@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "./node_modules/.bin/vite || vite",
     "build": "./node_modules/.bin/vite build || vite build",
+    "start": "./node_modules/.bin/vite preview || vite preview",
     "typecheck": "./node_modules/.bin/tsc --noEmit || tsc --noEmit",
     "preview": "./node_modules/.bin/vite preview || vite preview",
     "validate": "./node_modules/.bin/tsx scripts/validate-grammar-content.ts || tsx scripts/validate-grammar-content.ts"
