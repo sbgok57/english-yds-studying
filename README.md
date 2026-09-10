@@ -1,39 +1,51 @@
-# 🗺️ Phonics Treasure Island - 1st Grade Reading Adventure
+# 🎓 YDS & YDT English Mastery Platform
 
-An offline-ready, single-file HTML5/JS educational phonics and reading game designed specifically for 1st-grade children (6–7 years old).
-
----
-
-## 🌟 Game Features
-
-### 1. 🗺️ Spacious Mobile "Saga" Style Treasure Map
-- **A to Z Winding Pathway**: 26 letter nodes winding vertically through 5 vibrant cartoon biomes (Beach, Jungle, Desert, Crystal Cavern, Royal Castle).
-- **Dedicated "Play" Buttons**: Every node has a clear `play` button and title badge (`A: Apple Island`, `B: Bear Beach`, ..., `Z: Zebra Zoo`).
-- **Interactive Avatar & Star Badges**: Displays animated `🐯 YOU ARE HERE` avatar and earned star badges.
-
-### 2. 📖 Complete 4-Step Learning Loop (Per Letter)
-1. **Step 1 (Learn Sound)**: Letter & CVC target word cards with `🔊 Click to hear` natural human teacher audio (0.5s–1.0s).
-2. **Step 2 (Match Sound)**: Listen to the target phoneme and tap the matching letter bubble.
-3. **Step 3 (Letter Tracing)**: Super-forgiving 52px wide glowing stroke path with green start guide.
-4. **Step 4 (Word Blending)**: Individually clickable phonetic tiles with dedicated `🔊 Click to hear` buttons for repeated listening before word formation.
-
-### 3. ⭐ Strict Star Progression (White to Yellow)
-- Stars initialize as 100% white (`☆`) on load.
-- Turns glowing yellow (`★`) with an authentic bell chime strictly upon correct task completion.
-
-### 4. 🎁 100-Item Conditional Reward System
-- 100 distinct collectible items across 4 categories (26 Island Stickers, 26 Explorer Hats, 24 Magic Wands, 24 Phonics Pets).
-- Instant celebratory pop-up modals upon unlocking rewards.
-- Full Treasure Chest modal with filter chips and progress tracking.
-
-### 5. 🐯 Active Speaking Narrator & Guide
-- Clear verbal instructions on every screen so 1st graders understand what to do without reading.
-- Warm, enthusiastic spoken praise when earning stars and rewards.
+A comprehensive, adult-oriented English learning and exam preparation platform designed for Turkish learners (~25 years old, A2 to YDS level, HR and career advancement focus).
 
 ---
 
-## 🚀 Running Locally or Deploying
+## 🌟 Key Features
 
-- **Local Execution**: Open `index.html` directly in any web browser.
-- **Production Build**: Self-contained static site root (`./`).
-- **Vercel Hosting**: Configured via `vercel.json` with clean URLs and SPA rewrites.
+### 1. 🧠 Visual Memory & SM-2 Spaced Repetition
+- **208 High-Frequency YDS Adverbs & Terms**: Extracted from curated YDS study corpora across 30 days.
+- **Visual Mnemonic Associations**: Dedicated conceptual visual cues and diagrams for every vocabulary item.
+- **SM-2 Adaptive Spaced Repetition**: Memory stages (0-19 New, 20-39 Familiar, 40-59 Learning, 60-79 Strong, 80-94 Very Strong, 95-100 Mastered for now).
+- **40 Distinct Vocabulary Activity Types**: Multi-directional retrieval (EN→TR, TR→EN, Visual→Word, Definition, Sentence Completion, Collocations, Odd-one-out, etc.).
+
+### 2. 🏛️ Complete Grammar Laboratory (30 Topics)
+- **19 Structural Sections per Topic**: Topic intro, What & Why, interactive sentence building blocks, positive/negative/question formulas, signal words, vocabulary support table, tense timelines, common mistakes with explanations, memory tricks, micro-practice, YDS exam strategy.
+- **660+ Validated Grammar Activities**: At least 20 unique activities per topic verified by `scripts/validate-grammar-content.ts`.
+
+### 3. 🎯 YDS Exam Mode & Strategy Engine
+- Deep question analysis covering Sentence Completion, Cloze Tests, Conjunctions & Logic, Vocabulary & Translation, and Academic Paragraph Synthesis.
+- In-depth answer breakdowns explaining why correct options succeed and why distractors fail.
+
+### 4. 🔊 Positive Voice Feedback (Web Speech API)
+- Real-time spoken encouragement and pronunciation assistance with volume control, mute toggle, and replay.
+
+### 5. 🚀 Motivation Screen ("TODAY'S MISSION")
+- 55 bilingual adult-oriented motivational quotes focused on consistency, cognitive retention, and career advancement.
+
+---
+
+## 🛠️ Development & Deployment
+
+```bash
+# Install dependencies
+npm install
+
+# Run content validator (checks all 30 topics, 19 sections, 660 activities)
+npm run validate
+
+# Typecheck
+npm run typecheck
+
+# Production build
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+## 🌐 Vercel Deployment
+Configured out-of-the-box via `vercel.json` with SPA routing rewrites.
