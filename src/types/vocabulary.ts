@@ -1,37 +1,57 @@
+export type PartOfSpeech =
+  | 'noun'
+  | 'verb'
+  | 'adjective'
+  | 'adverb'
+  | 'preposition'
+  | 'conjunction'
+  | 'phrase'
+  | 'phrasal_verb';
+
+export type WordDifficulty = 'A2' | 'B1' | 'B2' | 'C1' | 'YDS';
+
+export type LearningStage =
+  | 'new'
+  | 'familiar'
+  | 'learning'
+  | 'strong'
+  | 'very_strong'
+  | 'mastered';
+
+/**
+ * Immutable vocabulary dictionary entry.
+ * Updating metadata must NEVER reset mutable learning progress.
+ */
 export interface VocabularyItem {
   id: string;
   word: string;
   meaningsTr: string[];
-  partOfSpeech: 'noun' | 'verb' | 'adjective' | 'adverb' | 'preposition' | 'conjunction' | 'phrase';
-  definitionEn: string;
+  partOfSpeech: PartOfSpeech;
   example: string;
-  exampleTr: string;
+  exampleTr?: string;
   synonyms: string[];
   antonyms: string[];
   collocations: string[];
-  relatedWords: string[];
-  pronunciation?: string;
-  visualMnemonic: {
-    description: string;
-    clue: string;
-    iconName?: string;
-    badgeCategory?: string;
-  };
-  difficulty: 'A2' | 'B1' | 'B2' | 'YDS_CORE' | 'YDS_ADVANCED';
+  visualMnemonic: string;
+  pronunciation: string;
+  difficulty: WordDifficulty;
   source: string;
-  day?: string;
 }
 
-export type RetrievalDirection =
-  | 'en-to-tr'
-  | 'tr-to-en'
-  | 'image-to-word'
-  | 'word-to-image'
-  | 'def-to-word'
-  | 'word-to-def'
-  | 'sentence-missing-word'
-  | 'synonym-to-word'
-  | 'antonym-to-word'
-  | 'collocation-completion'
-  | 'audio-to-word'
-  | 'context-meaning';
+/**
+ * Mutable user learning state for a specific vocabulary word.
+ * Keyed by vocabularyId.
+ */
+export interface LearningState {
+  vocabularyId: string;
+  mastery: number; // 0-100 clamped
+  correctCount: number;
+  incorrectCount: number;
+  consecutiveCorrect: number;
+  consecutiveIncorrect: number;
+  easeFactor: number; // default 2.5
+  intervalDays: number; // current review interval in days
+  lastReviewedAt: string | null; // ISO timestamp
+  nextReviewAt: string; // ISO timestamp
+  learningStage: LearningStage;
+}

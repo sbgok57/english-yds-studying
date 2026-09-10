@@ -1,20 +1,26 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './',
   server: {
-    host: true,
-    fs: {
-      strict: false,
-    },
-  },
-  preview: {
+    port: 3000,
     host: true,
   },
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes('src/data/grammar/')) {
+            return 'grammar-data';
+          }
+        },
+      },
+    },
   },
 });

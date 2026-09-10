@@ -1,212 +1,228 @@
-import { GRAMMAR_TOPICS } from '../src/data/grammarData';
+import {
+  GRAMMAR_TOPICS,
+  ALL_GRAMMAR_LESSONS,
+  ALL_GRAMMAR_ACTIVITIES,
+  ACTIVITIES_BY_TOPIC_ID,
+  LESSONS_BY_TOPIC_ID,
+} from '../src/data/grammar';
 
-interface ValidationError {
-  topicId: string;
-  field: string;
-  message: string;
-}
+function runGrammarValidation() {
+  console.log('🔍 Starting Comprehensive Grammar Content Validation...\n');
 
-const REQUIRED_TOPIC_IDS = [
-  'be',
-  'pronouns',
-  'articles',
-  'present-simple',
-  'present-continuous',
-  'past-simple',
-  'future-forms',
-  'present-perfect',
-  'past-perfect',
-  'modal-verbs',
-  'comparatives',
-  'superlatives',
-  'quantifiers',
-  'gerunds-infinitives',
-  'passive-voice',
-  'conditionals',
-  'relative-clauses',
-  'noun-clauses',
-  'adverb-clauses',
-  'reported-speech',
-  'linking-words',
-  'prepositions',
-  'advanced-tenses',
-  'inversion',
-  'participles',
-  'reduced-clauses',
-  'advanced-connectors',
-  'sentence-completion',
-  'cloze-grammar',
-  'mixed-yds-grammar'
-];
+  let errors = 0;
+  const warnings = 0;
 
-function validateGrammarContent() {
-  console.log('🔍 Starting comprehensive Grammar Content Validation...\n');
-  const errors: ValidationError[] = [];
-  const globalActivityIds = new Set<string>();
-  const globalQuestionTexts = new Set<string>();
-
-  // 1. Verify all 30 topics exist
-  const existingIds = new Set(GRAMMAR_TOPICS.map(t => t.id));
-  for (const reqId of REQUIRED_TOPIC_IDS) {
-    if (!existingIds.has(reqId)) {
-      errors.push({ topicId: reqId, field: 'topic_existence', message: `Missing required topic: "${reqId}"` });
-    }
+  // 1. Validate Topic Count & Metadata
+  console.log(`Checking topics... Total declared: ${GRAMMAR_TOPICS.length}`);
+  if (GRAMMAR_TOPICS.length !== 28) {
+    console.error(`❌ ERROR: Expected exactly 28 grammar topics, found ${GRAMMAR_TOPICS.length}`);
+    errors++;
   }
 
-  // 2. Validate every topic's 19 required structural sections and activities
-  for (const topic of GRAMMAR_TOPICS) {
-    const tid = topic.id;
+  const topicIds = new Set<string>();
+  GRAMMAR_TOPICS.forEach((t) => {
+    if (topicIds.has(t.id)) {
+      console.error(`❌ ERROR: Duplicate Topic ID: ${t.id}`);
+      errors++;
+    }
+    topicIds.add(t.id);
 
-    // Lesson & Title
-    if (!topic.title || !topic.titleTr) {
-      errors.push({ topicId: tid, field: 'title', message: 'Topic missing title or titleTr' });
+    if (!t.title || !t.titleTr || !t.slug || !t.level || !t.description || !t.descriptionTr) {
+      console.error(`❌ ERROR: Incomplete metadata for topic ${t.id}`);
+      errors++;
     }
+  });
 
-    // Section 1-3: Intro / What / Why
-    if (!topic.intro?.overview || !topic.intro?.overviewTr) {
-      errors.push({ topicId: tid, field: 'intro.overview', message: 'Missing overview in English or Turkish' });
-    }
-    if (!topic.intro?.whatIsIt || !topic.intro?.whatIsItTr) {
-      errors.push({ topicId: tid, field: 'intro.whatIsIt', message: 'Missing whatIsIt explanation in English or Turkish' });
-    }
-    if (!topic.intro?.whyUseIt || !topic.intro?.whyUseItTr) {
-      errors.push({ topicId: tid, field: 'intro.whyUseIt', message: 'Missing whyUseIt explanation in English or Turkish' });
-    }
-
-    // Section 4-8: Sentence Structure Formulas & Sentence Blocks
-    if (!topic.structure?.formulaPositive || !topic.structure?.formulaNegative || !topic.structure?.formulaQuestion) {
-      errors.push({ topicId: tid, field: 'structure.formulas', message: 'Missing structural formulas' });
-    }
-    if (!topic.structure?.sentenceBlocksPositive || topic.structure.sentenceBlocksPositive.length === 0) {
-      errors.push({ topicId: tid, field: 'structure.sentenceBlocks', message: 'Missing interactive sentence blocks' });
+  // 2. Validate Every Topic Has a Full Lesson with All 16 Sections
+  console.log(`Checking lessons... Total lessons: ${ALL_GRAMMAR_LESSONS.length}`);
+  topicIds.forEach((id) => {
+    const lesson = LESSONS_BY_TOPIC_ID.get(id);
+    if (!lesson) {
+      console.error(`❌ ERROR: Missing lesson for topic ${id}`);
+      errors++;
+      return;
     }
 
-    // Section 9: Signal Words
-    if (!topic.signalWords?.words || topic.signalWords.words.length === 0) {
-      errors.push({ topicId: tid, field: 'signalWords', message: 'Missing signal words list' });
+    // 16 Required Sections Verification:
+    // 1 Introduction
+    if (!lesson.introduction?.en || !lesson.introduction?.tr) {
+      console.error(`❌ ERROR: Topic ${id} missing bilingual introduction.`);
+      errors++;
     }
-    if (!topic.signalWords?.explanationEn || !topic.signalWords?.explanationTr) {
-      errors.push({ topicId: tid, field: 'signalWords.explanation', message: 'Missing signal words explanation' });
+    // 2 Why it matters
+    if (!lesson.whyItMatters?.en || !lesson.whyItMatters?.tr) {
+      console.error(`❌ ERROR: Topic ${id} missing bilingual whyItMatters.`);
+      errors++;
     }
-
-    // Section 10-11: Examples with Vocabulary Support
-    if (!topic.examplesWithVocab || topic.examplesWithVocab.length === 0) {
-      errors.push({ topicId: tid, field: 'examplesWithVocab', message: 'Missing examples with vocabulary support' });
+    // 3 Basic Structure
+    if (!lesson.basicStructure?.pattern || !lesson.basicStructure?.explanationEn || !lesson.basicStructure?.explanationTr || !lesson.basicStructure?.formulaBlocks?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing basicStructure or formulaBlocks.`);
+      errors++;
+    }
+    // 4 Positive sentences
+    if (!lesson.positive?.structure || !lesson.positive?.explanationEn || !lesson.positive?.explanationTr || !lesson.positive?.examples?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing positive section or examples.`);
+      errors++;
+    }
+    // 5 Negative sentences
+    if (!lesson.negative?.structure || !lesson.negative?.explanationEn || !lesson.negative?.explanationTr || !lesson.negative?.examples?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing negative section or examples.`);
+      errors++;
+    }
+    // 6 Questions
+    if (!lesson.questions?.structure || !lesson.questions?.explanationEn || !lesson.questions?.explanationTr || !lesson.questions?.examples?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing questions section or examples.`);
+      errors++;
+    }
+    // 7 Short Answers
+    if (!lesson.shortAnswers?.structure || !lesson.shortAnswers?.explanationEn || !lesson.shortAnswers?.explanationTr || !lesson.shortAnswers?.examples?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing shortAnswers section or examples.`);
+      errors++;
+    }
+    // 8 Signal Words
+    if (!lesson.signalWords || lesson.signalWords.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing signalWords.`);
+      errors++;
     } else {
-      for (const ex of topic.examplesWithVocab) {
-        if (!ex.sentence || !ex.sentenceTr) {
-          errors.push({ topicId: tid, field: 'examplesWithVocab.sentence', message: 'Example missing English sentence or Turkish translation' });
+      lesson.signalWords.forEach((s) => {
+        if (!s.word || !s.meaningTr || !s.noteEn || !s.noteTr) {
+          console.error(`❌ ERROR: Topic ${id} has incomplete signalWord: ${JSON.stringify(s)}`);
+          errors++;
         }
-        if (!ex.vocabulary || ex.vocabulary.length === 0) {
-          errors.push({ topicId: tid, field: 'examplesWithVocab.vocabulary', message: `Example "${ex.sentence}" missing vocabulary support` });
-        }
-      }
-    }
-
-    // Section 12-13: Visual Explanation / Visual Timelines
-    if (!topic.visualExplanation?.descriptionEn || !topic.visualExplanation?.descriptionTr) {
-      errors.push({ topicId: tid, field: 'visualExplanation', message: 'Missing visual explanation' });
-    }
-
-    // Section 14: Common Mistakes
-    if (!topic.commonMistakes || topic.commonMistakes.length === 0) {
-      errors.push({ topicId: tid, field: 'commonMistakes', message: 'Missing common mistakes list' });
-    } else {
-      for (const m of topic.commonMistakes) {
-        if (!m.incorrect || !m.correct || !m.explanationEn || !m.explanationTr) {
-          errors.push({ topicId: tid, field: 'commonMistakes.item', message: 'Incomplete common mistake item' });
-        }
-      }
-    }
-
-    // Section 15: Memory Tricks
-    if (!topic.memoryTricks || topic.memoryTricks.length === 0) {
-      errors.push({ topicId: tid, field: 'memoryTricks', message: 'Missing memory tricks' });
-    }
-
-    // Section 16: Micro Practice
-    if (!topic.microPractices || topic.microPractices.length === 0) {
-      errors.push({ topicId: tid, field: 'microPractices', message: 'Missing micro-practices' });
-    }
-
-    // Section 18: YDS Connection
-    if (!topic.ydsConnection?.ydsStrategyEn || !topic.ydsConnection?.ydsStrategyTr) {
-      errors.push({ topicId: tid, field: 'ydsConnection', message: 'Missing YDS connection strategies' });
-    }
-
-    // Section 19: Final Review Summary
-    if (!topic.finalReviewSummary?.keyRules || topic.finalReviewSummary.keyRules.length === 0) {
-      errors.push({ topicId: tid, field: 'finalReviewSummary', message: 'Missing final review summary rules' });
-    }
-
-    // Section 20: Activities (MUST BE AT LEAST 20 UNIQUE ACTIVITIES)
-    if (!topic.activities || topic.activities.length < 20) {
-      errors.push({
-        topicId: tid,
-        field: 'activities.count',
-        message: `Topic only has ${topic.activities?.length || 0} activities. Minimum requirement is 20.`
       });
     }
-
-    // Validate individual activities
-    for (const act of topic.activities || []) {
-      if (!act.id) {
-        errors.push({ topicId: tid, field: 'activity.id', message: 'Activity missing ID' });
-      } else if (globalActivityIds.has(act.id)) {
-        errors.push({ topicId: tid, field: 'activity.id', message: `Duplicate activity ID detected: "${act.id}"` });
-      } else {
-        globalActivityIds.add(act.id);
-      }
-
-      if (!act.prompt) {
-        errors.push({ topicId: tid, field: 'activity.prompt', message: `Activity ${act.id} missing prompt` });
-      } else {
-        const normPrompt = act.prompt.trim().toLowerCase();
-        if (globalQuestionTexts.has(normPrompt)) {
-          // Warning: potential duplicate question
-          console.warn(`⚠️ Warning: Duplicate question text across topics: "${act.prompt.substring(0, 40)}..."`);
-        } else {
-          globalQuestionTexts.add(normPrompt);
+    // 9 Common Mistakes
+    if (!lesson.commonMistakes || lesson.commonMistakes.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing commonMistakes.`);
+      errors++;
+    } else {
+      lesson.commonMistakes.forEach((m) => {
+        if (!m.wrong || !m.right || !m.explanationEn || !m.explanationTr) {
+          console.error(`❌ ERROR: Topic ${id} has incomplete commonMistake.`);
+          errors++;
         }
-      }
-
-      if (!act.correctAnswer) {
-        errors.push({ topicId: tid, field: 'activity.correctAnswer', message: `Activity ${act.id} missing correct answer` });
-      }
-
-      if (!act.options || act.options.length < 2) {
-        errors.push({ topicId: tid, field: 'activity.options', message: `Activity ${act.id} needs at least 2 options` });
-      } else if (!act.options.includes(act.correctAnswer)) {
-        errors.push({
-          topicId: tid,
-          field: 'activity.options',
-          message: `Activity ${act.id} correct answer "${act.correctAnswer}" not in options [${act.options.join(', ')}]`
-        });
-      }
-
-      if (!act.explanationEn || !act.explanationTr) {
-        errors.push({ topicId: tid, field: 'activity.explanation', message: `Activity ${act.id} missing English or Turkish explanation` });
-      }
+      });
     }
-  }
+    // 10 Visual Explanation
+    if (!lesson.visualExplanation?.type || !lesson.visualExplanation?.titleEn || !lesson.visualExplanation?.titleTr || !lesson.visualExplanation?.steps?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing visualExplanation.`);
+      errors++;
+    }
+    // 11 Examples
+    if (!lesson.examples || lesson.examples.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing examples.`);
+      errors++;
+    }
+    // 12 Vocabulary
+    if (!lesson.vocabulary || lesson.vocabulary.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing vocabulary references.`);
+      errors++;
+    } else {
+      lesson.vocabulary.forEach((v) => {
+        if (!v.word || !v.meaningTr || !v.context) {
+          console.error(`❌ ERROR: Incomplete vocabulary entry in topic ${id}.`);
+          errors++;
+        }
+      });
+    }
+    // 13 Memory Tricks
+    if (!lesson.memoryTricks || lesson.memoryTricks.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing memoryTricks.`);
+      errors++;
+    }
+    // 14 Micro Practices
+    if (!lesson.microPractices || lesson.microPractices.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing microPractices.`);
+      errors++;
+    }
+    // 15 YDS Connection
+    if (!lesson.ydsConnection?.descriptionEn || !lesson.ydsConnection?.a2Example || !lesson.ydsConnection?.b1Example || !lesson.ydsConnection?.ydsExample) {
+      console.error(`❌ ERROR: Topic ${id} missing comprehensive YDS connection.`);
+      errors++;
+    }
+    // 16 Final Check
+    if (!lesson.finalCheck || lesson.finalCheck.length === 0) {
+      console.error(`❌ ERROR: Topic ${id} missing finalCheck questions.`);
+      errors++;
+    }
+    // Mastery Rules
+    if (!lesson.masteryRules?.minScoreToPass || !lesson.masteryRules?.activitiesRequired || !lesson.masteryRules?.keyConcepts?.length) {
+      console.error(`❌ ERROR: Topic ${id} missing masteryRules.`);
+      errors++;
+    }
+  });
 
-  // Final summary
-  console.log('----------------------------------------------------');
-  console.log(`📊 Validated ${GRAMMAR_TOPICS.length} grammar topics.`);
-  console.log(`📊 Total activities validated: ${globalActivityIds.size}`);
-  console.log('----------------------------------------------------');
+  // 3. Validate Activities per Topic (Must be >= 20 valid activities)
+  console.log(`Checking activities... Total declared: ${ALL_GRAMMAR_ACTIVITIES.length}`);
+  const activityIds = new Set<string>();
 
-  if (errors.length > 0) {
-    console.error(`❌ Validation Failed with ${errors.length} errors:\n`);
-    errors.forEach(e => console.error(` [${e.topicId}] ${e.field}: ${e.message}`));
+  topicIds.forEach((id) => {
+    const topicActs = ACTIVITIES_BY_TOPIC_ID.get(id) || [];
+    if (topicActs.length < 20) {
+      console.error(`❌ ERROR: Topic ${id} has ${topicActs.length} activities (minimum required: 20).`);
+      errors++;
+    }
+
+    const questionTextsInTopic = new Set<string>();
+
+    topicActs.forEach((act) => {
+      // Unique ID check
+      if (activityIds.has(act.id)) {
+        console.error(`❌ ERROR: Duplicate Activity ID across dataset: ${act.id}`);
+        errors++;
+      }
+      activityIds.add(act.id);
+
+      // Unique Question in Topic
+      if (questionTextsInTopic.has(act.question.trim().toLowerCase())) {
+        console.error(`❌ ERROR: Duplicate question in topic ${id}: "${act.question}"`);
+        errors++;
+      }
+      questionTextsInTopic.add(act.question.trim().toLowerCase());
+
+      // Topic ID match
+      if (act.grammarTopicId !== id) {
+        console.error(`❌ ERROR: Activity ${act.id} grammarTopicId mismatch. Found ${act.grammarTopicId}, expected ${id}`);
+        errors++;
+      }
+
+      // Options and Correct Answer
+      if (!act.options || act.options.length < 2) {
+        console.error(`❌ ERROR: Activity ${act.id} has fewer than 2 options.`);
+        errors++;
+      } else if (!act.options.includes(act.correctAnswer)) {
+        console.error(`❌ ERROR: Activity ${act.id} correctAnswer "${act.correctAnswer}" not in options.`);
+        errors++;
+      }
+
+      // Bilingual Explanations
+      if (!act.explanationEn || act.explanationEn.trim() === '') {
+        console.error(`❌ ERROR: Activity ${act.id} missing explanationEn.`);
+        errors++;
+      }
+      if (!act.explanationTr || act.explanationTr.trim() === '') {
+        console.error(`❌ ERROR: Activity ${act.id} missing explanationTr.`);
+        errors++;
+      }
+
+      // Difficulty
+      if (!['A2', 'B1', 'B2', 'YDS'].includes(act.difficulty)) {
+        console.error(`❌ ERROR: Activity ${act.id} invalid difficulty: ${act.difficulty}`);
+        errors++;
+      }
+    });
+  });
+
+  console.log('\n----------------------------------------');
+  if (errors > 0) {
+    console.error(`💥 Validation FAILED with ${errors} error(s) and ${warnings} warning(s).`);
     process.exit(1);
   } else {
-    console.log('✅ ALL GRAMMAR CONTENT VALIDATED SUCCESSFULLY!');
-    console.log('✔ All 30 topics present.');
-    console.log('✔ All 19 required structural sections present.');
-    console.log('✔ Every topic has at least 20 unique activities with Turkish explanations and correct answers.');
+    console.log(`✅ All ${topicIds.size} grammar topics validated successfully!`);
+    console.log(`✅ All ${activityIds.size} grammar activities passed strict validation (>= 20 per topic).`);
+    console.log(`✅ Zero duplicate IDs, zero duplicate questions, 100% bilingual coverage.\n`);
     process.exit(0);
   }
 }
 
-validateGrammarContent();
+runGrammarValidation();

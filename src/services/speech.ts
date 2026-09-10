@@ -1,147 +1,117 @@
-// Positive Voice Feedback Service using Web Speech API
-
-interface SpeechSettings {
-  enabled: boolean;
-  volume: number; // 0.0 to 1.0
-  rate: number;   // 0.8 to 1.2
-  pitch: number;
+export interface SpeechOptions {
+  lang?: 'en-US' | 'en-GB' | 'tr-TR';
+  rate?: number; // 0.1 to 10 (normal is 1.0, slow is 0.7)
+  pitch?: number; // 0 to 2
+  volume?: number; // 0 to 1
 }
-
-const STORAGE_KEY = 'yds_speech_settings';
-
-const DEFAULT_SETTINGS: SpeechSettings = {
-  enabled: true,
-  volume: 0.85,
-  rate: 0.95,
-  pitch: 1.0
-};
-
-const CORRECT_PRAISES = [
-  "Excellent!",
-  "Great job!",
-  "That's correct!",
-  "You remembered it!",
-  "Brilliant!",
-  "Nice work!",
-  "Perfect!",
-  "Outstanding recall!",
-  "Well done!"
-];
-
-const ENCOURAGING_FEEDBACK = [
-  "Not quite. Let's try again.",
-  "Good effort!",
-  "Almost there!",
-  "Keep going!",
-  "That's okay. Learning takes practice.",
-  "Let's look at the clue.",
-  "You can get this one.",
-  "Take your time; analyze the context."
-];
 
 class SpeechService {
   private synth: SpeechSynthesis | null = null;
-  private settings: SpeechSettings;
-  private lastSpokenText: string = '';
+  private voices: SpeechSynthesisVoice[] = [];
+  private isMuted = false;
+  private masterVolume = 1.0;
+  private defaultSpeed: 'normal' | 'slow' = 'normal';
 
   constructor() {
-    this.settings = this.loadSettings();
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       this.synth = window.speechSynthesis;
-    }
-  }
-
-  private loadSettings(): SpeechSettings {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        return { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
+      this.loadVoices();
+      if (this.synth.onvoiceschanged !== undefined) {
+        this.synth.onvoiceschanged = () => this.loadVoices();
       }
-    } catch {
-      // Ignore localStorage errors
     }
-    return { ...DEFAULT_SETTINGS };
   }
 
-  public saveSettings(newSettings: Partial<SpeechSettings>): void {
-    this.settings = { ...this.settings, ...newSettings };
+  private loadVoices(): void {
+    if (!this.synth) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.settings));
+      this.voices = this.synth.getVoices();
     } catch {
-      // Ignore storage write errors
+      this.voices = [];
     }
-  }
-
-  public getSettings(): SpeechSettings {
-    return { ...this.settings };
   }
 
   public isAvailable(): boolean {
-    return this.synth !== null;
+    return !!this.synth;
   }
 
-  public stopSpeaking(): void {
-    if (this.synth) {
-      try {
-        this.synth.cancel();
-      } catch (e) {
-        console.warn('Speech cancellation error:', e);
-      }
+  public setMuted(muted: boolean): void {
+    this.isMuted = muted;
+    if (muted) {
+      this.stopSpeaking();
     }
   }
 
-  public speak(text: string, options?: { lang?: string; rate?: number; volume?: number; onEnd?: () => void }): void {
-    if (!this.synth || !this.settings.enabled) return;
+  public setVolume(volume: number): void {
+    this.masterVolume = Math.max(0, Math.min(1, volume));
+  }
 
-    // Prevent overlapping speech
+  public setDefaultSpeed(speed: 'normal' | 'slow'): void {
+    this.defaultSpeed = speed;
+  }
+
+  public stopSpeaking(): void {
+    if (!this.synth) return;
+    try {
+      this.synth.cancel();
+    } catch (err) {
+      console.warn('Speech cancellation error:', err);
+    }
+  }
+
+  public speak(text: string, options: SpeechOptions = {}): void {
+    if (!this.synth || this.isMuted) return;
+
+    // Sanitize and limit length to prevent reading large blocks of text
+    const cleanText = text.replace(/<[^>]*>?/gm, '').slice(0, 300).trim();
+    if (!cleanText) return;
+
+    // Always cancel previous speech to prevent overlapping voices
     this.stopSpeaking();
-    this.lastSpokenText = text;
 
     try {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = options?.lang || 'en-US';
-      utterance.volume = options?.volume ?? this.settings.volume;
-      utterance.rate = options?.rate ?? this.settings.rate;
-      utterance.pitch = this.settings.pitch;
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const targetLang = options.lang || 'en-US';
+      utterance.lang = targetLang;
 
-      if (options?.onEnd) {
-        utterance.onend = options.onEnd;
-      }
+      // Determine rate
+      const baseRate = this.defaultSpeed === 'slow' ? 0.7 : 1.0;
+      utterance.rate = options.rate ?? baseRate;
+      utterance.pitch = options.pitch ?? 1.0;
+      utterance.volume = (options.volume ?? 1.0) * this.masterVolume;
 
-      // Select natural English voice if available
-      const voices = this.synth.getVoices();
-      const enVoice = voices.find(v => (v.lang.includes('en-US') || v.lang.includes('en-GB')) && !v.name.includes('Bad'));
-      if (enVoice) {
-        utterance.voice = enVoice;
+      // Select appropriate voice if available
+      const langPrefix = targetLang.split('-')[0];
+      const matchingVoice = this.voices.find(
+        (v) => v.lang.startsWith(langPrefix) || v.lang.includes(langPrefix)
+      );
+      if (matchingVoice) {
+        utterance.voice = matchingVoice;
       }
 
       this.synth.speak(utterance);
     } catch (err) {
-      console.warn('Web Speech API execution error:', err);
+      console.warn('Speech synthesis utterance error:', err);
     }
   }
 
-  public replayLast(): void {
-    if (this.lastSpokenText) {
-      this.speak(this.lastSpokenText);
-    }
+  public speakCorrectAnswer(text = 'Excellent! That is correct.'): void {
+    this.speak(text, { lang: 'en-US', rate: 1.0 });
   }
 
-  public speakCorrectAnswer(itemWord?: string): void {
-    const praise = CORRECT_PRAISES[Math.floor(Math.random() * CORRECT_PRAISES.length)];
-    const textToSpeak = itemWord ? `${praise} ${itemWord}.` : praise;
-    this.speak(textToSpeak, { rate: 1.0 });
+  public speakIncorrectAnswer(text = 'Not quite, keep practicing.'): void {
+    this.speak(text, { lang: 'en-US', rate: 0.9 });
   }
 
-  public speakIncorrectAnswer(hint?: string): void {
-    const encouragement = ENCOURAGING_FEEDBACK[Math.floor(Math.random() * ENCOURAGING_FEEDBACK.length)];
-    const textToSpeak = hint ? `${encouragement} ${hint}` : encouragement;
-    this.speak(textToSpeak, { rate: 0.9 });
+  public speakMotivation(text: string): void {
+    this.speak(text, { lang: 'en-US', rate: 0.95 });
   }
 
-  public speakMotivation(message?: string): void {
-    const defaultMsg = "Step into this session with confidence and focus.";
-    this.speak(message || defaultMsg, { rate: 0.95 });
+  public getUnavailableMessage(): { en: string; tr: string } {
+    return {
+      en: 'Audio is unavailable in this browser.',
+      tr: 'Bu tarayıcıda ses özelliği kullanılamıyor.',
+    };
   }
 }
 
