@@ -10,13 +10,15 @@ import {
   DailyMission,
   AppSettings,
   DEFAULT_SETTINGS,
+  VocabularySource,
 } from '../types';
 
 const DB_NAME = 'YdtYdsEnglishMasterDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 export const STORES = {
   VOCABULARY: 'vocabulary',
+  VOCABULARY_SOURCES: 'vocabulary_sources',
   LEARNING_STATES: 'learning_states',
   ATTEMPTS: 'attempts',
   STUDY_SESSIONS: 'study_sessions',
@@ -102,6 +104,9 @@ class DatabaseService {
 
           if (!db.objectStoreNames.contains(STORES.VOCABULARY)) {
             db.createObjectStore(STORES.VOCABULARY, { keyPath: 'id' });
+          }
+          if (!db.objectStoreNames.contains(STORES.VOCABULARY_SOURCES)) {
+            db.createObjectStore(STORES.VOCABULARY_SOURCES, { keyPath: 'id' });
           }
           if (!db.objectStoreNames.contains(STORES.LEARNING_STATES)) {
             db.createObjectStore(STORES.LEARNING_STATES, { keyPath: 'vocabularyId' });
@@ -213,6 +218,91 @@ class DatabaseService {
 
     return new Promise((resolve) => {
       items.forEach((item) => store.put(item));
+      resolve();
+    });
+  }
+
+  /**
+   * Safely adds new seed vocabulary items into IndexedDB without overwriting
+   * existing user-imported items or resetting mutable learning progress.
+   */
+  public async syncSeedVocabulary(seedItems: VocabularyItem[]): Promise<VocabularyItem[]> {
+    const existing = await this.getAllVocabulary();
+    if (existing.length === 0) {
+      await this.saveVocabularyBatch(seedItems);
+      return seedItems;
+    }
+
+    const existingMap = new Map<string, VocabularyItem>();
+    existing.forEach((item) => {
+      existingMap.set(item.word.trim().toLowerCase(), item);
+      existingMap.set(item.id, item);
+    });
+
+    const newSeedsToInsert: VocabularyItem[] = [];
+    seedItems.forEach((seed) => {
+      const normWord = seed.word.trim().toLowerCase();
+      if (!existingMap.has(normWord) && !existingMap.has(seed.id)) {
+        newSeedsToInsert.push(seed);
+        existingMap.set(normWord, seed);
+        existingMap.set(seed.id, seed);
+      }
+    });
+
+    if (newSeedsToInsert.length > 0) {
+      await this.saveVocabularyBatch(newSeedsToInsert);
+      return await this.getAllVocabulary();
+    }
+
+    return existing;
+  }
+
+  // --- Vocabulary Source Operations ---
+  public async getAllSources(): Promise<VocabularySource[]> {
+    const store = await this.getStore(STORES.VOCABULARY_SOURCES, 'readonly');
+    if (!store) {
+      return this.fallbackStore.getAll<VocabularySource>(STORES.VOCABULARY_SOURCES);
+    }
+
+    return new Promise((resolve) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result || []);
+      request.onerror = () => resolve(this.fallbackStore.getAll<VocabularySource>(STORES.VOCABULARY_SOURCES));
+    });
+  }
+
+  public async getSourceById(id: string): Promise<VocabularySource | undefined> {
+    const store = await this.getStore(STORES.VOCABULARY_SOURCES, 'readonly');
+    if (!store) {
+      return this.fallbackStore.get<VocabularySource>(STORES.VOCABULARY_SOURCES, id);
+    }
+
+    return new Promise((resolve) => {
+      const request = store.get(id);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(this.fallbackStore.get<VocabularySource>(STORES.VOCABULARY_SOURCES, id));
+    });
+  }
+
+  public async saveSource(source: VocabularySource): Promise<void> {
+    this.fallbackStore.put(STORES.VOCABULARY_SOURCES, source);
+    const store = await this.getStore(STORES.VOCABULARY_SOURCES, 'readwrite');
+    if (!store) return;
+
+    return new Promise((resolve) => {
+      const req = store.put(source);
+      req.onsuccess = () => resolve();
+      req.onerror = () => resolve();
+    });
+  }
+
+  public async saveSourcesBatch(sources: VocabularySource[]): Promise<void> {
+    sources.forEach((s) => this.fallbackStore.put(STORES.VOCABULARY_SOURCES, s));
+    const store = await this.getStore(STORES.VOCABULARY_SOURCES, 'readwrite');
+    if (!store) return;
+
+    return new Promise((resolve) => {
+      sources.forEach((s) => store.put(s));
       resolve();
     });
   }

@@ -36,11 +36,20 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     if (key === 'voiceEnabled') speechService.setMuted(!value);
     if (key === 'voiceVolume') speechService.setVolume(value as number);
     if (key === 'voiceSpeed') speechService.setDefaultSpeed(value as 'normal' | 'slow');
+    if (key === 'voiceGender') speechService.setVoiceGender(value as 'female' | 'male');
 
     onSettingsUpdated(next);
 
     setSavedNotice(true);
     setTimeout(() => setSavedNotice(false), 2000);
+  };
+
+  const handleTestWomanAudio = () => {
+    speechService.speakWoman('Hello, this is the academic female voice for YDS and YDT preparation.');
+  };
+
+  const handleTestManAudio = () => {
+    speechService.speakMan('Hello, this is the academic male voice for YDS and YDT preparation.');
   };
 
   const handleTestAudio = () => {
@@ -127,6 +136,107 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </select>
             </div>
 
+            {/* Voice Gender Selection (2 Dedicated Sections: Woman & Man) */}
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+                Ses Karakteri Seçimi (Voice Profile)
+              </span>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* 1. Woman Voice Section */}
+                <div
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
+                    settings.voiceGender === 'female'
+                      ? 'bg-rose-50/60 border-rose-400 dark:bg-rose-950/40 dark:border-rose-700 ring-2 ring-rose-400/20'
+                      : 'bg-white dark:bg-slate-800/60 border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span>
+                        Kadın Sesi (Woman Voice)
+                      </span>
+                      {settings.voiceGender === 'female' && (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300">
+                          Aktif
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                      Akademik İngilizce ve telaffuz için net, doğal kadın ses profili.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-700/60">
+                    <button
+                      type="button"
+                      onClick={() => handleUpdate('voiceGender', 'female')}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold transition-all ${
+                        settings.voiceGender === 'female'
+                          ? 'bg-rose-600 text-white shadow-sm'
+                          : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      {settings.voiceGender === 'female' ? 'Seçili' : 'Bunu Seç'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleTestWomanAudio}
+                      className="py-1.5 px-3 rounded-xl text-xs font-semibold bg-rose-100 hover:bg-rose-200 dark:bg-rose-900/60 dark:hover:bg-rose-800 text-rose-800 dark:text-rose-200 transition-colors flex items-center gap-1"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" /> Dinle
+                    </button>
+                  </div>
+                </div>
+
+                {/* 2. Man Voice Section */}
+                <div
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
+                    settings.voiceGender === 'male'
+                      ? 'bg-blue-50/60 border-blue-400 dark:bg-blue-950/40 dark:border-blue-700 ring-2 ring-blue-400/20'
+                      : 'bg-white dark:bg-slate-800/60 border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+                        Erkek Sesi (Man Voice)
+                      </span>
+                      {settings.voiceGender === 'male' && (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">
+                          Aktif
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                      Akademik İngilizce ve telaffuz için tok, anlaşılır erkek ses profili.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-700/60">
+                    <button
+                      type="button"
+                      onClick={() => handleUpdate('voiceGender', 'male')}
+                      className={`flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold transition-all ${
+                        settings.voiceGender === 'male'
+                          ? 'bg-blue-600 text-white shadow-sm'
+                          : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      {settings.voiceGender === 'male' ? 'Seçili' : 'Bunu Seç'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleTestManAudio}
+                      className="py-1.5 px-3 rounded-xl text-xs font-semibold bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/60 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200 transition-colors flex items-center gap-1"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" /> Dinle
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Test voice button */}
             <div className="pt-2 flex justify-end">
               <button
@@ -134,7 +244,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 onClick={handleTestAudio}
                 className="px-4 py-2 rounded-xl text-xs font-semibold bg-brand-50 hover:bg-brand-100 text-brand-700 dark:bg-brand-950 dark:text-brand-300 transition-colors"
               >
-                Sesi Test Et (Test Voice)
+                Aktif Sesi Test Et (Test Active Voice)
               </button>
             </div>
           </div>

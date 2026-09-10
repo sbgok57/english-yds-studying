@@ -10,8 +10,9 @@
     "typecheck": "./node_modules/.bin/tsc --noEmit",
     "lint": "./node_modules/.bin/eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "validate:content": "./node_modules/.bin/tsx scripts/validate-content.ts",
+    "validate:vocabulary": "./node_modules/.bin/tsx scripts/validate-vocabulary-content.ts",
     "validate:grammar": "./node_modules/.bin/tsx scripts/validate-grammar-content.ts",
-    "validate": "npm run validate:content && npm run validate:grammar",
+    "validate": "npm run validate:vocabulary && npm run validate:content && npm run validate:grammar",
     "test": "./node_modules/.bin/tsx scripts/run-tests.ts"
   },
   "dependencies": {

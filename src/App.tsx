@@ -86,14 +86,76 @@ export const App: React.FC = () => {
     try {
       await dbService.init();
 
-      // 1. Vocabulary
-      let vocabs = await dbService.getAllVocabulary();
-      if (vocabs.length === 0) {
-        // Seed initial curated vocabulary
-        await dbService.saveVocabularyBatch(INITIAL_VOCABULARY);
-        vocabs = INITIAL_VOCABULARY;
-      }
+      // 1. Vocabulary: Safely sync seed vocabulary without overwriting user progress
+      const vocabs = await dbService.syncSeedVocabulary(INITIAL_VOCABULARY);
       setVocabulary(vocabs);
+
+      // Initialize source registry if empty
+      const existingSources = await dbService.getAllSources();
+      if (existingSources.length === 0) {
+        await dbService.saveSourcesBatch([
+          {
+            id: 'source-quizlet-zarflar',
+            type: 'quizlet-folder',
+            url: 'https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-zarflar?i=6bll0l&x=1xqt',
+            title: 'YDT & YDS En Sık Kullanılan Zarflar (Quizlet)',
+            status: 'completed',
+            lastImportedAt: new Date().toISOString(),
+            discoveredSetCount: 7,
+            processedSetCount: 7,
+            failedSetCount: 0,
+            importedItemCount: 207,
+            duplicateCount: 4,
+            incompleteCount: 0,
+            manualReviewCount: 0,
+          },
+          {
+            id: 'source-quizlet-kelimeler',
+            type: 'quizlet-folder',
+            url: 'https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler?i=6bll0l&x=1xqt',
+            title: 'YDT & YDS En Sık Kullanılan Kelimeler (Quizlet)',
+            status: 'access_failed',
+            lastImportedAt: new Date().toISOString(),
+            discoveredSetCount: 0,
+            processedSetCount: 0,
+            failedSetCount: 1,
+            importedItemCount: 0,
+            duplicateCount: 0,
+            incompleteCount: 0,
+            manualReviewCount: 0,
+            errorMessage: 'Cloudflare WAF bot verification challenge required (HTTP 403). Dışa aktarım metni ile aktarılabilir.',
+          },
+          {
+            id: 'source-pdf-phrasal-verbs',
+            type: 'pdf',
+            fileName: 'YDS Phrasal Verbs.pdf',
+            title: 'YDS Phrasal Verbs & Deyimsel Fiiller (PDF)',
+            status: 'not_scanned',
+            discoveredSetCount: 0,
+            processedSetCount: 0,
+            failedSetCount: 0,
+            importedItemCount: 0,
+            duplicateCount: 0,
+            incompleteCount: 0,
+            manualReviewCount: 0,
+            errorMessage: 'PDF dosyası kullanıcı tarafından yükleme bekliyor.',
+          },
+          {
+            id: 'source-yds-core',
+            type: 'manual',
+            title: 'YDS Akademik Çekirdek Kelimeler (YDS Core)',
+            status: 'completed',
+            lastImportedAt: new Date().toISOString(),
+            discoveredSetCount: 1,
+            processedSetCount: 1,
+            failedSetCount: 0,
+            importedItemCount: 25,
+            duplicateCount: 0,
+            incompleteCount: 0,
+            manualReviewCount: 0,
+          },
+        ]);
+      }
 
       // 2. Learning States
       const states = await dbService.getAllLearningStates();

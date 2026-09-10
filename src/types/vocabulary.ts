@@ -18,6 +18,35 @@ export type LearningStage =
   | 'very_strong'
   | 'mastered';
 
+export interface SourceReference {
+  sourceId: string;
+  sourceType: 'quizlet' | 'pdf' | 'csv' | 'manual' | 'seed';
+  sourceUrl?: string;
+  fileName?: string;
+  folderName?: string;
+  setName?: string;
+  sourcePage?: number;
+  importedAt: string;
+}
+
+export interface VocabularySource {
+  id: string;
+  type: 'quizlet-folder' | 'quizlet-set' | 'pdf' | 'csv' | 'manual';
+  url?: string;
+  fileName?: string;
+  title: string;
+  status: 'not_scanned' | 'scanning' | 'completed' | 'partially_completed' | 'failed' | 'access_failed';
+  lastImportedAt?: string;
+  discoveredSetCount: number;
+  processedSetCount: number;
+  failedSetCount: number;
+  importedItemCount: number;
+  duplicateCount: number;
+  incompleteCount: number;
+  manualReviewCount: number;
+  errorMessage?: string;
+}
+
 /**
  * Immutable vocabulary dictionary entry.
  * Updating metadata must NEVER reset mutable learning progress.
@@ -36,6 +65,9 @@ export interface VocabularyItem {
   pronunciation: string;
   difficulty: WordDifficulty;
   source: string;
+  sourceRefs?: SourceReference[];
+  missingFields?: string[];
+  requiresManualReview?: boolean;
 }
 
 /**

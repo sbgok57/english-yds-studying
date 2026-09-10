@@ -1,9 +1,41 @@
+export type VoiceGender = 'female' | 'male';
+
 export interface SpeechOptions {
   lang?: 'en-US' | 'en-GB' | 'tr-TR';
   rate?: number; // 0.1 to 10 (normal is 1.0, slow is 0.7)
   pitch?: number; // 0 to 2
   volume?: number; // 0 to 1
+  gender?: VoiceGender;
 }
+
+const FEMALE_VOICE_NAMES = [
+  'samantha',
+  'victoria',
+  'karen',
+  'zira',
+  'jenny',
+  'moira',
+  'fiona',
+  'tessa',
+  'serena',
+  'allison',
+  'susan',
+  'ava',
+];
+
+const MALE_VOICE_NAMES = [
+  'alex',
+  'daniel',
+  'fred',
+  'david',
+  'guy',
+  'oliver',
+  'george',
+  'rishi',
+  'aaron',
+  'tom',
+  'james',
+];
 
 class SpeechService {
   private synth: SpeechSynthesis | null = null;
@@ -11,6 +43,7 @@ class SpeechService {
   private isMuted = false;
   private masterVolume = 1.0;
   private defaultSpeed: 'normal' | 'slow' = 'normal';
+  private currentGender: VoiceGender = 'female';
 
   constructor() {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -50,6 +83,14 @@ class SpeechService {
     this.defaultSpeed = speed;
   }
 
+  public setVoiceGender(gender: VoiceGender): void {
+    this.currentGender = gender;
+  }
+
+  public getVoiceGender(): VoiceGender {
+    return this.currentGender;
+  }
+
   public stopSpeaking(): void {
     if (!this.synth) return;
     try {
@@ -57,6 +98,26 @@ class SpeechService {
     } catch (err) {
       console.warn('Speech cancellation error:', err);
     }
+  }
+
+  private pickBestVoice(targetLang: string, gender: VoiceGender): SpeechSynthesisVoice | undefined {
+    const langPrefix = targetLang.split('-')[0].toLowerCase();
+    const langVoices = this.voices.filter(
+      (v) => v.lang.toLowerCase().startsWith(langPrefix) || v.lang.toLowerCase().includes(langPrefix)
+    );
+
+    if (langVoices.length === 0) return undefined;
+
+    const targetList = gender === 'female' ? FEMALE_VOICE_NAMES : MALE_VOICE_NAMES;
+
+    // 1. Try finding a voice whose name matches preferred gender list
+    const matched = langVoices.find((v) =>
+      targetList.some((name) => v.name.toLowerCase().includes(name))
+    );
+    if (matched) return matched;
+
+    // 2. Return the first matching language voice as fallback
+    return langVoices[0];
   }
 
   public speak(text: string, options: SpeechOptions = {}): void {
@@ -72,27 +133,35 @@ class SpeechService {
     try {
       const utterance = new SpeechSynthesisUtterance(cleanText);
       const targetLang = options.lang || 'en-US';
+      const effectiveGender = options.gender || this.currentGender;
       utterance.lang = targetLang;
 
       // Determine rate
       const baseRate = this.defaultSpeed === 'slow' ? 0.7 : 1.0;
       utterance.rate = options.rate ?? baseRate;
-      utterance.pitch = options.pitch ?? 1.0;
+
+      // Apply acoustic pitch shaping based on gender
+      const defaultPitch = effectiveGender === 'female' ? 1.15 : 0.85;
+      utterance.pitch = options.pitch ?? defaultPitch;
       utterance.volume = (options.volume ?? 1.0) * this.masterVolume;
 
-      // Select appropriate voice if available
-      const langPrefix = targetLang.split('-')[0];
-      const matchingVoice = this.voices.find(
-        (v) => v.lang.startsWith(langPrefix) || v.lang.includes(langPrefix)
-      );
-      if (matchingVoice) {
-        utterance.voice = matchingVoice;
+      const voice = this.pickBestVoice(targetLang, effectiveGender);
+      if (voice) {
+        utterance.voice = voice;
       }
 
       this.synth.speak(utterance);
     } catch (err) {
       console.warn('Speech synthesis utterance error:', err);
     }
+  }
+
+  public speakWoman(text: string): void {
+    this.speak(text, { gender: 'female', lang: 'en-US' });
+  }
+
+  public speakMan(text: string): void {
+    this.speak(text, { gender: 'male', lang: 'en-US' });
   }
 
   public speakCorrectAnswer(text = 'Excellent! That is correct.'): void {

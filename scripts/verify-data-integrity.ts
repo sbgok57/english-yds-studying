@@ -97,6 +97,7 @@ async function runDataIntegrityVerification() {
     voiceEnabled: true,
     voiceVolume: 0.8,
     voiceSpeed: 'slow',
+    voiceGender: 'female',
     languageSupportLevel: 'bilingual',
     sessionDurationMinutes: 30,
     dailyGoalWords: 25,
