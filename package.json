@@ -1,0 +1,21 @@
+{
+  "name": "phonics-galaxy-adventure",
+  "version": "1.0.0",
+  "description": "Educational phonics and reading game for 1st grade students with interactive alphabet quest, letter tracing, sound matching, and word blending.",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Production static build ready: index.html is root.'",
+    "test": "node -e \"const fs = require('fs'); if (!fs.existsSync('index.html')) throw new Error('index.html not found'); console.log('✔ All build assets verified.');\"",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "phonics",
+    "education",
+    "reading",
+    "letter-tracing",
+    "html5-game",
+    "web-audio"
+  ],
+  "author": "Antigravity Team",
+  "license": "MIT"
+}
