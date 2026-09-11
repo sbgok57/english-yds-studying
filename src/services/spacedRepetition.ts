@@ -1,4 +1,4 @@
-import { LearningState, LearningStage, VocabularyItem } from '../types';
+import { LearningState, LearningStage, VocabularyItem, WordLearningStatus } from '../types';
 
 const INTERVAL_STEPS = [1, 3, 7, 14, 30];
 
@@ -10,6 +10,19 @@ export function determineStage(mastery: number): LearningStage {
   if (safe < 80) return 'strong';
   if (safe < 95) return 'very_strong';
   return 'mastered';
+}
+
+export function determineWordLearningStatus(
+  mastery: number,
+  consecutiveCorrect: number,
+  consecutiveIncorrect: number,
+  isDue = false
+): WordLearningStatus {
+  if (mastery >= 90 && consecutiveCorrect >= 4) return 'mastered';
+  if (isDue || consecutiveIncorrect > 0) return 'review_needed';
+  if (mastery >= 60) return 'learned';
+  if (mastery > 0 || consecutiveCorrect > 0) return 'learning';
+  return 'new';
 }
 
 export function createInitialLearningState(vocabularyId: string): LearningState {
@@ -26,6 +39,86 @@ export function createInitialLearningState(vocabularyId: string): LearningState 
     lastReviewedAt: null,
     nextReviewAt: now,
     learningStage: 'new',
+    status: 'new',
+    errorRate: 0,
+  };
+}
+
+/**
+ * Three-tier user feedback SRS calculation:
+ * - "know" (Yeşil): Extends interval (1d -> 3d -> 7d -> 14d -> 30d), increases ease, status -> learned/mastered
+ * - "unsure" (Sarı): Short-interval follow-up (0.5d / 12h), ease preserved, status -> learning
+ * - "forgot" (Kırmızı): Reset to immediate queue, ease reduced, status -> review_needed
+ */
+export function processSrsConfidenceReview(
+  currentState: LearningState,
+  response: 'know' | 'unsure' | 'forgot'
+): LearningState {
+  const now = new Date();
+
+  let consecutiveCorrect = currentState.consecutiveCorrect;
+  let consecutiveIncorrect = currentState.consecutiveIncorrect;
+  let correctCount = currentState.correctCount;
+  let incorrectCount = currentState.incorrectCount;
+  let easeFactor = currentState.easeFactor;
+  let intervalDays = currentState.intervalDays;
+  let nextReviewDate: Date;
+  let status: WordLearningStatus;
+
+  if (response === 'know') {
+    consecutiveCorrect += 1;
+    consecutiveIncorrect = 0;
+    correctCount += 1;
+
+    if (consecutiveCorrect <= INTERVAL_STEPS.length) {
+      intervalDays = INTERVAL_STEPS[consecutiveCorrect - 1];
+    } else {
+      intervalDays = Math.round(intervalDays * easeFactor);
+    }
+    easeFactor = Math.min(2.8, easeFactor + 0.05);
+    nextReviewDate = new Date(now.getTime() + intervalDays * 24 * 60 * 60 * 1000);
+    status = consecutiveCorrect >= 4 && intervalDays >= 14 ? 'mastered' : 'learned';
+  } else if (response === 'unsure') {
+    // Gentle follow-up within 12 hours
+    intervalDays = 0.5;
+    nextReviewDate = new Date(now.getTime() + 12 * 60 * 60 * 1000);
+    status = 'learning';
+  } else {
+    // Forgot: reset to immediate review pool
+    consecutiveCorrect = 0;
+    consecutiveIncorrect += 1;
+    incorrectCount += 1;
+    intervalDays = 0;
+    easeFactor = Math.max(1.3, easeFactor - 0.15);
+    nextReviewDate = now; // Available immediately for re-study
+    status = 'review_needed';
+  }
+
+  const totalReviews = correctCount + incorrectCount;
+  const rawRatio = totalReviews > 0 ? (correctCount / totalReviews) * 60 : 0;
+  const streakBonus = Math.min(25, consecutiveCorrect * 5);
+  const consistencyBonus = Math.min(15, Math.log10(totalReviews + 1) * 10);
+  const penalty = Math.min(25, consecutiveIncorrect * 8);
+
+  const rawMastery = rawRatio + streakBonus + consistencyBonus - penalty;
+  const mastery = Math.round(Math.max(0, Math.min(100, rawMastery)));
+  const errorRate = totalReviews > 0 ? Math.round((incorrectCount / totalReviews) * 100) : 0;
+
+  return {
+    ...currentState,
+    mastery,
+    correctCount,
+    incorrectCount,
+    consecutiveCorrect,
+    consecutiveIncorrect,
+    easeFactor: Number(easeFactor.toFixed(2)),
+    intervalDays,
+    lastReviewedAt: now.toISOString(),
+    nextReviewAt: nextReviewDate.toISOString(),
+    learningStage: determineStage(mastery),
+    status,
+    lastResponse: response,
+    errorRate,
   };
 }
 
@@ -84,6 +177,10 @@ export function processReview(
 
   const rawMastery = rawRatio + streakBonus + consistencyBonus - penalty;
   const mastery = Math.round(Math.max(0, Math.min(100, rawMastery)));
+  const errorRate = totalReviews > 0 ? Math.round((incorrectCount / totalReviews) * 100) : 0;
+
+  const isDue = nextReviewDate <= now;
+  const status = determineWordLearningStatus(mastery, consecutiveCorrect, consecutiveIncorrect, isDue);
 
   return {
     ...currentState,
@@ -97,6 +194,9 @@ export function processReview(
     lastReviewedAt: now.toISOString(),
     nextReviewAt: nextReviewDate.toISOString(),
     learningStage: determineStage(mastery),
+    status,
+    lastResponse: isCorrect ? 'know' : 'forgot',
+    errorRate,
   };
 }
 

@@ -10,6 +10,8 @@ import {
   Flame,
   Zap,
   Sparkles,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { UserProgress } from '../../types';
 
@@ -28,12 +30,16 @@ interface NavbarProps {
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
   userProgress: UserProgress;
+  isDarkMode?: boolean;
+  onToggleDarkMode?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
   userProgress,
+  isDarkMode = false,
+  onToggleDarkMode,
 }) => {
   const navItems = [
     { id: 'dashboard', label: 'Ana Sayfa', labelEn: 'Dashboard', icon: LayoutDashboard },
@@ -112,6 +118,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                 Lv.{userProgress.level}
               </span>
             </div>
+
+            {/* Dark Mode Quick Toggle */}
+            {onToggleDarkMode && (
+              <button
+                type="button"
+                onClick={onToggleDarkMode}
+                title={isDarkMode ? 'Aydınlık moda geç' : 'Karanlık moda geç'}
+                aria-label="Tema değiştir"
+                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm"
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+            )}
           </div>
         </div>
 

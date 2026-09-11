@@ -32,6 +32,14 @@ import {
   YDS_EXAM_INFO,
   YDT_EXAM_INFO,
 } from '../src/data/ydsEssentialsData';
+import {
+  processSrsConfidenceReview,
+  determineWordLearningStatus,
+} from '../src/services/spacedRepetition';
+import {
+  buildVocabQuiz,
+  VocabQuizQuestionType,
+} from '../src/services/vocabularyQuizEngine';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -665,6 +673,79 @@ assert(QUESTION_TYPE_GUIDES.length === 15, `YDS Essentials guides cover all 15 q
 assert(EXAM_STRATEGIES.length >= 3, 'YDS Essentials provides time, distractor and checklist strategies');
 assert(YDS_EXAM_INFO.questionCount === 80 && YDS_EXAM_INFO.durationMinutes === 180, 'YDS exam parameters match ÖSYM format (80 questions, 180 mins)');
 assert(YDT_EXAM_INFO.questionCount === 80 && YDT_EXAM_INFO.durationMinutes === 120, 'YDT exam parameters match ÖSYM format (80 questions, 120 mins)');
+
+// 22. ENHANCED VOCABULARY SRS, LEVEL 1-5, WORD FAMILY & 8-TYPE QUIZ TESTS
+console.log('\n22. Enhanced Vocabulary System, SRS & 8-Type Quiz Engine Tests:');
+
+// SRS 3-tier user feedback tests
+const srsBase = createInitialLearningState('vocab-test-confidence');
+const srsKnow1 = processSrsConfidenceReview(srsBase, 'know');
+assert(srsKnow1.intervalDays === 1, 'SRS "know" (1st time) gives 1 day interval');
+assert(srsKnow1.status === 'learned', 'SRS "know" sets status to learned');
+assert(srsKnow1.consecutiveCorrect === 1, 'SRS "know" increments consecutiveCorrect');
+
+const srsUnsure = processSrsConfidenceReview(srsKnow1, 'unsure');
+assert(srsUnsure.intervalDays === 0.5, 'SRS "unsure" gives 0.5 day (12h) gentle follow-up');
+assert(srsUnsure.status === 'learning', 'SRS "unsure" sets status to learning');
+
+const srsForgot = processSrsConfidenceReview(srsKnow1, 'forgot');
+assert(srsForgot.intervalDays === 0, 'SRS "forgot" resets interval to 0 (immediate review)');
+assert(srsForgot.status === 'review_needed', 'SRS "forgot" sets status to review_needed');
+assert(srsForgot.consecutiveCorrect === 0, 'SRS "forgot" resets consecutive streak to 0');
+assert(srsForgot.easeFactor < srsBase.easeFactor, 'SRS "forgot" reduces ease factor');
+
+// Word status tests
+assert(determineWordLearningStatus(0, 0, 0) === 'new', 'Status is "new" for 0 mastery');
+assert(determineWordLearningStatus(40, 1, 0) === 'learning', 'Status is "learning" for active early progress');
+assert(determineWordLearningStatus(70, 2, 0, true) === 'review_needed', 'Status is "review_needed" when card is due');
+assert(determineWordLearningStatus(75, 3, 0, false) === 'learned', 'Status is "learned" for solid mastery');
+assert(determineWordLearningStatus(95, 5, 0, false) === 'mastered', 'Status is "mastered" for %90+ with 4+ correct');
+
+// Vocabulary dataset integrity
+const levelsPresent = new Set(INITIAL_VOCABULARY.map(v => v.level));
+assert(levelsPresent.has(1), 'Vocabulary dataset contains Level 1: Temel');
+assert(levelsPresent.has(2), 'Vocabulary dataset contains Level 2: Orta');
+assert(levelsPresent.has(3), 'Vocabulary dataset contains Level 3: Orta-İleri');
+assert(levelsPresent.has(4), 'Vocabulary dataset contains Level 4: İleri');
+assert(levelsPresent.has(5), 'Vocabulary dataset contains Level 5: YDS Kritik');
+
+const sampleV = INITIAL_VOCABULARY[0];
+assert(!!sampleV.wordFamily, 'Vocabulary item contains Word Family');
+assert(!!sampleV.ydsTrap, 'Vocabulary item contains YDS Trap (confusing word)');
+assert(!!sampleV.mediaContext, 'Vocabulary item contains media/real-life context');
+assert(!!sampleV.logicMnemonic, 'Vocabulary item contains logic mnemonic');
+assert(!!sampleV.ydsNote, 'Vocabulary item contains YDS note');
+
+// 8-Type Quiz Engine Tests
+const quizPool = INITIAL_VOCABULARY.slice(0, 20);
+const statesMock = new Map();
+const all8Types: VocabQuizQuestionType[] = [
+  'en_to_tr',
+  'tr_to_en',
+  'fill_blank',
+  'context_based',
+  'synonym',
+  'antonym',
+  'word_family',
+  'yds_multiple_choice',
+];
+
+const generatedQuiz = buildVocabQuiz(quizPool, statesMock, {
+  questionCount: 16,
+  selectedTypes: all8Types,
+});
+assert(generatedQuiz.length === 16, `Quiz generator generated requested 16 questions (found ${generatedQuiz.length})`);
+
+const qTypesSeen = new Set(generatedQuiz.map(q => q.type));
+assert(qTypesSeen.size >= 4, `Quiz contains diverse question types (found ${qTypesSeen.size} distinct types)`);
+
+generatedQuiz.forEach((q, idx) => {
+  assert(q.options.length >= 4, `Question ${idx + 1} has at least 4 options`);
+  assert(q.options.some(o => o.isCorrect), `Question ${idx + 1} has a correct option`);
+  assert(q.whyCorrect.length > 5, `Question ${idx + 1} provides whyCorrect explanation`);
+  assert(q.whyDistractorsFail.length > 5, `Question ${idx + 1} provides whyDistractorsFail explanation`);
+  assert(q.ydsTip.length > 5, `Question ${idx + 1} provides YDS strategy tip`);
+});
 
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);

@@ -227,6 +227,19 @@ export const App: React.FC = () => {
     navigateToTab('study_session');
   };
 
+  const handleToggleDarkMode = () => {
+    const isCurrentlyDark = document.documentElement.classList.contains('dark');
+    const nextTheme: AppSettings['theme'] = isCurrentlyDark ? 'light' : 'dark';
+    const updatedSettings = { ...settings, theme: nextTheme };
+    setSettings(updatedSettings);
+    storageService.saveSettings(updatedSettings);
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
@@ -240,12 +253,20 @@ export const App: React.FC = () => {
     );
   }
 
+  const isDarkActive =
+    settings.theme === 'dark' ||
+    (settings.theme === 'system' &&
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
       <Navbar
         activeTab={activeTab}
         setActiveTab={navigateToTab}
         userProgress={userProgress}
+        isDarkMode={isDarkActive}
+        onToggleDarkMode={handleToggleDarkMode}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">

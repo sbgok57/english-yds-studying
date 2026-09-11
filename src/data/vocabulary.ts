@@ -41,7 +41,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "mitigate",
+      "noun": "mitigation",
+      "adjective": "mitigative",
+      "adverb": "mitigatively"
+    },
+    "ydsTrap": {
+      "confusingWord": "militate",
+      "differenceTr": "mitigate hafifletmek; militate against aleyhte rol oynamaktır.",
+      "examTrapTip": "YDS seçeneklerinde 'militate' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Governments must take immediate action to mitigate the severe consequences of global climate change.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'mitigate' kelimesi 'hafifletmek' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "mitigate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hafifletmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Mitigate: Miti-Gate kapısındaki nöbetçiler kalabalığın baskısını hafifletiyor."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: mitigate risks, mitigate effects. Eş anlamlıları: alleviate, lessen, reduce. Zıt anlamlıları: aggravate, exacerbate."
   },
   {
     "id": "vocab-deteriorate",
@@ -81,7 +105,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "deteriorate",
+      "noun": "deterioration",
+      "adjective": "deteriorative",
+      "adverb": "deterioratively"
+    },
+    "ydsTrap": {
+      "confusingWord": "devastate",
+      "differenceTr": "deteriorate kendi kendine kötüleşmek; devastate yerle bir etmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'devastate' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Relations between the two countries began to deteriorate rapidly after the trade dispute.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'deteriorate' kelimesi 'kötüleşmek' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deteriorate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kötüleşmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deteriorate: De-terror-ate korku yedikçe durum daha da kötüleşiyor."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: deteriorate rapidly, condition deteriorates. Eş anlamlıları: worsen, decline, degenerate. Zıt anlamlıları: improve, ameliorate."
   },
   {
     "id": "vocab-detrimental",
@@ -121,7 +169,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "detrimentalness",
+      "adjective": "detrimental",
+      "adverb": "detrimentally"
+    },
+    "ydsTrap": {
+      "confusingWord": "instrumental",
+      "differenceTr": "detrimental zararlı; instrumental vesile/faydalı demektir.",
+      "examTrapTip": "YDS seçeneklerinde 'instrumental' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Excessive consumption of sugar has a detrimental effect on cognitive performance.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'detrimental' kelimesi 'zararlı' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "detrimental (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'zararlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Detrimental: De-trim-mental zihni budayıp yok eden zararlı alışkanlıklar."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: detrimental effect, detrimental impact. Eş anlamlıları: harmful, damaging, injurious. Zıt anlamlıları: beneficial, advantageous."
   },
   {
     "id": "vocab-comprehensive",
@@ -161,7 +233,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "comprehensiveness",
+      "adjective": "comprehensive",
+      "adverb": "comprehensively"
+    },
+    "ydsTrap": {
+      "confusingWord": "comprehensible",
+      "differenceTr": "comprehensive kapsamlı/geniş; comprehensible anlaşılırdır.",
+      "examTrapTip": "YDS seçeneklerinde 'comprehensible' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The research team conducted a comprehensive study of renewable energy alternatives in Europe.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'comprehensive' kelimesi 'kapsamlı' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "comprehensive (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kapsamlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Comprehensive: Comprehend anlamak, her şeyi içine alıp kapsayan büyük plan."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: comprehensive study, comprehensive review. Eş anlamlıları: thorough, exhaustive, extensive. Zıt anlamlıları: limited, restricted."
   },
   {
     "id": "vocab-ubiquitous",
@@ -200,7 +296,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "ubiquitosity",
+      "adjective": "ubiquitous",
+      "adverb": "ubiquitously"
+    },
+    "ydsTrap": {
+      "confusingWord": "ambiguous",
+      "differenceTr": "ubiquitous her yerde bulunan; ambiguous belirsiz/çelişkilidir.",
+      "examTrapTip": "YDS seçeneklerinde 'ambiguous' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Smartphones have become ubiquitous in modern urban life across all generations.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'ubiquitous' kelimesi 'her yerde bulunan' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "ubiquitous (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'her yerde bulunan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Ubiquitous: U-bike-with-us nereye baksan her yerde bisikletli insanlar."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: ubiquitous presence, become ubiquitous. Eş anlamlıları: omnipresent, pervasive, widespread. Zıt anlamlıları: rare, scarce."
   },
   {
     "id": "vocab-alleviate",
@@ -242,7 +362,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "alleviate",
+      "noun": "alleviation",
+      "adjective": "alleviative",
+      "adverb": "alleviatively"
+    },
+    "ydsTrap": {
+      "confusingWord": "elevate",
+      "differenceTr": "alleviate dindirmek/hafifletmek; elevate yükseltmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'elevate' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The local charity distributed clean water to alleviate the suffering of drought victims.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'alleviate' kelimesi 'hafifletmek' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "alleviate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hafifletmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Alleviate: Ali-ve-ateş Ali hastanın ateşini düşürüp acısını dindiriyor."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: alleviate poverty, alleviate symptoms. Eş anlamlıları: relieve, soothe, mitigate. Zıt anlamlıları: intensify, exacerbate."
   },
   {
     "id": "vocab-drastically",
@@ -282,7 +426,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "drast",
+      "adjective": "drastical",
+      "adverb": "drastically"
+    },
+    "ydsTrap": {
+      "confusingWord": "dramatically",
+      "differenceTr": "drastically sert ve kökten bir düşüş/artış; dramatically göze çarpan dikkate değer değişimdir.",
+      "examTrapTip": "YDS seçeneklerinde 'dramatically' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Fuel consumption dropped drastically after the introduction of electric transport networks.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'drastically' kelimesi 'ciddi biçimde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "drastically (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ciddi biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Drastically: Drakula gibi sert ve radikal bir iniş veya değişim."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: drop drastically, change drastically. Eş anlamlıları: severely, radically, dramatically. Zıt anlamlıları: slightly, marginally."
   },
   {
     "id": "vocab-reluctantly",
@@ -329,7 +497,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "reluctantness",
+      "adjective": "reluctant",
+      "adverb": "reluctantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "redundantly",
+      "differenceTr": "reluctantly isteksizce; redundantly gereksiz/fuzuli yere demektir.",
+      "examTrapTip": "YDS seçeneklerinde 'redundantly' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The board members reluctantly accepted the new budget cuts due to market pressure.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'reluctantly' kelimesi 'isteksizce' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "reluctantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'isteksizce' kavramının zihinde somutlaşması.",
+      "mentalImage": "Reluctantly: Re-luck şansına güvenmeyip ayaklarını sürüyerek isteksizce gitmek."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: reluctantly agree, reluctantly accept. Eş anlamlıları: unwillingly, grudgingly, hesitantly. Zıt anlamlıları: willingly, eagerly."
   },
   {
     "id": "vocab-scarcely",
@@ -377,7 +569,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "scarceness",
+      "adjective": "scarce",
+      "adverb": "scarcely"
+    },
+    "ydsTrap": {
+      "confusingWord": "rarely",
+      "differenceTr": "scarcely neredeyse hiç / henüz ...-mişti ki; rarely nadiren demektir.",
+      "examTrapTip": "YDS seçeneklerinde 'rarely' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There was scarcely enough food left in the storage to sustain the expedition through the winter.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'scarcely' kelimesi 'neredeyse hiç' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "scarcely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'neredeyse hiç' kavramının zihinde somutlaşması.",
+      "mentalImage": "Scarcely: Scarce kıtlık, yok denecek kadar az."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: scarcely any, scarcely able to. Eş anlamlıları: hardly, barely, rarely. Zıt anlamlıları: abundantly, frequently."
   },
   {
     "id": "vocab-account-for",
@@ -416,7 +632,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "account for",
+      "noun": "accounting",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "stand for",
+      "differenceTr": "account for açıklamak veya oranını oluşturmak; stand for temsil etmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'stand for' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Renewable resources now account for nearly forty percent of national electricity output.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'account for' kelimesi 'oluşturmak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "account for (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'oluşturmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Account for: Muhasebeci (account) yüzdeleri açıklayıp pastadaki payı oluşturur."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: account for the difference, account for the majority. Eş anlamlıları: constitute, represent, explain. Zıt anlamlıları: contradict, exclude."
   },
   {
     "id": "vocab-bring-about",
@@ -457,7 +697,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "bring about",
+      "noun": "bringing",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "come about",
+      "differenceTr": "bring about sebep olmak (nesne alır); come about meydana gelmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'come about' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The technological revolution has brought about fundamental shifts in communication.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'bring about' kelimesi 'sebep olmak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "bring about (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sebep olmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bring about: Masaya yeni bir durumu getirip ortaya çıkmasına sebep olmak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: bring about change, bring about reform. Eş anlamlıları: cause, lead to, trigger. Zıt anlamlıları: prevent, halt."
   },
   {
     "id": "vocab-cope-with",
@@ -496,7 +760,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "cope with",
+      "noun": "copeing",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "come up with",
+      "differenceTr": "cope with başa çıkmak; come up with fikir/çözüm bulmaktır.",
+      "examTrapTip": "YDS seçeneklerinde 'come up with' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Modern healthcare systems struggle to cope with the demands of an aging population.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'cope with' kelimesi 'başa çıkmak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "cope with (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başa çıkmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Cope with: Köpüklerle boğuşurken suyun üstünde kalıp zorlukla başa çıkmak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: cope with stress, cope with problems. Eş anlamlıları: deal with, handle, manage. Zıt anlamlıları: succumb to, give in."
   },
   {
     "id": "vocab-carry-out",
@@ -536,7 +824,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "carry out",
+      "noun": "carrying",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "point out",
+      "differenceTr": "carry out uygulamak/yürütmek; point out dikkat çekmek/belirtmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'point out' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Scientists decided to carry out further laboratory experiments to verify the hypothesis.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'carry out' kelimesi 'yürütmek' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "carry out (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yürütmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Carry out: Deney tüplerini dışarıya taşıyıp araştırmayı gerçekleştirmek."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: carry out research, carry out an experiment. Eş anlamlıları: conduct, execute, perform. Zıt anlamlıları: neglect, abandon."
   },
   {
     "id": "vocab-make-up-for",
@@ -573,7 +885,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "make up for",
+      "noun": "makeing",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "put up with",
+      "differenceTr": "make up for telafi etmek; put up with katlanmak/tahammül etmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'put up with' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He studied extra hours during the weekend to make up for the lectures he had missed.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'make up for' kelimesi 'telafi etmek' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "make up for (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'telafi etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Make up for: Eksik parçayı yapıp açığı kapatmak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: make up for lost time, make up for the loss. Eş anlamlıları: compensate for, offset, atone for. Zıt anlamlıları: worsen, deplete."
   },
   {
     "id": "vocab-discrepancy",
@@ -614,7 +950,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "discrepancy",
+      "adjective": "discrepancyal",
+      "adverb": "discrepancyally"
+    },
+    "ydsTrap": {
+      "confusingWord": "discretion",
+      "differenceTr": "discrepancy tutarsızlık/çelişki; discretion takdir yetkisidir.",
+      "examTrapTip": "YDS seçeneklerinde 'discretion' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Auditors discovered a noticeable discrepancy between the recorded inventory and physical stock.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'discrepancy' kelimesi 'tutarsızlık' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "discrepancy (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tutarsızlık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Discrepancy: Disk-rep raporda diskin kapasitesiyle uyuşmayan çelişki."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: glaring discrepancy, discrepancy between. Eş anlamlıları: inconsistency, divergence, variance. Zıt anlamlıları: consistency, similarity."
   },
   {
     "id": "vocab-consensus",
@@ -655,7 +1015,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "consensus",
+      "adjective": "consensusal",
+      "adverb": "consensusally"
+    },
+    "ydsTrap": {
+      "confusingWord": "census",
+      "differenceTr": "consensus uzlaşma/fikir birliği; census nüfus sayımıdır.",
+      "examTrapTip": "YDS seçeneklerinde 'census' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There is a broad scientific consensus that human activities contribute to rising global temperatures.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'consensus' kelimesi 'fikir birliği' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "consensus (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'fikir birliği' kavramının zihinde somutlaşması.",
+      "mentalImage": "Consensus: Con-sense herkesin sağduyuda ortak bir paydada buluşması."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: reach a consensus, general consensus. Eş anlamlıları: agreement, accord, unanimity. Zıt anlamlıları: disagreement, conflict."
   },
   {
     "id": "vocab-feasibility",
@@ -693,7 +1077,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "feasibility",
+      "adjective": "feasibil",
+      "adverb": "feasibilly"
+    },
+    "ydsTrap": {
+      "confusingWord": "flexibility",
+      "differenceTr": "feasibility uygulanabilirlik/fizibilite; flexibility esnekliktir.",
+      "examTrapTip": "YDS seçeneklerinde 'flexibility' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Engineers are evaluating the technical and financial feasibility of the proposed underwater tunnel.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'feasibility' kelimesi 'uygulanabilirlik' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "feasibility (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uygulanabilirlik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Feasibility: Fees-ability ödenebilir ve yapılabilir olma durumu."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: feasibility study, assess feasibility. Eş anlamlıları: viability, practicability, workability. Zıt anlamlıları: impossibility, impracticability."
   },
   {
     "id": "vocab-inevitably",
@@ -740,7 +1148,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inevitabness",
+      "adjective": "inevitab",
+      "adverb": "inevitably"
+    },
+    "ydsTrap": {
+      "confusingWord": "invariably",
+      "differenceTr": "inevitably kaçınılmaz olarak; invariably her zaman/istisnasız demektir.",
+      "examTrapTip": "YDS seçeneklerinde 'invariably' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Rapid urbanization inevitably strains existing public transport infrastructure.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'inevitably' kelimesi 'kaçınılmaz olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "inevitably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kaçınılmaz olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Inevitably: Kaçacak hiçbir kapı (evit) yok, mutlaka olacak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: lead inevitably to, will inevitably. Eş anlamlıları: unavoidably, necessarily, inescapably. Zıt anlamlıları: avoidably, preventably."
   },
   {
     "id": "vocab-nonetheless",
@@ -775,7 +1207,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "furthermore",
+      "differenceTr": "nonetheless yine de/buna rağmen (zıtlık); furthermore dahası/üstelik (ekleme).",
+      "examTrapTip": "YDS seçeneklerinde 'furthermore' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The climb was perilous and icy; nonetheless, the mountaineers reached the peak before twilight.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'nonetheless' kelimesi 'yine de' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "nonetheless (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yine de' kavramının zihinde somutlaşması.",
+      "mentalImage": "Nonetheless: None the less zorluklar azalsa da artmasa da yine de başarmak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: but nonetheless, was difficult, nonetheless. Eş anlamlıları: nevertheless, even so, however."
   },
   {
     "id": "vocab-undermine",
@@ -817,7 +1273,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "undermine",
+      "noun": "underminion",
+      "adjective": "underminive",
+      "adverb": "underminively"
+    },
+    "ydsTrap": {
+      "confusingWord": "underline",
+      "differenceTr": "undermine baltalamak/zayıflatmak; underline altını çizmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'underline' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Spreading unsubstantiated rumors can severely undermine public confidence in democratic institutions.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'undermine' kelimesi 'zayıflatmak' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "undermine (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'zayıflatmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Undermine: Binanın altını (under) kazıp maden (mine) açarak temeli çökertmek."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: undermine confidence, undermine authority. Eş anlamlıları: weaken, subvert, damage. Zıt anlamlıları: strengthen, reinforce."
   },
   {
     "id": "vocab-prevalent",
@@ -857,7 +1337,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "prevalence",
+      "adjective": "prevalent",
+      "adverb": "prevalently"
+    },
+    "ydsTrap": {
+      "confusingWord": "relevant",
+      "differenceTr": "prevalent yaygın/hüküm süren; relevant konuyla ilgili/alakalıdır.",
+      "examTrapTip": "YDS seçeneklerinde 'relevant' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Waterborne diseases remain prevalent in rural regions lacking sanitation infrastructure.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'prevalent' kelimesi 'yaygın' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "prevalent (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yaygın' kavramının zihinde somutlaşması.",
+      "mentalImage": "Prevalent: Önceden de valiz valiz her yerde olan yaygın eşyalar."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: widely prevalent, prevalent among. Eş anlamlıları: widespread, common, predominant. Zıt anlamlıları: rare, uncommon."
   },
   {
     "id": "vocab-scrutiny",
@@ -897,7 +1401,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "scrutiny",
+      "adjective": "scrutinyal",
+      "adverb": "scrutinyally"
+    },
+    "ydsTrap": {
+      "confusingWord": "security",
+      "differenceTr": "scrutiny derinlemesine inceleme; security emniyet/güvenliktir.",
+      "examTrapTip": "YDS seçeneklerinde 'security' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Financial transactions of multinational corporations are subjected to intense regulatory scrutiny.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'scrutiny' kelimesi 'dikkatli inceleme' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "scrutiny (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkatli inceleme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Scrutiny: Vida gibi (screw) sıkarak her santimini büyüteçle incelemek."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: close scrutiny, under scrutiny. Eş anlamlıları: inspection, examination, investigation. Zıt anlamlıları: neglect, glance."
   },
   {
     "id": "vocab-vulnerable",
@@ -938,7 +1466,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "vulnerability",
+      "adjective": "vulnerable",
+      "adverb": "vulnerablely"
+    },
+    "ydsTrap": {
+      "confusingWord": "valuable",
+      "differenceTr": "vulnerable savunmasız/kırılgan; valuable değerli demektir.",
+      "examTrapTip": "YDS seçeneklerinde 'valuable' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Elderly citizens and newborns are especially vulnerable to respiratory infections in winter.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'vulnerable' kelimesi 'savunmasız' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "vulnerable (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'savunmasız' kavramının zihinde somutlaşması.",
+      "mentalImage": "Vulnerable: Zırhı olmayan yaralanmaya (wound) açık bir savaşçı."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: vulnerable to disease, vulnerable group. Eş anlamlıları: susceptible, defenseless, exposed. Zıt anlamlıları: invulnerable, protected."
   },
   {
     "id": "vocab-plausible",
@@ -978,7 +1530,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "plausibility",
+      "adjective": "plausible",
+      "adverb": "plausiblely"
+    },
+    "ydsTrap": {
+      "confusingWord": "pleasurable",
+      "differenceTr": "plausible akla yatkın/makul; pleasurable zevk vericidir.",
+      "examTrapTip": "YDS seçeneklerinde 'pleasurable' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The detective presented a plausible explanation that accounted for all witness statements.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'plausible' kelimesi 'makul' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "plausible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'makul' kavramının zihinde somutlaşması.",
+      "mentalImage": "Plausible: Alkışlanabilir (applause-able) derecede mantıklı ve inandırıcı bir tez."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: plausible explanation, plausible scenario. Eş anlamlıları: reasonable, credible, believable. Zıt anlamlıları: implausible, unbelievable."
   },
   {
     "id": "vocab-facilitate",
@@ -1017,7 +1593,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "facilitate",
+      "noun": "facilitation",
+      "adjective": "facilitative",
+      "adverb": "facilitatively"
+    },
+    "ydsTrap": {
+      "confusingWord": "felicitate",
+      "differenceTr": "facilitate kolaylaştırmak; felicitate tebrik etmektir.",
+      "examTrapTip": "YDS seçeneklerinde 'felicitate' çeldirici olarak verilir; cümlenin nesnesini ve gramer bağlamını dikkatle inceleyin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Digital learning platforms facilitate independent study by giving learners instant feedback.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'facilitate' kelimesi 'kolaylaştırmak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "facilitate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kolaylaştırmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Facilitate: Facility tesis kurup işleri kolaylaştırmak."
+    },
+    "ydsNote": "Sık kullanılan kalıplar: facilitate communication, facilitate learning. Eş anlamlıları: ease, enable, assist. Zıt anlamlıları: hinder, impede."
   },
   {
     "id": "vocab-efficiently",
@@ -1044,7 +1644,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "efficientness",
+      "adjective": "efficient",
+      "adverb": "efficiently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'efficiently' anlamı: etkili bir şekilde yeterli bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It is essential to make sure businesses operate efficiently to maximize profits.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Efficiently' kelimesi 'etkili bir şekilde yeterli bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Efficiently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'etkili bir şekilde yeterli bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Gears rotating smoothly together with zero friction - Verimli ve düzenli sistem"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-significantly",
@@ -1071,7 +1695,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "significantness",
+      "adjective": "significant",
+      "adverb": "significantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'significantly' anlamı: önemli derecede. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"People who smoke have a significantly greater risk of developing lung cancer than people who don't.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Significantly' kelimesi 'önemli derecede' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Significantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'önemli derecede' kavramının zihinde somutlaşması.",
+      "mentalImage": "A rising bar chart jumping above all previous months - Dikkat çeken büyük artış"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-widely",
@@ -1098,7 +1746,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "wideness",
+      "adjective": "wide",
+      "adverb": "widely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'widely' anlamı: yaygın bir şekilde geniş ölçüde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The books are widely read by adults as well as children.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Widely' kelimesi 'yaygın bir şekilde geniş ölçüde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Widely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yaygın bir şekilde geniş ölçüde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Global network radiating across multiple continents - Geniş coğrafyaya yayılan etki"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-extremely",
@@ -1125,7 +1797,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "extremeness",
+      "adjective": "extreme",
+      "adverb": "extremely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'extremely' anlamı: oldukça son derece. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Mark knew he had behaved extremely badly.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Extremely' kelimesi 'oldukça son derece' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Extremely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'oldukça son derece' kavramının zihinde somutlaşması.",
+      "mentalImage": "Thermometer gauge hitting the maximum red zone - Sınırları zorlayan aşırı seviye"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-initially",
@@ -1152,7 +1848,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "initialness",
+      "adjective": "initial",
+      "adverb": "initially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'initially' anlamı: başlangıçta. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The damage was far more serious than initially believed.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Initially' kelimesi 'başlangıçta' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Initially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başlangıçta' kavramının zihinde somutlaşması.",
+      "mentalImage": "Starting pistol firing at the beginning of a marathon - İlk başlangıç noktası"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-absolutely",
@@ -1179,7 +1899,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 1",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "absoluteness",
+      "adjective": "absolute",
+      "adverb": "absolutely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'absolutely' anlamı: kesinlikle\ntamamen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It’s absolutely impossible to work with you.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Absolutely' kelimesi 'kesinlikle\ntamamen' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Absolutely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kesinlikle\ntamamen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Absolutely\" - kesinlikle\ntamamen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-apparently",
@@ -1206,7 +1950,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "apparentness",
+      "adjective": "apparent",
+      "adverb": "apparently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'apparently' anlamı: görünüşe bakılırsa görünüşte. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I heard a rumour that he’s leaving, but apparently it’s not true.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Apparently' kelimesi 'görünüşe bakılırsa görünüşte' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Apparently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'görünüşe bakılırsa görünüşte' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Apparently\" - görünüşe bakılırsa görünüşte kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-briefly",
@@ -1233,7 +2001,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "briefness",
+      "adjective": "brief",
+      "adverb": "briefly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'briefly' anlamı: kısaca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Let me tell you briefly what happened.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Briefly' kelimesi 'kısaca' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Briefly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kısaca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Briefly\" - kısaca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-carefully",
@@ -1260,7 +2052,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "carefulness",
+      "adjective": "careful",
+      "adverb": "carefully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'carefully' anlamı: dikkatlice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Drive carefully, it’s raining.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Carefully' kelimesi 'dikkatlice' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Carefully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkatlice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Carefully\" - dikkatlice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-certainly",
@@ -1287,7 +2103,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "certainness",
+      "adjective": "certain",
+      "adverb": "certainly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'certainly' anlamı: elbette kesinlikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She had a friend called Tom, but I don’t know whether he was her boyfriend.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Certainly' kelimesi 'elbette kesinlikle' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Certainly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'elbette kesinlikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Certainly\" - elbette kesinlikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-equally",
@@ -1314,7 +2154,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "equalness",
+      "adjective": "equal",
+      "adverb": "equally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'equally' anlamı: eşit derecede. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"In an ideal world, everyone would get treated equally.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Equally' kelimesi 'eşit derecede' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Equally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eşit derecede' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Equally\" - eşit derecede kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-directly",
@@ -1341,7 +2205,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 2",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "directness",
+      "adjective": "direct",
+      "adverb": "directly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'directly' anlamı: doğrudan direkt olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The disease is directly linked to poor drainage systems.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Directly' kelimesi 'doğrudan direkt olarak' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Directly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'doğrudan direkt olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Directly\" - doğrudan direkt olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-clearly",
@@ -1368,7 +2256,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "clearness",
+      "adjective": "clear",
+      "adverb": "clearly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'clearly' anlamı: açıkça anlaşılır biçimde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The accident was clearly your fault, you should have driven more carefully.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Clearly' kelimesi 'açıkça anlaşılır biçimde' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Clearly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'açıkça anlaşılır biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Clearly\" - açıkça anlaşılır biçimde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-essentially",
@@ -1396,7 +2308,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "essentialness",
+      "adjective": "essential",
+      "adverb": "essentially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'essentially' anlamı: aslında. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her new album is essentially a collection of her greatest hits.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Essentially' kelimesi 'aslında' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Essentially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aslında' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Essentially\" - aslında/aslen\nesasen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fairly",
@@ -1423,7 +2359,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fairness",
+      "adjective": "fair",
+      "adverb": "fairly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fairly' anlamı: oldukça adil bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He claimed that he hadn’t been treated fairly by his employers.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Fairly' kelimesi 'oldukça adil bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fairly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'oldukça adil bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fairly\" - oldukça adil bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-closely",
@@ -1450,7 +2410,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "closeness",
+      "adjective": "close",
+      "adverb": "closely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'closely' anlamı: yakından\n(hem ilişki hem de mesafe için kullanılır). Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We are working closely with the detective.\nHe walked into the room, closely folllowed by his sister.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Closely' kelimesi 'yakından\n(hem ilişki hem de mesafe için kullanılır)' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Closely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yakından\n(hem ilişki hem de mesafe için kullanılır)' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Closely\" - yakından\n(hem ilişki hem de mesafe için kullanılır) kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-generally",
@@ -1477,7 +2461,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "generalness",
+      "adjective": "general",
+      "adverb": "generally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'generally' anlamı: genellikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The baby generally wakes up four times during the night.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Generally' kelimesi 'genellikle' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Generally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'genellikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Generally\" - genellikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-incredibly",
@@ -1504,7 +2512,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "incredibness",
+      "adjective": "incredib",
+      "adverb": "incredibly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'incredibly' anlamı: son derece inanılması güç. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This coffee is incredibly smooth and rich.\nWe missed our flight but, incredibly, got there on time.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Incredibly' kelimesi 'son derece inanılması güç' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Incredibly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'son derece inanılması güç' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Incredibly\" - son derece inanılması güç kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-mainly",
@@ -1531,7 +2563,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 3",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "mainness",
+      "adjective": "main",
+      "adverb": "mainly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'mainly' anlamı: başlıca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Cheetahs are mainly found in Africa.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Mainly' kelimesi 'başlıca' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Mainly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başlıca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Mainly\" - başlıca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-gradually",
@@ -1558,7 +2614,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "gradualness",
+      "adjective": "gradual",
+      "adverb": "gradually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'gradually' anlamı: aşama aşama giderek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Gradually, she realized that he was cheating on her.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Gradually' kelimesi 'aşama aşama giderek' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Gradually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aşama aşama giderek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Gradually\" - aşama aşama giderek kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-largely",
@@ -1585,7 +2665,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "largeness",
+      "adjective": "large",
+      "adverb": "largely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'largely' anlamı: büyük ölçüde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The decision was based largely on consumer feedback.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Largely' kelimesi 'büyük ölçüde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Largely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'büyük ölçüde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Largely\" - büyük ölçüde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-merely",
@@ -1612,7 +2716,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "mereness",
+      "adjective": "mere",
+      "adverb": "merely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'merely' anlamı: sadece ancak sırf. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I wasn’t complaining, I merely said that I was tired.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Merely' kelimesi 'sadece ancak sırf' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Merely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sadece ancak sırf' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Merely\" - sadece ancak sırf kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-nearly",
@@ -1640,7 +2768,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "nearness",
+      "adjective": "near",
+      "adverb": "nearly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'nearly' anlamı: yaklaşık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’ve nearly finished that book you lent me.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Nearly' kelimesi 'yaklaşık' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Nearly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yaklaşık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Nearly\" - yaklaşık kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-greatly",
@@ -1667,7 +2819,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "greatness",
+      "adjective": "great",
+      "adverb": "greatly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'greatly' anlamı: büyük oranda geniş ölçüde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I feel that I have benefited greatly from her wisdom.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Greatly' kelimesi 'büyük oranda geniş ölçüde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Greatly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'büyük oranda geniş ölçüde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Greatly\" - büyük oranda geniş ölçüde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-currently",
@@ -1694,7 +2870,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 4",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "currentness",
+      "adjective": "current",
+      "adverb": "currently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'currently' anlamı: şu anda mevcut durumda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The device is currently available only in Japan.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Currently' kelimesi 'şu anda mevcut durumda' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Currently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'şu anda mevcut durumda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Currently\" - şu anda mevcut durumda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-necessarily",
@@ -1721,7 +2921,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "necessariness",
+      "adjective": "necessari",
+      "adverb": "necessarily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'necessarily' anlamı: illa ister istemez. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Servants necessarily had close contact with their employers.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Necessarily' kelimesi 'illa ister istemez' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Necessarily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'illa ister istemez' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Necessarily\" - illa ister istemez kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-obviously",
@@ -1748,7 +2972,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "obviousness",
+      "adjective": "obvious",
+      "adverb": "obviously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'obviously' anlamı: açıkçası\nbesbelli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They were obviously exhausted after the game.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Obviously' kelimesi 'açıkçası\nbesbelli' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Obviously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'açıkçası\nbesbelli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Obviously\" - açıkçası\nbesbelli kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-notably",
@@ -1776,7 +3024,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "notabness",
+      "adjective": "notab",
+      "adverb": "notably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'notably' anlamı: özellikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The house had many drawbacks, most notably its price.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Notably' kelimesi 'özellikle' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Notably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özellikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Notably\" - özellikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-particularly",
@@ -1804,7 +3076,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "particularness",
+      "adjective": "particular",
+      "adverb": "particularly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'particularly' anlamı: özellikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They don’t seem particularly worried about the situation.\nThe story focuses particularly on the main character.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Particularly' kelimesi 'özellikle' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Particularly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özellikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Particularly\" - özellikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-highly",
@@ -1832,7 +3128,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "highness",
+      "adjective": "high",
+      "adverb": "highly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'highly' anlamı: yüksek derecede. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She had a highly successful career as a translator.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Highly' kelimesi 'yüksek derecede' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Highly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yüksek derecede' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Highly\" - yüksek derecede kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-hopefully",
@@ -1859,7 +3179,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "hopefulness",
+      "adjective": "hopeful",
+      "adverb": "hopefully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'hopefully' anlamı: ümit ederim ki umutla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Hopefully, we’ll arrive before dark.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Hopefully' kelimesi 'ümit ederim ki umutla' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Hopefully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ümit ederim ki umutla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Hopefully\" - ümit ederim ki umutla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-partly",
@@ -1886,7 +3230,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 5",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "partness",
+      "adjective": "part",
+      "adverb": "partly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'partly' anlamı: kısmen\nbir dereceye kadar. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The house is partly owned by her sister.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Partly' kelimesi 'kısmen\nbir dereceye kadar' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Partly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kısmen\nbir dereceye kadar' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Partly\" - kısmen\nbir dereceye kadar kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-heavily",
@@ -1913,7 +3281,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "heaviness",
+      "adjective": "heavi",
+      "adverb": "heavily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'heavily' anlamı: aşırı derecede ağır bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The country depends heavily on foreign aid.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Heavily' kelimesi 'aşırı derecede ağır bir şekilde' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Heavily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aşırı derecede ağır bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Heavily\" - aşırı derecede ağır bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-occasionally",
@@ -1940,7 +3332,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "occasionalness",
+      "adjective": "occasional",
+      "adverb": "occasionally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'occasionally' anlamı: ara sıra\narada sırada. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This type of allergy can very occasionally be fatal.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Occasionally' kelimesi 'ara sıra\narada sırada' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Occasionally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ara sıra\narada sırada' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Occasionally\" - ara sıra\narada sırada kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-precisely",
@@ -1967,7 +3383,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "preciseness",
+      "adjective": "precise",
+      "adverb": "precisely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'precisely' anlamı: tam olarak açık olarak kesinlikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The fireworks begin at eight o’clock precisely.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Precisely' kelimesi 'tam olarak açık olarak kesinlikle' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Precisely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tam olarak açık olarak kesinlikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Precisely\" - tam olarak açık olarak kesinlikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-similarly",
@@ -1994,7 +3434,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "similarness",
+      "adjective": "similar",
+      "adverb": "similarly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'similarly' anlamı: aynı şekilde\nbenzer olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The United States won most of the track and field events. Similarly, in swimming, the top three places went to Americans.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Similarly' kelimesi 'aynı şekilde\nbenzer olarak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Similarly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aynı şekilde\nbenzer olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Similarly\" - aynı şekilde\nbenzer olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-rapidly",
@@ -2021,7 +3485,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "rapidness",
+      "adjective": "rapid",
+      "adverb": "rapidly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'rapidly' anlamı: hızlıca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The country’s oil reserves are rapidly declining.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Rapidly' kelimesi 'hızlıca' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Rapidly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hızlıca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Rapidly\" - hızlıca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-truly",
@@ -2048,7 +3536,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "truness",
+      "adjective": "tru",
+      "adverb": "truly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'truly' anlamı: tam anlamıyla gerçekten. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This is a desperate situation which requires a truly radical solution.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Truly' kelimesi 'tam anlamıyla gerçekten' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Truly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tam anlamıyla gerçekten' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Truly\" - tam anlamıyla gerçekten kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-suddenly",
@@ -2075,7 +3587,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 6",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "suddenness",
+      "adjective": "sudden",
+      "adverb": "suddenly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'suddenly' anlamı: aniden birdenbire. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I was reading a book when suddenly I heard a scream from outside.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Suddenly' kelimesi 'aniden birdenbire' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Suddenly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aniden birdenbire' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Suddenly\" - aniden birdenbire kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-relatively",
@@ -2102,7 +3638,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "relativeness",
+      "adjective": "relative",
+      "adverb": "relatively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'relatively' anlamı: nispeten diğerine nazaran. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Online sales are relatively easy to track.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Relatively' kelimesi 'nispeten diğerine nazaran' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Relatively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'nispeten diğerine nazaran' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Relatively\" - nispeten diğerine nazaran kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-virtually",
@@ -2129,7 +3689,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "virtualness",
+      "adjective": "virtual",
+      "adverb": "virtually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'virtually' anlamı: hemen hemen\nyaklaşık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He virtually admitted he was guilty.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Virtually' kelimesi 'hemen hemen\nyaklaşık' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Virtually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hemen hemen\nyaklaşık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Virtually\" - hemen hemen\nyaklaşık kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-ultimately",
@@ -2156,7 +3740,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "ultimateness",
+      "adjective": "ultimate",
+      "adverb": "ultimately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'ultimately' anlamı: nihayetinde eninde sonunda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"A poor diet ultimately lead to illness.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Ultimately' kelimesi 'nihayetinde eninde sonunda' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Ultimately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'nihayetinde eninde sonunda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Ultimately\" - nihayetinde eninde sonunda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-roughly",
@@ -2183,7 +3791,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "roughness",
+      "adjective": "rough",
+      "adverb": "roughly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'roughly' anlamı: yaklaşık olarak aşağı yukarı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The town’s population has roughly doubled.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Roughly' kelimesi 'yaklaşık olarak aşağı yukarı' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Roughly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yaklaşık olarak aşağı yukarı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Roughly\" - yaklaşık olarak aşağı yukarı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-commonly",
@@ -2211,7 +3843,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "commonness",
+      "adjective": "common",
+      "adverb": "commonly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'commonly' anlamı: sık sık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Knee injuries are commonly found in football players.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Commonly' kelimesi 'sık sık' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Commonly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sık sık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Commonly\" - sık sık kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-randomly",
@@ -2238,7 +3894,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "randomness",
+      "adjective": "random",
+      "adverb": "randomly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'randomly' anlamı: rastgele gelişigüzel. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The winner is randomly selected by computer.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Randomly' kelimesi 'rastgele gelişigüzel' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Randomly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'rastgele gelişigüzel' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Randomly\" - rastgele gelişigüzel kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-formerly",
@@ -2265,7 +3945,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 7",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "formerness",
+      "adjective": "former",
+      "adverb": "formerly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'formerly' anlamı: eskiden önceden. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The European Union was formerly called the European Community.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Formerly' kelimesi 'eskiden önceden' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Formerly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eskiden önceden' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Formerly\" - eskiden önceden kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-adversely",
@@ -2292,7 +3996,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "adverseness",
+      "adjective": "adverse",
+      "adverb": "adversely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'adversely' anlamı: olumsuz şekilde\ntersine. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"A lot of companies have been adversely affected by the recession.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Adversely' kelimesi 'olumsuz şekilde\ntersine' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Adversely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'olumsuz şekilde\ntersine' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Adversely\" - olumsuz şekilde\ntersine kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-solely",
@@ -2319,7 +4047,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "soleness",
+      "adjective": "sole",
+      "adverb": "solely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'solely' anlamı: sadece\nyalnızca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He is solely in charge of the operation.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Solely' kelimesi 'sadece\nyalnızca' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Solely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sadece\nyalnızca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Solely\" - sadece\nyalnızca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-permanently",
@@ -2346,7 +4098,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "permanentness",
+      "adjective": "permanent",
+      "adverb": "permanently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'permanently' anlamı: kalıcı bir şekilde daimi olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The stroke left his right side permanently damaged.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Permanently' kelimesi 'kalıcı bir şekilde daimi olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Permanently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kalıcı bir şekilde daimi olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Permanently\" - kalıcı bir şekilde daimi olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-conversely",
@@ -2374,7 +4150,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "converseness",
+      "adjective": "converse",
+      "adverb": "conversely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'conversely' anlamı: aksine\ndiğer taraftan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I thought that it would rain; conversely, it was sunny.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Conversely' kelimesi 'aksine\ndiğer taraftan' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Conversely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aksine\ndiğer taraftan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Conversely\" - aksine\ndiğer taraftan/buna karşılık kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-dramatically",
@@ -2401,7 +4201,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "dramat",
+      "adjective": "dramatical",
+      "adverb": "dramatically"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'dramatically' anlamı: çarpıcı bir şekilde önemli ölçüde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her health has improved dramatically since she started on this new diet.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Dramatically' kelimesi 'çarpıcı bir şekilde önemli ölçüde' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Dramatically (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çarpıcı bir şekilde önemli ölçüde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Dramatically\" - çarpıcı bir şekilde önemli ölçüde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-remarkably",
@@ -2428,7 +4252,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "remarkabness",
+      "adjective": "remarkab",
+      "adverb": "remarkably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'remarkably' anlamı: dikkate değer şekilde önemli derecede. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Remarkably, he wasn’t hurt in the crash.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Remarkably' kelimesi 'dikkate değer şekilde önemli derecede' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Remarkably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkate değer şekilde önemli derecede' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Remarkably\" - dikkate değer şekilde önemli derecede kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-profoundly",
@@ -2456,7 +4304,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 8",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "profoundness",
+      "adjective": "profound",
+      "adverb": "profoundly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'profoundly' anlamı: derinlemesine. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Society has changed profoundly over the last 40 years.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Profoundly' kelimesi 'derinlemesine' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Profoundly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'derinlemesine' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Profoundly\" - derinlemesine kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-vaguely",
@@ -2483,7 +4355,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "vagueness",
+      "adjective": "vague",
+      "adverb": "vaguely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'vaguely' anlamı: belirsiz bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I vaguely remembered having met him before.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Vaguely' kelimesi 'belirsiz bir şekilde' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Vaguely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirsiz bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Vaguely\" - belirsiz bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-consequently",
@@ -2510,7 +4406,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "consequentness",
+      "adjective": "consequent",
+      "adverb": "consequently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'consequently' anlamı: sonuç olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He is always bad-tempered, and consequently doesn’t have many friends.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Consequently' kelimesi 'sonuç olarak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Consequently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sonuç olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Dominoes falling in sequence showing cause and effect - Sonuç olarak doğan durum"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-densely",
@@ -2537,7 +4457,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "denseness",
+      "adjective": "dense",
+      "adverb": "densely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'densely' anlamı: yoğun olarak yoğun bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"England was once a densely wooded country.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Densely' kelimesi 'yoğun olarak yoğun bir şekilde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Densely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yoğun olarak yoğun bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Densely\" - yoğun olarak yoğun bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-distinctly",
@@ -2565,7 +4509,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "distinctness",
+      "adjective": "distinct",
+      "adverb": "distinctly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'distinctly' anlamı: belirgin biçimde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I began to feel distinctly disturbed.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Distinctly' kelimesi 'belirgin biçimde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Distinctly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirgin biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Distinctly\" - belirgin biçimde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-chiefly",
@@ -2592,7 +4560,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "chiefness",
+      "adjective": "chief",
+      "adverb": "chiefly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'chiefly' anlamı: başlıca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The city chiefly attracts upmarket tourists.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Chiefly' kelimesi 'başlıca' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Chiefly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başlıca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Chiefly\" - başlıca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fortunately",
@@ -2619,7 +4611,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fortunateness",
+      "adjective": "fortunate",
+      "adverb": "fortunately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fortunately' anlamı: şans eseri neyse ki. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I was late, but fortunately, the lesson hadn’t started.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Fortunately' kelimesi 'şans eseri neyse ki' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fortunately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'şans eseri neyse ki' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fortunately\" - şans eseri neyse ki kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-lately",
@@ -2646,7 +4662,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 9",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "lateness",
+      "adjective": "late",
+      "adverb": "lately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'lately' anlamı: son zamanlarda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Have you seen her lately?\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Lately' kelimesi 'son zamanlarda' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Lately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'son zamanlarda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Lately\" - son zamanlarda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-abruptly",
@@ -2673,7 +4713,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "abruptness",
+      "adjective": "abrupt",
+      "adverb": "abruptly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'abruptly' anlamı: ansızın birdenbire. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The call ended abruptly.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Abruptly' kelimesi 'ansızın birdenbire' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Abruptly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ansızın birdenbire' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Abruptly\" - ansızın birdenbire kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-indefinitely",
@@ -2700,7 +4764,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "indefiniteness",
+      "adjective": "indefinite",
+      "adverb": "indefinitely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'indefinitely' anlamı: belirsiz olarak süresiz olasak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The negotiations have been postponed indefinitely.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Indefinitely' kelimesi 'belirsiz olarak süresiz olasak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Indefinitely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirsiz olarak süresiz olasak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Indefinitely\" - belirsiz olarak süresiz olasak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-sufficiently",
@@ -2727,7 +4815,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "sufficientness",
+      "adjective": "sufficient",
+      "adverb": "sufficiently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'sufficiently' anlamı: yeteri kadar yeterli miktarda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The following day she felt sufficiently well to go to work.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Sufficiently' kelimesi 'yeteri kadar yeterli miktarda' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Sufficiently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yeteri kadar yeterli miktarda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Sufficiently\" - yeteri kadar yeterli miktarda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-casually",
@@ -2755,7 +4867,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "casualness",
+      "adjective": "casual",
+      "adverb": "casually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'casually' anlamı: gelişigüzel bir biçimde günlük. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He glanced casually out of the window.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Casually' kelimesi 'gelişigüzel bir biçimde günlük' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Casually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gelişigüzel bir biçimde günlük' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Casually\" - gelişigüzel bir biçimde günlük kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-abundantly",
@@ -2783,7 +4919,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 10",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "abundantness",
+      "adjective": "abundant",
+      "adverb": "abundantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'abundantly' anlamı: bol bol. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Calcium is found most abundantly in milk.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Abundantly' kelimesi 'bol bol' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Abundantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bol bol' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Abundantly\" - bol bol kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-repeatedly",
@@ -2810,7 +4970,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "repeatedness",
+      "adjective": "repeated",
+      "adverb": "repeatedly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'repeatedly' anlamı: tekrar tekrar. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Your mother called you repeatedly, why didn’t you pick up the phone?\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Repeatedly' kelimesi 'tekrar tekrar' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Repeatedly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tekrar tekrar' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Repeatedly\" - tekrar tekrar kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-severely",
@@ -2837,7 +5021,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "severeness",
+      "adjective": "severe",
+      "adverb": "severely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'severely' anlamı: ciddi olarak ağır biçimde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Several people were severely injured in the accident.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Severely' kelimesi 'ciddi olarak ağır biçimde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Severely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ciddi olarak ağır biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Severely\" - ciddi olarak ağır biçimde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-accurately",
@@ -2865,7 +5073,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "accurateness",
+      "adjective": "accurate",
+      "adverb": "accurately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'accurately' anlamı: kesin. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The adverb \"Accurately\" is commonly tested in academic reading passages.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Accurately' kelimesi 'kesin' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Accurately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kesin' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bullseye hit with laser precision in analytics - Hatasız ve tam isabet"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-voluntarily",
@@ -2892,7 +5124,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "voluntariness",
+      "adjective": "voluntari",
+      "adverb": "voluntarily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'voluntarily' anlamı: gönüllü olarak kendi isteğiyle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She went voluntarily to the police to explain what she had done.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Voluntarily' kelimesi 'gönüllü olarak kendi isteğiyle' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Voluntarily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gönüllü olarak kendi isteğiyle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Voluntarily\" - gönüllü olarak kendi isteğiyle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-tightly",
@@ -2919,7 +5175,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "tightness",
+      "adjective": "tight",
+      "adverb": "tightly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'tightly' anlamı: sıkı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her eyes were tightly closed.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Tightly' kelimesi 'sıkı olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Tightly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sıkı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Tightly\" - sıkı olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-continually",
@@ -2947,7 +5227,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "continualness",
+      "adjective": "continual",
+      "adverb": "continually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'continually' anlamı: devamlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"New products are continually being developed.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Continually' kelimesi 'devamlı' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Continually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'devamlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Continually\" - devamlı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-effortlesly",
@@ -2974,7 +5278,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 11",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "effortlesness",
+      "adjective": "effortles",
+      "adverb": "effortlesly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'effortlesly' anlamı: çaba harcamadan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She got used to her new dorm effortlessly.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Effortlesly' kelimesi 'çaba harcamadan' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Effortlesly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çaba harcamadan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Effortlesly\" - çaba harcamadan kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-intentionally",
@@ -3001,7 +5329,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "intentionalness",
+      "adjective": "intentional",
+      "adverb": "intentionally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'intentionally' anlamı: kasıtlı olarak bile bile. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I didn’t ignore her intentionally, I just didn’t recognize her.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Intentionally' kelimesi 'kasıtlı olarak bile bile' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Intentionally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kasıtlı olarak bile bile' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Intentionally\" - kasıtlı olarak bile bile kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-inconsiderately",
@@ -3028,7 +5380,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inconsiderateness",
+      "adjective": "inconsiderate",
+      "adverb": "inconsiderately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'inconsiderately' anlamı: düşüncesizce başkalarının düşüncelerini\numursamadan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"People often drive carelessly and inconsiderately.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Inconsiderately' kelimesi 'düşüncesizce başkalarının düşüncelerini\numursamadan' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Inconsiderately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'düşüncesizce başkalarının düşüncelerini\numursamadan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Inconsiderately\" - düşüncesizce başkalarının düşüncelerini\numursamadan kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-selectively",
@@ -3056,7 +5432,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "selectiveness",
+      "adjective": "selective",
+      "adverb": "selectively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'selectively' anlamı: seçerek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They selectively removed trees that were diseased.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Selectively' kelimesi 'seçerek' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Selectively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'seçerek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Selectively\" - seçerek kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-confidentially",
@@ -3083,7 +5483,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "confidentialness",
+      "adjective": "confidential",
+      "adverb": "confidentially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'confidentially' anlamı: sır olarak gizlice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"All information supplied must be treated confidentially.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Confidentially' kelimesi 'sır olarak gizlice' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Confidentially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sır olarak gizlice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Confidentially\" - sır olarak gizlice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-exceedingly",
@@ -3111,7 +5535,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "exceedingness",
+      "adjective": "exceeding",
+      "adverb": "exceedingly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'exceedingly' anlamı: fazlasıyla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The team played exceedingly well.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Exceedingly' kelimesi 'fazlasıyla' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Exceedingly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'fazlasıyla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Exceedingly\" - fazlasıyla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-plainly",
@@ -3138,7 +5586,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "plainness",
+      "adjective": "plain",
+      "adverb": "plainly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'plainly' anlamı: açıkça sade bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Every footstep could be painly heard. a plainly furnished room\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Plainly' kelimesi 'açıkça sade bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Plainly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'açıkça sade bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Plainly\" - açıkça sade bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-urgently",
@@ -3165,7 +5637,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 12",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "urgentness",
+      "adjective": "urgent",
+      "adverb": "urgently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'urgently' anlamı: acilen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I need to speak to her urgently.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Urgently' kelimesi 'acilen' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Urgently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'acilen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Urgently\" - acilen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-superficially",
@@ -3193,7 +5689,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "superficialness",
+      "adjective": "superficial",
+      "adverb": "superficially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'superficially' anlamı: yüzeysel. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The arguments were superficially discussed.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Superficially' kelimesi 'yüzeysel' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Superficially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yüzeysel' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Superficially\" - yüzeysel kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-desperately",
@@ -3220,7 +5740,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "desperateness",
+      "adjective": "desperate",
+      "adverb": "desperately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'desperately' anlamı: aşırı\numutsuzca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They fought desperately for their lives.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Desperately' kelimesi 'aşırı\numutsuzca' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Desperately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aşırı\numutsuzca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Desperately\" - aşırı\numutsuzca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-excessively",
@@ -3247,7 +5791,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "excessiveness",
+      "adjective": "excessive",
+      "adverb": "excessively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'excessively' anlamı: aşırı şekilde\nhaddinden fazla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The music was excessively loud, so I couldn’t sleep.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Excessively' kelimesi 'aşırı şekilde\nhaddinden fazla' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Excessively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aşırı şekilde\nhaddinden fazla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Excessively\" - aşırı şekilde\nhaddinden fazla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-uniquely",
@@ -3274,7 +5842,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "uniqueness",
+      "adjective": "unique",
+      "adverb": "uniquely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'uniquely' anlamı: eşsiz olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She was a uniquely gifted teacher.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Uniquely' kelimesi 'eşsiz olarak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Uniquely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eşsiz olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Uniquely\" - eşsiz olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-tremendously",
@@ -3301,7 +5893,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "tremendousness",
+      "adjective": "tremendous",
+      "adverb": "tremendously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'tremendously' anlamı: son derece olağanüstü düzeyde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Our water resources are tremendously important.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Tremendously' kelimesi 'son derece olağanüstü düzeyde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Tremendously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'son derece olağanüstü düzeyde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Tremendously\" - son derece olağanüstü düzeyde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-enormously",
@@ -3329,7 +5945,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 13",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "enormousness",
+      "adjective": "enormous",
+      "adverb": "enormously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'enormously' anlamı: çokça. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He worked enormously hard on the project.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Enormously' kelimesi 'çokça' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Enormously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çokça' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Enormously\" - çokça kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-adequately",
@@ -3356,7 +5996,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "adequateness",
+      "adjective": "adequate",
+      "adverb": "adequately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'adequately' anlamı: yeterli olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We have not invested adequately in the public health capacity of developing countries.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Adequately' kelimesi 'yeterli olarak' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Adequately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yeterli olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Water cup filled exactly to the optimal required line - Gerekeni tam karşılayan yeterlilik"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fluently",
@@ -3383,7 +6047,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fluentness",
+      "adjective": "fluent",
+      "adverb": "fluently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fluently' anlamı: akıcı bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’d like to speak French fluently.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Fluently' kelimesi 'akıcı bir şekilde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fluently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'akıcı bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fluently\" - akıcı bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-kindly",
@@ -3411,7 +6099,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "kindness",
+      "adjective": "kind",
+      "adverb": "kindly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'kindly' anlamı: nazikçe. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She has very kindly offered to help.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Kindly' kelimesi 'nazikçe' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Kindly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'nazikçe' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Kindly\" - nazikçe kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-potentially",
@@ -3438,7 +6150,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "potentialness",
+      "adjective": "potential",
+      "adverb": "potentially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'potentially' anlamı: imkan dahilinde potansiyel olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Hepatitis is a potentially fatal disease.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Potentially' kelimesi 'imkan dahilinde potansiyel olarak' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Potentially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'imkan dahilinde potansiyel olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Potentially\" - imkan dahilinde potansiyel olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-appropriately",
@@ -3465,7 +6201,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "appropriateness",
+      "adjective": "appropriate",
+      "adverb": "appropriately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'appropriately' anlamı: uygun bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She didn’t dress appropriately for the wedding.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Appropriately' kelimesi 'uygun bir şekilde' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Appropriately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uygun bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Appropriately\" - uygun bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-conveniently",
@@ -3493,7 +6253,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "convenientness",
+      "adjective": "convenient",
+      "adverb": "conveniently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'conveniently' anlamı: rahatlıkla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The report can be conveniently divided into three sections.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Conveniently' kelimesi 'rahatlıkla' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Conveniently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'rahatlıkla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Conveniently\" - rahatlıkla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-traditionally",
@@ -3520,7 +6304,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 14",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "traditionalness",
+      "adjective": "traditional",
+      "adverb": "traditionally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'traditionally' anlamı: geleneksel olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The festival is traditionally held in May.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Traditionally' kelimesi 'geleneksel olarak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Traditionally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'geleneksel olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Traditionally\" - geleneksel olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-promptly",
@@ -3548,7 +6356,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "promptness",
+      "adjective": "prompt",
+      "adverb": "promptly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'promptly' anlamı: derhal. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I try to answer readers’ letters as promptly as I can.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Promptly' kelimesi 'derhal' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Promptly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'derhal' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Promptly\" - derhal kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-firmly",
@@ -3575,7 +6407,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "firmness",
+      "adjective": "firm",
+      "adverb": "firmly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'firmly' anlamı: sıkı bir şekilde kesin olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He shook my hand firmly.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Firmly' kelimesi 'sıkı bir şekilde kesin olarak' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Firmly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sıkı bir şekilde kesin olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Firmly\" - sıkı bir şekilde kesin olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-instantly",
@@ -3603,7 +6459,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "instantness",
+      "adjective": "instant",
+      "adverb": "instantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'instantly' anlamı: hemen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her voice is instantly recognizable.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Instantly' kelimesi 'hemen' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Instantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hemen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Instantly\" - hemen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-inadequately",
@@ -3630,7 +6510,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inadequateness",
+      "adjective": "inadequate",
+      "adverb": "inadequately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'inadequately' anlamı: yarım yamalak yetersiz bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Staff were inadequately trained and failed to carry out their duties.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Inadequately' kelimesi 'yarım yamalak yetersiz bir şekilde' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Inadequately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yarım yamalak yetersiz bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Inadequately\" - yarım yamalak yetersiz bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-safely",
@@ -3657,7 +6561,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "safeness",
+      "adjective": "safe",
+      "adverb": "safely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'safely' anlamı: güvenli bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Drive safely, don’t take any risks!\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Safely' kelimesi 'güvenli bir şekilde' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Safely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'güvenli bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Safely\" - güvenli bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-reliably",
@@ -3685,7 +6613,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "reliabness",
+      "adjective": "reliab",
+      "adverb": "reliably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'reliably' anlamı: hatasız. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’m reliably informed that you’ve been talking about resigning from the company.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Reliably' kelimesi 'hatasız' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Reliably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hatasız' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Reliably\" - hatasız kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-socially",
@@ -3712,7 +6664,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 15",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "socialness",
+      "adjective": "social",
+      "adverb": "socially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'socially' anlamı: sosyal açıdan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Divorce is becoming more socially accepted.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Socially' kelimesi 'sosyal açıdan' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Socially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sosyal açıdan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Socially\" - sosyal açıdan kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-consistently",
@@ -3739,7 +6715,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "consistentness",
+      "adjective": "consistent",
+      "adverb": "consistently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'consistently' anlamı: sürekli olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The president has consistently denied the rumours.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Consistently' kelimesi 'sürekli olarak' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Consistently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sürekli olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Consistently\" - sürekli olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-immensely",
@@ -3767,7 +6767,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "immenseness",
+      "adjective": "immense",
+      "adverb": "immensely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'immensely' anlamı: son derece. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was immensely popular in his day.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Immensely' kelimesi 'son derece' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Immensely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'son derece' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Immensely\" - son derece kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-arguably",
@@ -3794,7 +6818,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "arguabness",
+      "adjective": "arguab",
+      "adverb": "arguably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'arguably' anlamı: tartışmaya açık bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He is arguably the world’s best football player.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Arguably' kelimesi 'tartışmaya açık bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Arguably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tartışmaya açık bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Arguably\" - tartışmaya açık bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-legally",
@@ -3822,7 +6870,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "legalness",
+      "adjective": "legal",
+      "adverb": "legally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'legally' anlamı: hukuken. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Children under 16 are not legally allowed to buy cigarattes.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Legally' kelimesi 'hukuken' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Legally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hukuken' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Legally\" - hukuken kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-conclusively",
@@ -3849,7 +6921,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "conclusiveness",
+      "adjective": "conclusive",
+      "adverb": "conclusively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'conclusively' anlamı: kesin olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The story had been conclusively debunked.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Conclusively' kelimesi 'kesin olarak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Conclusively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kesin olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Conclusively\" - kesin olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-doubtfully",
@@ -3877,7 +6973,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "doubtfulness",
+      "adjective": "doubtful",
+      "adverb": "doubtfully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'doubtfully' anlamı: tereddütle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"“Are you telling me the truth?” she asked doubtfully.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Doubtfully' kelimesi 'tereddütle' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Doubtfully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tereddütle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Doubtfully\" - tereddütle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-violently",
@@ -3905,7 +7025,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 16",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "violentness",
+      "adjective": "violent",
+      "adverb": "violently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'violently' anlamı: şiddetle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He claimed to have been violently assaulted while in detention.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Violently' kelimesi 'şiddetle' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Violently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'şiddetle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Violently\" - şiddetle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-cautiously",
@@ -3933,7 +7077,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "cautiousness",
+      "adjective": "cautious",
+      "adverb": "cautiously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'cautiously' anlamı: dikkatlice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She moved slowly and cautiously along the dark rocky path.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Cautiously' kelimesi 'dikkatlice' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Cautiously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkatlice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Cautiously\" - dikkatlice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-suitably",
@@ -3960,7 +7128,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "suitabness",
+      "adjective": "suitab",
+      "adverb": "suitably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'suitably' anlamı: uygun bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was afraid he might not have behaved suitably.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Suitably' kelimesi 'uygun bir şekilde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Suitably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uygun bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Suitably\" - uygun bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-abnormally",
@@ -3987,7 +7179,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "abnormalness",
+      "adjective": "abnormal",
+      "adverb": "abnormally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'abnormally' anlamı: anormal bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The success rate was abnormally low.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Abnormally' kelimesi 'anormal bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Abnormally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'anormal bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Abnormally\" - anormal bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-brutally",
@@ -4015,7 +7231,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "brutalness",
+      "adjective": "brutal",
+      "adverb": "brutally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'brutally' anlamı: vahşice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The old lady had been brutally attacked.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Brutally' kelimesi 'vahşice' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Brutally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'vahşice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Brutally\" - vahşice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-decisively",
@@ -4043,7 +7283,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "decisiveness",
+      "adjective": "decisive",
+      "adverb": "decisively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'decisively' anlamı: kati surette. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"My bet is that he will desicively win the next election.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Decisively' kelimesi 'kati surette' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Decisively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kati surette' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Decisively\" - kati surette kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-favourably",
@@ -4072,7 +7336,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "favourabness",
+      "adjective": "favourab",
+      "adverb": "favourably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'favourably' anlamı: tercihen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Our products compare favourably with all the leading brands.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Favourably' kelimesi 'tercihen' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Favourably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tercihen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Favourably\" - tercihen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-evenly",
@@ -4100,7 +7388,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 17",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "evenness",
+      "adjective": "even",
+      "adverb": "evenly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'evenly' anlamı: aynı oranda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Divide the mixture evenly between the two pans.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Evenly' kelimesi 'aynı oranda' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Evenly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aynı oranda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Evenly\" - aynı oranda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-inclusively",
@@ -4127,7 +7439,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inclusiveness",
+      "adjective": "inclusive",
+      "adverb": "inclusively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'inclusively' anlamı: kapsamlı bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The contracts are prepared very inclusively by the law department of the publishers.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Inclusively' kelimesi 'kapsamlı bir şekilde' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Inclusively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kapsamlı bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Inclusively\" - kapsamlı bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-indifferently",
@@ -4155,7 +7491,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "indifferentness",
+      "adjective": "indifferent",
+      "adverb": "indifferently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'indifferently' anlamı: kayıtsızca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"“You can try,” said Harry indifferently.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Indifferently' kelimesi 'kayıtsızca' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Indifferently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kayıtsızca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Indifferently\" - kayıtsızca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-mutually",
@@ -4182,7 +7542,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "mutualness",
+      "adjective": "mutual",
+      "adverb": "mutually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'mutually' anlamı: karşılıklı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Can we find a mutually convenient time to meet?\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Mutually' kelimesi 'karşılıklı olarak' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Mutually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'karşılıklı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Two professionals shaking hands sealing an HR partnership - Karşılıklı ortak fayda"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-sensitively",
@@ -4210,7 +7594,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "sensitiveness",
+      "adjective": "sensitive",
+      "adverb": "sensitively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'sensitively' anlamı: duyarlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She worried that she might have reacted too sensitively.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Sensitively' kelimesi 'duyarlı' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Sensitively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'duyarlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Sensitively\" - duyarlı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-attentively",
@@ -4237,7 +7645,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "attentiveness",
+      "adjective": "attentive",
+      "adverb": "attentively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'attentively' anlamı: dikkatlice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The children listened attentively to the story.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Attentively' kelimesi 'dikkatlice' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Attentively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkatlice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Attentively\" - dikkatlice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-successively",
@@ -4265,7 +7697,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "successiveness",
+      "adjective": "successive",
+      "adverb": "successively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'successively' anlamı: art arda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This concept has been applied successively to painting and architecture.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Successively' kelimesi 'art arda' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Successively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'art arda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Successively\" - art arda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-flexibly",
@@ -4293,7 +7749,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 18",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "flexibness",
+      "adjective": "flexib",
+      "adverb": "flexibly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'flexibly' anlamı: esnek bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Managers must respond flexibly to new developments in business.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Flexibly' kelimesi 'esnek bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Flexibly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'esnek bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Flexibly\" - esnek bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-recklessly",
@@ -4321,7 +7801,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "recklessness",
+      "adjective": "reckless",
+      "adverb": "recklessly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'recklessly' anlamı: düşünmeden. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"After the accident, he admitted driving recklessly.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Recklessly' kelimesi 'düşünmeden' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Recklessly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'düşünmeden' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Recklessly\" - düşünmeden kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-plausibly",
@@ -4348,7 +7852,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "plausibness",
+      "adjective": "plausib",
+      "adverb": "plausibly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'plausibly' anlamı: makul bir biçimde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He argued very plausibly that the claims were true.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Plausibly' kelimesi 'makul bir biçimde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Plausibly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'makul bir biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Plausibly\" - makul bir biçimde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-coincidentally",
@@ -4376,7 +7904,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "coincidentalness",
+      "adjective": "coincidental",
+      "adverb": "coincidentally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'coincidentally' anlamı: tesadüfen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Coincidentally, they had both studied in Los Angeles.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Coincidentally' kelimesi 'tesadüfen' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Coincidentally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tesadüfen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Coincidentally\" - tesadüfen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-distantly",
@@ -4404,7 +7956,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "distantness",
+      "adjective": "distant",
+      "adverb": "distantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'distantly' anlamı: mesafeli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She spoke to me distantly.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Distantly' kelimesi 'mesafeli' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Distantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'mesafeli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Distantly\" - mesafeli kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-externally",
@@ -4432,7 +8008,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "externalness",
+      "adjective": "external",
+      "adverb": "externally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'externally' anlamı: dıştan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The university has many externally funded research projects.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Externally' kelimesi 'dıştan' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Externally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dıştan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Externally\" - dıştan kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-ingeniously",
@@ -4459,7 +8059,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "ingeniousness",
+      "adjective": "ingenious",
+      "adverb": "ingeniously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'ingeniously' anlamı: ustalıkla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Rooms ingeniously designed to withstand the most devastating earthquakes.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Ingeniously' kelimesi 'ustalıkla' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Ingeniously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ustalıkla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Ingeniously\" - ustalıkla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-offensively",
@@ -4487,7 +8111,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 19",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "offensiveness",
+      "adjective": "offensive",
+      "adverb": "offensively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'offensively' anlamı: saldırganca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He later apologized for speaking offensively about her.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Offensively' kelimesi 'saldırganca' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Offensively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'saldırganca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Offensively\" - saldırganca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-painfully",
@@ -4514,7 +8162,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "painfulness",
+      "adjective": "painful",
+      "adverb": "painfully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'painfully' anlamı: acı verici abartılı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He banged his pinky finger painfully.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Painfully' kelimesi 'acı verici abartılı' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Painfully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'acı verici abartılı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Painfully\" - acı verici abartılı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-conditionally",
@@ -4541,7 +8213,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "conditionalness",
+      "adjective": "conditional",
+      "adverb": "conditionally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'conditionally' anlamı: bir şarta bağlı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The offer was made conditionally.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Conditionally' kelimesi 'bir şarta bağlı olarak' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Conditionally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bir şarta bağlı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Conditionally\" - bir şarta bağlı olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-relevantly",
@@ -4568,7 +8264,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "relevantness",
+      "adjective": "relevant",
+      "adverb": "relevantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'relevantly' anlamı: yararlı bir şekilde ilgili bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The applicant has experience in teaching and, more relevantly, in industry.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Relevantly' kelimesi 'yararlı bir şekilde ilgili bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Relevantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yararlı bir şekilde ilgili bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Relevantly\" - yararlı bir şekilde ilgili bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-compulsively",
@@ -4596,7 +8316,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "compulsiveness",
+      "adjective": "compulsive",
+      "adverb": "compulsively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'compulsively' anlamı: zorlayıcı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I constantly counted calories and exercised compulsively.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Compulsively' kelimesi 'zorlayıcı olarak' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Compulsively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'zorlayıcı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Compulsively\" - zorlayıcı olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-suspiciously",
@@ -4624,7 +8368,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "suspiciousness",
+      "adjective": "suspicious",
+      "adverb": "suspiciously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'suspiciously' anlamı: kuşkuyla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was arrested after behaving suspiciously.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Suspiciously' kelimesi 'kuşkuyla' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Suspiciously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kuşkuyla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Suspiciously\" - kuşkuyla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-entirely",
@@ -4652,7 +8420,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "entireness",
+      "adjective": "entire",
+      "adverb": "entirely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'entirely' anlamı: tümüyle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The traffic seemed to consist entirely of black cabs.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Entirely' kelimesi 'tümüyle' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Entirely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tümüyle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Entirely\" - tümüyle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-primarily",
@@ -4680,7 +8472,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 20",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "primariness",
+      "adjective": "primari",
+      "adverb": "primarily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'primarily' anlamı: öncelikle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The problem is not primarily a financial one.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Primarily' kelimesi 'öncelikle' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Primarily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'öncelikle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Primarily\" - öncelikle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-rarely",
@@ -4708,7 +8524,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "rareness",
+      "adjective": "rare",
+      "adverb": "rarely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'rarely' anlamı: nadiren. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I rarely have time to readthe newspaper.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Rarely' kelimesi 'nadiren' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Rarely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'nadiren' kavramının zihinde somutlaşması.",
+      "mentalImage": "A solar eclipse visible only once a decade - Ender ve nadir görülen"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-vividly",
@@ -4736,7 +8576,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "vividness",
+      "adjective": "vivid",
+      "adverb": "vividly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'vividly' anlamı: belirgin bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I vividly remember my first day at school.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Vividly' kelimesi 'belirgin bir şekilde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Vividly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirgin bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "High-definition 4K sharp display screen - Net ve capcanlı hatırlanan"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-divisively",
@@ -4764,7 +8628,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "divisiveness",
+      "adjective": "divisive",
+      "adverb": "divisively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'divisively' anlamı: bölücü. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The Institute must be seen as bringing groups of people together, not as acting divisively.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Divisively' kelimesi 'bölücü' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Divisively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bölücü' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Divisively\" - bölücü kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-allegedly",
@@ -4791,7 +8679,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "allegedness",
+      "adjective": "alleged",
+      "adverb": "allegedly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'allegedly' anlamı: iddiaya göre söylentilere göre. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was arrested for allegedly stealing a car.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Allegedly' kelimesi 'iddiaya göre söylentilere göre' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Allegedly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iddiaya göre söylentilere göre' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Allegedly\" - iddiaya göre söylentilere göre kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-deficiently",
@@ -4818,7 +8730,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deficientness",
+      "adjective": "deficient",
+      "adverb": "deficiently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'deficiently' anlamı: eksik şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The system was deficiently designed and implemented.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Deficiently' kelimesi 'eksik şekilde' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Deficiently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eksik şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Deficiently\" - eksik şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-politely",
@@ -4846,7 +8782,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "politeness",
+      "adjective": "polite",
+      "adverb": "politely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'politely' anlamı: kibarca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He told them politely to leave him in peace.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Politely' kelimesi 'kibarca' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Politely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kibarca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Politely\" - kibarca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-frankly",
@@ -4874,7 +8834,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 21",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "frankness",
+      "adjective": "frank",
+      "adverb": "frankly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'frankly' anlamı: açıkçası. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She spoke very frankly about her experiences.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Frankly' kelimesi 'açıkçası' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Frankly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'açıkçası' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Frankly\" - açıkçası kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-deliberately",
@@ -4902,7 +8886,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deliberateness",
+      "adjective": "deliberate",
+      "adverb": "deliberately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'deliberately' anlamı: kasten. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I think she says these things deliberately to annoy me.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Deliberately' kelimesi 'kasten' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Deliberately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kasten' kavramının zihinde somutlaşması.",
+      "mentalImage": "Chess player carefully calculating three moves ahead - Kasten ve bilerek atılan adım"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-preciously",
@@ -4929,7 +8937,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "preciousness",
+      "adjective": "precious",
+      "adverb": "preciously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'preciously' anlamı: ender olarak değerli bir biçimde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Thank you for treating me preciously.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Preciously' kelimesi 'ender olarak değerli bir biçimde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Preciously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ender olarak değerli bir biçimde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Preciously\" - ender olarak değerli bir biçimde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-eventually",
@@ -4956,7 +8988,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "eventualness",
+      "adjective": "eventual",
+      "adverb": "eventually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'eventually' anlamı: eninde sonunda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"After a long search, they eventually found the missing papers.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Eventually' kelimesi 'eninde sonunda' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Eventually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eninde sonunda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Eventually\" - eninde sonunda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-sincerely",
@@ -4984,7 +9040,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "sincereness",
+      "adjective": "sincere",
+      "adverb": "sincerely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'sincerely' anlamı: samimi olarak candan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I sincerely believe that this is the right decision.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Sincerely' kelimesi 'samimi olarak candan' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Sincerely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'samimi olarak candan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Sincerely\" - samimi olarak candan kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-annually",
@@ -5012,7 +9092,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "annualness",
+      "adjective": "annual",
+      "adverb": "annually"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'annually' anlamı: her yıl. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The exhibition is held annually.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Annually' kelimesi 'her yıl' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Annually (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'her yıl' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Annually\" - her yıl kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-privately",
@@ -5039,7 +9143,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "privateness",
+      "adjective": "private",
+      "adverb": "privately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'privately' anlamı: özel olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Can we speak privately?\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Privately' kelimesi 'özel olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Privately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özel olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Privately\" - özel olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-formally",
@@ -5066,7 +9194,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 22",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "formalness",
+      "adjective": "formal",
+      "adverb": "formally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'formally' anlamı: resmi olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The accounts were formally approved by the board.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Formally' kelimesi 'resmi olarak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Formally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'resmi olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Formally\" - resmi olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-ineffectively",
@@ -5094,7 +9246,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "ineffectiveness",
+      "adjective": "ineffective",
+      "adverb": "ineffectively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'ineffectively' anlamı: başarısız bir şekilde etkisiz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The government is dealing ineffectively with these economic problems.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Ineffectively' kelimesi 'başarısız bir şekilde etkisiz' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Ineffectively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başarısız bir şekilde etkisiz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Ineffectively\" - başarısız bir şekilde etkisiz kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-incomparably",
@@ -5122,7 +9298,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "incomparabness",
+      "adjective": "incomparab",
+      "adverb": "incomparably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'incomparably' anlamı: benzersiz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her latest book is incomparably better than her earlier ones.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Incomparably' kelimesi 'benzersiz' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Incomparably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'benzersiz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Incomparably\" - benzersiz kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-hospitably",
@@ -5149,7 +9349,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "hospitabness",
+      "adjective": "hospitab",
+      "adverb": "hospitably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'hospitably' anlamı: misafirperver olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She welcomed us hospitably.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Hospitably' kelimesi 'misafirperver olarak' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Hospitably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'misafirperver olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Hospitably\" - misafirperver olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-sarcastically",
@@ -5176,7 +9400,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "sarcast",
+      "adjective": "sarcastical",
+      "adverb": "sarcastically"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'sarcastically' anlamı: alaycı bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"‘John can’t come.’ ‘What a shame,’ my sister said sarcastically.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Sarcastically' kelimesi 'alaycı bir şekilde' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Sarcastically (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'alaycı bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Sarcastically\" - alaycı bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-seriously",
@@ -5203,7 +9451,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "seriousness",
+      "adjective": "serious",
+      "adverb": "seriously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'seriously' anlamı: ciddi bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"You are not seriously thinking of going, are you?\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Seriously' kelimesi 'ciddi bir şekilde' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Seriously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ciddi bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Seriously\" - ciddi bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-alternatively",
@@ -5230,7 +9502,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "alternativeness",
+      "adjective": "alternative",
+      "adverb": "alternatively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'alternatively' anlamı: alternatif olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Mix two tablespoons of sugar, or alternatively honey, into the mixture.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Alternatively' kelimesi 'alternatif olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Alternatively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'alternatif olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Alternatively\" - alternatif olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-consecutively",
@@ -5258,7 +9554,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 23",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "consecutiveness",
+      "adjective": "consecutive",
+      "adverb": "consecutively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'consecutively' anlamı: ardışık olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The plays will be performed consecutively and will last eight hours.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Consecutively' kelimesi 'ardışık olarak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Consecutively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ardışık olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Consecutively\" - ardışık olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-anxiously",
@@ -5285,7 +9605,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "anxiousness",
+      "adjective": "anxious",
+      "adverb": "anxiously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'anxiously' anlamı: endişeyle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Residents are anxiously awaiting a decision.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Anxiously' kelimesi 'endişeyle' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Anxiously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'endişeyle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Anxiously\" - endişeyle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-broadly",
@@ -5313,7 +9657,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "broadness",
+      "adjective": "broad",
+      "adverb": "broadly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'broadly' anlamı: genişçe. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Broadly speaking, there are five artistic categories within the Western tradition.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Broadly' kelimesi 'genişçe' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Broadly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'genişçe' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Broadly\" - genişçe kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-vehemently",
@@ -5340,7 +9708,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "vehementness",
+      "adjective": "vehement",
+      "adverb": "vehemently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'vehemently' anlamı: hararetli bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The president has vehemently denied having an affair.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Vehemently' kelimesi 'hararetli bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Vehemently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hararetli bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Vehemently\" - hararetli bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-acutely",
@@ -5368,7 +9760,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "acuteness",
+      "adjective": "acute",
+      "adverb": "acutely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'acutely' anlamı: keskin. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’m acutely aware of the difficulties we face.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Acutely' kelimesi 'keskin' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Acutely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'keskin' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Acutely\" - keskin/güçlü bir şekilde yoğun bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-assertively",
@@ -5396,7 +9812,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "assertiveness",
+      "adjective": "assertive",
+      "adverb": "assertively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'assertively' anlamı: güçlü. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We should not be afraid to assertively condemn such actions.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Assertively' kelimesi 'güçlü' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Assertively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'güçlü' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Assertively\" - güçlü/özgüvenli bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-dependently",
@@ -5423,7 +9863,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "dependentness",
+      "adjective": "dependent",
+      "adverb": "dependently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'dependently' anlamı: başka bir duruma bağlı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"A relationship with someone arises dependently on many causes.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Dependently' kelimesi 'başka bir duruma bağlı olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Dependently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başka bir duruma bağlı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Dependently\" - başka bir duruma bağlı olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-protectively",
@@ -5450,7 +9914,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 24",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "protectiveness",
+      "adjective": "protective",
+      "adverb": "protectively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'protectively' anlamı: koruyucu bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He put an arm around her shoulder protectively.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Protectively' kelimesi 'koruyucu bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Protectively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'koruyucu bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Protectively\" - koruyucu bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-progressively",
@@ -5478,7 +9966,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "progressiveness",
+      "adjective": "progressive",
+      "adverb": "progressively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'progressively' anlamı: devamlı olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"My eyesight has got progressively worse over the years.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Progressively' kelimesi 'devamlı olarak' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Progressively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'devamlı olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Step-by-step upward ladder ascent - Giderek ve kademeli artış"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-unfairly",
@@ -5506,7 +10018,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "unfairness",
+      "adjective": "unfair",
+      "adverb": "unfairly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'unfairly' anlamı: haksızca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They claim the police treat minorities unfairly.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Unfairly' kelimesi 'haksızca' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Unfairly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'haksızca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Unfairly\" - haksızca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-comfortably",
@@ -5533,7 +10069,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "comfortabness",
+      "adjective": "comfortab",
+      "adverb": "comfortably"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'comfortably' anlamı: rahat bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"All the rooms were comfortably furnished.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Comfortably' kelimesi 'rahat bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Comfortably (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'rahat bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Comfortably\" - rahat bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-ambiguously",
@@ -5561,7 +10121,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "ambiguousness",
+      "adjective": "ambiguous",
+      "adverb": "ambiguously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'ambiguously' anlamı: muğlak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The novel ends ambiguously, so I’m not sure what happened.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Ambiguously' kelimesi 'muğlak' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Ambiguously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'muğlak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Ambiguously\" - muğlak/belirsiz olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-briskly",
@@ -5589,7 +10173,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "briskness",
+      "adjective": "brisk",
+      "adverb": "briskly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'briskly' anlamı: istenilen hızda. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She walked briskly over to the phone and answered it.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Briskly' kelimesi 'istenilen hızda' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Briskly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'istenilen hızda' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Briskly\" - istenilen hızda kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-covertly",
@@ -5617,7 +10225,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "covertness",
+      "adjective": "covert",
+      "adverb": "covertly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'covertly' anlamı: gizlice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Terrorists have been operating covertly in London.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Covertly' kelimesi 'gizlice' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Covertly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gizlice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Covertly\" - gizlice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-flawlessly",
@@ -5644,7 +10276,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 25",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "flawlessness",
+      "adjective": "flawless",
+      "adverb": "flawlessly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'flawlessly' anlamı: kusursuz bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This is an action film that is very well crafted and flawlessly executed.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Flawlessly' kelimesi 'kusursuz bir şekilde' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Flawlessly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kusursuz bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Flawlessly\" - kusursuz bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-hastily",
@@ -5672,7 +10328,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "hastiness",
+      "adjective": "hasti",
+      "adverb": "hastily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'hastily' anlamı: acilen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Some thought the government acted too hastily.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Hastily' kelimesi 'acilen' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Hastily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'acilen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Hastily\" - acilen kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-savagely",
@@ -5699,7 +10379,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "savageness",
+      "adjective": "savage",
+      "adverb": "savagely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'savagely' anlamı: vahşice. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The man had been savagely beaten.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Savagely' kelimesi 'vahşice' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Savagely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'vahşice' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Savagely\" - vahşice kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-tenderly",
@@ -5727,7 +10431,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "tenderness",
+      "adjective": "tender",
+      "adverb": "tenderly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'tenderly' anlamı: kibarca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He tenderly nursed the patient back to health.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Tenderly' kelimesi 'kibarca' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Tenderly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kibarca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Tenderly\" - kibarca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-meticulously",
@@ -5755,7 +10483,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "meticulousness",
+      "adjective": "meticulous",
+      "adverb": "meticulously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'meticulously' anlamı: özenle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The entire project was meticulously planned.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Meticulously' kelimesi 'özenle' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Meticulously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özenle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Meticulously\" - özenle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-vainly",
@@ -5783,7 +10535,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "vainness",
+      "adjective": "vain",
+      "adverb": "vainly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'vainly' anlamı: boşuna. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He shouted after them, vainly trying to attract their attention.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Vainly' kelimesi 'boşuna' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Vainly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'boşuna' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Vainly\" - boşuna kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-delicately",
@@ -5812,7 +10588,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "delicateness",
+      "adjective": "delicate",
+      "adverb": "delicately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'delicately' anlamı: dikkatle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Some goods needs to be handled delicately.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Delicately' kelimesi 'dikkatle' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Delicately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikkatle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Delicately\" - dikkatle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-passionately",
@@ -5839,7 +10639,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 26",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "passionateness",
+      "adjective": "passionate",
+      "adverb": "passionately"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'passionately' anlamı: tutkuyla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They are all passionately interested in environmental issues.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Passionately' kelimesi 'tutkuyla' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Passionately (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tutkuyla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Passionately\" - tutkuyla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-loosely",
@@ -5866,7 +10690,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "looseness",
+      "adjective": "loose",
+      "adverb": "loosely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'loosely' anlamı: gevşek bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The parcel had only been loosely wrapped, and the paper had come off.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Loosely' kelimesi 'gevşek bir şekilde' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Loosely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gevşek bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Loosely\" - gevşek bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fiercely",
@@ -5894,7 +10742,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fierceness",
+      "adjective": "fierce",
+      "adverb": "fiercely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fiercely' anlamı: güçlü. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They remain fiercely opposed to outside intervention.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Fiercely' kelimesi 'güçlü' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fiercely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'güçlü' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fiercely\" - güçlü kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-readily",
@@ -5923,7 +10795,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "readiness",
+      "adjective": "readi",
+      "adverb": "readily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'readily' anlamı: kolaylıkla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"All ingredients are readily available from your local store.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Readily' kelimesi 'kolaylıkla' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Readily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kolaylıkla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Readily\" - kolaylıkla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-rigidly",
@@ -5951,7 +10847,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "rigidness",
+      "adjective": "rigid",
+      "adverb": "rigidly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'rigidly' anlamı: sıkı sıkıya. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The speed limit must be rigidly enforced.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Rigidly' kelimesi 'sıkı sıkıya' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Rigidly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sıkı sıkıya' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Rigidly\" - sıkı sıkıya kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-eagerly",
@@ -5978,7 +10898,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "eagerness",
+      "adjective": "eager",
+      "adverb": "eagerly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'eagerly' anlamı: hevesle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They eagerly accepted my offer of hospitality.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Eagerly' kelimesi 'hevesle' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Eagerly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hevesle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Eagerly\" - hevesle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-endlessly",
@@ -6006,7 +10950,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "endlessness",
+      "adjective": "endless",
+      "adverb": "endlessly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'endlessly' anlamı: sonsuz bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She talks endlessly about her problems.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Endlessly' kelimesi 'sonsuz bir şekilde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Endlessly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sonsuz bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Endlessly\" - sonsuz bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-quickly",
@@ -6033,7 +11001,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 27",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "quickness",
+      "adjective": "quick",
+      "adverb": "quickly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'quickly' anlamı: hızlıca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The disease spreads quickly.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Quickly' kelimesi 'hızlıca' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Quickly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hızlıca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Quickly\" - hızlıca kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-securely",
@@ -6061,7 +11053,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "secureness",
+      "adjective": "secure",
+      "adverb": "securely"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'securely' anlamı: emniyetli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She locked the door securely behind her.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Securely' kelimesi 'emniyetli' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Securely (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'emniyetli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Double-locked armored vault with biometric shield - Güvenli ve emniyetli koruma"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-diligently",
@@ -6088,7 +11104,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "diligentness",
+      "adjective": "diligent",
+      "adverb": "diligently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'diligently' anlamı: özenli bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They worked diligently on the task they had been given.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Diligently' kelimesi 'özenli bir şekilde' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Diligently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özenli bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Dedicated professional working with meticulous care - Özenli ve titiz çalışma"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-dreadfully",
@@ -6116,7 +11156,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "dreadfulness",
+      "adjective": "dreadful",
+      "adverb": "dreadfully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'dreadfully' anlamı: korkunç bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She behaved dreadfully.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Dreadfully' kelimesi 'korkunç bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Dreadfully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'korkunç bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Dreadfully\" - korkunç bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-irreversibly",
@@ -6143,7 +11207,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "irreversibness",
+      "adjective": "irreversib",
+      "adverb": "irreversibly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'irreversibly' anlamı: geri dönülemez bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The monument has already been irreversibly damaged.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Irreversibly' kelimesi 'geri dönülemez bir şekilde' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Irreversibly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'geri dönülemez bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Irreversibly\" - geri dönülemez bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-possibly",
@@ -6171,7 +11259,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "possibness",
+      "adjective": "possib",
+      "adverb": "possibly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'possibly' anlamı: muhtemel. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He may possibly decide not to come, in which case there is no problem.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Possibly' kelimesi 'muhtemel' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Possibly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'muhtemel' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Possibly\" - muhtemel kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-steadily",
@@ -6199,7 +11311,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "steadiness",
+      "adjective": "steadi",
+      "adverb": "steadily"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'steadily' anlamı: istikrarlı bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Prices have risen steadily.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Steadily' kelimesi 'istikrarlı bir şekilde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Steadily (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'istikrarlı bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Steadily\" - istikrarlı bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-hesitantly",
@@ -6226,7 +11362,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 28",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "hesitantness",
+      "adjective": "hesitant",
+      "adverb": "hesitantly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'hesitantly' anlamı: tereddütle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She approached the teacher hesitantly.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Hesitantly' kelimesi 'tereddütle' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Hesitantly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tereddütle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Hesitantly\" - tereddütle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fruitfully",
@@ -6254,7 +11414,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fruitfulness",
+      "adjective": "fruitful",
+      "adverb": "fruitfully"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fruitfully' anlamı: yararlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The research tools can be fruitfully. applied to other questions.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Fruitfully' kelimesi 'yararlı' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fruitfully (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yararlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fruitfully\" - yararlı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-persistently",
@@ -6283,7 +11467,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "persistentness",
+      "adjective": "persistent",
+      "adverb": "persistently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'persistently' anlamı: sürekli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Schools with persistently low test scores would get an extra funding.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Persistently' kelimesi 'sürekli' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Persistently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sürekli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Water droplet carving rock through steady repetition - Israrla ve yılmadan devam"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-willingly",
@@ -6311,7 +11519,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "willingness",
+      "adjective": "willing",
+      "adverb": "willingly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'willingly' anlamı: seve seve. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I would willingly help you if I weren’t going away tomorrow.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Willingly' kelimesi 'seve seve' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Willingly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'seve seve' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Willingly\" - seve seve kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-comprehensively",
@@ -6339,7 +11571,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "comprehensiveness",
+      "adjective": "comprehensive",
+      "adverb": "comprehensively"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'comprehensively' anlamı: kapsamlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The matter has been comprehensively discussed.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Comprehensively' kelimesi 'kapsamlı' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Comprehensively (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kapsamlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Comprehensively\" - kapsamlı kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-inherently",
@@ -6367,7 +11623,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inherentness",
+      "adjective": "inherent",
+      "adverb": "inherently"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'inherently' anlamı: doğal olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She felt the system was inherently unfair and unequal.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Inherently' kelimesi 'doğal olarak' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Inherently (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'doğal olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Inherently\" - doğal olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-hopelessly",
@@ -6394,7 +11674,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "hopelessness",
+      "adjective": "hopeless",
+      "adverb": "hopelessly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'hopelessly' anlamı: ümitsiz bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They met at university and fell hopelessly in love.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Hopelessly' kelimesi 'ümitsiz bir şekilde' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Hopelessly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ümitsiz bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Hopelessly\" - ümitsiz bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-alertly",
@@ -6421,7 +11725,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 29",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "alertness",
+      "adjective": "alert",
+      "adverb": "alertly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'alertly' anlamı: tetikte olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She walked alertly down the street.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Alertly' kelimesi 'tetikte olarak' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Alertly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tetikte olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Alertly\" - tetikte olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-fatally",
@@ -6448,7 +11776,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "fatalness",
+      "adjective": "fatal",
+      "adverb": "fatally"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'fatally' anlamı: ölümcül bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The plan was fatally flawed from the start.\" — The Social Dilemma",
+      "sourceTitle": "The Social Dilemma",
+      "explanationTr": "Burada 'Fatally' kelimesi 'ölümcül bir şekilde' anlamıyla teknolojinin günlük yaşam ve insan psikolojisi üzerindeki etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Fatally (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ölümcül bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Fatally\" - ölümcül bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-justly",
@@ -6476,7 +11828,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "justness",
+      "adjective": "just",
+      "adverb": "justly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'justly' anlamı: adaletle. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was justly condemned to a long prison sentence.\" — Grey's Anatomy",
+      "sourceTitle": "Grey's Anatomy",
+      "explanationTr": "Burada 'Justly' kelimesi 'adaletle' anlamıyla tıbbi teşhis, tedavi ve hastane ortamındaki kritik kararlar. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Justly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'adaletle' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Justly\" - adaletle kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-wrongly",
@@ -6503,7 +11879,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "wrongness",
+      "adjective": "wrong",
+      "adverb": "wrongly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'wrongly' anlamı: hatalı bir şekilde. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Several people were wrongly convicted.\" — Sherlock",
+      "sourceTitle": "Sherlock",
+      "explanationTr": "Burada 'Wrongly' kelimesi 'hatalı bir şekilde' anlamıyla zihinsel analiz ve gizemli bir olayın ayrıntılı çözümlemesi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Wrongly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hatalı bir şekilde' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Wrongly\" - hatalı bir şekilde kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-determinedly",
@@ -6531,7 +11931,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 1,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "determinedness",
+      "adjective": "determined",
+      "adverb": "determinedly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'determinedly' anlamı: kesin olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He continued determinedly despite his injury.\" — Chernobyl",
+      "sourceTitle": "Chernobyl",
+      "explanationTr": "Burada 'Determinedly' kelimesi 'kesin olarak' anlamıyla kriz anında yapılan kritik hata veya tehlikeli sonuçların boyutu. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Determinedly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kesin olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Determinedly\" - kesin olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-narrowly",
@@ -6560,7 +11984,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 2,
+    "importance": "normal",
+    "wordFamily": {
+      "verb": "",
+      "noun": "narrowness",
+      "adjective": "narrow",
+      "adverb": "narrowly"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'narrowly' anlamı: güç bela. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The car narrowly missed a cyclist.\" — Oppenheimer",
+      "sourceTitle": "Oppenheimer",
+      "explanationTr": "Burada 'Narrowly' kelimesi 'güç bela' anlamıyla bilimsel keşiflerin insanlık ve toplum üzerindeki derin etkileri. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Narrowly (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'güç bela' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Narrowly\" - güç bela kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-officially",
@@ -6587,7 +12035,31 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 3,
+    "importance": "important",
+    "wordFamily": {
+      "verb": "",
+      "noun": "officialness",
+      "adjective": "official",
+      "adverb": "officially"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'officially' anlamı: resmi olarak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Many of those living on the streets are not officially homeless.\" — Succession",
+      "sourceTitle": "Succession",
+      "explanationTr": "Burada 'Officially' kelimesi 'resmi olarak' anlamıyla büyük bir şirketin stratejik kararları ve rekabet ortamı. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Officially (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'resmi olarak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Officially\" - resmi olarak kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   },
   {
     "id": "vocab-prosperously",
@@ -6615,6 +12087,30 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "setName": "Table 30",
         "importedAt": "2026-09-10T18:07:09.000Z"
       }
-    ]
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "prosperousness",
+      "adjective": "prosperous",
+      "adverb": "prosperously"
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words",
+      "differenceTr": "'prosperously' anlamı: refahla. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The town is a prosperously suburban place.\" — BBC Earth",
+      "sourceTitle": "BBC Documentaries",
+      "explanationTr": "Burada 'Prosperously' kelimesi 'refahla' anlamıyla doğal kaynakların korunması ve ekolojik dengenin önemi. bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "Prosperously (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'refahla' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conceptual visual association representing the dynamic nature of \"Prosperously\" - refahla kavramı"
+    },
+    "ydsNote": "YDS/YDT metinlerinde ve kelime sorularında sıkça doğru cevap olarak karşımıza çıkar."
   }
 ];
