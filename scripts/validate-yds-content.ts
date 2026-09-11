@@ -99,8 +99,8 @@ console.log(`  ✓ Sampled mock exams (${testExamNumbers.join(', ')}): 100% comp
 
 // 4. Validate Scientific Reading Library
 console.log('\n4. Validating Scientific Reading Library...');
-if (SCIENTIFIC_READINGS.length === 0) {
-  logError('Scientific Reading Library is empty.');
+if (SCIENTIFIC_READINGS.length < 100) {
+  logError(`Expected at least 100 scientific readings, found ${SCIENTIFIC_READINGS.length}`);
 } else {
   SCIENTIFIC_READINGS.forEach((reading) => {
     if (!reading.id || !reading.title) logError(`Reading missing id or title.`);
@@ -110,8 +110,17 @@ if (SCIENTIFIC_READINGS.length === 0) {
     reading.keyVocabulary.forEach((v) => {
       if (!v.word || !v.meaningTr) logError(`Reading "${reading.title}" vocabulary missing word or meaning.`);
     });
+    if (!reading.openEndedQuestions || reading.openEndedQuestions.length === 0) {
+      logError(`Reading "${reading.title}" missing open-ended questions.`);
+    } else {
+      reading.openEndedQuestions.forEach((oq) => {
+        if (!oq.id || !oq.questionText || !oq.keyConcepts || oq.keyConcepts.length === 0) {
+          logError(`Reading "${reading.title}" open-ended question ${oq.id} invalid.`);
+        }
+      });
+    }
   });
-  console.log(`  ✓ ${SCIENTIFIC_READINGS.length} academic scientific readings fully verified with vocabulary & comprehension questions.`);
+  console.log(`  ✓ ${SCIENTIFIC_READINGS.length} academic scientific readings fully verified with vocabulary, comprehension & open-ended questions.`);
 }
 
 console.log('\n----------------------------------------');

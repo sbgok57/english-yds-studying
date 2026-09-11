@@ -163,10 +163,60 @@ export interface ScientificReadingVocabulary {
   visualMnemonic: string;
 }
 
+export interface OpenEndedReadingQuestion {
+  id: string;
+  questionText: string;
+  expectedAnswer: string;
+  keyConcepts: string[];
+  minConceptsForFullCredit?: number;
+  explanation: string;
+}
+
+export interface OpenEndedEvaluationResult {
+  status: 'correct' | 'partially_correct' | 'incorrect';
+  score: number; // 0, 50, 100
+  matchedConcepts: string[];
+  missingConcepts: string[];
+  feedback: string;
+  expectedAnswer: string;
+}
+
+export type ScientificReadingCategory =
+  | 'Biology'
+  | 'Medicine'
+  | 'Neuroscience'
+  | 'Psychology'
+  | 'Climate & Oceans'
+  | 'Astronomy'
+  | 'Space'
+  | 'Physics'
+  | 'Chemistry'
+  | 'Genetics'
+  | 'Technology'
+  | 'Artificial Intelligence'
+  | 'Economics'
+  | 'Sociology'
+  | 'Education'
+  | 'Archaeology'
+  | 'History of Science'
+  | 'Public Health'
+  | 'Nutrition Science'
+  | 'Ecology'
+  | 'Geology'
+  | 'Oceanography'
+  | 'Materials Science'
+  | 'Engineering'
+  | 'Renewable Energy'
+  | 'Animal Behavior'
+  | 'Evolution'
+  | 'Linguistics'
+  | 'Cognitive Robotics'
+  | string;
+
 export interface ScientificReading {
   id: string;
   title: string;
-  category: 'Neuroscience' | 'Artificial Intelligence' | 'Climate & Oceans' | 'Genetics' | 'Astrophysics' | 'Archaeology' | 'Renewable Energy' | 'Behavioral Economics' | 'Public Health' | 'Cognitive Robotics';
+  category: ScientificReadingCategory;
   readTimeMinutes: number;
   difficulty: 'B2' | 'C1';
   passageEn: string;
@@ -174,4 +224,5 @@ export interface ScientificReading {
   visualConcept: string;
   keyVocabulary: ScientificReadingVocabulary[];
   questions: YdsQuestion[];
+  openEndedQuestions?: OpenEndedReadingQuestion[];
 }

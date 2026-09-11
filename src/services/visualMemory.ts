@@ -1,15 +1,5 @@
 import { PartOfSpeech } from '../types/vocabulary';
 
-export interface VisualMemoryData {
-  svgContent: string;
-  themeColor: string;
-  category: string;
-  memoryTip: {
-    en: string;
-    tr: string;
-  };
-}
-
 // Curated high-yield conceptual SVG icons / illustrations
 const CONCEPT_SVGS: Record<string, { svg: string; category: string }> = {
   abandon: {
@@ -226,12 +216,51 @@ function generateMemoryTip(word: string, pos: PartOfSpeech, meaningsTr: string[]
   };
 }
 
+export interface VisualMemoryData {
+  svgContent: string;
+  themeColor: string;
+  category: string;
+  style: 'photo' | 'cartoon' | 'illustration' | 'visual-mnemonic' | 'scientific-photo';
+  visualPrompt: string;
+  memoryTip: {
+    en: string;
+    tr: string;
+  };
+}
+
+/**
+ * Automatically creates visual mnemonic prompt focusing on the word's meaning.
+ */
+function generateVisualPrompt(word: string, pos: PartOfSpeech, meaningsTr: string[]): {
+  style: VisualMemoryData['style'];
+  prompt: string;
+} {
+  const tr = meaningsTr[0] || 'academic concept';
+  if (pos === 'verb' || pos === 'phrasal_verb') {
+    return {
+      style: 'visual-mnemonic',
+      prompt: `A dynamic, expressive visual mnemonic illustrating the action and meaning of "${word}" (${tr}), focused on movement and concrete outcome, strictly without English text.`,
+    };
+  }
+  if (pos === 'adjective' || pos === 'adverb') {
+    return {
+      style: 'illustration',
+      prompt: `A colorful conceptual illustration emphasizing the attribute of "${word}" (${tr}), high visual salience and memory hook, no typography.`,
+    };
+  }
+  return {
+    style: 'scientific-photo',
+    prompt: `An authentic educational conceptual scene representing the essence of "${word}" (${tr}) in an academic context, strong memory anchor, zero text.`,
+  };
+}
+
 /**
  * Returns full visual memory assets for any vocabulary word.
  * Guaranteed 100% offline resilient with 0 broken images.
  */
 export function getVisualMemory(word: string, pos: PartOfSpeech = 'noun', meaningsTr: string[] = []): VisualMemoryData {
   const norm = word.toLowerCase().trim();
+  const { style, prompt } = generateVisualPrompt(word, pos, meaningsTr);
 
   if (CONCEPT_SVGS[norm]) {
     const item = CONCEPT_SVGS[norm];
@@ -239,6 +268,8 @@ export function getVisualMemory(word: string, pos: PartOfSpeech = 'noun', meanin
       svgContent: item.svg,
       themeColor: '#3b82f6',
       category: item.category,
+      style,
+      visualPrompt: prompt,
       memoryTip: generateMemoryTip(word, pos, meaningsTr),
     };
   }
@@ -248,6 +279,8 @@ export function getVisualMemory(word: string, pos: PartOfSpeech = 'noun', meanin
     svgContent: svg,
     themeColor: color,
     category: pos,
+    style,
+    visualPrompt: prompt,
     memoryTip: generateMemoryTip(word, pos, meaningsTr),
   };
 }

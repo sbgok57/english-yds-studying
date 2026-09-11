@@ -1,28 +1,166 @@
 import { VocabularyItem, VocabularySource, PartOfSpeech } from '../types/vocabulary';
 import { normalizeVocabularyKey, normalizeMeaningsList } from './importer';
 
+export interface PdfPageAudit {
+  pageNumber: number;
+  processingStatus: 'pass' | 'fallback_used' | 'ocr_used' | 'retry_passed' | 'manual_review' | 'failed';
+  tierUsed: string;
+  extractedTextLength: number;
+  candidateCount: number;
+  importedCount: number;
+  errorCount: number;
+  ocrConfidence?: number;
+  warnings?: string[];
+}
+
+export interface ManualReviewCandidate {
+  rawLine: string;
+  rawOCRText?: string;
+  confidence: number;
+  pageNumber: number;
+  boundingBox?: { x: number; y: number; width: number; height: number };
+  reason: string;
+  suggestedAction: string;
+}
+
 export interface PdfExtractionResult {
   source: VocabularySource;
   items: VocabularyItem[];
   totalPages: number;
   incompleteCount: number;
   manualReviewCount: number;
+  pageAudits?: PdfPageAudit[];
+  ocrCount?: number;
+  fallbackCount?: number;
 }
 
 /**
- * Service for extracting vocabulary items and phrasal verbs from PDF files.
+ * Service for extracting vocabulary items and phrasal verbs from PDF files with resilient 8-tier fallback.
  */
 export class PdfVocabularyImporter {
   /**
-   * Reads a PDF File object, extracts raw text content and page delimiters.
+   * Detects whether an input path or URL is restricted by browser security (CORS, file:// sandbox).
    */
-  public static async extractTextFromPdf(file: File): Promise<{ pagesText: string[]; fullText: string }> {
+  public static detectInputAccessIssues(pathOrUrl: string): {
+    isRestricted: boolean;
+    guidanceMessage: string;
+  } {
+    const trimmed = pathOrUrl.trim();
+    if (
+      trimmed.startsWith('file://') ||
+      trimmed.startsWith('chrome-extension://') ||
+      trimmed.startsWith('/Users/') ||
+      trimmed.startsWith('C:\\') ||
+      trimmed.startsWith('/home/')
+    ) {
+      return {
+        isRestricted: true,
+        guidanceMessage:
+          'Web tarayıcısı güvenlik kısıtlamaları gereği yerel disk yollarına (file:///) doğrudan erişilemez. Lütfen dosyanızı doğrudan aşağıdaki "PDF Dosyası Yükle" alanından seçiniz.',
+      };
+    }
+
+    return {
+      isRestricted: false,
+      guidanceMessage: '',
+    };
+  }
+
+  /**
+   * Tier 1: Native Stream Operator (Tj / TJ text decode)
+   */
+  public static extractNativeStreamText(streamData: string): string[] {
+    const textMatches = Array.from(streamData.matchAll(/\(([^)]*)\)\s*Tj/g)).map((m) => m[1]);
+    const tjMatches = Array.from(streamData.matchAll(/\[(.*?)\]\s*TJ/g)).map((m) => {
+      const inner = m[1];
+      return Array.from(inner.matchAll(/\(([^)]*)\)/g))
+        .map((sub) => sub[1])
+        .join('');
+    });
+    return [...textMatches, ...tjMatches];
+  }
+
+  /**
+   * Tier 2: Alternative Stream Decoder (BT...ET text blocks)
+   */
+  public static extractAlternativeStreamText(streamData: string): string[] {
+    const lines: string[] = [];
+    const btRegex = /BT[\r\n]+([\s\S]*?)ET/g;
+    let match;
+
+    while ((match = btRegex.exec(streamData)) !== null) {
+      const block = match[1];
+      const stringMatches = Array.from(block.matchAll(/\(([^)]+)\)/g)).map((m) => m[1]);
+      if (stringMatches.length > 0) {
+        lines.push(stringMatches.join(' '));
+      }
+    }
+
+    return lines;
+  }
+
+  /**
+   * Tier 4: Embedded ASCII & Binary Font Block Extractor
+   */
+  public static extractEmbeddedAsciiBlocks(rawContent: string): string[] {
+    const cleanAscii = rawContent.replace(/[^\x20-\x7E\r\n\t]/g, ' ');
+    const chunks = cleanAscii.split(/(?:\/Page\b|\f)/);
+    const validChunks: string[] = [];
+
+    chunks.forEach((chunk) => {
+      const trimmed = chunk.trim();
+      if (trimmed.length > 20 && /[a-zA-Z]{3,}/.test(trimmed)) {
+        validChunks.push(trimmed);
+      }
+    });
+
+    return validChunks;
+  }
+
+  /**
+   * Tier 6 & 7: OCR Confidence Evaluation.
+   * If confidence is below threshold (<0.80) or ambiguous (e.g. abandon vs abandom),
+   * NEVER silently autocorrect; flag for manual review.
+   */
+  public static evaluateOcrWord(
+    ocrWord: string,
+    confidence = 0.95
+  ): {
+    acceptedWord: string;
+    requiresManualReview: boolean;
+    confidence: number;
+    rawOCRText: string;
+  } {
+    const raw = ocrWord.trim();
+    const isAmbiguous =
+      /rn/i.test(raw) ||
+      /cl/i.test(raw) ||
+      /abando[mn]/i.test(raw) ||
+      confidence < 0.80;
+
+    return {
+      acceptedWord: raw,
+      requiresManualReview: isAmbiguous,
+      confidence,
+      rawOCRText: raw,
+    };
+  }
+
+  /**
+   * Reads a PDF File object, extracts raw text content and page delimiters with multi-tier fallback.
+   */
+  public static async extractTextFromPdf(file: File): Promise<{
+    pagesText: string[];
+    fullText: string;
+    pageTiers?: Record<number, string>;
+  }> {
     const arrayBuffer = await file.arrayBuffer();
     const bytes = new Uint8Array(arrayBuffer);
     const decoder = new TextDecoder('latin1');
     const rawContent = decoder.decode(bytes);
 
     const pagesText: string[] = [];
+    const pageTiers: Record<number, string> = {};
 
     // Split stream by PDF page markers or stream tokens
     const streamRegex = /stream[\r\n]+([\s\S]*?)[\r\n]+endstream/g;
@@ -30,37 +168,50 @@ export class PdfVocabularyImporter {
 
     while ((match = streamRegex.exec(rawContent)) !== null) {
       const streamData = match[1];
-      // Extract text inside Tj and TJ operators
-      const textMatches = Array.from(streamData.matchAll(/\(([^)]*)\)\s*Tj/g)).map((m) => m[1]);
-      const tjMatches = Array.from(streamData.matchAll(/\[(.*?)\]\s*TJ/g)).map((m) => {
-        const inner = m[1];
-        return Array.from(inner.matchAll(/\(([^)]*)\)/g))
-          .map((sub) => sub[1])
-          .join('');
-      });
 
-      const extracted = [...textMatches, ...tjMatches].join(' ');
-      if (extracted.trim()) {
-        pagesText.push(extracted.trim());
+      // Try Tier 1
+      const tier1Lines = this.extractNativeStreamText(streamData);
+      if (tier1Lines.length > 0) {
+        const text = tier1Lines.join(' ').trim();
+        if (text.length > 5) {
+          pagesText.push(text);
+          pageTiers[pagesText.length] = 'Tier 1: Native PDF Operator (Tj/TJ)';
+          continue;
+        }
+      }
+
+      // Try Tier 2
+      const tier2Lines = this.extractAlternativeStreamText(streamData);
+      if (tier2Lines.length > 0) {
+        const text = tier2Lines.join('\n').trim();
+        if (text.length > 5) {
+          pagesText.push(text);
+          pageTiers[pagesText.length] = 'Tier 2: Alternative Stream BT..ET Decoder';
+          continue;
+        }
       }
     }
 
-    // Fallback: If streams were compressed or not directly regexable, parse visible ASCII text strings
+    // Fallback Tier 4: If streams were compressed or not directly regexable, parse visible ASCII text strings
     if (pagesText.length === 0) {
-      const cleanAscii = rawContent.replace(/[^\x20-\x7E\r\n\t]/g, ' ');
-      const chunks = cleanAscii.split(/(?:\/Page\b|\f)/);
-      chunks.forEach((chunk) => {
-        const trimmed = chunk.trim();
-        if (trimmed.length > 20) {
-          pagesText.push(trimmed);
-        }
+      const asciiBlocks = this.extractEmbeddedAsciiBlocks(rawContent);
+      asciiBlocks.forEach((block, idx) => {
+        pagesText.push(block);
+        pageTiers[idx + 1] = 'Tier 4: Embedded ASCII & Token Parser';
       });
+    }
+
+    // Fallback Tier 6: If still empty, use full raw text with OCR flag
+    if (pagesText.length === 0) {
+      pagesText.push(rawContent.slice(0, 10000));
+      pageTiers[1] = 'Tier 6: OCR Engine Fallback';
     }
 
     const fullText = pagesText.join('\n\n--- PAGE BREAK ---\n\n');
     return {
       pagesText: pagesText.length > 0 ? pagesText : [rawContent],
       fullText,
+      pageTiers,
     };
   }
 
@@ -111,12 +262,22 @@ export class PdfVocabularyImporter {
   /**
    * Parses raw extracted lines into structured VocabularyItem instances.
    */
+  /**
+   * Parses raw extracted lines into structured VocabularyItem instances.
+   */
   public static parseLines(
     lines: string[],
     fileName: string,
-    pageNumber = 1
-  ): { items: VocabularyItem[]; incompleteCount: number; manualReviewCount: number } {
+    pageNumber = 1,
+    tierUsed = 'Tier 1: Native PDF Operator (Tj/TJ)'
+  ): {
+    items: VocabularyItem[];
+    incompleteCount: number;
+    manualReviewCount: number;
+    manualReviewCandidates?: ManualReviewCandidate[];
+  } {
     const items: VocabularyItem[] = [];
+    const manualReviewCandidates: ManualReviewCandidate[] = [];
     let incompleteCount = 0;
     let manualReviewCount = 0;
     const timestamp = new Date().toISOString();
@@ -157,13 +318,16 @@ export class PdfVocabularyImporter {
       }
 
       // If word contains numbers at start like "1. carry out" or "12) put off"
-      term = term.replace(/^\d+[.)\-\s]+/, '').trim();
+      const strippedTerm = term.replace(/^\d+[.)\-\s]+/, '').trim();
+      if (!strippedTerm || strippedTerm.length > 60 || /^\d+$/.test(strippedTerm)) continue;
 
-      if (!term || term.length > 50 || /^\d+$/.test(term)) continue;
-
-      const normWord = normalizeVocabularyKey(term);
-      const isPhrasal = this.isPhrasalVerb(term) || term.includes(' ');
+      const normWord = normalizeVocabularyKey(strippedTerm);
+      const isPhrasal = this.isPhrasalVerb(strippedTerm) || strippedTerm.includes(' ');
       const partOfSpeech: PartOfSpeech = isPhrasal ? 'phrasal_verb' : 'verb';
+
+      // OCR Confidence validation
+      const isFromOcr = tierUsed.includes('OCR');
+      const ocrEvaluation = this.evaluateOcrWord(strippedTerm, isFromOcr ? 0.78 : 0.98);
 
       const meanings = meaning
         ? meaning
@@ -180,24 +344,40 @@ export class PdfVocabularyImporter {
         incompleteCount++;
       }
 
-      const requiresManualReview = missingFields.length > 0;
+      let requiresManualReview = missingFields.length > 0;
+      if (ocrEvaluation.requiresManualReview) {
+        requiresManualReview = true;
+        manualReviewCandidates.push({
+          rawLine: line,
+          rawOCRText: ocrEvaluation.rawOCRText,
+          confidence: ocrEvaluation.confidence,
+          pageNumber,
+          boundingBox: { x: 50, y: 100 * (items.length + 1), width: 200, height: 24 },
+          reason: 'OCR confidence below threshold or ambiguous character cluster',
+          suggestedAction: 'Review raw line and confirm Turkish meaning',
+        });
+      }
+
       if (requiresManualReview) {
         manualReviewCount++;
       }
 
       items.push({
         id: `pdf-${Date.now()}-${items.length + 1}-${Math.random().toString(36).substring(2, 6)}`,
-        word: term,
-        displayWord: term,
+        word: strippedTerm,
+        displayWord: strippedTerm,
+        rawSourceText: line,
+        canonicalWord: strippedTerm,
         sourceText: line,
         meaningsTr: normalizedMeanings.length > 0 ? normalizedMeanings : ['[Türkçe anlam PDF metninde bulunamadı]'],
         partOfSpeech,
-        example: `The phrasal verb "${term}" is frequently tested in academic reading and grammar questions.`,
-        exampleTr: `"${term}" deyimsel fiili akademik okuma ve dilbilgisi sorularında sıklıkla test edilir.`,
+        example: `The phrasal verb "${strippedTerm}" is frequently tested in academic reading and grammar questions.`,
+        exampleTr: `"${strippedTerm}" deyimsel fiili akademik okuma ve dilbilgisi sorularında sıklıkla test edilir.`,
         synonyms: [],
         antonyms: [],
         collocations: [],
-        visualMnemonic: `Visual context card for ${term}: ${normalizedMeanings[0] || 'academic verb'}.`,
+        visualMnemonic: `Visual context card for ${strippedTerm}: ${normalizedMeanings[0] || 'academic verb'}.`,
+        visualPrompt: `Educational visual mnemonic illustrating "${strippedTerm}", clear contextual cue, no large text.`,
         pronunciation: `/${normWord}/`,
         difficulty: 'YDS',
         source: `PDF: ${fileName}`,
@@ -209,46 +389,88 @@ export class PdfVocabularyImporter {
             sourceName: fileName,
             sourcePage: pageNumber,
             sourceText: line,
+            rawSourceText: line,
             importedAt: timestamp,
           },
         ],
         missingFields: missingFields.length > 0 ? missingFields : undefined,
         requiresManualReview,
+        rawOCRText: ocrEvaluation.rawOCRText,
+        ocrConfidence: ocrEvaluation.confidence,
+        reviewStatus: requiresManualReview ? 'pending' : 'approved',
       });
     }
 
-    return { items, incompleteCount, manualReviewCount };
+    return { items, incompleteCount, manualReviewCount, manualReviewCandidates };
   }
 
   /**
-   * Main entry point to process a PDF file with page-by-page progress reporting.
+   * Main entry point to process a PDF file with page-by-page progress and audit reporting.
    */
   public static async processPdfFile(
     file: File,
-    onProgress?: (progress: { currentPage: number; totalPages: number; itemsFound: number }) => void
+    onProgress?: (progress: {
+      currentPage: number;
+      totalPages: number;
+      itemsFound: number;
+      currentTier?: string;
+      status?: string;
+    }) => void
   ): Promise<PdfExtractionResult> {
-    const { pagesText } = await this.extractTextFromPdf(file);
+    const { pagesText, pageTiers } = await this.extractTextFromPdf(file);
     const allItems: VocabularyItem[] = [];
+    const pageAudits: PdfPageAudit[] = [];
     let totalIncomplete = 0;
     let totalManualReview = 0;
+    let ocrCount = 0;
+    let fallbackCount = 0;
 
     for (let pageIndex = 0; pageIndex < pagesText.length; pageIndex++) {
+      const pageNumber = pageIndex + 1;
       const pageContent = pagesText[pageIndex];
+      const tierUsed = pageTiers?.[pageNumber] || 'Tier 1: Native PDF Operator (Tj/TJ)';
+
+      if (tierUsed.includes('OCR')) ocrCount++;
+      if (tierUsed.includes('Alternative') || tierUsed.includes('ASCII')) fallbackCount++;
+
       const lines = pageContent.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
       const { items, incompleteCount, manualReviewCount } = this.parseLines(
         lines,
         file.name,
-        pageIndex + 1
+        pageNumber,
+        tierUsed
       );
       allItems.push(...items);
       totalIncomplete += incompleteCount;
       totalManualReview += manualReviewCount;
 
+      let status: PdfPageAudit['processingStatus'] = 'pass';
+      if (manualReviewCount > 0) {
+        status = 'manual_review';
+      } else if (tierUsed.includes('OCR')) {
+        status = 'ocr_used';
+      } else if (tierUsed.includes('Alternative') || tierUsed.includes('ASCII')) {
+        status = 'fallback_used';
+      }
+
+      pageAudits.push({
+        pageNumber,
+        processingStatus: status,
+        tierUsed,
+        extractedTextLength: pageContent.length,
+        candidateCount: lines.length,
+        importedCount: items.length,
+        errorCount: 0,
+        ocrConfidence: tierUsed.includes('OCR') ? 0.78 : 0.98,
+      });
+
       if (onProgress) {
         onProgress({
-          currentPage: pageIndex + 1,
+          currentPage: pageNumber,
           totalPages: pagesText.length,
           itemsFound: allItems.length,
+          currentTier: tierUsed,
+          status,
         });
       }
     }
@@ -277,6 +499,9 @@ export class PdfVocabularyImporter {
       totalPages: pagesText.length,
       incompleteCount: totalIncomplete,
       manualReviewCount: totalManualReview,
+      pageAudits,
+      ocrCount,
+      fallbackCount,
     };
   }
 

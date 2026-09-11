@@ -21,7 +21,7 @@ import { PdfVocabularyImporter } from '../src/services/pdf';
 import { getVisualMemory } from '../src/services/visualMemory';
 import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
 import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator';
-import { SCIENTIFIC_READINGS } from '../src/data/scientificReadings';
+import { SCIENTIFIC_READINGS, evaluateOpenEndedAnswer } from '../src/data/scientificReadings';
 import { OFFICIAL_YDS_SECTIONS, YdsQuestionCategory } from '../src/types/yds';
 
 let totalTests = 0;
@@ -483,17 +483,50 @@ const cleaned = PdfVocabularyImporter.cleanCorruptedPdfItems(dirtyItems);
 assert(cleaned.removedCount === 2, 'Identified and removed exactly 2 malformed/corrupted PDF entries');
 assert(cleaned.cleanItems.length === 3, 'Preserved all 3 genuine vocabulary items');
 
+// Multi-Tier Fallback PDF Tests
+const restrictedAccess = PdfVocabularyImporter.detectInputAccessIssues('file:///Users/sbgok57/document.pdf');
+assert(restrictedAccess.isRestricted === true, 'detectInputAccessIssues flags file:/// local disk paths');
+assert(restrictedAccess.guidanceMessage.length > 20, 'Provides clear Turkish guidance for local disk restrictions');
+
+const safeAccess = PdfVocabularyImporter.detectInputAccessIssues('blob:https://app.vercel.app/test-uuid');
+assert(safeAccess.isRestricted === false, 'Allows valid blob and uploaded file URLs');
+
+const nativeStreamMock = 'BT (carry out) Tj ET [ (look) (forward) (to) ] TJ';
+const nativeExtracted = PdfVocabularyImporter.extractNativeStreamText(nativeStreamMock);
+assert(nativeExtracted.includes('carry out'), 'Tier 1 Native Stream extracts (text) Tj');
+assert(nativeExtracted.some(t => t.includes('lookforwardto') || t.includes('look')), 'Tier 1 Native Stream decodes TJ bracket arrays');
+
+const altStreamMock = 'BT\n(undermine)\n(sustainable)\nET';
+const altExtracted = PdfVocabularyImporter.extractAlternativeStreamText(altStreamMock);
+assert(altExtracted.length > 0 && altExtracted[0].includes('undermine'), 'Tier 2 Alternative Stream parses BT..ET text blocks');
+
+const asciiMock = 'trailer << /Root 1 0 R >> /Page (The government aims to accelerate renewable energy)';
+const asciiExtracted = PdfVocabularyImporter.extractEmbeddedAsciiBlocks(asciiMock);
+assert(asciiExtracted.length > 0 && asciiExtracted.some(c => c.includes('renewable energy')), 'Tier 4 Embedded ASCII extracts readable page text blocks');
+
+// OCR Confidence and Non-Destructive Manual Review Tests
+const ocrConfident = PdfVocabularyImporter.evaluateOcrWord('comprehensive', 0.96);
+assert(ocrConfident.requiresManualReview === false, 'High confidence (0.96) OCR word passes directly');
+assert(ocrConfident.acceptedWord === 'comprehensive', 'Accepted word matches original text');
+
+const ocrLowConf = PdfVocabularyImporter.evaluateOcrWord('abandom', 0.72);
+assert(ocrLowConf.requiresManualReview === true, 'Low confidence (<0.80) or ambiguous OCR word flags manual review');
+assert(ocrLowConf.acceptedWord === 'abandom', 'Never silently autocorrupts or mutates low-confidence word');
+
 // 14. VISUAL MEMORY & OFFLINE SVG FALLBACK TESTS
 console.log('\n14. Visual Memory & Offline SVG Fallback Tests:');
 const visual1 = getVisualMemory('abandon', 'verb', ['terk etmek']);
 assert(visual1.svgContent.includes('<svg'), 'Returns valid inline SVG content for "abandon"');
 assert(visual1.memoryTip.tr.length > 5, 'Provides bilingual Turkish cognitive memory tip');
 assert(visual1.memoryTip.en.length > 5, 'Provides bilingual English cognitive memory tip');
+assert(!!visual1.style, 'Visual memory item defines visual style (photo/illustration/mnemonic)');
+assert(visual1.visualPrompt.length > 10, 'Visual memory item contains detailed visual prompt description');
 
 // Procedural fallback test for unknown word
 const visualFallback = getVisualMemory('unprecedentedWordXYZ', 'adverb', ['emsalsiz']);
 assert(visualFallback.svgContent.includes('<svg'), 'Procedural generator produces guaranteed SVG for unknown word');
 assert(!visualFallback.svgContent.includes('<img') && !visualFallback.svgContent.includes('href="https://'), 'Visual is 100% offline resilient with 0 external network dependencies');
+assert(visualFallback.visualPrompt.length > 0, 'Fallback generates procedural visual prompt');
 
 // 15. 10 STANDALONE YDS QUESTION MODULES TESTS
 console.log('\n15. 10 Official YDS Question Modules Tests:');
@@ -559,12 +592,30 @@ assert(catCounts['irrelevant_sentence'] === 5, 'Questions 76-80 are Irrelevant S
 
 // 17. SCIENTIFIC READING LIBRARY TESTS
 console.log('\n17. Scientific Reading Library Tests:');
-assert(SCIENTIFIC_READINGS.length >= 3, 'Scientific Reading Library contains multiple academic passages');
+assert(SCIENTIFIC_READINGS.length >= 100, `Scientific Reading Library contains 100+ academic passages (found ${SCIENTIFIC_READINGS.length})`);
 const sampleReading = SCIENTIFIC_READINGS[0];
 assert(sampleReading.passageEn.length > 200, 'Reading contains substantial academic English passage');
 assert(sampleReading.summaryTr.length > 50, 'Reading contains comprehensive Turkish synopsis');
 assert(sampleReading.keyVocabulary.length >= 2, 'Reading has highlighted key academic vocabulary');
 assert(sampleReading.questions.length >= 1, 'Reading contains YDS-standard comprehension questions');
+assert(
+  Array.isArray(sampleReading.openEndedQuestions) && sampleReading.openEndedQuestions.length >= 1,
+  'Reading contains open-ended typing questions'
+);
+
+// Open-Ended Semantic Keyword Evaluator Tests
+const testQ = sampleReading.openEndedQuestions![0];
+const perfectAnswer = `Modern neuroimaging and fMRI repudiated the dogma that the adult brain is immutable by demonstrating continuous neural plasticity and connectivity.`;
+const result100 = evaluateOpenEndedAnswer(perfectAnswer, testQ);
+assert(result100.score === 100 && result100.status === 'correct', 'Full credit (100) awarded when required key concepts are matched');
+
+const partialAnswer = `It involves neuroplasticity in the human brain.`;
+const result50 = evaluateOpenEndedAnswer(partialAnswer, testQ);
+assert(result50.score === 50 && result50.status === 'partially_correct', 'Partial credit (50) awarded for partial concept mention');
+
+const blankAnswer = ``;
+const result0 = evaluateOpenEndedAnswer(blankAnswer, testQ);
+assert(result0.score === 0 && result0.status === 'incorrect', 'Zero credit (0) for empty answer');
 
 // 18. MOCK EXAM SCORING & TIMER SPECIFICATION TESTS
 console.log('\n18. Mock Exam Scoring & Timer Tests:');

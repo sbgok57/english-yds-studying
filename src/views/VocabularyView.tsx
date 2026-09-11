@@ -4,10 +4,11 @@ import { getMasteryLevelInfo } from '../services/mastery';
 import { speechService } from '../services/speech';
 import { exportVocabularyToCsv } from '../services/csv';
 import { dbService } from '../services/db';
-import { createInitialLearningState } from '../services/spacedRepetition';
+import { createInitialLearningState, processReview } from '../services/spacedRepetition';
 import { calculateSourceCompleteness } from '../services/importer';
 import { VocabularyImportModal } from '../components/VocabularyImportModal';
 import { VisualMemoryCard } from '../components/common/VisualMemoryCard';
+import { AuditDashboardModal } from '../components/common/AuditDashboardModal';
 import { getVisualMemory } from '../services/visualMemory';
 import {
   Search,
@@ -22,6 +23,9 @@ import {
   Database,
   X,
   Sparkles,
+  Eye,
+  CheckCircle2,
+  XCircle,
 } from 'lucide-react';
 
 interface VocabularyViewProps {
@@ -44,6 +48,11 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isAuditOpen, setIsAuditOpen] = useState(false);
+  const [isAuditDashboardOpen, setIsAuditDashboardOpen] = useState(false);
+  const [isVisualQuizOpen, setIsVisualQuizOpen] = useState(false);
+  const [quizWordIndex, setQuizWordIndex] = useState(0);
+  const [isWordRevealed, setIsWordRevealed] = useState(false);
+  const [quizGuessInput, setQuizGuessInput] = useState('');
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<VocabularyItem | null>(null);
   const [sources, setSources] = useState<VocabularySource[]>([]);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -186,27 +195,201 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
 
         <div className="flex flex-wrap items-center gap-2">
           <button
+            onClick={() => {
+              setIsVisualQuizOpen(true);
+              setQuizWordIndex(0);
+              setIsWordRevealed(false);
+              setQuizGuessInput('');
+            }}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-500 to-indigo-600 hover:opacity-90 text-white shadow-sm transition-all"
+          >
+            <Sparkles className="w-3.5 h-3.5" /> Görsel Hafıza Testi (What's the word?)
+          </button>
+          <button
+            onClick={() => setIsAuditDashboardOpen(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            Teşhis &amp; Denetim Paneli
+          </button>
+          <button
             onClick={() => setIsAuditOpen(!isAuditOpen)}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-brand-600" />
-            Kaynak Denetimi ({sources.length})
+            <Database className="w-3.5 h-3.5 text-brand-600" />
+            Kaynaklar ({sources.length})
             {isAuditOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
           <button
             onClick={() => setIsImportModalOpen(true)}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white transition-all shadow-sm"
           >
-            <Upload className="w-3.5 h-3.5" /> Kelime İçe Aktar (Import)
+            <Upload className="w-3.5 h-3.5" /> İçe Aktar
           </button>
           <button
             onClick={handleExportCsv}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
           >
-            <Download className="w-3.5 h-3.5" /> CSV Dışa Aktar
+            <Download className="w-3.5 h-3.5" /> CSV
           </button>
         </div>
       </div>
+
+      {/* Visual Memory Quiz Modal / Screen */}
+      {isVisualQuizOpen && (
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-brand-950 text-white border border-indigo-700/50 shadow-2xl space-y-6 animate-fadeIn">
+          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-base font-extrabold flex items-center gap-2">
+                  <span>Görsel Hafıza Testi: "What's the word?"</span>
+                </h3>
+                <p className="text-xs text-indigo-200">
+                  Resim ve bilişsel ipucundan kelimeyi hatırlayın, ardından kartı açıp SRS bilginizi değerlendirin.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-indigo-200">
+                {quizWordIndex + 1} / {vocabulary.length}
+              </span>
+              <button
+                onClick={() => setIsVisualQuizOpen(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {vocabulary.length > 0 && (() => {
+            const currentItem = vocabulary[quizWordIndex] || vocabulary[0];
+            const currentVisual = getVisualMemory(currentItem.word, currentItem.partOfSpeech, currentItem.meaningsTr);
+            const currentState = learningStates.get(currentItem.id) || createInitialLearningState(currentItem.id);
+
+            const handleRateQuiz = async (isCorrect: boolean) => {
+              try {
+                const nextState = processReview(currentState, isCorrect);
+                await dbService.saveLearningState(nextState);
+                onRefreshData();
+              } catch (err) {
+                console.warn('SRS update error:', err);
+              }
+              setQuizWordIndex((prev) => (prev + 1) % vocabulary.length);
+              setIsWordRevealed(false);
+              setQuizGuessInput('');
+            };
+
+            return (
+              <div className="max-w-2xl mx-auto space-y-6">
+                <div className="p-6 rounded-2xl bg-white/10 backdrop-blur border border-white/15 flex flex-col md:flex-row items-center gap-6">
+                  <div className="w-40 h-40 shrink-0 bg-slate-900/60 rounded-2xl p-2 border border-white/10 overflow-hidden shadow-inner flex items-center justify-center">
+                    <div
+                      dangerouslySetInnerHTML={{ __html: currentVisual.svgContent }}
+                      className="w-full h-full"
+                    />
+                  </div>
+
+                  <div className="space-y-3 flex-1 text-center md:text-left">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-500/30 text-brand-200 uppercase tracking-wider">
+                        {currentItem.partOfSpeech}
+                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/30 text-indigo-200 font-mono">
+                        {currentVisual.style}
+                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/30 text-amber-200">
+                        {currentItem.difficulty}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-xs text-indigo-200 font-semibold block mb-1">
+                        Bilişsel Hafıza İpucu:
+                      </span>
+                      <p className="text-sm font-bold text-amber-200 leading-snug">
+                        "{currentVisual.memoryTip.tr}"
+                      </p>
+                    </div>
+
+                    {!isWordRevealed ? (
+                      <div className="py-2">
+                        <span className="text-2xl font-mono tracking-widest text-slate-400 font-black select-none">
+                          {currentItem.word.split('').map((c) => (c === ' ' || c === '-' ? c : '•')).join('')}
+                        </span>
+                        <p className="text-[11px] text-indigo-300 mt-1">
+                          Kelime gizlendi. Zihninizde görseli ve anlamı çağrıştırın.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-2 animate-fadeIn pt-2 border-t border-white/10">
+                        <div className="flex items-center justify-center md:justify-start gap-3">
+                          <h4 className="text-2xl font-black text-white">{currentItem.word}</h4>
+                          <button
+                            onClick={() => speechService.speak(currentItem.word)}
+                            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
+                          >
+                            <Volume2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <p className="text-xs text-emerald-300 font-bold">
+                          {currentItem.meaningsTr.join(', ')}
+                        </p>
+                        <p className="text-xs text-slate-300 italic">
+                          "{currentItem.example}"
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {!isWordRevealed ? (
+                  <div className="flex flex-col sm:flex-row items-center gap-3">
+                    <input
+                      type="text"
+                      placeholder="Tahmininizi yazın (isteğe bağlı)..."
+                      value={quizGuessInput}
+                      onChange={(e) => setQuizGuessInput(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && setIsWordRevealed(true)}
+                      className="flex-1 w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                    />
+                    <button
+                      onClick={() => setIsWordRevealed(true)}
+                      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-900 font-black text-xs shadow-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <Eye className="w-4 h-4" /> Kelimeyi Göster
+                    </button>
+                  </div>
+                ) : (
+                  <div className="p-4 rounded-2xl bg-white/10 border border-white/15 space-y-3 animate-fadeIn text-center">
+                    <span className="text-xs text-indigo-200 font-bold block">
+                      Bu kelimeyi doğru hatırladınız mı?
+                    </span>
+                    <div className="flex items-center justify-center gap-4">
+                      <button
+                        onClick={() => handleRateQuiz(false)}
+                        className="flex-1 py-3 px-4 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
+                      >
+                        <XCircle className="w-4 h-4" /> Hatırlayamadım
+                      </button>
+                      <button
+                        onClick={() => handleRateQuiz(true)}
+                        className="flex-1 py-3 px-4 rounded-xl bg-emerald-600/90 hover:bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md"
+                      >
+                        <CheckCircle2 className="w-4 h-4" /> Doğru Hatırladım (+10 XP)
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
+        </div>
+      )}
 
       {/* Collapsible Source Audit Panel */}
       {isAuditOpen && (
@@ -549,6 +732,14 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
           loadSources();
           setIsImportModalOpen(false);
         }}
+      />
+
+      {/* Admin Audit & Diagnostics Dashboard Modal */}
+      <AuditDashboardModal
+        isOpen={isAuditDashboardOpen}
+        onClose={() => setIsAuditDashboardOpen(false)}
+        vocabulary={vocabulary}
+        sources={sources}
       />
     </div>
   );

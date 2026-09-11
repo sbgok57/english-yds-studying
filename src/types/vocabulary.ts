@@ -28,6 +28,8 @@ export interface SourceReference {
   setName?: string;
   sourcePage?: number;
   sourceText?: string;
+  rawSourceText?: string;
+  sourceTermIndex?: number;
   importedAt: string;
 }
 
@@ -58,6 +60,8 @@ export interface VocabularyItem {
   word: string;
   displayWord?: string;
   sourceText?: string;
+  rawSourceText?: string;
+  canonicalWord?: string;
   meaningsTr: string[];
   partOfSpeech: PartOfSpeech;
   example: string;
@@ -66,6 +70,7 @@ export interface VocabularyItem {
   antonyms: string[];
   collocations: string[];
   visualMnemonic: string;
+  visualPrompt?: string;
   visualImage?: string;
   memoryTip?: { en: string; tr: string };
   pronunciation: string;
@@ -74,6 +79,10 @@ export interface VocabularyItem {
   sourceRefs?: SourceReference[];
   missingFields?: string[];
   requiresManualReview?: boolean;
+  rawOCRText?: string;
+  ocrConfidence?: number;
+  boundingBox?: { x: number; y: number; width: number; height: number };
+  reviewStatus?: 'pending' | 'approved' | 'rejected';
   verifiedYDSOccurrence?: boolean;
 }
 
