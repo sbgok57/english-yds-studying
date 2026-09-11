@@ -20,6 +20,7 @@ import { StudySessionView } from './views/StudySessionView';
 import { VocabularyView } from './views/VocabularyView';
 import { GrammarView } from './views/GrammarView';
 import { YdsView } from './views/YdsView';
+import { YdsEssentialsView } from './views/YdsEssentialsView';
 import { ErrorNotebookView } from './views/ErrorNotebookView';
 import { ProgressView } from './views/ProgressView';
 import { SettingsView } from './views/SettingsView';
@@ -60,6 +61,7 @@ export const App: React.FC = () => {
         'vocabulary',
         'grammar',
         'yds',
+        'yds_essentials',
         'errors',
         'progress',
         'settings',
@@ -296,6 +298,12 @@ export const App: React.FC = () => {
               userProgress={userProgress}
               onRefreshProgress={loadData}
               allVocabulary={vocabulary}
+            />
+          )}
+
+          {activeTab === 'yds_essentials' && (
+            <YdsEssentialsView
+              onNavigateToPractice={() => navigateToTab('yds')}
             />
           )}
 

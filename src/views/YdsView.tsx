@@ -3,13 +3,14 @@ import { UserProgress, YdsAttempt, VocabularyItem } from '../types';
 import {
   YdsQuestionCategory,
   YdsMockExam,
-  OFFICIAL_YDS_SECTIONS,
+  ALL_PRACTICE_CATEGORIES,
 } from '../types/yds';
 import { getMockExamList, generateMockExam } from '../services/mockExamGenerator';
 import { YdsModulePracticeScreen } from './yds/YdsModulePracticeScreen';
 import { MockExamScreen } from './yds/MockExamScreen';
 import { MockExamResultScreen } from './yds/MockExamResultScreen';
 import { ScientificReadingView } from './yds/ScientificReadingView';
+import { RealExamsArchiveScreen } from './yds/RealExamsArchiveScreen';
 import { dbService } from '../services/db';
 import { VisualMemoryCard } from '../components/common/VisualMemoryCard';
 import {
@@ -23,6 +24,7 @@ import {
   Clock,
   Filter,
   Search,
+  Archive,
 } from 'lucide-react';
 
 interface YdsViewProps {
@@ -35,8 +37,8 @@ export const YdsView: React.FC<YdsViewProps> = ({
   onRefreshProgress,
   allVocabulary = [],
 }) => {
-  // Hub sub-tabs: 'modules' | 'mock_exams' | 'scientific_reading' | 'vocab_bank'
-  const [activeHubTab, setActiveHubTab] = useState<'modules' | 'mock_exams' | 'scientific_reading' | 'vocab_bank'>('modules');
+  // Hub sub-tabs: 'modules' | 'mock_exams' | 'scientific_reading' | 'vocab_bank' | 'real_exams'
+  const [activeHubTab, setActiveHubTab] = useState<'modules' | 'mock_exams' | 'scientific_reading' | 'vocab_bank' | 'real_exams'>('modules');
 
   // Navigation states
   const [viewState, setViewState] = useState<'hub' | 'module_practice' | 'mock_exam' | 'exam_result' | 'scientific_reading'>('hub');
@@ -222,6 +224,18 @@ export const YdsView: React.FC<YdsViewProps> = ({
         </button>
 
         <button
+          onClick={() => setActiveHubTab('real_exams')}
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
+            activeHubTab === 'real_exams'
+              ? 'bg-brand-600 text-white shadow-md'
+              : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50'
+          }`}
+        >
+          <Archive className="w-4 h-4" />
+          2013–2026 YDS Resmi Arşiv
+        </button>
+
+        <button
           onClick={() => setActiveHubTab('scientific_reading')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
             activeHubTab === 'scientific_reading'
@@ -246,12 +260,12 @@ export const YdsView: React.FC<YdsViewProps> = ({
         </button>
       </div>
 
-      {/* --- TAB 1: 10 SEPARATE QUESTION PRACTICE MODULES --- */}
+      {/* --- TAB 1: 15 SEPARATE QUESTION PRACTICE MODULES --- */}
       {activeHubTab === 'modules' && (
         <div className="space-y-4 animate-fadeIn">
           <div className="flex items-center justify-between">
             <h3 className="font-black text-base text-slate-900 dark:text-slate-100">
-              Resmi YDS Soru Kategorileri (Bağımsız Çalışma Modları)
+              YDS / YDT Soru Kategorileri (15 Bağımsız Modül &amp; 580+ Soru)
             </h3>
             <span className="text-xs text-slate-500">
               Her modülde YDS standardında soru ve ayrıntılı çeldirici analizleri
@@ -259,9 +273,9 @@ export const YdsView: React.FC<YdsViewProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {OFFICIAL_YDS_SECTIONS.map((sec, idx) => (
+            {ALL_PRACTICE_CATEGORIES.map((cat, idx) => (
               <div
-                key={sec.category}
+                key={cat.category}
                 className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div className="space-y-2.5">
@@ -270,25 +284,25 @@ export const YdsView: React.FC<YdsViewProps> = ({
                       {idx + 1}
                     </span>
                     <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
-                      {sec.questionCount} Soru / Deneme
+                      {cat.targetCount}+ Soru Havuzu
                     </span>
                   </div>
 
                   <h4 className="font-extrabold text-base text-slate-900 dark:text-slate-100">
-                    {sec.nameTr}
+                    {cat.nameTr}
                   </h4>
 
                   <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {sec.descriptionTr}
+                    {cat.descriptionTr}
                   </p>
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <span className="text-[11px] font-medium text-slate-400">
-                    Sorular: {sec.questionRange[0]}–{sec.questionRange[1]}
+                    Seviye: {cat.difficultyRange}
                   </span>
                   <button
-                    onClick={() => handleStartModulePractice(sec.category)}
+                    onClick={() => handleStartModulePractice(cat.category)}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs transition-colors shadow-sm"
                   >
                     <Play className="w-3.5 h-3.5 fill-white" /> Çalışmaya Başla
@@ -412,6 +426,17 @@ export const YdsView: React.FC<YdsViewProps> = ({
             })}
           </div>
         </div>
+      )}
+
+      {/* --- TAB: 2013-2026 REAL EXAMS ARCHIVE --- */}
+      {activeHubTab === 'real_exams' && (
+        <RealExamsArchiveScreen
+          onStartExamByYear={(year, title) => {
+            const exam = generateMockExam(1);
+            setActiveExam({ ...exam, title: `${year} Formatında ${title}` });
+            setViewState('mock_exam');
+          }}
+        />
       )}
 
       {/* --- TAB 3: SCIENTIFIC READING LIBRARY --- */}

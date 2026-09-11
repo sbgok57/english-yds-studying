@@ -403,9 +403,9 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Kelime İçe Aktarma Merkezi"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-start justify-center p-3 sm:p-6 sm:pt-8 pt-4 overflow-y-auto bg-slate-900/70 backdrop-blur-sm animate-fadeIn"
     >
-      <div className="relative w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-2xl max-h-[92vh] flex flex-col rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-2">

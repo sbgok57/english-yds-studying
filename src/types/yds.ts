@@ -10,7 +10,12 @@ export type YdsQuestionCategory =
   | 'dialogue'              // 7. Diyalog Tamamlama (5 questions)
   | 'restatement'           // 8. Yakın Anlamlı Cümle (4 questions)
   | 'paragraph_completion'  // 9. Paragraf Tamamlama (4 questions)
-  | 'irrelevant_sentence';  // 10. Anlam Bütünlüğünü Bozan Cümle (5 questions)
+  | 'irrelevant_sentence'   // 10. Anlam Bütünlüğünü Bozan Cümle (5 questions)
+  | 'connector'             // 11. Bağlaçlar (Conjunctions)
+  | 'preposition'           // 12. Edatlar (Prepositions)
+  | 'tense'                 // 13. Zamanlar (Tenses & Time)
+  | 'relative_clause'       // 14. İlgi Cümlecikleri (Relative Clauses)
+  | 'modal';                // 15. Modallar (Modal Verbs & Meaning)
 
 export type YdsOptionLabel = 'A' | 'B' | 'C' | 'D' | 'E';
 
@@ -24,7 +29,7 @@ export interface YdsQuestion {
   examId?: string;
   questionNumber: number; // 1 to 80 in a mock exam, or 1 to N in module practice
   category: YdsQuestionCategory;
-  level: 'B1' | 'B2' | 'B2+' | 'C1_YDS';
+  level: 'A2' | 'B1' | 'B2' | 'B2+' | 'C1_YDS';
   stemEn: string;
   passage?: string; // Cloze text or reading passage
   dialogueSpeakers?: { speaker: string; text: string }[];
@@ -39,6 +44,12 @@ export interface YdsQuestion {
   relatedVocabulary?: string[];
   relatedGrammarTopicId?: string;
   verifiedYDSOccurrence?: boolean;
+  skill?: string;
+  source?: string;
+  createdAt?: string;
+  year?: number;
+  period?: string;
+  sourcePage?: number;
 }
 
 export interface YdsSectionConfig {
@@ -132,6 +143,48 @@ export const OFFICIAL_YDS_SECTIONS: YdsSectionConfig[] = [
     descriptionTr: 'Paragrafta akışı ve ana düşünceyi bozan cümlenin tespiti.',
   },
 ];
+
+export interface PracticeCategoryConfig {
+  category: YdsQuestionCategory;
+  nameTr: string;
+  nameEn: string;
+  targetCount: number;
+  descriptionTr: string;
+  difficultyRange: string;
+}
+
+export const ALL_PRACTICE_CATEGORIES: PracticeCategoryConfig[] = [
+  { category: 'vocabulary', nameTr: 'Kelime Bilgisi', nameEn: 'Vocabulary', targetCount: 65, descriptionTr: 'Akademik isimler, fiiller, sıfatlar, zarflar ve öbek fiiller', difficultyRange: 'A2-C1' },
+  { category: 'grammar', nameTr: 'Dil Bilgisi', nameEn: 'Grammar', targetCount: 65, descriptionTr: 'Gramer yapıları, devrik yapılar, bağlaçlar ve zaman uyumu', difficultyRange: 'A2-C1' },
+  { category: 'cloze', nameTr: 'Cloze Test', nameEn: 'Cloze Test', targetCount: 55, descriptionTr: 'Paragraf içi boşluk tamamlama ve bağlamsal gramer/kelime', difficultyRange: 'B1-C1' },
+  { category: 'sentence_completion', nameTr: 'Cümle Tamamlama', nameEn: 'Sentence Completion', targetCount: 55, descriptionTr: 'Zıtlık, neden-sonuç ve şart cümlelerini tamamlama', difficultyRange: 'B1-C1' },
+  { category: 'translation', nameTr: 'Çeviri (İngilizce-Türkçe)', nameEn: 'Translation', targetCount: 45, descriptionTr: 'Özne-yüklem uyumlu iki yönlü akademik çeviri', difficultyRange: 'A2-C1' },
+  { category: 'reading', nameTr: 'Okuma Parçaları', nameEn: 'Reading Comprehension', targetCount: 85, descriptionTr: 'Akademik metin analizi, ana fikir, detay ve çıkarım soruları', difficultyRange: 'B1-C1' },
+  { category: 'dialogue', nameTr: 'Diyalog Tamamlama', nameEn: 'Dialogue Completion', targetCount: 35, descriptionTr: 'Karşılıklı konuşmada duruma ve bağlama uygun ifade', difficultyRange: 'A2-B2' },
+  { category: 'restatement', nameTr: 'Yakın Anlamlı Cümle', nameEn: 'Restatement', targetCount: 35, descriptionTr: 'Anlam kaybı olmadan eşdeğer paraphrase tespiti', difficultyRange: 'B2-C1' },
+  { category: 'paragraph_completion', nameTr: 'Paragraf Tamamlama', nameEn: 'Paragraph Completion', targetCount: 35, descriptionTr: 'Paragrafın mantıksal akışını tamamlayan cümle', difficultyRange: 'B1-C1' },
+  { category: 'irrelevant_sentence', nameTr: 'Anlamı Bozan Cümle', nameEn: 'Irrelevant Sentence', targetCount: 35, descriptionTr: 'Düşünce akışını ve ana fikri bozan cümlenin tespiti', difficultyRange: 'B1-C1' },
+  { category: 'connector', nameTr: 'Bağlaçlar & Conjunctions', nameEn: 'Connectors & Conjunctions', targetCount: 35, descriptionTr: 'Zıtlık, sebep, sonuç, koşul ve ekleme bağlaçları', difficultyRange: 'A2-C1' },
+  { category: 'preposition', nameTr: 'Edatlar & Prepositions', nameEn: 'Prepositions', targetCount: 25, descriptionTr: 'Fiil, sıfat ve isim edat tamlamaları', difficultyRange: 'A2-C1' },
+  { category: 'tense', nameTr: 'Zamanlar & Tense Harmony', nameEn: 'Tense & Time Harmony', targetCount: 25, descriptionTr: 'Geçmiş, şimdiki ve gelecek zaman uyum kuralları', difficultyRange: 'A2-B2' },
+  { category: 'relative_clause', nameTr: 'İlgi Cümlecikleri', nameEn: 'Relative Clauses', targetCount: 25, descriptionTr: 'Who, which, that, whose, where, prep+which yapıları', difficultyRange: 'B1-C1' },
+  { category: 'modal', nameTr: 'Modallar & Çıkarım', nameEn: 'Modals & Meaning', targetCount: 25, descriptionTr: 'Zorunluluk, olasılık, geçmiş çıkarım (must have V3 vb.)', difficultyRange: 'A2-C1' },
+];
+
+export interface RealExamArchiveItem {
+  id: string;
+  year: number; // 2013-2026
+  period: 'İlkbahar' | 'Sonbahar' | 'Kış' | 'e-YDS';
+  examType: 'YDS' | 'e-YDS' | 'YDT';
+  title: string;
+  officialAnnouncementUrl: string;
+  sampleBookletUrl?: string;
+  licensedImportStatus?: 'available_to_import' | 'sample_available' | 'imported';
+  questionCountSample?: number;
+  totalExamQuestions?: number;
+  isUserImported?: boolean;
+  importedQuestions?: YdsQuestion[];
+}
 
 export interface YdsMockExam {
   id: string;

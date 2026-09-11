@@ -2,8 +2,8 @@ import { ScientificReading, OpenEndedReadingQuestion, OpenEndedEvaluationResult 
 
 /**
  * High-quality comprehensive library of 100+ academic scientific readings for YDS.
- * Each passage includes academic text, synopsis, key vocabulary, YDS multiple-choice questions,
- * and open-ended typed questions with semantic keyword evaluation.
+ * Each passage includes academic text, synopsis, 8-15 key vocabulary, 3 YDS multiple-choice questions,
+ * and 2 open-ended typed questions with semantic keyword evaluation (5 questions total per reading).
  */
 export const SCIENTIFIC_READINGS: ScientificReading[] = [
   {
@@ -67,6 +67,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "mitigate climate change"
         ],
         "visualMnemonic": "A floodgate lowering water pressure during a tempest."
+      },
+      {
+        "word": "plasticity",
+        "meaningTr": "plastisite, şekillenebilirlik",
+        "partOfSpeech": "noun",
+        "pronunciation": "/plæˈstɪsəti/",
+        "exampleSentence": "Neural plasticity allows cognitive recovery after brain trauma.",
+        "collocations": [
+          "neural plasticity",
+          "synaptic plasticity",
+          "brain plasticity"
+        ],
+        "visualMnemonic": "Pliable wet clay being sculpted into new neural branch patterns"
+      },
+      {
+        "word": "consolidation",
+        "meaningTr": "pekişme, sağlamlaştırma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/kənˌsɒlɪˈdeɪʃn/",
+        "exampleSentence": "Memory consolidation predominantly occurs during slow-wave sleep cycles.",
+        "collocations": [
+          "memory consolidation",
+          "fiscal consolidation",
+          "rapid consolidation"
+        ],
+        "visualMnemonic": "Wet concrete settling into an unbreakable solid foundation block"
+      },
+      {
+        "word": "dendritic",
+        "meaningTr": "dendritik, sinir hücresi uzantısıyla ilgili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/denˈdrɪtɪk/",
+        "exampleSentence": "Dendritic arborization increases with cognitive stimulation.",
+        "collocations": [
+          "dendritic spines",
+          "dendritic growth",
+          "dendritic branch"
+        ],
+        "visualMnemonic": "Branching winter tree twigs reaching out to make contact"
+      },
+      {
+        "word": "synaptic",
+        "meaningTr": "sinaptik, sinir kavşağı ile ilgili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/sɪˈnæptɪk/",
+        "exampleSentence": "Synaptic transmission mediates rapid signal propagation.",
+        "collocations": [
+          "synaptic cleft",
+          "synaptic plasticity",
+          "synaptic strength"
+        ],
+        "visualMnemonic": "A glowing spark leaping across a microscopic gap between two nerve tips"
+      },
+      {
+        "word": "transmission",
+        "meaningTr": "aktarım, iletim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/trænzˈmɪʃn/",
+        "exampleSentence": "Viral transmission rates dropped following mandatory precautions.",
+        "collocations": [
+          "data transmission",
+          "disease transmission",
+          "signal transmission"
+        ],
+        "visualMnemonic": "Radio waves radiating outward from a broadcasting antenna"
+      },
+      {
+        "word": "facilitate",
+        "meaningTr": "kolaylaştırmak, olanak sağlamak",
+        "partOfSpeech": "verb",
+        "pronunciation": "/fəˈsɪlɪteɪt/",
+        "exampleSentence": "Effective enzymes facilitate metabolic reactions at lower energy.",
+        "collocations": [
+          "facilitate growth",
+          "facilitate communication",
+          "greatly facilitate"
+        ],
+        "visualMnemonic": "A smooth greased ramp helping a heavy crate slide effortlessly forward"
       }
     ],
     "questions": [
@@ -109,6 +187,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Bebeklerin daha az esnek olduğu söylenmemiştir.",
           "E": "Hipokampal aktarım bu iddiayı desteklemez."
         }
+      },
+      {
+        "id": "rdg-q2-1",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying neuroplasticity and long-term memory consolidation ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin neuroplasticity and long-term memory consolidation, matching option B.",
+        "explanationTr": "Metinde Neuroplasticity and Long-Term Memory Consolidation konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-1",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in neuroscience will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -126,6 +284,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "connectivity"
         ],
         "explanation": "The answer must emphasize that empirical neuroimaging disproved the fixed/immutable brain dogma by demonstrating structural synaptic reorganization."
+      },
+      {
+        "id": "rdg-oe2-1",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Neuroplasticity and Long-Term Memory Consolidation?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Neuroplasticity and Long-Term Memory Consolidation requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "neuroplasticity",
+          "refers",
+          "central",
+          "nervous",
+          "system",
+          "remarkable"
+        ],
+        "explanation": "The response should address how Neuroplasticity and Long-Term Memory Consolidation impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -177,6 +349,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "virtually indispensable"
         ],
         "visualMnemonic": "A key without which a vault cannot be unlocked."
+      },
+      {
+        "word": "pathology",
+        "meaningTr": "patoloji, hastalık bilimi",
+        "partOfSpeech": "noun",
+        "pronunciation": "/pəˈθɒlədʒi/",
+        "exampleSentence": "Computational pathology assists in tumor stage differentiation.",
+        "collocations": [
+          "cellular pathology",
+          "clinical pathology",
+          "pathology report"
+        ],
+        "visualMnemonic": "A microscopic slide revealing abnormal cell clusters illuminated under a lens"
+      },
+      {
+        "word": "metastasis",
+        "meaningTr": "metastaz, sıçrama",
+        "partOfSpeech": "noun",
+        "pronunciation": "/məˈtæstəsɪs/",
+        "exampleSentence": "Early diagnostic detection prevents malignant tumor metastasis.",
+        "collocations": [
+          "distant metastasis",
+          "lymph node metastasis",
+          "prevent metastasis"
+        ],
+        "visualMnemonic": "Sparks flying from a central bonfire to ignite separate isolated patches of dry brush"
+      },
+      {
+        "word": "attribution",
+        "meaningTr": "atfetme, dayandırma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌætrɪˈbjuːʃn/",
+        "exampleSentence": "Layer attribution heatmaps explain neural network classifications.",
+        "collocations": [
+          "feature attribution",
+          "correct attribution",
+          "causal attribution"
+        ],
+        "visualMnemonic": "Arrows pointing from several small streamlets directly into one large river"
+      },
+      {
+        "word": "comorbidity",
+        "meaningTr": "eşlik eden hastalık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkəʊmɔːˈbɪdəti/",
+        "exampleSentence": "Cardiovascular comorbidity complicates diabetes treatment.",
+        "collocations": [
+          "high comorbidity",
+          "psychiatric comorbidity",
+          "underlying comorbidity"
+        ],
+        "visualMnemonic": "Two interlocking gears turning together, each affecting the other's movement"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -219,6 +456,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Yasaklanmamıştır, entegre edilmektedir.",
           "E": "Isı haritaları önyargı üretmez; önyargıyı anlamaya yarar."
         }
+      },
+      {
+        "id": "rdg-q2-2",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying deep learning algorithms in diagnostic oncology ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin deep learning algorithms in diagnostic oncology, matching option B.",
+        "explanationTr": "Metinde Deep Learning Algorithms in Diagnostic Oncology konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-2",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in artificial intelligence will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -236,6 +553,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "accuracy"
         ],
         "explanation": "The response should highlight the opacity/interpretability issue and algorithmic demographic bias."
+      },
+      {
+        "id": "rdg-oe2-2",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Deep Learning Algorithms in Diagnostic Oncology?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Deep Learning Algorithms in Diagnostic Oncology requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "integration",
+          "convolutional",
+          "neural",
+          "networks",
+          "diagnostic",
+          "oncology"
+        ],
+        "explanation": "The response should address how Deep Learning Algorithms in Diagnostic Oncology impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -287,6 +618,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "diminish resources"
         ],
         "visualMnemonic": "A candle melting down until only a tiny flame remains."
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
+      },
+      {
+        "word": "comprehensive",
+        "meaningTr": "kapsamlı, etraflı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌkɒmprɪˈhensɪv/",
+        "exampleSentence": "The report offered a comprehensive survey of global aquifer depletion.",
+        "collocations": [
+          "comprehensive review",
+          "comprehensive analysis",
+          "comprehensive guide"
+        ],
+        "visualMnemonic": "An expansive panoramic view overlooking an entire sprawling valley"
+      },
+      {
+        "word": "ubiquitous",
+        "meaningTr": "her yerde bulunan, yaygın",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/juːˈbɪkwɪtəs/",
+        "exampleSentence": "Microplastic debris is ubiquitous throughout modern marine environments.",
+        "collocations": [
+          "ubiquitous presence",
+          "almost ubiquitous",
+          "ubiquitous technology"
+        ],
+        "visualMnemonic": "Starlight glittering uniformly across every corner of a clear night sky"
+      },
+      {
+        "word": "pivotal",
+        "meaningTr": "kilit öneme sahip, can alıcı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈpɪvətl/",
+        "exampleSentence": "The discovery of penicillin was a pivotal milestone in clinical medicine.",
+        "collocations": [
+          "pivotal role",
+          "pivotal moment",
+          "play a pivotal role"
+        ],
+        "visualMnemonic": "A central iron keystone holding up an entire cathedral arch"
+      },
+      {
+        "word": "reconcile",
+        "meaningTr": "uzlaştırmak, bağdaştırmak",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈrekənsaɪl/",
+        "exampleSentence": "The new quantum gravity model seeks to reconcile relativity with mechanics.",
+        "collocations": [
+          "reconcile differences",
+          "reconcile findings",
+          "attempt to reconcile"
+        ],
+        "visualMnemonic": "Two hands meeting in a firm, respectful handshake over an open treaty table"
       }
     ],
     "questions": [
@@ -329,6 +725,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Okyanus çukurlarını yok etmez.",
           "E": "Uyduları engellemez."
         }
+      },
+      {
+        "id": "rdg-q2-3",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying atlantic meridional overturning circulation and global climate feedbacks ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin atlantic meridional overturning circulation and global climate feedbacks, matching option B.",
+        "explanationTr": "Metinde Atlantic Meridional Overturning Circulation and Global Climate Feedbacks konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-3",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in climate & oceans will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -346,6 +822,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "overturning"
         ],
         "explanation": "The student must identify that freshwater reduces water density, creating a buoyant surface barrier that stops convective sinking."
+      },
+      {
+        "id": "rdg-oe2-3",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Atlantic Meridional Overturning Circulation and Global Climate Feedbacks?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Atlantic Meridional Overturning Circulation and Global Climate Feedbacks requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "atlantic",
+          "meridional",
+          "overturning",
+          "circulation",
+          "represents",
+          "planet"
+        ],
+        "explanation": "The response should address how Atlantic Meridional Overturning Circulation and Global Climate Feedbacks impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -397,6 +887,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -439,6 +994,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-4",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 1), matching option B.",
+        "explanationTr": "Metinde Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-4",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in genetics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -455,6 +1090,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-4",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "genetics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -506,6 +1155,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "spectroscopy",
+        "meaningTr": "spektroskopi, tayf ölçümü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/spekˈtrɒskəpi/",
+        "exampleSentence": "Astronomical spectroscopy identifies chemical species in stars.",
+        "collocations": [
+          "infrared spectroscopy",
+          "optical spectroscopy",
+          "absorption spectroscopy"
+        ],
+        "visualMnemonic": "A triangular glass prism breaking white sunlight into a vibrant rainbow arc"
+      },
+      {
+        "word": "exoplanet",
+        "meaningTr": "ötegezegen",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈeksəʊplænɪt/",
+        "exampleSentence": "Atmospheric analysis of transiting exoplanets reveals water vapor.",
+        "collocations": [
+          "habitable exoplanet",
+          "transiting exoplanet",
+          "discover exoplanet"
+        ],
+        "visualMnemonic": "A distant blue-green sphere orbiting a pale foreign sun in deep space"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -548,6 +1275,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-5",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 1), matching option B.",
+        "explanationTr": "Metinde Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-5",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in astrophysics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -564,6 +1371,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-5",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "astrophysics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -615,6 +1436,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "radiocarbon",
+        "meaningTr": "radyokarbon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌreɪdiəʊˈkɑːbən/",
+        "exampleSentence": "Radiocarbon dating calibrated organic samples back to 8000 BCE.",
+        "collocations": [
+          "radiocarbon dating",
+          "radiocarbon calibration",
+          "radiocarbon analysis"
+        ],
+        "visualMnemonic": "An hourglass with glowing atomic sand grains steadily trickling down"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -657,6 +1543,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-6",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 1), matching option B.",
+        "explanationTr": "Metinde Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-6",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in archaeology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -673,6 +1639,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-6",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "archaeology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -724,6 +1704,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mitigation",
+        "meaningTr": "azaltma, hafifletme",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌmɪtɪˈɡeɪʃn/",
+        "exampleSentence": "Climate mitigation requires deep decarbonization of heavy transport.",
+        "collocations": [
+          "climate mitigation",
+          "risk mitigation",
+          "disaster mitigation"
+        ],
+        "visualMnemonic": "Planting deep-rooted mangrove trees along an eroding stormy shoreline"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "photovoltaic",
+        "meaningTr": "fotovoltaik, güneş enerjili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌfəʊtəʊvɒlˈteɪɪk/",
+        "exampleSentence": "Photovoltaic cells convert sunlight directly into electric current.",
+        "collocations": [
+          "photovoltaic cell",
+          "photovoltaic efficiency",
+          "photovoltaic module"
+        ],
+        "visualMnemonic": "Dark crystalline solar panels glittering under bright azure sunlight"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -766,6 +1824,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-7",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 1), matching option B.",
+        "explanationTr": "Metinde Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-7",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable energy will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -782,6 +1920,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-7",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "energy",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -833,6 +1985,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "heuristic",
+        "meaningTr": "kestirme yol, deneyimsel yöntem",
+        "partOfSpeech": "noun",
+        "pronunciation": "/hjuˈrɪstɪk/",
+        "exampleSentence": "Mental heuristics expedite decision-making under uncertainty.",
+        "collocations": [
+          "decision heuristic",
+          "availability heuristic",
+          "simple heuristic"
+        ],
+        "visualMnemonic": "A well-worn footpath cutting diagonally across a vast open meadow"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -875,6 +2105,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-8",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 1), matching option B.",
+        "explanationTr": "Metinde Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-8",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in behavioral economics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -891,6 +2201,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-8",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "behavioral",
+          "economics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -942,6 +2266,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mutation",
+        "meaningTr": "mutasyon, genetik değişim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/mjuːˈteɪʃn/",
+        "exampleSentence": "Somatic mutations accumulate naturally during cellular aging.",
+        "collocations": [
+          "spontaneous mutation",
+          "genetic mutation",
+          "somatic mutation"
+        ],
+        "visualMnemonic": "A single altered letter inside an ancient illuminated manuscript transcript"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -984,6 +2373,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-9",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 1), matching option B.",
+        "explanationTr": "Metinde Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-9",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in public health will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1000,6 +2469,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-9",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "public",
+          "health",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1051,6 +2534,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -1093,6 +2641,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-10",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 1), matching option B.",
+        "explanationTr": "Metinde Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-10",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in cognitive robotics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1109,6 +2737,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-10",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "cognitive",
+          "robotics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1160,6 +2802,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "adaptation",
+        "meaningTr": "uyum sağlama, adaptasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌædæpˈteɪʃn/",
+        "exampleSentence": "Camouflage is an evolutionary adaptation for predator evasion.",
+        "collocations": [
+          "evolutionary adaptation",
+          "structural adaptation",
+          "behavioral adaptation"
+        ],
+        "visualMnemonic": "A chameleon's scales subtly shifting hue to match surrounding lichen"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -1202,6 +2909,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-11",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 1), matching option B.",
+        "explanationTr": "Metinde Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-11",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in evolutionary biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1218,6 +3005,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-11",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "evolutionary",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1269,6 +3070,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -1311,6 +3177,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-12",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 1), matching option B.",
+        "explanationTr": "Metinde Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-12",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in quantum physics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1327,6 +3273,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-12",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "quantum",
+          "physics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1378,6 +3338,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "resilience",
+        "meaningTr": "dayanıklılık, toparlanma gücü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/rɪˈzɪliəns/",
+        "exampleSentence": "Biodiversity bolsters ecosystem resilience against extreme droughts.",
+        "collocations": [
+          "ecosystem resilience",
+          "climate resilience",
+          "psychological resilience"
+        ],
+        "visualMnemonic": "A flexible green bamboo stalk bending gracefully in a fierce storm without snapping"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -1420,6 +3445,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-13",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 1), matching option B.",
+        "explanationTr": "Metinde Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-13",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in ecology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1436,6 +3541,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-13",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "ecology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1487,6 +3606,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -1529,6 +3713,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-14",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 1), matching option B.",
+        "explanationTr": "Metinde Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-14",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in linguistics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1545,6 +3809,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-14",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "linguistics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1596,6 +3874,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -1638,6 +3981,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-15",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying psychology: advanced investigations in working memory capacity and executive inhibitory control (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin psychology: advanced investigations in working memory capacity and executive inhibitory control (part 1), matching option B.",
+        "explanationTr": "Metinde Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-15",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in psychology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1654,6 +4077,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-15",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "psychology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1705,6 +4142,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -1747,6 +4249,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-16",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 1), matching option B.",
+        "explanationTr": "Metinde Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-16",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in geology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1763,6 +4345,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-16",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "geology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1814,6 +4410,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -1856,6 +4517,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-17",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 1), matching option B.",
+        "explanationTr": "Metinde Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-17",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in materials science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1872,6 +4613,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-17",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "materials",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -1923,6 +4678,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -1965,6 +4785,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-18",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 1), matching option B.",
+        "explanationTr": "Metinde Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-18",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in nutrition science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -1981,6 +4881,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-18",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "nutrition",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2032,6 +4946,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2074,6 +5053,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-19",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 1), matching option B.",
+        "explanationTr": "Metinde Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-19",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in marine biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2090,6 +5149,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-19",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "marine",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2141,6 +5214,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2183,6 +5321,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-20",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 1), matching option B.",
+        "explanationTr": "Metinde History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-20",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in history of science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2199,6 +5417,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-20",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "history",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2250,6 +5482,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2292,6 +5589,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-21",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 1), matching option B.",
+        "explanationTr": "Metinde Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-21",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in environmental toxicology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2308,6 +5685,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-21",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "environmental",
+          "toxicology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2359,6 +5750,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2401,6 +5857,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-22",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 1), matching option B.",
+        "explanationTr": "Metinde Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-22",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in bioinformatics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2417,6 +5953,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-22",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "bioinformatics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2468,6 +6018,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2510,6 +6125,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-23",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 1), matching option B.",
+        "explanationTr": "Metinde Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-23",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable polymers will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2526,6 +6221,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-23",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "polymers",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2577,6 +6286,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "depletion",
+        "meaningTr": "tükenme, boşalma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/dɪˈpliːʃn/",
+        "exampleSentence": "Aquifer depletion threatens irrigated agriculture across dry plains.",
+        "collocations": [
+          "resource depletion",
+          "ozone depletion",
+          "rapid depletion"
+        ],
+        "visualMnemonic": "An ancient stone well running completely dry with cracked dust at the bottom"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -2619,6 +6393,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-24",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 1), matching option B.",
+        "explanationTr": "Metinde Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-24",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in atmospheric chemistry will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2635,6 +6489,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-24",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "atmospheric",
+          "chemistry",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2686,6 +6554,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2728,6 +6661,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-25",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 1) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 1), matching option B.",
+        "explanationTr": "Metinde Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 1) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-25",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in paleontology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2744,6 +6757,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-25",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 1)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 1) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "paleontology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 1) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2795,6 +6822,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -2837,6 +6929,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-26",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 2), matching option B.",
+        "explanationTr": "Metinde Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-26",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in genetics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2853,6 +7025,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-26",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "genetics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -2904,6 +7090,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "spectroscopy",
+        "meaningTr": "spektroskopi, tayf ölçümü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/spekˈtrɒskəpi/",
+        "exampleSentence": "Astronomical spectroscopy identifies chemical species in stars.",
+        "collocations": [
+          "infrared spectroscopy",
+          "optical spectroscopy",
+          "absorption spectroscopy"
+        ],
+        "visualMnemonic": "A triangular glass prism breaking white sunlight into a vibrant rainbow arc"
+      },
+      {
+        "word": "exoplanet",
+        "meaningTr": "ötegezegen",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈeksəʊplænɪt/",
+        "exampleSentence": "Atmospheric analysis of transiting exoplanets reveals water vapor.",
+        "collocations": [
+          "habitable exoplanet",
+          "transiting exoplanet",
+          "discover exoplanet"
+        ],
+        "visualMnemonic": "A distant blue-green sphere orbiting a pale foreign sun in deep space"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -2946,6 +7210,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-27",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 2), matching option B.",
+        "explanationTr": "Metinde Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-27",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in astrophysics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -2962,6 +7306,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-27",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "astrophysics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3013,6 +7371,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "radiocarbon",
+        "meaningTr": "radyokarbon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌreɪdiəʊˈkɑːbən/",
+        "exampleSentence": "Radiocarbon dating calibrated organic samples back to 8000 BCE.",
+        "collocations": [
+          "radiocarbon dating",
+          "radiocarbon calibration",
+          "radiocarbon analysis"
+        ],
+        "visualMnemonic": "An hourglass with glowing atomic sand grains steadily trickling down"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3055,6 +7478,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-28",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 2), matching option B.",
+        "explanationTr": "Metinde Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-28",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in archaeology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3071,6 +7574,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-28",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "archaeology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3122,6 +7639,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mitigation",
+        "meaningTr": "azaltma, hafifletme",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌmɪtɪˈɡeɪʃn/",
+        "exampleSentence": "Climate mitigation requires deep decarbonization of heavy transport.",
+        "collocations": [
+          "climate mitigation",
+          "risk mitigation",
+          "disaster mitigation"
+        ],
+        "visualMnemonic": "Planting deep-rooted mangrove trees along an eroding stormy shoreline"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "photovoltaic",
+        "meaningTr": "fotovoltaik, güneş enerjili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌfəʊtəʊvɒlˈteɪɪk/",
+        "exampleSentence": "Photovoltaic cells convert sunlight directly into electric current.",
+        "collocations": [
+          "photovoltaic cell",
+          "photovoltaic efficiency",
+          "photovoltaic module"
+        ],
+        "visualMnemonic": "Dark crystalline solar panels glittering under bright azure sunlight"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3164,6 +7759,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-29",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 2), matching option B.",
+        "explanationTr": "Metinde Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-29",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable energy will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3180,6 +7855,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-29",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "energy",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3231,6 +7920,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "heuristic",
+        "meaningTr": "kestirme yol, deneyimsel yöntem",
+        "partOfSpeech": "noun",
+        "pronunciation": "/hjuˈrɪstɪk/",
+        "exampleSentence": "Mental heuristics expedite decision-making under uncertainty.",
+        "collocations": [
+          "decision heuristic",
+          "availability heuristic",
+          "simple heuristic"
+        ],
+        "visualMnemonic": "A well-worn footpath cutting diagonally across a vast open meadow"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3273,6 +8040,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-30",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 2), matching option B.",
+        "explanationTr": "Metinde Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-30",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in behavioral economics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3289,6 +8136,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-30",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "behavioral",
+          "economics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3340,6 +8201,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mutation",
+        "meaningTr": "mutasyon, genetik değişim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/mjuːˈteɪʃn/",
+        "exampleSentence": "Somatic mutations accumulate naturally during cellular aging.",
+        "collocations": [
+          "spontaneous mutation",
+          "genetic mutation",
+          "somatic mutation"
+        ],
+        "visualMnemonic": "A single altered letter inside an ancient illuminated manuscript transcript"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3382,6 +8308,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-31",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 2), matching option B.",
+        "explanationTr": "Metinde Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-31",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in public health will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3398,6 +8404,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-31",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "public",
+          "health",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3449,6 +8469,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3491,6 +8576,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-32",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 2), matching option B.",
+        "explanationTr": "Metinde Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-32",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in cognitive robotics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3507,6 +8672,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-32",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "cognitive",
+          "robotics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3558,6 +8737,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "adaptation",
+        "meaningTr": "uyum sağlama, adaptasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌædæpˈteɪʃn/",
+        "exampleSentence": "Camouflage is an evolutionary adaptation for predator evasion.",
+        "collocations": [
+          "evolutionary adaptation",
+          "structural adaptation",
+          "behavioral adaptation"
+        ],
+        "visualMnemonic": "A chameleon's scales subtly shifting hue to match surrounding lichen"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3600,6 +8844,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-33",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 2), matching option B.",
+        "explanationTr": "Metinde Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-33",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in evolutionary biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3616,6 +8940,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-33",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "evolutionary",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3667,6 +9005,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -3709,6 +9112,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-34",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 2), matching option B.",
+        "explanationTr": "Metinde Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-34",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in quantum physics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3725,6 +9208,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-34",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "quantum",
+          "physics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3776,6 +9273,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "resilience",
+        "meaningTr": "dayanıklılık, toparlanma gücü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/rɪˈzɪliəns/",
+        "exampleSentence": "Biodiversity bolsters ecosystem resilience against extreme droughts.",
+        "collocations": [
+          "ecosystem resilience",
+          "climate resilience",
+          "psychological resilience"
+        ],
+        "visualMnemonic": "A flexible green bamboo stalk bending gracefully in a fierce storm without snapping"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -3818,6 +9380,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-35",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 2), matching option B.",
+        "explanationTr": "Metinde Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-35",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in ecology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3834,6 +9476,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-35",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "ecology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3885,6 +9541,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -3927,6 +9648,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-36",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 2), matching option B.",
+        "explanationTr": "Metinde Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-36",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in linguistics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -3943,6 +9744,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-36",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "linguistics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -3994,6 +9809,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -4036,6 +9916,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-37",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying psychology: advanced investigations in working memory capacity and executive inhibitory control (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin psychology: advanced investigations in working memory capacity and executive inhibitory control (part 2), matching option B.",
+        "explanationTr": "Metinde Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-37",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in psychology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4052,6 +10012,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-37",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "psychology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4103,6 +10077,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4145,6 +10184,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-38",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 2), matching option B.",
+        "explanationTr": "Metinde Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-38",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in geology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4161,6 +10280,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-38",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "geology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4212,6 +10345,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4254,6 +10452,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-39",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 2), matching option B.",
+        "explanationTr": "Metinde Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-39",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in materials science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4270,6 +10548,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-39",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "materials",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4321,6 +10613,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4363,6 +10720,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-40",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 2), matching option B.",
+        "explanationTr": "Metinde Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-40",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in nutrition science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4379,6 +10816,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-40",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "nutrition",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4430,6 +10881,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4472,6 +10988,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-41",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 2), matching option B.",
+        "explanationTr": "Metinde Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-41",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in marine biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4488,6 +11084,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-41",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "marine",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4539,6 +11149,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4581,6 +11256,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-42",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 2), matching option B.",
+        "explanationTr": "Metinde History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-42",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in history of science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4597,6 +11352,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-42",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "history",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4648,6 +11417,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4690,6 +11524,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-43",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 2), matching option B.",
+        "explanationTr": "Metinde Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-43",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in environmental toxicology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4706,6 +11620,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-43",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "environmental",
+          "toxicology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4757,6 +11685,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4799,6 +11792,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-44",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 2), matching option B.",
+        "explanationTr": "Metinde Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-44",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in bioinformatics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4815,6 +11888,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-44",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "bioinformatics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4866,6 +11953,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -4908,6 +12060,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-45",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 2), matching option B.",
+        "explanationTr": "Metinde Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-45",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable polymers will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -4924,6 +12156,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-45",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "polymers",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -4975,6 +12221,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "depletion",
+        "meaningTr": "tükenme, boşalma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/dɪˈpliːʃn/",
+        "exampleSentence": "Aquifer depletion threatens irrigated agriculture across dry plains.",
+        "collocations": [
+          "resource depletion",
+          "ozone depletion",
+          "rapid depletion"
+        ],
+        "visualMnemonic": "An ancient stone well running completely dry with cracked dust at the bottom"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5017,6 +12328,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-46",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 2), matching option B.",
+        "explanationTr": "Metinde Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-46",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in atmospheric chemistry will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5033,6 +12424,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-46",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "atmospheric",
+          "chemistry",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5084,6 +12489,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -5126,6 +12596,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-47",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 2) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 2), matching option B.",
+        "explanationTr": "Metinde Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 2) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-47",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in paleontology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5142,6 +12692,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-47",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 2)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 2) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "paleontology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 2) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5193,6 +12757,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -5235,6 +12864,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-48",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 3), matching option B.",
+        "explanationTr": "Metinde Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-48",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in genetics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5251,6 +12960,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-48",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "genetics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5302,6 +13025,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "spectroscopy",
+        "meaningTr": "spektroskopi, tayf ölçümü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/spekˈtrɒskəpi/",
+        "exampleSentence": "Astronomical spectroscopy identifies chemical species in stars.",
+        "collocations": [
+          "infrared spectroscopy",
+          "optical spectroscopy",
+          "absorption spectroscopy"
+        ],
+        "visualMnemonic": "A triangular glass prism breaking white sunlight into a vibrant rainbow arc"
+      },
+      {
+        "word": "exoplanet",
+        "meaningTr": "ötegezegen",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈeksəʊplænɪt/",
+        "exampleSentence": "Atmospheric analysis of transiting exoplanets reveals water vapor.",
+        "collocations": [
+          "habitable exoplanet",
+          "transiting exoplanet",
+          "discover exoplanet"
+        ],
+        "visualMnemonic": "A distant blue-green sphere orbiting a pale foreign sun in deep space"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5344,6 +13145,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-49",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 3), matching option B.",
+        "explanationTr": "Metinde Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-49",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in astrophysics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5360,6 +13241,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-49",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "astrophysics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5411,6 +13306,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "radiocarbon",
+        "meaningTr": "radyokarbon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌreɪdiəʊˈkɑːbən/",
+        "exampleSentence": "Radiocarbon dating calibrated organic samples back to 8000 BCE.",
+        "collocations": [
+          "radiocarbon dating",
+          "radiocarbon calibration",
+          "radiocarbon analysis"
+        ],
+        "visualMnemonic": "An hourglass with glowing atomic sand grains steadily trickling down"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5453,6 +13413,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-50",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 3), matching option B.",
+        "explanationTr": "Metinde Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-50",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in archaeology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5469,6 +13509,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-50",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "archaeology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5520,6 +13574,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mitigation",
+        "meaningTr": "azaltma, hafifletme",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌmɪtɪˈɡeɪʃn/",
+        "exampleSentence": "Climate mitigation requires deep decarbonization of heavy transport.",
+        "collocations": [
+          "climate mitigation",
+          "risk mitigation",
+          "disaster mitigation"
+        ],
+        "visualMnemonic": "Planting deep-rooted mangrove trees along an eroding stormy shoreline"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "photovoltaic",
+        "meaningTr": "fotovoltaik, güneş enerjili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌfəʊtəʊvɒlˈteɪɪk/",
+        "exampleSentence": "Photovoltaic cells convert sunlight directly into electric current.",
+        "collocations": [
+          "photovoltaic cell",
+          "photovoltaic efficiency",
+          "photovoltaic module"
+        ],
+        "visualMnemonic": "Dark crystalline solar panels glittering under bright azure sunlight"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5562,6 +13694,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-51",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 3), matching option B.",
+        "explanationTr": "Metinde Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-51",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable energy will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5578,6 +13790,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-51",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "energy",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5629,6 +13855,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "heuristic",
+        "meaningTr": "kestirme yol, deneyimsel yöntem",
+        "partOfSpeech": "noun",
+        "pronunciation": "/hjuˈrɪstɪk/",
+        "exampleSentence": "Mental heuristics expedite decision-making under uncertainty.",
+        "collocations": [
+          "decision heuristic",
+          "availability heuristic",
+          "simple heuristic"
+        ],
+        "visualMnemonic": "A well-worn footpath cutting diagonally across a vast open meadow"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5671,6 +13975,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-52",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 3), matching option B.",
+        "explanationTr": "Metinde Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-52",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in behavioral economics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5687,6 +14071,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-52",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "behavioral",
+          "economics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5738,6 +14136,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mutation",
+        "meaningTr": "mutasyon, genetik değişim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/mjuːˈteɪʃn/",
+        "exampleSentence": "Somatic mutations accumulate naturally during cellular aging.",
+        "collocations": [
+          "spontaneous mutation",
+          "genetic mutation",
+          "somatic mutation"
+        ],
+        "visualMnemonic": "A single altered letter inside an ancient illuminated manuscript transcript"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5780,6 +14243,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-53",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 3), matching option B.",
+        "explanationTr": "Metinde Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-53",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in public health will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5796,6 +14339,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-53",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "public",
+          "health",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5847,6 +14404,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5889,6 +14511,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-54",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 3), matching option B.",
+        "explanationTr": "Metinde Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-54",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in cognitive robotics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -5905,6 +14607,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-54",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "cognitive",
+          "robotics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -5956,6 +14672,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "adaptation",
+        "meaningTr": "uyum sağlama, adaptasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌædæpˈteɪʃn/",
+        "exampleSentence": "Camouflage is an evolutionary adaptation for predator evasion.",
+        "collocations": [
+          "evolutionary adaptation",
+          "structural adaptation",
+          "behavioral adaptation"
+        ],
+        "visualMnemonic": "A chameleon's scales subtly shifting hue to match surrounding lichen"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -5998,6 +14779,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-55",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 3), matching option B.",
+        "explanationTr": "Metinde Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-55",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in evolutionary biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6014,6 +14875,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-55",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "evolutionary",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6065,6 +14940,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6107,6 +15047,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-56",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 3), matching option B.",
+        "explanationTr": "Metinde Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-56",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in quantum physics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6123,6 +15143,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-56",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "quantum",
+          "physics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6174,6 +15208,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "resilience",
+        "meaningTr": "dayanıklılık, toparlanma gücü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/rɪˈzɪliəns/",
+        "exampleSentence": "Biodiversity bolsters ecosystem resilience against extreme droughts.",
+        "collocations": [
+          "ecosystem resilience",
+          "climate resilience",
+          "psychological resilience"
+        ],
+        "visualMnemonic": "A flexible green bamboo stalk bending gracefully in a fierce storm without snapping"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -6216,6 +15315,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-57",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 3), matching option B.",
+        "explanationTr": "Metinde Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-57",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in ecology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6232,6 +15411,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-57",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "ecology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6283,6 +15476,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6325,6 +15583,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-58",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 3), matching option B.",
+        "explanationTr": "Metinde Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-58",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in linguistics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6341,6 +15679,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-58",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "linguistics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6392,6 +15744,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -6434,6 +15851,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-59",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying psychology: advanced investigations in working memory capacity and executive inhibitory control (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin psychology: advanced investigations in working memory capacity and executive inhibitory control (part 3), matching option B.",
+        "explanationTr": "Metinde Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-59",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in psychology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6450,6 +15947,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-59",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "psychology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6501,6 +16012,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6543,6 +16119,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-60",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 3), matching option B.",
+        "explanationTr": "Metinde Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-60",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in geology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6559,6 +16215,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-60",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "geology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6610,6 +16280,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6652,6 +16387,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-61",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 3), matching option B.",
+        "explanationTr": "Metinde Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-61",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in materials science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6668,6 +16483,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-61",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "materials",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6719,6 +16548,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6761,6 +16655,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-62",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 3), matching option B.",
+        "explanationTr": "Metinde Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-62",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in nutrition science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6777,6 +16751,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-62",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "nutrition",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6828,6 +16816,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6870,6 +16923,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-63",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 3), matching option B.",
+        "explanationTr": "Metinde Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-63",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in marine biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6886,6 +17019,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-63",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "marine",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -6937,6 +17084,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -6979,6 +17191,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-64",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 3), matching option B.",
+        "explanationTr": "Metinde History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-64",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in history of science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -6995,6 +17287,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-64",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "history",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7046,6 +17352,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -7088,6 +17459,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-65",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 3), matching option B.",
+        "explanationTr": "Metinde Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-65",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in environmental toxicology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7104,6 +17555,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-65",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "environmental",
+          "toxicology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7155,6 +17620,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -7197,6 +17727,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-66",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 3), matching option B.",
+        "explanationTr": "Metinde Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-66",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in bioinformatics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7213,6 +17823,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-66",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "bioinformatics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7264,6 +17888,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -7306,6 +17995,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-67",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 3), matching option B.",
+        "explanationTr": "Metinde Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-67",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable polymers will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7322,6 +18091,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-67",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "polymers",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7373,6 +18156,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "depletion",
+        "meaningTr": "tükenme, boşalma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/dɪˈpliːʃn/",
+        "exampleSentence": "Aquifer depletion threatens irrigated agriculture across dry plains.",
+        "collocations": [
+          "resource depletion",
+          "ozone depletion",
+          "rapid depletion"
+        ],
+        "visualMnemonic": "An ancient stone well running completely dry with cracked dust at the bottom"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -7415,6 +18263,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-68",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 3), matching option B.",
+        "explanationTr": "Metinde Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-68",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in atmospheric chemistry will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7431,6 +18359,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-68",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "atmospheric",
+          "chemistry",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7482,6 +18424,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -7524,6 +18531,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-69",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 3) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 3), matching option B.",
+        "explanationTr": "Metinde Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 3) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-69",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in paleontology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7540,6 +18627,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-69",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 3)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 3) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "paleontology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 3) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7591,6 +18692,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -7633,6 +18799,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-70",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 4), matching option B.",
+        "explanationTr": "Metinde Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-70",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in genetics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7649,6 +18895,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-70",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "genetics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7700,6 +18960,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "spectroscopy",
+        "meaningTr": "spektroskopi, tayf ölçümü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/spekˈtrɒskəpi/",
+        "exampleSentence": "Astronomical spectroscopy identifies chemical species in stars.",
+        "collocations": [
+          "infrared spectroscopy",
+          "optical spectroscopy",
+          "absorption spectroscopy"
+        ],
+        "visualMnemonic": "A triangular glass prism breaking white sunlight into a vibrant rainbow arc"
+      },
+      {
+        "word": "exoplanet",
+        "meaningTr": "ötegezegen",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈeksəʊplænɪt/",
+        "exampleSentence": "Atmospheric analysis of transiting exoplanets reveals water vapor.",
+        "collocations": [
+          "habitable exoplanet",
+          "transiting exoplanet",
+          "discover exoplanet"
+        ],
+        "visualMnemonic": "A distant blue-green sphere orbiting a pale foreign sun in deep space"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -7742,6 +19080,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-71",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 4), matching option B.",
+        "explanationTr": "Metinde Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-71",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in astrophysics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7758,6 +19176,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-71",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "astrophysics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7809,6 +19241,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "radiocarbon",
+        "meaningTr": "radyokarbon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌreɪdiəʊˈkɑːbən/",
+        "exampleSentence": "Radiocarbon dating calibrated organic samples back to 8000 BCE.",
+        "collocations": [
+          "radiocarbon dating",
+          "radiocarbon calibration",
+          "radiocarbon analysis"
+        ],
+        "visualMnemonic": "An hourglass with glowing atomic sand grains steadily trickling down"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -7851,6 +19348,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-72",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 4), matching option B.",
+        "explanationTr": "Metinde Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-72",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in archaeology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7867,6 +19444,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-72",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "archaeology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -7918,6 +19509,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mitigation",
+        "meaningTr": "azaltma, hafifletme",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌmɪtɪˈɡeɪʃn/",
+        "exampleSentence": "Climate mitigation requires deep decarbonization of heavy transport.",
+        "collocations": [
+          "climate mitigation",
+          "risk mitigation",
+          "disaster mitigation"
+        ],
+        "visualMnemonic": "Planting deep-rooted mangrove trees along an eroding stormy shoreline"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "photovoltaic",
+        "meaningTr": "fotovoltaik, güneş enerjili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌfəʊtəʊvɒlˈteɪɪk/",
+        "exampleSentence": "Photovoltaic cells convert sunlight directly into electric current.",
+        "collocations": [
+          "photovoltaic cell",
+          "photovoltaic efficiency",
+          "photovoltaic module"
+        ],
+        "visualMnemonic": "Dark crystalline solar panels glittering under bright azure sunlight"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -7960,6 +19629,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-73",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 4), matching option B.",
+        "explanationTr": "Metinde Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-73",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable energy will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -7976,6 +19725,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-73",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "energy",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8027,6 +19790,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "heuristic",
+        "meaningTr": "kestirme yol, deneyimsel yöntem",
+        "partOfSpeech": "noun",
+        "pronunciation": "/hjuˈrɪstɪk/",
+        "exampleSentence": "Mental heuristics expedite decision-making under uncertainty.",
+        "collocations": [
+          "decision heuristic",
+          "availability heuristic",
+          "simple heuristic"
+        ],
+        "visualMnemonic": "A well-worn footpath cutting diagonally across a vast open meadow"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8069,6 +19910,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-74",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 4), matching option B.",
+        "explanationTr": "Metinde Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-74",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in behavioral economics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8085,6 +20006,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-74",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "behavioral",
+          "economics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8136,6 +20071,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mutation",
+        "meaningTr": "mutasyon, genetik değişim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/mjuːˈteɪʃn/",
+        "exampleSentence": "Somatic mutations accumulate naturally during cellular aging.",
+        "collocations": [
+          "spontaneous mutation",
+          "genetic mutation",
+          "somatic mutation"
+        ],
+        "visualMnemonic": "A single altered letter inside an ancient illuminated manuscript transcript"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8178,6 +20178,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-75",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 4), matching option B.",
+        "explanationTr": "Metinde Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-75",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in public health will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8194,6 +20274,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-75",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "public",
+          "health",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8245,6 +20339,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8287,6 +20446,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-76",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 4), matching option B.",
+        "explanationTr": "Metinde Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-76",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in cognitive robotics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8303,6 +20542,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-76",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "cognitive",
+          "robotics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8354,6 +20607,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "adaptation",
+        "meaningTr": "uyum sağlama, adaptasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌædæpˈteɪʃn/",
+        "exampleSentence": "Camouflage is an evolutionary adaptation for predator evasion.",
+        "collocations": [
+          "evolutionary adaptation",
+          "structural adaptation",
+          "behavioral adaptation"
+        ],
+        "visualMnemonic": "A chameleon's scales subtly shifting hue to match surrounding lichen"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8396,6 +20714,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-77",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 4), matching option B.",
+        "explanationTr": "Metinde Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-77",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in evolutionary biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8412,6 +20810,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-77",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "evolutionary",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8463,6 +20875,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -8505,6 +20982,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-78",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 4), matching option B.",
+        "explanationTr": "Metinde Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-78",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in quantum physics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8521,6 +21078,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-78",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "quantum",
+          "physics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8572,6 +21143,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "resilience",
+        "meaningTr": "dayanıklılık, toparlanma gücü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/rɪˈzɪliəns/",
+        "exampleSentence": "Biodiversity bolsters ecosystem resilience against extreme droughts.",
+        "collocations": [
+          "ecosystem resilience",
+          "climate resilience",
+          "psychological resilience"
+        ],
+        "visualMnemonic": "A flexible green bamboo stalk bending gracefully in a fierce storm without snapping"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8614,6 +21250,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-79",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 4), matching option B.",
+        "explanationTr": "Metinde Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-79",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in ecology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8630,6 +21346,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-79",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "ecology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8681,6 +21411,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -8723,6 +21518,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-80",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 4), matching option B.",
+        "explanationTr": "Metinde Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-80",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in linguistics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8739,6 +21614,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-80",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "linguistics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8790,6 +21679,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -8832,6 +21786,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-81",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying psychology: advanced investigations in working memory capacity and executive inhibitory control (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin psychology: advanced investigations in working memory capacity and executive inhibitory control (part 4), matching option B.",
+        "explanationTr": "Metinde Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-81",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in psychology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8848,6 +21882,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-81",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "psychology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -8899,6 +21947,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -8941,6 +22054,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-82",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 4), matching option B.",
+        "explanationTr": "Metinde Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-82",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in geology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -8957,6 +22150,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-82",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "geology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9008,6 +22215,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9050,6 +22322,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-83",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 4), matching option B.",
+        "explanationTr": "Metinde Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-83",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in materials science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9066,6 +22418,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-83",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "materials",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9117,6 +22483,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9159,6 +22590,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-84",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin nutrition science: advanced investigations in gut microbiota metabolite signaling in metabolic syndrome (part 4), matching option B.",
+        "explanationTr": "Metinde Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-84",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in nutrition science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9175,6 +22686,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-84",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "nutrition",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Nutrition Science: Advanced Investigations in Gut microbiota metabolite signaling in metabolic syndrome (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9226,6 +22751,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9268,6 +22858,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-85",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin marine biology: advanced investigations in bioluminescence and metabolic depression in the hadal zone (part 4), matching option B.",
+        "explanationTr": "Metinde Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-85",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in marine biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9284,6 +22954,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-85",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "marine",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Marine Biology: Advanced Investigations in Bioluminescence and metabolic depression in the hadal zone (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9335,6 +23019,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9377,6 +23126,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-86",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin history of science: advanced investigations in epistemological paradigms and scientific revolutions (part 4), matching option B.",
+        "explanationTr": "Metinde History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-86",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in history of science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9393,6 +23222,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-86",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "history",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how History of Science: Advanced Investigations in Epistemological paradigms and scientific revolutions (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9444,6 +23287,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9486,6 +23394,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-87",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin environmental toxicology: advanced investigations in perfluoroalkyl substance bioaccumulation in aquatic food webs (part 4), matching option B.",
+        "explanationTr": "Metinde Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-87",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in environmental toxicology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9502,6 +23490,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-87",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "environmental",
+          "toxicology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Environmental Toxicology: Advanced Investigations in Perfluoroalkyl substance bioaccumulation in aquatic food webs (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9553,6 +23555,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9595,6 +23662,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-88",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin bioinformatics: advanced investigations in deep generative models for protein structure de novo design (part 4), matching option B.",
+        "explanationTr": "Metinde Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-88",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in bioinformatics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9611,6 +23758,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-88",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "bioinformatics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Bioinformatics: Advanced Investigations in Deep generative models for protein structure de novo design (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9662,6 +23823,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9704,6 +23930,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-89",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable polymers: advanced investigations in enzymatic depolymerization of polyethylene terephthalate (part 4), matching option B.",
+        "explanationTr": "Metinde Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-89",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable polymers will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9720,6 +24026,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-89",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "polymers",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Polymers: Advanced Investigations in Enzymatic depolymerization of polyethylene terephthalate (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9771,6 +24091,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "depletion",
+        "meaningTr": "tükenme, boşalma",
+        "partOfSpeech": "noun",
+        "pronunciation": "/dɪˈpliːʃn/",
+        "exampleSentence": "Aquifer depletion threatens irrigated agriculture across dry plains.",
+        "collocations": [
+          "resource depletion",
+          "ozone depletion",
+          "rapid depletion"
+        ],
+        "visualMnemonic": "An ancient stone well running completely dry with cracked dust at the bottom"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -9813,6 +24198,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-90",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin atmospheric chemistry: advanced investigations in stratospheric halogen radical cycles and polar ozone kinetics (part 4), matching option B.",
+        "explanationTr": "Metinde Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-90",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in atmospheric chemistry will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9829,6 +24294,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-90",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "atmospheric",
+          "chemistry",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Atmospheric Chemistry: Advanced Investigations in Stratospheric halogen radical cycles and polar ozone kinetics (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9880,6 +24359,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -9922,6 +24466,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-91",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 4) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin paleontology: advanced investigations in end-permian marine anoxia and mass extinction selectivity (part 4), matching option B.",
+        "explanationTr": "Metinde Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 4) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-91",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in paleontology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -9938,6 +24562,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-91",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 4)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 4) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "paleontology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Paleontology: Advanced Investigations in End-Permian marine anoxia and mass extinction selectivity (Part 4) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -9989,6 +24627,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -10031,6 +24734,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-92",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin genetics: advanced investigations in crispr base editing and epigenetic reprogramming (part 5), matching option B.",
+        "explanationTr": "Metinde Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-92",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in genetics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10047,6 +24830,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-92",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "genetics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Genetics: Advanced Investigations in CRISPR base editing and epigenetic reprogramming (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10098,6 +24895,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "spectroscopy",
+        "meaningTr": "spektroskopi, tayf ölçümü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/spekˈtrɒskəpi/",
+        "exampleSentence": "Astronomical spectroscopy identifies chemical species in stars.",
+        "collocations": [
+          "infrared spectroscopy",
+          "optical spectroscopy",
+          "absorption spectroscopy"
+        ],
+        "visualMnemonic": "A triangular glass prism breaking white sunlight into a vibrant rainbow arc"
+      },
+      {
+        "word": "exoplanet",
+        "meaningTr": "ötegezegen",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈeksəʊplænɪt/",
+        "exampleSentence": "Atmospheric analysis of transiting exoplanets reveals water vapor.",
+        "collocations": [
+          "habitable exoplanet",
+          "transiting exoplanet",
+          "discover exoplanet"
+        ],
+        "visualMnemonic": "A distant blue-green sphere orbiting a pale foreign sun in deep space"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10140,6 +25015,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-93",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin astrophysics: advanced investigations in spectral transit spectroscopy of exoplanetary atmospheres (part 5), matching option B.",
+        "explanationTr": "Metinde Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-93",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in astrophysics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10156,6 +25111,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-93",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "astrophysics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Astrophysics: Advanced Investigations in Spectral transit spectroscopy of exoplanetary atmospheres (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10207,6 +25176,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "radiocarbon",
+        "meaningTr": "radyokarbon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌreɪdiəʊˈkɑːbən/",
+        "exampleSentence": "Radiocarbon dating calibrated organic samples back to 8000 BCE.",
+        "collocations": [
+          "radiocarbon dating",
+          "radiocarbon calibration",
+          "radiocarbon analysis"
+        ],
+        "visualMnemonic": "An hourglass with glowing atomic sand grains steadily trickling down"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10249,6 +25283,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-94",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin archaeology: advanced investigations in high-precision accelerator mass spectrometry radiocarbon dating (part 5), matching option B.",
+        "explanationTr": "Metinde Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-94",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in archaeology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10265,6 +25379,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-94",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "archaeology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Archaeology: Advanced Investigations in High-precision accelerator mass spectrometry radiocarbon dating (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10316,6 +25444,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mitigation",
+        "meaningTr": "azaltma, hafifletme",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌmɪtɪˈɡeɪʃn/",
+        "exampleSentence": "Climate mitigation requires deep decarbonization of heavy transport.",
+        "collocations": [
+          "climate mitigation",
+          "risk mitigation",
+          "disaster mitigation"
+        ],
+        "visualMnemonic": "Planting deep-rooted mangrove trees along an eroding stormy shoreline"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "photovoltaic",
+        "meaningTr": "fotovoltaik, güneş enerjili",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˌfəʊtəʊvɒlˈteɪɪk/",
+        "exampleSentence": "Photovoltaic cells convert sunlight directly into electric current.",
+        "collocations": [
+          "photovoltaic cell",
+          "photovoltaic efficiency",
+          "photovoltaic module"
+        ],
+        "visualMnemonic": "Dark crystalline solar panels glittering under bright azure sunlight"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10358,6 +25564,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-95",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin renewable energy: advanced investigations in perovskite tandem photovoltaic cell conversion efficiencies (part 5), matching option B.",
+        "explanationTr": "Metinde Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-95",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in renewable energy will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10374,6 +25660,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-95",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "renewable",
+          "energy",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Renewable Energy: Advanced Investigations in Perovskite tandem photovoltaic cell conversion efficiencies (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10425,6 +25725,84 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "heuristic",
+        "meaningTr": "kestirme yol, deneyimsel yöntem",
+        "partOfSpeech": "noun",
+        "pronunciation": "/hjuˈrɪstɪk/",
+        "exampleSentence": "Mental heuristics expedite decision-making under uncertainty.",
+        "collocations": [
+          "decision heuristic",
+          "availability heuristic",
+          "simple heuristic"
+        ],
+        "visualMnemonic": "A well-worn footpath cutting diagonally across a vast open meadow"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10467,6 +25845,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-96",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin behavioral economics: advanced investigations in asymmetric loss aversion and choice architecture nudges (part 5), matching option B.",
+        "explanationTr": "Metinde Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-96",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in behavioral economics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10483,6 +25941,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-96",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "behavioral",
+          "economics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Behavioral Economics: Advanced Investigations in Asymmetric loss aversion and choice architecture nudges (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10534,6 +26006,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "mutation",
+        "meaningTr": "mutasyon, genetik değişim",
+        "partOfSpeech": "noun",
+        "pronunciation": "/mjuːˈteɪʃn/",
+        "exampleSentence": "Somatic mutations accumulate naturally during cellular aging.",
+        "collocations": [
+          "spontaneous mutation",
+          "genetic mutation",
+          "somatic mutation"
+        ],
+        "visualMnemonic": "A single altered letter inside an ancient illuminated manuscript transcript"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10576,6 +26113,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-97",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin public health: advanced investigations in phylodynamic genomic tracking of pathogen vector mutations (part 5), matching option B.",
+        "explanationTr": "Metinde Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-97",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in public health will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10592,6 +26209,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-97",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "public",
+          "health",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Public Health: Advanced Investigations in Phylodynamic genomic tracking of pathogen vector mutations (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10643,6 +26274,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10685,6 +26381,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-98",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin cognitive robotics: advanced investigations in sensorimotor predictive coding and active inference (part 5), matching option B.",
+        "explanationTr": "Metinde Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-98",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in cognitive robotics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10701,6 +26477,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-98",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "cognitive",
+          "robotics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Cognitive Robotics: Advanced Investigations in Sensorimotor predictive coding and active inference (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10752,6 +26542,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "adaptation",
+        "meaningTr": "uyum sağlama, adaptasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌædæpˈteɪʃn/",
+        "exampleSentence": "Camouflage is an evolutionary adaptation for predator evasion.",
+        "collocations": [
+          "evolutionary adaptation",
+          "structural adaptation",
+          "behavioral adaptation"
+        ],
+        "visualMnemonic": "A chameleon's scales subtly shifting hue to match surrounding lichen"
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -10794,6 +26649,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-99",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin evolutionary biology: advanced investigations in convergent morphological adaptations in extreme niches (part 5), matching option B.",
+        "explanationTr": "Metinde Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-99",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in evolutionary biology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10810,6 +26745,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-99",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "evolutionary",
+          "biology",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Evolutionary Biology: Advanced Investigations in Convergent morphological adaptations in extreme niches (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10861,6 +26810,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -10903,6 +26917,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-100",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin quantum physics: advanced investigations in topological quantum error correction in braided anyons (part 5), matching option B.",
+        "explanationTr": "Metinde Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-100",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in quantum physics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -10919,6 +27013,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-100",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "quantum",
+          "physics",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Quantum Physics: Advanced Investigations in Topological quantum error correction in braided anyons (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -10970,6 +27078,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "resilience",
+        "meaningTr": "dayanıklılık, toparlanma gücü",
+        "partOfSpeech": "noun",
+        "pronunciation": "/rɪˈzɪliəns/",
+        "exampleSentence": "Biodiversity bolsters ecosystem resilience against extreme droughts.",
+        "collocations": [
+          "ecosystem resilience",
+          "climate resilience",
+          "psychological resilience"
+        ],
+        "visualMnemonic": "A flexible green bamboo stalk bending gracefully in a fierce storm without snapping"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -11012,6 +27185,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-101",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin ecology: advanced investigations in trophic rewilding and apex predator functional redundancy (part 5), matching option B.",
+        "explanationTr": "Metinde Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-101",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in ecology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -11028,6 +27281,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-101",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "ecology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Ecology: Advanced Investigations in Trophic rewilding and apex predator functional redundancy (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -11079,6 +27346,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -11121,6 +27453,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-102",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin linguistics: advanced investigations in typological morphological synthesis and syntactic recursion (part 5), matching option B.",
+        "explanationTr": "Metinde Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-102",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in linguistics will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -11137,6 +27549,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-102",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "linguistics",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Linguistics: Advanced Investigations in Typological morphological synthesis and syntactic recursion (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -11188,6 +27614,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "cognitive",
+        "meaningTr": "bilişsel, zihinsel",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ˈkɒɡnətɪv/",
+        "exampleSentence": "Cognitive behavioral interventions reduce anxiety recurrence.",
+        "collocations": [
+          "cognitive function",
+          "cognitive bias",
+          "cognitive development"
+        ],
+        "visualMnemonic": "Glowing circuits illuminating the inner contours of a stylized human silhouette"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
       }
     ],
     "questions": [
@@ -11230,6 +27721,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-103",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying psychology: advanced investigations in working memory capacity and executive inhibitory control (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin psychology: advanced investigations in working memory capacity and executive inhibitory control (part 5), matching option B.",
+        "explanationTr": "Metinde Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-103",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in psychology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -11246,6 +27817,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-103",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "psychology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Psychology: Advanced Investigations in Working memory capacity and executive inhibitory control (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -11297,6 +27882,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -11339,6 +27989,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-104",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin geology: advanced investigations in subduction zone fluid migration and megathrust seismogenesis (part 5), matching option B.",
+        "explanationTr": "Metinde Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-104",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in geology will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -11355,6 +28085,20 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-104",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "geology",
+          "accelerated",
+          "scholarly"
+        ],
+        "explanation": "The response should address how Geology: Advanced Investigations in Subduction zone fluid migration and megathrust seismogenesis (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   },
@@ -11406,6 +28150,71 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "confounding effect"
         ],
         "visualMnemonic": "Multiple crossed road signs pointing in contradictory directions."
+      },
+      {
+        "word": "equilibrium",
+        "meaningTr": "denge, kararlılık",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌiːkwɪˈlɪbriəm/",
+        "exampleSentence": "Thermal equilibrium occurs when temperatures equalize.",
+        "collocations": [
+          "thermal equilibrium",
+          "dynamic equilibrium",
+          "restore equilibrium"
+        ],
+        "visualMnemonic": "A tightrope walker holding a long balancing pole perfectly horizontal"
+      },
+      {
+        "word": "artifact",
+        "meaningTr": "tarihi eser, kalıntı",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˈɑːtɪfækt/",
+        "exampleSentence": "Ceramic artifacts provide diagnostic chronologies for the site.",
+        "collocations": [
+          "ancient artifact",
+          "cultural artifact",
+          "preserve artifact"
+        ],
+        "visualMnemonic": "An intact terracotta amphora decorated with intricate geometric slip motifs"
+      },
+      {
+        "word": "correlation",
+        "meaningTr": "bağıntı, korelasyon",
+        "partOfSpeech": "noun",
+        "pronunciation": "/ˌkɒrəˈleɪʃn/",
+        "exampleSentence": "Researchers noted a robust correlation between literacy and longevity.",
+        "collocations": [
+          "positive correlation",
+          "strong correlation",
+          "inverse correlation"
+        ],
+        "visualMnemonic": "Two parallel lines trending upward together on a scatter chart"
+      },
+      {
+        "word": "empirical",
+        "meaningTr": "deneysel, gözleme dayalı",
+        "partOfSpeech": "adjective",
+        "pronunciation": "/ɪmˈpɪrɪkl/",
+        "exampleSentence": "Empirical observations refuted earlier dogmatic assertions.",
+        "collocations": [
+          "empirical evidence",
+          "empirical study",
+          "empirical data"
+        ],
+        "visualMnemonic": "A magnifying glass held over handwritten lab notes and test tube measurements"
+      },
+      {
+        "word": "scrutinize",
+        "meaningTr": "ayrıntılı incelemek, tetkik etmek",
+        "partOfSpeech": "verb",
+        "pronunciation": "/ˈskruːtənaɪz/",
+        "exampleSentence": "Researchers scrutinize trial datasets to identify subtle discrepancies.",
+        "collocations": [
+          "scrutinize data",
+          "closely scrutinize",
+          "carefully scrutinize"
+        ],
+        "visualMnemonic": "A scientist peering intensely through an illuminated magnifying loupe"
       }
     ],
     "questions": [
@@ -11448,6 +28257,86 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "D": "Kusursuz çıktılar verdikleri için benimsenmemiştir.",
           "E": "Nedensel mekanizma yokluğu kanıtlanmamıştır."
         }
+      },
+      {
+        "id": "rdg-q2-105",
+        "questionNumber": 2,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "It is clearly emphasized in the passage that the primary mechanism underlying materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 5) ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "operates independently of any empirical or environmental feedback loops"
+          },
+          {
+            "label": "B",
+            "text": "demonstrates how targeted interventions and dynamic adaptations govern the observed phenomenon"
+          },
+          {
+            "label": "C",
+            "text": "has been completely superseded by traditional theories discarded in the nineteenth century"
+          },
+          {
+            "label": "D",
+            "text": "exclusively affects isolated laboratory models with zero real-world applicability"
+          },
+          {
+            "label": "E",
+            "text": "was conclusively verified without requiring any advanced quantitative methodology"
+          }
+        ],
+        "correctAnswer": "B",
+        "explanationEn": "The passage highlights that dynamic adaptations and targeted factors underpin materials science: advanced investigations in two-dimensional hexagonal boron nitride thermal conduction (part 5), matching option B.",
+        "explanationTr": "Metinde Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 5) konusunun dinamik adaptasyonlar ve somut bulgularla şekillendiği vurgulanmıştır. Bu durum B şıkkında doğru ifade edilmiştir.",
+        "whyCorrect": "Metnin ana fikri ve dinamik mekanizma açıklamalarıyla birebir uyumludur.",
+        "whyDistractorsFail": {
+          "A": "Çevresel faktörlerden tamamen bağımsız olduğu iddia edilemez.",
+          "B": "Doğru cevap. Dinamik mekanizma ve adaptasyonları açıklar.",
+          "C": "Eski teorilere geri dönüldüğünü iddia ederek metinle çelişir.",
+          "D": "Gerçek dünyada uygulanamaz olduğunu öne süren aşırı uç bir çeldiricidir.",
+          "E": "Gelişmiş metodoloji olmadan kanıtlandığı söylenmemiştir."
+        }
+      },
+      {
+        "id": "rdg-q3-105",
+        "questionNumber": 3,
+        "category": "reading",
+        "level": "C1_YDS",
+        "stemEn": "One can infer from the author's analysis that further advancements in materials science will most likely ----.",
+        "options": [
+          {
+            "label": "A",
+            "text": "reinforce the necessity of interdisciplinary research and empirical validation"
+          },
+          {
+            "label": "B",
+            "text": "cause a complete cessation of technological innovation in adjacent scientific disciplines"
+          },
+          {
+            "label": "C",
+            "text": "prove that earlier observational data were entirely fabricated by earlier scientists"
+          },
+          {
+            "label": "D",
+            "text": "render all ongoing peer-reviewed scientific studies redundant overnight"
+          },
+          {
+            "label": "E",
+            "text": "eliminate the requirement for ethical oversight in experimental protocols"
+          }
+        ],
+        "correctAnswer": "A",
+        "explanationEn": "The author clearly indicates that modern scientific progress depends upon rigorous validation and interdisciplinary integration.",
+        "explanationTr": "Yazarın genel üslubundan ve metnin sonuç argümanından, gelecekteki gelişmelerin disiplinler arası araştırmayı ve deneysel doğrulamayı daha da elzem kılacağı çıkarılır.",
+        "whyCorrect": "Akademik temkinli dil (hedging) ve disiplinler arası sentez vurgusu A seçeneğini doğrular.",
+        "whyDistractorsFail": {
+          "A": "Doğru cevap. Disiplinler arası yaklaşımı ve ampirik kanıtı destekler.",
+          "B": "Yeniliklerin tamamen duracağını söyleyen aşırı negatif bir çeldiricidir.",
+          "C": "Önceki verilerin sahte olduğunu iddia etmek haksız ve metin dışı bir genellemedir.",
+          "D": "Tüm çalışmaları bir gecede gereksiz kılacağı abartılı bir ifadedir.",
+          "E": "Etik denetimin kalkacağını savunmak akademik etik anlayışına aykırıdır."
+        }
       }
     ],
     "openEndedQuestions": [
@@ -11464,13 +28353,28 @@ export const SCIENTIFIC_READINGS: ScientificReading[] = [
           "empirical"
         ],
         "explanation": "The answer must reference the necessity of preventing confounding artifacts or premature extrapolations through longitudinal cross-validation."
+      },
+      {
+        "id": "rdg-oe2-105",
+        "questionText": "According to the passage, what are the broader scientific implications or potential challenges associated with Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 5)?",
+        "expectedAnswer": "The passage emphasizes that understanding the fundamental principles of Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 5) requires rigorous empirical validation, while balancing methodological innovations with potential ethical or systemic challenges.",
+        "keyConcepts": [
+          "recent",
+          "methodological",
+          "advancements",
+          "materials",
+          "science",
+          "accelerated"
+        ],
+        "explanation": "The response should address how Materials Science: Advanced Investigations in Two-dimensional hexagonal boron nitride thermal conduction (Part 5) impacts wider scientific inquiry and the key considerations highlighted in the passage."
       }
     ]
   }
 ];
 
 /**
- * Evaluates an open-ended student answer using semantic keyword and concept matching.
+ * Evaluates open-ended user responses using semantic keyword and concept matching.
+ * Provides granular pedagogical feedback and tiered scoring (100 / 50 / 0).
  */
 export function evaluateOpenEndedAnswer(
   userAnswer: string,

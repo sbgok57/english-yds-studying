@@ -9,6 +9,7 @@ import {
   Settings,
   Flame,
   Zap,
+  Sparkles,
 } from 'lucide-react';
 import { UserProgress } from '../../types';
 
@@ -18,6 +19,7 @@ export type ActiveTab =
   | 'vocabulary'
   | 'grammar'
   | 'yds'
+  | 'yds_essentials'
   | 'errors'
   | 'progress'
   | 'settings';
@@ -35,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const navItems = [
     { id: 'dashboard', label: 'Ana Sayfa', labelEn: 'Dashboard', icon: LayoutDashboard },
+    { id: 'yds_essentials', label: 'YDS/YDT Önemliler', labelEn: 'YDS/YDT Essentials', icon: Sparkles },
     { id: 'vocabulary', label: 'Kelimeler', labelEn: 'Vocabulary', icon: BookOpen },
     { id: 'grammar', label: 'Gramer', labelEn: 'Grammar', icon: Cpu },
     { id: 'yds', label: 'YDS Çalışma Merkezi', labelEn: 'YDS Study Center', icon: GraduationCap },
@@ -57,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div>
               <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">
-                YDT:YDS Master
+                YDS/YDT Master
               </span>
               <span className="hidden sm:block text-[10px] text-slate-400 font-medium">
                 Personal English Tutor

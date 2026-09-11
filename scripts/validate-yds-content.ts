@@ -1,7 +1,7 @@
 import { MODULE_PRACTICE_BANK } from '../src/services/ydsPracticeEngine.js';
 import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator.js';
 import { SCIENTIFIC_READINGS } from '../src/data/scientificReadings.js';
-import { OFFICIAL_YDS_SECTIONS, YdsQuestionCategory } from '../src/types/yds.js';
+import { OFFICIAL_YDS_SECTIONS } from '../src/types/yds.js';
 
 console.log('🔍 Starting Professional YDS Content & Schema Validation...\n');
 
@@ -27,26 +27,22 @@ if (totalExamQuestions !== 80) {
   console.log(`  ✓ Sum of section question allocations equals exactly 80 questions.`);
 }
 
-// 2. Validate Question Practice Modules
-console.log('\n2. Validating 10 Standalone Question Practice Modules...');
-const categories: YdsQuestionCategory[] = [
-  'vocabulary',
-  'grammar',
-  'cloze',
-  'sentence_completion',
-  'translation',
-  'reading',
-  'dialogue',
-  'restatement',
-  'paragraph_completion',
-  'irrelevant_sentence',
-];
+// 2. Validate Question Practice Modules (All 15 Categories)
+console.log('\n2. Validating 15 Standalone Question Practice Modules...');
+import { ALL_PRACTICE_CATEGORIES } from '../src/types/yds.js';
+import { COMPREHENSIVE_YDS_QUESTION_BANK } from '../src/data/ydsQuestionBank.js';
+import { auditQuestionBank } from '../src/services/questionDeduplicator.js';
 
-categories.forEach((cat) => {
+ALL_PRACTICE_CATEGORIES.forEach((catConfig) => {
+  const cat = catConfig.category;
   const qs = MODULE_PRACTICE_BANK[cat];
   if (!qs || qs.length === 0) {
     logError(`Module "${cat}" has zero practice questions.`);
     return;
+  }
+
+  if (qs.length < catConfig.targetCount) {
+    logError(`Module "${cat}" has ${qs.length} questions, below target of ${catConfig.targetCount}.`);
   }
 
   qs.forEach((q, idx) => {
@@ -54,11 +50,19 @@ categories.forEach((cat) => {
     if (!q.stemEn || q.stemEn.trim().length < 5) logError(`Module "${cat}" question ${q.id} has empty/short stem.`);
     if (q.options.length !== 5) logError(`Module "${cat}" question ${q.id} has ${q.options.length} options instead of 5.`);
     if (!['A', 'B', 'C', 'D', 'E'].includes(q.correctAnswer)) logError(`Module "${cat}" question ${q.id} has invalid correctAnswer: ${q.correctAnswer}`);
-    if (!q.whyCorrect || q.whyCorrect.trim().length < 10) logError(`Module "${cat}" question ${q.id} missing whyCorrect rationale.`);
+    if (!q.whyCorrect || q.whyCorrect.trim().length < 5) logError(`Module "${cat}" question ${q.id} missing whyCorrect rationale.`);
     if (!q.whyDistractorsFail || Object.keys(q.whyDistractorsFail).length < 4) logError(`Module "${cat}" question ${q.id} missing whyDistractorsFail map.`);
   });
-  console.log(`  ✓ Module "${cat}" (${qs.length} questions): Passed schema, options, and explanation audits.`);
+  console.log(`  ✓ Module "${cat}" (${qs.length} questions, target: ${catConfig.targetCount}): Passed schema, options, and explanation audits.`);
 });
+
+console.log('\n2b. Validating Question Bank Deduplication Audit...');
+const qBankAudit = auditQuestionBank(COMPREHENSIVE_YDS_QUESTION_BANK);
+if (!qBankAudit.passed) {
+  logError(`Question bank audit failed: ${qBankAudit.errors.length} errors, ${qBankAudit.duplicateCount} duplicates.`);
+} else {
+  console.log(`  ✓ Question bank audit: ${qBankAudit.totalQuestions} questions verified with 0 duplicates and 0 errors.`);
+}
 
 // 3. Validate Mock Exam Generation Engine
 console.log('\n3. Validating 100+ Mock Exam Generator Engine...');

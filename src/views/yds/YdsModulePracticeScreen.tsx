@@ -9,11 +9,15 @@ import {
   ArrowRight,
   CheckCircle2,
   XCircle,
-  HelpCircle,
   Volume2,
   BookmarkPlus,
   Check,
   Award,
+  Zap,
+  Sparkles,
+  Lightbulb,
+  ShieldAlert,
+  Compass,
 } from 'lucide-react';
 
 interface YdsModulePracticeScreenProps {
@@ -33,6 +37,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<YdsOptionLabel | null>(null);
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
+  const [showFastTactic, setShowFastTactic] = useState(false);
   const [addedToErrors, setAddedToErrors] = useState<Record<string, boolean>>({});
   const [stats, setStats] = useState({ correct: 0, incorrect: 0 });
 
@@ -45,10 +50,10 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
 
     const isCorrect = label === currentQ.correctAnswer;
     if (isCorrect) {
-      speechService.speakCorrectAnswer('Correct analysis!');
+      speechService.speakCorrectAnswer('Excellent! Correct analysis.');
       setStats((prev) => ({ ...prev, correct: prev.correct + 1 }));
     } else {
-      speechService.speakIncorrectAnswer('Review the distractor.');
+      speechService.speakIncorrectAnswer('Take note of the distractor trap.');
       setStats((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
     }
   };
@@ -58,6 +63,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
       setCurrentIdx((prev) => prev + 1);
       setSelectedOption(null);
       setIsAnswerSubmitted(false);
+      setShowFastTactic(false);
     }
   };
 
@@ -66,6 +72,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
       setCurrentIdx((prev) => prev - 1);
       setSelectedOption(null);
       setIsAnswerSubmitted(false);
+      setShowFastTactic(false);
     }
   };
 
@@ -107,6 +114,9 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
     );
   }
 
+  const isUserCorrect = isAnswerSubmitted && selectedOption === currentQ.correctAnswer;
+  const isUserIncorrect = isAnswerSubmitted && selectedOption !== currentQ.correctAnswer;
+
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn pb-12">
       {/* Top Header */}
@@ -130,10 +140,10 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
 
         {/* Live Score */}
         <div className="flex items-center gap-2 text-xs font-bold">
-          <span className="text-emerald-600 dark:text-emerald-400">
+          <span className="text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-1 rounded-lg border border-emerald-200 dark:border-emerald-800">
             ✓ {stats.correct}
           </span>
-          <span className="text-rose-600 dark:text-rose-400">
+          <span className="text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-2 py-1 rounded-lg border border-rose-200 dark:border-rose-800">
             ✗ {stats.incorrect}
           </span>
         </div>
@@ -141,6 +151,38 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
 
       {/* Question Card */}
       <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+        {/* Top Action Bar: Fast Tactic Toggle */}
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            Soru #{currentIdx + 1}
+          </span>
+
+          <button
+            onClick={() => setShowFastTactic(!showFastTactic)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              showFastTactic
+                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
+                : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 hover:bg-amber-100'
+            }`}
+          >
+            <Zap className="w-3.5 h-3.5 fill-current" />
+            {showFastTactic ? 'Taktik Bilgisini Kapat' : 'Hızlı Taktik (Püf Noktası)'}
+          </button>
+        </div>
+
+        {/* Fast Tactic Drawer */}
+        {showFastTactic && (
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-950/40 border border-amber-300 dark:border-amber-800 text-xs text-amber-900 dark:text-amber-200 space-y-1.5 animate-fadeIn">
+            <div className="flex items-center gap-2 font-black text-amber-800 dark:text-amber-300 uppercase tracking-wider text-[11px]">
+              <Lightbulb className="w-4 h-4 text-amber-600" />
+              Bu Soru Türü İçin Hızlı Sınav İpucu:
+            </div>
+            <p className="leading-relaxed font-medium">
+              {currentQ.strategyTip || 'Cümledeki zaman uyumunu, kutupluluk dengesini (+/-) ve bağlaç sentaksını kontrol edin.'}
+            </p>
+          </div>
+        )}
+
         {/* Dialogue header if dialogue question */}
         {currentQ.dialogueSpeakers && currentQ.dialogueSpeakers.length > 0 && (
           <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
@@ -170,7 +212,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
           <button
             onClick={() => speechService.speak(currentQ.stemEn)}
             title="Soruyu Dinle"
-            className="p-2 rounded-xl text-slate-400 hover:text-brand-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-xl text-slate-400 hover:text-brand-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
           >
             <Volume2 className="w-4 h-4" />
           </button>
@@ -226,6 +268,67 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
           })}
         </div>
 
+        {/* MICRO-CELEBRATION ON CORRECT ANSWER */}
+        {isUserCorrect && (
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-emerald-500/10 border border-emerald-400/40 text-emerald-950 dark:text-emerald-100 flex items-center justify-between gap-3 animate-fadeIn">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-black text-base shadow-md">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-sm text-emerald-800 dark:text-emerald-300">
+                  Tebrikler! Doğru Analiz
+                </h4>
+                <p className="text-xs text-emerald-700 dark:text-emerald-400">
+                  Soruyu akademik standartta doğru çözdünüz.
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-full bg-emerald-600 text-white font-black text-xs shadow-sm">
+              +15 XP
+            </span>
+          </div>
+        )}
+
+        {/* DEEP PEDAGOGICAL BREAKDOWN ON INCORRECT ANSWER */}
+        {isUserIncorrect && (
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-rose-500/10 via-amber-500/10 to-rose-500/10 border border-rose-300 dark:border-rose-800/60 text-slate-900 dark:text-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fadeIn">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-rose-500 text-white flex items-center justify-center font-black text-base shrink-0 shadow-md">
+                <ShieldAlert className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-sm text-rose-800 dark:text-rose-300">
+                  Bu Soru Çeldirici İçeriyordu!
+                </h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400">
+                  Hata yapmak öğrenmenin en hızlı yoludur. Çözüm adımlarını aşağıda inceleyin.
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={handleAddToErrors}
+              disabled={addedToErrors[currentQ.id]}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 shadow ${
+                addedToErrors[currentQ.id]
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-rose-600 hover:bg-rose-700 text-white'
+              }`}
+            >
+              {addedToErrors[currentQ.id] ? (
+                <>
+                  <Check className="w-3.5 h-3.5" /> Hata Defterime Eklendi
+                </>
+              ) : (
+                <>
+                  <BookmarkPlus className="w-3.5 h-3.5" /> 1-Tıkla Hata Defterime Ekle
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
         {/* Deep Explanation Panel (Revealed on submission) */}
         {isAnswerSubmitted && (
           <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-4 animate-fadeIn">
@@ -233,23 +336,16 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <span className="font-black text-emerald-700 dark:text-emerald-300 text-xs flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4" /> Neden Doğru Cevap: {currentQ.correctAnswer}?
+                  <CheckCircle2 className="w-4 h-4" /> Doğru Cevap Neden {currentQ.correctAnswer}?
                 </span>
-                <button
-                  onClick={handleAddToErrors}
-                  disabled={addedToErrors[currentQ.id]}
-                  className="flex items-center gap-1 text-[11px] font-semibold text-rose-600 hover:text-rose-700 transition-colors"
-                >
-                  {addedToErrors[currentQ.id] ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" /> Hata Defterine Eklendi
-                    </>
-                  ) : (
-                    <>
-                      <BookmarkPlus className="w-3.5 h-3.5" /> Hata Defterine Ekle
-                    </>
-                  )}
-                </button>
+                {!addedToErrors[currentQ.id] && (
+                  <button
+                    onClick={handleAddToErrors}
+                    className="flex items-center gap-1 text-[11px] font-semibold text-rose-600 hover:text-rose-700 transition-colors"
+                  >
+                    <BookmarkPlus className="w-3.5 h-3.5" /> Hata Defterine Ekle
+                  </button>
+                )}
               </div>
               <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
                 {currentQ.whyCorrect}
@@ -261,11 +357,23 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
               )}
             </div>
 
+            {/* Why Selected Distractor Failed */}
+            {isUserIncorrect && selectedOption && currentQ.whyDistractorsFail?.[selectedOption] && (
+              <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 space-y-1 text-xs">
+                <span className="font-bold text-rose-800 dark:text-rose-300 block uppercase tracking-wider text-[11px]">
+                  Seçtiğiniz Şık ({selectedOption}) Neden Yanlış?
+                </span>
+                <p className="text-rose-950 dark:text-rose-200">
+                  {currentQ.whyDistractorsFail[selectedOption]}
+                </p>
+              </div>
+            )}
+
             {/* Why Distractors Fail Breakdown */}
             {currentQ.whyDistractorsFail && (
               <div className="pt-3 border-t border-slate-200 dark:border-slate-700 space-y-2">
                 <span className="font-bold text-slate-700 dark:text-slate-300 text-xs block">
-                  Diğer Seçenekler Neden Yanlış? (Çeldirici Analizi):
+                  Tüm Seçeneklerin Çeldirici Analizi:
                 </span>
                 <div className="space-y-1.5 text-[11px]">
                   {Object.entries(currentQ.whyDistractorsFail).map(([label, reason]) => {
@@ -285,13 +393,16 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
               </div>
             )}
 
-            {/* Strategy Tip */}
+            {/* Step-by-Step Heuristic & Strategy Tip */}
             {currentQ.strategyTip && (
-              <div className="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/40 text-[11px] text-amber-900 dark:text-amber-200 flex items-start gap-2">
-                <HelpCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                <p>
-                  <strong>Sınav Stratejisi:</strong> {currentQ.strategyTip}
-                </p>
+              <div className="p-3.5 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
+                <Compass className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <strong className="block font-black uppercase tracking-wider text-[11px]">
+                    Benzer Sorularda Uygulanacak Çözüm Stratejisi:
+                  </strong>
+                  <p className="leading-relaxed">{currentQ.strategyTip}</p>
+                </div>
               </div>
             )}
           </div>

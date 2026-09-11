@@ -22,7 +22,16 @@ import { getVisualMemory } from '../src/services/visualMemory';
 import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
 import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator';
 import { SCIENTIFIC_READINGS, evaluateOpenEndedAnswer } from '../src/data/scientificReadings';
-import { OFFICIAL_YDS_SECTIONS, YdsQuestionCategory } from '../src/types/yds';
+import { OFFICIAL_YDS_SECTIONS, YdsQuestionCategory, ALL_PRACTICE_CATEGORIES } from '../src/types/yds';
+import { COMPREHENSIVE_YDS_QUESTION_BANK } from '../src/data/ydsQuestionBank';
+import { auditQuestionBank } from '../src/services/questionDeduplicator';
+import {
+  GOLDEN_RULES_50,
+  QUESTION_TYPE_GUIDES,
+  EXAM_STRATEGIES,
+  YDS_EXAM_INFO,
+  YDT_EXAM_INFO,
+} from '../src/data/ydsEssentialsData';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -626,6 +635,36 @@ assert(officialYdsScore === 80.0, '64/80 questions evaluates to exactly 80.0 YDS
 
 const totalSeconds = 180 * 60;
 assert(totalSeconds === 10800, '180 minutes equals exactly 10,800 seconds');
+
+// 19. 500+ DEDUPLICATED QUESTION BANK & 15 CATEGORIES TESTS
+console.log('\n19. 500+ Deduplicated Question Bank & 15 Categories Tests:');
+assert(COMPREHENSIVE_YDS_QUESTION_BANK.length >= 500, `Question bank contains 500+ questions (found ${COMPREHENSIVE_YDS_QUESTION_BANK.length})`);
+assert(ALL_PRACTICE_CATEGORIES.length === 15, 'Officially defines 15 distinct practice question categories');
+
+const qAudit = auditQuestionBank(COMPREHENSIVE_YDS_QUESTION_BANK);
+assert(qAudit.passed === true, 'Question bank audit passed with zero integrity violations');
+assert(qAudit.duplicatePairs.length === 0, 'Zero duplicate question stems detected across bank');
+assert(qAudit.totalQuestions >= 580, `Audit verified ${qAudit.totalQuestions} questions with 5 options and whyCorrect`);
+
+ALL_PRACTICE_CATEGORIES.forEach((catConfig) => {
+  const countInBank = COMPREHENSIVE_YDS_QUESTION_BANK.filter(q => q.category === catConfig.category).length;
+  assert(countInBank >= catConfig.targetCount, `Category "${catConfig.category}" meets target count (${countInBank} >= ${catConfig.targetCount})`);
+});
+
+// 20. ENHANCED SCIENTIFIC READINGS (4-5 QUESTIONS & 8-15 VOCABULARY ITEMS) TESTS
+console.log('\n20. Enhanced Scientific Readings Tests:');
+assert(sampleReading.questions.length === 3, `Sample reading contains 3 YDS multiple-choice questions (found ${sampleReading.questions.length})`);
+assert(sampleReading.openEndedQuestions!.length === 2, `Sample reading contains 2 open-ended semantic questions (found ${sampleReading.openEndedQuestions!.length})`);
+assert(sampleReading.questions.length + sampleReading.openEndedQuestions!.length === 5, 'Sample reading provides exactly 5 comprehensive questions (3 MCQs + 2 OEQs)');
+assert(sampleReading.keyVocabulary.length >= 8, `Sample reading provides at least 8 key vocabulary items (found ${sampleReading.keyVocabulary.length})`);
+
+// 21. YDS/YDT ESSENTIALS & GOLDEN RULES TESTS
+console.log('\n21. YDS/YDT Essentials & Golden Rules Tests:');
+assert(GOLDEN_RULES_50.length >= 50, `YDS Essentials contains 50+ golden rules (found ${GOLDEN_RULES_50.length})`);
+assert(QUESTION_TYPE_GUIDES.length === 15, `YDS Essentials guides cover all 15 question types (found ${QUESTION_TYPE_GUIDES.length})`);
+assert(EXAM_STRATEGIES.length >= 3, 'YDS Essentials provides time, distractor and checklist strategies');
+assert(YDS_EXAM_INFO.questionCount === 80 && YDS_EXAM_INFO.durationMinutes === 180, 'YDS exam parameters match ÖSYM format (80 questions, 180 mins)');
+assert(YDT_EXAM_INFO.questionCount === 80 && YDT_EXAM_INFO.durationMinutes === 120, 'YDT exam parameters match ÖSYM format (80 questions, 120 mins)');
 
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);

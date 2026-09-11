@@ -70,8 +70,14 @@ export interface VocabularyItem {
   antonyms: string[];
   collocations: string[];
   visualMnemonic: string;
+  visualConcept?: string;
   visualPrompt?: string;
+  visualSearchQuery?: string;
+  visualStyle?: 'photo' | 'cartoon' | 'illustration' | 'visual-mnemonic' | 'scientific-photo';
   visualImage?: string;
+  imageUrl?: string;
+  imageSource?: string;
+  altText?: string;
   memoryTip?: { en: string; tr: string };
   pronunciation: string;
   difficulty: WordDifficulty;
