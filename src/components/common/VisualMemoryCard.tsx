@@ -15,7 +15,9 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
   compact = false,
   className = '',
 }) => {
-  const visual = getVisualMemory(vocab.word, vocab.partOfSpeech, vocab.meaningsTr);
+  const safeMeanings = vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings || [];
+  const safePos = vocab.partOfSpeech || 'noun';
+  const visual = getVisualMemory(vocab.word, safePos, safeMeanings);
   const memoryTip = vocab.memoryTip || visual.memoryTip;
 
   const handleSpeak = (e: React.MouseEvent, gender: 'female' | 'male') => {
@@ -40,11 +42,11 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
               {vocab.displayWord || vocab.word}
             </span>
             <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300">
-              {vocab.partOfSpeech.replace('_', ' ')}
+              {safePos.replace('_', ' ')}
             </span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-400 truncate">
-            {vocab.meaningsTr.join(', ')}
+            {safeMeanings.join(', ')}
           </p>
         </div>
       </div>
@@ -54,19 +56,26 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
   return (
     <div className={`bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-md flex flex-col ${className}`}>
       {/* Visual Header Illustration */}
-      <div className="relative w-full h-44 bg-slate-950/40 flex items-center justify-center p-4 border-b border-slate-100 dark:border-slate-800/80">
+      <div className="relative w-full h-48 bg-slate-950/40 flex items-center justify-center p-4 border-b border-slate-100 dark:border-slate-800/80">
         <div
-          className="w-36 h-36 drop-shadow-lg"
+          className="w-40 h-40 drop-shadow-lg"
           dangerouslySetInnerHTML={{ __html: visual.svgContent }}
         />
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5">
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
           <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white backdrop-blur border border-white/10 uppercase tracking-wide">
-            {vocab.partOfSpeech.replace('_', ' ')}
+            {safePos.replace('_', ' ')}
           </span>
-          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-500/80 text-white backdrop-blur">
-            {vocab.difficulty}
-          </span>
+          {vocab.difficulty && (
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-brand-500/80 text-white backdrop-blur">
+              {vocab.difficulty}
+            </span>
+          )}
+          {visual.emotion && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/90 text-slate-950 backdrop-blur">
+              {visual.emotion}
+            </span>
+          )}
           {vocab.verifiedYDSOccurrence && (
             <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/90 text-white backdrop-blur flex items-center gap-1">
               <CheckCircle className="w-3 h-3" /> YDS
@@ -111,7 +120,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
               {vocab.displayWord || vocab.word}
             </h3>
             <div className="flex flex-wrap gap-1.5 mt-1.5">
-              {vocab.meaningsTr.map((meaning, idx) => (
+              {safeMeanings.map((meaning, idx) => (
                 <span
                   key={idx}
                   className="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40"
@@ -120,6 +129,11 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
                 </span>
               ))}
             </div>
+            {visual.semanticScene && (
+              <p className="text-xs text-slate-500 dark:text-slate-400 italic mt-1.5">
+                🎬 {visual.semanticScene}
+              </p>
+            )}
           </div>
 
           {/* Bilingual Cognitive Memory Tip (Hafıza İpucu) */}

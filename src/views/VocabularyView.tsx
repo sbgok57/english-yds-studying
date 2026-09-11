@@ -24,6 +24,7 @@ import { VocabularyImportModal } from '../components/VocabularyImportModal';
 import { VisualMemoryCard } from '../components/common/VisualMemoryCard';
 import { AuditDashboardModal } from '../components/common/AuditDashboardModal';
 import { ModernFlashcard } from '../components/vocabulary/ModernFlashcard';
+import { CelebrationCharacter } from '../components/common/CelebrationCharacter';
 import {
   Search,
   Volume2,
@@ -171,20 +172,23 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
     return { dueCount, newCount, difficultCount, masteredCount, favoritesCount };
   }, [vocabulary, learningStates, now]);
 
+  const [showCelebration, setShowCelebration] = useState(false);
+
   // Filtered Vocabulary for Card Grid & Sub-modes
   const filteredVocabulary = useMemo(() => {
     return vocabulary
       .filter((item) => {
         const q = searchQuery.toLowerCase().trim();
+        const meanings = item.meaningsTr || item.turkishMeanings || item.meanings || [];
         const matchesSearch =
           !q ||
-          item.word.toLowerCase().includes(q) ||
-          item.meaningsTr.some((m) => m.toLowerCase().includes(q)) ||
-          item.synonyms?.some((s) => s.toLowerCase().includes(q)) ||
-          item.antonyms?.some((a) => a.toLowerCase().includes(q)) ||
-          item.collocations?.some((c) => c.toLowerCase().includes(q)) ||
-          item.partOfSpeech.toLowerCase().includes(q) ||
-          item.source.toLowerCase().includes(q);
+          item.word?.toLowerCase().includes(q) ||
+          meanings.some((m) => m?.toLowerCase().includes(q)) ||
+          item.synonyms?.some((s) => s?.toLowerCase().includes(q)) ||
+          item.antonyms?.some((a) => a?.toLowerCase().includes(q)) ||
+          item.collocations?.some((c) => c?.toLowerCase().includes(q)) ||
+          item.partOfSpeech?.toLowerCase().includes(q) ||
+          item.source?.toLowerCase().includes(q);
 
         const matchesLevel =
           selectedLevel === 'all' || (item.level && item.level.toString() === selectedLevel);
@@ -398,6 +402,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
 
     if (isCorrect) {
       setQuizScore((prev) => ({ ...prev, correct: prev.correct + 1 }));
+      setShowCelebration(true);
     } else {
       setQuizScore((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
       setMissedInQuiz((prev) => [...prev, currentQ.vocabularyId]);
@@ -1133,7 +1138,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                           </button>
                         </td>
                         <td className="p-3 text-slate-700 dark:text-slate-300">
-                          {item.meaningsTr.slice(0, 2).join(', ')}
+                          {(item.meaningsTr || item.turkishMeanings || item.meanings || []).slice(0, 2).join(', ')}
                         </td>
                         <td className="p-3">
                           {levelInfo && (
@@ -1400,7 +1405,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                   {/* Turkish Meaning */}
                   <div className="my-2">
                     <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                      {item.meaningsTr.join(', ')}
+                      {(item.meaningsTr || item.turkishMeanings || item.meanings || []).join(', ')}
                     </p>
                   </div>
 
@@ -1633,6 +1638,12 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
         onClose={() => setIsAuditDashboardOpen(false)}
         vocabulary={vocabulary}
         sources={sources}
+      />
+
+      {/* Correct Answer Celebration Character */}
+      <CelebrationCharacter
+        show={showCelebration}
+        onComplete={() => setShowCelebration(false)}
       />
     </div>
   );

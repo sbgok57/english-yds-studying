@@ -223,11 +223,17 @@ export interface VocabularyItem {
   visualConcept?: string;
   visualPrompt?: string;
   visualSearchQuery?: string;
-  visualStyle?: 'photo' | 'cartoon' | 'illustration' | 'visual-mnemonic' | 'scientific-photo';
+  visualStyle?: 'photo' | 'cartoon' | 'illustration' | 'visual-mnemonic' | 'scientific-photo' | 'expressive-colorful-caricature' | string;
   visualImage?: string;
   imageUrl?: string;
   imageSource?: string;
+  imageLicense?: string;
   altText?: string;
+  semanticScene?: string;
+  emotion?: string;
+  characterAction?: string;
+  meanings?: string[];
+  turkishMeanings?: string[];
   memoryTip?: { en: string; tr: string };
   pronunciation: string;
   difficulty: WordDifficulty;

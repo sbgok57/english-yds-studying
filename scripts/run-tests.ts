@@ -18,7 +18,8 @@ import {
 import { INITIAL_VOCABULARY } from '../src/data/vocabulary';
 import { UserProgress, VocabularyItem, LearningState, VocabularySource } from '../src/types';
 import { PdfVocabularyImporter } from '../src/services/pdf';
-import { getVisualMemory } from '../src/services/visualMemory';
+import { getVisualMemory, enrichVocabularyVisualMetadata } from '../src/services/visualMemory';
+import { classifyVocabularyRecord } from '../src/services/importer';
 import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
 import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator';
 import { SCIENTIFIC_READINGS, evaluateOpenEndedAnswer } from '../src/data/scientificReadings';
@@ -747,6 +748,48 @@ generatedQuiz.forEach((q, idx) => {
   assert(q.ydsTip.length > 5, `Question ${idx + 1} provides YDS strategy tip`);
 });
 
+// 23. EXPRESSIVE CARICATURE VISUAL MEMORY & ZERO-TEXT INTEGRITY TESTS
+console.log('\n23. Expressive Caricature Visual Memory & Zero-Text Integrity Tests:');
+const sampleWords = ['abandon', 'reluctant', 'fragile', 'scarce', 'abundant', 'mitigate', 'scrutinize', 'breakthrough'];
+sampleWords.forEach((word) => {
+  const vis = getVisualMemory(word, 'verb', ['örnek anlam']);
+  assert(vis.svgContent.startsWith('<svg'), `Visual for "${word}" produces valid SVG`);
+  assert(!vis.svgContent.includes('<text'), `Visual for "${word}" strictly contains zero <text> tags (no POS labels)`);
+  assert(vis.semanticScene.length > 10, `Visual for "${word}" provides rich semanticScene description`);
+  assert(vis.emotion.length > 2, `Visual for "${word}" provides expressive caricature emotion`);
+  assert(vis.characterAction.length > 5, `Visual for "${word}" specifies character action pose`);
+  assert(
+    !vis.visualSearchQuery.toLowerCase().includes('verb') &&
+    !vis.visualSearchQuery.toLowerCase().includes('noun') &&
+    !vis.visualSearchQuery.toLowerCase().includes('adjective'),
+    `visualSearchQuery for "${word}" has no POS bias (${vis.visualSearchQuery})`
+  );
+});
+
+// Test procedural caricature generation for general word
+const proceduralVis = getVisualMemory('comprehensive', 'adjective', ['kapsamlı', 'ayrıntılı']);
+assert(proceduralVis.svgContent.startsWith('<svg'), 'Procedural visual produces valid SVG');
+assert(!proceduralVis.svgContent.includes('<text'), 'Procedural visual contains zero <text> tags');
+assert(proceduralVis.characterAction.length > 5, 'Procedural visual generates character action');
+
+// Test metadata enrichment
+const sampleItem = INITIAL_VOCABULARY[0];
+const enriched = enrichVocabularyVisualMetadata(sampleItem);
+assert(enriched.visualStyle === 'expressive-colorful-caricature', 'Enriched item has expressive-colorful-caricature style');
+assert(
+  Boolean(enriched.imageLicense && (enriched.imageLicense.includes('CC0') || enriched.imageLicense.includes('Public Domain'))),
+  'Enriched item has safe permissive license'
+);
+
+// Test quarantine classification
+const corruptedItem: Partial<VocabularyItem> = { word: '' };
+const classification = classifyVocabularyRecord(corruptedItem);
+assert(classification.status === 'corrupted', 'Empty word is quarantined as corrupted');
+const needsReviewItem: Partial<VocabularyItem> = { word: 'testword', meaningsTr: [] };
+const nrClassification = classifyVocabularyRecord(needsReviewItem);
+assert(nrClassification.status === 'needs-review', 'Missing meanings is quarantined as needs-review');
+
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);
 console.log('Zero failures detected in domain algorithms.\n');
+

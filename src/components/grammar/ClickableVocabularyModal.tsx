@@ -79,7 +79,7 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
               Türkçe Anlamı
             </span>
             <p className="font-semibold text-slate-900 dark:text-slate-100">
-              {item.meaningsTr.join(', ')}
+              {(item.meaningsTr || item.turkishMeanings || item.meanings || []).join(', ')}
             </p>
           </div>
 

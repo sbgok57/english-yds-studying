@@ -664,7 +664,7 @@ carry out : yerine getirmek"
                               {pdfItems.slice(0, 10).map((item, idx) => (
                                 <tr key={idx}>
                                   <td className="p-2 font-bold">{item.word}</td>
-                                  <td className="p-2">{item.meaningsTr.join(', ')}</td>
+                                  <td className="p-2">{(item.meaningsTr || item.turkishMeanings || item.meanings || []).join(', ')}</td>
                                   <td className="p-2 uppercase font-mono text-[9px]">
                                     {item.partOfSpeech}
                                   </td>

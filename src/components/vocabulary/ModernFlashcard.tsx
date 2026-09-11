@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   VocabularyItem,
   LearningState,
@@ -7,6 +7,8 @@ import {
   WORD_LEARNING_STATUS_CONFIG,
 } from '../../types';
 import { speechService } from '../../services/speech';
+import { getVisualMemory } from '../../services/visualMemory';
+import { CelebrationCharacter } from '../common/CelebrationCharacter';
 import {
   Volume2,
   Star,
@@ -52,7 +54,22 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [swipeHint, setSwipeHint] = useState<'know' | 'forgot' | 'unsure' | null>(null);
+  const [showCelebration, setShowCelebration] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const safeMeanings = vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings || [];
+  const safePos = vocab.partOfSpeech || 'noun';
+  const visual = getVisualMemory(vocab.word, safePos, safeMeanings);
+
+  const handleResponseAction = useCallback(
+    (type: 'know' | 'unsure' | 'forgot') => {
+      if (type === 'know') {
+        setShowCelebration(true);
+      }
+      onResponse(type);
+    },
+    [onResponse]
+  );
 
   // Pronunciation handler
   const handlePronounce = (e?: React.MouseEvent) => {
@@ -79,19 +96,19 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
         onFlip();
       } else if (e.key === '1') {
         e.preventDefault();
-        onResponse('forgot');
+        handleResponseAction('forgot');
       } else if (e.key === '2') {
         e.preventDefault();
-        onResponse('unsure');
+        handleResponseAction('unsure');
       } else if (e.key === '3') {
         e.preventDefault();
-        onResponse('know');
+        handleResponseAction('know');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [enableShortcuts, onFlip, onResponse]);
+  }, [enableShortcuts, onFlip, handleResponseAction]);
 
   // Touch Swipe Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -123,11 +140,11 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
     if (!enableSwipe || !touchStart) return;
 
     if (swipeHint === 'know') {
-      onResponse('know');
+      handleResponseAction('know');
     } else if (swipeHint === 'forgot') {
-      onResponse('forgot');
+      handleResponseAction('forgot');
     } else if (swipeHint === 'unsure') {
-      onResponse('unsure');
+      handleResponseAction('unsure');
     }
 
     setTouchStart(null);
@@ -303,32 +320,49 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
               !isFlipped ? 'pointer-events-none' : ''
             } border-brand-500/40 dark:border-brand-500/30 shadow-xl flex flex-col justify-between overflow-y-auto space-y-4`}
           >
-            {/* Top Bar: Word, Turkish Meaning & Audio */}
-            <div className="flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                    {vocab.word}
-                  </h3>
-                  <button
-                    type="button"
-                    onClick={handlePronounce}
-                    className="p-1 rounded-full text-slate-400 hover:text-brand-600 transition-colors"
-                  >
-                    <Volume2 className="w-4 h-4" />
-                  </button>
+            {/* Top Bar: Word, Turkish Meaning, Audio & Caricature Visual */}
+            <div className="flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 shadow-sm"
+                  dangerouslySetInnerHTML={{ __html: visual.svgContent }}
+                  title={visual.semanticScene}
+                />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white">
+                      {vocab.word}
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={handlePronounce}
+                      className="p-1 rounded-full text-slate-400 hover:text-brand-600 transition-colors"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <p className="text-base font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">
+                    {safeMeanings.join(', ')}
+                  </p>
+                  {visual.semanticScene && (
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 italic mt-0.5 max-w-xs truncate">
+                      🎬 {visual.semanticScene}
+                    </p>
+                  )}
                 </div>
-                <p className="text-base font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">
-                  {vocab.meaningsTr.join(', ')}
-                </p>
               </div>
 
-              <div className="text-right">
+              <div className="text-right shrink-0">
                 <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold">
-                  {vocab.partOfSpeech}
+                  {safePos}
                 </span>
+                {visual.emotion && (
+                  <span className="block text-[10px] font-bold text-amber-500 mt-1">
+                    {visual.emotion}
+                  </span>
+                )}
                 {levelInfo && (
-                  <span className="block text-[10px] text-slate-400 font-bold mt-1">
+                  <span className="block text-[10px] text-slate-400 font-bold mt-0.5">
                     {levelInfo.badge}
                   </span>
                 )}
@@ -459,7 +493,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                onResponse('forgot');
+                handleResponseAction('forgot');
               }}
               className="py-3 px-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/60 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 font-black text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 min-h-[48px]"
             >
@@ -473,7 +507,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                onResponse('unsure');
+                handleResponseAction('unsure');
               }}
               className="py-3 px-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/60 border border-amber-200 dark:border-amber-900 text-amber-700 dark:text-amber-300 font-black text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 min-h-[48px]"
             >
@@ -487,7 +521,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                onResponse('know');
+                handleResponseAction('know');
               }}
               className="py-3 px-3 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-900 text-emerald-700 dark:text-emerald-300 font-black text-xs sm:text-sm flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all shadow-sm active:scale-95 min-h-[48px]"
             >
@@ -511,6 +545,12 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
           </div>
         </div>
       )}
+
+      {/* Correct Answer Joyful Celebration Animation */}
+      <CelebrationCharacter
+        show={showCelebration}
+        onComplete={() => setShowCelebration(false)}
+      />
     </div>
   );
 };

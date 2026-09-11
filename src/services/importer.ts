@@ -48,10 +48,12 @@ export function mergeVocabularyRecords(
   incoming: Partial<VocabularyItem>,
   sourceRef?: SourceReference
 ): VocabularyItem {
-  // 1. Merge Turkish meanings preserving unique alternatives
+  // 1. Merge Turkish meanings preserving unique alternatives from meaningsTr, turkishMeanings, or meanings
+  const incomingMeanings = incoming.meaningsTr || incoming.turkishMeanings || incoming.meanings || [];
+  const existingMeanings = existing.meaningsTr || existing.turkishMeanings || existing.meanings || [];
   const mergedMeanings = normalizeMeaningsList([
-    ...(existing.meaningsTr || []),
-    ...(incoming.meaningsTr || []),
+    ...existingMeanings,
+    ...incomingMeanings,
   ]);
 
   // 2. Merge synonyms without duplication
@@ -124,7 +126,7 @@ export function mergeVocabularyRecords(
       ? existing.pronunciation
       : incoming.pronunciation || existing.pronunciation || `/${existing.word.toLowerCase()}/`;
 
-  // 8. Visual Mnemonic
+  // 8. Visual Mnemonic & Visual Metadata
   const visualMnemonic =
     existing.visualMnemonic ||
     incoming.visualMnemonic ||
@@ -144,7 +146,7 @@ export function mergeVocabularyRecords(
 
   return {
     ...existing,
-    meaningsTr: mergedMeanings.length > 0 ? mergedMeanings : existing.meaningsTr,
+    meaningsTr: mergedMeanings.length > 0 ? mergedMeanings : (existing.meaningsTr || []),
     synonyms: mergedSynonyms,
     antonyms: mergedAntonyms,
     collocations: mergedCollocations,
@@ -152,12 +154,62 @@ export function mergeVocabularyRecords(
     exampleTr,
     pronunciation,
     visualMnemonic,
-    partOfSpeech: incoming.partOfSpeech || existing.partOfSpeech,
-    difficulty: incoming.difficulty || existing.difficulty,
+    partOfSpeech: incoming.partOfSpeech || existing.partOfSpeech || 'noun',
+    difficulty: incoming.difficulty || existing.difficulty || 'B2',
     sourceRefs: mergedRefs,
     missingFields: missingFields.length > 0 ? missingFields : undefined,
     requiresManualReview,
+    // Visual caricature metadata preservation
+    visualConcept: incoming.visualConcept || existing.visualConcept,
+    visualPrompt: incoming.visualPrompt || existing.visualPrompt,
+    visualSearchQuery: incoming.visualSearchQuery || existing.visualSearchQuery,
+    visualStyle: incoming.visualStyle || existing.visualStyle,
+    imageUrl: incoming.imageUrl || existing.imageUrl,
+    imageSource: incoming.imageSource || existing.imageSource,
+    imageLicense: incoming.imageLicense || existing.imageLicense,
+    altText: incoming.altText || existing.altText,
+    semanticScene: incoming.semanticScene || existing.semanticScene,
+    emotion: incoming.emotion || existing.emotion,
+    characterAction: incoming.characterAction || existing.characterAction,
   };
+}
+
+export type RecordClassification = 'valid' | 'needs-review' | 'corrupted' | 'duplicate';
+
+export interface RecordClassificationResult {
+  status: RecordClassification;
+  reasons: string[];
+}
+
+/**
+ * Classifies an incoming or existing vocabulary record into valid, needs-review, or corrupted.
+ * Quarantines broken records without deleting user data.
+ */
+export function classifyVocabularyRecord(item: Partial<VocabularyItem>): RecordClassificationResult {
+  const reasons: string[] = [];
+
+  if (!item.word || typeof item.word !== 'string' || item.word.trim().length === 0) {
+    return { status: 'corrupted', reasons: ['Kelime dizesi eksik veya tanımsız'] };
+  }
+
+  const meanings = item.meaningsTr || item.turkishMeanings || item.meanings;
+  if (!meanings || !Array.isArray(meanings) || meanings.length === 0 || meanings.every((m) => !m || !m.trim())) {
+    reasons.push('Türkçe anlam eksik');
+  }
+
+  if (!item.partOfSpeech) {
+    reasons.push('Sözcük türü (POS) eksik');
+  }
+
+  if (!item.example || item.example.trim().length === 0) {
+    reasons.push('Örnek cümle eksik');
+  }
+
+  if (reasons.length > 0) {
+    return { status: 'needs-review', reasons };
+  }
+
+  return { status: 'valid', reasons: [] };
 }
 
 /**

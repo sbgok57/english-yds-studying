@@ -262,7 +262,7 @@ export const CsvModal: React.FC<CsvModalProps> = ({
                           <td className="p-2.5 font-bold text-slate-900 dark:text-slate-100">
                             {row.word}
                           </td>
-                          <td className="p-2.5">{row.meaningsTr.join(', ')}</td>
+                          <td className="p-2.5">{(row.meaningsTr || []).join(', ')}</td>
                           <td className="p-2.5 uppercase font-mono text-[10px]">
                             {row.partOfSpeech}
                           </td>
