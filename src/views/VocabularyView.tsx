@@ -7,6 +7,8 @@ import { dbService } from '../services/db';
 import { createInitialLearningState } from '../services/spacedRepetition';
 import { calculateSourceCompleteness } from '../services/importer';
 import { VocabularyImportModal } from '../components/VocabularyImportModal';
+import { VisualMemoryCard } from '../components/common/VisualMemoryCard';
+import { getVisualMemory } from '../services/visualMemory';
 import {
   Search,
   Volume2,
@@ -14,11 +16,12 @@ import {
   Upload,
   BookmarkPlus,
   Check,
-  Lightbulb,
   ShieldCheck,
   ChevronDown,
   ChevronUp,
   Database,
+  X,
+  Sparkles,
 } from 'lucide-react';
 
 interface VocabularyViewProps {
@@ -41,6 +44,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [isAuditOpen, setIsAuditOpen] = useState(false);
+  const [selectedItemForDetail, setSelectedItemForDetail] = useState<VocabularyItem | null>(null);
   const [sources, setSources] = useState<VocabularySource[]>([]);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
 
@@ -447,40 +451,61 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                   )}
                 </div>
 
-                {/* Visual Mnemonic */}
+                {/* Visual Mnemonic & Concept Badge */}
                 {item.visualMnemonic && (
-                  <div className="mt-3 p-2.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/50 dark:border-amber-900/50 flex items-start gap-2 text-[11px] text-amber-900 dark:text-amber-200">
-                    <Lightbulb className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
-                    <p>{item.visualMnemonic}</p>
+                  <div
+                    onClick={() => setSelectedItemForDetail(item)}
+                    className="mt-3 p-2.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/50 dark:border-amber-900/50 flex items-start gap-2.5 text-[11px] text-amber-900 dark:text-amber-200 cursor-pointer hover:bg-amber-100/80 transition-colors"
+                  >
+                    <div
+                      className="w-8 h-8 rounded-lg shrink-0 overflow-hidden bg-slate-900/10 dark:bg-slate-800"
+                      dangerouslySetInnerHTML={{ __html: getVisualMemory(item.word, item.partOfSpeech, item.meaningsTr).svgContent }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1 font-bold text-[10px] text-amber-800 dark:text-amber-300">
+                        <Sparkles className="w-3 h-3 text-amber-500" />
+                        <span>Görsel Hafıza & İpucu (Tıkla ve İncele)</span>
+                      </div>
+                      <p className="line-clamp-2 mt-0.5">{item.visualMnemonic}</p>
+                    </div>
                   </div>
                 )}
               </div>
 
               {/* Card Footer Actions & Provenance */}
               <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-[10px] font-semibold text-slate-400 uppercase truncate max-w-[160px]" title={item.source}>
+                <span className="text-[10px] font-semibold text-slate-400 uppercase truncate max-w-[120px]" title={item.source}>
                   {item.source}
                 </span>
 
-                <button
-                  onClick={(e) => handleAddToReview(item, e)}
-                  disabled={isAdded}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                    isAdded
-                      ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 cursor-default'
-                      : 'bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 hover:bg-brand-100'
-                  }`}
-                >
-                  {isAdded ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" /> Listemde
-                    </>
-                  ) : (
-                    <>
-                      <BookmarkPlus className="w-3.5 h-3.5" /> Tekrara Ekle
-                    </>
-                  )}
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={() => setSelectedItemForDetail(item)}
+                    className="px-2 py-1 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 transition-colors"
+                    title="Görsel Hafıza Kartını Aç"
+                  >
+                    Detay
+                  </button>
+                  <button
+                    onClick={(e) => handleAddToReview(item, e)}
+                    disabled={isAdded}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                      isAdded
+                        ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 cursor-default'
+                        : 'bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 hover:bg-brand-100'
+                    }`}
+                  >
+                    {isAdded ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" /> Listemde
+                      </>
+                    ) : (
+                      <>
+                        <BookmarkPlus className="w-3.5 h-3.5" /> Tekrara Ekle
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           );
@@ -495,6 +520,22 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
           <p className="text-xs text-slate-400 mt-1">
             Filtreleri sıfırlayarak tüm kelime veritabanını görüntüleyebilirsiniz.
           </p>
+        </div>
+      )}
+
+      {/* Visual Memory Detail Modal */}
+      {selectedItemForDetail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fadeIn">
+          <div className="relative w-full max-w-lg">
+            <button
+              onClick={() => setSelectedItemForDetail(null)}
+              aria-label="Kapat"
+              className="absolute -top-3 -right-3 z-10 p-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <VisualMemoryCard vocab={selectedItemForDetail} />
+          </div>
         </div>
       )}
 

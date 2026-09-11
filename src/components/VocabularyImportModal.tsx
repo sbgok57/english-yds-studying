@@ -70,6 +70,7 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfItems, setPdfItems] = useState<VocabularyItem[]>([]);
   const [pdfPages, setPdfPages] = useState<number>(0);
+  const [pdfProgress, setPdfProgress] = useState<{ currentPage: number; totalPages: number; itemsFound: number } | null>(null);
 
   // Tab 3: CSV States
   const [csvFile, setCsvFile] = useState<File | null>(null);
@@ -104,6 +105,17 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
         status: 'success',
         message: `Başarılı! ${result.discoveredSets.length} adet halka açık set tespit edildi.`,
       });
+    }
+  };
+
+  const handleCleanCorruptedPdfRecords = async () => {
+    const { cleanItems, removedCount } = PdfVocabularyImporter.cleanCorruptedPdfItems(existingVocabulary);
+    if (removedCount > 0) {
+      await dbService.saveVocabularyBatch(cleanItems);
+      alert(`Temizlendi: ${removedCount} adet hatalı PDF kaydı kaldırıldı. Mevcut öğrenme geçmişiniz ve geçerli kelimeleriniz korundu.`);
+      onImportComplete();
+    } else {
+      alert('Tebrikler: Veritabanında hatalı veya bozuk PDF kaydı bulunamadı. Verileriniz tamamen geçerli.');
     }
   };
 
@@ -179,7 +191,10 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
     setIsProcessing(true);
 
     try {
-      const result = await PdfVocabularyImporter.processPdfFile(file);
+      setPdfProgress({ currentPage: 0, totalPages: 1, itemsFound: 0 });
+      const result = await PdfVocabularyImporter.processPdfFile(file, (prog) => {
+        setPdfProgress(prog);
+      });
       setPdfItems(result.items);
       setPdfPages(result.totalPages);
     } catch (err) {
@@ -187,6 +202,7 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
       alert('PDF dosyası okunurken hata oluştu.');
     } finally {
       setIsProcessing(false);
+      setPdfProgress(null);
     }
   };
 
@@ -592,6 +608,37 @@ carry out : yerine getirmek"
                     </label>
                   </div>
 
+                  {/* Live scanning progress indicator */}
+                  {isProcessing && pdfProgress && (
+                    <div className="p-4 rounded-xl bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-800 space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-brand-700 dark:text-brand-300">
+                        <span>PDF Sayfa Taranıyor...</span>
+                        <span>Sayfa {pdfProgress.currentPage} / {pdfProgress.totalPages}</span>
+                      </div>
+                      <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-brand-600 transition-all duration-200"
+                          style={{
+                            width: `${Math.round((pdfProgress.currentPage / (pdfProgress.totalPages || 1)) * 100)}%`,
+                          }}
+                        />
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Şu ana kadar bulunan kelime &amp; phrasal verb: <strong>{pdfProgress.itemsFound}</strong>
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Rule 42 Friendly Notice */}
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-[11px] text-slate-600 dark:text-slate-400 space-y-1">
+                    <p className="font-semibold text-slate-800 dark:text-slate-200">
+                      📌 Yerel macOS PDF Dosyaları Notu:
+                    </p>
+                    <p>
+                      "YDS Grammar En Çok Sorulan Öbek Fiiller.pdf" veya "YDS Phrasal Verbs.pdf" dosyalarınız bilgisayarınızdaysa, yukarıdaki butona tıklayarak doğrudan seçip içe aktarabilirsiniz. Sayfa sayfa taranarak phrasal verbler ("carry out", "put off") ve Türkçe karşılıkları eksiksiz ayrıştırılır.
+                    </p>
+                  </div>
+
                   {pdfFile && (
                     <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
                       <div className="flex items-center justify-between">
@@ -629,6 +676,25 @@ carry out : yerine getirmek"
                       )}
                     </div>
                   )}
+
+                  {/* Clean Corrupted PDF records */}
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold text-slate-700 dark:text-slate-300 block text-[11px]">
+                        Veri Tabanı Bütünlüğü &amp; Temizlik:
+                      </span>
+                      <span className="text-[10px] text-slate-400">
+                        Önceki bozuk/yarım PDF kayıtlarını güvenle temizler; gerçek öğrenme geçmişinize dokunmaz.
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleCleanCorruptedPdfRecords}
+                      className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition-colors"
+                    >
+                      Hatalı PDF Kayıtlarını Temizle
+                    </button>
+                  </div>
                 </div>
               )}
 

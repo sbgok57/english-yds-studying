@@ -12,7 +12,9 @@
     "validate:content": "./node_modules/.bin/tsx scripts/validate-content.ts",
     "validate:vocabulary": "./node_modules/.bin/tsx scripts/validate-vocabulary-content.ts",
     "validate:grammar": "./node_modules/.bin/tsx scripts/validate-grammar-content.ts",
-    "validate": "npm run validate:vocabulary && npm run validate:content && npm run validate:grammar",
+    "validate:yds": "./node_modules/.bin/tsx scripts/validate-yds-content.ts",
+    "clean:pdf": "./node_modules/.bin/tsx scripts/clean-corrupted-pdf-imports.ts",
+    "validate": "npm run validate:vocabulary && npm run validate:content && npm run validate:grammar && npm run validate:yds",
     "test": "./node_modules/.bin/tsx scripts/run-tests.ts"
   },
   "dependencies": {

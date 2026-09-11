@@ -124,7 +124,7 @@ export class PdfVocabularyImporter {
 
     for (const rawLine of lines) {
       const line = rawLine.trim();
-      if (!line || line.length < 3 || line.startsWith('---') || line.startsWith('Page')) continue;
+      if (!line || line.length < 3 || line.startsWith('---') || line.startsWith('Page') || /^\d+$/.test(line)) continue;
 
       let term = '';
       let meaning = '';
@@ -159,7 +159,7 @@ export class PdfVocabularyImporter {
       // If word contains numbers at start like "1. carry out" or "12) put off"
       term = term.replace(/^\d+[.)\-\s]+/, '').trim();
 
-      if (!term || term.length > 50) continue;
+      if (!term || term.length > 50 || /^\d+$/.test(term)) continue;
 
       const normWord = normalizeVocabularyKey(term);
       const isPhrasal = this.isPhrasalVerb(term) || term.includes(' ');
@@ -188,6 +188,8 @@ export class PdfVocabularyImporter {
       items.push({
         id: `pdf-${Date.now()}-${items.length + 1}-${Math.random().toString(36).substring(2, 6)}`,
         word: term,
+        displayWord: term,
+        sourceText: line,
         meaningsTr: normalizedMeanings.length > 0 ? normalizedMeanings : ['[Türkçe anlam PDF metninde bulunamadı]'],
         partOfSpeech,
         example: `The phrasal verb "${term}" is frequently tested in academic reading and grammar questions.`,
@@ -204,7 +206,9 @@ export class PdfVocabularyImporter {
             sourceId,
             sourceType: 'pdf',
             fileName,
+            sourceName: fileName,
             sourcePage: pageNumber,
+            sourceText: line,
             importedAt: timestamp,
           },
         ],
@@ -217,15 +221,19 @@ export class PdfVocabularyImporter {
   }
 
   /**
-   * Main entry point to process a PDF file.
+   * Main entry point to process a PDF file with page-by-page progress reporting.
    */
-  public static async processPdfFile(file: File): Promise<PdfExtractionResult> {
+  public static async processPdfFile(
+    file: File,
+    onProgress?: (progress: { currentPage: number; totalPages: number; itemsFound: number }) => void
+  ): Promise<PdfExtractionResult> {
     const { pagesText } = await this.extractTextFromPdf(file);
     const allItems: VocabularyItem[] = [];
     let totalIncomplete = 0;
     let totalManualReview = 0;
 
-    pagesText.forEach((pageContent, pageIndex) => {
+    for (let pageIndex = 0; pageIndex < pagesText.length; pageIndex++) {
+      const pageContent = pagesText[pageIndex];
       const lines = pageContent.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
       const { items, incompleteCount, manualReviewCount } = this.parseLines(
         lines,
@@ -235,7 +243,15 @@ export class PdfVocabularyImporter {
       allItems.push(...items);
       totalIncomplete += incompleteCount;
       totalManualReview += manualReviewCount;
-    });
+
+      if (onProgress) {
+        onProgress({
+          currentPage: pageIndex + 1,
+          totalPages: pagesText.length,
+          itemsFound: allItems.length,
+        });
+      }
+    }
 
     const sourceId = `pdf-${file.name.replace(/[^a-zA-Z0-9_-]/g, '_')}-${Date.now()}`;
 
@@ -261,6 +277,47 @@ export class PdfVocabularyImporter {
       totalPages: pagesText.length,
       incompleteCount: totalIncomplete,
       manualReviewCount: totalManualReview,
+    };
+  }
+
+  /**
+   * Inspects a list of vocabulary items and cleans any corrupted / malformed PDF records
+   * (e.g. noise strings like "page 12", single-letter fragments, or malformed OCR lines)
+   * while STRICTLY PRESERVING valid words and non-PDF sources.
+   */
+  public static cleanCorruptedPdfItems(items: VocabularyItem[]): {
+    cleanItems: VocabularyItem[];
+    removedCount: number;
+    removedWords: string[];
+  } {
+    const removedWords: string[] = [];
+    const cleanItems = items.filter((item) => {
+      // Non-PDF items are ALWAYS preserved
+      const isPdfSource = item.sourceRefs?.some((s) => s.sourceType === 'pdf') || item.source.startsWith('PDF:');
+      if (!isPdfSource) return true;
+
+      // Check for corrupted / invalid words:
+      const word = item.word.trim();
+      const isCorrupted =
+        word.length < 2 ||
+        /^(page|sayfa)\b/i.test(word) ||
+        /^\d+$/.test(word) ||
+        /^\W+$/.test(word) ||
+        /^--+/.test(word) ||
+        word.length > 80;
+
+      if (isCorrupted) {
+        removedWords.push(item.word);
+        return false;
+      }
+
+      return true;
+    });
+
+    return {
+      cleanItems,
+      removedCount: removedWords.length,
+      removedWords,
     };
   }
 }

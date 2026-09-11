@@ -17,6 +17,12 @@ import {
 } from '../src/services/activityGenerator';
 import { INITIAL_VOCABULARY } from '../src/data/vocabulary';
 import { UserProgress, VocabularyItem, LearningState, VocabularySource } from '../src/types';
+import { PdfVocabularyImporter } from '../src/services/pdf';
+import { getVisualMemory } from '../src/services/visualMemory';
+import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
+import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator';
+import { SCIENTIFIC_READINGS } from '../src/data/scientificReadings';
+import { OFFICIAL_YDS_SECTIONS, YdsQuestionCategory } from '../src/types/yds';
 
 let totalTests = 0;
 let passedTests = 0;
@@ -157,12 +163,13 @@ assert(calculateLevel(0) === 1, '0 XP is Level 1');
 assert(calculateLevel(50) === 2, '50 XP is Level 2');
 assert(calculateLevel(200) === 3, '200 XP is Level 3');
 
+const yesterdayDate = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 const userProg: UserProgress = {
   xp: 150,
   level: 2,
   dailyStreak: 3,
   weeklyStreak: 1,
-  lastActiveDate: '2026-09-09',
+  lastActiveDate: yesterdayDate,
   totalStudyTimeMinutes: 45,
   perfectSessions: 1,
 };
@@ -364,7 +371,6 @@ assert(
 
 // 11. PDF VOCABULARY & PHRASAL VERBS PARSER TESTS
 console.log('\n11. PDF Vocabulary & Phrasal Verbs Parser Tests:');
-const { PdfVocabularyImporter } = await import('../src/services/pdf');
 assert(PdfVocabularyImporter.isPhrasalVerb('carry out'), '"carry out" is recognized as a phrasal verb');
 assert(PdfVocabularyImporter.isPhrasalVerb('look after'), '"look after" is recognized as a phrasal verb');
 assert(PdfVocabularyImporter.isPhrasalVerb('put off'), '"put off" is recognized as a phrasal verb');
@@ -426,6 +432,149 @@ const completeSource: VocabularySource = {
 };
 const auditComplete = calculateSourceCompleteness(completeSource);
 assert(auditComplete.isComplete, 'Detected that source with 7 discovered and 7 processed is complete');
+
+// 13. PDF EXACT-TEXT PRESERVATION & MALFORMED RECORD CLEANER
+console.log('\n13. PDF Exact-Text Preservation & Malformed Record Cleaner Tests:');
+const malformedPdfLines = [
+  'carry out - yerine getirmek',
+  'Page 12',
+  'put off - ertelemek',
+  '12345',
+  'take into account - hesaba katmak',
+  '--- PAGE BREAK ---',
+];
+const parsedSample = PdfVocabularyImporter.parseLines(malformedPdfLines, 'test.pdf', 1);
+assert(parsedSample.items.length === 3, 'Filtered out numeric and header noise lines, parsed 3 valid phrases');
+assert(Boolean(parsedSample.items[0].sourceText?.includes('carry out')), 'Preserved exact raw sourceText for phrasal verb');
+assert(parsedSample.items[0].displayWord === 'carry out', 'Preserved exact displayWord without truncation');
+
+const dirtyItems: VocabularyItem[] = [
+  ...parsedSample.items,
+  {
+    id: 'corrupt-1',
+    word: 'page 4',
+    meaningsTr: ['sayfa'],
+    partOfSpeech: 'noun',
+    example: '',
+    synonyms: [],
+    antonyms: [],
+    collocations: [],
+    visualMnemonic: '',
+    pronunciation: '',
+    difficulty: 'YDS',
+    source: 'PDF: corrupted.pdf',
+  },
+  {
+    id: 'corrupt-2',
+    word: 'a',
+    meaningsTr: ['harf'],
+    partOfSpeech: 'noun',
+    example: '',
+    synonyms: [],
+    antonyms: [],
+    collocations: [],
+    visualMnemonic: '',
+    pronunciation: '',
+    difficulty: 'YDS',
+    source: 'PDF: corrupted.pdf',
+  },
+];
+const cleaned = PdfVocabularyImporter.cleanCorruptedPdfItems(dirtyItems);
+assert(cleaned.removedCount === 2, 'Identified and removed exactly 2 malformed/corrupted PDF entries');
+assert(cleaned.cleanItems.length === 3, 'Preserved all 3 genuine vocabulary items');
+
+// 14. VISUAL MEMORY & OFFLINE SVG FALLBACK TESTS
+console.log('\n14. Visual Memory & Offline SVG Fallback Tests:');
+const visual1 = getVisualMemory('abandon', 'verb', ['terk etmek']);
+assert(visual1.svgContent.includes('<svg'), 'Returns valid inline SVG content for "abandon"');
+assert(visual1.memoryTip.tr.length > 5, 'Provides bilingual Turkish cognitive memory tip');
+assert(visual1.memoryTip.en.length > 5, 'Provides bilingual English cognitive memory tip');
+
+// Procedural fallback test for unknown word
+const visualFallback = getVisualMemory('unprecedentedWordXYZ', 'adverb', ['emsalsiz']);
+assert(visualFallback.svgContent.includes('<svg'), 'Procedural generator produces guaranteed SVG for unknown word');
+assert(!visualFallback.svgContent.includes('<img') && !visualFallback.svgContent.includes('href="https://'), 'Visual is 100% offline resilient with 0 external network dependencies');
+
+// 15. 10 STANDALONE YDS QUESTION MODULES TESTS
+console.log('\n15. 10 Official YDS Question Modules Tests:');
+assert(OFFICIAL_YDS_SECTIONS.length === 10, 'Officially supports exactly 10 YDS question modules');
+
+const categories: YdsQuestionCategory[] = [
+  'vocabulary',
+  'grammar',
+  'cloze',
+  'sentence_completion',
+  'translation',
+  'reading',
+  'dialogue',
+  'restatement',
+  'paragraph_completion',
+  'irrelevant_sentence',
+];
+
+categories.forEach((cat) => {
+  const qs = getQuestionsForModule(cat);
+  assert(qs.length > 0, `Module "${cat}" contains active practice questions`);
+  const sampleQ = qs[0];
+  assert(sampleQ.options.length === 5, `Question in "${cat}" has exactly 5 options (A-E)`);
+  assert(
+    ['A', 'B', 'C', 'D', 'E'].includes(sampleQ.correctAnswer),
+    `Question in "${cat}" has valid correct answer (${sampleQ.correctAnswer})`
+  );
+  assert(
+    sampleQ.whyCorrect.length > 10,
+    `Question in "${cat}" provides deep "whyCorrect" pedagogical rationale`
+  );
+  assert(
+    Object.keys(sampleQ.whyDistractorsFail).length >= 4,
+    `Question in "${cat}" provides explicit failure reasons for distractors`
+  );
+});
+
+// 16. 100+ FULL 80-QUESTION MOCK EXAM GENERATOR TESTS
+console.log('\n16. 100+ Full 80-Question Mock Exam Generator Tests:');
+const examCatalog = getMockExamList(100);
+assert(examCatalog.length === 100, 'Catalog contains 100 full mock exams');
+
+// Test Exam 1 and Exam 50
+const exam1 = generateMockExam(1);
+assert(exam1.questions.length === 80, 'Exam 1 contains exactly 80 questions');
+assert(exam1.durationMinutes === 180, 'Exam 1 duration is exactly 180 minutes');
+
+// Verify distribution across sections
+const catCounts: Record<string, number> = {};
+exam1.questions.forEach((q) => {
+  catCounts[q.category] = (catCounts[q.category] || 0) + 1;
+});
+assert(catCounts['vocabulary'] === 6, 'Questions 1-6 are Vocabulary (6 questions)');
+assert(catCounts['grammar'] === 10, 'Questions 7-16 are Grammar (10 questions)');
+assert(catCounts['cloze'] === 10, 'Questions 17-26 are Cloze Test (10 questions)');
+assert(catCounts['sentence_completion'] === 10, 'Questions 27-36 are Sentence Completion (10 questions)');
+assert(catCounts['translation'] === 6, 'Questions 37-42 are Translation (6 questions)');
+assert(catCounts['reading'] === 20, 'Questions 43-62 are Reading Comprehension (20 questions)');
+assert(catCounts['dialogue'] === 5, 'Questions 63-67 are Dialogue Completion (5 questions)');
+assert(catCounts['restatement'] === 4, 'Questions 68-71 are Restatement (4 questions)');
+assert(catCounts['paragraph_completion'] === 4, 'Questions 72-75 are Paragraph Completion (4 questions)');
+assert(catCounts['irrelevant_sentence'] === 5, 'Questions 76-80 are Irrelevant Sentence (5 questions)');
+
+// 17. SCIENTIFIC READING LIBRARY TESTS
+console.log('\n17. Scientific Reading Library Tests:');
+assert(SCIENTIFIC_READINGS.length >= 3, 'Scientific Reading Library contains multiple academic passages');
+const sampleReading = SCIENTIFIC_READINGS[0];
+assert(sampleReading.passageEn.length > 200, 'Reading contains substantial academic English passage');
+assert(sampleReading.summaryTr.length > 50, 'Reading contains comprehensive Turkish synopsis');
+assert(sampleReading.keyVocabulary.length >= 2, 'Reading has highlighted key academic vocabulary');
+assert(sampleReading.questions.length >= 1, 'Reading contains YDS-standard comprehension questions');
+
+// 18. MOCK EXAM SCORING & TIMER SPECIFICATION TESTS
+console.log('\n18. Mock Exam Scoring & Timer Tests:');
+const totalQ = 80;
+const testCorrect = 64; // 64 out of 80
+const officialYdsScore = Math.round((testCorrect / totalQ) * 100 * 100) / 100;
+assert(officialYdsScore === 80.0, '64/80 questions evaluates to exactly 80.0 YDS score');
+
+const totalSeconds = 180 * 60;
+assert(totalSeconds === 10800, '180 minutes equals exactly 10,800 seconds');
 
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);

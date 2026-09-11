@@ -295,6 +295,7 @@ export const App: React.FC = () => {
             <YdsView
               userProgress={userProgress}
               onRefreshProgress={loadData}
+              allVocabulary={vocabulary}
             />
           )}
 

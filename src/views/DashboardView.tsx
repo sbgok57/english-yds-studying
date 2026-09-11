@@ -7,7 +7,7 @@ import {
   StudySession,
   ErrorRecord,
 } from '../types';
-import { getTodayMotivation } from '../data/motivation';
+import { getDynamicMotivation } from '../data/motivation';
 import {
   Flame,
   Zap,
@@ -43,7 +43,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onNavigate,
   onStartSession,
 }) => {
-  const motivation = getTodayMotivation();
+  const unmasteredErrorsCount = errors.filter((e) => !e.mastered).length;
+  const dynamicMotivation = getDynamicMotivation(
+    userProgress.dailyStreak,
+    userProgress.xp,
+    unmasteredErrorsCount
+  );
+  const motivation = dynamicMotivation.message;
 
   // Calculate real metrics from persisted data (No fake data!)
   const now = new Date();
@@ -67,8 +73,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     (g) => g.lessonCompleted || g.mastery >= 80
   ).length;
 
-  const unmasteredErrorsCount = errors.filter((e) => !e.mastered).length;
-
   const handleSpeakMotivation = () => {
     speechService.speakMotivation(motivation.en);
   };
@@ -83,11 +87,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Greeting & Motivation Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-indigo-800/40">
-        <div className="relative z-10 max-w-3xl space-y-4">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-indigo-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="relative z-10 max-w-2xl space-y-4 flex-1">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold text-brand-200">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Günün İlhamı & Odak Notu</span>
+            <span>Günün İlhamı &amp; Odak Notu</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -127,6 +131,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               Hızlı Tekrar (5 Dk)
             </button>
           </div>
+        </div>
+
+        {/* Dynamic Visual Badge */}
+        <div className="shrink-0 hidden md:flex items-center justify-center w-36 h-36 rounded-2xl bg-white/5 border border-white/10 p-3 shadow-inner">
+          <div
+            className="w-full h-full drop-shadow-md"
+            dangerouslySetInnerHTML={{ __html: dynamicMotivation.visualSvg }}
+          />
         </div>
       </div>
 

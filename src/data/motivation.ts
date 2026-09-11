@@ -334,3 +334,79 @@ export function getTodayMotivation(): MotivationMessage {
   const index = dayOfYear % MOTIVATION_MESSAGES.length;
   return MOTIVATION_MESSAGES[index];
 }
+
+export const MOTIVATION_VISUALS = {
+  daily: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+    <rect width="100" height="100" rx="16" fill="#1e1b4b" fill-opacity="0.1"/>
+    <path d="M22 68H78M30 68V42C30 38 34 35 38 35H62C66 35 70 38 70 42V68" stroke="#6366f1" stroke-width="3" stroke-linecap="round"/>
+    <path d="M42 45H58M42 53H54" stroke="#818cf8" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="72" cy="28" r="8" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
+    <path d="M72 23V25M72 31V33M67 28H69M75 28H77" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`,
+  streak: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+    <rect width="100" height="100" rx="16" fill="#451a03" fill-opacity="0.1"/>
+    <path d="M50 20C50 20 62 35 62 48C62 58 54 66 44 66C36 66 30 60 30 52C30 40 42 32 42 32C42 32 38 42 44 46C46 47 48 46 48 44C48 38 44 30 50 20Z" fill="#f97316" stroke="#ea580c" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M50 82C68 82 80 70 80 54C80 40 70 28 62 20" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  </svg>`,
+  exam_done: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+    <rect width="100" height="100" rx="16" fill="#064e3b" fill-opacity="0.1"/>
+    <circle cx="50" cy="50" r="30" stroke="#10b981" stroke-width="3"/>
+    <circle cx="50" cy="50" r="20" stroke="#34d399" stroke-width="2" stroke-dasharray="4 3"/>
+    <path d="M40 50L47 57L62 42" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
+  error_notebook: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+    <rect width="100" height="100" rx="16" fill="#881337" fill-opacity="0.1"/>
+    <path d="M30 25H70V75H30V25Z" stroke="#f43f5e" stroke-width="2.5" rx="3"/>
+    <path d="M38 38H62M38 48H56M38 58H50" stroke="#fb7185" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="68" cy="68" r="12" fill="#881337" stroke="#f43f5e" stroke-width="2"/>
+    <path d="M68 62V70M68 73V74" stroke="#fecdd3" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+};
+
+/**
+ * Returns dynamically adapted motivational message and visual based on real user data.
+ */
+export function getDynamicMotivation(
+  userStreak: number,
+  userXp: number,
+  errorCount: number,
+  recentExamScore?: number
+): { message: MotivationMessage; visualSvg: string; theme: string } {
+  // Case 1: Unresolved errors in notebook
+  if (errorCount >= 4) {
+    const mistakeMsg = MOTIVATION_MESSAGES.find((m) => m.id === 'mot-2') || MOTIVATION_MESSAGES[1];
+    return {
+      message: mistakeMsg,
+      visualSvg: MOTIVATION_VISUALS.error_notebook,
+      theme: 'rose',
+    };
+  }
+
+  // Case 2: High active streak (3+ days) or high XP milestone (500+ XP)
+  if (userStreak >= 3 || userXp >= 500) {
+    const streakMsg = MOTIVATION_MESSAGES.find((m) => m.id === 'mot-1') || MOTIVATION_MESSAGES[0];
+    return {
+      message: streakMsg,
+      visualSvg: MOTIVATION_VISUALS.streak,
+      theme: 'amber',
+    };
+  }
+
+  // Case 3: Recent exam completed
+  if (recentExamScore !== undefined && recentExamScore > 0) {
+    const examMsg = MOTIVATION_MESSAGES.find((m) => m.id === 'mot-47') || MOTIVATION_MESSAGES[3];
+    return {
+      message: examMsg,
+      visualSvg: MOTIVATION_VISUALS.exam_done,
+      theme: 'emerald',
+    };
+  }
+
+  // Default: Calendar-based today motivation with study desk visual
+  return {
+    message: getTodayMotivation(),
+    visualSvg: MOTIVATION_VISUALS.daily,
+    theme: 'indigo',
+  };
+}
+

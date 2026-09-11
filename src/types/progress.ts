@@ -98,15 +98,21 @@ export interface WeeklyMission {
 export type YdsTestType =
   | 'mini'
   | 'full'
+  | 'module_practice'
   | 'grammar'
   | 'vocabulary'
   | 'cloze'
   | 'reading'
   | 'sentence_completion'
-  | 'translation';
+  | 'translation'
+  | 'dialogue'
+  | 'restatement'
+  | 'paragraph_completion'
+  | 'irrelevant_sentence';
 
 export interface YdsQuestionDetail {
   questionId: string;
+  questionNumber?: number;
   category: string;
   isCorrect: boolean;
   userAnswer: string;
@@ -115,11 +121,17 @@ export interface YdsQuestionDetail {
 
 export interface YdsAttempt {
   id: string;
+  examId?: string;
+  examTitle?: string;
   testType: YdsTestType;
-  score: number;
+  score: number; // 0-100 scale
   totalQuestions: number;
   correctAnswers: number;
   incorrectAnswers: number;
+  blankAnswers?: number;
+  timeSpentSeconds?: number;
+  sectionScores?: Record<string, { correct: number; total: number; percentage: number }>;
+  flaggedQuestionIds?: string[];
   date: string; // ISO
   questionDetails: YdsQuestionDetail[];
 }

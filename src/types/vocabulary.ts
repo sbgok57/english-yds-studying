@@ -23,9 +23,11 @@ export interface SourceReference {
   sourceType: 'quizlet' | 'pdf' | 'csv' | 'manual' | 'seed';
   sourceUrl?: string;
   fileName?: string;
+  sourceName?: string;
   folderName?: string;
   setName?: string;
   sourcePage?: number;
+  sourceText?: string;
   importedAt: string;
 }
 
@@ -54,6 +56,8 @@ export interface VocabularySource {
 export interface VocabularyItem {
   id: string;
   word: string;
+  displayWord?: string;
+  sourceText?: string;
   meaningsTr: string[];
   partOfSpeech: PartOfSpeech;
   example: string;
@@ -62,12 +66,15 @@ export interface VocabularyItem {
   antonyms: string[];
   collocations: string[];
   visualMnemonic: string;
+  visualImage?: string;
+  memoryTip?: { en: string; tr: string };
   pronunciation: string;
   difficulty: WordDifficulty;
   source: string;
   sourceRefs?: SourceReference[];
   missingFields?: string[];
   requiresManualReview?: boolean;
+  verifiedYDSOccurrence?: boolean;
 }
 
 /**

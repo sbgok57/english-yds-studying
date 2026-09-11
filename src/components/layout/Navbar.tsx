@@ -37,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'dashboard', label: 'Ana Sayfa', labelEn: 'Dashboard', icon: LayoutDashboard },
     { id: 'vocabulary', label: 'Kelimeler', labelEn: 'Vocabulary', icon: BookOpen },
     { id: 'grammar', label: 'Gramer', labelEn: 'Grammar', icon: Cpu },
-    { id: 'yds', label: 'YDS Modu', labelEn: 'YDS Mode', icon: GraduationCap },
+    { id: 'yds', label: 'YDS Çalışma Merkezi', labelEn: 'YDS Study Center', icon: GraduationCap },
     { id: 'errors', label: 'Hata Defterim', labelEn: 'Error Notebook', icon: AlertCircle },
     { id: 'progress', label: 'İlerleme', labelEn: 'Progress', icon: BarChart3 },
     { id: 'settings', label: 'Ayarlar', labelEn: 'Settings', icon: Settings },

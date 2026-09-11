@@ -436,6 +436,10 @@ class DatabaseService {
     });
   }
 
+  public async saveErrorRecord(error: ErrorRecord): Promise<void> {
+    return this.saveError(error);
+  }
+
   // --- Grammar Progress ---
   public async getAllGrammarProgress(): Promise<GrammarProgress[]> {
     const store = await this.getStore(STORES.GRAMMAR_PROGRESS, 'readonly');
