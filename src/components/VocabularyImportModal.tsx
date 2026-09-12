@@ -482,7 +482,7 @@ export const VocabularyImportModal: React.FC<VocabularyImportModalProps> = ({
                   <div className="space-y-1.5 pt-2">
                     <div className="flex items-center justify-between">
                       <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                        Quizlet Dışa Aktarım Metni (Tab, Tire, İki Nokta veya Virgül Ayırıcı)
+                        Quizlet Dışa Aktarım Metni (Sekme [Tab], Tire, İki Nokta veya Virgül Ayırıcı)
                       </label>
                       <span className="text-[11px] text-slate-400">Otomatik Ayırıcı Algılama</span>
                     </div>

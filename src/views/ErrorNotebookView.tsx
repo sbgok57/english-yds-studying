@@ -47,8 +47,8 @@ export const ErrorNotebookView: React.FC<ErrorNotebookViewProps> = ({
       {/* Header */}
       <div>
         <h2 className="text-2xl font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
-          <AlertCircle className="w-7 h-7 text-amber-500" />
-          Hata Defterim (Personal Error Notebook)
+          <AlertCircle className="w-7 h-7 text-rose-500" />
+          Hata Defteri
         </h2>
         <p className="text-xs text-slate-500 dark:text-slate-400">
           Hatalarınız en değerli öğrenme verinizdir. Yanılgılarınızı inceleyin ve kalıcı öğrenmeye dönüştürün.

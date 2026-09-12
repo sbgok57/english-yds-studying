@@ -177,7 +177,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                           : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200'
                       }`}
                     >
-                      {settings.voiceGender === 'female' ? 'Seçili' : 'Bunu Seç'}
+                      {settings.voiceGender === 'female' ? 'Seçili' : 'Seç'}
                     </button>
                     <button
                       type="button"
@@ -223,7 +223,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                           : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200'
                       }`}
                     >
-                      {settings.voiceGender === 'male' ? 'Seçili' : 'Bunu Seç'}
+                      {settings.voiceGender === 'male' ? 'Seçili' : 'Seç'}
                     </button>
                     <button
                       type="button"

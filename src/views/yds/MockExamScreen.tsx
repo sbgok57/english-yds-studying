@@ -343,7 +343,7 @@ export const MockExamScreen: React.FC<MockExamScreenProps> = ({
 
             <div className="text-center space-y-1">
               <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
-                Sınavı Tamamlamak İstiyor Musunuz?
+                Sınavı tamamlamak istiyor musunuz?
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Toplam 80 sorudan <strong>{Object.values(answers).filter(Boolean).length}</strong> tanesini cevapladınız.{' '}

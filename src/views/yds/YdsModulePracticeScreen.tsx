@@ -126,7 +126,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
           className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
-          Modüllere Dön
+          Soru Modüllerine Dön
         </button>
 
         <div className="text-center">
@@ -149,8 +149,8 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
         </div>
       </div>
 
-      {/* Question Card */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+      {/* Question Card with Rainbow Accent */}
+      <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-rainbow-top shadow-md space-y-6">
         {/* Top Action Bar: Fast Tactic Toggle */}
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
@@ -415,7 +415,7 @@ export const YdsModulePracticeScreen: React.FC<YdsModulePracticeScreenProps> = (
             disabled={currentIdx === 0}
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 disabled:opacity-40 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Önceki
+            <ArrowLeft className="w-4 h-4" /> Önceki Soru
           </button>
 
           {currentIdx < questions.length - 1 ? (

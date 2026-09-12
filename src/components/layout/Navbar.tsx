@@ -43,29 +43,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const navItems = [
     { id: 'dashboard', label: 'Ana Sayfa', labelEn: 'Dashboard', icon: LayoutDashboard },
-    { id: 'yds_essentials', label: 'YDS/YDT Önemliler', labelEn: 'YDS/YDT Essentials', icon: Sparkles },
+    { id: 'yds_essentials', label: 'YDS/YDT Altın Kurallar', labelEn: 'YDS/YDT Essentials', icon: Sparkles },
     { id: 'vocabulary', label: 'Kelimeler', labelEn: 'Vocabulary', icon: BookOpen },
     { id: 'grammar', label: 'Gramer', labelEn: 'Grammar', icon: Cpu },
     { id: 'yds', label: 'YDS Çalışma Merkezi', labelEn: 'YDS Study Center', icon: GraduationCap },
-    { id: 'errors', label: 'Hata Defterim', labelEn: 'Error Notebook', icon: AlertCircle },
+    { id: 'errors', label: 'Hata Defteri', labelEn: 'Error Notebook', icon: AlertCircle },
     { id: 'progress', label: 'İlerleme', labelEn: 'Progress', icon: BarChart3 },
     { id: 'settings', label: 'Ayarlar', labelEn: 'Settings', icon: Settings },
   ] as const;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-sm">
+      {/* 🔴🟠🟡🟢🔵🟣🟣 Top Rainbow Accent Stripe */}
+      <div className="h-[3px] w-full bg-rainbow-stripe" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <div
             onClick={() => setActiveTab('dashboard')}
-            className="flex items-center gap-3 cursor-pointer select-none"
+            className="flex items-center gap-3 cursor-pointer select-none group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-rainbow-gradient flex items-center justify-center text-white font-black text-xl shadow-md transition-transform group-hover:scale-105">
               Y
             </div>
             <div>
-              <span className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-brand-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="font-extrabold text-lg tracking-tight text-rainbow-gradient block">
                 YDS/YDT Master
               </span>
               <span className="hidden sm:block text-[10px] text-slate-400 font-medium">
@@ -75,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-1" aria-label="Ana Menü">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -83,14 +86,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                  className={`relative flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
                     isActive
-                      ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-300 font-bold shadow-sm'
+                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold shadow-sm ring-1 ring-slate-200 dark:ring-slate-700'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-500' : ''}`} />
                   <span>{item.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-rainbow-stripe" />
+                  )}
                 </button>
               );
             })}
@@ -143,14 +149,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center px-2 py-1 rounded-lg text-[10px] font-medium shrink-0 ${
+                className={`flex flex-col items-center justify-center px-2 py-1 rounded-lg text-[10px] font-medium shrink-0 relative ${
                   isActive
-                    ? 'text-brand-600 dark:text-brand-400 font-bold'
+                    ? 'text-indigo-600 dark:text-indigo-400 font-bold'
                     : 'text-slate-500 dark:text-slate-400'
                 }`}
               >
                 <Icon className="w-4 h-4 mb-0.5" />
                 <span>{item.label}</span>
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-rainbow-stripe mt-0.5" />
+                )}
               </button>
             );
           })}

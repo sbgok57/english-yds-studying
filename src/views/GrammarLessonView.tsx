@@ -117,7 +117,7 @@ export const GrammarLessonView: React.FC<GrammarLessonViewProps> = ({
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
-          aria-label="Gramer listesine dön"
+          aria-label="Gramer Konularına Dön"
           className="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-colors shadow-sm"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -474,7 +474,7 @@ export const GrammarLessonView: React.FC<GrammarLessonViewProps> = ({
           {/* Progress bar */}
           <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
             <div
-              className="h-full bg-brand-500 transition-all duration-300"
+              className="h-full bg-rainbow-stripe transition-all duration-300"
               style={{ width: `${((activityIndex + 1) / activities.length) * 100}%` }}
             ></div>
           </div>
@@ -542,7 +542,7 @@ export const GrammarLessonView: React.FC<GrammarLessonViewProps> = ({
                 <span className="font-bold text-sm flex items-center gap-1.5">
                   {selectedActAnswer === currentActivity.correctAnswer ? (
                     <>
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Doğru! (Well done!)
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 🎉 Harika! Doğru Cevap
                     </>
                   ) : (
                     <>

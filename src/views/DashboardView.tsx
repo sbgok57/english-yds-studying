@@ -86,16 +86,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      {/* Top Greeting & Motivation Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white p-6 sm:p-8 shadow-xl border border-indigo-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      {/* Top Greeting & Motivation Banner with Rainbow Top Accent */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white p-6 sm:p-8 shadow-xl border border-indigo-800/40 border-rainbow-top flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="relative z-10 max-w-2xl space-y-4 flex-1">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold text-brand-200">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold text-indigo-200 border border-white/10">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             <span>Günün İlhamı &amp; Odak Notu</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            {getGreeting()}, Şampiyon! Hazır mısın?
+            {getGreeting()}, Şampiyon! <span className="text-rainbow-gradient">Hazır mısın?</span>
           </h2>
 
           <div className="p-4 rounded-2xl bg-white/10 backdrop-blur border border-white/10 space-y-2">
@@ -106,12 +106,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <button
                 onClick={handleSpeakMotivation}
                 aria-label="Motivasyon sözünü dinle"
-                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-brand-200 transition-colors shrink-0"
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-indigo-200 transition-colors shrink-0"
               >
                 <Volume2 className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-xs sm:text-sm text-brand-200/90 font-medium">
+            <p className="text-xs sm:text-sm text-indigo-200/90 font-medium">
               {motivation.tr}
             </p>
           </div>
@@ -119,16 +119,16 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <button
               onClick={() => onStartSession('daily_mission')}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-brand-500 hover:bg-brand-400 text-white font-bold text-sm shadow-lg hover:shadow-brand-500/25 transition-all transform hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl btn-rainbow-primary font-bold text-sm shadow-lg"
             >
               <Play className="w-4 h-4 fill-white" />
-              Günün Görevine Başla (15 Dk)
+              Günün Görevine Başla (15 dk)
             </button>
             <button
               onClick={() => onStartSession('quick_review')}
-              className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm backdrop-blur transition-all"
+              className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm backdrop-blur transition-all border border-white/10"
             >
-              Hızlı Tekrar (5 Dk)
+              Hızlı Tekrar (5 dk)
             </button>
           </div>
         </div>
@@ -142,11 +142,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
       </div>
 
-      {/* Real Performance Metrics Grid */}
+      {/* Real Performance Metrics Grid (🔴🟠🟡🟢🔵🟣 Spectrum Colors) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {/* Streak */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
-          <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-amber-500">
+        {/* 🟠 Streak (Turuncu / Ateş) */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-amber-200/70 dark:border-amber-900/40 shadow-sm flex items-center gap-4 hover:shadow-md transition-shadow">
+          <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/50 text-amber-500 ring-1 ring-amber-200/60 dark:ring-amber-800/40">
             <Flame className="w-7 h-7 fill-amber-500" />
           </div>
           <div>
@@ -157,15 +157,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {userProgress.dailyStreak} Gün
             </span>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
-              Haftalık: {userProgress.weeklyStreak} hf
+              Haftalık: {userProgress.weeklyStreak} hafta
             </span>
           </div>
         </div>
 
-        {/* Level & XP */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
-          <div className="p-3.5 rounded-2xl bg-brand-50 dark:bg-brand-950/40 text-brand-500">
-            <Zap className="w-7 h-7 fill-brand-500" />
+        {/* 🟡 Level & XP (Sarı / Altın) */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-yellow-200/70 dark:border-yellow-900/40 shadow-sm flex items-center gap-4 hover:shadow-md transition-shadow">
+          <div className="p-3.5 rounded-2xl bg-yellow-50 dark:bg-yellow-950/50 text-yellow-600 ring-1 ring-yellow-200/60 dark:ring-yellow-800/40">
+            <Zap className="w-7 h-7 fill-yellow-500 text-yellow-500" />
           </div>
           <div>
             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block">
@@ -175,17 +175,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               {userProgress.xp} XP
             </span>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
-              Sonraki Lv: {userProgress.level * 100 - userProgress.xp > 0 ? userProgress.level * 100 - userProgress.xp : 0} XP
+              Sonraki Seviye: {userProgress.level * 100 - userProgress.xp > 0 ? userProgress.level * 100 - userProgress.xp : 0} XP
             </span>
           </div>
         </div>
 
-        {/* Vocabulary Progress */}
+        {/* 🟢 Vocabulary Progress (Yeşil / Başarı) */}
         <div
           onClick={() => onNavigate('vocabulary')}
-          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4 cursor-pointer hover:border-brand-400 transition-all"
+          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-200/70 dark:border-emerald-900/40 shadow-sm flex items-center gap-4 cursor-pointer hover:border-emerald-400 dark:hover:border-emerald-600 hover:shadow-md transition-all"
         >
-          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600">
+          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">
             <BookOpen className="w-7 h-7" />
           </div>
           <div>
@@ -201,12 +201,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
         </div>
 
-        {/* Grammar Progress */}
+        {/* 🟣 Grammar Progress (Mor / Mimari) */}
         <div
           onClick={() => onNavigate('grammar')}
-          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4 cursor-pointer hover:border-brand-400 transition-all"
+          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-purple-200/70 dark:border-purple-900/40 shadow-sm flex items-center gap-4 cursor-pointer hover:border-purple-400 dark:hover:border-purple-600 hover:shadow-md transition-all"
         >
-          <div className="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 text-purple-600">
+          <div className="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/50 text-purple-600 ring-1 ring-purple-200/60 dark:ring-purple-800/40">
             <Cpu className="w-7 h-7" />
           </div>
           <div>
@@ -225,11 +225,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
       {/* Main Study Hub: Overdue Reviews, Weak Words, Error Notebook */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Due Reviews Card */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        {/* 🟢 Due Reviews Card (Yeşil / Tekrarlar) */}
+        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-emerald-100 dark:border-emerald-950/60 shadow-sm space-y-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-brand-600" />
+              <BookOpen className="w-5 h-5 text-emerald-600" />
               Bugünün Tekrarları
             </h3>
             <span
@@ -250,14 +250,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <button
             onClick={() => onStartSession('standard')}
             disabled={dueReviewsCount === 0 && learningStates.size === 0}
-            className="w-full py-2.5 rounded-xl font-semibold text-xs text-white bg-brand-600 hover:bg-brand-700 disabled:opacity-50 transition-all"
+            className="w-full py-2.5 rounded-xl font-semibold text-xs text-white bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 transition-all shadow-sm"
           >
             Tekrarları Başlat
           </button>
         </div>
 
-        {/* Weak Words Alert */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        {/* 🟠 Weak Words Alert (Turuncu-Sarı / Pekiştirme) */}
+        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-amber-100 dark:border-amber-950/60 shadow-sm space-y-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-amber-500" />
@@ -275,20 +275,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <button
             onClick={() => onStartSession('deep_practice')}
             disabled={weakWordsCount === 0}
-            className="w-full py-2.5 rounded-xl font-semibold text-xs text-slate-800 dark:text-slate-200 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/40 dark:hover:bg-amber-950 border border-amber-200 dark:border-amber-800/60 disabled:opacity-50 transition-all"
+            className="w-full py-2.5 rounded-xl font-semibold text-xs text-amber-800 dark:text-amber-200 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/40 dark:hover:bg-amber-950/70 border border-amber-200 dark:border-amber-800/60 disabled:opacity-50 transition-all"
           >
             Zayıf Kelimeleri Çalış
           </button>
         </div>
 
-        {/* Error Notebook Preview */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        {/* 🔴 Error Notebook Preview (Kırmızı-Gül / Hata Analizi) */}
+        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-rose-100 dark:border-rose-950/60 shadow-sm space-y-4 hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-indigo-500" />
+              <GraduationCap className="w-5 h-5 text-rose-500" />
               Hata Defteri
             </h3>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300">
               {unmasteredErrorsCount} Hata
             </span>
           </div>
@@ -299,7 +299,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </p>
           <button
             onClick={() => onNavigate('errors')}
-            className="w-full py-2.5 rounded-xl font-semibold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:hover:bg-indigo-950 border border-indigo-200 dark:border-indigo-800/60 transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-xl font-semibold text-xs text-rose-700 dark:text-rose-300 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 border border-rose-200 dark:border-rose-800/60 transition-all flex items-center justify-center gap-1.5"
           >
             <span>Hata Defterini Aç</span>
             <ArrowRight className="w-3.5 h-3.5" />

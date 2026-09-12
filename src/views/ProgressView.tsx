@@ -75,6 +75,36 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
         </p>
       </div>
 
+      {/* Level & XP Progress Banner with Rainbow Bar */}
+      <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-rainbow-top shadow-sm space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-rainbow-gradient flex items-center justify-center text-white font-black text-base shadow-md">
+              {userProgress.level}
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+                Mevcut Seviye
+              </span>
+              <h3 className="text-lg font-black text-slate-900 dark:text-slate-100">
+                Seviye {userProgress.level} ({userProgress.xp} XP)
+              </h3>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-800">
+            Sonraki Seviyeye: {Math.max(0, userProgress.level * 100 - userProgress.xp)} XP
+          </span>
+        </div>
+        <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <div
+            className="h-full bg-rainbow-stripe transition-all duration-500 rounded-full"
+            style={{
+              width: `${Math.min(100, Math.max(5, ((userProgress.xp % 100) / 100) * 100))}%`,
+            }}
+          />
+        </div>
+      </div>
+
       {/* Primary KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -82,7 +112,7 @@ export const ProgressView: React.FC<ProgressViewProps> = ({
             <Clock className="w-4 h-4 text-blue-500" /> Toplam Süre
           </div>
           <span className="text-2xl font-black text-slate-900 dark:text-slate-100">
-            {userProgress.totalStudyTimeMinutes} Dk
+            {userProgress.totalStudyTimeMinutes} dk
           </span>
           <p className="text-[11px] text-slate-500 mt-1">{totalCompletedSessions} tamamlanan oturum</p>
         </div>

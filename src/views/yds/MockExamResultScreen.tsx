@@ -91,8 +91,8 @@ export const MockExamResultScreen: React.FC<MockExamResultScreenProps> = ({
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-fadeIn pb-16">
-      {/* Top Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white shadow-xl border border-indigo-800/40 flex flex-col md:flex-row items-center justify-between gap-6">
+      {/* Top Banner with Rainbow Accent */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white shadow-xl border border-indigo-800/40 border-rainbow-top flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-2 text-center md:text-left">
           <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/10 backdrop-blur text-brand-200">
             {exam.code} Sonuç Raporu
@@ -385,7 +385,7 @@ export const MockExamResultScreen: React.FC<MockExamResultScreenProps> = ({
           onClick={onExit}
           className="flex items-center gap-2 px-8 py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg transition-all"
         >
-          <ArrowLeft className="w-4 h-4" /> YDS Çalışma Merkezine Dön
+          <ArrowLeft className="w-4 h-4" /> YDS Çalışma Merkezi'ne Dön
         </button>
       </div>
     </div>

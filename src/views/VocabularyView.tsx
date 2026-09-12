@@ -482,7 +482,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
       {/* =========================================================================
           12. GÜNLÜK DASHBOARD ("BUGÜN NE ÇALIŞMALIYIM?")
       ========================================================================== */}
-      <div className="p-5 rounded-3xl bg-gradient-to-br from-indigo-900/90 via-slate-900 to-brand-950 text-white shadow-xl border border-indigo-700/40 space-y-4">
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-indigo-900/90 via-slate-900 to-brand-950 text-white shadow-xl border border-indigo-700/40 border-rainbow-top space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
             <Flame className="w-5 h-5 text-amber-400 fill-amber-400" />
@@ -508,7 +508,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
           <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur border border-white/10">
             <span className="text-[11px] font-semibold text-indigo-200 block">Yeni Kelimeler</span>
             <div className="flex items-baseline gap-1.5 mt-0.5">
-              <span className="text-2xl font-black text-sky-300">{dashboardStats.newCount}</span>
+              <span className="text-2xl font-black text-emerald-300">{dashboardStats.newCount}</span>
               <span className="text-[10px] text-slate-300">kelime</span>
             </div>
             <p className="text-[10px] text-indigo-200/80 mt-1">Henüz çalışılmamış</p>
@@ -528,7 +528,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
           <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur border border-white/10">
             <span className="text-[11px] font-semibold text-indigo-200 block">Ustalaşılan</span>
             <div className="flex items-baseline gap-1.5 mt-0.5">
-              <span className="text-2xl font-black text-emerald-300">{dashboardStats.masteredCount}</span>
+              <span className="text-2xl font-black text-indigo-300">{dashboardStats.masteredCount}</span>
               <span className="text-[10px] text-slate-300">kelime</span>
             </div>
             <p className="text-[10px] text-indigo-200/80 mt-1">%90+ Başarı oranı</p>
@@ -536,7 +536,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
         </div>
 
         {/* Action Button: Start Today's Review */}
-        <div className="pt-1 flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 pt-1">
           <button
             onClick={() => {
               setFlashcardPoolType('due');
@@ -546,9 +546,9 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
               setFlashcardSessionStats({ know: 0, unsure: 0, forgot: 0 });
               setSubMode('flashcards');
             }}
-            className="flex items-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 shadow-lg hover:shadow-xl transition-all"
+            className="flex items-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-black btn-rainbow-primary text-white shadow-lg hover:shadow-xl transition-all"
           >
-            <Play className="w-4 h-4 fill-slate-950" />
+            <Play className="w-4 h-4 fill-white" />
             Bugünkü Tekrarı Başlat ({dashboardStats.dueCount > 0 ? dashboardStats.dueCount : 15} Kelime)
           </button>
 
@@ -982,9 +982,9 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                 ) : (
                   <button
                     onClick={handleNextQuizQuestion}
-                    className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3.5 rounded-2xl btn-rainbow-primary text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2"
                   >
-                    {quizIndex + 1 < quizQuestions.length ? 'Sonraki Soruya Geç' : 'Test Sonuçlarını Gör'}
+                    {quizIndex + 1 < quizQuestions.length ? 'Sonraki Soru' : 'Test Sonuçlarını Gör'}
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 )}

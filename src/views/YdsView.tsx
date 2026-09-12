@@ -162,8 +162,8 @@ export const YdsView: React.FC<YdsViewProps> = ({
   // --- MAIN YDS STUDY CENTER HUB ---
   return (
     <div className="space-y-8 animate-fadeIn pb-16">
-      {/* Top Welcome & Mode Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white shadow-xl border border-indigo-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      {/* Top Welcome & Mode Banner with Rainbow Accent */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-brand-900 to-slate-900 text-white shadow-xl border border-indigo-800/40 border-rainbow-top flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur text-xs font-semibold text-brand-200">
             <GraduationCap className="w-3.5 h-3.5 text-amber-300" />

@@ -79,8 +79,8 @@ export const YdsEssentialsView: React.FC<YdsEssentialsViewProps> = ({
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16 animate-fadeIn">
-      {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-brand-950 p-6 sm:p-8 text-white shadow-2xl border border-indigo-800/40">
+      {/* Hero Header with Rainbow Accent */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-brand-950 p-6 sm:p-8 text-white shadow-2xl border border-indigo-800/40 border-rainbow-top">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold uppercase tracking-wider">
@@ -88,7 +88,7 @@ export const YdsEssentialsView: React.FC<YdsEssentialsViewProps> = ({
               YDS / YDT Master Akademi
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-              YDS / YDT ÖNEMLİLER
+              YDS / YDT Altın Kurallar &amp; Taktikler
             </h1>
             <p className="text-indigo-200 text-sm sm:text-base max-w-2xl leading-relaxed">
               ÖSYM sınav mantığı, 50+ Altın Kural, 15 soru türünün çözüm taktikleri,

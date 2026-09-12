@@ -336,9 +336,9 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
               </button>
               <button
                 onClick={startActiveSession}
-                className="flex-1 py-3.5 px-6 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg hover:shadow-brand-500/25 transition-all flex items-center justify-center gap-2"
+                className="flex-1 py-3.5 px-6 rounded-2xl btn-rainbow-primary font-bold text-sm shadow-lg flex items-center justify-center gap-2"
               >
-                <span>MİSYONUMA BAŞLA</span>
+                <span>Görevi Başlat</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -355,8 +355,8 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
 
     return (
       <div className="max-w-xl mx-auto py-12 px-4 animate-fadeIn">
-        <div className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl text-center space-y-6">
-          <div className="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-inner">
+        <div className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-rainbow-top shadow-2xl text-center space-y-6">
+          <div className="w-20 h-20 rounded-full bg-rainbow-gradient text-white flex items-center justify-center mx-auto shadow-lg">
             <Award className="w-10 h-10 animate-bounce" />
           </div>
 
@@ -427,10 +427,10 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
         </div>
       </div>
 
-      {/* Progress Bar */}
+      {/* Progress Bar (Rainbow Stripe) */}
       <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden mb-6">
         <div
-          className="h-full bg-brand-500 transition-all duration-300"
+          className="h-full bg-rainbow-stripe transition-all duration-300"
           style={{ width: `${((currentIndex + 1) / queue.length) * 100}%` }}
         ></div>
       </div>
@@ -551,9 +551,9 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
           <div className="pt-2 flex justify-end">
             <button
               onClick={handleNextQuestion}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl btn-rainbow-primary font-bold text-sm shadow-md transition-all"
             >
-              <span>{currentIndex < queue.length - 1 ? 'Sonraki Soru' : 'Misyonu Tamamla'}</span>
+              <span>{currentIndex < queue.length - 1 ? 'Sonraki Soru' : 'Görevi Tamamla'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
