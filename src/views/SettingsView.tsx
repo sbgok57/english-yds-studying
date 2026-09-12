@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { AppSettings } from '../types';
-import { storageService } from '../services/db';
+import { dbService, storageService } from '../services/db';
 import { speechService } from '../services/speech';
+import { PdfVocabularyImporter } from '../services/pdf';
+import { exportVocabularyToCsv } from '../services/csv';
+import { VocabularyItem } from '../types/vocabulary';
 import {
   Settings,
   Volume2,
@@ -11,6 +14,9 @@ import {
   Clock,
   CheckCircle2,
   AlertCircle,
+  Database,
+  Download,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface SettingsViewProps {
@@ -24,6 +30,92 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 }) => {
   const [settings, setSettings] = useState<AppSettings>(currentSettings);
   const [savedNotice, setSavedNotice] = useState(false);
+
+  // Data management & integrity audit states
+  const [auditResult, setAuditResult] = useState<{
+    validItems: VocabularyItem[];
+    repairableItems: VocabularyItem[];
+    duplicateItems: VocabularyItem[];
+    corruptedItems: VocabularyItem[];
+    manualReviewItems: VocabularyItem[];
+    backupJson: string;
+  } | null>(null);
+  const [isAuditing, setIsAuditing] = useState(false);
+  const [auditMessage, setAuditMessage] = useState<string | null>(null);
+
+  const handleRunAudit = async () => {
+    setIsAuditing(true);
+    try {
+      const items = await dbService.getAllVocabulary();
+      const res = PdfVocabularyImporter.auditVocabularyIntegrity(items);
+      setAuditResult(res);
+      setAuditMessage(
+        res.corruptedItems.length === 0 && res.repairableItems.length === 0
+          ? 'Tüm kelime veritabanı sağlam, hatasız ve geçerli.'
+          : `${res.corruptedItems.length} bozuk, ${res.repairableItems.length} onarılabilir kayıt tespit edildi.`
+      );
+    } catch (err) {
+      console.warn('Audit error:', err);
+      setAuditMessage('Bütünlük denetimi sırasında hata oluştu.');
+    } finally {
+      setIsAuditing(false);
+    }
+  };
+
+  const handleExportJson = async () => {
+    try {
+      const items = await dbService.getAllVocabulary();
+      const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ydt_yds_vocabulary_backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      alert('Yedek dışa aktarılırken hata oluştu.');
+    }
+  };
+
+  const handleExportCsv = async () => {
+    try {
+      const items = await dbService.getAllVocabulary();
+      const csvStr = exportVocabularyToCsv(items);
+      const blob = new Blob([csvStr], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ydt_yds_vocabulary_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      alert('Kelime listesi dışa aktarılırken hata oluştu.');
+    }
+  };
+
+  const handleCleanCorrupted = async () => {
+    if (!auditResult || auditResult.corruptedItems.length === 0) return;
+    const confirmed = window.confirm(
+      `${auditResult.corruptedItems.length} adet bozuk kayıt silinmeden önce otomatik JSON yedeği indirilecektir. Onaylıyor musunuz?`
+    );
+    if (!confirmed) return;
+
+    await handleExportJson();
+
+    for (const item of auditResult.corruptedItems) {
+      await dbService.deleteVocabularyItem(item.id);
+    }
+
+    setAuditMessage(`${auditResult.corruptedItems.length} bozuk kayıt temizlendi. Yedeğiniz indirildi.`);
+    await handleRunAudit();
+  };
+
+  const handleRepairDropouts = async () => {
+    if (!auditResult || auditResult.repairableItems.length === 0) return;
+    await dbService.saveVocabularyBatch(auditResult.repairableItems);
+    setAuditMessage(`${auditResult.repairableItems.length} kayıt güvenle onarıldı.`);
+    await handleRunAudit();
+  };
 
   const audioAvailable = speechService.isAvailable();
 
@@ -357,6 +449,102 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Data Management & Integrity Repair */}
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+              <Database className="w-4 h-4 text-brand-500" />
+              Veri Yönetimi &amp; Bütünlük (Data Management)
+            </h3>
+          </div>
+
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Kelime veritabanınızı yedekleyebilir, dışa aktarabilir veya bozuk PDF/aktarım kayıtlarını güvenle temizleyebilirsiniz.
+          </p>
+
+          <div className="flex flex-wrap gap-2.5">
+            <button
+              type="button"
+              onClick={handleExportCsv}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5 text-brand-500" />
+              Kelime Listesini Dışa Aktar (CSV)
+            </button>
+
+            <button
+              type="button"
+              onClick={handleExportJson}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors"
+            >
+              <Download className="w-3.5 h-3.5 text-indigo-500" />
+              Tam JSON Yedek Al
+            </button>
+
+            <button
+              type="button"
+              onClick={handleRunAudit}
+              disabled={isAuditing}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand-50 hover:bg-brand-100 dark:bg-brand-950 dark:hover:bg-brand-900 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 transition-colors"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-600" />
+              {isAuditing ? 'Denetleniyor...' : 'Kelime Bütünlüğünü Denetle'}
+            </button>
+          </div>
+
+          {auditMessage && (
+            <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300 flex items-center justify-between">
+              <span>{auditMessage}</span>
+            </div>
+          )}
+
+          {auditResult && (
+            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 space-y-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span className="text-xs text-slate-400 block">Geçerli</span>
+                  <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{auditResult.validItems.length}</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span className="text-xs text-slate-400 block">Onarılabilir</span>
+                  <span className="text-lg font-bold text-amber-600 dark:text-amber-400">{auditResult.repairableItems.length}</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span className="text-xs text-slate-400 block">Bozuk</span>
+                  <span className="text-lg font-bold text-rose-600 dark:text-rose-400">{auditResult.corruptedItems.length}</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                  <span className="text-xs text-slate-400 block">Mükerrer</span>
+                  <span className="text-lg font-bold text-slate-600 dark:text-slate-300">{auditResult.duplicateItems.length}</span>
+                </div>
+              </div>
+
+              {(auditResult.repairableItems.length > 0 || auditResult.corruptedItems.length > 0) && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {auditResult.repairableItems.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={handleRepairDropouts}
+                      className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-600 hover:bg-amber-700 text-white transition-colors"
+                    >
+                      Onarılabilirleri Düzelt ({auditResult.repairableItems.length})
+                    </button>
+                  )}
+                  {auditResult.corruptedItems.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={handleCleanCorrupted}
+                      className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-colors"
+                    >
+                      Bozuk Kayıtları Temizle ({auditResult.corruptedItems.length})
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -84,13 +84,20 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
   const [isAuditDashboardOpen, setIsAuditDashboardOpen] = useState(false);
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<VocabularyItem | null>(null);
 
-  // Lock body scroll when detail modal is open
+  // Lock body scroll & listen for Escape key when detail modal is open
   useEffect(() => {
     if (selectedItemForDetail) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setSelectedItemForDetail(null);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
       return () => {
         document.body.style.overflow = originalOverflow;
+        window.removeEventListener('keydown', handleKeyDown);
       };
     }
   }, [selectedItemForDetail]);

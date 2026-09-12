@@ -161,10 +161,10 @@ export function sanitizeWord(raw: unknown): string {
   }
 
   // Strip leading list numbering (e.g. "1. apple" or "02) apple")
-  text = text.replace(/^\d+[\.\)\-]\s*/, '');
+  text = text.replace(/^\d+[.)-]\s*/, '');
 
   // Strip wrapping quotes and brackets
-  text = text.replace(/^["'\[\(]+|["'\]\)]+$/g, '').trim();
+  text = text.replace(/^["'[(]+|["'\])]+$/g, '').trim();
 
   // If text is a pure ID or placeholder code, return empty string
   if (isIdOrTechnicalCode(text)) {
@@ -186,7 +186,77 @@ export function sanitizeWord(raw: unknown): string {
     text = 'effortlessly';
   }
 
+  // Apply high-confidence PDF dropout repair
+  text = repairKnownPdfDropouts(text);
+
   return text;
+}
+
+/**
+ * High-confidence deterministic repairs for PDF text extraction dropouts
+ * where a space or missing character occurs in a known context.
+ * Strict: Never guesses when ambiguous.
+ */
+const KNOWN_PDF_DROPOUTS: [RegExp, string][] = [
+  [/\be\s+planation\b/gi, 'explanation'],
+  [/\be\s+perience\b/gi, 'experience'],
+  [/\be\s+pression\b/gi, 'expression'],
+  [/\bkno\s+ledge\b/gi, 'knowledge'],
+  [/\bsub\s+tantial\b/gi, 'substantial'],
+  [/\bignificant\b/gi, 'significant'],
+  [/\bphra\s+al\b/gi, 'phrasal'],
+  [/\bfollo\s+ing\b/gi, 'following'],
+  [/\bdiffi\s+ult\b/gi, 'difficult'],
+  [/\beffi\s+ient\b/gi, 'efficient'],
+  [/\beffe\s+t\b/gi, 'effect'],
+  [/\ba\s+count\s+for\b/gi, 'account for'],
+  [/\bturn\s+do\s+n\b/gi, 'turn down'],
+  [/\brely\s+o\s+n\b/gi, 'rely on'],
+  [/\bloo\s*k\s+after\b/gi, 'look after'],
+  [/\bcarry\s+o\s+n\b/gi, 'carry on'],
+  [/\blook\s+for\s*ard\s+to\b/gi, 'look forward to'],
+  [/\bgo\s+throu\s*gh\b/gi, 'go through'],
+  [/\bcome\s+a\s*cross\b/gi, 'come across'],
+  [/\bget\s+ri\s*d\s+of\b/gi, 'get rid of'],
+  [/\bturn\s+in\s*to\b/gi, 'turn into'],
+  [/\bcall\s+o\s*ff\b/gi, 'call off'],
+  [/\bput\s+o\s*ff\b/gi, 'put off'],
+  [/\bdeal\s+wi\s*th\b/gi, 'deal with'],
+  [/\bkeep\s+up\s+wi\s*th\b/gi, 'keep up with'],
+  [/\bfall\s+a\s*part\b/gi, 'fall apart'],
+  [/\bbreak\s+o\s*ut\b/gi, 'break out'],
+  [/\bgive\s+o\s*ff\b/gi, 'give off'],
+  [/\bget\s+a\s*way\b/gi, 'get away'],
+];
+
+export function repairKnownPdfDropouts(text: string): string {
+  if (!text) return '';
+  let repaired = text.trim();
+  for (const [pattern, replacement] of KNOWN_PDF_DROPOUTS) {
+    repaired = repaired.replace(pattern, replacement);
+  }
+  return repaired.trim();
+}
+
+/**
+ * Flags words or phrases that show evidence of corrupted extraction,
+ * replacement characters, or unresolved dropouts.
+ */
+export function isExtractionCorrupted(word: string): boolean {
+  if (!word) return true;
+  const trimmed = word.trim();
+  if (trimmed.length < 2 && trimmed !== 'a' && trimmed !== 'I') return true;
+  if (/^\d+$/.test(trimmed)) return true;
+  if (/^--+/.test(trimmed)) return true;
+  if (trimmed.startsWith('---')) return true;
+  if (/[\uFFFDÃÄÅ]/.test(trimmed)) return true;
+  if (/^\W+$/.test(trimmed)) return true;
+  if (/^(?:page|sayfa)\b/i.test(trimmed)) return true;
+  if (/\be\s+planation\b/i.test(trimmed)) return true;
+  if (/\bkno\s+ledge\b/i.test(trimmed)) return true;
+  if (/\be\s+perience\b/i.test(trimmed)) return true;
+  if (/^\s+[a-z]{3,}\b/.test(word)) return true; // leading space dropout like " ant" or " ith"
+  return false;
 }
 
 /**
@@ -291,7 +361,7 @@ export function sanitizeMeanings(raw: unknown): string[] {
     // Split on newlines, carriage returns, or semicolons
     const subLines = entry.split(/[\r\n;]+/).map((s) => s.trim()).filter(Boolean);
 
-    for (let sub of subLines) {
+    for (const sub of subLines) {
       // Remove bracketed placeholders
       if (/^\[.*?\]$/.test(sub) || isIdOrTechnicalCode(sub)) {
         continue;

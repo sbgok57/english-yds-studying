@@ -31,6 +31,156 @@ const CURATED_SCENES: Record<
     altText: string;
   }
 > = {
+  accelerate: {
+    themeColor: '#3b82f6',
+    category: 'motion',
+    semanticScene: 'A sleek car becoming visibly faster with animated motion speed lines and racing energy',
+    emotion: 'Dynamic & Fast',
+    characterAction: 'Rapidly accelerating with motion blur',
+    visualSearchQuery: 'car accelerating speeding forward with motion lines cartoon',
+    altText: 'A car rapidly accelerating forward with animated speed lines and motion trails',
+    svg: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <defs>
+        <linearGradient id="bg-accelerate" x1="0%" y1="0%" x2="1" y2="1">
+          <stop offset="0%" stop-color="#eff6ff"/>
+          <stop offset="100%" stop-color="#dbeafe"/>
+        </linearGradient>
+      </defs>
+      <style>
+        @keyframes carMotion { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(7px); } }
+        @keyframes streakPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .car-anim { animation: carMotion 2s ease-in-out infinite; }
+        .streak-anim { animation: streakPulse 1.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .car-anim, .streak-anim { animation: none !important; }
+        }
+      </style>
+      <rect width="200" height="200" rx="28" fill="url(#bg-accelerate)"/>
+      <path d="M15 160C70 160 130 160 185 160" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <line x1="20" y1="130" x2="60" y2="130" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" class="streak-anim"/>
+      <line x1="10" y1="140" x2="45" y2="140" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" class="streak-anim"/>
+      <line x1="25" y1="150" x2="55" y2="150" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" class="streak-anim"/>
+      <g class="car-anim">
+        <path d="M60 145H160C165 145 170 140 168 135L152 110C150 106 145 104 140 104H95C90 104 85 108 82 112L65 136C62 140 60 145 60 145Z" fill="#2563eb" stroke="#1e293b" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M96 108H138L148 126H90L96 108Z" fill="#bfdbfe" stroke="#1e293b" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle cx="85" cy="148" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="3"/>
+        <circle cx="145" cy="148" r="14" fill="#0f172a" stroke="#ffffff" stroke-width="3"/>
+        <circle cx="85" cy="148" r="5" fill="#94a3b8"/>
+        <circle cx="145" cy="148" r="5" fill="#94a3b8"/>
+        <polygon points="166,134 176,137 166,140" fill="#facc15"/>
+      </g>
+    </svg>`,
+  },
+
+  decline: {
+    themeColor: '#ef4444',
+    category: 'trend',
+    semanticScene: 'A business chart with a clear red downward trending arrow declining toward the bottom',
+    emotion: 'Downturn & Decreasing',
+    characterAction: 'Graph line moving steadily downward',
+    visualSearchQuery: 'downward graph chart declining arrow cartoon',
+    altText: 'Downward graph showing declining trend line with downward arrow',
+    svg: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <defs>
+        <linearGradient id="bg-decline" x1="0%" y1="0%" x2="1" y2="1">
+          <stop offset="0%" stop-color="#fef2f2"/>
+          <stop offset="100%" stop-color="#fee2e2"/>
+        </linearGradient>
+      </defs>
+      <style>
+        @keyframes dipAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+        .dip-line { animation: dipAnim 2.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .dip-line { animation: none !important; }
+        }
+      </style>
+      <rect width="200" height="200" rx="28" fill="url(#bg-decline)"/>
+      <line x1="35" y1="40" x2="35" y2="160" stroke="#94a3b8" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="35" y1="160" x2="170" y2="160" stroke="#94a3b8" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="35" y1="120" x2="165" y2="120" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <line x1="35" y1="80" x2="165" y2="80" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <g class="dip-line">
+        <path d="M45 65L85 85L120 115L155 145" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <polygon points="155,134 165,148 148,150" fill="#ef4444"/>
+        <circle cx="45" cy="65" r="4.5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle cx="85" cy="85" r="4.5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle cx="120" cy="115" r="4.5" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+      </g>
+    </svg>`,
+  },
+
+  expand: {
+    themeColor: '#8b5cf6',
+    category: 'growth',
+    semanticScene: 'A glowing geometrical shape expanding outward in all dimensions with ripple rings',
+    emotion: 'Growing & Expanding',
+    characterAction: 'Expanding outward continuously',
+    visualSearchQuery: 'expanding growing outward sphere cartoon',
+    altText: 'Geometric shape visibly expanding outward with subtle animated pulse waves',
+    svg: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <defs>
+        <linearGradient id="bg-expand" x1="0%" y1="0%" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f5f3ff"/>
+          <stop offset="100%" stop-color="#ede9fe"/>
+        </linearGradient>
+      </defs>
+      <style>
+        @keyframes pulseGrow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        .grow-circle { transform-origin: center; animation: pulseGrow 2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .grow-circle { animation: none !important; }
+        }
+      </style>
+      <rect width="200" height="200" rx="28" fill="url(#bg-expand)"/>
+      <circle cx="100" cy="100" r="68" stroke="#ddd6fe" stroke-width="2" stroke-dasharray="6 4"/>
+      <circle cx="100" cy="100" r="52" stroke="#c4b5fd" stroke-width="2.5"/>
+      <g class="grow-circle">
+        <circle cx="100" cy="100" r="36" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3.5"/>
+        <path d="M100 45L100 35M100 35L95 40M100 35L105 40" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+        <path d="M100 155L100 165M100 165L95 160M100 165L105 160" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+        <path d="M45 100L35 100M35 100L40 95M35 100L40 105" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+        <path d="M155 100L165 100M165 100L160 95M165 100L160 105" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>`,
+  },
+
+  prevent: {
+    themeColor: '#059669',
+    category: 'protection',
+    semanticScene: 'A sturdy barrier stopping a rolling threat from crossing the boundary line',
+    emotion: 'Guarded & Safe',
+    characterAction: 'Barrier stopping and deflecting impact',
+    visualSearchQuery: 'barrier stopping rolling boulder hazard cartoon',
+    altText: 'Sturdy safety barrier positioned to block an approaching obstacle',
+    svg: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+      <defs>
+        <linearGradient id="bg-prevent" x1="0%" y1="0%" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f0fdf4"/>
+          <stop offset="100%" stop-color="#dcfce7"/>
+        </linearGradient>
+      </defs>
+      <style>
+        @keyframes blockPulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .barrier-block { animation: blockPulse 2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .barrier-block { animation: none !important; }
+        }
+      </style>
+      <rect width="200" height="200" rx="28" fill="url(#bg-prevent)"/>
+      <path d="M20 160C70 160 130 160 180 160" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>
+      <g class="barrier-block">
+        <rect x="95" y="70" width="16" height="88" rx="3" fill="#059669" stroke="#1e293b" stroke-width="3"/>
+        <rect x="80" y="90" width="46" height="14" rx="3" fill="#eab308" stroke="#1e293b" stroke-width="2.5"/>
+        <rect x="80" y="120" width="46" height="14" rx="3" fill="#eab308" stroke="#1e293b" stroke-width="2.5"/>
+        <line x1="86" y1="90" x2="86" y2="104" stroke="#000" stroke-width="2"/>
+        <line x1="102" y1="90" x2="102" y2="104" stroke="#000" stroke-width="2"/>
+        <line x1="118" y1="90" x2="118" y2="104" stroke="#000" stroke-width="2"/>
+      </g>
+      <circle cx="50" cy="140" r="18" fill="#ef4444" stroke="#1e293b" stroke-width="3"/>
+      <path d="M72 130L78 135M72 145L78 140" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+    </svg>`,
+  },
+
   abandon: {
     themeColor: '#f43f5e',
     category: 'separation',
@@ -736,6 +886,22 @@ function generateProceduralCaricatureSvg(
  * Known custom cognitive memory tips for high-frequency words
  */
 const KNOWN_MEMORY_TIPS: Record<string, { en: string; tr: string }> = {
+  accelerate: {
+    en: 'Visualize a streamlined sports car instantly kicking into high gear, streaking forward with speed lines.',
+    tr: 'Gaza basınca aniden hızlanıp geride rüzgar çizgileri bırakan spor arabayı gözünüzde canlandırın.',
+  },
+  decline: {
+    en: 'Visualize a market chart with a distinct red arrow pointing downward, showing falling numbers.',
+    tr: 'Aşağıya doğru eğim yapan kırmızı düşüş grafiğini ve azalan değerleri hatırlayın.',
+  },
+  expand: {
+    en: 'Visualize a crystal or balloon steadily swelling and growing larger in all directions.',
+    tr: 'Her yöne doğru giderek genişleyen, büyüyen ve hacim kazanan nesneyi düşünün.',
+  },
+  prevent: {
+    en: 'Visualize a heavy metal security gate or barrier dropping down firmly to block danger.',
+    tr: 'Tehlikeyi engellemek için anında kapanan sağlam güvenlik bariyerini zihninizde tutun.',
+  },
   abandon: {
     en: 'Visualize a traveler leaving their heavy baggage behind to move forward freely.',
     tr: 'Ağır çantasını yol kenarında bırakıp geriye bakmadan uzaklaşan kişiyi hayal edin.',

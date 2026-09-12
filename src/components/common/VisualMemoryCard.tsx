@@ -224,6 +224,14 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
               </span>
             </div>
           )}
+          {vocab.antonyms && vocab.antonyms.length > 0 && (
+            <div className="flex items-start gap-1">
+              <span className="font-bold text-slate-500 shrink-0">Zıt Anlam:</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium break-words">
+                {vocab.antonyms.slice(0, 3).join(', ')}
+              </span>
+            </div>
+          )}
           {vocab.sourceRefs && vocab.sourceRefs.length > 0 && (
             <div className="text-[10px] text-slate-400 pt-1 flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-brand-500" />

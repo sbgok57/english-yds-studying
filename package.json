@@ -10,11 +10,16 @@
     "typecheck": "./node_modules/.bin/tsc --noEmit",
     "lint": "./node_modules/.bin/eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "validate:content": "./node_modules/.bin/tsx scripts/validate-content.ts",
+    "validate-content": "./node_modules/.bin/tsx scripts/validate-content.ts",
     "validate:vocabulary": "./node_modules/.bin/tsx scripts/validate-vocabulary-content.ts",
+    "validate-vocabulary": "./node_modules/.bin/tsx scripts/validate-vocabulary-content.ts",
     "validate:grammar": "./node_modules/.bin/tsx scripts/validate-grammar-content.ts",
+    "validate-grammar-content": "./node_modules/.bin/tsx scripts/validate-grammar-content.ts",
     "validate:yds": "./node_modules/.bin/tsx scripts/validate-yds-content.ts",
+    "validate:pdf": "./node_modules/.bin/tsx scripts/validate-pdf-import.ts",
+    "validate-pdf-import": "./node_modules/.bin/tsx scripts/validate-pdf-import.ts",
     "clean:pdf": "./node_modules/.bin/tsx scripts/clean-corrupted-pdf-imports.ts",
-    "validate": "npm run validate:vocabulary && npm run validate:content && npm run validate:grammar && npm run validate:yds",
+    "validate": "npm run validate:vocabulary && npm run validate:content && npm run validate:grammar && npm run validate:yds && npm run validate:pdf",
     "test": "./node_modules/.bin/tsx scripts/run-tests.ts"
   },
   "dependencies": {

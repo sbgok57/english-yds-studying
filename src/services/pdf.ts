@@ -1,4 +1,4 @@
-import { sanitizeWord, sanitizeMeanings } from './wordSanitizer';
+import { sanitizeWord, sanitizeMeanings, repairKnownPdfDropouts, isExtractionCorrupted } from './wordSanitizer';
 import { VocabularyItem, VocabularySource, PartOfSpeech } from '../types/vocabulary';
 import { normalizeVocabularyKey, normalizeMeaningsList } from './importer';
 
@@ -228,24 +228,30 @@ export class PdfVocabularyImporter {
     reason?: string;
   } {
     const raw = ocrWord.trim();
+    const repaired = repairKnownPdfDropouts(raw);
+    const wasRepaired = repaired.toLowerCase() !== raw.toLowerCase();
 
     // Check for corrupt replacement characters or suspicious non-alphabetic noise
-    const hasReplacementChar = raw.includes('\uFFFD');
+    const hasReplacementChar = raw.includes('\uFFFD') || /[\uFFFDÃÄÅ]/.test(raw);
+    const corrupted = isExtractionCorrupted(repaired);
     const isAmbiguous =
       /rn/i.test(raw) ||
       /cl/i.test(raw) ||
-      /abando[mn]/i.test(raw) ||
       hasReplacementChar ||
+      corrupted ||
       confidence < 0.80;
 
+    const requiresManualReview = isAmbiguous && !wasRepaired;
+    const finalConfidence = wasRepaired ? 0.99 : hasReplacementChar || corrupted ? 0.45 : confidence;
+
     return {
-      acceptedWord: raw,
-      requiresManualReview: isAmbiguous,
-      confidence,
+      acceptedWord: repaired,
+      requiresManualReview,
+      confidence: finalConfidence,
       rawOCRText: raw,
       reason: hasReplacementChar
-        ? 'Bozuk veya okunamayan karakter () içeriyor'
-        : isAmbiguous
+        ? 'Bozuk veya okunamayan karakter içeriyor'
+        : requiresManualReview
         ? 'OCR güven skoru eşiğin altında veya belirsiz karakter kümesi'
         : undefined,
     };
@@ -372,12 +378,12 @@ export class PdfVocabularyImporter {
       'put up with', 'rely on', 'rule out', 'run across', 'run away', 'run into',
       'run out of', 'run over', 'set aside', 'set off', 'set out', 'set up',
       'show off', 'show up', 'slow down', 'stand by', 'stand for', 'stand out',
-      'stand up for', 'take after', 'take away', 'take down', 'take in',
+      'stand up for', 'stem from', 'take after', 'take away', 'take down', 'take in',
       'take off', 'take on', 'take over', 'take to', 'take up', 'tell apart',
       'tell off', 'think over', 'throw away', 'try on', 'try out', 'turn down',
       'turn into', 'turn off', 'turn on', 'turn out', 'turn over', 'turn up',
       'use up', 'wait on', 'wake up', 'warm up', 'wash up', 'watch out',
-      'wear off', 'wear out', 'wind up', 'wipe out', 'work out'
+      'wear off', 'wear out', 'wind up', 'wipe out', 'work out', 'be fed up with'
     ];
 
     const normalized = phrase.toLowerCase().trim();
@@ -410,11 +416,35 @@ export class PdfVocabularyImporter {
       const line = this.cleanAndNormalizeText(rawLine.trim());
       if (!line || line.length < 3 || line.startsWith('---') || line.startsWith('Page') || /^\d+$/.test(line)) continue;
 
+      // Skip table header lines
+      if (/^(?:phrasal verb|verb|word|term|meaning|synonym|kelime|anlam|örnek|example)\b/i.test(line)) {
+        continue;
+      }
+
       let term = '';
       let meaning = '';
+      let synonymsList: string[] = [];
 
-      // Check common delimiters: " - ", " : ", " = ", "\t", "–", "—"
-      if (line.includes(' - ')) {
+      // Check table column structures first: pipe "|", tab "\t"
+      if (line.includes('|')) {
+        const parts = line.split('|').map((p) => p.trim()).filter(Boolean);
+        if (parts.length >= 2) {
+          term = parts[0];
+          meaning = parts[1];
+          if (parts[2]) {
+            synonymsList = parts[2].split(/[,;/]/).map((s) => s.trim()).filter(Boolean);
+          }
+        }
+      } else if (line.includes('\t')) {
+        const parts = line.split('\t').map((p) => p.trim()).filter(Boolean);
+        if (parts.length >= 2) {
+          term = parts[0];
+          meaning = parts[1];
+          if (parts[2]) {
+            synonymsList = parts[2].split(/[,;/]/).map((s) => s.trim()).filter(Boolean);
+          }
+        }
+      } else if (line.includes(' - ')) {
         const parts = line.split(' - ');
         term = parts[0].trim();
         meaning = parts.slice(1).join(' - ').trim();
@@ -434,12 +464,7 @@ export class PdfVocabularyImporter {
         const parts = line.split(' = ');
         term = parts[0].trim();
         meaning = parts.slice(1).join(' = ').trim();
-      } else if (line.includes('\t')) {
-        const parts = line.split('\t');
-        term = parts[0].trim();
-        meaning = parts.slice(1).join(' ').trim();
       } else {
-        // Line may only have the term/phrasal verb
         term = line;
         meaning = '';
       }
@@ -453,7 +478,7 @@ export class PdfVocabularyImporter {
       const isPhrasal = this.isPhrasalVerb(strippedTerm) || strippedTerm.includes(' ');
       const partOfSpeech: PartOfSpeech = isPhrasal ? 'phrasal_verb' : 'verb';
 
-      // OCR Confidence validation
+      // OCR Confidence validation & safe dropout recovery
       const isFromOcr = tierUsed.includes('OCR');
       const ocrEvaluation = this.evaluateOcrWord(strippedTerm, isFromOcr ? 0.78 : 0.98);
 
@@ -490,25 +515,33 @@ export class PdfVocabularyImporter {
         manualReviewCount++;
       }
 
-      const cleanPdfWord = sanitizeWord(strippedTerm) || strippedTerm;
+      const cleanPdfWord = sanitizeWord(ocrEvaluation.acceptedWord) || ocrEvaluation.acceptedWord;
       const cleanPdfMeanings = normalizedMeanings.length > 0 ? sanitizeMeanings(normalizedMeanings) : ['Akademik anlam'];
 
       items.push({
         id: `pdf-${Date.now()}-${items.length + 1}-${Math.random().toString(36).substring(2, 6)}`,
         word: cleanPdfWord,
         displayWord: cleanPdfWord,
+        rawText: line,
         rawSourceText: line,
+        normalizedText: cleanPdfWord,
+        sourceFile: fileName,
+        sourcePage: pageNumber,
+        sourcePosition: items.length + 1,
+        extractionMethod: tierUsed,
+        confidence: ocrEvaluation.confidence,
+        needsManualReview: requiresManualReview,
         canonicalWord: cleanPdfWord,
         sourceText: line,
         meaningsTr: cleanPdfMeanings,
         partOfSpeech,
-        example: `The phrasal verb "${strippedTerm}" is frequently tested in academic reading and grammar questions.`,
-        exampleTr: `"${strippedTerm}" deyimsel fiili akademik okuma ve dilbilgisi sorularında sıklıkla test edilir.`,
-        synonyms: [],
+        example: `The phrasal verb "${cleanPdfWord}" is frequently tested in academic reading and grammar questions.`,
+        exampleTr: `"${cleanPdfWord}" deyimsel fiili akademik okuma ve dilbilgisi sorularında sıklıkla test edilir.`,
+        synonyms: synonymsList,
         antonyms: [],
         collocations: [],
-        visualMnemonic: `Visual context card for ${strippedTerm}: ${normalizedMeanings[0] || 'academic verb'}.`,
-        visualPrompt: `Educational visual mnemonic illustrating "${strippedTerm}", clear contextual cue, no large text.`,
+        visualMnemonic: `Visual context card for ${cleanPdfWord}: ${normalizedMeanings[0] || 'academic verb'}.`,
+        visualPrompt: `Educational visual mnemonic illustrating "${cleanPdfWord}", clear contextual cue, no large text.`,
         pronunciation: `/${normWord}/`,
         difficulty: 'YDS',
         source: `PDF: ${fileName}`,
@@ -519,8 +552,14 @@ export class PdfVocabularyImporter {
             fileName,
             sourceName: fileName,
             sourcePage: pageNumber,
+            sourcePosition: items.length + 1,
             sourceText: line,
             rawSourceText: line,
+            rawText: line,
+            normalizedText: cleanPdfWord,
+            extractionMethod: tierUsed,
+            confidence: ocrEvaluation.confidence,
+            needsManualReview: requiresManualReview,
             importedAt: timestamp,
           },
         ],
@@ -687,6 +726,7 @@ export class PdfVocabularyImporter {
         /^\W+$/.test(word) ||
         /^--+/.test(word) ||
         word.includes('\uFFFD') ||
+        isExtractionCorrupted(word) ||
         word.length > 80;
 
       if (isCorrupted) {
@@ -701,6 +741,71 @@ export class PdfVocabularyImporter {
       cleanItems,
       removedCount: removedWords.length,
       removedWords,
+    };
+  }
+
+  /**
+   * Performs an exhaustive integrity audit on a vocabulary list.
+   * Classifies records into VALID, REPAIRABLE, DUPLICATE, CORRUPTED, and MANUAL REVIEW.
+   * Generates a lossless backup snapshot before any modifications.
+   */
+  public static auditVocabularyIntegrity(items: VocabularyItem[]): {
+    validItems: VocabularyItem[];
+    repairableItems: VocabularyItem[];
+    duplicateItems: VocabularyItem[];
+    corruptedItems: VocabularyItem[];
+    manualReviewItems: VocabularyItem[];
+    backupJson: string;
+  } {
+    const backupJson = JSON.stringify(items, null, 2);
+    const validItems: VocabularyItem[] = [];
+    const repairableItems: VocabularyItem[] = [];
+    const duplicateItems: VocabularyItem[] = [];
+    const corruptedItems: VocabularyItem[] = [];
+    const manualReviewItems: VocabularyItem[] = [];
+    const seenWords = new Set<string>();
+
+    for (const item of items) {
+      const rawWord = item.word ? item.word.trim() : '';
+      const normWord = normalizeVocabularyKey(rawWord);
+
+      if (!rawWord || isExtractionCorrupted(rawWord) || !item.meaningsTr || item.meaningsTr.length === 0) {
+        // Check if repairable
+        const repaired = repairKnownPdfDropouts(rawWord);
+        if (repaired && repaired !== rawWord && !isExtractionCorrupted(repaired) && item.meaningsTr?.length) {
+          repairableItems.push({
+            ...item,
+            word: repaired,
+            displayWord: repaired,
+            normalizedText: repaired,
+          });
+        } else {
+          corruptedItems.push(item);
+        }
+        continue;
+      }
+
+      if (seenWords.has(normWord)) {
+        duplicateItems.push(item);
+        continue;
+      }
+      seenWords.add(normWord);
+
+      if (item.requiresManualReview || item.needsManualReview) {
+        manualReviewItems.push(item);
+        continue;
+      }
+
+      validItems.push(item);
+    }
+
+    return {
+      validItems,
+      repairableItems,
+      duplicateItems,
+      corruptedItems,
+      manualReviewItems,
+      backupJson,
     };
   }
 }

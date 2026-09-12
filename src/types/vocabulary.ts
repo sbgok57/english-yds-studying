@@ -177,8 +177,14 @@ export interface SourceReference {
   folderName?: string;
   setName?: string;
   sourcePage?: number;
+  sourcePosition?: number;
   sourceText?: string;
   rawSourceText?: string;
+  rawText?: string;
+  normalizedText?: string;
+  extractionMethod?: string;
+  confidence?: number;
+  needsManualReview?: boolean;
   sourceTermIndex?: number;
   importedAt: string;
 }
@@ -251,10 +257,36 @@ export interface VocabularyItem {
   level?: WordLevel;
   importance?: WordImportance;
   wordFamily?: WordFamily;
+  relatedWordForms?: string[];
+  visualType?: string;
+  sourceMetadata?: Record<string, unknown> | SourceReference;
   ydsTrap?: YdsTrap;
   mediaContext?: MediaContext;
   logicMnemonic?: LogicMnemonic;
   ydsNote?: string;
+
+  // Source provenance & extraction safety
+  rawText?: string;
+  normalizedText?: string;
+  sourceFile?: string;
+  sourcePage?: number;
+  sourcePosition?: number;
+  extractionMethod?: string;
+  confidence?: number;
+  needsManualReview?: boolean;
+  errorPriority?: number;
+
+  // Learning state projections (for joined/composite display)
+  mastery?: number;
+  correctCount?: number;
+  incorrectCount?: number;
+  lastReviewedAt?: string | null;
+  nextReviewAt?: string;
+  consecutiveCorrect?: number;
+  consecutiveIncorrect?: number;
+  easeFactor?: number;
+  intervalDays?: number;
+  learningStage?: LearningStage;
 }
 
 /**
