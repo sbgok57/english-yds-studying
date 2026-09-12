@@ -8,8 +8,8 @@ function runVocabularyValidation() {
   let errors = 0;
 
   console.log(`Total static vocabulary items declared: ${INITIAL_VOCABULARY.length}`);
-  if (INITIAL_VOCABULARY.length < 200) {
-    console.error(`❌ ERROR: Expected at least 200 vocabulary items, found only ${INITIAL_VOCABULARY.length}`);
+  if (INITIAL_VOCABULARY.length < 400) {
+    console.error(`❌ ERROR: Expected at least 400 vocabulary items, found only ${INITIAL_VOCABULARY.length}`);
     errors++;
   }
 

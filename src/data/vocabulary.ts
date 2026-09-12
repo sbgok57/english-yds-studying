@@ -1,4 +1,4 @@
-import { VocabularyItem } from '../types';
+import { VocabularyItem } from "../types";
 
 export const INITIAL_VOCABULARY: VocabularyItem[] = [
   {
@@ -1485,7 +1485,9 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "meaningsTr": [
       "yaygın",
       "hakim",
-      "sık rastlanan"
+      "sık rastlanan",
+      "mevcut",
+      "olagelen"
     ],
     "partOfSpeech": "adjective",
     "example": "Waterborne diseases remain prevalent in rural regions lacking sanitation infrastructure.",
@@ -1516,6 +1518,14 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "sourceType": "seed",
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
+      },
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
       }
     ],
     "level": 1,
@@ -1631,7 +1641,8 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "meaningsTr": [
       "savunmasız",
       "hassas",
-      "kırılgan"
+      "kırılgan",
+      "korunmasız"
     ],
     "partOfSpeech": "adjective",
     "example": "Elderly citizens and newborns are especially vulnerable to respiratory infections in winter.",
@@ -1663,6 +1674,14 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "sourceType": "seed",
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
+      },
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
       }
     ],
     "level": 4,
@@ -1777,7 +1796,8 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "word": "facilitate",
     "meaningsTr": [
       "kolaylaştırmak",
-      "olanak sağlamak"
+      "olanak sağlamak",
+      "hafifletmek"
     ],
     "partOfSpeech": "verb",
     "example": "Digital learning platforms facilitate independent study by giving learners instant feedback.",
@@ -1808,6 +1828,14 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
         "sourceType": "seed",
         "setName": "YDS Core",
         "importedAt": "2026-09-10T12:00:00.000Z"
+      },
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
       }
     ],
     "level": 4,
@@ -14231,6 +14259,13234 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "emotion": "Determined & Positive",
     "characterAction": "Standing with energized engaged posture",
     "altText": "Cartoon character depicting the concept of prosperously (refahla)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-cause",
+    "word": "cause",
+    "meaningsTr": [
+      "neden olmak yol açmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Most heart attacks are caused by blood clots.",
+    "exampleTr": "Örnek: \"neden olmak yol açmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "cause in practice",
+      "academic cause"
+    ],
+    "visualMnemonic": "Cause: neden olmak yol açmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/cause/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "cause",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to cause",
+      "differenceTr": "'cause' anlamı: neden olmak yol açmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Most heart attacks are caused by blood clots.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'cause' kelimesi 'neden olmak yol açmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "cause (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'neden olmak yol açmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Cause - neden olmak yol açmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with cause (neden olmak yol açmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with cause (neden olmak yol açmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene cause",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with cause (neden olmak yol açmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with cause concept",
+    "altText": "Cartoon character depicting the concept of cause (neden olmak yol açmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-prediction",
+    "word": "prediction",
+    "meaningsTr": [
+      "tahmin öngörü"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Her predictions turned out to be accurate.",
+    "exampleTr": "Örnek: \"tahmin öngörü\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "prediction in practice",
+      "academic prediction"
+    ],
+    "visualMnemonic": "Prediction: tahmin öngörü kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/prediction/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "prediction",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to prediction",
+      "differenceTr": "'prediction' anlamı: tahmin öngörü. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her predictions turned out to be accurate.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'prediction' kelimesi 'tahmin öngörü' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "prediction (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tahmin öngörü' kavramının zihinde somutlaşması.",
+      "mentalImage": "Prediction - tahmin öngörü"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with prediction (tahmin öngörü)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with prediction (tahmin öngörü). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene prediction",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with prediction (tahmin öngörü)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with prediction concept",
+    "altText": "Cartoon character depicting the concept of prediction (tahmin öngörü)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-speculation",
+    "word": "speculation",
+    "meaningsTr": [
+      "tahmin",
+      "dayanaksız görüş"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Rumours that they are about to marry have been dismissed as pure speculation.",
+    "exampleTr": "Örnek: \"tahmin\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "speculation in practice",
+      "academic speculation"
+    ],
+    "visualMnemonic": "Speculation: tahmin kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/speculation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "speculation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to speculation",
+      "differenceTr": "'speculation' anlamı: tahmin. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Rumours that they are about to marry have been dismissed as pure speculation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'speculation' kelimesi 'tahmin' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "speculation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tahmin' kavramının zihinde somutlaşması.",
+      "mentalImage": "Speculation - tahmin"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with speculation (tahmin)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with speculation (tahmin). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene speculation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with speculation (tahmin)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with speculation concept",
+    "altText": "Cartoon character depicting the concept of speculation (tahmin)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-inclusion",
+    "word": "inclusion",
+    "meaningsTr": [
+      "dahil olma",
+      "kapsama"
+    ],
+    "partOfSpeech": "noun",
+    "example": "She is being considered for inclusion in the Olympic team.",
+    "exampleTr": "Örnek: \"dahil olma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "inclusion in practice",
+      "academic inclusion"
+    ],
+    "visualMnemonic": "Inclusion: dahil olma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/inclusion/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inclusion",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to inclusion",
+      "differenceTr": "'inclusion' anlamı: dahil olma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She is being considered for inclusion in the Olympic team.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'inclusion' kelimesi 'dahil olma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "inclusion (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dahil olma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Inclusion - dahil olma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with inclusion (dahil olma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with inclusion (dahil olma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene inclusion",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with inclusion (dahil olma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with inclusion concept",
+    "altText": "Cartoon character depicting the concept of inclusion (dahil olma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-expansion",
+    "word": "expansion",
+    "meaningsTr": [
+      "genişleme",
+      "yayılma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Expansion into new areas of research is possible.",
+    "exampleTr": "Örnek: \"genişleme\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "expansion in practice",
+      "academic expansion"
+    ],
+    "visualMnemonic": "Expansion: genişleme kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/expansion/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "expansion",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to expansion",
+      "differenceTr": "'expansion' anlamı: genişleme. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Expansion into new areas of research is possible.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'expansion' kelimesi 'genişleme' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "expansion (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'genişleme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Expansion - genişleme"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with expansion (genişleme)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with expansion (genişleme). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene expansion",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with expansion (genişleme)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with expansion concept",
+    "altText": "Cartoon character depicting the concept of expansion (genişleme)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-decisive",
+    "word": "decisive",
+    "meaningsTr": [
+      "kararlı kesin",
+      "nihai",
+      "şüphesiz"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "DNA test results were decisive in proving his innocence.",
+    "exampleTr": "Örnek: \"kararlı kesin\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "decisive in practice",
+      "academic decisive"
+    ],
+    "visualMnemonic": "Decisive: kararlı kesin kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/decisive/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "decisive",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to decisive",
+      "differenceTr": "'decisive' anlamı: kararlı kesin. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"DNA test results were decisive in proving his innocence.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'decisive' kelimesi 'kararlı kesin' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "decisive (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kararlı kesin' kavramının zihinde somutlaşması.",
+      "mentalImage": "Decisive - kararlı kesin"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with decisive (kararlı kesin)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with decisive (kararlı kesin). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene decisive",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with decisive (kararlı kesin)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with decisive concept",
+    "altText": "Cartoon character depicting the concept of decisive (kararlı kesin)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abundant",
+    "word": "abundant",
+    "meaningsTr": [
+      "bol",
+      "çok"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "There is abundant evidence that cars have a harmful effect on the environment.",
+    "exampleTr": "Örnek: \"bol\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abundant in practice",
+      "academic abundant"
+    ],
+    "visualMnemonic": "Abundant: bol kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abundant/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "1. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "abundant",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abundant",
+      "differenceTr": "'abundant' anlamı: bol. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There is abundant evidence that cars have a harmful effect on the environment.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abundant' kelimesi 'bol' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abundant (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bol' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abundant - bol"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 1. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abundant (bol)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abundant (bol). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abundant",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abundant (bol)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abundant concept",
+    "altText": "Cartoon character depicting the concept of abundant (bol)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-obsolete",
+    "word": "obsolete",
+    "meaningsTr": [
+      "modası geçmiş",
+      "kullanılmayan"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Gas lamps became obsolete when electric lighting was invented.",
+    "exampleTr": "Örnek: \"modası geçmiş\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "obsolete in practice",
+      "academic obsolete"
+    ],
+    "visualMnemonic": "Obsolete: modası geçmiş kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/obsolete/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "obsolete",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to obsolete",
+      "differenceTr": "'obsolete' anlamı: modası geçmiş. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Gas lamps became obsolete when electric lighting was invented.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'obsolete' kelimesi 'modası geçmiş' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "obsolete (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'modası geçmiş' kavramının zihinde somutlaşması.",
+      "mentalImage": "Obsolete - modası geçmiş"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with obsolete (modası geçmiş)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with obsolete (modası geçmiş). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene obsolete",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with obsolete (modası geçmiş)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with obsolete concept",
+    "altText": "Cartoon character depicting the concept of obsolete (modası geçmiş)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-futile",
+    "word": "futile",
+    "meaningsTr": [
+      "nafile",
+      "boşuna"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "It is completely futile trying to reason with him, he just won’t listen.",
+    "exampleTr": "Örnek: \"nafile\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "futile in practice",
+      "academic futile"
+    ],
+    "visualMnemonic": "Futile: nafile kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/futile/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "futile",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to futile",
+      "differenceTr": "'futile' anlamı: nafile. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It is completely futile trying to reason with him, he just won’t listen.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'futile' kelimesi 'nafile' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "futile (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'nafile' kavramının zihinde somutlaşması.",
+      "mentalImage": "Futile - nafile"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with futile (nafile)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with futile (nafile). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene futile",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with futile (nafile)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with futile concept",
+    "altText": "Cartoon character depicting the concept of futile (nafile)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-implicit",
+    "word": "implicit",
+    "meaningsTr": [
+      "imalı",
+      "üstü kapalı"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He interpreted her comments as an implicit criticism of the government.",
+    "exampleTr": "Örnek: \"imalı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "implicit in practice",
+      "academic implicit"
+    ],
+    "visualMnemonic": "Implicit: imalı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/implicit/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "implicit",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to implicit",
+      "differenceTr": "'implicit' anlamı: imalı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He interpreted her comments as an implicit criticism of the government.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'implicit' kelimesi 'imalı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "implicit (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'imalı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Implicit - imalı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with implicit (imalı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with implicit (imalı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene implicit",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with implicit (imalı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with implicit concept",
+    "altText": "Cartoon character depicting the concept of implicit (imalı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-expand",
+    "word": "expand",
+    "meaningsTr": [
+      "genişletmek",
+      "yayılmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The air in the balloon expands when heated.",
+    "exampleTr": "Örnek: \"genişletmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "expand in practice",
+      "academic expand"
+    ],
+    "visualMnemonic": "Expand: genişletmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/expand/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "expand",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to expand",
+      "differenceTr": "'expand' anlamı: genişletmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The air in the balloon expands when heated.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'expand' kelimesi 'genişletmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "expand (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'genişletmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Expand - genişletmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with expand (genişletmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with expand (genişletmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene expand",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with expand (genişletmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with expand concept",
+    "altText": "Cartoon character depicting the concept of expand (genişletmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-progress",
+    "word": "progress",
+    "meaningsTr": [
+      "gelişim göstermek",
+      "ilerlemek"
+    ],
+    "partOfSpeech": "noun",
+    "example": "I’m not making much progress with my French.",
+    "exampleTr": "Örnek: \"gelişim göstermek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "progress in practice",
+      "academic progress"
+    ],
+    "visualMnemonic": "Progress: gelişim göstermek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/progress/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "progress",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to progress",
+      "differenceTr": "'progress' anlamı: gelişim göstermek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’m not making much progress with my French.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'progress' kelimesi 'gelişim göstermek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "progress (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gelişim göstermek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Progress - gelişim göstermek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with progress (gelişim göstermek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with progress (gelişim göstermek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene progress",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with progress (gelişim göstermek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with progress concept",
+    "altText": "Cartoon character depicting the concept of progress (gelişim göstermek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-persuade",
+    "word": "persuade",
+    "meaningsTr": [
+      "ikna etmek",
+      "inandırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "If he doesn’t want to go, nothing you can say will persuade him.",
+    "exampleTr": "Örnek: \"ikna etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "persuade in practice",
+      "academic persuade"
+    ],
+    "visualMnemonic": "Persuade: ikna etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/persuade/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "persuade",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to persuade",
+      "differenceTr": "'persuade' anlamı: ikna etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"If he doesn’t want to go, nothing you can say will persuade him.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'persuade' kelimesi 'ikna etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "persuade (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ikna etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Persuade - ikna etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with persuade (ikna etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with persuade (ikna etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene persuade",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with persuade (ikna etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with persuade concept",
+    "altText": "Cartoon character depicting the concept of persuade (ikna etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-differ",
+    "word": "differ",
+    "meaningsTr": [
+      "ters düşmek",
+      "değişik olmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The findings of the various studies differ significantly.",
+    "exampleTr": "Örnek: \"ters düşmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "differ in practice",
+      "academic differ"
+    ],
+    "visualMnemonic": "Differ: ters düşmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/differ/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "2. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "differ",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to differ",
+      "differenceTr": "'differ' anlamı: ters düşmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The findings of the various studies differ significantly.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'differ' kelimesi 'ters düşmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "differ (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ters düşmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Differ - ters düşmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 2. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with differ (ters düşmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with differ (ters düşmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene differ",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with differ (ters düşmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with differ concept",
+    "altText": "Cartoon character depicting the concept of differ (ters düşmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-boost",
+    "word": "boost",
+    "meaningsTr": [
+      "destekleme",
+      "arttırma"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I tried to boost his ego by praising his work.",
+    "exampleTr": "Örnek: \"destekleme\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "boost in practice",
+      "academic boost"
+    ],
+    "visualMnemonic": "Boost: destekleme kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/boost/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "boost",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to boost",
+      "differenceTr": "'boost' anlamı: destekleme. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I tried to boost his ego by praising his work.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'boost' kelimesi 'destekleme' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "boost (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'destekleme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Boost - destekleme"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with boost (destekleme)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with boost (destekleme). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene boost",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with boost (destekleme)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with boost concept",
+    "altText": "Cartoon character depicting the concept of boost (destekleme)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-capability",
+    "word": "capability",
+    "meaningsTr": [
+      "kabiliyet",
+      "yetenek"
+    ],
+    "partOfSpeech": "noun",
+    "example": "These tests are beyond the capability of an average ten-year-old.",
+    "exampleTr": "Örnek: \"kabiliyet\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "capability in practice",
+      "academic capability"
+    ],
+    "visualMnemonic": "Capability: kabiliyet kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/capability/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "capability",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to capability",
+      "differenceTr": "'capability' anlamı: kabiliyet. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"These tests are beyond the capability of an average ten-year-old.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'capability' kelimesi 'kabiliyet' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "capability (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kabiliyet' kavramının zihinde somutlaşması.",
+      "mentalImage": "Capability - kabiliyet"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with capability (kabiliyet)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with capability (kabiliyet). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene capability",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with capability (kabiliyet)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with capability concept",
+    "altText": "Cartoon character depicting the concept of capability (kabiliyet)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-prejudice",
+    "word": "prejudice",
+    "meaningsTr": [
+      "önyargı"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Laws against racial prejudice must be strictly enforced.",
+    "exampleTr": "Örnek: \"önyargı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "prejudice in practice",
+      "academic prejudice"
+    ],
+    "visualMnemonic": "Prejudice: önyargı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/prejudice/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "prejudice",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to prejudice",
+      "differenceTr": "'prejudice' anlamı: önyargı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Laws against racial prejudice must be strictly enforced.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'prejudice' kelimesi 'önyargı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "prejudice (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'önyargı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Prejudice - önyargı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with prejudice (önyargı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with prejudice (önyargı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene prejudice",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with prejudice (önyargı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with prejudice concept",
+    "altText": "Cartoon character depicting the concept of prejudice (önyargı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-deception",
+    "word": "deception",
+    "meaningsTr": [
+      "aldatmaca",
+      "kandırma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "He was found guilty of obtaining money by deception.",
+    "exampleTr": "Örnek: \"aldatmaca\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "deception in practice",
+      "academic deception"
+    ],
+    "visualMnemonic": "Deception: aldatmaca kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/deception/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deception",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to deception",
+      "differenceTr": "'deception' anlamı: aldatmaca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was found guilty of obtaining money by deception.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'deception' kelimesi 'aldatmaca' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deception (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aldatmaca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deception - aldatmaca"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with deception (aldatmaca)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with deception (aldatmaca). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene deception",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with deception (aldatmaca)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with deception concept",
+    "altText": "Cartoon character depicting the concept of deception (aldatmaca)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-resistance",
+    "word": "resistance",
+    "meaningsTr": [
+      "direnç",
+      "karşı çıkma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "There should be no resistance to the new management structure.",
+    "exampleTr": "Örnek: \"direnç\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "resistance in practice",
+      "academic resistance"
+    ],
+    "visualMnemonic": "Resistance: direnç kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/resistance/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "resistance",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to resistance",
+      "differenceTr": "'resistance' anlamı: direnç. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There should be no resistance to the new management structure.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'resistance' kelimesi 'direnç' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "resistance (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'direnç' kavramının zihinde somutlaşması.",
+      "mentalImage": "Resistance - direnç"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with resistance (direnç)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with resistance (direnç). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene resistance",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with resistance (direnç)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with resistance concept",
+    "altText": "Cartoon character depicting the concept of resistance (direnç)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-nomination",
+    "word": "nomination",
+    "meaningsTr": [
+      "adaylık",
+      "tayin"
+    ],
+    "partOfSpeech": "noun",
+    "example": "There have been two nominations for the new job.",
+    "exampleTr": "Örnek: \"adaylık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "nomination in practice",
+      "academic nomination"
+    ],
+    "visualMnemonic": "Nomination: adaylık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/nomination/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "nomination",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to nomination",
+      "differenceTr": "'nomination' anlamı: adaylık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There have been two nominations for the new job.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'nomination' kelimesi 'adaylık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "nomination (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'adaylık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Nomination - adaylık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with nomination (adaylık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with nomination (adaylık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene nomination",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with nomination (adaylık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with nomination concept",
+    "altText": "Cartoon character depicting the concept of nomination (adaylık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-compatible",
+    "word": "compatible",
+    "meaningsTr": [
+      "uyumlu",
+      "bağdaşan"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "It was when we started living together that we found we just weren’t compatible.",
+    "exampleTr": "Örnek: \"uyumlu\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "compatible in practice",
+      "academic compatible"
+    ],
+    "visualMnemonic": "Compatible: uyumlu kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/compatible/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "3. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "compatible",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to compatible",
+      "differenceTr": "'compatible' anlamı: uyumlu. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It was when we started living together that we found we just weren’t compatible.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'compatible' kelimesi 'uyumlu' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "compatible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uyumlu' kavramının zihinde somutlaşması.",
+      "mentalImage": "Compatible - uyumlu"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 3. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with compatible (uyumlu)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with compatible (uyumlu). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene compatible",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with compatible (uyumlu)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with compatible concept",
+    "altText": "Cartoon character depicting the concept of compatible (uyumlu)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-disastrous",
+    "word": "disastrous",
+    "meaningsTr": [
+      "felaket",
+      "korkunç"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "In 2020, there was a disastrous covid epidemic.",
+    "exampleTr": "Örnek: \"felaket\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "disastrous in practice",
+      "academic disastrous"
+    ],
+    "visualMnemonic": "Disastrous: felaket kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/disastrous/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "disastrous",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to disastrous",
+      "differenceTr": "'disastrous' anlamı: felaket. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"In 2020, there was a disastrous covid epidemic.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'disastrous' kelimesi 'felaket' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "disastrous (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'felaket' kavramının zihinde somutlaşması.",
+      "mentalImage": "Disastrous - felaket"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with disastrous (felaket)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with disastrous (felaket). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene disastrous",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with disastrous (felaket)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with disastrous concept",
+    "altText": "Cartoon character depicting the concept of disastrous (felaket)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-indicative",
+    "word": "indicative",
+    "meaningsTr": [
+      "belirti",
+      "gösterge"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The fall in demand is indicative of a broader trend in consumer spending.",
+    "exampleTr": "Örnek: \"belirti\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "indicative in practice",
+      "academic indicative"
+    ],
+    "visualMnemonic": "Indicative: belirti kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/indicative/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "indicative",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to indicative",
+      "differenceTr": "'indicative' anlamı: belirti. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The fall in demand is indicative of a broader trend in consumer spending.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'indicative' kelimesi 'belirti' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "indicative (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirti' kavramının zihinde somutlaşması.",
+      "mentalImage": "Indicative - belirti"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with indicative (belirti)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with indicative (belirti). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene indicative",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with indicative (belirti)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with indicative concept",
+    "altText": "Cartoon character depicting the concept of indicative (belirti)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-attach",
+    "word": "attach",
+    "meaningsTr": [
+      "iliştirmek",
+      "eklemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She attached a photo to her application form.",
+    "exampleTr": "Örnek: \"iliştirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "attach in practice",
+      "academic attach"
+    ],
+    "visualMnemonic": "Attach: iliştirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/attach/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "attach",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to attach",
+      "differenceTr": "'attach' anlamı: iliştirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She attached a photo to her application form.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'attach' kelimesi 'iliştirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "attach (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iliştirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Attach - iliştirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with attach (iliştirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with attach (iliştirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene attach",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with attach (iliştirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with attach concept",
+    "altText": "Cartoon character depicting the concept of attach (iliştirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-occupy",
+    "word": "occupy",
+    "meaningsTr": [
+      "işgal etmek",
+      "meşgul etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The house hasn’t been occupied by anyone for a few years.",
+    "exampleTr": "Örnek: \"işgal etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "occupy in practice",
+      "academic occupy"
+    ],
+    "visualMnemonic": "Occupy: işgal etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/occupy/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "occupy",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to occupy",
+      "differenceTr": "'occupy' anlamı: işgal etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The house hasn’t been occupied by anyone for a few years.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'occupy' kelimesi 'işgal etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "occupy (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'işgal etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Occupy - işgal etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with occupy (işgal etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with occupy (işgal etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene occupy",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with occupy (işgal etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with occupy concept",
+    "altText": "Cartoon character depicting the concept of occupy (işgal etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-consider",
+    "word": "consider",
+    "meaningsTr": [
+      "göz önünde bulundurmak",
+      "değerlendirmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I think he is being considered for the position.",
+    "exampleTr": "Örnek: \"göz önünde bulundurmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "consider in practice",
+      "academic consider"
+    ],
+    "visualMnemonic": "Consider: göz önünde bulundurmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/consider/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "consider",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to consider",
+      "differenceTr": "'consider' anlamı: göz önünde bulundurmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I think he is being considered for the position.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'consider' kelimesi 'göz önünde bulundurmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "consider (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'göz önünde bulundurmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Consider - göz önünde bulundurmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with consider (göz önünde bulundurmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with consider (göz önünde bulundurmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene consider",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with consider (göz önünde bulundurmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with consider concept",
+    "altText": "Cartoon character depicting the concept of consider (göz önünde bulundurmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-encompass",
+    "word": "encompass",
+    "meaningsTr": [
+      "kapsamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Attica is a historical area of Greece that encompasses the capital, Athens and its environs.",
+    "exampleTr": "Örnek: \"kapsamak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "encompass in practice",
+      "academic encompass"
+    ],
+    "visualMnemonic": "Encompass: kapsamak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/encompass/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "4. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "encompass",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to encompass",
+      "differenceTr": "'encompass' anlamı: kapsamak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Attica is a historical area of Greece that encompasses the capital, Athens and its environs.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'encompass' kelimesi 'kapsamak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "encompass (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kapsamak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Encompass - kapsamak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 4. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with encompass (kapsamak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with encompass (kapsamak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene encompass",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with encompass (kapsamak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with encompass concept",
+    "altText": "Cartoon character depicting the concept of encompass (kapsamak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-inhabit",
+    "word": "inhabit",
+    "meaningsTr": [
+      "ikamet etmek",
+      "yaşamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "They inhabit rivers and ponds, and their entire bodies are green.",
+    "exampleTr": "Örnek: \"ikamet etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "inhabit in practice",
+      "academic inhabit"
+    ],
+    "visualMnemonic": "Inhabit: ikamet etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/inhabit/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "inhabit",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to inhabit",
+      "differenceTr": "'inhabit' anlamı: ikamet etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They inhabit rivers and ponds, and their entire bodies are green.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'inhabit' kelimesi 'ikamet etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "inhabit (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ikamet etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Inhabit - ikamet etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with inhabit (ikamet etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with inhabit (ikamet etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene inhabit",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with inhabit (ikamet etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with inhabit concept",
+    "altText": "Cartoon character depicting the concept of inhabit (ikamet etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-promise",
+    "word": "promise",
+    "meaningsTr": [
+      "söz vermek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He promised faithfully to call me every week.",
+    "exampleTr": "Örnek: \"söz vermek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "promise in practice",
+      "academic promise"
+    ],
+    "visualMnemonic": "Promise: söz vermek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/promise/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "promise",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to promise",
+      "differenceTr": "'promise' anlamı: söz vermek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He promised faithfully to call me every week.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'promise' kelimesi 'söz vermek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "promise (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'söz vermek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Promise - söz vermek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with promise (söz vermek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with promise (söz vermek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene promise",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with promise (söz vermek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with promise concept",
+    "altText": "Cartoon character depicting the concept of promise (söz vermek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-assumption",
+    "word": "assumption",
+    "meaningsTr": [
+      "varsayım"
+    ],
+    "partOfSpeech": "noun",
+    "example": "People tend to make assumptions about you when you have a disability.",
+    "exampleTr": "Örnek: \"varsayım\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "assumption in practice",
+      "academic assumption"
+    ],
+    "visualMnemonic": "Assumption: varsayım kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/assumption/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "assumption",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to assumption",
+      "differenceTr": "'assumption' anlamı: varsayım. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"People tend to make assumptions about you when you have a disability.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'assumption' kelimesi 'varsayım' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "assumption (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'varsayım' kavramının zihinde somutlaşması.",
+      "mentalImage": "Assumption - varsayım"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with assumption (varsayım)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with assumption (varsayım). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene assumption",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with assumption (varsayım)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with assumption concept",
+    "altText": "Cartoon character depicting the concept of assumption (varsayım)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-priority",
+    "word": "priority",
+    "meaningsTr": [
+      "öncelik",
+      "üstünlük"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The president vowed to make education one of his top priorities.",
+    "exampleTr": "Örnek: \"öncelik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "priority in practice",
+      "academic priority"
+    ],
+    "visualMnemonic": "Priority: öncelik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/priority/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "priority",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to priority",
+      "differenceTr": "'priority' anlamı: öncelik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The president vowed to make education one of his top priorities.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'priority' kelimesi 'öncelik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "priority (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'öncelik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Priority - öncelik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with priority (öncelik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with priority (öncelik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene priority",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with priority (öncelik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with priority concept",
+    "altText": "Cartoon character depicting the concept of priority (öncelik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-compliment",
+    "word": "compliment",
+    "meaningsTr": [
+      "iltifat",
+      "özgü"
+    ],
+    "partOfSpeech": "noun",
+    "example": "I take it as a compliment when people say I look like my sister.",
+    "exampleTr": "Örnek: \"iltifat\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "compliment in practice",
+      "academic compliment"
+    ],
+    "visualMnemonic": "Compliment: iltifat kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/compliment/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "compliment",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to compliment",
+      "differenceTr": "'compliment' anlamı: iltifat. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I take it as a compliment when people say I look like my sister.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'compliment' kelimesi 'iltifat' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "compliment (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iltifat' kavramının zihinde somutlaşması.",
+      "mentalImage": "Compliment - iltifat"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with compliment (iltifat)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with compliment (iltifat). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene compliment",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with compliment (iltifat)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with compliment concept",
+    "altText": "Cartoon character depicting the concept of compliment (iltifat)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-artificial",
+    "word": "artificial",
+    "meaningsTr": [
+      "yapay"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Her bouquet was made of artificial flowers.",
+    "exampleTr": "Örnek: \"yapay\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "artificial in practice",
+      "academic artificial"
+    ],
+    "visualMnemonic": "Artificial: yapay kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/artificial/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "artificial",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to artificial",
+      "differenceTr": "'artificial' anlamı: yapay. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her bouquet was made of artificial flowers.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'artificial' kelimesi 'yapay' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "artificial (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yapay' kavramının zihinde somutlaşması.",
+      "mentalImage": "Artificial - yapay"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with artificial (yapay)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with artificial (yapay). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene artificial",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with artificial (yapay)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with artificial concept",
+    "altText": "Cartoon character depicting the concept of artificial (yapay)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-outdated",
+    "word": "outdated",
+    "meaningsTr": [
+      "modası geçmiş zaman aşımına uğramış"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Staff shortages and an outdated computer system are blamed for the problem.",
+    "exampleTr": "Örnek: \"modası geçmiş zaman aşımına uğramış\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "outdated in practice",
+      "academic outdated"
+    ],
+    "visualMnemonic": "Outdated: modası geçmiş zaman aşımına uğramış kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/outdated/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "5. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "outdated",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to outdated",
+      "differenceTr": "'outdated' anlamı: modası geçmiş zaman aşımına uğramış. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Staff shortages and an outdated computer system are blamed for the problem.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'outdated' kelimesi 'modası geçmiş zaman aşımına uğramış' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "outdated (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'modası geçmiş zaman aşımına uğramış' kavramının zihinde somutlaşması.",
+      "mentalImage": "Outdated - modası geçmiş zaman aşımına uğramış"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 5. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with outdated (modası geçmiş zaman aşımına uğramış)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with outdated (modası geçmiş zaman aşımına uğramış). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene outdated",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with outdated (modası geçmiş zaman aşımına uğramış)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with outdated concept",
+    "altText": "Cartoon character depicting the concept of outdated (modası geçmiş zaman aşımına uğramış)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-enhance",
+    "word": "enhance",
+    "meaningsTr": [
+      "arttırmak",
+      "geliştirmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "These scandals will not enhance the organization’s reputation.",
+    "exampleTr": "Örnek: \"arttırmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "enhance in practice",
+      "academic enhance"
+    ],
+    "visualMnemonic": "Enhance: arttırmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/enhance/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "enhance",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to enhance",
+      "differenceTr": "'enhance' anlamı: arttırmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"These scandals will not enhance the organization’s reputation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'enhance' kelimesi 'arttırmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "enhance (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'arttırmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Enhance - arttırmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with enhance (arttırmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with enhance (arttırmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene enhance",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with enhance (arttırmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with enhance concept",
+    "altText": "Cartoon character depicting the concept of enhance (arttırmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-insist",
+    "word": "insist",
+    "meaningsTr": [
+      "ısrar etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She is 75, but she insists on doing all her own housework.",
+    "exampleTr": "Örnek: \"ısrar etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "insist in practice",
+      "academic insist"
+    ],
+    "visualMnemonic": "Insist: ısrar etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/insist/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "insist",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to insist",
+      "differenceTr": "'insist' anlamı: ısrar etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She is 75, but she insists on doing all her own housework.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'insist' kelimesi 'ısrar etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "insist (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ısrar etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Insist - ısrar etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with insist (ısrar etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with insist (ısrar etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene insist",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with insist (ısrar etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with insist concept",
+    "altText": "Cartoon character depicting the concept of insist (ısrar etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-require",
+    "word": "require",
+    "meaningsTr": [
+      "gerek duymak",
+      "ihtiyacı olmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Please call me if you require any further information.",
+    "exampleTr": "Örnek: \"gerek duymak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "require in practice",
+      "academic require"
+    ],
+    "visualMnemonic": "Require: gerek duymak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/require/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "require",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to require",
+      "differenceTr": "'require' anlamı: gerek duymak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Please call me if you require any further information.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'require' kelimesi 'gerek duymak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "require (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gerek duymak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Require - gerek duymak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with require (gerek duymak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with require (gerek duymak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene require",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with require (gerek duymak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with require concept",
+    "altText": "Cartoon character depicting the concept of require (gerek duymak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-provide",
+    "word": "provide",
+    "meaningsTr": [
+      "sağlamak",
+      "temin etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "This booklet provides useful information about local services.",
+    "exampleTr": "Örnek: \"sağlamak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "provide in practice",
+      "academic provide"
+    ],
+    "visualMnemonic": "Provide: sağlamak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/provide/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "provide",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to provide",
+      "differenceTr": "'provide' anlamı: sağlamak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This booklet provides useful information about local services.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'provide' kelimesi 'sağlamak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "provide (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sağlamak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Provide - sağlamak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with provide (sağlamak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with provide (sağlamak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene provide",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with provide (sağlamak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with provide concept",
+    "altText": "Cartoon character depicting the concept of provide (sağlamak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-occupation",
+    "word": "occupation",
+    "meaningsTr": [
+      "uğraş",
+      "iş",
+      "meşguliyet"
+    ],
+    "partOfSpeech": "noun",
+    "example": "It seems to me her favourite occupation is writing.",
+    "exampleTr": "Örnek: \"uğraş\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "occupation in practice",
+      "academic occupation"
+    ],
+    "visualMnemonic": "Occupation: uğraş kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/occupation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "occupation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to occupation",
+      "differenceTr": "'occupation' anlamı: uğraş. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It seems to me her favourite occupation is writing.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'occupation' kelimesi 'uğraş' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "occupation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uğraş' kavramının zihinde somutlaşması.",
+      "mentalImage": "Occupation - uğraş"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with occupation (uğraş)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with occupation (uğraş). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene occupation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with occupation (uğraş)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with occupation concept",
+    "altText": "Cartoon character depicting the concept of occupation (uğraş)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-settlement",
+    "word": "settlement",
+    "meaningsTr": [
+      "yerleşim"
+    ],
+    "partOfSpeech": "noun",
+    "example": "A large Roman settlement has been discovered just outside the French town.",
+    "exampleTr": "Örnek: \"yerleşim\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "settlement in practice",
+      "academic settlement"
+    ],
+    "visualMnemonic": "Settlement: yerleşim kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/settlement/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "settlement",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to settlement",
+      "differenceTr": "'settlement' anlamı: yerleşim. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"A large Roman settlement has been discovered just outside the French town.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'settlement' kelimesi 'yerleşim' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "settlement (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yerleşim' kavramının zihinde somutlaşması.",
+      "mentalImage": "Settlement - yerleşim"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with settlement (yerleşim)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with settlement (yerleşim). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene settlement",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with settlement (yerleşim)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with settlement concept",
+    "altText": "Cartoon character depicting the concept of settlement (yerleşim)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-destruction",
+    "word": "destruction",
+    "meaningsTr": [
+      "tahribat",
+      "yıkım"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Unusually high winds left a trail of destruction over the area.",
+    "exampleTr": "Örnek: \"tahribat\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "destruction in practice",
+      "academic destruction"
+    ],
+    "visualMnemonic": "Destruction: tahribat kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/destruction/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "6. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "destruction",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to destruction",
+      "differenceTr": "'destruction' anlamı: tahribat. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Unusually high winds left a trail of destruction over the area.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'destruction' kelimesi 'tahribat' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "destruction (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tahribat' kavramının zihinde somutlaşması.",
+      "mentalImage": "Destruction - tahribat"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 6. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with destruction (tahribat)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with destruction (tahribat). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene destruction",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with destruction (tahribat)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with destruction concept",
+    "altText": "Cartoon character depicting the concept of destruction (tahribat)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-cultivation",
+    "word": "cultivation",
+    "meaningsTr": [
+      "toprağı işleme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The cultivation of wheat required the most fertile lands.",
+    "exampleTr": "Örnek: \"toprağı işleme\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "cultivation in practice",
+      "academic cultivation"
+    ],
+    "visualMnemonic": "Cultivation: toprağı işleme kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/cultivation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "cultivation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to cultivation",
+      "differenceTr": "'cultivation' anlamı: toprağı işleme. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The cultivation of wheat required the most fertile lands.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'cultivation' kelimesi 'toprağı işleme' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "cultivation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'toprağı işleme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Cultivation - toprağı işleme"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with cultivation (toprağı işleme)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with cultivation (toprağı işleme). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene cultivation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with cultivation (toprağı işleme)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with cultivation concept",
+    "altText": "Cartoon character depicting the concept of cultivation (toprağı işleme)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-invention",
+    "word": "invention",
+    "meaningsTr": [
+      "buluş",
+      "icat"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The world changed rapidly after the invention of the phone.",
+    "exampleTr": "Örnek: \"buluş\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "invention in practice",
+      "academic invention"
+    ],
+    "visualMnemonic": "Invention: buluş kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/invention/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "invention",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to invention",
+      "differenceTr": "'invention' anlamı: buluş. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The world changed rapidly after the invention of the phone.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'invention' kelimesi 'buluş' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "invention (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'buluş' kavramının zihinde somutlaşması.",
+      "mentalImage": "Invention - buluş"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with invention (buluş)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with invention (buluş). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene invention",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with invention (buluş)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with invention concept",
+    "altText": "Cartoon character depicting the concept of invention (buluş)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-intervention",
+    "word": "intervention",
+    "meaningsTr": [
+      "araya girme",
+      "müdahale"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Repeated interventions on the currency markets failed to prevent the currency’s value falling.",
+    "exampleTr": "Örnek: \"araya girme\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "intervention in practice",
+      "academic intervention"
+    ],
+    "visualMnemonic": "Intervention: araya girme kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/intervention/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "intervention",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to intervention",
+      "differenceTr": "'intervention' anlamı: araya girme. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Repeated interventions on the currency markets failed to prevent the currency’s value falling.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'intervention' kelimesi 'araya girme' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "intervention (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'araya girme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Intervention - araya girme"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with intervention (araya girme)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with intervention (araya girme). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene intervention",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with intervention (araya girme)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with intervention concept",
+    "altText": "Cartoon character depicting the concept of intervention (araya girme)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-accomplishment",
+    "word": "accomplishment",
+    "meaningsTr": [
+      "başarma",
+      "becerme",
+      "hüner"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Winning the award was a major accomplishment for me.",
+    "exampleTr": "Örnek: \"başarma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "accomplishment in practice",
+      "academic accomplishment"
+    ],
+    "visualMnemonic": "Accomplishment: başarma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/accomplishment/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "accomplishment",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to accomplishment",
+      "differenceTr": "'accomplishment' anlamı: başarma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Winning the award was a major accomplishment for me.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'accomplishment' kelimesi 'başarma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "accomplishment (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başarma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Accomplishment - başarma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with accomplishment (başarma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with accomplishment (başarma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene accomplishment",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with accomplishment (başarma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with accomplishment concept",
+    "altText": "Cartoon character depicting the concept of accomplishment (başarma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-condition",
+    "word": "condition",
+    "meaningsTr": [
+      "hal",
+      "koşul",
+      "durum",
+      "şart"
+    ],
+    "partOfSpeech": "noun",
+    "example": "They left the flat in a terrible condition, there was mess everywhere.",
+    "exampleTr": "Örnek: \"hal\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "condition in practice",
+      "academic condition"
+    ],
+    "visualMnemonic": "Condition: hal kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/condition/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "condition",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to condition",
+      "differenceTr": "'condition' anlamı: hal. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They left the flat in a terrible condition, there was mess everywhere.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'condition' kelimesi 'hal' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "condition (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hal' kavramının zihinde somutlaşması.",
+      "mentalImage": "Condition - hal"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with condition (hal)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with condition (hal). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene condition",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with condition (hal)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with condition concept",
+    "altText": "Cartoon character depicting the concept of condition (hal)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-crucial",
+    "word": "crucial",
+    "meaningsTr": [
+      "önemli",
+      "kritik",
+      "elzem"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "His work has been crucial to the project’s success.",
+    "exampleTr": "Örnek: \"önemli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "crucial in practice",
+      "academic crucial"
+    ],
+    "visualMnemonic": "Crucial: önemli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/crucial/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "crucial",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to crucial",
+      "differenceTr": "'crucial' anlamı: önemli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"His work has been crucial to the project’s success.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'crucial' kelimesi 'önemli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "crucial (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'önemli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Crucial - önemli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with crucial (önemli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with crucial (önemli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene crucial",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with crucial (önemli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with crucial concept",
+    "altText": "Cartoon character depicting the concept of crucial (önemli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-virtual",
+    "word": "virtual",
+    "meaningsTr": [
+      "sanal",
+      "gerçekte etkili olan"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "In the game players simulate real life in a virtual world.",
+    "exampleTr": "Örnek: \"sanal\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "virtual in practice",
+      "academic virtual"
+    ],
+    "visualMnemonic": "Virtual: sanal kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/virtual/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "7. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "virtual",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to virtual",
+      "differenceTr": "'virtual' anlamı: sanal. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"In the game players simulate real life in a virtual world.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'virtual' kelimesi 'sanal' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "virtual (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sanal' kavramının zihinde somutlaşması.",
+      "mentalImage": "Virtual - sanal"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 7. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with virtual (sanal)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with virtual (sanal). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene virtual",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with virtual (sanal)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with virtual concept",
+    "altText": "Cartoon character depicting the concept of virtual (sanal)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-threaten",
+    "word": "threaten",
+    "meaningsTr": [
+      "tehdit etmek",
+      "gözdağı vermek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "They threatened to blow up the plane if their demands were not met.",
+    "exampleTr": "Örnek: \"tehdit etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "threaten in practice",
+      "academic threaten"
+    ],
+    "visualMnemonic": "Threaten: tehdit etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/threaten/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "threaten",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to threaten",
+      "differenceTr": "'threaten' anlamı: tehdit etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They threatened to blow up the plane if their demands were not met.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'threaten' kelimesi 'tehdit etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "threaten (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tehdit etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Threaten - tehdit etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with threaten (tehdit etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with threaten (tehdit etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene threaten",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with threaten (tehdit etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with threaten concept",
+    "altText": "Cartoon character depicting the concept of threaten (tehdit etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-initiate",
+    "word": "initiate",
+    "meaningsTr": [
+      "başlatmak",
+      "önayak olmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The Commission has power to initiate legislation.",
+    "exampleTr": "Örnek: \"başlatmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "initiate in practice",
+      "academic initiate"
+    ],
+    "visualMnemonic": "Initiate: başlatmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/initiate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "initiate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to initiate",
+      "differenceTr": "'initiate' anlamı: başlatmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The Commission has power to initiate legislation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'initiate' kelimesi 'başlatmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "initiate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başlatmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Initiate - başlatmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with initiate (başlatmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with initiate (başlatmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene initiate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with initiate (başlatmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with initiate concept",
+    "altText": "Cartoon character depicting the concept of initiate (başlatmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-maintain",
+    "word": "maintain",
+    "meaningsTr": [
+      "sürdürmek",
+      "devam ettirmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Despite living in different countries, the two families have maintained close links.",
+    "exampleTr": "Örnek: \"sürdürmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "maintain in practice",
+      "academic maintain"
+    ],
+    "visualMnemonic": "Maintain: sürdürmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/maintain/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "maintain",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to maintain",
+      "differenceTr": "'maintain' anlamı: sürdürmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Despite living in different countries, the two families have maintained close links.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'maintain' kelimesi 'sürdürmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "maintain (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sürdürmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Maintain - sürdürmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with maintain (sürdürmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with maintain (sürdürmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene maintain",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with maintain (sürdürmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with maintain concept",
+    "altText": "Cartoon character depicting the concept of maintain (sürdürmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-isolation",
+    "word": "isolation",
+    "meaningsTr": [
+      "izolasyon",
+      "soyutlanma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The prisoner had been kept in isolation for three days.",
+    "exampleTr": "Örnek: \"izolasyon\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "isolation in practice",
+      "academic isolation"
+    ],
+    "visualMnemonic": "Isolation: izolasyon kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/isolation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "isolation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to isolation",
+      "differenceTr": "'isolation' anlamı: izolasyon. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The prisoner had been kept in isolation for three days.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'isolation' kelimesi 'izolasyon' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "isolation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'izolasyon' kavramının zihinde somutlaşması.",
+      "mentalImage": "Isolation - izolasyon"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with isolation (izolasyon)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with isolation (izolasyon). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene isolation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with isolation (izolasyon)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with isolation concept",
+    "altText": "Cartoon character depicting the concept of isolation (izolasyon)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-concern",
+    "word": "concern",
+    "meaningsTr": [
+      "endişe",
+      "kaygı"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Concern for the safety of the two missing teenagers is growing.",
+    "exampleTr": "Örnek: \"endişe\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "concern in practice",
+      "academic concern"
+    ],
+    "visualMnemonic": "Concern: endişe kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/concern/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "concern",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to concern",
+      "differenceTr": "'concern' anlamı: endişe. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Concern for the safety of the two missing teenagers is growing.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'concern' kelimesi 'endişe' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "concern (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'endişe' kavramının zihinde somutlaşması.",
+      "mentalImage": "Concern - endişe"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with concern (endişe)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with concern (endişe). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene concern",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with concern (endişe)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with concern concept",
+    "altText": "Cartoon character depicting the concept of concern (endişe)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-awareness",
+    "word": "awareness",
+    "meaningsTr": [
+      "farkındalık",
+      "bilinçlenme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Public awareness of the problem will make politicians take it seriously.",
+    "exampleTr": "Örnek: \"farkındalık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "awareness in practice",
+      "academic awareness"
+    ],
+    "visualMnemonic": "Awareness: farkındalık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/awareness/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "awareness",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to awareness",
+      "differenceTr": "'awareness' anlamı: farkındalık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Public awareness of the problem will make politicians take it seriously.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'awareness' kelimesi 'farkındalık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "awareness (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'farkındalık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Awareness - farkındalık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with awareness (farkındalık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with awareness (farkındalık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene awareness",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with awareness (farkındalık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with awareness concept",
+    "altText": "Cartoon character depicting the concept of awareness (farkındalık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-demand",
+    "word": "demand",
+    "meaningsTr": [
+      "talep",
+      "rağbet",
+      "isteme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "You can’t give in to children’s demands all the time.",
+    "exampleTr": "Örnek: \"talep\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "demand in practice",
+      "academic demand"
+    ],
+    "visualMnemonic": "Demand: talep kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/demand/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "8. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "demand",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to demand",
+      "differenceTr": "'demand' anlamı: talep. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"You can’t give in to children’s demands all the time.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'demand' kelimesi 'talep' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "demand (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'talep' kavramının zihinde somutlaşması.",
+      "mentalImage": "Demand - talep"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 8. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with demand (talep)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with demand (talep). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene demand",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with demand (talep)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with demand concept",
+    "altText": "Cartoon character depicting the concept of demand (talep)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-variety",
+    "word": "variety",
+    "meaningsTr": [
+      "çeşitlilik",
+      "tür"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The company makes a variety of cameras.",
+    "exampleTr": "Örnek: \"çeşitlilik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "variety in practice",
+      "academic variety"
+    ],
+    "visualMnemonic": "Variety: çeşitlilik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/variety/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "variety",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to variety",
+      "differenceTr": "'variety' anlamı: çeşitlilik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The company makes a variety of cameras.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'variety' kelimesi 'çeşitlilik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "variety (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çeşitlilik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Variety - çeşitlilik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with variety (çeşitlilik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with variety (çeşitlilik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene variety",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with variety (çeşitlilik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with variety concept",
+    "altText": "Cartoon character depicting the concept of variety (çeşitlilik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-negligible",
+    "word": "negligible",
+    "meaningsTr": [
+      "ihmal edilebilir",
+      "gözardı edilebilir"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The difference between the two products is negligible.",
+    "exampleTr": "Örnek: \"ihmal edilebilir\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "negligible in practice",
+      "academic negligible"
+    ],
+    "visualMnemonic": "Negligible: ihmal edilebilir kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/negligible/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "negligible",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to negligible",
+      "differenceTr": "'negligible' anlamı: ihmal edilebilir. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The difference between the two products is negligible.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'negligible' kelimesi 'ihmal edilebilir' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "negligible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ihmal edilebilir' kavramının zihinde somutlaşması.",
+      "mentalImage": "Negligible - ihmal edilebilir"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with negligible (ihmal edilebilir)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with negligible (ihmal edilebilir). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene negligible",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with negligible (ihmal edilebilir)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with negligible concept",
+    "altText": "Cartoon character depicting the concept of negligible (ihmal edilebilir)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-consistent",
+    "word": "consistent",
+    "meaningsTr": [
+      "istikrarlı",
+      "tutarlı"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "There has been a consistent improvement in her attitude.",
+    "exampleTr": "Örnek: \"istikrarlı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "consistent in practice",
+      "academic consistent"
+    ],
+    "visualMnemonic": "Consistent: istikrarlı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/consistent/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "consistent",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to consistent",
+      "differenceTr": "'consistent' anlamı: istikrarlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There has been a consistent improvement in her attitude.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'consistent' kelimesi 'istikrarlı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "consistent (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'istikrarlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Consistent - istikrarlı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with consistent (istikrarlı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with consistent (istikrarlı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene consistent",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with consistent (istikrarlı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with consistent concept",
+    "altText": "Cartoon character depicting the concept of consistent (istikrarlı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-precede",
+    "word": "precede",
+    "meaningsTr": [
+      "önce olmak",
+      "üstün olmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "It would be helpful if you were to precede the report with an introduction.",
+    "exampleTr": "Örnek: \"önce olmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "precede in practice",
+      "academic precede"
+    ],
+    "visualMnemonic": "Precede: önce olmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/precede/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "precede",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to precede",
+      "differenceTr": "'precede' anlamı: önce olmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It would be helpful if you were to precede the report with an introduction.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'precede' kelimesi 'önce olmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "precede (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'önce olmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Precede - önce olmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with precede (önce olmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with precede (önce olmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene precede",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with precede (önce olmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with precede concept",
+    "altText": "Cartoon character depicting the concept of precede (önce olmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-accelerate",
+    "word": "accelerate",
+    "meaningsTr": [
+      "hızlanmak",
+      "hızlandırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "They use special chemicals to accelerate the growth of crops.",
+    "exampleTr": "Örnek: \"hızlanmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "accelerate in practice",
+      "academic accelerate"
+    ],
+    "visualMnemonic": "Accelerate: hızlanmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/accelerate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "accelerate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to accelerate",
+      "differenceTr": "'accelerate' anlamı: hızlanmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They use special chemicals to accelerate the growth of crops.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'accelerate' kelimesi 'hızlanmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "accelerate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hızlanmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Accelerate - hızlanmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with accelerate (hızlanmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with accelerate (hızlanmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene accelerate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with accelerate (hızlanmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with accelerate concept",
+    "altText": "Cartoon character depicting the concept of accelerate (hızlanmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-counter",
+    "word": "counter",
+    "meaningsTr": [
+      "tezgah sayaç"
+    ],
+    "partOfSpeech": "verb",
+    "example": "There was nobody behind the counter when I went into the bank.",
+    "exampleTr": "Örnek: \"tezgah sayaç\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "counter in practice",
+      "academic counter"
+    ],
+    "visualMnemonic": "Counter: tezgah sayaç kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/counter/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "9. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "counter",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to counter",
+      "differenceTr": "'counter' anlamı: tezgah sayaç. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There was nobody behind the counter when I went into the bank.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'counter' kelimesi 'tezgah sayaç' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "counter (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tezgah sayaç' kavramının zihinde somutlaşması.",
+      "mentalImage": "Counter - tezgah sayaç"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 9. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with counter (tezgah sayaç)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with counter (tezgah sayaç). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene counter",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with counter (tezgah sayaç)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with counter concept",
+    "altText": "Cartoon character depicting the concept of counter (tezgah sayaç)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abandon",
+    "word": "abandon",
+    "meaningsTr": [
+      "terk etmek",
+      "bırakmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "By the time the rebel troops arrived, the village had already been abandoned.",
+    "exampleTr": "Örnek: \"terk etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abandon in practice",
+      "academic abandon"
+    ],
+    "visualMnemonic": "Abandon: terk etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abandon/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "abandon",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abandon",
+      "differenceTr": "'abandon' anlamı: terk etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"By the time the rebel troops arrived, the village had already been abandoned.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abandon' kelimesi 'terk etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abandon (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'terk etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abandon - terk etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abandon (terk etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abandon (terk etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abandon",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abandon (terk etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abandon concept",
+    "altText": "Cartoon character depicting the concept of abandon (terk etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-bankrupt",
+    "word": "bankrupt",
+    "meaningsTr": [
+      "iflas etmek"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He went bankrupt after only a year in business.",
+    "exampleTr": "Örnek: \"iflas etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "bankrupt in practice",
+      "academic bankrupt"
+    ],
+    "visualMnemonic": "Bankrupt: iflas etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/bankrupt/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "bankrupt",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to bankrupt",
+      "differenceTr": "'bankrupt' anlamı: iflas etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He went bankrupt after only a year in business.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'bankrupt' kelimesi 'iflas etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "bankrupt (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iflas etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bankrupt - iflas etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with bankrupt (iflas etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with bankrupt (iflas etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene bankrupt",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with bankrupt (iflas etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with bankrupt concept",
+    "altText": "Cartoon character depicting the concept of bankrupt (iflas etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-captivate",
+    "word": "captivate",
+    "meaningsTr": [
+      "cezbetmek",
+      "büyülemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "With her beauty and charm, she captivated audiences everywhere.",
+    "exampleTr": "Örnek: \"cezbetmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "captivate in practice",
+      "academic captivate"
+    ],
+    "visualMnemonic": "Captivate: cezbetmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/captivate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "captivate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to captivate",
+      "differenceTr": "'captivate' anlamı: cezbetmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"With her beauty and charm, she captivated audiences everywhere.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'captivate' kelimesi 'cezbetmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "captivate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'cezbetmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Captivate - cezbetmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with captivate (cezbetmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with captivate (cezbetmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene captivate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with captivate (cezbetmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with captivate concept",
+    "altText": "Cartoon character depicting the concept of captivate (cezbetmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-clarify",
+    "word": "clarify",
+    "meaningsTr": [
+      "açıklığa kavuşmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Could you clarify the first point please?",
+    "exampleTr": "Örnek: \"açıklığa kavuşmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "clarify in practice",
+      "academic clarify"
+    ],
+    "visualMnemonic": "Clarify: açıklığa kavuşmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/clarify/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "clarify",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to clarify",
+      "differenceTr": "'clarify' anlamı: açıklığa kavuşmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Could you clarify the first point please?\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'clarify' kelimesi 'açıklığa kavuşmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "clarify (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'açıklığa kavuşmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Clarify - açıklığa kavuşmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with clarify (açıklığa kavuşmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with clarify (açıklığa kavuşmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene clarify",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with clarify (açıklığa kavuşmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with clarify concept",
+    "altText": "Cartoon character depicting the concept of clarify (açıklığa kavuşmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-deduction",
+    "word": "deduction",
+    "meaningsTr": [
+      "sonuç çıkarma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "All we can do is make deductions from the available facts.",
+    "exampleTr": "Örnek: \"sonuç çıkarma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "deduction in practice",
+      "academic deduction"
+    ],
+    "visualMnemonic": "Deduction: sonuç çıkarma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/deduction/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deduction",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to deduction",
+      "differenceTr": "'deduction' anlamı: sonuç çıkarma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"All we can do is make deductions from the available facts.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'deduction' kelimesi 'sonuç çıkarma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deduction (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sonuç çıkarma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deduction - sonuç çıkarma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with deduction (sonuç çıkarma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with deduction (sonuç çıkarma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene deduction",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with deduction (sonuç çıkarma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with deduction concept",
+    "altText": "Cartoon character depicting the concept of deduction (sonuç çıkarma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-demolish",
+    "word": "demolish",
+    "meaningsTr": [
+      "yıkmak",
+      "tahrip etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "A number of houses were demolished so that the supermarket could be built.",
+    "exampleTr": "Örnek: \"yıkmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "demolish in practice",
+      "academic demolish"
+    ],
+    "visualMnemonic": "Demolish: yıkmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/demolish/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "demolish",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to demolish",
+      "differenceTr": "'demolish' anlamı: yıkmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"A number of houses were demolished so that the supermarket could be built.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'demolish' kelimesi 'yıkmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "demolish (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yıkmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Demolish - yıkmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with demolish (yıkmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with demolish (yıkmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene demolish",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with demolish (yıkmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with demolish concept",
+    "altText": "Cartoon character depicting the concept of demolish (yıkmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-distinguish",
+    "word": "distinguish",
+    "meaningsTr": [
+      "ayırt etmek",
+      "farkı görmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I sometimes have difficulty distinguishing Spanish from Portuguese.",
+    "exampleTr": "Örnek: \"ayırt etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "distinguish in practice",
+      "academic distinguish"
+    ],
+    "visualMnemonic": "Distinguish: ayırt etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/distinguish/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "10. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "distinguish",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to distinguish",
+      "differenceTr": "'distinguish' anlamı: ayırt etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I sometimes have difficulty distinguishing Spanish from Portuguese.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'distinguish' kelimesi 'ayırt etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "distinguish (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ayırt etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Distinguish - ayırt etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 10. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with distinguish (ayırt etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with distinguish (ayırt etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene distinguish",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with distinguish (ayırt etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with distinguish concept",
+    "altText": "Cartoon character depicting the concept of distinguish (ayırt etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-edible",
+    "word": "edible",
+    "meaningsTr": [
+      "yenilebilir"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Only the leaves of the plant are edible.",
+    "exampleTr": "Örnek: \"yenilebilir\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "edible in practice",
+      "academic edible"
+    ],
+    "visualMnemonic": "Edible: yenilebilir kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/edible/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "edible",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to edible",
+      "differenceTr": "'edible' anlamı: yenilebilir. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Only the leaves of the plant are edible.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'edible' kelimesi 'yenilebilir' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "edible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yenilebilir' kavramının zihinde somutlaşması.",
+      "mentalImage": "Edible - yenilebilir"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with edible (yenilebilir)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with edible (yenilebilir). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene edible",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with edible (yenilebilir)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with edible concept",
+    "altText": "Cartoon character depicting the concept of edible (yenilebilir)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-elaborate",
+    "word": "elaborate",
+    "meaningsTr": [
+      "detaylandırmak",
+      "ayrıntılı şekilde hazırlamak"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He refused to elaborate on why he had resigned.",
+    "exampleTr": "Örnek: \"detaylandırmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "elaborate in practice",
+      "academic elaborate"
+    ],
+    "visualMnemonic": "Elaborate: detaylandırmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/elaborate/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "elaborate",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to elaborate",
+      "differenceTr": "'elaborate' anlamı: detaylandırmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He refused to elaborate on why he had resigned.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'elaborate' kelimesi 'detaylandırmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "elaborate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'detaylandırmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Elaborate - detaylandırmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with elaborate (detaylandırmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with elaborate (detaylandırmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene elaborate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with elaborate (detaylandırmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with elaborate concept",
+    "altText": "Cartoon character depicting the concept of elaborate (detaylandırmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-hesitate",
+    "word": "hesitate",
+    "meaningsTr": [
+      "tereddüt etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She hesitated slightly before answering the question.",
+    "exampleTr": "Örnek: \"tereddüt etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "hesitate in practice",
+      "academic hesitate"
+    ],
+    "visualMnemonic": "Hesitate: tereddüt etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/hesitate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "hesitate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to hesitate",
+      "differenceTr": "'hesitate' anlamı: tereddüt etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She hesitated slightly before answering the question.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'hesitate' kelimesi 'tereddüt etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "hesitate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tereddüt etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Hesitate - tereddüt etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with hesitate (tereddüt etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with hesitate (tereddüt etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene hesitate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with hesitate (tereddüt etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with hesitate concept",
+    "altText": "Cartoon character depicting the concept of hesitate (tereddüt etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-irresistible",
+    "word": "irresistible",
+    "meaningsTr": [
+      "karşı konulmaz",
+      "dayanılmaz"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He gave me one of those irresistible smiles.",
+    "exampleTr": "Örnek: \"karşı konulmaz\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "irresistible in practice",
+      "academic irresistible"
+    ],
+    "visualMnemonic": "Irresistible: karşı konulmaz kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/irresistible/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "irresistible",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to irresistible",
+      "differenceTr": "'irresistible' anlamı: karşı konulmaz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He gave me one of those irresistible smiles.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'irresistible' kelimesi 'karşı konulmaz' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "irresistible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'karşı konulmaz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Irresistible - karşı konulmaz"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with irresistible (karşı konulmaz)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with irresistible (karşı konulmaz). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene irresistible",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with irresistible (karşı konulmaz)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with irresistible concept",
+    "altText": "Cartoon character depicting the concept of irresistible (karşı konulmaz)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-justify",
+    "word": "justify",
+    "meaningsTr": [
+      "haklı göstermek",
+      "temize çıkarmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "That doesn’t justify getting involved in somebody else’s fight.",
+    "exampleTr": "Örnek: \"haklı göstermek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "justify in practice",
+      "academic justify"
+    ],
+    "visualMnemonic": "Justify: haklı göstermek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/justify/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "justify",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to justify",
+      "differenceTr": "'justify' anlamı: haklı göstermek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"That doesn’t justify getting involved in somebody else’s fight.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'justify' kelimesi 'haklı göstermek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "justify (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'haklı göstermek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Justify - haklı göstermek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with justify (haklı göstermek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with justify (haklı göstermek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene justify",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with justify (haklı göstermek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with justify concept",
+    "altText": "Cartoon character depicting the concept of justify (haklı göstermek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-kidnap",
+    "word": "kidnap",
+    "meaningsTr": [
+      "birini kaçırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Fanatical revolutionaries kidnap a millionaire’s daughter.",
+    "exampleTr": "Örnek: \"birini kaçırmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "kidnap in practice",
+      "academic kidnap"
+    ],
+    "visualMnemonic": "Kidnap: birini kaçırmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/kidnap/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "11. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "kidnap",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to kidnap",
+      "differenceTr": "'kidnap' anlamı: birini kaçırmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Fanatical revolutionaries kidnap a millionaire’s daughter.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'kidnap' kelimesi 'birini kaçırmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "kidnap (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'birini kaçırmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Kidnap - birini kaçırmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 11. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with kidnap (birini kaçırmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with kidnap (birini kaçırmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene kidnap",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with kidnap (birini kaçırmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with kidnap concept",
+    "altText": "Cartoon character depicting the concept of kidnap (birini kaçırmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-launch",
+    "word": "launch",
+    "meaningsTr": [
+      "(bir işi) piyasaya sürmek",
+      "(roket",
+      "mekik) fırlatmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The programme was launched two years ago.",
+    "exampleTr": "Örnek: \"(bir işi) piyasaya sürmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "launch in practice",
+      "academic launch"
+    ],
+    "visualMnemonic": "Launch: (bir işi) piyasaya sürmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/launch/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "launch",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to launch",
+      "differenceTr": "'launch' anlamı: (bir işi) piyasaya sürmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The programme was launched two years ago.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'launch' kelimesi '(bir işi) piyasaya sürmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "launch (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: '(bir işi) piyasaya sürmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Launch - (bir işi) piyasaya sürmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with launch ((bir işi) piyasaya sürmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with launch ((bir işi) piyasaya sürmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene launch",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with launch ((bir işi) piyasaya sürmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with launch concept",
+    "altText": "Cartoon character depicting the concept of launch ((bir işi) piyasaya sürmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-manufacture",
+    "word": "manufacture",
+    "meaningsTr": [
+      "üretmek",
+      "imal etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He works for a company that manufactures car parts.",
+    "exampleTr": "Örnek: \"üretmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "manufacture in practice",
+      "academic manufacture"
+    ],
+    "visualMnemonic": "Manufacture: üretmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/manufacture/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "manufacture",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to manufacture",
+      "differenceTr": "'manufacture' anlamı: üretmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He works for a company that manufactures car parts.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'manufacture' kelimesi 'üretmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "manufacture (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'üretmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Manufacture - üretmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with manufacture (üretmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with manufacture (üretmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene manufacture",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with manufacture (üretmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with manufacture concept",
+    "altText": "Cartoon character depicting the concept of manufacture (üretmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-medieval",
+    "word": "medieval",
+    "meaningsTr": [
+      "ortaçağ"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "You really should go and see the lovely medieval court in the castle.",
+    "exampleTr": "Örnek: \"ortaçağ\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "medieval in practice",
+      "academic medieval"
+    ],
+    "visualMnemonic": "Medieval: ortaçağ kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/medieval/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "medieval",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to medieval",
+      "differenceTr": "'medieval' anlamı: ortaçağ. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"You really should go and see the lovely medieval court in the castle.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'medieval' kelimesi 'ortaçağ' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "medieval (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ortaçağ' kavramının zihinde somutlaşması.",
+      "mentalImage": "Medieval - ortaçağ"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with medieval (ortaçağ)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with medieval (ortaçağ). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene medieval",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with medieval (ortaçağ)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with medieval concept",
+    "altText": "Cartoon character depicting the concept of medieval (ortaçağ)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-neglect",
+    "word": "neglect",
+    "meaningsTr": [
+      "ihmal etmek",
+      "aldırmamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She’s been neglecting her studies this semester.",
+    "exampleTr": "Örnek: \"ihmal etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "neglect in practice",
+      "academic neglect"
+    ],
+    "visualMnemonic": "Neglect: ihmal etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/neglect/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "neglect",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to neglect",
+      "differenceTr": "'neglect' anlamı: ihmal etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She’s been neglecting her studies this semester.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'neglect' kelimesi 'ihmal etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "neglect (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ihmal etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Neglect - ihmal etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with neglect (ihmal etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with neglect (ihmal etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene neglect",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with neglect (ihmal etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with neglect concept",
+    "altText": "Cartoon character depicting the concept of neglect (ihmal etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-obstacle",
+    "word": "obstacle",
+    "meaningsTr": [
+      "engel",
+      "mani"
+    ],
+    "partOfSpeech": "noun",
+    "example": "We suddenly encountered an obstacle along the trail.",
+    "exampleTr": "Örnek: \"engel\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "obstacle in practice",
+      "academic obstacle"
+    ],
+    "visualMnemonic": "Obstacle: engel kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/obstacle/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "obstacle",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to obstacle",
+      "differenceTr": "'obstacle' anlamı: engel. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We suddenly encountered an obstacle along the trail.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'obstacle' kelimesi 'engel' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "obstacle (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'engel' kavramının zihinde somutlaşması.",
+      "mentalImage": "Obstacle - engel"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with obstacle (engel)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with obstacle (engel). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene obstacle",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with obstacle (engel)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with obstacle concept",
+    "altText": "Cartoon character depicting the concept of obstacle (engel)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-pace",
+    "word": "pace",
+    "meaningsTr": [
+      "tempo",
+      "hız",
+      "sürat"
+    ],
+    "partOfSpeech": "noun",
+    "example": "When she thought she heard someone following her, she quickened her pace.",
+    "exampleTr": "Örnek: \"tempo\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "pace in practice",
+      "academic pace"
+    ],
+    "visualMnemonic": "Pace: tempo kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/pace/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "pace",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to pace",
+      "differenceTr": "'pace' anlamı: tempo. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"When she thought she heard someone following her, she quickened her pace.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'pace' kelimesi 'tempo' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "pace (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tempo' kavramının zihinde somutlaşması.",
+      "mentalImage": "Pace - tempo"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with pace (tempo)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with pace (tempo). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene pace",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with pace (tempo)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with pace concept",
+    "altText": "Cartoon character depicting the concept of pace (tempo)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-perceive",
+    "word": "perceive",
+    "meaningsTr": [
+      "algılamak",
+      "idrak etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "How do the French perceive the British?",
+    "exampleTr": "Örnek: \"algılamak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "perceive in practice",
+      "academic perceive"
+    ],
+    "visualMnemonic": "Perceive: algılamak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/perceive/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "12. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "perceive",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to perceive",
+      "differenceTr": "'perceive' anlamı: algılamak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"How do the French perceive the British?\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'perceive' kelimesi 'algılamak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "perceive (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'algılamak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Perceive - algılamak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 12. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with perceive (algılamak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with perceive (algılamak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene perceive",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with perceive (algılamak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with perceive concept",
+    "altText": "Cartoon character depicting the concept of perceive (algılamak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-redundant",
+    "word": "redundant",
+    "meaningsTr": [
+      "lüzumsuz",
+      "gereksiz"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "In the sentence “She is a single unmarried woman”, the word “unmarried” is redundant.",
+    "exampleTr": "Örnek: \"lüzumsuz\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "redundant in practice",
+      "academic redundant"
+    ],
+    "visualMnemonic": "Redundant: lüzumsuz kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/redundant/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "redundant",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to redundant",
+      "differenceTr": "'redundant' anlamı: lüzumsuz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"In the sentence “She is a single unmarried woman”, the word “unmarried” is redundant.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'redundant' kelimesi 'lüzumsuz' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "redundant (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'lüzumsuz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Redundant - lüzumsuz"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with redundant (lüzumsuz)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with redundant (lüzumsuz). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene redundant",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with redundant (lüzumsuz)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with redundant concept",
+    "altText": "Cartoon character depicting the concept of redundant (lüzumsuz)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-scatter",
+    "word": "scatter",
+    "meaningsTr": [
+      "dağıtmak",
+      "saçmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Her ashes were scattered at sea.",
+    "exampleTr": "Örnek: \"dağıtmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "scatter in practice",
+      "academic scatter"
+    ],
+    "visualMnemonic": "Scatter: dağıtmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/scatter/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "scatter",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to scatter",
+      "differenceTr": "'scatter' anlamı: dağıtmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her ashes were scattered at sea.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'scatter' kelimesi 'dağıtmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "scatter (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dağıtmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Scatter - dağıtmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with scatter (dağıtmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with scatter (dağıtmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene scatter",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with scatter (dağıtmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with scatter concept",
+    "altText": "Cartoon character depicting the concept of scatter (dağıtmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abolish",
+    "word": "abolish",
+    "meaningsTr": [
+      "feshetmek",
+      "yürürlükten kaldırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I think bullfighting should be abolished.",
+    "exampleTr": "Örnek: \"feshetmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abolish in practice",
+      "academic abolish"
+    ],
+    "visualMnemonic": "Abolish: feshetmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abolish/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "abolish",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abolish",
+      "differenceTr": "'abolish' anlamı: feshetmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I think bullfighting should be abolished.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abolish' kelimesi 'feshetmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abolish (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'feshetmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abolish - feshetmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abolish (feshetmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abolish (feshetmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abolish",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abolish (feshetmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abolish concept",
+    "altText": "Cartoon character depicting the concept of abolish (feshetmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-burden",
+    "word": "burden",
+    "meaningsTr": [
+      "yük",
+      "sorumluluk"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Buying a house often places a large financial burden on young couples.",
+    "exampleTr": "Örnek: \"yük\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "burden in practice",
+      "academic burden"
+    ],
+    "visualMnemonic": "Burden: yük kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/burden/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "burden",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to burden",
+      "differenceTr": "'burden' anlamı: yük. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Buying a house often places a large financial burden on young couples.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'burden' kelimesi 'yük' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "burden (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yük' kavramının zihinde somutlaşması.",
+      "mentalImage": "Burden - yük"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with burden (yük)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with burden (yük). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene burden",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with burden (yük)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with burden concept",
+    "altText": "Cartoon character depicting the concept of burden (yük)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-collapse",
+    "word": "collapse",
+    "meaningsTr": [
+      "çöküş",
+      "yığılmak",
+      "çökmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Thousands of buildings collapsed in the earthquake.",
+    "exampleTr": "Örnek: \"çöküş\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "collapse in practice",
+      "academic collapse"
+    ],
+    "visualMnemonic": "Collapse: çöküş kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/collapse/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "collapse",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to collapse",
+      "differenceTr": "'collapse' anlamı: çöküş. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Thousands of buildings collapsed in the earthquake.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'collapse' kelimesi 'çöküş' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "collapse (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çöküş' kavramının zihinde somutlaşması.",
+      "mentalImage": "Collapse - çöküş"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with collapse (çöküş)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with collapse (çöküş). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene collapse",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with collapse (çöküş)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with collapse concept",
+    "altText": "Cartoon character depicting the concept of collapse (çöküş)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-deficiency",
+    "word": "deficiency",
+    "meaningsTr": [
+      "eksiklik",
+      "yoksunluk"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Pregnant women often suffer from iron deficiency.",
+    "exampleTr": "Örnek: \"eksiklik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "deficiency in practice",
+      "academic deficiency"
+    ],
+    "visualMnemonic": "Deficiency: eksiklik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/deficiency/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deficiency",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to deficiency",
+      "differenceTr": "'deficiency' anlamı: eksiklik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Pregnant women often suffer from iron deficiency.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'deficiency' kelimesi 'eksiklik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deficiency (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eksiklik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deficiency - eksiklik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with deficiency (eksiklik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with deficiency (eksiklik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene deficiency",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with deficiency (eksiklik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with deficiency concept",
+    "altText": "Cartoon character depicting the concept of deficiency (eksiklik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-devote",
+    "word": "devote",
+    "meaningsTr": [
+      "adamak",
+      "vakfetmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She has devoted all her life to the care of homeless people.",
+    "exampleTr": "Örnek: \"adamak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "devote in practice",
+      "academic devote"
+    ],
+    "visualMnemonic": "Devote: adamak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/devote/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "13. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "devote",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to devote",
+      "differenceTr": "'devote' anlamı: adamak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She has devoted all her life to the care of homeless people.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'devote' kelimesi 'adamak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "devote (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'adamak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Devote - adamak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 13. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with devote (adamak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with devote (adamak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene devote",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with devote (adamak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with devote concept",
+    "altText": "Cartoon character depicting the concept of devote (adamak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-estimate",
+    "word": "estimate",
+    "meaningsTr": [
+      "kestirmek",
+      "tahmin etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Government sources estimate a long-term 50 percent increase in rail fares.",
+    "exampleTr": "Örnek: \"kestirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "estimate in practice",
+      "academic estimate"
+    ],
+    "visualMnemonic": "Estimate: kestirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/estimate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "estimate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to estimate",
+      "differenceTr": "'estimate' anlamı: kestirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Government sources estimate a long-term 50 percent increase in rail fares.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'estimate' kelimesi 'kestirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "estimate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kestirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Estimate - kestirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with estimate (kestirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with estimate (kestirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene estimate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with estimate (kestirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with estimate concept",
+    "altText": "Cartoon character depicting the concept of estimate (kestirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-exhibit",
+    "word": "exhibit",
+    "meaningsTr": [
+      "sergilemek",
+      "göstermek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He frequently exhibits at the art gallery.",
+    "exampleTr": "Örnek: \"sergilemek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "exhibit in practice",
+      "academic exhibit"
+    ],
+    "visualMnemonic": "Exhibit: sergilemek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/exhibit/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "exhibit",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to exhibit",
+      "differenceTr": "'exhibit' anlamı: sergilemek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He frequently exhibits at the art gallery.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'exhibit' kelimesi 'sergilemek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "exhibit (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sergilemek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Exhibit - sergilemek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with exhibit (sergilemek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with exhibit (sergilemek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene exhibit",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with exhibit (sergilemek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with exhibit concept",
+    "altText": "Cartoon character depicting the concept of exhibit (sergilemek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-gratitude",
+    "word": "gratitude",
+    "meaningsTr": [
+      "minnettarlık",
+      "şükran"
+    ],
+    "partOfSpeech": "noun",
+    "example": "She sent them a present to show her gratitude.",
+    "exampleTr": "Örnek: \"minnettarlık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "gratitude in practice",
+      "academic gratitude"
+    ],
+    "visualMnemonic": "Gratitude: minnettarlık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/gratitude/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "gratitude",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to gratitude",
+      "differenceTr": "'gratitude' anlamı: minnettarlık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She sent them a present to show her gratitude.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'gratitude' kelimesi 'minnettarlık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "gratitude (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'minnettarlık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Gratitude - minnettarlık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with gratitude (minnettarlık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with gratitude (minnettarlık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene gratitude",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with gratitude (minnettarlık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with gratitude concept",
+    "altText": "Cartoon character depicting the concept of gratitude (minnettarlık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-illusion",
+    "word": "illusion",
+    "meaningsTr": [
+      "kuruntu",
+      "ilüzyon"
+    ],
+    "partOfSpeech": "noun",
+    "example": "He had no illusions about his talents as a singer.",
+    "exampleTr": "Örnek: \"kuruntu\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "illusion in practice",
+      "academic illusion"
+    ],
+    "visualMnemonic": "Illusion: kuruntu kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/illusion/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "illusion",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to illusion",
+      "differenceTr": "'illusion' anlamı: kuruntu. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He had no illusions about his talents as a singer.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'illusion' kelimesi 'kuruntu' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "illusion (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kuruntu' kavramının zihinde somutlaşması.",
+      "mentalImage": "Illusion - kuruntu"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with illusion (kuruntu)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with illusion (kuruntu). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene illusion",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with illusion (kuruntu)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with illusion concept",
+    "altText": "Cartoon character depicting the concept of illusion (kuruntu)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-immune",
+    "word": "immune",
+    "meaningsTr": [
+      "bağışık",
+      "etkilenmeyen"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He seems to be immune to colds, he just never gets them.",
+    "exampleTr": "Örnek: \"bağışık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "immune in practice",
+      "academic immune"
+    ],
+    "visualMnemonic": "Immune: bağışık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/immune/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "immune",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to immune",
+      "differenceTr": "'immune' anlamı: bağışık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He seems to be immune to colds, he just never gets them.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'immune' kelimesi 'bağışık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "immune (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bağışık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Immune - bağışık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with immune (bağışık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with immune (bağışık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene immune",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with immune (bağışık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with immune concept",
+    "altText": "Cartoon character depicting the concept of immune (bağışık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-slippery",
+    "word": "slippery",
+    "meaningsTr": [
+      "kaygan"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The sidewalks were slippery with ice.",
+    "exampleTr": "Örnek: \"kaygan\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "slippery in practice",
+      "academic slippery"
+    ],
+    "visualMnemonic": "Slippery: kaygan kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/slippery/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "slippery",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to slippery",
+      "differenceTr": "'slippery' anlamı: kaygan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The sidewalks were slippery with ice.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'slippery' kelimesi 'kaygan' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "slippery (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kaygan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Slippery - kaygan"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with slippery (kaygan)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with slippery (kaygan). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene slippery",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with slippery (kaygan)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with slippery concept",
+    "altText": "Cartoon character depicting the concept of slippery (kaygan)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-tame",
+    "word": "tame",
+    "meaningsTr": [
+      "evcilleştirmek",
+      "uslandırmak"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Their goats seem very tame.",
+    "exampleTr": "Örnek: \"evcilleştirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "tame in practice",
+      "academic tame"
+    ],
+    "visualMnemonic": "Tame: evcilleştirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/tame/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "14. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "tame",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to tame",
+      "differenceTr": "'tame' anlamı: evcilleştirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Their goats seem very tame.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'tame' kelimesi 'evcilleştirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "tame (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'evcilleştirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Tame - evcilleştirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 14. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with tame (evcilleştirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with tame (evcilleştirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene tame",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with tame (evcilleştirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with tame concept",
+    "altText": "Cartoon character depicting the concept of tame (evcilleştirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-transmit",
+    "word": "transmit",
+    "meaningsTr": [
+      "iletmek",
+      "ulaştırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Your bank will transmit funds by wire to our central bank in New York.",
+    "exampleTr": "Örnek: \"iletmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "transmit in practice",
+      "academic transmit"
+    ],
+    "visualMnemonic": "Transmit: iletmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/transmit/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "transmit",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to transmit",
+      "differenceTr": "'transmit' anlamı: iletmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Your bank will transmit funds by wire to our central bank in New York.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'transmit' kelimesi 'iletmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "transmit (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iletmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Transmit - iletmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with transmit (iletmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with transmit (iletmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene transmit",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with transmit (iletmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with transmit concept",
+    "altText": "Cartoon character depicting the concept of transmit (iletmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-underestimate",
+    "word": "underestimate",
+    "meaningsTr": [
+      "hafife almak",
+      "azımsamak",
+      "küçümsemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "They’ve seriously underestimated the cost of the building project.",
+    "exampleTr": "Örnek: \"hafife almak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "underestimate in practice",
+      "academic underestimate"
+    ],
+    "visualMnemonic": "Underestimate: hafife almak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/underestimate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "underestimate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to underestimate",
+      "differenceTr": "'underestimate' anlamı: hafife almak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They’ve seriously underestimated the cost of the building project.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'underestimate' kelimesi 'hafife almak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "underestimate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hafife almak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Underestimate - hafife almak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with underestimate (hafife almak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with underestimate (hafife almak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene underestimate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with underestimate (hafife almak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with underestimate concept",
+    "altText": "Cartoon character depicting the concept of underestimate (hafife almak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-versatile",
+    "word": "versatile",
+    "meaningsTr": [
+      "çok yönlü"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "This versatile material represents both comfort and strength.",
+    "exampleTr": "Örnek: \"çok yönlü\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "versatile in practice",
+      "academic versatile"
+    ],
+    "visualMnemonic": "Versatile: çok yönlü kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/versatile/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "versatile",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to versatile",
+      "differenceTr": "'versatile' anlamı: çok yönlü. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This versatile material represents both comfort and strength.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'versatile' kelimesi 'çok yönlü' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "versatile (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çok yönlü' kavramının zihinde somutlaşması.",
+      "mentalImage": "Versatile - çok yönlü"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with versatile (çok yönlü)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with versatile (çok yönlü). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene versatile",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with versatile (çok yönlü)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with versatile concept",
+    "altText": "Cartoon character depicting the concept of versatile (çok yönlü)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-withstand",
+    "word": "withstand",
+    "meaningsTr": [
+      "karşı koymak",
+      "direnmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Our toys are designed to withstand the rough treatment of the average six-year-old.",
+    "exampleTr": "Örnek: \"karşı koymak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "withstand in practice",
+      "academic withstand"
+    ],
+    "visualMnemonic": "Withstand: karşı koymak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/withstand/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "withstand",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to withstand",
+      "differenceTr": "'withstand' anlamı: karşı koymak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Our toys are designed to withstand the rough treatment of the average six-year-old.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'withstand' kelimesi 'karşı koymak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "withstand (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'karşı koymak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Withstand - karşı koymak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with withstand (karşı koymak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with withstand (karşı koymak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene withstand",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with withstand (karşı koymak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with withstand concept",
+    "altText": "Cartoon character depicting the concept of withstand (karşı koymak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-acquire",
+    "word": "acquire",
+    "meaningsTr": [
+      "elde etmek",
+      "edinmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I was wearing a newly acquired jacket.",
+    "exampleTr": "Örnek: \"elde etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "acquire in practice",
+      "academic acquire"
+    ],
+    "visualMnemonic": "Acquire: elde etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/acquire/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "acquire",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to acquire",
+      "differenceTr": "'acquire' anlamı: elde etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I was wearing a newly acquired jacket.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'acquire' kelimesi 'elde etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "acquire (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'elde etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Acquire - elde etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with acquire (elde etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with acquire (elde etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene acquire",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with acquire (elde etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with acquire concept",
+    "altText": "Cartoon character depicting the concept of acquire (elde etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-confront",
+    "word": "confront",
+    "meaningsTr": [
+      "yüzleşmek",
+      "karşı koymak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "It’s an issue you’ll have to confront at some point, no matter how unpleasant it is",
+    "exampleTr": "Örnek: \"yüzleşmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "confront in practice",
+      "academic confront"
+    ],
+    "visualMnemonic": "Confront: yüzleşmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/confront/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "confront",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to confront",
+      "differenceTr": "'confront' anlamı: yüzleşmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It’s an issue you’ll have to confront at some point, no matter how unpleasant it is\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'confront' kelimesi 'yüzleşmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "confront (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yüzleşmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Confront - yüzleşmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with confront (yüzleşmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with confront (yüzleşmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene confront",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with confront (yüzleşmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with confront concept",
+    "altText": "Cartoon character depicting the concept of confront (yüzleşmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-inspiration",
+    "word": "inspiration",
+    "meaningsTr": [
+      "esin",
+      "ilham"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Perhaps they will become inspiration for another project.",
+    "exampleTr": "Örnek: \"esin\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "inspiration in practice",
+      "academic inspiration"
+    ],
+    "visualMnemonic": "Inspiration: esin kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/inspiration/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "15. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "inspiration",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to inspiration",
+      "differenceTr": "'inspiration' anlamı: esin. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Perhaps they will become inspiration for another project.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'inspiration' kelimesi 'esin' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "inspiration (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'esin' kavramının zihinde somutlaşması.",
+      "mentalImage": "Inspiration - esin"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 15. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with inspiration (esin)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with inspiration (esin). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene inspiration",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with inspiration (esin)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with inspiration concept",
+    "altText": "Cartoon character depicting the concept of inspiration (esin)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-eligible",
+    "word": "eligible",
+    "meaningsTr": [
+      "hak sahibi",
+      "uygun"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "She is not considered eligible for legal aid.",
+    "exampleTr": "Örnek: \"hak sahibi\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "eligible in practice",
+      "academic eligible"
+    ],
+    "visualMnemonic": "Eligible: hak sahibi kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/eligible/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "eligible",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to eligible",
+      "differenceTr": "'eligible' anlamı: hak sahibi. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She is not considered eligible for legal aid.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'eligible' kelimesi 'hak sahibi' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "eligible (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hak sahibi' kavramının zihinde somutlaşması.",
+      "mentalImage": "Eligible - hak sahibi"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with eligible (hak sahibi)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with eligible (hak sahibi). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene eligible",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with eligible (hak sahibi)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with eligible concept",
+    "altText": "Cartoon character depicting the concept of eligible (hak sahibi)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-prevent",
+    "word": "prevent",
+    "meaningsTr": [
+      "engellemek",
+      "önlemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Eating healthfully can help prevent heart disease.gecikmek, ertelemek",
+    "exampleTr": "Örnek: \"engellemek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "prevent in practice",
+      "academic prevent"
+    ],
+    "visualMnemonic": "Prevent: engellemek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/prevent/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "prevent",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to prevent",
+      "differenceTr": "'prevent' anlamı: engellemek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Eating healthfully can help prevent heart disease.gecikmek, ertelemek\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'prevent' kelimesi 'engellemek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "prevent (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'engellemek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Prevent - engellemek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with prevent (engellemek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with prevent (engellemek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene prevent",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with prevent (engellemek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with prevent concept",
+    "altText": "Cartoon character depicting the concept of prevent (engellemek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-delay",
+    "word": "delay",
+    "meaningsTr": [
+      ""
+    ],
+    "partOfSpeech": "noun",
+    "example": "Heavy storm delayed the start of the game.",
+    "exampleTr": "Örnek: \"\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "delay in practice",
+      "academic delay"
+    ],
+    "visualMnemonic": "Delay:  kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/delay/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "delay",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to delay",
+      "differenceTr": "'delay' anlamı: . Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Heavy storm delayed the start of the game.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'delay' kelimesi '' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "delay (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: '' kavramının zihinde somutlaşması.",
+      "mentalImage": "Delay - "
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with delay ()",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with delay (). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene delay",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with delay ()",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with delay concept",
+    "altText": "Cartoon character depicting the concept of delay ()",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-embark",
+    "word": "embark",
+    "meaningsTr": [
+      "gemiye bindirmek",
+      "gemiye binmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "They stood on the pier and watched as we embarked.",
+    "exampleTr": "Örnek: \"gemiye bindirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "embark in practice",
+      "academic embark"
+    ],
+    "visualMnemonic": "Embark: gemiye bindirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/embark/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "embark",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to embark",
+      "differenceTr": "'embark' anlamı: gemiye bindirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"They stood on the pier and watched as we embarked.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'embark' kelimesi 'gemiye bindirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "embark (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gemiye bindirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Embark - gemiye bindirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with embark (gemiye bindirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with embark (gemiye bindirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene embark",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with embark (gemiye bindirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with embark concept",
+    "altText": "Cartoon character depicting the concept of embark (gemiye bindirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-fade",
+    "word": "fade",
+    "meaningsTr": [
+      "karartmak",
+      "soldurmak",
+      "solmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The sun had faded the curtains.",
+    "exampleTr": "Örnek: \"karartmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "fade in practice",
+      "academic fade"
+    ],
+    "visualMnemonic": "Fade: karartmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/fade/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "fade",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to fade",
+      "differenceTr": "'fade' anlamı: karartmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The sun had faded the curtains.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'fade' kelimesi 'karartmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "fade (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'karartmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Fade - karartmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with fade (karartmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with fade (karartmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene fade",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with fade (karartmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with fade concept",
+    "altText": "Cartoon character depicting the concept of fade (karartmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-frustrate",
+    "word": "frustrate",
+    "meaningsTr": [
+      "engellemek",
+      "yıldırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The rescue attempt was frustrated by heavy snow.",
+    "exampleTr": "Örnek: \"engellemek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "frustrate in practice",
+      "academic frustrate"
+    ],
+    "visualMnemonic": "Frustrate: engellemek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/frustrate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "frustrate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to frustrate",
+      "differenceTr": "'frustrate' anlamı: engellemek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The rescue attempt was frustrated by heavy snow.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'frustrate' kelimesi 'engellemek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "frustrate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'engellemek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Frustrate - engellemek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with frustrate (engellemek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with frustrate (engellemek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene frustrate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with frustrate (engellemek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with frustrate concept",
+    "altText": "Cartoon character depicting the concept of frustrate (engellemek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-obligation",
+    "word": "obligation",
+    "meaningsTr": [
+      "yükümlülük",
+      "zorunluluk"
+    ],
+    "partOfSpeech": "noun",
+    "example": "My obligation to the Council requires my presence elsewhere.",
+    "exampleTr": "Örnek: \"yükümlülük\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "obligation in practice",
+      "academic obligation"
+    ],
+    "visualMnemonic": "Obligation: yükümlülük kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/obligation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "16. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "obligation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to obligation",
+      "differenceTr": "'obligation' anlamı: yükümlülük. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"My obligation to the Council requires my presence elsewhere.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'obligation' kelimesi 'yükümlülük' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "obligation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yükümlülük' kavramının zihinde somutlaşması.",
+      "mentalImage": "Obligation - yükümlülük"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 16. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with obligation (yükümlülük)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with obligation (yükümlülük). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene obligation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with obligation (yükümlülük)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with obligation concept",
+    "altText": "Cartoon character depicting the concept of obligation (yükümlülük)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-miscarry",
+    "word": "miscarry",
+    "meaningsTr": [
+      "düşük yapmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The disease caused her to miscarry.",
+    "exampleTr": "Örnek: \"düşük yapmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "miscarry in practice",
+      "academic miscarry"
+    ],
+    "visualMnemonic": "Miscarry: düşük yapmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/miscarry/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "miscarry",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to miscarry",
+      "differenceTr": "'miscarry' anlamı: düşük yapmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The disease caused her to miscarry.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'miscarry' kelimesi 'düşük yapmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "miscarry (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'düşük yapmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Miscarry - düşük yapmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with miscarry (düşük yapmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with miscarry (düşük yapmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene miscarry",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with miscarry (düşük yapmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with miscarry concept",
+    "altText": "Cartoon character depicting the concept of miscarry (düşük yapmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-recognize",
+    "word": "recognize",
+    "meaningsTr": [
+      "tanımak",
+      "ayırt etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I recognized my childhood friend immediately.",
+    "exampleTr": "Örnek: \"tanımak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "recognize in practice",
+      "academic recognize"
+    ],
+    "visualMnemonic": "Recognize: tanımak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/recognize/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "recognize",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to recognize",
+      "differenceTr": "'recognize' anlamı: tanımak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I recognized my childhood friend immediately.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'recognize' kelimesi 'tanımak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "recognize (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tanımak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Recognize - tanımak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with recognize (tanımak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with recognize (tanımak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene recognize",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with recognize (tanımak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with recognize concept",
+    "altText": "Cartoon character depicting the concept of recognize (tanımak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-tactful",
+    "word": "tactful",
+    "meaningsTr": [
+      "ince düşünceli",
+      "nazik"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I tried to find a tactful way of telling the truth.",
+    "exampleTr": "Örnek: \"ince düşünceli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "tactful in practice",
+      "academic tactful"
+    ],
+    "visualMnemonic": "Tactful: ince düşünceli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/tactful/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "tactful",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to tactful",
+      "differenceTr": "'tactful' anlamı: ince düşünceli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I tried to find a tactful way of telling the truth.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'tactful' kelimesi 'ince düşünceli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "tactful (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ince düşünceli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Tactful - ince düşünceli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with tactful (ince düşünceli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with tactful (ince düşünceli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene tactful",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with tactful (ince düşünceli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with tactful concept",
+    "altText": "Cartoon character depicting the concept of tactful (ince düşünceli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-splendid",
+    "word": "splendid",
+    "meaningsTr": [
+      "muhteşem",
+      "olağanüstü"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "She made a lot of money and bought a splendid house.",
+    "exampleTr": "Örnek: \"muhteşem\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "splendid in practice",
+      "academic splendid"
+    ],
+    "visualMnemonic": "Splendid: muhteşem kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/splendid/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "splendid",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to splendid",
+      "differenceTr": "'splendid' anlamı: muhteşem. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She made a lot of money and bought a splendid house.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'splendid' kelimesi 'muhteşem' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "splendid (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'muhteşem' kavramının zihinde somutlaşması.",
+      "mentalImage": "Splendid - muhteşem"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with splendid (muhteşem)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with splendid (muhteşem). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene splendid",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with splendid (muhteşem)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with splendid concept",
+    "altText": "Cartoon character depicting the concept of splendid (muhteşem)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-warfare",
+    "word": "warfare",
+    "meaningsTr": [
+      "savaş hali",
+      "harp"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Cyber warfare can have an equally devastating impact.",
+    "exampleTr": "Örnek: \"savaş hali\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "warfare in practice",
+      "academic warfare"
+    ],
+    "visualMnemonic": "Warfare: savaş hali kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/warfare/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "warfare",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to warfare",
+      "differenceTr": "'warfare' anlamı: savaş hali. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Cyber warfare can have an equally devastating impact.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'warfare' kelimesi 'savaş hali' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "warfare (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'savaş hali' kavramının zihinde somutlaşması.",
+      "mentalImage": "Warfare - savaş hali"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with warfare (savaş hali)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with warfare (savaş hali). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene warfare",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with warfare (savaş hali)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with warfare concept",
+    "altText": "Cartoon character depicting the concept of warfare (savaş hali)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-utilize",
+    "word": "utilize",
+    "meaningsTr": [
+      "kullanmak",
+      "faydalanmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Vitamin C helps the body utilize the iron present in your body.",
+    "exampleTr": "Örnek: \"kullanmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "utilize in practice",
+      "academic utilize"
+    ],
+    "visualMnemonic": "Utilize: kullanmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/utilize/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "utilize",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to utilize",
+      "differenceTr": "'utilize' anlamı: kullanmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Vitamin C helps the body utilize the iron present in your body.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'utilize' kelimesi 'kullanmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "utilize (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kullanmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Utilize - kullanmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with utilize (kullanmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with utilize (kullanmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene utilize",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with utilize (kullanmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with utilize concept",
+    "altText": "Cartoon character depicting the concept of utilize (kullanmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abstain",
+    "word": "abstain",
+    "meaningsTr": [
+      "çekinmek",
+      "kaçınmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He took a vow to abstain from alcohol.",
+    "exampleTr": "Örnek: \"çekinmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abstain in practice",
+      "academic abstain"
+    ],
+    "visualMnemonic": "Abstain: çekinmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abstain/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "17. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "abstain",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abstain",
+      "differenceTr": "'abstain' anlamı: çekinmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He took a vow to abstain from alcohol.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abstain' kelimesi 'çekinmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abstain (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çekinmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abstain - çekinmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 17. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abstain (çekinmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abstain (çekinmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abstain",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abstain (çekinmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abstain concept",
+    "altText": "Cartoon character depicting the concept of abstain (çekinmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-accumulation",
+    "word": "accumulation",
+    "meaningsTr": [
+      "birikinti",
+      "yığın"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Despite this accumulation of evidence, the polic persisted in doing nothing.",
+    "exampleTr": "Örnek: \"birikinti\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "accumulation in practice",
+      "academic accumulation"
+    ],
+    "visualMnemonic": "Accumulation: birikinti kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/accumulation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "accumulation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to accumulation",
+      "differenceTr": "'accumulation' anlamı: birikinti. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Despite this accumulation of evidence, the polic persisted in doing nothing.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'accumulation' kelimesi 'birikinti' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "accumulation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'birikinti' kavramının zihinde somutlaşması.",
+      "mentalImage": "Accumulation - birikinti"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with accumulation (birikinti)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with accumulation (birikinti). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene accumulation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with accumulation (birikinti)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with accumulation concept",
+    "altText": "Cartoon character depicting the concept of accumulation (birikinti)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-betray",
+    "word": "betray",
+    "meaningsTr": [
+      "ihanet etmek",
+      "aldatmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She felt betrayed when she found out the truth about her sister.",
+    "exampleTr": "Örnek: \"ihanet etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "betray in practice",
+      "academic betray"
+    ],
+    "visualMnemonic": "Betray: ihanet etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/betray/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "betray",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to betray",
+      "differenceTr": "'betray' anlamı: ihanet etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She felt betrayed when she found out the truth about her sister.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'betray' kelimesi 'ihanet etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "betray (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ihanet etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Betray - ihanet etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with betray (ihanet etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with betray (ihanet etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene betray",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with betray (ihanet etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with betray concept",
+    "altText": "Cartoon character depicting the concept of betray (ihanet etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-catastrophe",
+    "word": "catastrophe",
+    "meaningsTr": [
+      "facia",
+      "afet",
+      "felaket"
+    ],
+    "partOfSpeech": "noun",
+    "example": "We’ve had a few catastrophes with the food for the party.",
+    "exampleTr": "Örnek: \"facia\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "catastrophe in practice",
+      "academic catastrophe"
+    ],
+    "visualMnemonic": "Catastrophe: facia kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/catastrophe/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "catastrophe",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to catastrophe",
+      "differenceTr": "'catastrophe' anlamı: facia. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We’ve had a few catastrophes with the food for the party.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'catastrophe' kelimesi 'facia' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "catastrophe (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'facia' kavramının zihinde somutlaşması.",
+      "mentalImage": "Catastrophe - facia"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with catastrophe (facia)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with catastrophe (facia). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene catastrophe",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with catastrophe (facia)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with catastrophe concept",
+    "altText": "Cartoon character depicting the concept of catastrophe (facia)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-decline",
+    "word": "decline",
+    "meaningsTr": [
+      "geri çevirmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I politely declined her invitation.",
+    "exampleTr": "Örnek: \"geri çevirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "decline in practice",
+      "academic decline"
+    ],
+    "visualMnemonic": "Decline: geri çevirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/decline/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "decline",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to decline",
+      "differenceTr": "'decline' anlamı: geri çevirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I politely declined her invitation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'decline' kelimesi 'geri çevirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "decline (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'geri çevirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Decline - geri çevirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with decline (geri çevirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with decline (geri çevirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene decline",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with decline (geri çevirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with decline concept",
+    "altText": "Cartoon character depicting the concept of decline (geri çevirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-extract",
+    "word": "extract",
+    "meaningsTr": [
+      "esans",
+      "öz"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The cream contained extracts of several plants.",
+    "exampleTr": "Örnek: \"esans\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "extract in practice",
+      "academic extract"
+    ],
+    "visualMnemonic": "Extract: esans kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/extract/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "extract",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to extract",
+      "differenceTr": "'extract' anlamı: esans. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The cream contained extracts of several plants.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'extract' kelimesi 'esans' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "extract (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'esans' kavramının zihinde somutlaşması.",
+      "mentalImage": "Extract - esans"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with extract (esans)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with extract (esans). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene extract",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with extract (esans)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with extract concept",
+    "altText": "Cartoon character depicting the concept of extract (esans)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-keen",
+    "word": "keen",
+    "meaningsTr": [
+      "hevesli olmak"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Andrew was very keen to help our project.",
+    "exampleTr": "Örnek: \"hevesli olmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "keen in practice",
+      "academic keen"
+    ],
+    "visualMnemonic": "Keen: hevesli olmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/keen/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "keen",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to keen",
+      "differenceTr": "'keen' anlamı: hevesli olmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Andrew was very keen to help our project.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'keen' kelimesi 'hevesli olmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "keen (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hevesli olmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Keen - hevesli olmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with keen (hevesli olmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with keen (hevesli olmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene keen",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with keen (hevesli olmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with keen concept",
+    "altText": "Cartoon character depicting the concept of keen (hevesli olmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-intervene",
+    "word": "intervene",
+    "meaningsTr": [
+      "araya girmek",
+      "müdahale etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He might have been hurt if the neighbours hadn’t intervened.",
+    "exampleTr": "Örnek: \"araya girmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "intervene in practice",
+      "academic intervene"
+    ],
+    "visualMnemonic": "Intervene: araya girmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/intervene/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "18. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "intervene",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to intervene",
+      "differenceTr": "'intervene' anlamı: araya girmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He might have been hurt if the neighbours hadn’t intervened.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'intervene' kelimesi 'araya girmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "intervene (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'araya girmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Intervene - araya girmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 18. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with intervene (araya girmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with intervene (araya girmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene intervene",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with intervene (araya girmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with intervene concept",
+    "altText": "Cartoon character depicting the concept of intervene (araya girmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-observation",
+    "word": "observation",
+    "meaningsTr": [
+      "gözlem",
+      "gözetleme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The police are keeping the suspect under observation.",
+    "exampleTr": "Örnek: \"gözlem\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "observation in practice",
+      "academic observation"
+    ],
+    "visualMnemonic": "Observation: gözlem kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/observation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "observation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to observation",
+      "differenceTr": "'observation' anlamı: gözlem. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The police are keeping the suspect under observation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'observation' kelimesi 'gözlem' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "observation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gözlem' kavramının zihinde somutlaşması.",
+      "mentalImage": "Observation - gözlem"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with observation (gözlem)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with observation (gözlem). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene observation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with observation (gözlem)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with observation concept",
+    "altText": "Cartoon character depicting the concept of observation (gözlem)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-request",
+    "word": "request",
+    "meaningsTr": [
+      "istek",
+      "talep"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The boss refused or request to leave work early.",
+    "exampleTr": "Örnek: \"istek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "request in practice",
+      "academic request"
+    ],
+    "visualMnemonic": "Request: istek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/request/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "request",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to request",
+      "differenceTr": "'request' anlamı: istek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The boss refused or request to leave work early.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'request' kelimesi 'istek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "request (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'istek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Request - istek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with request (istek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with request (istek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene request",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with request (istek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with request concept",
+    "altText": "Cartoon character depicting the concept of request (istek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-stroll",
+    "word": "stroll",
+    "meaningsTr": [
+      "gezinmek",
+      "gezinti"
+    ],
+    "partOfSpeech": "verb",
+    "example": "We could stroll along the beach if you want.",
+    "exampleTr": "Örnek: \"gezinmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "stroll in practice",
+      "academic stroll"
+    ],
+    "visualMnemonic": "Stroll: gezinmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/stroll/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "stroll",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to stroll",
+      "differenceTr": "'stroll' anlamı: gezinmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We could stroll along the beach if you want.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'stroll' kelimesi 'gezinmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "stroll (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gezinmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Stroll - gezinmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with stroll (gezinmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with stroll (gezinmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene stroll",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with stroll (gezinmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with stroll concept",
+    "altText": "Cartoon character depicting the concept of stroll (gezinmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-uneasy",
+    "word": "uneasy",
+    "meaningsTr": [
+      "huzursuz",
+      "tedirgin"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I feel a little uneasy about talking to him.",
+    "exampleTr": "Örnek: \"huzursuz\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "uneasy in practice",
+      "academic uneasy"
+    ],
+    "visualMnemonic": "Uneasy: huzursuz kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/uneasy/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "uneasy",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to uneasy",
+      "differenceTr": "'uneasy' anlamı: huzursuz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I feel a little uneasy about talking to him.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'uneasy' kelimesi 'huzursuz' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "uneasy (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'huzursuz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Uneasy - huzursuz"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with uneasy (huzursuz)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with uneasy (huzursuz). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene uneasy",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with uneasy (huzursuz)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with uneasy concept",
+    "altText": "Cartoon character depicting the concept of uneasy (huzursuz)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-weary",
+    "word": "weary",
+    "meaningsTr": [
+      "yorgun",
+      "bitap"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "You must be weary from your long journey.",
+    "exampleTr": "Örnek: \"yorgun\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "weary in practice",
+      "academic weary"
+    ],
+    "visualMnemonic": "Weary: yorgun kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/weary/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "weary",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to weary",
+      "differenceTr": "'weary' anlamı: yorgun. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"You must be weary from your long journey.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'weary' kelimesi 'yorgun' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "weary (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yorgun' kavramının zihinde somutlaşması.",
+      "mentalImage": "Weary - yorgun"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with weary (yorgun)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with weary (yorgun). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene weary",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with weary (yorgun)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with weary concept",
+    "altText": "Cartoon character depicting the concept of weary (yorgun)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-outcome",
+    "word": "outcome",
+    "meaningsTr": [
+      "sonuç",
+      "çıktı"
+    ],
+    "partOfSpeech": "noun",
+    "example": "It’s too early to predict the outcome of the discussion.",
+    "exampleTr": "Örnek: \"sonuç\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "outcome in practice",
+      "academic outcome"
+    ],
+    "visualMnemonic": "Outcome: sonuç kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/outcome/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "outcome",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to outcome",
+      "differenceTr": "'outcome' anlamı: sonuç. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It’s too early to predict the outcome of the discussion.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'outcome' kelimesi 'sonuç' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "outcome (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sonuç' kavramının zihinde somutlaşması.",
+      "mentalImage": "Outcome - sonuç"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with outcome (sonuç)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with outcome (sonuç). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene outcome",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with outcome (sonuç)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with outcome concept",
+    "altText": "Cartoon character depicting the concept of outcome (sonuç)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-bet",
+    "word": "bet",
+    "meaningsTr": [
+      "iddia etmek bahis"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I bet the moment I sit down, my mother will call me.",
+    "exampleTr": "Örnek: \"iddia etmek bahis\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "bet in practice",
+      "academic bet"
+    ],
+    "visualMnemonic": "Bet: iddia etmek bahis kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/bet/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "19. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "bet",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to bet",
+      "differenceTr": "'bet' anlamı: iddia etmek bahis. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I bet the moment I sit down, my mother will call me.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'bet' kelimesi 'iddia etmek bahis' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "bet (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iddia etmek bahis' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bet - iddia etmek bahis"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 19. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with bet (iddia etmek bahis)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with bet (iddia etmek bahis). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene bet",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with bet (iddia etmek bahis)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with bet concept",
+    "altText": "Cartoon character depicting the concept of bet (iddia etmek bahis)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-hostile",
+    "word": "hostile",
+    "meaningsTr": [
+      "düşmanca"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He was openly hostile towards his classmates.",
+    "exampleTr": "Örnek: \"düşmanca\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "hostile in practice",
+      "academic hostile"
+    ],
+    "visualMnemonic": "Hostile: düşmanca kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/hostile/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "hostile",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to hostile",
+      "differenceTr": "'hostile' anlamı: düşmanca. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was openly hostile towards his classmates.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'hostile' kelimesi 'düşmanca' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "hostile (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'düşmanca' kavramının zihinde somutlaşması.",
+      "mentalImage": "Hostile - düşmanca"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with hostile (düşmanca)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with hostile (düşmanca). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene hostile",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with hostile (düşmanca)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with hostile concept",
+    "altText": "Cartoon character depicting the concept of hostile (düşmanca)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-fierce",
+    "word": "fierce",
+    "meaningsTr": [
+      "hiddetli",
+      "şiddetli"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Two men were shot during fierce fighting last month.",
+    "exampleTr": "Örnek: \"hiddetli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "fierce in practice",
+      "academic fierce"
+    ],
+    "visualMnemonic": "Fierce: hiddetli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/fierce/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "fierce",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to fierce",
+      "differenceTr": "'fierce' anlamı: hiddetli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Two men were shot during fierce fighting last month.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'fierce' kelimesi 'hiddetli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "fierce (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hiddetli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Fierce - hiddetli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with fierce (hiddetli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with fierce (hiddetli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene fierce",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with fierce (hiddetli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with fierce concept",
+    "altText": "Cartoon character depicting the concept of fierce (hiddetli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-speculative",
+    "word": "speculative",
+    "meaningsTr": [
+      "teorik",
+      "kuramsal"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Her theory was too speculative for most of her colleagues to accept.",
+    "exampleTr": "Örnek: \"teorik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "speculative in practice",
+      "academic speculative"
+    ],
+    "visualMnemonic": "Speculative: teorik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/speculative/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "speculative",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to speculative",
+      "differenceTr": "'speculative' anlamı: teorik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her theory was too speculative for most of her colleagues to accept.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'speculative' kelimesi 'teorik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "speculative (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'teorik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Speculative - teorik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with speculative (teorik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with speculative (teorik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene speculative",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with speculative (teorik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with speculative concept",
+    "altText": "Cartoon character depicting the concept of speculative (teorik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-elimination",
+    "word": "elimination",
+    "meaningsTr": [
+      "eleme",
+      "bertaraf etme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "There were four eliminations in the first round.",
+    "exampleTr": "Örnek: \"eleme\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "elimination in practice",
+      "academic elimination"
+    ],
+    "visualMnemonic": "Elimination: eleme kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/elimination/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "elimination",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to elimination",
+      "differenceTr": "'elimination' anlamı: eleme. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There were four eliminations in the first round.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'elimination' kelimesi 'eleme' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "elimination (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eleme' kavramının zihinde somutlaşması.",
+      "mentalImage": "Elimination - eleme"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with elimination (eleme)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with elimination (eleme). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene elimination",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with elimination (eleme)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with elimination concept",
+    "altText": "Cartoon character depicting the concept of elimination (eleme)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-application",
+    "word": "application",
+    "meaningsTr": [
+      "başvuru",
+      "talep"
+    ],
+    "partOfSpeech": "noun",
+    "example": "We have received applications from more than 150 students.",
+    "exampleTr": "Örnek: \"başvuru\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "application in practice",
+      "academic application"
+    ],
+    "visualMnemonic": "Application: başvuru kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/application/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "application",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to application",
+      "differenceTr": "'application' anlamı: başvuru. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We have received applications from more than 150 students.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'application' kelimesi 'başvuru' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "application (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'başvuru' kavramının zihinde somutlaşması.",
+      "mentalImage": "Application - başvuru"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with application (başvuru)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with application (başvuru). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene application",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with application (başvuru)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with application concept",
+    "altText": "Cartoon character depicting the concept of application (başvuru)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-profitable",
+    "word": "profitable",
+    "meaningsTr": [
+      "kazançlı",
+      "yararlı"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "It’s more profitable to sell directly to the public.",
+    "exampleTr": "Örnek: \"kazançlı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "profitable in practice",
+      "academic profitable"
+    ],
+    "visualMnemonic": "Profitable: kazançlı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/profitable/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "profitable",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to profitable",
+      "differenceTr": "'profitable' anlamı: kazançlı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It’s more profitable to sell directly to the public.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'profitable' kelimesi 'kazançlı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "profitable (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kazançlı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Profitable - kazançlı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with profitable (kazançlı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with profitable (kazançlı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene profitable",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with profitable (kazançlı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with profitable concept",
+    "altText": "Cartoon character depicting the concept of profitable (kazançlı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-severe",
+    "word": "severe",
+    "meaningsTr": [
+      "şiddetli",
+      "ciddi"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "This is a school for children with serious learning difficulties.",
+    "exampleTr": "Örnek: \"şiddetli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "severe in practice",
+      "academic severe"
+    ],
+    "visualMnemonic": "Severe: şiddetli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/severe/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "20. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "severe",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to severe",
+      "differenceTr": "'severe' anlamı: şiddetli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This is a school for children with serious learning difficulties.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'severe' kelimesi 'şiddetli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "severe (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'şiddetli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Severe - şiddetli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 20. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with severe (şiddetli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with severe (şiddetli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene severe",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with severe (şiddetli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with severe concept",
+    "altText": "Cartoon character depicting the concept of severe (şiddetli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abrupt",
+    "word": "abrupt",
+    "meaningsTr": [
+      "birdenbire",
+      "ani"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Our conversation came to an abrupt end when his parents came home.",
+    "exampleTr": "Örnek: \"birdenbire\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abrupt in practice",
+      "academic abrupt"
+    ],
+    "visualMnemonic": "Abrupt: birdenbire kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abrupt/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "abrupt",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abrupt",
+      "differenceTr": "'abrupt' anlamı: birdenbire. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Our conversation came to an abrupt end when his parents came home.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abrupt' kelimesi 'birdenbire' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abrupt (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'birdenbire' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abrupt - birdenbire"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abrupt (birdenbire)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abrupt (birdenbire). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abrupt",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abrupt (birdenbire)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abrupt concept",
+    "altText": "Cartoon character depicting the concept of abrupt (birdenbire)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-exclude",
+    "word": "exclude",
+    "meaningsTr": [
+      "hariç tutmak",
+      "dahil etmemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "It wasn’t my intention to exclude her from the list, I just forgot her.",
+    "exampleTr": "Örnek: \"hariç tutmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "exclude in practice",
+      "academic exclude"
+    ],
+    "visualMnemonic": "Exclude: hariç tutmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/exclude/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "exclude",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to exclude",
+      "differenceTr": "'exclude' anlamı: hariç tutmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It wasn’t my intention to exclude her from the list, I just forgot her.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'exclude' kelimesi 'hariç tutmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "exclude (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hariç tutmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Exclude - hariç tutmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with exclude (hariç tutmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with exclude (hariç tutmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene exclude",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with exclude (hariç tutmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with exclude concept",
+    "altText": "Cartoon character depicting the concept of exclude (hariç tutmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-deliver",
+    "word": "deliver",
+    "meaningsTr": [
+      "teslim etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "We had the burger delivered.",
+    "exampleTr": "Örnek: \"teslim etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "deliver in practice",
+      "academic deliver"
+    ],
+    "visualMnemonic": "Deliver: teslim etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/deliver/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "deliver",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to deliver",
+      "differenceTr": "'deliver' anlamı: teslim etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We had the burger delivered.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'deliver' kelimesi 'teslim etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deliver (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'teslim etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deliver - teslim etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with deliver (teslim etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with deliver (teslim etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene deliver",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with deliver (teslim etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with deliver concept",
+    "altText": "Cartoon character depicting the concept of deliver (teslim etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-unearth",
+    "word": "unearth",
+    "meaningsTr": [
+      "gün yüzüne çıkarmak",
+      "keşfetmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Thousands of bodies have been unearthed in mass graves.",
+    "exampleTr": "Örnek: \"gün yüzüne çıkarmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "unearth in practice",
+      "academic unearth"
+    ],
+    "visualMnemonic": "Unearth: gün yüzüne çıkarmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/unearth/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "unearth",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to unearth",
+      "differenceTr": "'unearth' anlamı: gün yüzüne çıkarmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Thousands of bodies have been unearthed in mass graves.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'unearth' kelimesi 'gün yüzüne çıkarmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "unearth (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'gün yüzüne çıkarmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Unearth - gün yüzüne çıkarmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with unearth (gün yüzüne çıkarmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with unearth (gün yüzüne çıkarmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene unearth",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with unearth (gün yüzüne çıkarmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with unearth concept",
+    "altText": "Cartoon character depicting the concept of unearth (gün yüzüne çıkarmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-urgency",
+    "word": "urgency",
+    "meaningsTr": [
+      "aciliyet"
+    ],
+    "partOfSpeech": "noun",
+    "example": "She stressed the urgency of an early solution.",
+    "exampleTr": "Örnek: \"aciliyet\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "urgency in practice",
+      "academic urgency"
+    ],
+    "visualMnemonic": "Urgency: aciliyet kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/urgency/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "urgency",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to urgency",
+      "differenceTr": "'urgency' anlamı: aciliyet. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She stressed the urgency of an early solution.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'urgency' kelimesi 'aciliyet' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "urgency (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aciliyet' kavramının zihinde somutlaşması.",
+      "mentalImage": "Urgency - aciliyet"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with urgency (aciliyet)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with urgency (aciliyet). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene urgency",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with urgency (aciliyet)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with urgency concept",
+    "altText": "Cartoon character depicting the concept of urgency (aciliyet)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-incentive",
+    "word": "incentive",
+    "meaningsTr": [
+      "teşvik",
+      "neden",
+      "isteklendirme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The incentive to sell more is large, and it plainly works.",
+    "exampleTr": "Örnek: \"teşvik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "incentive in practice",
+      "academic incentive"
+    ],
+    "visualMnemonic": "Incentive: teşvik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/incentive/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "incentive",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to incentive",
+      "differenceTr": "'incentive' anlamı: teşvik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The incentive to sell more is large, and it plainly works.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'incentive' kelimesi 'teşvik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "incentive (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'teşvik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Incentive - teşvik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with incentive (teşvik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with incentive (teşvik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene incentive",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with incentive (teşvik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with incentive concept",
+    "altText": "Cartoon character depicting the concept of incentive (teşvik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-preservation",
+    "word": "preservation",
+    "meaningsTr": [
+      "koruma",
+      "muhafaza"
+    ],
+    "partOfSpeech": "noun",
+    "example": "There is great public concern about some of the chemicals used in food preservation.",
+    "exampleTr": "Örnek: \"koruma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "preservation in practice",
+      "academic preservation"
+    ],
+    "visualMnemonic": "Preservation: koruma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/preservation/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "21. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "preservation",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to preservation",
+      "differenceTr": "'preservation' anlamı: koruma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"There is great public concern about some of the chemicals used in food preservation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'preservation' kelimesi 'koruma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "preservation (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'koruma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Preservation - koruma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 21. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with preservation (koruma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with preservation (koruma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene preservation",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with preservation (koruma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with preservation concept",
+    "altText": "Cartoon character depicting the concept of preservation (koruma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-objectivity",
+    "word": "objectivity",
+    "meaningsTr": [
+      "tarafsızlık"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Some have questioned the objectivity of his own investigation into the matter.",
+    "exampleTr": "Örnek: \"tarafsızlık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "objectivity in practice",
+      "academic objectivity"
+    ],
+    "visualMnemonic": "Objectivity: tarafsızlık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/objectivity/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "objectivity",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to objectivity",
+      "differenceTr": "'objectivity' anlamı: tarafsızlık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Some have questioned the objectivity of his own investigation into the matter.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'objectivity' kelimesi 'tarafsızlık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "objectivity (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tarafsızlık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Objectivity - tarafsızlık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with objectivity (tarafsızlık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with objectivity (tarafsızlık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene objectivity",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with objectivity (tarafsızlık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with objectivity concept",
+    "altText": "Cartoon character depicting the concept of objectivity (tarafsızlık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-initial",
+    "word": "initial",
+    "meaningsTr": [
+      "baştaki",
+      "birinci"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The initial eathquake was followed by a series of aftershocks.",
+    "exampleTr": "Örnek: \"baştaki\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "initial in practice",
+      "academic initial"
+    ],
+    "visualMnemonic": "Initial: baştaki kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/initial/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "initial",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to initial",
+      "differenceTr": "'initial' anlamı: baştaki. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The initial eathquake was followed by a series of aftershocks.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'initial' kelimesi 'baştaki' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "initial (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'baştaki' kavramının zihinde somutlaşması.",
+      "mentalImage": "Initial - baştaki"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with initial (baştaki)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with initial (baştaki). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene initial",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with initial (baştaki)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with initial concept",
+    "altText": "Cartoon character depicting the concept of initial (baştaki)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-selective",
+    "word": "selective",
+    "meaningsTr": [
+      "seçici",
+      "seçmeli"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I’m more selective about the books I read than I used to be.",
+    "exampleTr": "Örnek: \"seçici\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "selective in practice",
+      "academic selective"
+    ],
+    "visualMnemonic": "Selective: seçici kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/selective/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "selective",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to selective",
+      "differenceTr": "'selective' anlamı: seçici. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I’m more selective about the books I read than I used to be.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'selective' kelimesi 'seçici' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "selective (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'seçici' kavramının zihinde somutlaşması.",
+      "mentalImage": "Selective - seçici"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with selective (seçici)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with selective (seçici). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene selective",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with selective (seçici)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with selective concept",
+    "altText": "Cartoon character depicting the concept of selective (seçici)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-reduce",
+    "word": "reduce",
+    "meaningsTr": [
+      "azaltmak",
+      "eksiltmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "My weight reduces when I stop eating sugar.",
+    "exampleTr": "Örnek: \"azaltmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "reduce in practice",
+      "academic reduce"
+    ],
+    "visualMnemonic": "Reduce: azaltmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/reduce/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "reduce",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to reduce",
+      "differenceTr": "'reduce' anlamı: azaltmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"My weight reduces when I stop eating sugar.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'reduce' kelimesi 'azaltmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "reduce (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'azaltmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Reduce - azaltmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with reduce (azaltmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with reduce (azaltmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene reduce",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with reduce (azaltmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with reduce concept",
+    "altText": "Cartoon character depicting the concept of reduce (azaltmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-specify",
+    "word": "specify",
+    "meaningsTr": [
+      "belirtmek",
+      "belirlemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He said we should meet but didn’t specify a time.",
+    "exampleTr": "Örnek: \"belirtmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "specify in practice",
+      "academic specify"
+    ],
+    "visualMnemonic": "Specify: belirtmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/specify/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "specify",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to specify",
+      "differenceTr": "'specify' anlamı: belirtmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He said we should meet but didn’t specify a time.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'specify' kelimesi 'belirtmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "specify (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirtmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Specify - belirtmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with specify (belirtmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with specify (belirtmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene specify",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with specify (belirtmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with specify concept",
+    "altText": "Cartoon character depicting the concept of specify (belirtmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-vague",
+    "word": "vague",
+    "meaningsTr": [
+      "belirsiz",
+      "anlaşılmaz"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I do have a vague memory of meeting her many years ago.",
+    "exampleTr": "Örnek: \"belirsiz\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "vague in practice",
+      "academic vague"
+    ],
+    "visualMnemonic": "Vague: belirsiz kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/vague/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "vague",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to vague",
+      "differenceTr": "'vague' anlamı: belirsiz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I do have a vague memory of meeting her many years ago.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'vague' kelimesi 'belirsiz' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "vague (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirsiz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Vague - belirsiz"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with vague (belirsiz)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with vague (belirsiz). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene vague",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with vague (belirsiz)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with vague concept",
+    "altText": "Cartoon character depicting the concept of vague (belirsiz)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-cooperative",
+    "word": "cooperative",
+    "meaningsTr": [
+      "işbirliği"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "He went voluntarily and was very cooperative.",
+    "exampleTr": "Örnek: \"işbirliği\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "cooperative in practice",
+      "academic cooperative"
+    ],
+    "visualMnemonic": "Cooperative: işbirliği kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/cooperative/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "22. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "cooperative",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to cooperative",
+      "differenceTr": "'cooperative' anlamı: işbirliği. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He went voluntarily and was very cooperative.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'cooperative' kelimesi 'işbirliği' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "cooperative (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'işbirliği' kavramının zihinde somutlaşması.",
+      "mentalImage": "Cooperative - işbirliği"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 22. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with cooperative (işbirliği)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with cooperative (işbirliği). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene cooperative",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with cooperative (işbirliği)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with cooperative concept",
+    "altText": "Cartoon character depicting the concept of cooperative (işbirliği)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-distribution",
+    "word": "distribution",
+    "meaningsTr": [
+      "dağıtma",
+      "dağılım",
+      "yayılma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "She had it printed for distribution among her friends.",
+    "exampleTr": "Örnek: \"dağıtma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "distribution in practice",
+      "academic distribution"
+    ],
+    "visualMnemonic": "Distribution: dağıtma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/distribution/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "distribution",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to distribution",
+      "differenceTr": "'distribution' anlamı: dağıtma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She had it printed for distribution among her friends.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'distribution' kelimesi 'dağıtma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "distribution (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dağıtma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Distribution - dağıtma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with distribution (dağıtma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with distribution (dağıtma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene distribution",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with distribution (dağıtma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with distribution concept",
+    "altText": "Cartoon character depicting the concept of distribution (dağıtma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-excessive",
+    "word": "excessive",
+    "meaningsTr": [
+      "aşırı",
+      "lüzumsuz"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The directive will prevent employees from working excessive hours.",
+    "exampleTr": "Örnek: \"aşırı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "excessive in practice",
+      "academic excessive"
+    ],
+    "visualMnemonic": "Excessive: aşırı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/excessive/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "excessive",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to excessive",
+      "differenceTr": "'excessive' anlamı: aşırı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The directive will prevent employees from working excessive hours.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'excessive' kelimesi 'aşırı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "excessive (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aşırı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Excessive - aşırı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with excessive (aşırı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with excessive (aşırı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene excessive",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with excessive (aşırı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with excessive concept",
+    "altText": "Cartoon character depicting the concept of excessive (aşırı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-valid",
+    "word": "valid",
+    "meaningsTr": [
+      "geçerli",
+      "mantıklı"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The judge remarked that ignorance was not a valid defence.",
+    "exampleTr": "Örnek: \"geçerli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "valid in practice",
+      "academic valid"
+    ],
+    "visualMnemonic": "Valid: geçerli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/valid/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "valid",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to valid",
+      "differenceTr": "'valid' anlamı: geçerli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The judge remarked that ignorance was not a valid defence.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'valid' kelimesi 'geçerli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "valid (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'geçerli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Valid - geçerli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with valid (geçerli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with valid (geçerli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene valid",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with valid (geçerli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with valid concept",
+    "altText": "Cartoon character depicting the concept of valid (geçerli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-hazardous",
+    "word": "hazardous",
+    "meaningsTr": [
+      "tehlikeli",
+      "riskli"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Heavy snow fell overnight, making road conditions hazardous.",
+    "exampleTr": "Örnek: \"tehlikeli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "hazardous in practice",
+      "academic hazardous"
+    ],
+    "visualMnemonic": "Hazardous: tehlikeli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/hazardous/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "hazardous",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to hazardous",
+      "differenceTr": "'hazardous' anlamı: tehlikeli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Heavy snow fell overnight, making road conditions hazardous.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'hazardous' kelimesi 'tehlikeli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "hazardous (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tehlikeli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Hazardous - tehlikeli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with hazardous (tehlikeli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with hazardous (tehlikeli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene hazardous",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with hazardous (tehlikeli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with hazardous concept",
+    "altText": "Cartoon character depicting the concept of hazardous (tehlikeli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-spoil",
+    "word": "spoil",
+    "meaningsTr": [
+      "şımartmak",
+      "berbat etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "I haven’t read the book, so don’t spoil it for me by telling me what happens.",
+    "exampleTr": "Örnek: \"şımartmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "spoil in practice",
+      "academic spoil"
+    ],
+    "visualMnemonic": "Spoil: şımartmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/spoil/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "spoil",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to spoil",
+      "differenceTr": "'spoil' anlamı: şımartmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I haven’t read the book, so don’t spoil it for me by telling me what happens.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'spoil' kelimesi 'şımartmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "spoil (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'şımartmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Spoil - şımartmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with spoil (şımartmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with spoil (şımartmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene spoil",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with spoil (şımartmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with spoil concept",
+    "altText": "Cartoon character depicting the concept of spoil (şımartmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-relieve",
+    "word": "relieve",
+    "meaningsTr": [
+      "rahatlatmak",
+      "gönlünü ferahlatmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "This cream relieves the swelling caused by insect stings.",
+    "exampleTr": "Örnek: \"rahatlatmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "relieve in practice",
+      "academic relieve"
+    ],
+    "visualMnemonic": "Relieve: rahatlatmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/relieve/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "relieve",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to relieve",
+      "differenceTr": "'relieve' anlamı: rahatlatmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This cream relieves the swelling caused by insect stings.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'relieve' kelimesi 'rahatlatmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "relieve (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'rahatlatmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Relieve - rahatlatmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with relieve (rahatlatmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with relieve (rahatlatmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene relieve",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with relieve (rahatlatmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with relieve concept",
+    "altText": "Cartoon character depicting the concept of relieve (rahatlatmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-highlight",
+    "word": "highlight",
+    "meaningsTr": [
+      "altını çizmek",
+      "vurgulamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The report highlights the need for safety.",
+    "exampleTr": "Örnek: \"altını çizmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "highlight in practice",
+      "academic highlight"
+    ],
+    "visualMnemonic": "Highlight: altını çizmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/highlight/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "23. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "highlight",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to highlight",
+      "differenceTr": "'highlight' anlamı: altını çizmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The report highlights the need for safety.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'highlight' kelimesi 'altını çizmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "highlight (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'altını çizmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Highlight - altını çizmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 23. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with highlight (altını çizmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with highlight (altını çizmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene highlight",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with highlight (altını çizmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with highlight concept",
+    "altText": "Cartoon character depicting the concept of highlight (altını çizmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-belongings",
+    "word": "belongings",
+    "meaningsTr": [
+      "kişisel eşyalar"
+    ],
+    "partOfSpeech": "noun",
+    "example": "I put a few personal belongings in a bag and left the house for the last time.",
+    "exampleTr": "Örnek: \"kişisel eşyalar\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "belongings in practice",
+      "academic belongings"
+    ],
+    "visualMnemonic": "Belongings: kişisel eşyalar kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/belongings/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "belongings",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to belongings",
+      "differenceTr": "'belongings' anlamı: kişisel eşyalar. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I put a few personal belongings in a bag and left the house for the last time.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'belongings' kelimesi 'kişisel eşyalar' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "belongings (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kişisel eşyalar' kavramının zihinde somutlaşması.",
+      "mentalImage": "Belongings - kişisel eşyalar"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with belongings (kişisel eşyalar)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with belongings (kişisel eşyalar). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene belongings",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with belongings (kişisel eşyalar)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with belongings concept",
+    "altText": "Cartoon character depicting the concept of belongings (kişisel eşyalar)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-pattern",
+    "word": "pattern",
+    "meaningsTr": [
+      "model",
+      "desen",
+      "yapı"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The curtains had a floral pattern.",
+    "exampleTr": "Örnek: \"model\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "pattern in practice",
+      "academic pattern"
+    ],
+    "visualMnemonic": "Pattern: model kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/pattern/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "pattern",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to pattern",
+      "differenceTr": "'pattern' anlamı: model. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The curtains had a floral pattern.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'pattern' kelimesi 'model' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "pattern (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'model' kavramının zihinde somutlaşması.",
+      "mentalImage": "Pattern - model"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with pattern (model)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with pattern (model). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene pattern",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with pattern (model)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with pattern concept",
+    "altText": "Cartoon character depicting the concept of pattern (model)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-detect",
+    "word": "detect",
+    "meaningsTr": [
+      "saptamak",
+      "belirlemek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Some sounds cannot be detected by the human ear.",
+    "exampleTr": "Örnek: \"saptamak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "detect in practice",
+      "academic detect"
+    ],
+    "visualMnemonic": "Detect: saptamak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/detect/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "detect",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to detect",
+      "differenceTr": "'detect' anlamı: saptamak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Some sounds cannot be detected by the human ear.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'detect' kelimesi 'saptamak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "detect (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'saptamak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Detect - saptamak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with detect (saptamak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with detect (saptamak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene detect",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with detect (saptamak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with detect concept",
+    "altText": "Cartoon character depicting the concept of detect (saptamak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abstract",
+    "word": "abstract",
+    "meaningsTr": [
+      "soyut",
+      "özetlemek"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Truth and beauty are abstract concepts.",
+    "exampleTr": "Örnek: \"soyut\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abstract in practice",
+      "academic abstract"
+    ],
+    "visualMnemonic": "Abstract: soyut kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abstract/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "abstract",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abstract",
+      "differenceTr": "'abstract' anlamı: soyut. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Truth and beauty are abstract concepts.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abstract' kelimesi 'soyut' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abstract (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'soyut' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abstract - soyut"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abstract (soyut)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abstract (soyut). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abstract",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abstract (soyut)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abstract concept",
+    "altText": "Cartoon character depicting the concept of abstract (soyut)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-candidate",
+    "word": "candidate",
+    "meaningsTr": [
+      "aday"
+    ],
+    "partOfSpeech": "noun",
+    "example": "We have interviewed four candidates for the job.",
+    "exampleTr": "Örnek: \"aday\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "candidate in practice",
+      "academic candidate"
+    ],
+    "visualMnemonic": "Candidate: aday kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/candidate/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "candidate",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to candidate",
+      "differenceTr": "'candidate' anlamı: aday. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We have interviewed four candidates for the job.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'candidate' kelimesi 'aday' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "candidate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'aday' kavramının zihinde somutlaşması.",
+      "mentalImage": "Candidate - aday"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with candidate (aday)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with candidate (aday). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene candidate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with candidate (aday)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with candidate concept",
+    "altText": "Cartoon character depicting the concept of candidate (aday)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-determine",
+    "word": "determine",
+    "meaningsTr": [
+      "belirlemek",
+      "saptamak",
+      "kararlaştırmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Officials will determine whether or not the game will be played.",
+    "exampleTr": "Örnek: \"belirlemek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "determine in practice",
+      "academic determine"
+    ],
+    "visualMnemonic": "Determine: belirlemek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/determine/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "determine",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to determine",
+      "differenceTr": "'determine' anlamı: belirlemek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Officials will determine whether or not the game will be played.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'determine' kelimesi 'belirlemek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "determine (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'belirlemek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Determine - belirlemek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with determine (belirlemek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with determine (belirlemek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene determine",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with determine (belirlemek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with determine concept",
+    "altText": "Cartoon character depicting the concept of determine (belirlemek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-accumulate",
+    "word": "accumulate",
+    "meaningsTr": [
+      "biriktirmek",
+      "yığmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "We’ve accumulated so much rubbish over the years.",
+    "exampleTr": "Örnek: \"biriktirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "accumulate in practice",
+      "academic accumulate"
+    ],
+    "visualMnemonic": "Accumulate: biriktirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/accumulate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "24. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "accumulate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to accumulate",
+      "differenceTr": "'accumulate' anlamı: biriktirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We’ve accumulated so much rubbish over the years.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'accumulate' kelimesi 'biriktirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "accumulate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'biriktirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Accumulate - biriktirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 24. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with accumulate (biriktirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with accumulate (biriktirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene accumulate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with accumulate (biriktirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with accumulate concept",
+    "altText": "Cartoon character depicting the concept of accumulate (biriktirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-bother",
+    "word": "bother",
+    "meaningsTr": [
+      "rahatsız etmek",
+      "can sıkmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "It bothers me that he is out so much of the time.",
+    "exampleTr": "Örnek: \"rahatsız etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "bother in practice",
+      "academic bother"
+    ],
+    "visualMnemonic": "Bother: rahatsız etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/bother/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "bother",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to bother",
+      "differenceTr": "'bother' anlamı: rahatsız etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It bothers me that he is out so much of the time.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'bother' kelimesi 'rahatsız etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "bother (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'rahatsız etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bother - rahatsız etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with bother (rahatsız etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with bother (rahatsız etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene bother",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with bother (rahatsız etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with bother concept",
+    "altText": "Cartoon character depicting the concept of bother (rahatsız etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-abbreviate",
+    "word": "abbreviate",
+    "meaningsTr": [
+      "sadeleştirmek",
+      "kısaltmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "“Chief Executive Officer” is abbreviated as “CEO”.",
+    "exampleTr": "Örnek: \"sadeleştirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "abbreviate in practice",
+      "academic abbreviate"
+    ],
+    "visualMnemonic": "Abbreviate: sadeleştirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/abbreviate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "abbreviate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to abbreviate",
+      "differenceTr": "'abbreviate' anlamı: sadeleştirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"“Chief Executive Officer” is abbreviated as “CEO”.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'abbreviate' kelimesi 'sadeleştirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "abbreviate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'sadeleştirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Abbreviate - sadeleştirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with abbreviate (sadeleştirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with abbreviate (sadeleştirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene abbreviate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with abbreviate (sadeleştirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with abbreviate concept",
+    "altText": "Cartoon character depicting the concept of abbreviate (sadeleştirmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-bizarre",
+    "word": "bizarre",
+    "meaningsTr": [
+      "garip",
+      "tuhaf"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I had a really bizarre dream last night.",
+    "exampleTr": "Örnek: \"garip\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "bizarre in practice",
+      "academic bizarre"
+    ],
+    "visualMnemonic": "Bizarre: garip kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/bizarre/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "bizarre",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to bizarre",
+      "differenceTr": "'bizarre' anlamı: garip. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I had a really bizarre dream last night.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'bizarre' kelimesi 'garip' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "bizarre (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'garip' kavramının zihinde somutlaşması.",
+      "mentalImage": "Bizarre - garip"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with bizarre (garip)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with bizarre (garip). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene bizarre",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with bizarre (garip)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with bizarre concept",
+    "altText": "Cartoon character depicting the concept of bizarre (garip)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-circulate",
+    "word": "circulate",
+    "meaningsTr": [
+      "haberi yaymak havanın",
+      "sıvının akımını sağlamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "News of her retirement quickly circulated around the office.",
+    "exampleTr": "Örnek: \"haberi yaymak havanın\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "circulate in practice",
+      "academic circulate"
+    ],
+    "visualMnemonic": "Circulate: haberi yaymak havanın kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/circulate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "circulate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to circulate",
+      "differenceTr": "'circulate' anlamı: haberi yaymak havanın. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"News of her retirement quickly circulated around the office.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'circulate' kelimesi 'haberi yaymak havanın' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "circulate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'haberi yaymak havanın' kavramının zihinde somutlaşması.",
+      "mentalImage": "Circulate - haberi yaymak havanın"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with circulate (haberi yaymak havanın)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with circulate (haberi yaymak havanın). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene circulate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with circulate (haberi yaymak havanın)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with circulate concept",
+    "altText": "Cartoon character depicting the concept of circulate (haberi yaymak havanın)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-rebellious",
+    "word": "rebellious",
+    "meaningsTr": [
+      "isyankar",
+      "asi"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "His teachers regard him as a rebellious, trouble-making boy.",
+    "exampleTr": "Örnek: \"isyankar\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "rebellious in practice",
+      "academic rebellious"
+    ],
+    "visualMnemonic": "Rebellious: isyankar kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/rebellious/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "rebellious",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to rebellious",
+      "differenceTr": "'rebellious' anlamı: isyankar. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"His teachers regard him as a rebellious, trouble-making boy.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'rebellious' kelimesi 'isyankar' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "rebellious (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'isyankar' kavramının zihinde somutlaşması.",
+      "mentalImage": "Rebellious - isyankar"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with rebellious (isyankar)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with rebellious (isyankar). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene rebellious",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with rebellious (isyankar)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with rebellious concept",
+    "altText": "Cartoon character depicting the concept of rebellious (isyankar)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-unsteady",
+    "word": "unsteady",
+    "meaningsTr": [
+      "istikrarsız",
+      "değişken"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The report showed unemployment surging in an unsteady economy.",
+    "exampleTr": "Örnek: \"istikrarsız\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "unsteady in practice",
+      "academic unsteady"
+    ],
+    "visualMnemonic": "Unsteady: istikrarsız kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/unsteady/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "unsteady",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to unsteady",
+      "differenceTr": "'unsteady' anlamı: istikrarsız. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The report showed unemployment surging in an unsteady economy.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'unsteady' kelimesi 'istikrarsız' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "unsteady (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'istikrarsız' kavramının zihinde somutlaşması.",
+      "mentalImage": "Unsteady - istikrarsız"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with unsteady (istikrarsız)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with unsteady (istikrarsız). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene unsteady",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with unsteady (istikrarsız)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with unsteady concept",
+    "altText": "Cartoon character depicting the concept of unsteady (istikrarsız)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-testimony",
+    "word": "testimony",
+    "meaningsTr": [
+      "tanıklık",
+      "delil"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Some doubts have been expressed about his testimony.",
+    "exampleTr": "Örnek: \"tanıklık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "testimony in practice",
+      "academic testimony"
+    ],
+    "visualMnemonic": "Testimony: tanıklık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/testimony/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "25. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "testimony",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to testimony",
+      "differenceTr": "'testimony' anlamı: tanıklık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Some doubts have been expressed about his testimony.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'testimony' kelimesi 'tanıklık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "testimony (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'tanıklık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Testimony - tanıklık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 25. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with testimony (tanıklık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with testimony (tanıklık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene testimony",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with testimony (tanıklık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with testimony concept",
+    "altText": "Cartoon character depicting the concept of testimony (tanıklık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-slight",
+    "word": "slight",
+    "meaningsTr": [
+      "hafif",
+      "az"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I had a slight headache.",
+    "exampleTr": "Örnek: \"hafif\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "slight in practice",
+      "academic slight"
+    ],
+    "visualMnemonic": "Slight: hafif kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/slight/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "slight",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to slight",
+      "differenceTr": "'slight' anlamı: hafif. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I had a slight headache.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'slight' kelimesi 'hafif' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "slight (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hafif' kavramının zihinde somutlaşması.",
+      "mentalImage": "Slight - hafif"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with slight (hafif)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with slight (hafif). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene slight",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with slight (hafif)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with slight concept",
+    "altText": "Cartoon character depicting the concept of slight (hafif)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-cease",
+    "word": "cease",
+    "meaningsTr": [
+      "son vermek",
+      "durdurmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Whether the protests will cease remains to be seen.",
+    "exampleTr": "Örnek: \"son vermek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "cease in practice",
+      "academic cease"
+    ],
+    "visualMnemonic": "Cease: son vermek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/cease/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "cease",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to cease",
+      "differenceTr": "'cease' anlamı: son vermek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Whether the protests will cease remains to be seen.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'cease' kelimesi 'son vermek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "cease (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'son vermek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Cease - son vermek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with cease (son vermek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with cease (son vermek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene cease",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with cease (son vermek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with cease concept",
+    "altText": "Cartoon character depicting the concept of cease (son vermek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-notice",
+    "word": "notice",
+    "meaningsTr": [
+      "fark etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He noticed that the woman staring at him.",
+    "exampleTr": "Örnek: \"fark etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "notice in practice",
+      "academic notice"
+    ],
+    "visualMnemonic": "Notice: fark etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/notice/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "notice",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to notice",
+      "differenceTr": "'notice' anlamı: fark etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He noticed that the woman staring at him.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'notice' kelimesi 'fark etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "notice (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'fark etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Notice - fark etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with notice (fark etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with notice (fark etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene notice",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with notice (fark etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with notice concept",
+    "altText": "Cartoon character depicting the concept of notice (fark etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-arrogant",
+    "word": "arrogant",
+    "meaningsTr": [
+      "kibirli",
+      "küstah"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "I think he is arrogant and rude.",
+    "exampleTr": "Örnek: \"kibirli\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "arrogant in practice",
+      "academic arrogant"
+    ],
+    "visualMnemonic": "Arrogant: kibirli kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/arrogant/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "arrogant",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to arrogant",
+      "differenceTr": "'arrogant' anlamı: kibirli. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"I think he is arrogant and rude.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'arrogant' kelimesi 'kibirli' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "arrogant (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kibirli' kavramının zihinde somutlaşması.",
+      "mentalImage": "Arrogant - kibirli"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with arrogant (kibirli)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with arrogant (kibirli). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene arrogant",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with arrogant (kibirli)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with arrogant concept",
+    "altText": "Cartoon character depicting the concept of arrogant (kibirli)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-retreat",
+    "word": "retreat",
+    "meaningsTr": [
+      "geri çekilmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The government is retreating from its promises.",
+    "exampleTr": "Örnek: \"geri çekilmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "retreat in practice",
+      "academic retreat"
+    ],
+    "visualMnemonic": "Retreat: geri çekilmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/retreat/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "retreat",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to retreat",
+      "differenceTr": "'retreat' anlamı: geri çekilmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The government is retreating from its promises.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'retreat' kelimesi 'geri çekilmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "retreat (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'geri çekilmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Retreat - geri çekilmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with retreat (geri çekilmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with retreat (geri çekilmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene retreat",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with retreat (geri çekilmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with retreat concept",
+    "altText": "Cartoon character depicting the concept of retreat (geri çekilmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-deceit",
+    "word": "deceit",
+    "meaningsTr": [
+      "hilekarlık",
+      "dolandırıcılık"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Sociopaths regularly use deceit and manipulation.",
+    "exampleTr": "Örnek: \"hilekarlık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "deceit in practice",
+      "academic deceit"
+    ],
+    "visualMnemonic": "Deceit: hilekarlık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/deceit/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "deceit",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to deceit",
+      "differenceTr": "'deceit' anlamı: hilekarlık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Sociopaths regularly use deceit and manipulation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'deceit' kelimesi 'hilekarlık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "deceit (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'hilekarlık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Deceit - hilekarlık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with deceit (hilekarlık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with deceit (hilekarlık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene deceit",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with deceit (hilekarlık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with deceit concept",
+    "altText": "Cartoon character depicting the concept of deceit (hilekarlık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-dwell",
+    "word": "dwell",
+    "meaningsTr": [
+      "ikamet etmek",
+      "yaşamak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She dwelt in remote parts of Asia for many years.",
+    "exampleTr": "Örnek: \"ikamet etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "dwell in practice",
+      "academic dwell"
+    ],
+    "visualMnemonic": "Dwell: ikamet etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/dwell/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "26. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "dwell",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to dwell",
+      "differenceTr": "'dwell' anlamı: ikamet etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She dwelt in remote parts of Asia for many years.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'dwell' kelimesi 'ikamet etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "dwell (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ikamet etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Dwell - ikamet etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 26. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with dwell (ikamet etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with dwell (ikamet etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene dwell",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with dwell (ikamet etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with dwell concept",
+    "altText": "Cartoon character depicting the concept of dwell (ikamet etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-inscribe",
+    "word": "inscribe",
+    "meaningsTr": [
+      "atfetmek",
+      "yazmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She inscribed the book, “To my mother.”",
+    "exampleTr": "Örnek: \"atfetmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "inscribe in practice",
+      "academic inscribe"
+    ],
+    "visualMnemonic": "Inscribe: atfetmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/inscribe/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "inscribe",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to inscribe",
+      "differenceTr": "'inscribe' anlamı: atfetmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She inscribed the book, “To my mother.”\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'inscribe' kelimesi 'atfetmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "inscribe (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'atfetmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Inscribe - atfetmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with inscribe (atfetmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with inscribe (atfetmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene inscribe",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with inscribe (atfetmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with inscribe concept",
+    "altText": "Cartoon character depicting the concept of inscribe (atfetmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-well-preserved",
+    "word": "well-preserved",
+    "meaningsTr": [
+      "iyi korunmuş",
+      "yaşına göre iyi durumda"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Most buildings in Paris are extremely well-preserved .",
+    "exampleTr": "Örnek: \"iyi korunmuş\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "well-preserved in practice",
+      "academic well-preserved"
+    ],
+    "visualMnemonic": "Well-preserved: iyi korunmuş kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/well-preserved/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "well-preserved",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to well-preserved",
+      "differenceTr": "'well-preserved' anlamı: iyi korunmuş. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Most buildings in Paris are extremely well-preserved .\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'well-preserved' kelimesi 'iyi korunmuş' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "well-preserved (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'iyi korunmuş' kavramının zihinde somutlaşması.",
+      "mentalImage": "Well-preserved - iyi korunmuş"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with well-preserved (iyi korunmuş)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with well-preserved (iyi korunmuş). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene well-preserved",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with well-preserved (iyi korunmuş)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with well-preserved concept",
+    "altText": "Cartoon character depicting the concept of well-preserved (iyi korunmuş)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-conquer",
+    "word": "conquer",
+    "meaningsTr": [
+      "fethetmek",
+      "yenmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "The Spanish conquered the New World in the 16th century.",
+    "exampleTr": "Örnek: \"fethetmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "conquer in practice",
+      "academic conquer"
+    ],
+    "visualMnemonic": "Conquer: fethetmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/conquer/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "conquer",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to conquer",
+      "differenceTr": "'conquer' anlamı: fethetmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The Spanish conquered the New World in the 16th century.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'conquer' kelimesi 'fethetmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "conquer (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'fethetmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conquer - fethetmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with conquer (fethetmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with conquer (fethetmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene conquer",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with conquer (fethetmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with conquer concept",
+    "altText": "Cartoon character depicting the concept of conquer (fethetmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-offer",
+    "word": "offer",
+    "meaningsTr": [
+      "teklif vermek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He was offered a job in Ankara.",
+    "exampleTr": "Örnek: \"teklif vermek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "offer in practice",
+      "academic offer"
+    ],
+    "visualMnemonic": "Offer: teklif vermek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/offer/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "offer",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to offer",
+      "differenceTr": "'offer' anlamı: teklif vermek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He was offered a job in Ankara.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'offer' kelimesi 'teklif vermek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "offer (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'teklif vermek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Offer - teklif vermek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with offer (teklif vermek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with offer (teklif vermek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene offer",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with offer (teklif vermek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with offer concept",
+    "altText": "Cartoon character depicting the concept of offer (teklif vermek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-offspring",
+    "word": "offspring",
+    "meaningsTr": [
+      "yavru",
+      "çocuk"
+    ],
+    "partOfSpeech": "noun",
+    "example": "It is unclear how blood pressure may affect offspring gender.",
+    "exampleTr": "Örnek: \"yavru\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "offspring in practice",
+      "academic offspring"
+    ],
+    "visualMnemonic": "Offspring: yavru kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/offspring/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "offspring",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to offspring",
+      "differenceTr": "'offspring' anlamı: yavru. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It is unclear how blood pressure may affect offspring gender.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'offspring' kelimesi 'yavru' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "offspring (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yavru' kavramının zihinde somutlaşması.",
+      "mentalImage": "Offspring - yavru"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with offspring (yavru)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with offspring (yavru). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene offspring",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with offspring (yavru)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with offspring concept",
+    "altText": "Cartoon character depicting the concept of offspring (yavru)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-reproduction",
+    "word": "reproduction",
+    "meaningsTr": [
+      "çoğalma",
+      "yeniden yapma"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The slow reproduction rate makes gorillas vulnerable to any population declines.",
+    "exampleTr": "Örnek: \"çoğalma\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "reproduction in practice",
+      "academic reproduction"
+    ],
+    "visualMnemonic": "Reproduction: çoğalma kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/reproduction/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "reproduction",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to reproduction",
+      "differenceTr": "'reproduction' anlamı: çoğalma. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The slow reproduction rate makes gorillas vulnerable to any population declines.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'reproduction' kelimesi 'çoğalma' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "reproduction (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'çoğalma' kavramının zihinde somutlaşması.",
+      "mentalImage": "Reproduction - çoğalma"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with reproduction (çoğalma)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with reproduction (çoğalma). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene reproduction",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with reproduction (çoğalma)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with reproduction concept",
+    "altText": "Cartoon character depicting the concept of reproduction (çoğalma)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-participate",
+    "word": "participate",
+    "meaningsTr": [
+      "katılmak",
+      "ortak olmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Foreign firms participate through production-sharing and work contracts.",
+    "exampleTr": "Örnek: \"katılmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "participate in practice",
+      "academic participate"
+    ],
+    "visualMnemonic": "Participate: katılmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/participate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "27. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "participate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to participate",
+      "differenceTr": "'participate' anlamı: katılmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Foreign firms participate through production-sharing and work contracts.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'participate' kelimesi 'katılmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "participate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'katılmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Participate - katılmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 27. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with participate (katılmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with participate (katılmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene participate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with participate (katılmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with participate concept",
+    "altText": "Cartoon character depicting the concept of participate (katılmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-fatalistic",
+    "word": "fatalistic",
+    "meaningsTr": [
+      "her şeyi kadere bırakan"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "The Stoics believed that a fatalistic universe was not such a bad thing.",
+    "exampleTr": "Örnek: \"her şeyi kadere bırakan\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "fatalistic in practice",
+      "academic fatalistic"
+    ],
+    "visualMnemonic": "Fatalistic: her şeyi kadere bırakan kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/fatalistic/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "fatalistic",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to fatalistic",
+      "differenceTr": "'fatalistic' anlamı: her şeyi kadere bırakan. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The Stoics believed that a fatalistic universe was not such a bad thing.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'fatalistic' kelimesi 'her şeyi kadere bırakan' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "fatalistic (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'her şeyi kadere bırakan' kavramının zihinde somutlaşması.",
+      "mentalImage": "Fatalistic - her şeyi kadere bırakan"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with fatalistic (her şeyi kadere bırakan)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with fatalistic (her şeyi kadere bırakan). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene fatalistic",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with fatalistic (her şeyi kadere bırakan)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with fatalistic concept",
+    "altText": "Cartoon character depicting the concept of fatalistic (her şeyi kadere bırakan)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-sacrifice",
+    "word": "sacrifice",
+    "meaningsTr": [
+      "kurban etmek",
+      "feda etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "His parents made sacrifices so that he could have a good education.",
+    "exampleTr": "Örnek: \"kurban etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "sacrifice in practice",
+      "academic sacrifice"
+    ],
+    "visualMnemonic": "Sacrifice: kurban etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/sacrifice/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "sacrifice",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to sacrifice",
+      "differenceTr": "'sacrifice' anlamı: kurban etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"His parents made sacrifices so that he could have a good education.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'sacrifice' kelimesi 'kurban etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "sacrifice (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kurban etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Sacrifice - kurban etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with sacrifice (kurban etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with sacrifice (kurban etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene sacrifice",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with sacrifice (kurban etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with sacrifice concept",
+    "altText": "Cartoon character depicting the concept of sacrifice (kurban etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-reflect",
+    "word": "reflect",
+    "meaningsTr": [
+      "yansıtmak",
+      "göstermek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She could see herself reflected in Tom’s eyes.",
+    "exampleTr": "Örnek: \"yansıtmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "reflect in practice",
+      "academic reflect"
+    ],
+    "visualMnemonic": "Reflect: yansıtmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/reflect/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "reflect",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to reflect",
+      "differenceTr": "'reflect' anlamı: yansıtmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She could see herself reflected in Tom’s eyes.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'reflect' kelimesi 'yansıtmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "reflect (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yansıtmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Reflect - yansıtmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with reflect (yansıtmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with reflect (yansıtmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene reflect",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with reflect (yansıtmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with reflect concept",
+    "altText": "Cartoon character depicting the concept of reflect (yansıtmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-appropriate",
+    "word": "appropriate",
+    "meaningsTr": [
+      "münasip",
+      "uygun"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "It’s not an appropriate time to make a speech.",
+    "exampleTr": "Örnek: \"münasip\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "appropriate in practice",
+      "academic appropriate"
+    ],
+    "visualMnemonic": "Appropriate: münasip kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/appropriate/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "appropriate",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to appropriate",
+      "differenceTr": "'appropriate' anlamı: münasip. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"It’s not an appropriate time to make a speech.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'appropriate' kelimesi 'münasip' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "appropriate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'münasip' kavramının zihinde somutlaşması.",
+      "mentalImage": "Appropriate - münasip"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with appropriate (münasip)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with appropriate (münasip). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene appropriate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with appropriate (münasip)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with appropriate concept",
+    "altText": "Cartoon character depicting the concept of appropriate (münasip)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-precursor",
+    "word": "precursor",
+    "meaningsTr": [
+      "önceki",
+      "öncü"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Sulphur dioxide is the main precursor of acid rain.",
+    "exampleTr": "Örnek: \"önceki\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "precursor in practice",
+      "academic precursor"
+    ],
+    "visualMnemonic": "Precursor: önceki kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/precursor/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "precursor",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to precursor",
+      "differenceTr": "'precursor' anlamı: önceki. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Sulphur dioxide is the main precursor of acid rain.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'precursor' kelimesi 'önceki' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "precursor (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'önceki' kavramının zihinde somutlaşması.",
+      "mentalImage": "Precursor - önceki"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with precursor (önceki)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with precursor (önceki). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene precursor",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with precursor (önceki)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with precursor concept",
+    "altText": "Cartoon character depicting the concept of precursor (önceki)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-spread",
+    "word": "spread",
+    "meaningsTr": [
+      "yaymak",
+      "dağıtmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Never share your toothbrush as this can spread infections.",
+    "exampleTr": "Örnek: \"yaymak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "spread in practice",
+      "academic spread"
+    ],
+    "visualMnemonic": "Spread: yaymak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/spread/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "spread",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to spread",
+      "differenceTr": "'spread' anlamı: yaymak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Never share your toothbrush as this can spread infections.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'spread' kelimesi 'yaymak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "spread (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yaymak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Spread - yaymak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with spread (yaymak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with spread (yaymak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene spread",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with spread (yaymak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with spread concept",
+    "altText": "Cartoon character depicting the concept of spread (yaymak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-unavoidable",
+    "word": "unavoidable",
+    "meaningsTr": [
+      "kaçınılmaz",
+      "iptal edilemez"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Credit cards nowadays are an unavoidable necessity.",
+    "exampleTr": "Örnek: \"kaçınılmaz\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "unavoidable in practice",
+      "academic unavoidable"
+    ],
+    "visualMnemonic": "Unavoidable: kaçınılmaz kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/unavoidable/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "28. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "unavoidable",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to unavoidable",
+      "differenceTr": "'unavoidable' anlamı: kaçınılmaz. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Credit cards nowadays are an unavoidable necessity.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'unavoidable' kelimesi 'kaçınılmaz' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "unavoidable (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kaçınılmaz' kavramının zihinde somutlaşması.",
+      "mentalImage": "Unavoidable - kaçınılmaz"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 28. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with unavoidable (kaçınılmaz)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with unavoidable (kaçınılmaz). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene unavoidable",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with unavoidable (kaçınılmaz)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with unavoidable concept",
+    "altText": "Cartoon character depicting the concept of unavoidable (kaçınılmaz)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-commitment",
+    "word": "commitment",
+    "meaningsTr": [
+      "bağlılık",
+      "kararlılık"
+    ],
+    "partOfSpeech": "noun",
+    "example": "This work requires commitment and full confidentiality.",
+    "exampleTr": "Örnek: \"bağlılık\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "commitment in practice",
+      "academic commitment"
+    ],
+    "visualMnemonic": "Commitment: bağlılık kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/commitment/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "commitment",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to commitment",
+      "differenceTr": "'commitment' anlamı: bağlılık. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This work requires commitment and full confidentiality.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'commitment' kelimesi 'bağlılık' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "commitment (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'bağlılık' kavramının zihinde somutlaşması.",
+      "mentalImage": "Commitment - bağlılık"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with commitment (bağlılık)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with commitment (bağlılık). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene commitment",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with commitment (bağlılık)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with commitment concept",
+    "altText": "Cartoon character depicting the concept of commitment (bağlılık)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-substantial",
+    "word": "substantial",
+    "meaningsTr": [
+      "varlıklı",
+      "önemli"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "She inherited a substantial fortune from her grandfather.",
+    "exampleTr": "Örnek: \"varlıklı\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "substantial in practice",
+      "academic substantial"
+    ],
+    "visualMnemonic": "Substantial: varlıklı kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/substantial/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "substantial",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to substantial",
+      "differenceTr": "'substantial' anlamı: varlıklı. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She inherited a substantial fortune from her grandfather.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'substantial' kelimesi 'varlıklı' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "substantial (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'varlıklı' kavramının zihinde somutlaşması.",
+      "mentalImage": "Substantial - varlıklı"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with substantial (varlıklı)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with substantial (varlıklı). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene substantial",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with substantial (varlıklı)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with substantial concept",
+    "altText": "Cartoon character depicting the concept of substantial (varlıklı)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-dictate",
+    "word": "dictate",
+    "meaningsTr": [
+      "dikte etmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Guide their choices rather than dictate them.",
+    "exampleTr": "Örnek: \"dikte etmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "dictate in practice",
+      "academic dictate"
+    ],
+    "visualMnemonic": "Dictate: dikte etmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/dictate/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "dictate",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to dictate",
+      "differenceTr": "'dictate' anlamı: dikte etmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Guide their choices rather than dictate them.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'dictate' kelimesi 'dikte etmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "dictate (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'dikte etmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Dictate - dikte etmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with dictate (dikte etmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with dictate (dikte etmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene dictate",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with dictate (dikte etmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with dictate concept",
+    "altText": "Cartoon character depicting the concept of dictate (dikte etmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-shortage",
+    "word": "shortage",
+    "meaningsTr": [
+      "eksiklik",
+      "kıtlık"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Water shortage is an increasingly serious problem.",
+    "exampleTr": "Örnek: \"eksiklik\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "shortage in practice",
+      "academic shortage"
+    ],
+    "visualMnemonic": "Shortage: eksiklik kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/shortage/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "shortage",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to shortage",
+      "differenceTr": "'shortage' anlamı: eksiklik. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Water shortage is an increasingly serious problem.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'shortage' kelimesi 'eksiklik' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "shortage (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eksiklik' kavramının zihinde somutlaşması.",
+      "mentalImage": "Shortage - eksiklik"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with shortage (eksiklik)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with shortage (eksiklik). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene shortage",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with shortage (eksiklik)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with shortage concept",
+    "altText": "Cartoon character depicting the concept of shortage (eksiklik)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-conduct",
+    "word": "conduct",
+    "meaningsTr": [
+      "yürütmek",
+      "yönetmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "We are conducting a survey to find out what our customers think of their local bus service.",
+    "exampleTr": "Örnek: \"yürütmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "conduct in practice",
+      "academic conduct"
+    ],
+    "visualMnemonic": "Conduct: yürütmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/conduct/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "conduct",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to conduct",
+      "differenceTr": "'conduct' anlamı: yürütmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"We are conducting a survey to find out what our customers think of their local bus service.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'conduct' kelimesi 'yürütmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "conduct (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'yürütmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Conduct - yürütmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with conduct (yürütmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with conduct (yürütmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene conduct",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with conduct (yürütmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with conduct concept",
+    "altText": "Cartoon character depicting the concept of conduct (yürütmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-emerge",
+    "word": "emerge",
+    "meaningsTr": [
+      "ortaya çıkmak",
+      "meydana çıkmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "No new evidence emerged during the investigation.",
+    "exampleTr": "Örnek: \"ortaya çıkmak\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "emerge in practice",
+      "academic emerge"
+    ],
+    "visualMnemonic": "Emerge: ortaya çıkmak kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/emerge/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "emerge",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to emerge",
+      "differenceTr": "'emerge' anlamı: ortaya çıkmak. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"No new evidence emerged during the investigation.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'emerge' kelimesi 'ortaya çıkmak' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "emerge (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'ortaya çıkmak' kavramının zihinde somutlaşması.",
+      "mentalImage": "Emerge - ortaya çıkmak"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with emerge (ortaya çıkmak)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with emerge (ortaya çıkmak). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene emerge",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with emerge (ortaya çıkmak)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with emerge concept",
+    "altText": "Cartoon character depicting the concept of emerge (ortaya çıkmak)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-suitable",
+    "word": "suitable",
+    "meaningsTr": [
+      "uygun",
+      "elverişli",
+      "münasip"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "This show is not suitable for children.",
+    "exampleTr": "Örnek: \"uygun\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "suitable in practice",
+      "academic suitable"
+    ],
+    "visualMnemonic": "Suitable: uygun kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/suitable/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "29. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "suitable",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to suitable",
+      "differenceTr": "'suitable' anlamı: uygun. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This show is not suitable for children.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'suitable' kelimesi 'uygun' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "suitable (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'uygun' kavramının zihinde somutlaşması.",
+      "mentalImage": "Suitable - uygun"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 29. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with suitable (uygun)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with suitable (uygun). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene suitable",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with suitable (uygun)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with suitable concept",
+    "altText": "Cartoon character depicting the concept of suitable (uygun)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-triumph",
+    "word": "triumph",
+    "meaningsTr": [
+      "zafer",
+      "galibiyet"
+    ],
+    "partOfSpeech": "noun",
+    "example": "The righteous always will triumph in the end.",
+    "exampleTr": "Örnek: \"zafer\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "triumph in practice",
+      "academic triumph"
+    ],
+    "visualMnemonic": "Triumph: zafer kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/triumph/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 5,
+    "importance": "must_know",
+    "wordFamily": {
+      "verb": "",
+      "noun": "triumph",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to triumph",
+      "differenceTr": "'triumph' anlamı: zafer. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"The righteous always will triumph in the end.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'triumph' kelimesi 'zafer' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "triumph (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'zafer' kavramının zihinde somutlaşması.",
+      "mentalImage": "Triumph - zafer"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with triumph (zafer)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with triumph (zafer). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene triumph",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with triumph (zafer)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with triumph concept",
+    "altText": "Cartoon character depicting the concept of triumph (zafer)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-yearn",
+    "word": "yearn",
+    "meaningsTr": [
+      "özlemek",
+      "hasretini çekmek"
+    ],
+    "partOfSpeech": "verb",
+    "example": "Sometimes I just yearn to be alone.",
+    "exampleTr": "Örnek: \"özlemek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "yearn in practice",
+      "academic yearn"
+    ],
+    "visualMnemonic": "Yearn: özlemek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/yearn/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "yearn",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to yearn",
+      "differenceTr": "'yearn' anlamı: özlemek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Sometimes I just yearn to be alone.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'yearn' kelimesi 'özlemek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "yearn (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'özlemek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Yearn - özlemek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with yearn (özlemek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with yearn (özlemek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene yearn",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with yearn (özlemek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with yearn concept",
+    "altText": "Cartoon character depicting the concept of yearn (özlemek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-acknowledge",
+    "word": "acknowledge",
+    "meaningsTr": [
+      "kabullenmek",
+      "tanımak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "She does not acknowledge that I haven’t done anything wrong.",
+    "exampleTr": "Örnek: \"kabullenmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "acknowledge in practice",
+      "academic acknowledge"
+    ],
+    "visualMnemonic": "Acknowledge: kabullenmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/acknowledge/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "acknowledge",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to acknowledge",
+      "differenceTr": "'acknowledge' anlamı: kabullenmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"She does not acknowledge that I haven’t done anything wrong.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'acknowledge' kelimesi 'kabullenmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "acknowledge (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'kabullenmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Acknowledge - kabullenmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with acknowledge (kabullenmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with acknowledge (kabullenmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene acknowledge",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with acknowledge (kabullenmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with acknowledge concept",
+    "altText": "Cartoon character depicting the concept of acknowledge (kabullenmek)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-foremost",
+    "word": "foremost",
+    "meaningsTr": [
+      "en başta gelen",
+      "en önemli"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "This problem has been foremost in our minds recently.",
+    "exampleTr": "Örnek: \"en başta gelen\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "foremost in practice",
+      "academic foremost"
+    ],
+    "visualMnemonic": "Foremost: en başta gelen kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/foremost/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "foremost",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to foremost",
+      "differenceTr": "'foremost' anlamı: en başta gelen. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"This problem has been foremost in our minds recently.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'foremost' kelimesi 'en başta gelen' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "foremost (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'en başta gelen' kavramının zihinde somutlaşması.",
+      "mentalImage": "Foremost - en başta gelen"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with foremost (en başta gelen)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with foremost (en başta gelen). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene foremost",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with foremost (en başta gelen)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with foremost concept",
+    "altText": "Cartoon character depicting the concept of foremost (en başta gelen)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-damaging",
+    "word": "damaging",
+    "meaningsTr": [
+      "zarar verici",
+      "zararlı"
+    ],
+    "partOfSpeech": "adjective",
+    "example": "Studies show that it may protect your skin from the damaging rays of the sun.",
+    "exampleTr": "Örnek: \"zarar verici\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "damaging in practice",
+      "academic damaging"
+    ],
+    "visualMnemonic": "Damaging: zarar verici kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/damaging/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "",
+      "adjective": "damaging",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to damaging",
+      "differenceTr": "'damaging' anlamı: zarar verici. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Studies show that it may protect your skin from the damaging rays of the sun.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'damaging' kelimesi 'zarar verici' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "damaging (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'zarar verici' kavramının zihinde somutlaşması.",
+      "mentalImage": "Damaging - zarar verici"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with damaging (zarar verici)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with damaging (zarar verici). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene damaging",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with damaging (zarar verici)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with damaging concept",
+    "altText": "Cartoon character depicting the concept of damaging (zarar verici)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-tendency",
+    "word": "tendency",
+    "meaningsTr": [
+      "eğilim",
+      "meyletme"
+    ],
+    "partOfSpeech": "noun",
+    "example": "Her tendency to exaggerate is well known.",
+    "exampleTr": "Örnek: \"eğilim\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "tendency in practice",
+      "academic tendency"
+    ],
+    "visualMnemonic": "Tendency: eğilim kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/tendency/",
+    "difficulty": "B2",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 3,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "",
+      "noun": "tendency",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to tendency",
+      "differenceTr": "'tendency' anlamı: eğilim. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"Her tendency to exaggerate is well known.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'tendency' kelimesi 'eğilim' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "tendency (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: 'eğilim' kavramının zihinde somutlaşması.",
+      "mentalImage": "Tendency - eğilim"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with tendency (eğilim)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with tendency (eğilim). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene tendency",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with tendency (eğilim)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with tendency concept",
+    "altText": "Cartoon character depicting the concept of tendency (eğilim)",
+    "imageLicense": "CC0 / Public Domain Educational Vector"
+  },
+  {
+    "id": "vocab-undergo",
+    "word": "undergo",
+    "meaningsTr": [
+      "(hastalık) geçirmek",
+      "katlanmak"
+    ],
+    "partOfSpeech": "verb",
+    "example": "He underwent an operation on a tumour in his right lung last year.",
+    "exampleTr": "Örnek: \"(hastalık) geçirmek\" anlamında sınav bağlamında kurulan cümle.",
+    "synonyms": [],
+    "antonyms": [],
+    "collocations": [
+      "undergo in practice",
+      "academic undergo"
+    ],
+    "visualMnemonic": "Undergo: (hastalık) geçirmek kavramını zihinde canlandıran akılda kalıcı sahne.",
+    "pronunciation": "/undergo/",
+    "difficulty": "YDS",
+    "source": "Quizlet - YDS En Sık Kullanılan Kelimeler",
+    "sourceRefs": [
+      {
+        "sourceId": "source-quizlet-kelimeler",
+        "sourceType": "quizlet",
+        "sourceUrl": "https://quizlet.com/user/sbgok57/folders/ydtyds-en-sik-kullanilan-kelimeler",
+        "folderName": "ydtyds-en-sik-kullanilan-kelimeler",
+        "setName": "30. Gün",
+        "importedAt": "2026-09-12T21:00:00.000Z"
+      }
+    ],
+    "level": 4,
+    "importance": "high_priority",
+    "wordFamily": {
+      "verb": "undergo",
+      "noun": "",
+      "adjective": "",
+      "adverb": ""
+    },
+    "ydsTrap": {
+      "confusingWord": "similar sounding words to undergo",
+      "differenceTr": "'undergo' anlamı: (hastalık) geçirmek. Sınavda kökteş veya benzer telaffuzlu sözcüklerle karıştırılmamalıdır.",
+      "examTrapTip": "Cümledeki sıfat/zarf derecelendirmesine ve edat uyumuna dikkat edin."
+    },
+    "mediaContext": {
+      "sceneQuote": "\"He underwent an operation on a tumour in his right lung last year.\" — Academic YDS Corpus",
+      "sourceTitle": "Academic Reading Selection",
+      "explanationTr": "Burada 'undergo' kelimesi '(hastalık) geçirmek' anlamıyla sınav okuma parçası bağlamında kullanılmıştır."
+    },
+    "logicMnemonic": {
+      "breakdown": "undergo (Kök / Anlam birimi)",
+      "logicConnection": "Kelime mantığı: '(hastalık) geçirmek' kavramının zihinde somutlaşması.",
+      "mentalImage": "Undergo - (hastalık) geçirmek"
+    },
+    "ydsNote": "YDS ve YDT sınavlarında 30. Gün kelime setlerinde sıkça sorulan yüksek öncelikli sözcüktür.",
+    "visualConcept": "An expressive cartoon character engaging dynamically with undergo ((hastalık) geçirmek)",
+    "visualPrompt": "An expressive cartoon caricature scene with bold outlines and exaggerated facial expressions depicting: An expressive cartoon character engaging dynamically with undergo ((hastalık) geçirmek). Strictly zero text on image.",
+    "visualSearchQuery": "expressive cartoon character action scene undergo",
+    "visualStyle": "expressive-colorful-caricature",
+    "semanticScene": "An expressive cartoon character engaging dynamically with undergo ((hastalık) geçirmek)",
+    "emotion": "Focused & Determined",
+    "characterAction": "Interacting with undergo concept",
+    "altText": "Cartoon character depicting the concept of undergo ((hastalık) geçirmek)",
     "imageLicense": "CC0 / Public Domain Educational Vector"
   }
 ];

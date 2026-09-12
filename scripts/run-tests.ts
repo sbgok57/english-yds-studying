@@ -941,7 +941,7 @@ assert(parsedJson.items[0].word === 'resilient', 'Extracted term as word from JS
 assert(parsedJson.items[0].meaningsTr.includes('dayanıklı'), 'Extracted definition as meaning from JSON');
 
 // 25.5 Static INITIAL_VOCABULARY Zero-Leak Certification
-assert(INITIAL_VOCABULARY.length >= 229, `INITIAL_VOCABULARY contains at least 229 words (found ${INITIAL_VOCABULARY.length})`);
+assert(INITIAL_VOCABULARY.length >= 400, `INITIAL_VOCABULARY contains at least 400 words (found ${INITIAL_VOCABULARY.length})`);
 INITIAL_VOCABULARY.forEach((v) => {
   assert(!isIdOrTechnicalCode(v.word), `Word "${v.word}" is a real word, not an ID`);
   assert(v.word === v.word.trim(), `Word "${v.word}" has no untrimmed whitespace`);
