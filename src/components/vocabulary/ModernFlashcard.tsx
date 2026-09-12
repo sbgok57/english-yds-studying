@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings } from '../../services/wordSanitizer';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   VocabularyItem,
@@ -57,9 +58,10 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
   const [showCelebration, setShowCelebration] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const safeMeanings = vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings || [];
+  const cleanWord = sanitizeWord(vocab.displayWord || vocab.word);
+  const safeMeanings = sanitizeMeanings(vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings);
   const safePos = vocab.partOfSpeech || 'noun';
-  const visual = getVisualMemory(vocab.word, safePos, safeMeanings);
+  const visual = getVisualMemory(cleanWord, safePos, safeMeanings);
 
   const handleResponseAction = useCallback(
     (type: 'know' | 'unsure' | 'forgot') => {
@@ -74,7 +76,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
   // Pronunciation handler
   const handlePronounce = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    speechService.speak(vocab.word, { lang: 'en-US' });
+    speechService.speak(cleanWord, { lang: 'en-US' });
   };
 
   // Keyboard Shortcuts
@@ -268,7 +270,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
             {/* Middle: Word, Pronunciation, Audio */}
             <div className="my-auto py-8 text-center space-y-4">
               <h2 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
-                {vocab.word}
+                {cleanWord}
               </h2>
 
               <div className="flex items-center justify-center gap-3">
@@ -331,7 +333,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                      {vocab.word}
+                      {cleanWord}
                     </h3>
                     <button
                       type="button"
@@ -427,7 +429,7 @@ export const ModernFlashcard: React.FC<ModernFlashcardProps> = ({
                   <AlertTriangle className="w-3.5 h-3.5 text-rose-500" />
                   <span>YDS Çeldirici Tuzağı:</span>
                   <span className="font-mono bg-rose-100 dark:bg-rose-900/50 px-1.5 py-0.5 rounded text-[10px]">
-                    {vocab.word} ≠ {vocab.ydsTrap.confusingWord}
+                    {cleanWord} ≠ {vocab.ydsTrap.confusingWord}
                   </span>
                 </div>
                 <p className="text-slate-700 dark:text-slate-300 font-medium">

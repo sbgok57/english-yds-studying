@@ -1846,9 +1846,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-efficiently",
-    "word": "Efficiently",
+    "word": "efficiently",
     "meaningsTr": [
-      "etkili bir şekilde yeterli bir şekilde"
+      "etkili bir şekilde",
+      "yeterli bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "It is essential to make sure businesses operate efficiently to maximize profits.",
@@ -1906,7 +1907,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-significantly",
-    "word": "Significantly",
+    "word": "significantly",
     "meaningsTr": [
       "önemli derecede"
     ],
@@ -1966,9 +1967,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-widely",
-    "word": "Widely",
+    "word": "widely",
     "meaningsTr": [
-      "yaygın bir şekilde geniş ölçüde"
+      "yaygın bir şekilde",
+      "geniş ölçüde"
     ],
     "partOfSpeech": "adverb",
     "example": "The books are widely read by adults as well as children.",
@@ -2026,9 +2028,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-extremely",
-    "word": "Extremely",
+    "word": "extremely",
     "meaningsTr": [
-      "oldukça son derece"
+      "oldukça",
+      "son derece"
     ],
     "partOfSpeech": "adverb",
     "example": "Mark knew he had behaved extremely badly.",
@@ -2086,7 +2089,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-initially",
-    "word": "Initially",
+    "word": "initially",
     "meaningsTr": [
       "başlangıçta"
     ],
@@ -2146,9 +2149,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-absolutely",
-    "word": "Absolutely",
+    "word": "absolutely",
     "meaningsTr": [
-      "kesinlikle\ntamamen"
+      "kesinlikle",
+      "tamamen"
     ],
     "partOfSpeech": "adverb",
     "example": "It’s absolutely impossible to work with you.",
@@ -2206,9 +2210,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-apparently",
-    "word": "Apparently",
+    "word": "apparently",
     "meaningsTr": [
-      "görünüşe bakılırsa görünüşte"
+      "görünüşe bakılırsa",
+      "görünüşte"
     ],
     "partOfSpeech": "adverb",
     "example": "I heard a rumour that he’s leaving, but apparently it’s not true.",
@@ -2266,7 +2271,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-briefly",
-    "word": "Briefly",
+    "word": "briefly",
     "meaningsTr": [
       "kısaca"
     ],
@@ -2326,7 +2331,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-carefully",
-    "word": "Carefully",
+    "word": "carefully",
     "meaningsTr": [
       "dikkatlice"
     ],
@@ -2386,9 +2391,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-certainly",
-    "word": "Certainly",
+    "word": "certainly",
     "meaningsTr": [
-      "elbette kesinlikle"
+      "elbette",
+      "kesinlikle"
     ],
     "partOfSpeech": "adverb",
     "example": "She had a friend called Tom, but I don’t know whether he was her boyfriend.",
@@ -2446,7 +2452,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-equally",
-    "word": "Equally",
+    "word": "equally",
     "meaningsTr": [
       "eşit derecede"
     ],
@@ -2506,9 +2512,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-directly",
-    "word": "Directly",
+    "word": "directly",
     "meaningsTr": [
-      "doğrudan direkt olarak"
+      "doğrudan",
+      "direkt olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "The disease is directly linked to poor drainage systems.",
@@ -2566,9 +2573,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-clearly",
-    "word": "Clearly",
+    "word": "clearly",
     "meaningsTr": [
-      "açıkça anlaşılır biçimde"
+      "açıkça",
+      "anlaşılır biçimde"
     ],
     "partOfSpeech": "adverb",
     "example": "The accident was clearly your fault, you should have driven more carefully.",
@@ -2626,10 +2634,11 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-essentially",
-    "word": "Essentially",
+    "word": "essentially",
     "meaningsTr": [
       "aslında",
-      "aslen\nesasen"
+      "aslen",
+      "esasen"
     ],
     "partOfSpeech": "adverb",
     "example": "Her new album is essentially a collection of her greatest hits.",
@@ -2687,9 +2696,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fairly",
-    "word": "Fairly",
+    "word": "fairly",
     "meaningsTr": [
-      "oldukça adil bir şekilde"
+      "oldukça",
+      "adil bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "He claimed that he hadn’t been treated fairly by his employers.",
@@ -2747,9 +2757,9 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-closely",
-    "word": "Closely",
+    "word": "closely",
     "meaningsTr": [
-      "yakından\n(hem ilişki hem de mesafe için kullanılır)"
+      "yakından"
     ],
     "partOfSpeech": "adverb",
     "example": "We are working closely with the detective.\nHe walked into the room, closely folllowed by his sister.",
@@ -2807,7 +2817,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-generally",
-    "word": "Generally",
+    "word": "generally",
     "meaningsTr": [
       "genellikle"
     ],
@@ -2867,9 +2877,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-incredibly",
-    "word": "Incredibly",
+    "word": "incredibly",
     "meaningsTr": [
-      "son derece inanılması güç"
+      "son derece",
+      "inanılması güç"
     ],
     "partOfSpeech": "adverb",
     "example": "This coffee is incredibly smooth and rich.\nWe missed our flight but, incredibly, got there on time.",
@@ -2927,7 +2938,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-mainly",
-    "word": "Mainly",
+    "word": "mainly",
     "meaningsTr": [
       "başlıca"
     ],
@@ -2987,9 +2998,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-gradually",
-    "word": "Gradually",
+    "word": "gradually",
     "meaningsTr": [
-      "aşama aşama giderek"
+      "aşama aşama",
+      "giderek"
     ],
     "partOfSpeech": "adverb",
     "example": "Gradually, she realized that he was cheating on her.",
@@ -3047,7 +3059,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-largely",
-    "word": "Largely",
+    "word": "largely",
     "meaningsTr": [
       "büyük ölçüde"
     ],
@@ -3107,9 +3119,11 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-merely",
-    "word": "Merely",
+    "word": "merely",
     "meaningsTr": [
-      "sadece ancak sırf"
+      "sadece",
+      "ancak",
+      "sırf"
     ],
     "partOfSpeech": "adverb",
     "example": "I wasn’t complaining, I merely said that I was tired.",
@@ -3167,7 +3181,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-nearly",
-    "word": "Nearly",
+    "word": "nearly",
     "meaningsTr": [
       "yaklaşık",
       "neredeyse"
@@ -3228,9 +3242,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-greatly",
-    "word": "Greatly",
+    "word": "greatly",
     "meaningsTr": [
-      "büyük oranda geniş ölçüde"
+      "büyük oranda",
+      "geniş ölçüde"
     ],
     "partOfSpeech": "adverb",
     "example": "I feel that I have benefited greatly from her wisdom.",
@@ -3288,9 +3303,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-currently",
-    "word": "Currently",
+    "word": "currently",
     "meaningsTr": [
-      "şu anda mevcut durumda"
+      "şu anda",
+      "mevcut durumda"
     ],
     "partOfSpeech": "adverb",
     "example": "The device is currently available only in Japan.",
@@ -3348,9 +3364,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-necessarily",
-    "word": "Necessarily",
+    "word": "necessarily",
     "meaningsTr": [
-      "illa ister istemez"
+      "illa",
+      "ister istemez"
     ],
     "partOfSpeech": "adverb",
     "example": "Servants necessarily had close contact with their employers.",
@@ -3408,9 +3425,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-obviously",
-    "word": "Obviously",
+    "word": "obviously",
     "meaningsTr": [
-      "açıkçası\nbesbelli"
+      "açıkçası",
+      "besbelli"
     ],
     "partOfSpeech": "adverb",
     "example": "They were obviously exhausted after the game.",
@@ -3468,7 +3486,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-notably",
-    "word": "Notably",
+    "word": "notably",
     "meaningsTr": [
       "özellikle",
       "bilhassa önemli derecede"
@@ -3529,7 +3547,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-particularly",
-    "word": "Particularly",
+    "word": "particularly",
     "meaningsTr": [
       "özellikle",
       "bilhassa ayrıntılı olarak"
@@ -3590,7 +3608,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-highly",
-    "word": "Highly",
+    "word": "highly",
     "meaningsTr": [
       "yüksek derecede",
       "çok"
@@ -3651,9 +3669,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-hopefully",
-    "word": "Hopefully",
+    "word": "hopefully",
     "meaningsTr": [
-      "ümit ederim ki umutla"
+      "ümit ederim ki",
+      "umutla"
     ],
     "partOfSpeech": "adverb",
     "example": "Hopefully, we’ll arrive before dark.",
@@ -3711,9 +3730,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-partly",
-    "word": "Partly",
+    "word": "partly",
     "meaningsTr": [
-      "kısmen\nbir dereceye kadar"
+      "kısmen",
+      "bir dereceye kadar"
     ],
     "partOfSpeech": "adverb",
     "example": "The house is partly owned by her sister.",
@@ -3771,9 +3791,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-heavily",
-    "word": "Heavily",
+    "word": "heavily",
     "meaningsTr": [
-      "aşırı derecede ağır bir şekilde"
+      "aşırı derecede",
+      "ağır bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "The country depends heavily on foreign aid.",
@@ -3831,9 +3852,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-occasionally",
-    "word": "Occasionally",
+    "word": "occasionally",
     "meaningsTr": [
-      "ara sıra\narada sırada"
+      "ara sıra",
+      "arada sırada"
     ],
     "partOfSpeech": "adverb",
     "example": "This type of allergy can very occasionally be fatal.",
@@ -3891,9 +3913,11 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-precisely",
-    "word": "Precisely",
+    "word": "precisely",
     "meaningsTr": [
-      "tam olarak açık olarak kesinlikle"
+      "tam olarak",
+      "açık olarak",
+      "kesinlikle"
     ],
     "partOfSpeech": "adverb",
     "example": "The fireworks begin at eight o’clock precisely.",
@@ -3951,9 +3975,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-similarly",
-    "word": "Similarly",
+    "word": "similarly",
     "meaningsTr": [
-      "aynı şekilde\nbenzer olarak"
+      "aynı şekilde",
+      "benzer olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "The United States won most of the track and field events. Similarly, in swimming, the top three places went to Americans.",
@@ -4011,7 +4036,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-rapidly",
-    "word": "Rapidly",
+    "word": "rapidly",
     "meaningsTr": [
       "hızlıca"
     ],
@@ -4071,9 +4096,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-truly",
-    "word": "Truly",
+    "word": "truly",
     "meaningsTr": [
-      "tam anlamıyla gerçekten"
+      "tam anlamıyla",
+      "gerçekten"
     ],
     "partOfSpeech": "adverb",
     "example": "This is a desperate situation which requires a truly radical solution.",
@@ -4131,9 +4157,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-suddenly",
-    "word": "Suddenly",
+    "word": "suddenly",
     "meaningsTr": [
-      "aniden birdenbire"
+      "aniden",
+      "birdenbire"
     ],
     "partOfSpeech": "adverb",
     "example": "I was reading a book when suddenly I heard a scream from outside.",
@@ -4191,9 +4218,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-relatively",
-    "word": "Relatively",
+    "word": "relatively",
     "meaningsTr": [
-      "nispeten diğerine nazaran"
+      "nispeten",
+      "diğerine nazaran"
     ],
     "partOfSpeech": "adverb",
     "example": "Online sales are relatively easy to track.",
@@ -4251,9 +4279,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-virtually",
-    "word": "Virtually",
+    "word": "virtually",
     "meaningsTr": [
-      "hemen hemen\nyaklaşık"
+      "hemen hemen",
+      "yaklaşık"
     ],
     "partOfSpeech": "adverb",
     "example": "He virtually admitted he was guilty.",
@@ -4311,9 +4340,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-ultimately",
-    "word": "Ultimately",
+    "word": "ultimately",
     "meaningsTr": [
-      "nihayetinde eninde sonunda"
+      "nihayetinde",
+      "eninde sonunda"
     ],
     "partOfSpeech": "adverb",
     "example": "A poor diet ultimately lead to illness.",
@@ -4371,9 +4401,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-roughly",
-    "word": "Roughly",
+    "word": "roughly",
     "meaningsTr": [
-      "yaklaşık olarak aşağı yukarı"
+      "yaklaşık olarak",
+      "aşağı yukarı"
     ],
     "partOfSpeech": "adverb",
     "example": "The town’s population has roughly doubled.",
@@ -4431,7 +4462,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-commonly",
-    "word": "Commonly",
+    "word": "commonly",
     "meaningsTr": [
       "sık sık",
       "çoğunlukla"
@@ -4492,9 +4523,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-randomly",
-    "word": "Randomly",
+    "word": "randomly",
     "meaningsTr": [
-      "rastgele gelişigüzel"
+      "rastgele",
+      "gelişigüzel"
     ],
     "partOfSpeech": "adverb",
     "example": "The winner is randomly selected by computer.",
@@ -4552,9 +4584,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-formerly",
-    "word": "Formerly",
+    "word": "formerly",
     "meaningsTr": [
-      "eskiden önceden"
+      "eskiden",
+      "önceden"
     ],
     "partOfSpeech": "adverb",
     "example": "The European Union was formerly called the European Community.",
@@ -4612,9 +4645,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-adversely",
-    "word": "Adversely",
+    "word": "adversely",
     "meaningsTr": [
-      "olumsuz şekilde\ntersine"
+      "olumsuz şekilde",
+      "tersine"
     ],
     "partOfSpeech": "adverb",
     "example": "A lot of companies have been adversely affected by the recession.",
@@ -4672,9 +4706,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-solely",
-    "word": "Solely",
+    "word": "solely",
     "meaningsTr": [
-      "sadece\nyalnızca"
+      "sadece",
+      "yalnızca"
     ],
     "partOfSpeech": "adverb",
     "example": "He is solely in charge of the operation.",
@@ -4732,9 +4767,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-permanently",
-    "word": "Permanently",
+    "word": "permanently",
     "meaningsTr": [
-      "kalıcı bir şekilde daimi olarak"
+      "kalıcı bir şekilde",
+      "daimi olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "The stroke left his right side permanently damaged.",
@@ -4792,9 +4828,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-conversely",
-    "word": "Conversely",
+    "word": "conversely",
     "meaningsTr": [
-      "aksine\ndiğer taraftan",
+      "aksine",
+      "diğer taraftan",
       "buna karşılık"
     ],
     "partOfSpeech": "adverb",
@@ -4853,9 +4890,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-dramatically",
-    "word": "Dramatically",
+    "word": "dramatically",
     "meaningsTr": [
-      "çarpıcı bir şekilde önemli ölçüde"
+      "çarpıcı bir şekilde",
+      "önemli ölçüde"
     ],
     "partOfSpeech": "adverb",
     "example": "Her health has improved dramatically since she started on this new diet.",
@@ -4913,9 +4951,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-remarkably",
-    "word": "Remarkably",
+    "word": "remarkably",
     "meaningsTr": [
-      "dikkate değer şekilde önemli derecede"
+      "dikkate değer şekilde",
+      "önemli derecede"
     ],
     "partOfSpeech": "adverb",
     "example": "Remarkably, he wasn’t hurt in the crash.",
@@ -4973,7 +5012,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-profoundly",
-    "word": "Profoundly",
+    "word": "profoundly",
     "meaningsTr": [
       "derinlemesine",
       "kökten son derece"
@@ -5034,7 +5073,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-vaguely",
-    "word": "Vaguely",
+    "word": "vaguely",
     "meaningsTr": [
       "belirsiz bir şekilde"
     ],
@@ -5094,7 +5133,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-consequently",
-    "word": "Consequently",
+    "word": "consequently",
     "meaningsTr": [
       "sonuç olarak"
     ],
@@ -5154,9 +5193,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-densely",
-    "word": "Densely",
+    "word": "densely",
     "meaningsTr": [
-      "yoğun olarak yoğun bir şekilde"
+      "yoğun olarak",
+      "yoğun bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "England was once a densely wooded country.",
@@ -5214,7 +5254,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-distinctly",
-    "word": "Distinctly",
+    "word": "distinctly",
     "meaningsTr": [
       "belirgin biçimde",
       "açıkça farklı olarak"
@@ -5275,7 +5315,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-chiefly",
-    "word": "Chiefly",
+    "word": "chiefly",
     "meaningsTr": [
       "başlıca"
     ],
@@ -5335,9 +5375,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fortunately",
-    "word": "Fortunately",
+    "word": "fortunately",
     "meaningsTr": [
-      "şans eseri neyse ki"
+      "şans eseri",
+      "neyse ki"
     ],
     "partOfSpeech": "adverb",
     "example": "I was late, but fortunately, the lesson hadn’t started.",
@@ -5395,7 +5436,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-lately",
-    "word": "Lately",
+    "word": "lately",
     "meaningsTr": [
       "son zamanlarda"
     ],
@@ -5455,9 +5496,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-abruptly",
-    "word": "Abruptly",
+    "word": "abruptly",
     "meaningsTr": [
-      "ansızın birdenbire"
+      "ansızın",
+      "birdenbire"
     ],
     "partOfSpeech": "adverb",
     "example": "The call ended abruptly.",
@@ -5515,9 +5557,9 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-indefinitely",
-    "word": "Indefinitely",
+    "word": "indefinitely",
     "meaningsTr": [
-      "belirsiz olarak süresiz olasak"
+      "belirsiz olarak süresiz olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "The negotiations have been postponed indefinitely.",
@@ -5575,9 +5617,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-sufficiently",
-    "word": "Sufficiently",
+    "word": "sufficiently",
     "meaningsTr": [
-      "yeteri kadar yeterli miktarda"
+      "yeteri kadar",
+      "yeterli miktarda"
     ],
     "partOfSpeech": "adverb",
     "example": "The following day she felt sufficiently well to go to work.",
@@ -5635,7 +5678,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-casually",
-    "word": "Casually",
+    "word": "casually",
     "meaningsTr": [
       "gelişigüzel bir biçimde günlük",
       "sıradan"
@@ -5696,7 +5739,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-abundantly",
-    "word": "Abundantly",
+    "word": "abundantly",
     "meaningsTr": [
       "bol bol",
       "fazlasıyla"
@@ -5757,7 +5800,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-repeatedly",
-    "word": "Repeatedly",
+    "word": "repeatedly",
     "meaningsTr": [
       "tekrar tekrar"
     ],
@@ -5817,9 +5860,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-severely",
-    "word": "Severely",
+    "word": "severely",
     "meaningsTr": [
-      "ciddi olarak ağır biçimde"
+      "ciddi olarak",
+      "ağır biçimde"
     ],
     "partOfSpeech": "adverb",
     "example": "Several people were severely injured in the accident.",
@@ -5877,7 +5921,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-accurately",
-    "word": "Accurately",
+    "word": "accurately",
     "meaningsTr": [
       "kesin",
       "tam olarak doğru olarak"
@@ -5938,9 +5982,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-voluntarily",
-    "word": "Voluntarily",
+    "word": "voluntarily",
     "meaningsTr": [
-      "gönüllü olarak kendi isteğiyle"
+      "gönüllü olarak",
+      "kendi isteğiyle"
     ],
     "partOfSpeech": "adverb",
     "example": "She went voluntarily to the police to explain what she had done.",
@@ -5998,7 +6043,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-tightly",
-    "word": "Tightly",
+    "word": "tightly",
     "meaningsTr": [
       "sıkı olarak"
     ],
@@ -6058,7 +6103,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-continually",
-    "word": "Continually",
+    "word": "continually",
     "meaningsTr": [
       "devamlı",
       "durmadan"
@@ -6118,8 +6163,8 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "imageLicense": "CC0 / Public Domain Educational Vector"
   },
   {
-    "id": "vocab-effortlesly",
-    "word": "Effortlesly",
+    "id": "vocab-effortlessly",
+    "word": "effortlessly",
     "meaningsTr": [
       "çaba harcamadan"
     ],
@@ -6129,7 +6174,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
     "synonyms": [],
     "antonyms": [],
     "collocations": [],
-    "visualMnemonic": "Conceptual visual association representing the dynamic nature of \"Effortlesly\" - çaba harcamadan kavramı",
+    "visualMnemonic": "Conceptual visual association representing the dynamic nature of \"Effortlessly\" - çaba harcamadan kavramı",
     "pronunciation": "/effortlesly/",
     "difficulty": "YDS",
     "source": "Quizlet - YDS En Sık Kullanılan Zarflar",
@@ -6149,7 +6194,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
       "verb": "",
       "noun": "effortlesness",
       "adjective": "effortles",
-      "adverb": "effortlesly"
+      "adverb": "effortlessly"
     },
     "ydsTrap": {
       "confusingWord": "similar sounding words",
@@ -6179,9 +6224,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-intentionally",
-    "word": "Intentionally",
+    "word": "intentionally",
     "meaningsTr": [
-      "kasıtlı olarak bile bile"
+      "kasıtlı olarak",
+      "bile bile"
     ],
     "partOfSpeech": "adverb",
     "example": "I didn’t ignore her intentionally, I just didn’t recognize her.",
@@ -6239,9 +6285,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-inconsiderately",
-    "word": "Inconsiderately",
+    "word": "inconsiderately",
     "meaningsTr": [
-      "düşüncesizce başkalarının düşüncelerini\numursamadan"
+      "düşüncesizce başkalarının düşüncelerini",
+      "umursamadan"
     ],
     "partOfSpeech": "adverb",
     "example": "People often drive carelessly and inconsiderately.",
@@ -6299,7 +6346,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-selectively",
-    "word": "Selectively",
+    "word": "selectively",
     "meaningsTr": [
       "seçerek",
       "titizlikle"
@@ -6360,9 +6407,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-confidentially",
-    "word": "Confidentially",
+    "word": "confidentially",
     "meaningsTr": [
-      "sır olarak gizlice"
+      "sır olarak",
+      "gizlice"
     ],
     "partOfSpeech": "adverb",
     "example": "All information supplied must be treated confidentially.",
@@ -6420,7 +6468,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-exceedingly",
-    "word": "Exceedingly",
+    "word": "exceedingly",
     "meaningsTr": [
       "fazlasıyla",
       "çok"
@@ -6481,9 +6529,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-plainly",
-    "word": "Plainly",
+    "word": "plainly",
     "meaningsTr": [
-      "açıkça sade bir şekilde"
+      "açıkça",
+      "sade bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "Every footstep could be painly heard. a plainly furnished room",
@@ -6541,7 +6590,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-urgently",
-    "word": "Urgently",
+    "word": "urgently",
     "meaningsTr": [
       "acilen"
     ],
@@ -6601,7 +6650,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-superficially",
-    "word": "Superficially",
+    "word": "superficially",
     "meaningsTr": [
       "yüzeysel",
       "üstünkörü"
@@ -6662,9 +6711,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-desperately",
-    "word": "Desperately",
+    "word": "desperately",
     "meaningsTr": [
-      "aşırı\numutsuzca"
+      "aşırı",
+      "umutsuzca"
     ],
     "partOfSpeech": "adverb",
     "example": "They fought desperately for their lives.",
@@ -6722,9 +6772,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-excessively",
-    "word": "Excessively",
+    "word": "excessively",
     "meaningsTr": [
-      "aşırı şekilde\nhaddinden fazla"
+      "aşırı şekilde",
+      "haddinden fazla"
     ],
     "partOfSpeech": "adverb",
     "example": "The music was excessively loud, so I couldn’t sleep.",
@@ -6782,7 +6833,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-uniquely",
-    "word": "Uniquely",
+    "word": "uniquely",
     "meaningsTr": [
       "eşsiz olarak"
     ],
@@ -6842,9 +6893,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-tremendously",
-    "word": "Tremendously",
+    "word": "tremendously",
     "meaningsTr": [
-      "son derece olağanüstü düzeyde"
+      "son derece",
+      "olağanüstü düzeyde"
     ],
     "partOfSpeech": "adverb",
     "example": "Our water resources are tremendously important.",
@@ -6902,7 +6954,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-enormously",
-    "word": "Enormously",
+    "word": "enormously",
     "meaningsTr": [
       "çokça",
       "pek çok"
@@ -6963,7 +7015,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-adequately",
-    "word": "Adequately",
+    "word": "adequately",
     "meaningsTr": [
       "yeterli olarak"
     ],
@@ -7023,7 +7075,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fluently",
-    "word": "Fluently",
+    "word": "fluently",
     "meaningsTr": [
       "akıcı bir şekilde"
     ],
@@ -7083,7 +7135,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-kindly",
-    "word": "Kindly",
+    "word": "kindly",
     "meaningsTr": [
       "nazikçe",
       "kibarca"
@@ -7144,9 +7196,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-potentially",
-    "word": "Potentially",
+    "word": "potentially",
     "meaningsTr": [
-      "imkan dahilinde potansiyel olarak"
+      "imkan dahilinde",
+      "potansiyel olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "Hepatitis is a potentially fatal disease.",
@@ -7204,7 +7257,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-appropriately",
-    "word": "Appropriately",
+    "word": "appropriately",
     "meaningsTr": [
       "uygun bir şekilde"
     ],
@@ -7264,7 +7317,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-conveniently",
-    "word": "Conveniently",
+    "word": "conveniently",
     "meaningsTr": [
       "rahatlıkla",
       "kolayca"
@@ -7325,7 +7378,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-traditionally",
-    "word": "Traditionally",
+    "word": "traditionally",
     "meaningsTr": [
       "geleneksel olarak"
     ],
@@ -7385,7 +7438,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-promptly",
-    "word": "Promptly",
+    "word": "promptly",
     "meaningsTr": [
       "derhal",
       "acilen tam zamanında"
@@ -7446,9 +7499,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-firmly",
-    "word": "Firmly",
+    "word": "firmly",
     "meaningsTr": [
-      "sıkı bir şekilde kesin olarak"
+      "sıkı bir şekilde",
+      "kesin olarak"
     ],
     "partOfSpeech": "adverb",
     "example": "He shook my hand firmly.",
@@ -7506,7 +7560,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-instantly",
-    "word": "Instantly",
+    "word": "instantly",
     "meaningsTr": [
       "hemen",
       "anında birden"
@@ -7567,9 +7621,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-inadequately",
-    "word": "Inadequately",
+    "word": "inadequately",
     "meaningsTr": [
-      "yarım yamalak yetersiz bir şekilde"
+      "yarım yamalak",
+      "yetersiz bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "Staff were inadequately trained and failed to carry out their duties.",
@@ -7627,7 +7682,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-safely",
-    "word": "Safely",
+    "word": "safely",
     "meaningsTr": [
       "güvenli bir şekilde"
     ],
@@ -7687,10 +7742,11 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-reliably",
-    "word": "Reliably",
+    "word": "reliably",
     "meaningsTr": [
       "hatasız",
-      "eksiksiz\ngüvenilir"
+      "eksiksiz",
+      "güvenilir"
     ],
     "partOfSpeech": "adverb",
     "example": "I’m reliably informed that you’ve been talking about resigning from the company.",
@@ -7748,7 +7804,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-socially",
-    "word": "Socially",
+    "word": "socially",
     "meaningsTr": [
       "sosyal açıdan"
     ],
@@ -7808,7 +7864,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-consistently",
-    "word": "Consistently",
+    "word": "consistently",
     "meaningsTr": [
       "sürekli olarak"
     ],
@@ -7868,7 +7924,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-immensely",
-    "word": "Immensely",
+    "word": "immensely",
     "meaningsTr": [
       "son derece",
       "çok fazla"
@@ -7929,7 +7985,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-arguably",
-    "word": "Arguably",
+    "word": "arguably",
     "meaningsTr": [
       "tartışmaya açık bir şekilde"
     ],
@@ -7989,7 +8045,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-legally",
-    "word": "Legally",
+    "word": "legally",
     "meaningsTr": [
       "hukuken",
       "yasal olarak"
@@ -8050,7 +8106,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-conclusively",
-    "word": "Conclusively",
+    "word": "conclusively",
     "meaningsTr": [
       "kesin olarak"
     ],
@@ -8110,7 +8166,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-doubtfully",
-    "word": "Doubtfully",
+    "word": "doubtfully",
     "meaningsTr": [
       "tereddütle",
       "kuşkuyla"
@@ -8171,7 +8227,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-violently",
-    "word": "Violently",
+    "word": "violently",
     "meaningsTr": [
       "şiddetle",
       "kuvvetle"
@@ -8232,7 +8288,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-cautiously",
-    "word": "Cautiously",
+    "word": "cautiously",
     "meaningsTr": [
       "dikkatlice",
       "temkinli"
@@ -8293,7 +8349,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-suitably",
-    "word": "Suitably",
+    "word": "suitably",
     "meaningsTr": [
       "uygun bir şekilde"
     ],
@@ -8353,7 +8409,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-abnormally",
-    "word": "Abnormally",
+    "word": "abnormally",
     "meaningsTr": [
       "anormal bir şekilde"
     ],
@@ -8413,7 +8469,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-brutally",
-    "word": "Brutally",
+    "word": "brutally",
     "meaningsTr": [
       "vahşice",
       "hunharca"
@@ -8474,7 +8530,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-decisively",
-    "word": "Decisively",
+    "word": "decisively",
     "meaningsTr": [
       "kati surette",
       "kararlı bir biçimde"
@@ -8535,7 +8591,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-favourably",
-    "word": "Favourably",
+    "word": "favourably",
     "meaningsTr": [
       "tercihen",
       "daha iyisi",
@@ -8597,7 +8653,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-evenly",
-    "word": "Evenly",
+    "word": "evenly",
     "meaningsTr": [
       "aynı oranda",
       "tarafsızca eşit olarak"
@@ -8658,7 +8714,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-inclusively",
-    "word": "Inclusively",
+    "word": "inclusively",
     "meaningsTr": [
       "kapsamlı bir şekilde"
     ],
@@ -8718,7 +8774,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-indifferently",
-    "word": "Indifferently",
+    "word": "indifferently",
     "meaningsTr": [
       "kayıtsızca",
       "ilgisizce"
@@ -8779,7 +8835,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-mutually",
-    "word": "Mutually",
+    "word": "mutually",
     "meaningsTr": [
       "karşılıklı olarak"
     ],
@@ -8839,7 +8895,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-sensitively",
-    "word": "Sensitively",
+    "word": "sensitively",
     "meaningsTr": [
       "duyarlı",
       "hassas bir şekilde"
@@ -8900,7 +8956,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-attentively",
-    "word": "Attentively",
+    "word": "attentively",
     "meaningsTr": [
       "dikkatlice"
     ],
@@ -8960,7 +9016,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-successively",
-    "word": "Successively",
+    "word": "successively",
     "meaningsTr": [
       "art arda",
       "sıra ile"
@@ -9021,7 +9077,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-flexibly",
-    "word": "Flexibly",
+    "word": "flexibly",
     "meaningsTr": [
       "esnek bir şekilde",
       "değişken"
@@ -9082,7 +9138,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-recklessly",
-    "word": "Recklessly",
+    "word": "recklessly",
     "meaningsTr": [
       "düşünmeden",
       "çekinmeden"
@@ -9143,7 +9199,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-plausibly",
-    "word": "Plausibly",
+    "word": "plausibly",
     "meaningsTr": [
       "makul bir biçimde"
     ],
@@ -9203,7 +9259,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-coincidentally",
-    "word": "Coincidentally",
+    "word": "coincidentally",
     "meaningsTr": [
       "tesadüfen",
       "şans eseri"
@@ -9264,7 +9320,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-distantly",
-    "word": "Distantly",
+    "word": "distantly",
     "meaningsTr": [
       "mesafeli",
       "soğuk bir şekilde"
@@ -9325,7 +9381,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-externally",
-    "word": "Externally",
+    "word": "externally",
     "meaningsTr": [
       "dıştan",
       "harici olarak"
@@ -9386,7 +9442,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-ingeniously",
-    "word": "Ingeniously",
+    "word": "ingeniously",
     "meaningsTr": [
       "ustalıkla"
     ],
@@ -9446,7 +9502,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-offensively",
-    "word": "Offensively",
+    "word": "offensively",
     "meaningsTr": [
       "saldırganca",
       "kırıcı bir şekilde"
@@ -9507,7 +9563,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-painfully",
-    "word": "Painfully",
+    "word": "painfully",
     "meaningsTr": [
       "acı verici abartılı"
     ],
@@ -9567,7 +9623,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-conditionally",
-    "word": "Conditionally",
+    "word": "conditionally",
     "meaningsTr": [
       "bir şarta bağlı olarak"
     ],
@@ -9627,9 +9683,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-relevantly",
-    "word": "Relevantly",
+    "word": "relevantly",
     "meaningsTr": [
-      "yararlı bir şekilde ilgili bir şekilde"
+      "yararlı bir şekilde",
+      "ilgili bir şekilde"
     ],
     "partOfSpeech": "adverb",
     "example": "The applicant has experience in teaching and, more relevantly, in industry.",
@@ -9687,7 +9744,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-compulsively",
-    "word": "Compulsively",
+    "word": "compulsively",
     "meaningsTr": [
       "zorlayıcı olarak",
       "zorunlu"
@@ -9748,7 +9805,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-suspiciously",
-    "word": "Suspiciously",
+    "word": "suspiciously",
     "meaningsTr": [
       "kuşkuyla",
       "şüpheyle"
@@ -9809,7 +9866,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-entirely",
-    "word": "Entirely",
+    "word": "entirely",
     "meaningsTr": [
       "tümüyle",
       "büsbütün"
@@ -9870,7 +9927,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-primarily",
-    "word": "Primarily",
+    "word": "primarily",
     "meaningsTr": [
       "öncelikle",
       "ilk olarak"
@@ -9931,7 +9988,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-rarely",
-    "word": "Rarely",
+    "word": "rarely",
     "meaningsTr": [
       "nadiren",
       "ender olarak"
@@ -9992,7 +10049,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-vividly",
-    "word": "Vividly",
+    "word": "vividly",
     "meaningsTr": [
       "belirgin bir şekilde",
       "açıkça algılanabilir bir şekilde"
@@ -10053,7 +10110,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-divisively",
-    "word": "Divisively",
+    "word": "divisively",
     "meaningsTr": [
       "bölücü",
       "ara bozucu olarak"
@@ -10114,9 +10171,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-allegedly",
-    "word": "Allegedly",
+    "word": "allegedly",
     "meaningsTr": [
-      "iddiaya göre söylentilere göre"
+      "iddiaya göre",
+      "söylentilere göre"
     ],
     "partOfSpeech": "adverb",
     "example": "He was arrested for allegedly stealing a car.",
@@ -10174,7 +10232,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-deficiently",
-    "word": "Deficiently",
+    "word": "deficiently",
     "meaningsTr": [
       "eksik şekilde"
     ],
@@ -10234,7 +10292,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-politely",
-    "word": "Politely",
+    "word": "politely",
     "meaningsTr": [
       "kibarca",
       "nazikçe"
@@ -10295,7 +10353,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-frankly",
-    "word": "Frankly",
+    "word": "frankly",
     "meaningsTr": [
       "açıkçası",
       "açıkça"
@@ -10356,7 +10414,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-deliberately",
-    "word": "Deliberately",
+    "word": "deliberately",
     "meaningsTr": [
       "kasten",
       "bilerek"
@@ -10417,9 +10475,10 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-preciously",
-    "word": "Preciously",
+    "word": "preciously",
     "meaningsTr": [
-      "ender olarak değerli bir biçimde"
+      "ender olarak",
+      "değerli bir biçimde"
     ],
     "partOfSpeech": "adverb",
     "example": "Thank you for treating me preciously.",
@@ -10477,7 +10536,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-eventually",
-    "word": "Eventually",
+    "word": "eventually",
     "meaningsTr": [
       "eninde sonunda"
     ],
@@ -10537,7 +10596,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-sincerely",
-    "word": "Sincerely",
+    "word": "sincerely",
     "meaningsTr": [
       "samimi olarak candan",
       "içtenlikle"
@@ -10598,7 +10657,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-annually",
-    "word": "Annually",
+    "word": "annually",
     "meaningsTr": [
       "her yıl",
       "yılda bir"
@@ -10659,7 +10718,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-privately",
-    "word": "Privately",
+    "word": "privately",
     "meaningsTr": [
       "özel olarak"
     ],
@@ -10719,7 +10778,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-formally",
-    "word": "Formally",
+    "word": "formally",
     "meaningsTr": [
       "resmi olarak"
     ],
@@ -10779,7 +10838,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-ineffectively",
-    "word": "Ineffectively",
+    "word": "ineffectively",
     "meaningsTr": [
       "başarısız bir şekilde etkisiz",
       "sonuçsuz olarak"
@@ -10840,7 +10899,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-incomparably",
-    "word": "Incomparably",
+    "word": "incomparably",
     "meaningsTr": [
       "benzersiz",
       "kıyaslanamaz bir biçimde"
@@ -10901,7 +10960,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-hospitably",
-    "word": "Hospitably",
+    "word": "hospitably",
     "meaningsTr": [
       "misafirperver olarak"
     ],
@@ -10961,7 +11020,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-sarcastically",
-    "word": "Sarcastically",
+    "word": "sarcastically",
     "meaningsTr": [
       "alaycı bir şekilde"
     ],
@@ -11021,7 +11080,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-seriously",
-    "word": "Seriously",
+    "word": "seriously",
     "meaningsTr": [
       "ciddi bir şekilde"
     ],
@@ -11081,7 +11140,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-alternatively",
-    "word": "Alternatively",
+    "word": "alternatively",
     "meaningsTr": [
       "alternatif olarak"
     ],
@@ -11141,7 +11200,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-consecutively",
-    "word": "Consecutively",
+    "word": "consecutively",
     "meaningsTr": [
       "ardışık olarak",
       "peş peşe"
@@ -11202,7 +11261,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-anxiously",
-    "word": "Anxiously",
+    "word": "anxiously",
     "meaningsTr": [
       "endişeyle"
     ],
@@ -11262,7 +11321,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-broadly",
-    "word": "Broadly",
+    "word": "broadly",
     "meaningsTr": [
       "genişçe",
       "kapsamlı bir biçimde"
@@ -11323,7 +11382,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-vehemently",
-    "word": "Vehemently",
+    "word": "vehemently",
     "meaningsTr": [
       "hararetli bir şekilde"
     ],
@@ -11383,7 +11442,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-acutely",
-    "word": "Acutely",
+    "word": "acutely",
     "meaningsTr": [
       "keskin",
       "güçlü bir şekilde yoğun bir şekilde"
@@ -11444,7 +11503,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-assertively",
-    "word": "Assertively",
+    "word": "assertively",
     "meaningsTr": [
       "güçlü",
       "özgüvenli bir şekilde"
@@ -11505,7 +11564,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-dependently",
-    "word": "Dependently",
+    "word": "dependently",
     "meaningsTr": [
       "başka bir duruma bağlı olarak"
     ],
@@ -11565,7 +11624,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-protectively",
-    "word": "Protectively",
+    "word": "protectively",
     "meaningsTr": [
       "koruyucu bir şekilde"
     ],
@@ -11625,7 +11684,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-progressively",
-    "word": "Progressively",
+    "word": "progressively",
     "meaningsTr": [
       "devamlı olarak",
       "artan bir şekilde"
@@ -11686,7 +11745,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-unfairly",
-    "word": "Unfairly",
+    "word": "unfairly",
     "meaningsTr": [
       "haksızca",
       "adaletsiz bir biçimde"
@@ -11747,7 +11806,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-comfortably",
-    "word": "Comfortably",
+    "word": "comfortably",
     "meaningsTr": [
       "rahat bir şekilde"
     ],
@@ -11807,7 +11866,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-ambiguously",
-    "word": "Ambiguously",
+    "word": "ambiguously",
     "meaningsTr": [
       "muğlak",
       "belirsiz olarak"
@@ -11868,7 +11927,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-briskly",
-    "word": "Briskly",
+    "word": "briskly",
     "meaningsTr": [
       "istenilen hızda",
       "hareketli bir şekilde"
@@ -11929,7 +11988,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-covertly",
-    "word": "Covertly",
+    "word": "covertly",
     "meaningsTr": [
       "gizlice",
       "el altından"
@@ -11990,7 +12049,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-flawlessly",
-    "word": "Flawlessly",
+    "word": "flawlessly",
     "meaningsTr": [
       "kusursuz bir şekilde"
     ],
@@ -12050,7 +12109,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-hastily",
-    "word": "Hastily",
+    "word": "hastily",
     "meaningsTr": [
       "acilen",
       "apar topar"
@@ -12111,7 +12170,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-savagely",
-    "word": "Savagely",
+    "word": "savagely",
     "meaningsTr": [
       "vahşice"
     ],
@@ -12171,7 +12230,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-tenderly",
-    "word": "Tenderly",
+    "word": "tenderly",
     "meaningsTr": [
       "kibarca",
       "nazikçe"
@@ -12232,7 +12291,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-meticulously",
-    "word": "Meticulously",
+    "word": "meticulously",
     "meaningsTr": [
       "özenle",
       "titizlikle"
@@ -12293,7 +12352,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-vainly",
-    "word": "Vainly",
+    "word": "vainly",
     "meaningsTr": [
       "boşuna",
       "boş yere"
@@ -12354,7 +12413,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-delicately",
-    "word": "Delicately",
+    "word": "delicately",
     "meaningsTr": [
       "dikkatle",
       "incelikle",
@@ -12416,7 +12475,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-passionately",
-    "word": "Passionately",
+    "word": "passionately",
     "meaningsTr": [
       "tutkuyla"
     ],
@@ -12476,7 +12535,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-loosely",
-    "word": "Loosely",
+    "word": "loosely",
     "meaningsTr": [
       "gevşek bir şekilde"
     ],
@@ -12536,7 +12595,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fiercely",
-    "word": "Fiercely",
+    "word": "fiercely",
     "meaningsTr": [
       "güçlü",
       "korkutucu bir şekilde"
@@ -12597,7 +12656,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-readily",
-    "word": "Readily",
+    "word": "readily",
     "meaningsTr": [
       "kolaylıkla",
       "rahatlıkla",
@@ -12659,7 +12718,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-rigidly",
-    "word": "Rigidly",
+    "word": "rigidly",
     "meaningsTr": [
       "sıkı sıkıya",
       "sert bir şekilde"
@@ -12720,7 +12779,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-eagerly",
-    "word": "Eagerly",
+    "word": "eagerly",
     "meaningsTr": [
       "hevesle"
     ],
@@ -12780,7 +12839,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-endlessly",
-    "word": "Endlessly",
+    "word": "endlessly",
     "meaningsTr": [
       "sonsuz bir şekilde",
       "durmadan"
@@ -12841,7 +12900,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-quickly",
-    "word": "Quickly",
+    "word": "quickly",
     "meaningsTr": [
       "hızlıca"
     ],
@@ -12901,7 +12960,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-securely",
-    "word": "Securely",
+    "word": "securely",
     "meaningsTr": [
       "emniyetli",
       "güvenli"
@@ -12962,7 +13021,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-diligently",
-    "word": "Diligently",
+    "word": "diligently",
     "meaningsTr": [
       "özenli bir şekilde"
     ],
@@ -13022,7 +13081,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-dreadfully",
-    "word": "Dreadfully",
+    "word": "dreadfully",
     "meaningsTr": [
       "korkunç bir şekilde",
       "çok fena"
@@ -13083,7 +13142,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-irreversibly",
-    "word": "Irreversibly",
+    "word": "irreversibly",
     "meaningsTr": [
       "geri dönülemez bir şekilde"
     ],
@@ -13143,7 +13202,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-possibly",
-    "word": "Possibly",
+    "word": "possibly",
     "meaningsTr": [
       "muhtemel",
       "mümkün"
@@ -13204,7 +13263,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-steadily",
-    "word": "Steadily",
+    "word": "steadily",
     "meaningsTr": [
       "istikrarlı bir şekilde",
       "sabit"
@@ -13265,7 +13324,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-hesitantly",
-    "word": "Hesitantly",
+    "word": "hesitantly",
     "meaningsTr": [
       "tereddütle"
     ],
@@ -13325,7 +13384,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fruitfully",
-    "word": "Fruitfully",
+    "word": "fruitfully",
     "meaningsTr": [
       "yararlı",
       "kazançlı bir şekilde"
@@ -13386,7 +13445,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-persistently",
-    "word": "Persistently",
+    "word": "persistently",
     "meaningsTr": [
       "sürekli",
       "ısrarla",
@@ -13448,7 +13507,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-willingly",
-    "word": "Willingly",
+    "word": "willingly",
     "meaningsTr": [
       "seve seve",
       "isteyerek"
@@ -13509,7 +13568,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-comprehensively",
-    "word": "Comprehensively",
+    "word": "comprehensively",
     "meaningsTr": [
       "kapsamlı",
       "ayrıntılı bir şekilde"
@@ -13570,7 +13629,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-inherently",
-    "word": "Inherently",
+    "word": "inherently",
     "meaningsTr": [
       "doğal olarak",
       "özü gereği"
@@ -13631,7 +13690,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-hopelessly",
-    "word": "Hopelessly",
+    "word": "hopelessly",
     "meaningsTr": [
       "ümitsiz bir şekilde"
     ],
@@ -13691,7 +13750,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-alertly",
-    "word": "Alertly",
+    "word": "alertly",
     "meaningsTr": [
       "tetikte olarak"
     ],
@@ -13751,7 +13810,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-fatally",
-    "word": "Fatally",
+    "word": "fatally",
     "meaningsTr": [
       "ölümcül bir şekilde"
     ],
@@ -13811,7 +13870,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-justly",
-    "word": "Justly",
+    "word": "justly",
     "meaningsTr": [
       "adaletle",
       "doğru olarak"
@@ -13872,7 +13931,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-wrongly",
-    "word": "Wrongly",
+    "word": "wrongly",
     "meaningsTr": [
       "hatalı bir şekilde"
     ],
@@ -13932,7 +13991,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-determinedly",
-    "word": "Determinedly",
+    "word": "determinedly",
     "meaningsTr": [
       "kesin olarak",
       "kararlı bir şekilde"
@@ -13993,7 +14052,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-narrowly",
-    "word": "Narrowly",
+    "word": "narrowly",
     "meaningsTr": [
       "güç bela",
       "anca",
@@ -14055,7 +14114,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-officially",
-    "word": "Officially",
+    "word": "officially",
     "meaningsTr": [
       "resmi olarak"
     ],
@@ -14115,7 +14174,7 @@ export const INITIAL_VOCABULARY: VocabularyItem[] = [
   },
   {
     "id": "vocab-prosperously",
-    "word": "Prosperously",
+    "word": "prosperously",
     "meaningsTr": [
       "refahla",
       "saadetle"

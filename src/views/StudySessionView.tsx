@@ -16,6 +16,7 @@ import {
 import { speechService } from '../services/speech';
 import { dbService } from '../services/db';
 import { updateStreak } from '../services/gamification';
+import { sanitizeWord } from '../services/wordSanitizer';
 import {
   Volume2,
   Clock,
@@ -151,8 +152,8 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
           id: `err-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
           itemId: currentVocab.id,
           itemType: 'vocabulary',
-          title: `Hatalı Hatırlama: ${currentVocab.word}`,
-          targetWordOrRule: currentVocab.word,
+          title: `Hatalı Hatırlama: ${sanitizeWord(currentVocab.word)}`,
+          targetWordOrRule: sanitizeWord(currentVocab.word),
           userAnswer: option,
           correctAnswer: currentActivity.correctAnswer,
           explanation: currentActivity.explanationEn,
@@ -444,7 +445,7 @@ export const StudySessionView: React.FC<StudySessionViewProps> = ({
               {currentActivity.type.replace(/_/g, ' ')}
             </span>
             <button
-              onClick={() => speechService.speak(currentActivity.targetWord, { lang: 'en-US' })}
+              onClick={() => speechService.speak(sanitizeWord(currentActivity.targetWord), { lang: 'en-US' })}
               aria-label="Telaffuz et"
               className="p-1.5 rounded-full bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 hover:bg-brand-100 transition-colors"
             >

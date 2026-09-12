@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings } from '../services/wordSanitizer';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   VocabularyItem,
@@ -1347,7 +1348,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-xl font-black text-slate-900 dark:text-slate-100">
-                          {item.word}
+                          {sanitizeWord(item.displayWord || item.word)}
                         </h3>
                         <button
                           onClick={(e) => handlePronounce(item.word, e)}
@@ -1402,7 +1403,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                   {/* Turkish Meaning */}
                   <div className="my-2">
                     <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                      {(item.meaningsTr || item.turkishMeanings || item.meanings || []).join(', ')}
+                      {sanitizeMeanings(item.meaningsTr || item.turkishMeanings || item.meanings).join(', ')}
                     </p>
                   </div>
 
@@ -1617,7 +1618,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
             <div className="sticky top-0 z-20 px-5 py-3.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-2.5 min-w-0">
                 <h3 className="text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight truncate">
-                  {selectedItemForDetail.displayWord || selectedItemForDetail.word}
+                  {sanitizeWord(selectedItemForDetail.displayWord || selectedItemForDetail.word)}
                 </h3>
                 {selectedItemForDetail.pronunciation && (
                   <span className="text-xs font-mono text-slate-400 shrink-0">
@@ -1627,14 +1628,14 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5 shrink-0">
                 <button
-                  onClick={() => speechService.speakWoman(selectedItemForDetail.word)}
+                  onClick={() => speechService.speakWoman(sanitizeWord(selectedItemForDetail.displayWord || selectedItemForDetail.word))}
                   title="Kadın Sesiyle Dinle"
                   className="p-1.5 rounded-lg bg-pink-50 dark:bg-pink-950/50 text-pink-600 dark:text-pink-400 hover:bg-pink-100 transition-colors"
                 >
                   <Volume2 className="w-4 h-4" />
                 </button>
                 <button
-                  onClick={() => speechService.speakMan(selectedItemForDetail.word)}
+                  onClick={() => speechService.speakMan(sanitizeWord(selectedItemForDetail.displayWord || selectedItemForDetail.word))}
                   title="Erkek Sesiyle Dinle"
                   className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 transition-colors"
                 >

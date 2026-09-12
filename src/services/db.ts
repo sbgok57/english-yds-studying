@@ -1,3 +1,4 @@
+import { sanitizeVocabularyItem, isIdOrTechnicalCode } from './wordSanitizer';
 import {
   VocabularyItem,
   LearningState,
@@ -222,39 +223,95 @@ class DatabaseService {
     });
   }
 
+  public async deleteVocabularyItem(id: string): Promise<void> {
+    this.fallbackStore.delete(STORES.VOCABULARY, id);
+    const store = await this.getStore(STORES.VOCABULARY, 'readwrite');
+    if (!store) return;
+    return new Promise((resolve) => {
+      const req = store.delete(id);
+      req.onsuccess = () => resolve();
+      req.onerror = () => resolve();
+    });
+  }
+
   /**
-   * Safely adds new seed vocabulary items into IndexedDB without overwriting
-   * existing user-imported items or resetting mutable learning progress.
+   * Safely synchronizes seed vocabulary items into IndexedDB, sanitizing any corrupted/legacy
+   * records (IDs, hashes, raw JSON, placeholders) without resetting mutable user learning progress.
    */
   public async syncSeedVocabulary(seedItems: VocabularyItem[]): Promise<VocabularyItem[]> {
     const existing = await this.getAllVocabulary();
     if (existing.length === 0) {
-      await this.saveVocabularyBatch(seedItems);
-      return seedItems;
+      const cleanSeeds = seedItems.map(sanitizeVocabularyItem);
+      await this.saveVocabularyBatch(cleanSeeds);
+      return cleanSeeds;
     }
 
-    const existingMap = new Map<string, VocabularyItem>();
-    existing.forEach((item) => {
-      existingMap.set(item.word.trim().toLowerCase(), item);
-      existingMap.set(item.id, item);
-    });
+    const itemsToSave: VocabularyItem[] = [];
+    const idsToDelete: string[] = [];
 
-    const newSeedsToInsert: VocabularyItem[] = [];
+    // Map seed items by normalized word and id
+    const seedMap = new Map<string, VocabularyItem>();
     seedItems.forEach((seed) => {
-      const normWord = seed.word.trim().toLowerCase();
-      if (!existingMap.has(normWord) && !existingMap.has(seed.id)) {
-        newSeedsToInsert.push(seed);
-        existingMap.set(normWord, seed);
-        existingMap.set(seed.id, seed);
-      }
+      seedMap.set(seed.id, seed);
+      seedMap.set(seed.word.trim().toLowerCase(), seed);
     });
 
-    if (newSeedsToInsert.length > 0) {
-      await this.saveVocabularyBatch(newSeedsToInsert);
-      return await this.getAllVocabulary();
+    const existingSeen = new Set<string>();
+
+    for (const item of existing) {
+      // If item's word is an ID, UUID, hash, or placeholder code
+      if (isIdOrTechnicalCode(item.word) || !item.word.trim()) {
+        idsToDelete.push(item.id);
+        continue;
+      }
+
+      // Sanitize the existing item
+      const sanitized = sanitizeVocabularyItem(item);
+      const normWord = sanitized.word.trim().toLowerCase();
+
+      // If this item is a seed item, update the definitions & examples to current cleaned seed values
+      const matchingSeed = seedMap.get(sanitized.id) || seedMap.get(normWord);
+      if (matchingSeed) {
+        sanitized.word = matchingSeed.word;
+        sanitized.displayWord = matchingSeed.displayWord || matchingSeed.word;
+        sanitized.meaningsTr = matchingSeed.meaningsTr;
+        sanitized.partOfSpeech = matchingSeed.partOfSpeech;
+        sanitized.example = matchingSeed.example;
+        sanitized.exampleTr = matchingSeed.exampleTr;
+        sanitized.synonyms = matchingSeed.synonyms;
+        sanitized.antonyms = matchingSeed.antonyms;
+        sanitized.collocations = matchingSeed.collocations;
+        sanitized.visualMnemonic = matchingSeed.visualMnemonic;
+        sanitized.pronunciation = matchingSeed.pronunciation;
+        if (matchingSeed.wordFamily) sanitized.wordFamily = matchingSeed.wordFamily;
+        if (matchingSeed.ydsTrap) sanitized.ydsTrap = matchingSeed.ydsTrap;
+      }
+
+      itemsToSave.push(sanitized);
+      existingSeen.add(normWord);
+      existingSeen.add(sanitized.id);
     }
 
-    return existing;
+    // Check for any new seeds that were never in existing
+    for (const seed of seedItems) {
+      const normSeed = seed.word.trim().toLowerCase();
+      if (!existingSeen.has(normSeed) && !existingSeen.has(seed.id)) {
+        const cleanSeed = sanitizeVocabularyItem(seed);
+        itemsToSave.push(cleanSeed);
+        existingSeen.add(normSeed);
+        existingSeen.add(cleanSeed.id);
+      }
+    }
+
+    // Delete corrupted items if any
+    for (const id of idsToDelete) {
+      await this.deleteVocabularyItem(id);
+    }
+
+    // Save batch of sanitized items
+    await this.saveVocabularyBatch(itemsToSave);
+
+    return itemsToSave;
   }
 
   // --- Vocabulary Source Operations ---

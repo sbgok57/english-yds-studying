@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings, isIdOrTechnicalCode } from './wordSanitizer';
 import {
   VocabularyItem,
   WordLevel,
@@ -107,7 +108,18 @@ function generateQuestion(
   allVocab: VocabularyItem[]
 ): VocabQuizQuestion {
   const letters = ['A', 'B', 'C', 'D', 'E'];
-  const otherVocab = allVocab.filter((v) => v.id !== item.id);
+  const cleanWord = sanitizeWord(item.displayWord || item.word);
+  const cleanMeanings = sanitizeMeanings(item.meaningsTr);
+
+  const otherVocab = allVocab
+    .filter((v) => v.id !== item.id)
+    .map((v) => ({
+      ...v,
+      word: sanitizeWord(v.displayWord || v.word),
+      meaningsTr: sanitizeMeanings(v.meaningsTr),
+    }))
+    .filter((v) => Boolean(v.word) && !isIdOrTechnicalCode(v.word));
+
   const shuffledOthers = shuffleArray(otherVocab);
 
   let stem = '';
@@ -118,9 +130,9 @@ function generateQuestion(
 
   // 1. EN -> TR
   if (type === 'en_to_tr') {
-    stem = `"${item.word}" kelimesinin Türkçe karşılığı hangisidir?`;
+    stem = `"${cleanWord}" kelimesinin Türkçe karşılığı hangisidir?`;
     secondaryContext = `Sözcük Türü: ${item.partOfSpeech.toUpperCase()} | Seviye: ${item.level ? `Seviye ${item.level}` : item.difficulty}`;
-    correctText = item.meaningsTr[0];
+    correctText = cleanMeanings[0] || 'Akademik anlam';
     for (const other of shuffledOthers) {
       if (distractorTexts.length >= 3) break;
       const m = other.meaningsTr[0];
@@ -132,10 +144,10 @@ function generateQuestion(
 
   // 2. TR -> EN
   else if (type === 'tr_to_en') {
-    const trMeanings = item.meaningsTr.slice(0, 2).join(', ');
+    const trMeanings = cleanMeanings.slice(0, 2).join(', ');
     stem = `"${trMeanings}" anlamına gelen İngilizce sözcük hangisidir?`;
     secondaryContext = `Sözcük Türü: ${item.partOfSpeech.toUpperCase()}`;
-    correctText = item.word;
+    correctText = cleanWord;
     for (const other of shuffledOthers) {
       if (distractorTexts.length >= 3) break;
       if (other.word !== correctText && !distractorTexts.includes(other.word)) {
@@ -146,10 +158,10 @@ function generateQuestion(
 
   // 3. FILL IN THE BLANK
   else if (type === 'fill_blank') {
-    const masked = maskWordInSentence(item.example, item.word);
+    const masked = maskWordInSentence(item.example, cleanWord);
     stem = 'Cümledeki boşluğa (_____) anlamca en uygun kelimeyi seçiniz:';
     secondaryContext = `"${masked}"`;
-    correctText = item.word;
+    correctText = cleanWord;
 
     // Prefer same part of speech for distractors
     const samePos = shuffledOthers.filter((v) => v.partOfSpeech === item.partOfSpeech);
@@ -166,10 +178,10 @@ function generateQuestion(
   else if (type === 'context_based') {
     stem = 'Aşağıdaki gerçek hayat bağlamında boşluğa hangi kelime gelmelidir?';
     const quote = item.mediaContext?.sceneQuote || item.example;
-    const masked = maskWordInSentence(quote, item.word);
-    const expl = item.mediaContext?.explanationTr || `Anlam: ${item.meaningsTr.join(', ')}`;
+    const masked = maskWordInSentence(quote, cleanWord);
+    const expl = item.mediaContext?.explanationTr || `Anlam: ${cleanMeanings.join(', ')}`;
     secondaryContext = `${masked}\n\n💡 İpucu: ${expl}`;
-    correctText = item.word;
+    correctText = cleanWord;
 
     for (const other of shuffledOthers) {
       if (distractorTexts.length >= 3) break;
@@ -181,16 +193,18 @@ function generateQuestion(
 
   // 5. SYNONYM
   else if (type === 'synonym') {
-    if (item.synonyms && item.synonyms.length > 0) {
-      stem = `"${item.word}" sözcüğünün en yakın eş anlamlısı (synonym) hangisidir?`;
-      secondaryContext = `Anlamı: ${item.meaningsTr.join(', ')}`;
-      correctText = item.synonyms[0];
+    const validSynonyms = (item.synonyms || []).map(sanitizeWord).filter(Boolean);
+    if (validSynonyms.length > 0) {
+      stem = `"${cleanWord}" sözcüğünün en yakın eş anlamlısı (synonym) hangisidir?`;
+      secondaryContext = `Anlamı: ${cleanMeanings.join(', ')}`;
+      correctText = validSynonyms[0];
       for (const other of shuffledOthers) {
         if (distractorTexts.length >= 3) break;
-        const candidate = other.synonyms?.[0] || other.word;
+        const otherSyns = (other.synonyms || []).map(sanitizeWord).filter(Boolean);
+        const candidate = otherSyns[0] || other.word;
         if (
           candidate !== correctText &&
-          !item.synonyms.includes(candidate) &&
+          !validSynonyms.includes(candidate) &&
           !distractorTexts.includes(candidate)
         ) {
           distractorTexts.push(candidate);
@@ -204,16 +218,18 @@ function generateQuestion(
 
   // 6. ANTONYM
   else if (type === 'antonym') {
-    if (item.antonyms && item.antonyms.length > 0) {
-      stem = `"${item.word}" sözcüğünün zıt anlamlısı (antonym) hangisidir?`;
-      secondaryContext = `Anlamı: ${item.meaningsTr.join(', ')}`;
-      correctText = item.antonyms[0];
+    const validAntonyms = (item.antonyms || []).map(sanitizeWord).filter(Boolean);
+    if (validAntonyms.length > 0) {
+      stem = `"${cleanWord}" sözcüğünün zıt anlamlısı (antonym) hangisidir?`;
+      secondaryContext = `Anlamı: ${cleanMeanings.join(', ')}`;
+      correctText = validAntonyms[0];
       for (const other of shuffledOthers) {
         if (distractorTexts.length >= 3) break;
-        const candidate = other.antonyms?.[0] || other.word;
+        const otherAnts = (other.antonyms || []).map(sanitizeWord).filter(Boolean);
+        const candidate = otherAnts[0] || other.word;
         if (
           candidate !== correctText &&
-          !item.antonyms.includes(candidate) &&
+          !validAntonyms.includes(candidate) &&
           !distractorTexts.includes(candidate)
         ) {
           distractorTexts.push(candidate);
@@ -232,12 +248,13 @@ function generateQuestion(
       // Create a derivative question
       const targetRole = wf.noun ? 'noun' : wf.adjective ? 'adjective' : 'verb';
       const roleLabel = targetRole === 'noun' ? 'isim (noun)' : targetRole === 'adjective' ? 'sıfat (adjective)' : 'fiil (verb)';
-      stem = `"${item.word}" kelimesinin ${roleLabel} formu hangisidir?`;
-      correctText = wf[targetRole] || item.word;
+      stem = `"${cleanWord}" kelimesinin ${roleLabel} formu hangisidir?`;
+      correctText = wf[targetRole] ? sanitizeWord(wf[targetRole]) : cleanWord;
 
-      const familyMembers = [wf.verb, wf.noun, wf.adjective, wf.adverb].filter(
-        (m): m is string => Boolean(m && m !== correctText)
-      );
+      const familyMembers = [wf.verb, wf.noun, wf.adjective, wf.adverb]
+        .filter(Boolean)
+        .map(sanitizeWord)
+        .filter((m) => m && m !== correctText);
 
       for (const m of familyMembers) {
         if (distractorTexts.length < 3 && !distractorTexts.includes(m)) {
@@ -260,14 +277,17 @@ function generateQuestion(
   // 8. YDS MULTIPLE CHOICE (5 choices A-E)
   else {
     isFiveChoice = true;
-    const masked = maskWordInSentence(item.example, item.word);
+    const masked = maskWordInSentence(item.example, cleanWord);
     stem = 'Aşağıdaki cümlede boş bırakılan yere uygun düşen sözcüğü bulunuz:';
     secondaryContext = `"${masked}"`;
-    correctText = item.word;
+    correctText = cleanWord;
 
     // Distractor 1: YDS trap confusing word if present
-    if (item.ydsTrap?.confusingWord && item.ydsTrap.confusingWord !== correctText) {
-      distractorTexts.push(item.ydsTrap.confusingWord);
+    if (item.ydsTrap?.confusingWord) {
+      const cleanTrap = sanitizeWord(item.ydsTrap.confusingWord);
+      if (cleanTrap && cleanTrap !== correctText) {
+        distractorTexts.push(cleanTrap);
+      }
     }
 
     // Remaining distractors from academic pool
@@ -301,15 +321,15 @@ function generateQuestion(
   });
 
   // Construct pedagogical explanations
-  const whyCorrect = `"${correctText}" doğru cevaptır. Cümlenin anlamsal bağlamında "${item.meaningsTr.join(', ')}" anlamını eksiksiz karşılar. (${item.exampleTr || item.example})`;
+  const whyCorrect = `"${correctText}" doğru cevaptır. Cümlenin anlamsal bağlamında "${cleanMeanings.join(', ')}" anlamını eksiksiz karşılar. (${item.exampleTr || item.example})`;
   const trapDiff = item.ydsTrap ? ` Dikkat: ${item.ydsTrap.differenceTr}` : '';
   const whyDistractorsFail = `Diğer seçenekler cümlenin gerek anlamsal kurgusu gerekse edat uyumu ile örtüşmemektedir.${trapDiff}`;
-  const ydsTip = item.ydsNote || `${item.word} sözcüğü sınavda sıkça "${item.collocations?.slice(0, 2).join(', ')}" kalıplarıyla ve ${item.partOfSpeech} türünde karşımıza çıkar.`;
+  const ydsTip = item.ydsNote || `${cleanWord} sözcüğü sınavda sıkça "${item.collocations?.slice(0, 2).join(', ')}" kalıplarıyla ve ${item.partOfSpeech} türünde karşımıza çıkar.`;
 
   return {
     id: `quiz-q-${item.id}-${type}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     vocabularyId: item.id,
-    targetWord: item.word,
+    targetWord: cleanWord,
     type,
     typeLabelTr: VOCAB_QUIZ_TYPE_LABELS[type],
     stem,

@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings } from './wordSanitizer';
 import { VocabularyItem, VocabularySource, PartOfSpeech } from '../types/vocabulary';
 import { normalizeVocabularyKey, normalizeMeaningsList } from './importer';
 
@@ -489,14 +490,17 @@ export class PdfVocabularyImporter {
         manualReviewCount++;
       }
 
+      const cleanPdfWord = sanitizeWord(strippedTerm) || strippedTerm;
+      const cleanPdfMeanings = normalizedMeanings.length > 0 ? sanitizeMeanings(normalizedMeanings) : ['Akademik anlam'];
+
       items.push({
         id: `pdf-${Date.now()}-${items.length + 1}-${Math.random().toString(36).substring(2, 6)}`,
-        word: strippedTerm, // Preserves exact spelling (e.g. well-being stays well-being)
-        displayWord: strippedTerm,
+        word: cleanPdfWord,
+        displayWord: cleanPdfWord,
         rawSourceText: line,
-        canonicalWord: strippedTerm,
+        canonicalWord: cleanPdfWord,
         sourceText: line,
-        meaningsTr: normalizedMeanings.length > 0 ? normalizedMeanings : ['[Türkçe anlam PDF metninde bulunamadı]'],
+        meaningsTr: cleanPdfMeanings,
         partOfSpeech,
         example: `The phrasal verb "${strippedTerm}" is frequently tested in academic reading and grammar questions.`,
         exampleTr: `"${strippedTerm}" deyimsel fiili akademik okuma ve dilbilgisi sorularında sıklıkla test edilir.`,

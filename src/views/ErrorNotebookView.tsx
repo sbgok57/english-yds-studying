@@ -1,3 +1,4 @@
+import { sanitizeWord } from '../services/wordSanitizer';
 import React, { useState } from 'react';
 import { ErrorRecord } from '../types';
 import { dbService } from '../services/db';
@@ -144,7 +145,7 @@ export const ErrorNotebookView: React.FC<ErrorNotebookViewProps> = ({
                   <span className="text-red-700 dark:text-red-300 font-bold block mb-0.5">
                     Verdiğiniz Cevap:
                   </span>
-                  <p className="text-red-950 dark:text-red-200 font-mono">{err.userAnswer}</p>
+                  <p className="text-red-950 dark:text-red-200 font-mono">{sanitizeWord(err.userAnswer) || err.userAnswer}</p>
                 </div>
 
                 <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/40">
@@ -152,7 +153,7 @@ export const ErrorNotebookView: React.FC<ErrorNotebookViewProps> = ({
                     Doğru Cevap:
                   </span>
                   <p className="text-emerald-950 dark:text-emerald-200 font-mono font-bold">
-                    {err.correctAnswer}
+                    {sanitizeWord(err.correctAnswer) || err.correctAnswer}
                   </p>
                 </div>
               </div>

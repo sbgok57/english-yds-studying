@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings } from '../../services/wordSanitizer';
 import React, { useState } from 'react';
 import { VocabularyItem } from '../../types/vocabulary';
 import { LearningState } from '../../types';
@@ -21,17 +22,18 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
   learningState,
 }) => {
   const [imageError, setImageError] = useState(false);
-  const safeMeanings = vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings || [];
+  const cleanWord = sanitizeWord(vocab.displayWord || vocab.word);
+  const safeMeanings = sanitizeMeanings(vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings);
   const safePos = vocab.partOfSpeech || 'noun';
-  const visual = getVisualMemory(vocab.word, safePos, safeMeanings);
+  const visual = getVisualMemory(cleanWord, safePos, safeMeanings);
   const memoryTip = vocab.memoryTip || visual.memoryTip;
 
   const handleSpeak = (e: React.MouseEvent, gender: 'female' | 'male') => {
     e.stopPropagation();
     if (gender === 'female') {
-      speechService.speakWoman(vocab.word);
+      speechService.speakWoman(cleanWord);
     } else {
-      speechService.speakMan(vocab.word);
+      speechService.speakMan(cleanWord);
     }
   };
 
@@ -45,7 +47,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-900 dark:text-slate-100 truncate text-sm">
-              {vocab.displayWord || vocab.word}
+              {cleanWord}
             </span>
             <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300">
               {safePos.replace('_', ' ')}
@@ -66,7 +68,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
         {vocab.imageUrl && !imageError ? (
           <img
             src={vocab.imageUrl}
-            alt={vocab.altText || vocab.word}
+            alt={vocab.altText || cleanWord}
             onError={() => setImageError(true)}
             className="w-full h-full object-contain drop-shadow-md"
           />
@@ -136,7 +138,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
           <div className="mb-2">
             {!hideHeader && (
               <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight break-words">
-                {vocab.displayWord || vocab.word}
+                {cleanWord}
               </h3>
             )}
             <div className="flex flex-wrap gap-1.5 mt-1.5">

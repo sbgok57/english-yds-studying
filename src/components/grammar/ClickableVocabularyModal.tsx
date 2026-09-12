@@ -1,3 +1,4 @@
+import { sanitizeWord, sanitizeMeanings } from '../../services/wordSanitizer';
 import React, { useState } from 'react';
 import { VocabularyItem } from '../../types';
 import { Volume2, BookmarkPlus, Check, X } from 'lucide-react';
@@ -20,8 +21,11 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
 
   if (!isOpen) return null;
 
+  const cleanWord = sanitizeWord(item.displayWord || item.word);
+  const cleanMeanings = sanitizeMeanings(item.meaningsTr || item.turkishMeanings || item.meanings);
+
   const handlePronounce = () => {
-    speechService.speak(item.word, { lang: 'en-US' });
+    speechService.speak(cleanWord, { lang: 'en-US' });
   };
 
   const handleAddToReview = async () => {
@@ -41,7 +45,7 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Vocabulary details for ${item.word}`}
+      aria-label={`Vocabulary details for ${cleanWord}`}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/25 dark:bg-black/30 backdrop-blur-md animate-fadeIn"
     >
       <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-2xl">
@@ -55,11 +59,11 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
 
         <div className="flex items-center gap-3 mb-2">
           <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-            {item.word}
+            {cleanWord}
           </h3>
           <button
             onClick={handlePronounce}
-            aria-label={`Pronounce ${item.word}`}
+            aria-label={`Pronounce ${cleanWord}`}
             className="p-1.5 rounded-full bg-brand-50 hover:bg-brand-100 dark:bg-brand-950 dark:hover:bg-brand-900 text-brand-600 dark:text-brand-400 transition-colors"
           >
             <Volume2 className="w-4 h-4" />
@@ -79,7 +83,7 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
               Türkçe Anlamı
             </span>
             <p className="font-semibold text-slate-900 dark:text-slate-100">
-              {(item.meaningsTr || item.turkishMeanings || item.meanings || []).join(', ')}
+              {cleanMeanings.join(', ')}
             </p>
           </div>
 

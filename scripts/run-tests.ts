@@ -18,6 +18,11 @@ import {
 import { INITIAL_VOCABULARY } from '../src/data/vocabulary';
 import { UserProgress, VocabularyItem, LearningState, VocabularySource } from '../src/types';
 import { PdfVocabularyImporter } from '../src/services/pdf';
+import {
+  sanitizeWord,
+  sanitizeMeanings,
+  isIdOrTechnicalCode,
+} from '../src/services/wordSanitizer';
 import { getVisualMemory, enrichVocabularyVisualMetadata } from '../src/services/visualMemory';
 import { classifyVocabularyRecord, deduplicateVocabularyBatch } from '../src/services/importer';
 import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
@@ -878,6 +883,76 @@ assert(!vocabImportModalCode.includes('CSV Tablosu'), 'CSV tab label is removed 
 const vocabViewCode = fs.readFileSync('/Users/sbgok57/Desktop/Antigravity/YDT:YDS/src/views/VocabularyView.tsx', 'utf-8');
 assert(!vocabViewCode.includes('handleExportCsv'), 'handleExportCsv is removed from VocabularyView');
 assert(!vocabViewCode.includes('<Download className="w-3.5 h-3.5" /> CSV'), 'CSV download button is removed from VocabularyView header');
+
+// 25. WORD SANITIZER & ZERO-ID LEAK VERIFICATION TESTS
+console.log('\n25. Word Sanitizer & Zero-ID Leak Verification Tests:');
+
+// 25.1 Technical ID & Code Detection
+assert(isIdOrTechnicalCode('8f72a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b'), 'Identifies standard UUID');
+assert(isIdOrTechnicalCode('term_172849'), 'Identifies term_ prefix ID');
+assert(isIdOrTechnicalCode('8f72a1_word_004'), 'Identifies hash_word_000 format ID');
+assert(isIdOrTechnicalCode('vocab-seed-01'), 'Identifies internal vocab- ID');
+assert(isIdOrTechnicalCode('quizlet-import-12345'), 'Identifies quizlet- ID');
+assert(isIdOrTechnicalCode('[object Object]'), 'Identifies [object Object]');
+assert(isIdOrTechnicalCode('undefined'), 'Identifies undefined keyword');
+assert(isIdOrTechnicalCode('null'), 'Identifies null keyword');
+assert(isIdOrTechnicalCode('NaN'), 'Identifies NaN keyword');
+assert(!isIdOrTechnicalCode('scrutinize'), 'Genuine word "scrutinize" is not flagged as code');
+assert(!isIdOrTechnicalCode('well-being'), 'Hyphenated word "well-being" is not flagged as code');
+assert(!isIdOrTechnicalCode('give up'), 'Phrasal verb "give up" is not flagged as code');
+assert(!isIdOrTechnicalCode('abundantly'), 'Adverb "abundantly" is not flagged as code');
+
+// 25.2 sanitizeWord Cleaning Pipeline
+assert(sanitizeWord('{"id":"123","term":"apple"}') === 'apple', 'Extracts term from raw JSON string');
+assert(sanitizeWord('{"word":"banana"}') === 'banana', 'Extracts word property from raw JSON string');
+assert(sanitizeWord('8f72a1_word_004\tcherry\tkiraz') === 'cherry', 'Extracts genuine word from TSV string with leading ID');
+assert(sanitizeWord('term_172849: avocado') === 'avocado', 'Strips technical ID prefix');
+assert(sanitizeWord('14. pomegranate') === 'pomegranate', 'Strips leading numbered bullet');
+assert(sanitizeWord('grape &amp; pear') === 'grape & pear', 'Decodes HTML entity &amp;');
+assert(sanitizeWord('give   up') === 'give up', 'Normalizes extra spaces in phrasal verb');
+assert(sanitizeWord('Effortlesly') === 'effortlessly', 'Corrects typo Effortlesly');
+
+// 25.3 sanitizeMeanings Normalization Pipeline
+const dirtyMeanings = ['anlaşılmaz\nkarmaşık', 'hızlıca,süratle', '[Tanım Yok]', '[object Object]', 'süresiz olasak'];
+const cleanMeanings = sanitizeMeanings(dirtyMeanings);
+assert(cleanMeanings.includes('anlaşılmaz'), 'Splits newline embedded meaning into first item');
+assert(cleanMeanings.includes('karmaşık'), 'Splits newline embedded meaning into second item');
+assert(cleanMeanings.includes('hızlıca'), 'Splits unspaced comma glued meaning into first item');
+assert(cleanMeanings.includes('süratle'), 'Splits unspaced comma glued meaning into second item');
+assert(!cleanMeanings.includes('[Tanım Yok]'), 'Filters out [Tanım Yok] placeholder');
+assert(!cleanMeanings.includes('[object Object]'), 'Filters out [object Object] placeholder');
+assert(cleanMeanings.includes('süresiz olarak'), 'Fixes typo "süresiz olasak" -> "süresiz olarak"');
+
+// 25.4 Quizlet Importer ID Stripping on 3-Column & JSON text
+const sample3ColQuizlet = `
+8f72a1_word_001\tcomprehend\tanlamak, kavramak
+term_987654\tmitigate\thafifletmek, yatıştırmak
+`;
+const parsed3Col = QuizletImporter.parseQuizletExportText(sample3ColQuizlet);
+assert(parsed3Col.items.length === 2, 'Parsed 2 items from 3-column Quizlet text');
+assert(parsed3Col.items[0].word === 'comprehend', 'Extracted word "comprehend" instead of column 0 ID');
+assert(parsed3Col.items[0].meaningsTr.includes('anlamak'), 'Meaning "anlamak" preserved');
+assert(parsed3Col.items[1].word === 'mitigate', 'Extracted word "mitigate" instead of term_ ID');
+
+const sampleJsonQuizlet = `[{"term":"resilient","definition":"dayanıklı, dirençli"}]`;
+const parsedJson = QuizletImporter.parseQuizletExportText(sampleJsonQuizlet);
+assert(parsedJson.items.length === 1, 'Parsed JSON export text');
+assert(parsedJson.items[0].word === 'resilient', 'Extracted term as word from JSON');
+assert(parsedJson.items[0].meaningsTr.includes('dayanıklı'), 'Extracted definition as meaning from JSON');
+
+// 25.5 Static INITIAL_VOCABULARY Zero-Leak Certification
+assert(INITIAL_VOCABULARY.length >= 229, `INITIAL_VOCABULARY contains at least 229 words (found ${INITIAL_VOCABULARY.length})`);
+INITIAL_VOCABULARY.forEach((v) => {
+  assert(!isIdOrTechnicalCode(v.word), `Word "${v.word}" is a real word, not an ID`);
+  assert(v.word === v.word.trim(), `Word "${v.word}" has no untrimmed whitespace`);
+  assert(!v.word.includes('\n'), `Word "${v.word}" does not contain newlines`);
+  assert(v.meaningsTr.length > 0, `Word "${v.word}" has at least one meaning`);
+  v.meaningsTr.forEach((m) => {
+    assert(!isIdOrTechnicalCode(m), `Meaning "${m}" of "${v.word}" is not a code`);
+    assert(!m.includes('\n'), `Meaning "${m}" of "${v.word}" does not contain newlines`);
+    assert(!m.includes('[Tanım Yok]'), `Meaning "${m}" of "${v.word}" is not a placeholder`);
+  });
+});
 
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);

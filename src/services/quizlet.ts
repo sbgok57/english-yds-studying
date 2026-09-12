@@ -1,5 +1,6 @@
+import { sanitizeWord, sanitizeMeanings, isIdOrTechnicalCode, extractFromJsonString } from './wordSanitizer';
 import { VocabularyItem, VocabularySource, PartOfSpeech } from '../types/vocabulary';
-import { normalizeVocabularyKey, normalizeMeaningsList, deduplicateVocabularyBatch } from './importer';
+import { normalizeVocabularyKey, deduplicateVocabularyBatch } from './importer';
 
 export interface QuizletCompletenessCounters {
   expectedFolderCount: number;
@@ -320,107 +321,174 @@ export class QuizletImporter {
     incompleteCount: number;
     manualReviewQueue: QuizletManualReviewItem[];
   } {
-    const lines = rawText.split(/\r?\n/).map((l) => l.trim()).filter((l) => l.length > 0);
     const items: VocabularyItem[] = [];
     const manualReviewQueue: QuizletManualReviewItem[] = [];
     let incompleteCount = 0;
     const timestamp = new Date().toISOString();
+    const sourceId = options.sourceId || `quizlet-import-${Date.now()}`;
+    const sourceTitle = options.sourceTitle || 'Quizlet İçe Aktarımı';
 
+    // 1. Check if rawText is a full JSON array or object
+    const trimmedInput = rawText.trim();
+    if ((trimmedInput.startsWith('[') && trimmedInput.endsWith(']')) ||
+        (trimmedInput.startsWith('{') && trimmedInput.endsWith('}'))) {
+      try {
+        const parsed = JSON.parse(trimmedInput);
+        const array = Array.isArray(parsed) ? parsed : [parsed];
+        array.forEach((entry, idx) => {
+          if (!entry || typeof entry !== 'object') return;
+          const candidateWord = entry.term || entry.word || entry.displayWord || entry.text || '';
+          const candidateMeaning = entry.definition || entry.meaning || entry.meaningsTr || entry.turkishMeaning || '';
+          const cleanWord = sanitizeWord(candidateWord);
+          const cleanMeanings = sanitizeMeanings(candidateMeaning);
+
+          if (!cleanWord || isIdOrTechnicalCode(cleanWord)) {
+            incompleteCount++;
+            manualReviewQueue.push({
+              term: String(candidateWord),
+              rawDefinition: String(candidateMeaning),
+              reason: 'Geçersiz veya ID formatında kelime algılandı',
+            });
+            return;
+          }
+
+          const normWord = normalizeVocabularyKey(cleanWord);
+          const partOfSpeech = this.inferPartOfSpeech(cleanWord);
+
+          items.push({
+            id: `quizlet-${Date.now()}-${idx + 1}-${Math.random().toString(36).substring(2, 6)}`,
+            word: cleanWord,
+            displayWord: cleanWord,
+            meaningsTr: cleanMeanings,
+            partOfSpeech,
+            example: `The term "${cleanWord}" frequently appears in academic YDS and YDT examinations.`,
+            exampleTr: `"${cleanWord}" kelimesi akademik YDS ve YDT sınavlarında sıklıkla karşılaşılmaktadır.`,
+            synonyms: [],
+            antonyms: [],
+            collocations: [],
+            visualMnemonic: `Memory anchor for ${cleanWord}: ${cleanMeanings[0] || 'academic concept'}.`,
+            pronunciation: `/${normWord}/`,
+            difficulty: 'YDS',
+            source: sourceTitle,
+            sourceRefs: [
+              {
+                sourceId,
+                sourceType: 'quizlet',
+                sourceUrl: options.sourceUrl,
+                folderName: options.folderName,
+                setName: options.setName || 'Quizlet Set',
+                importedAt: timestamp,
+              },
+            ],
+            requiresManualReview: false,
+          });
+        });
+
+        if (items.length > 0) {
+          return { items, incompleteCount, manualReviewQueue };
+        }
+      } catch {
+        // Fall back to line-based parsing
+      }
+    }
+
+    // 2. Line-based parsing
+    const lines = rawText.split(/\r?\n/).map((l) => l.trim()).filter((l) => l.length > 0);
     const dominantDelimiter = this.detectDominantDelimiter(lines);
 
     lines.forEach((line, idx) => {
       let term = '';
       let definition = '';
 
-      // Priority 1: Check dominant delimiter
-      if (dominantDelimiter === '\t' && line.includes('\t')) {
-        const parts = line.split('\t');
-        term = parts[0].trim();
-        definition = parts.slice(1).join(' ').trim();
-      } else if (dominantDelimiter === ' - ' && (line.includes(' - ') || line.includes(' – ') || line.includes(' — '))) {
-        const sep = line.includes(' - ') ? ' - ' : line.includes(' – ') ? ' – ' : ' — ';
-        const parts = line.split(sep);
-        term = parts[0].trim();
-        definition = parts.slice(1).join(sep).trim();
-      } else if (dominantDelimiter === ' : ' && line.includes(' : ')) {
-        const parts = line.split(' : ');
-        term = parts[0].trim();
-        definition = parts.slice(1).join(' : ').trim();
-      } else if (dominantDelimiter === ';' && line.includes(';')) {
-        const parts = line.split(';');
-        term = parts[0].trim();
-        definition = parts.slice(1).join(';').trim();
-      } else if (dominantDelimiter === ',' && line.includes(',')) {
-        const parts = line.split(',');
-        term = parts[0].trim();
-        definition = parts.slice(1).join(',').trim();
+      // Check if line itself is a JSON object
+      const jsonLine = extractFromJsonString(line);
+      if (jsonLine && jsonLine.word) {
+        term = jsonLine.word;
+        definition = jsonLine.definition || '';
       } else {
-        // Fallback per-line checks
-        if (line.includes('\t')) {
-          const parts = line.split('\t');
-          term = parts[0].trim();
-          definition = parts.slice(1).join(' ').trim();
-        } else if (line.includes(' - ') || line.includes(' – ')) {
-          const sep = line.includes(' - ') ? ' - ' : ' – ';
-          const parts = line.split(sep);
-          term = parts[0].trim();
-          definition = parts.slice(1).join(sep).trim();
-        } else if (line.includes(' : ')) {
-          const parts = line.split(' : ');
-          term = parts[0].trim();
-          definition = parts.slice(1).join(' : ').trim();
-        } else if (line.includes(';')) {
-          const parts = line.split(';');
-          term = parts[0].trim();
-          definition = parts.slice(1).join(';').trim();
-        } else if (line.includes(',')) {
-          const parts = line.split(',');
-          term = parts[0].trim();
-          definition = parts.slice(1).join(',').trim();
+        // Delimiter splitting
+        let parts: string[] = [];
+        if (dominantDelimiter === '\t' && line.includes('\t')) {
+          parts = line.split('\t').map((p) => p.trim());
+        } else if (dominantDelimiter === ' - ' && (line.includes(' - ') || line.includes(' – ') || line.includes(' — '))) {
+          const sep = line.includes(' - ') ? ' - ' : line.includes(' – ') ? ' – ' : ' — ';
+          parts = line.split(sep).map((p) => p.trim());
+        } else if (dominantDelimiter === ' : ' && line.includes(' : ')) {
+          parts = line.split(' : ').map((p) => p.trim());
+        } else if (dominantDelimiter === ';' && line.includes(';')) {
+          parts = line.split(';').map((p) => p.trim());
+        } else if (dominantDelimiter === ',' && line.includes(',')) {
+          parts = line.split(',').map((p) => p.trim());
         } else {
-          term = line;
+          if (line.includes('\t')) parts = line.split('\t').map((p) => p.trim());
+          else if (line.includes(' - ')) parts = line.split(' - ').map((p) => p.trim());
+          else if (line.includes(' : ')) parts = line.split(' : ').map((p) => p.trim());
+          else if (line.includes(';')) parts = line.split(';').map((p) => p.trim());
+          else if (line.includes(',')) parts = line.split(',').map((p) => p.trim());
+          else parts = [line];
+        }
+
+        // Check multi-column lines where col[0] is an ID or index (e.g. "8f72a1_word_004\tapple\telma")
+        if (parts.length >= 3 && (isIdOrTechnicalCode(parts[0]) || /^\d+$/.test(parts[0]))) {
+          // col[0] is ID, col[1] is authentic term, col[2...] is definition
+          term = parts[1];
+          definition = parts.slice(2).join(' ');
+        } else if (parts.length >= 2) {
+          if (isIdOrTechnicalCode(parts[0])) {
+            term = parts[1];
+            definition = parts.slice(2).join(' ');
+          } else {
+            term = parts[0];
+            definition = parts.slice(1).join(' ');
+          }
+        } else {
+          term = parts[0] || '';
           definition = '';
         }
       }
 
-      if (!term) return;
+      // Sanitize the extracted term and definition
+      const cleanWord = sanitizeWord(term);
+      const cleanMeanings = sanitizeMeanings(definition);
 
-      const normWord = normalizeVocabularyKey(term);
-      const meanings = definition
-        ? definition
-            .split(/[,;/]/)
-            .map((m) => m.trim())
-            .filter(Boolean)
-        : [];
+      if (!cleanWord || isIdOrTechnicalCode(cleanWord)) {
+        if (term) {
+          incompleteCount++;
+          manualReviewQueue.push({
+            term,
+            rawDefinition: definition,
+            reason: 'Teknik kod veya ID içeren satır atlandı / inceleme kuyruğuna alındı',
+          });
+        }
+        return;
+      }
 
-      const normalizedMeanings = normalizeMeaningsList(meanings);
-      const partOfSpeech = this.inferPartOfSpeech(term);
+      const normWord = normalizeVocabularyKey(cleanWord);
+      const partOfSpeech = this.inferPartOfSpeech(cleanWord);
 
       const missingFields: string[] = [];
-      if (normalizedMeanings.length === 0) {
+      if (!definition || cleanMeanings.length === 0 || cleanMeanings[0] === 'Akademik anlam') {
         missingFields.push('meaningsTr');
         incompleteCount++;
         manualReviewQueue.push({
-          term,
+          term: cleanWord,
           rawDefinition: definition,
           reason: 'Türkçe tanım ayrıştırılamadı veya boş bırakılmış',
         });
       }
 
-      const sourceId = options.sourceId || `quizlet-import-${Date.now()}`;
-      const sourceTitle = options.sourceTitle || 'Quizlet İçe Aktarımı';
-
       items.push({
         id: `quizlet-${Date.now()}-${idx + 1}-${Math.random().toString(36).substring(2, 6)}`,
-        word: term,
-        meaningsTr: normalizedMeanings.length > 0 ? normalizedMeanings : ['[Tanım Yok]'],
+        word: cleanWord,
+        displayWord: cleanWord,
+        meaningsTr: cleanMeanings,
         partOfSpeech,
-        example: `The term "${term}" frequently appears in academic YDS and YDT examinations.`,
-        exampleTr: `"${term}" kelimesi akademik YDS ve YDT sınavlarında sıklıkla karşılaşılmaktadır.`,
+        example: `The term "${cleanWord}" frequently appears in academic YDS and YDT examinations.`,
+        exampleTr: `"${cleanWord}" kelimesi akademik YDS ve YDT sınavlarında sıklıkla karşılaşılmaktadır.`,
         synonyms: [],
         antonyms: [],
         collocations: [],
-        visualMnemonic: `Memory anchor for ${term}: ${normalizedMeanings[0] || 'academic concept'}.`,
+        visualMnemonic: `Memory anchor for ${cleanWord}: ${cleanMeanings[0] || 'academic concept'}.`,
         pronunciation: `/${normWord}/`,
         difficulty: 'YDS',
         source: sourceTitle,
