@@ -19,7 +19,7 @@ import { INITIAL_VOCABULARY } from '../src/data/vocabulary';
 import { UserProgress, VocabularyItem, LearningState, VocabularySource } from '../src/types';
 import { PdfVocabularyImporter } from '../src/services/pdf';
 import { getVisualMemory, enrichVocabularyVisualMetadata } from '../src/services/visualMemory';
-import { classifyVocabularyRecord } from '../src/services/importer';
+import { classifyVocabularyRecord, deduplicateVocabularyBatch } from '../src/services/importer';
 import { getQuestionsForModule } from '../src/services/ydsPracticeEngine';
 import { generateMockExam, getMockExamList } from '../src/services/mockExamGenerator';
 import { SCIENTIFIC_READINGS, evaluateOpenEndedAnswer } from '../src/data/scientificReadings';
@@ -788,6 +788,96 @@ assert(classification.status === 'corrupted', 'Empty word is quarantined as corr
 const needsReviewItem: Partial<VocabularyItem> = { word: 'testword', meaningsTr: [] };
 const nrClassification = classifyVocabularyRecord(needsReviewItem);
 assert(nrClassification.status === 'needs-review', 'Missing meanings is quarantined as needs-review');
+
+
+// 24. EMERGENCY STABILIZATION & UX OPTIMIZATION TESTS
+console.log('\n24. Emergency Stabilization & UX Optimization Tests:');
+import fs from 'fs';
+
+// 24.1 Quizlet Auto-Delimiter & Multi-Tier Preview Tests
+const complexQuizletSample = `
+abandon\tterk etmek, bırakmak, vazgeçmek
+scarce\tkıt, yetersiz, az bulunan
+reluctant\tisteksiz, gönülsüz
+unparseable_line_without_meaning
+`;
+const quizletDelim = QuizletImporter.detectDominantDelimiter(complexQuizletSample.trim().split('\n'));
+assert(quizletDelim === '\t', 'detectDominantDelimiter identifies tab delimiter correctly');
+
+const quizletParsed = QuizletImporter.parseQuizletExportText(complexQuizletSample);
+assert(quizletParsed.items.length === 4, 'All lines parsed including unparseable lines into review queue');
+assert(quizletParsed.incompleteCount === 1, 'Incomplete line flagged in incompleteCount');
+assert(quizletParsed.manualReviewQueue.length === 1, 'Unparseable term queued in manualReviewQueue');
+assert(quizletParsed.manualReviewQueue[0].term === 'unparseable_line_without_meaning', 'Manual review queue preserves exact unparseable term');
+
+// Verify commas inside definitions were NOT falsely split when dominant delimiter is tab
+const abandonItem = quizletParsed.items.find(i => i.word === 'abandon');
+assert(
+  Boolean(abandonItem && abandonItem.meaningsTr.includes('terk etmek') && abandonItem.meaningsTr.includes('bırakmak')),
+  'Tab delimiter preserves comma-separated Turkish meanings without corruption'
+);
+
+const quizletPreview = QuizletImporter.previewQuizletImport(complexQuizletSample, INITIAL_VOCABULARY);
+assert(quizletPreview.detectedCount === 4, 'previewQuizletImport accurately counts detected terms');
+assert(quizletPreview.manualReviewCount >= 1, 'previewQuizletImport accurately identifies review candidates');
+
+// 24.2 PDF Turkish Mojibake Repair & Encoding Pipeline Tests
+const mojibakeSample = 'Ã§evre, Ä±zgara, Ã¶rnek, Ã¼lke, ÅŸehir, ÄŸider, Ã‡alÄ±ÅŸma, â€™';
+const repairedTurkish = PdfVocabularyImporter.cleanAndNormalizeText(mojibakeSample);
+assert(repairedTurkish.includes('çevre'), 'Repairs Ã§ to ç');
+assert(repairedTurkish.includes('ızgara'), 'Repairs Ä± to ı');
+assert(repairedTurkish.includes('örnek'), 'Repairs Ã¶ to ö');
+assert(repairedTurkish.includes('ülke'), 'Repairs Ã¼ to ü');
+assert(repairedTurkish.includes('şehir'), 'Repairs ÅŸ to ş');
+assert(repairedTurkish.includes('ğider'), 'Repairs ÄŸ to ğ');
+assert(repairedTurkish.includes('Çalışma'), 'Repairs Ã‡ and Ä± and ÅŸ to Çalışma');
+assert(repairedTurkish.includes("'"), "Repairs â€™ to '");
+
+// 24.3 PDF Strict Zero-Guessing Rule Tests
+const parsedHyphenated = PdfVocabularyImporter.parseLines(
+  ['well-being - esenlik, refah', 'looked-after - bakılan', 'behavior - davranış'],
+  'rules.pdf',
+  1
+);
+assert(parsedHyphenated.items[0].word === 'well-being', 'Preserves exact spelling "well-being" (never guesses wellbeing)');
+assert(parsedHyphenated.items[1].word === 'looked-after', 'Preserves exact spelling "looked-after" (never strips hyphen)');
+assert(parsedHyphenated.items[2].word === 'behavior', 'Preserves exact spelling "behavior" (never Anglicizes to behaviour)');
+
+// 24.4 Ligature Normalization Tests
+const ligatureSample = 'The e\uFB03cient o\uFB04cer found a \uFB02ower in the \uFB00or'; // eﬃcient, oﬄcer, ﬂower, ﬀor
+const normalizedLigature = PdfVocabularyImporter.cleanAndNormalizeText(ligatureSample);
+assert(normalizedLigature.includes('efficient'), 'Normalizes ﬃ ligature to ffi');
+assert(normalizedLigature.includes('offlcer'), 'Normalizes ﬄ ligature to ffl');
+assert(normalizedLigature.includes('flower'), 'Normalizes ﬂ ligature to fl');
+assert(normalizedLigature.includes('ffor'), 'Normalizes ﬀ ligature to ff');
+
+// 24.5 Data Loss Prevention Check (Section 43: Veri Kaybı Testi)
+const studentVocabBefore: VocabularyItem = {
+  ...INITIAL_VOCABULARY[0],
+  id: 'test-student-preserve',
+  word: 'scrutinize',
+  meaningsTr: ['dikkatle incelemek'],
+};
+const incomingSameWord: VocabularyItem = {
+  ...studentVocabBefore,
+  meaningsTr: ['ayrıntılı araştırmak'],
+  example: 'Researchers scrutinize the latest data carefully.',
+};
+const mergeResult = deduplicateVocabularyBatch([studentVocabBefore], [incomingSameWord]);
+assert(mergeResult.duplicateCount === 1, 'Duplicate correctly flagged');
+assert(mergeResult.toUpdate.length === 1, 'Duplicate sent to update batch');
+const updatedWord = mergeResult.toUpdate[0];
+assert(updatedWord.meaningsTr.includes('dikkatle incelemek'), 'Existing Turkish meaning preserved');
+assert(updatedWord.meaningsTr.includes('ayrıntılı araştırmak'), 'New Turkish meaning merged without erasure');
+
+// 24.6 CSV Complete UI Removal Verification (Section 26)
+assert(!fs.existsSync('/Users/sbgok57/Desktop/Antigravity/YDT:YDS/src/components/CsvModal.tsx'), 'CsvModal.tsx is completely deleted');
+const vocabImportModalCode = fs.readFileSync('/Users/sbgok57/Desktop/Antigravity/YDT:YDS/src/components/VocabularyImportModal.tsx', 'utf-8');
+assert(!vocabImportModalCode.includes("TabType = 'quizlet' | 'pdf' | 'csv'"), 'CSV tab is removed from VocabularyImportModal TabType');
+assert(!vocabImportModalCode.includes('CSV Tablosu'), 'CSV tab label is removed from VocabularyImportModal');
+const vocabViewCode = fs.readFileSync('/Users/sbgok57/Desktop/Antigravity/YDT:YDS/src/views/VocabularyView.tsx', 'utf-8');
+assert(!vocabViewCode.includes('handleExportCsv'), 'handleExportCsv is removed from VocabularyView');
+assert(!vocabViewCode.includes('<Download className="w-3.5 h-3.5" /> CSV'), 'CSV download button is removed from VocabularyView header');
 
 console.log('\n----------------------------------------');
 console.log(`✅ All ${passedTests} of ${totalTests} Unit Tests PASSED successfully!`);

@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { VocabularyItem } from '../../types/vocabulary';
+import { LearningState } from '../../types';
 import { getVisualMemory } from '../../services/visualMemory';
 import { speechService } from '../../services/speech';
-import { Lightbulb, Volume2, Sparkles, CheckCircle } from 'lucide-react';
+import { Lightbulb, Volume2, Sparkles, CheckCircle, Award, RotateCw } from 'lucide-react';
 
 interface VisualMemoryCardProps {
   vocab: VocabularyItem;
   compact?: boolean;
   className?: string;
+  hideHeader?: boolean;
+  learningState?: LearningState;
 }
 
 export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
   vocab,
   compact = false,
   className = '',
+  hideHeader = false,
+  learningState,
 }) => {
+  const [imageError, setImageError] = useState(false);
   const safeMeanings = vocab.meaningsTr || vocab.turkishMeanings || vocab.meanings || [];
   const safePos = vocab.partOfSpeech || 'noun';
   const visual = getVisualMemory(vocab.word, safePos, safeMeanings);
@@ -56,11 +62,21 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
   return (
     <div className={`bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-md flex flex-col ${className}`}>
       {/* Visual Header Illustration */}
-      <div className="relative w-full h-48 bg-slate-950/40 flex items-center justify-center p-4 border-b border-slate-100 dark:border-slate-800/80">
-        <div
-          className="w-40 h-40 drop-shadow-lg"
-          dangerouslySetInnerHTML={{ __html: visual.svgContent }}
-        />
+      <div className="relative w-full h-48 bg-slate-950/20 dark:bg-slate-950/40 flex items-center justify-center p-4 border-b border-slate-100 dark:border-slate-800/80">
+        {vocab.imageUrl && !imageError ? (
+          <img
+            src={vocab.imageUrl}
+            alt={vocab.altText || vocab.word}
+            onError={() => setImageError(true)}
+            className="w-full h-full object-contain drop-shadow-md"
+          />
+        ) : (
+          <div
+            className="w-40 h-40 drop-shadow-lg"
+            dangerouslySetInnerHTML={{ __html: visual.svgContent }}
+          />
+        )}
+
         {/* Badges */}
         <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
           <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-900/80 text-white backdrop-blur border border-white/10 uppercase tracking-wide">
@@ -83,28 +99,30 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
           )}
         </div>
 
-        {/* Dual Pronunciation Listeners */}
-        <div className="absolute top-3 right-3 flex items-center gap-1">
-          <button
-            onClick={(e) => handleSpeak(e, 'female')}
-            title="Kadın Sesiyle Dinle"
-            className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/90 dark:bg-slate-800/90 text-pink-600 dark:text-pink-400 text-xs font-semibold hover:bg-white transition-all shadow-sm"
-          >
-            <Volume2 className="w-3.5 h-3.5" />
-            <span>♀</span>
-          </button>
-          <button
-            onClick={(e) => handleSpeak(e, 'male')}
-            title="Erkek Sesiyle Dinle"
-            className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/90 dark:bg-slate-800/90 text-blue-600 dark:text-blue-400 text-xs font-semibold hover:bg-white transition-all shadow-sm"
-          >
-            <Volume2 className="w-3.5 h-3.5" />
-            <span>♂</span>
-          </button>
-        </div>
+        {/* Dual Pronunciation Listeners (only shown if header not hidden) */}
+        {!hideHeader && (
+          <div className="absolute top-3 right-3 flex items-center gap-1">
+            <button
+              onClick={(e) => handleSpeak(e, 'female')}
+              title="Kadın Sesiyle Dinle"
+              className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/90 dark:bg-slate-800/90 text-pink-600 dark:text-pink-400 text-xs font-semibold hover:bg-white transition-all shadow-sm"
+            >
+              <Volume2 className="w-3.5 h-3.5" />
+              <span>♀</span>
+            </button>
+            <button
+              onClick={(e) => handleSpeak(e, 'male')}
+              title="Erkek Sesiyle Dinle"
+              className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/90 dark:bg-slate-800/90 text-blue-600 dark:text-blue-400 text-xs font-semibold hover:bg-white transition-all shadow-sm"
+            >
+              <Volume2 className="w-3.5 h-3.5" />
+              <span>♂</span>
+            </button>
+          </div>
+        )}
 
         {/* IPA Pronunciation */}
-        {vocab.pronunciation && (
+        {!hideHeader && vocab.pronunciation && (
           <div className="absolute bottom-2 right-3 text-[11px] text-slate-400 font-mono">
             /{vocab.pronunciation}/
           </div>
@@ -116,21 +134,23 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
         <div>
           {/* Word & Turkish Meanings */}
           <div className="mb-2">
-            <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
-              {vocab.displayWord || vocab.word}
-            </h3>
+            {!hideHeader && (
+              <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight break-words">
+                {vocab.displayWord || vocab.word}
+              </h3>
+            )}
             <div className="flex flex-wrap gap-1.5 mt-1.5">
               {safeMeanings.map((meaning, idx) => (
                 <span
                   key={idx}
-                  className="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40"
+                  className="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40 break-words"
                 >
                   {meaning}
                 </span>
               ))}
             </div>
             {visual.semanticScene && (
-              <p className="text-xs text-slate-500 dark:text-slate-400 italic mt-1.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 italic mt-1.5 break-words">
                 🎬 {visual.semanticScene}
               </p>
             )}
@@ -142,10 +162,10 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
               <Lightbulb className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span>Görsel Hafıza İpucu (Memory Tip)</span>
             </div>
-            <p className="text-xs text-amber-900 dark:text-amber-200 font-medium leading-relaxed">
+            <p className="text-xs text-amber-900 dark:text-amber-200 font-medium leading-relaxed break-words">
               🇹🇷 {memoryTip.tr}
             </p>
-            <p className="text-[11px] text-amber-800/80 dark:text-amber-300/80 italic leading-relaxed">
+            <p className="text-[11px] text-amber-800/80 dark:text-amber-300/80 italic leading-relaxed break-words">
               🇬🇧 {memoryTip.en}
             </p>
           </div>
@@ -153,14 +173,33 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
           {/* Example Sentence */}
           {vocab.example && (
             <div className="mt-3 text-xs">
-              <p className="text-slate-700 dark:text-slate-300 font-medium italic">
+              <p className="text-slate-700 dark:text-slate-300 font-medium italic break-words">
                 "{vocab.example}"
               </p>
               {vocab.exampleTr && (
-                <p className="text-slate-500 dark:text-slate-400 mt-0.5 text-[11px]">
+                <p className="text-slate-500 dark:text-slate-400 mt-0.5 text-[11px] break-words">
                   "{vocab.exampleTr}"
                 </p>
               )}
+            </div>
+          )}
+
+          {/* Student SRS Learning Status (if available) */}
+          {learningState && (
+            <div className="mt-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 text-xs flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-brand-600" />
+                <span className="font-bold text-slate-700 dark:text-slate-300">
+                  Ustalık: %{learningState.mastery || 0}
+                </span>
+                <span className="text-[10px] text-slate-400">
+                  ({learningState.learningStage || 'yeni'})
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-[11px] text-slate-500">
+                <RotateCw className="w-3 h-3 text-slate-400" />
+                <span>Sonraki Tekrar: {learningState.intervalDays || 1} gün</span>
+              </div>
             </div>
           )}
         </div>
@@ -170,7 +209,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
           {vocab.collocations && vocab.collocations.length > 0 && (
             <div className="flex items-start gap-1">
               <span className="font-bold text-slate-500 shrink-0">Öbekler:</span>
-              <span className="text-slate-700 dark:text-slate-300 font-medium">
+              <span className="text-slate-700 dark:text-slate-300 font-medium break-words">
                 {vocab.collocations.slice(0, 3).join(' • ')}
               </span>
             </div>
@@ -178,7 +217,7 @@ export const VisualMemoryCard: React.FC<VisualMemoryCardProps> = ({
           {vocab.synonyms && vocab.synonyms.length > 0 && (
             <div className="flex items-start gap-1">
               <span className="font-bold text-slate-500 shrink-0">Eş Anlam:</span>
-              <span className="text-slate-700 dark:text-slate-300 font-medium">
+              <span className="text-slate-700 dark:text-slate-300 font-medium break-words">
                 {vocab.synonyms.slice(0, 3).join(', ')}
               </span>
             </div>

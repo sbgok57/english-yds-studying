@@ -42,7 +42,7 @@ export const ClickableVocabularyModal: React.FC<ClickableVocabularyModalProps> =
       role="dialog"
       aria-modal="true"
       aria-label={`Vocabulary details for ${item.word}`}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/25 dark:bg-black/30 backdrop-blur-md animate-fadeIn"
     >
       <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-2xl">
         <button

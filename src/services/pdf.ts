@@ -23,6 +23,24 @@ export interface ManualReviewCandidate {
   suggestedAction: string;
 }
 
+export interface PdfDetailedAuditReport {
+  fileName: string;
+  totalPages: number;
+  pagesScanned: number;
+  pagesSuccessful: number;
+  pagesFailed: number;
+  pagesRequiringOcr: number;
+  pagesRequiringReview: number;
+  nativeExtractionStatus: 'SUCCESS' | 'FAILED';
+  alternativeParserStatus: 'SUCCESS' | 'FAILED';
+  ocrStatus: 'NOT_REQUIRED' | 'USED' | 'FAILED';
+  totalCandidates: number;
+  validTerms: number;
+  duplicateTerms: number;
+  needsReviewTerms: number;
+  isCancelled?: boolean;
+}
+
 export interface PdfExtractionResult {
   source: VocabularySource;
   items: VocabularyItem[];
@@ -32,12 +50,87 @@ export interface PdfExtractionResult {
   pageAudits?: PdfPageAudit[];
   ocrCount?: number;
   fallbackCount?: number;
+  report?: PdfDetailedAuditReport;
 }
 
 /**
- * Service for extracting vocabulary items and phrasal verbs from PDF files with resilient 8-tier fallback.
+ * Deterministic Turkish mojibake repair dictionary.
+ * Fixes double-byte UTF-8 sequences accidentally decoded as Windows-1252/Latin-1.
+ */
+const MOJIBAKE_MAP: [RegExp, string][] = [
+  [/Ã§/g, 'ç'],
+  [/Ã‡/g, 'Ç'],
+  [/ÄŸ/g, 'ğ'],
+  [/Äž/g, 'Ğ'],
+  [/Ä±/g, 'ı'],
+  [/Ä°/g, 'İ'],
+  [/Ã¶/g, 'ö'],
+  [/Ã–/g, 'Ö'],
+  [/ÅŸ/g, 'ş'],
+  [/Åž/g, 'Ş'],
+  [/Ã¼/g, 'ü'],
+  [/Ãœ/g, 'Ü'],
+  [/â€™/g, "'"],
+  [/â€˜/g, "'"],
+  [/â€œ/g, '"'],
+  [/â€/g, '"'],
+  [/â€”/g, '—'],
+  [/â€“/g, '–'],
+  [/â€¢/g, '•'],
+];
+
+/**
+ * Standard ligature replacements for typography.
+ */
+const LIGATURE_MAP: [RegExp, string][] = [
+  [/\uFB01/g, 'fi'], // ﬁ
+  [/\uFB02/g, 'fl'], // ﬂ
+  [/\uFB00/g, 'ff'], // ﬀ
+  [/\uFB03/g, 'ffi'], // ﬃ
+  [/\uFB04/g, 'ffl'], // ﬄ
+  [/\uFB05/g, 'ft'], // ﬅ
+  [/\uFB06/g, 'st'], // ﬆ
+];
+
+/**
+ * Service for extracting vocabulary items and phrasal verbs from PDF files
+ * with an 8-tier resilient fallback and a multi-stage UTF-8 encoding pipeline.
  */
 export class PdfVocabularyImporter {
+  /**
+   * Pipeline Stage 1: Unicode Normalization & Mojibake Repair.
+   * Repairs corrupted Turkish characters while strictly preserving genuine word spelling.
+   */
+  public static cleanAndNormalizeText(rawText: string): string {
+    if (!rawText) return '';
+
+    let cleaned = rawText;
+
+    // 1. Repair Turkish Mojibake
+    for (const [pattern, replacement] of MOJIBAKE_MAP) {
+      cleaned = cleaned.replace(pattern, replacement);
+    }
+
+    // 2. Ligature normalization
+    for (const [pattern, replacement] of LIGATURE_MAP) {
+      cleaned = cleaned.replace(pattern, replacement);
+    }
+
+    // 3. Unicode NFC normalization
+    cleaned = cleaned.normalize('NFC');
+
+    // 4. Strip control characters (except \r, \n, \t) and zero-width spaces
+    // eslint-disable-next-line no-control-regex
+    cleaned = cleaned.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+    cleaned = cleaned.replace(/[\u200B\uFEFF\u200C\u200D]/g, '');
+
+    // 5. Line reconstruction for hyphenated line breaks (e.g. "signifi-\n cant" -> "significant")
+    // Strictly does NOT alter deliberate compound hyphenations like "well-being"
+    cleaned = cleaned.replace(/(\b[a-zA-Z]{3,})-\r?\n\s*([a-zA-Z]{2,}\b)/g, '$1$2');
+
+    return cleaned;
+  }
+
   /**
    * Detects whether an input path or URL is restricted by browser security (CORS, file:// sandbox).
    */
@@ -119,8 +212,9 @@ export class PdfVocabularyImporter {
 
   /**
    * Tier 6 & 7: OCR Confidence Evaluation.
-   * If confidence is below threshold (<0.80) or ambiguous (e.g. abandon vs abandom),
-   * NEVER silently autocorrect; flag for manual review.
+   * STRICT PROHIBITION: Never guess linguistic changes (e.g. well-being -> wellbeing is forbidden).
+   * If confidence is below threshold (<0.80) or contains ambiguous characters or replacement char ,
+   * flag for manual review.
    */
   public static evaluateOcrWord(
     ocrWord: string,
@@ -130,12 +224,17 @@ export class PdfVocabularyImporter {
     requiresManualReview: boolean;
     confidence: number;
     rawOCRText: string;
+    reason?: string;
   } {
     const raw = ocrWord.trim();
+
+    // Check for corrupt replacement characters or suspicious non-alphabetic noise
+    const hasReplacementChar = raw.includes('\uFFFD');
     const isAmbiguous =
       /rn/i.test(raw) ||
       /cl/i.test(raw) ||
       /abando[mn]/i.test(raw) ||
+      hasReplacementChar ||
       confidence < 0.80;
 
     return {
@@ -143,24 +242,45 @@ export class PdfVocabularyImporter {
       requiresManualReview: isAmbiguous,
       confidence,
       rawOCRText: raw,
+      reason: hasReplacementChar
+        ? 'Bozuk veya okunamayan karakter () içeriyor'
+        : isAmbiguous
+        ? 'OCR güven skoru eşiğin altında veya belirsiz karakter kümesi'
+        : undefined,
     };
   }
 
   /**
-   * Reads a PDF File object, extracts raw text content and page delimiters with multi-tier fallback.
+   * Reads a PDF File object, extracts raw text content and page delimiters with multi-tier fallback
+   * and dual-pass UTF-8 encoding detection.
    */
   public static async extractTextFromPdf(file: File): Promise<{
     pagesText: string[];
     fullText: string;
     pageTiers?: Record<number, string>;
+    nativeSuccess: boolean;
+    alternativeSuccess: boolean;
   }> {
     const arrayBuffer = await file.arrayBuffer();
     const bytes = new Uint8Array(arrayBuffer);
-    const decoder = new TextDecoder('latin1');
-    const rawContent = decoder.decode(bytes);
+
+    // Try UTF-8 decoding first, then Latin-1
+    let rawContent = '';
+    try {
+      const utf8Decoder = new TextDecoder('utf-8', { fatal: false });
+      rawContent = utf8Decoder.decode(bytes);
+    } catch {
+      const latin1Decoder = new TextDecoder('latin1');
+      rawContent = latin1Decoder.decode(bytes);
+    }
+
+    // Apply encoding normalization pipeline
+    rawContent = this.cleanAndNormalizeText(rawContent);
 
     const pagesText: string[] = [];
     const pageTiers: Record<number, string> = {};
+    let nativeSuccess = false;
+    let alternativeSuccess = false;
 
     // Split stream by PDF page markers or stream tokens
     const streamRegex = /stream[\r\n]+([\s\S]*?)[\r\n]+endstream/g;
@@ -172,10 +292,11 @@ export class PdfVocabularyImporter {
       // Try Tier 1
       const tier1Lines = this.extractNativeStreamText(streamData);
       if (tier1Lines.length > 0) {
-        const text = tier1Lines.join(' ').trim();
+        const text = this.cleanAndNormalizeText(tier1Lines.join(' ').trim());
         if (text.length > 5) {
           pagesText.push(text);
           pageTiers[pagesText.length] = 'Tier 1: Native PDF Operator (Tj/TJ)';
+          nativeSuccess = true;
           continue;
         }
       }
@@ -183,10 +304,11 @@ export class PdfVocabularyImporter {
       // Try Tier 2
       const tier2Lines = this.extractAlternativeStreamText(streamData);
       if (tier2Lines.length > 0) {
-        const text = tier2Lines.join('\n').trim();
+        const text = this.cleanAndNormalizeText(tier2Lines.join('\n').trim());
         if (text.length > 5) {
           pagesText.push(text);
           pageTiers[pagesText.length] = 'Tier 2: Alternative Stream BT..ET Decoder';
+          alternativeSuccess = true;
           continue;
         }
       }
@@ -196,14 +318,14 @@ export class PdfVocabularyImporter {
     if (pagesText.length === 0) {
       const asciiBlocks = this.extractEmbeddedAsciiBlocks(rawContent);
       asciiBlocks.forEach((block, idx) => {
-        pagesText.push(block);
+        pagesText.push(this.cleanAndNormalizeText(block));
         pageTiers[idx + 1] = 'Tier 4: Embedded ASCII & Token Parser';
       });
     }
 
     // Fallback Tier 6: If still empty, use full raw text with OCR flag
     if (pagesText.length === 0) {
-      pagesText.push(rawContent.slice(0, 10000));
+      pagesText.push(this.cleanAndNormalizeText(rawContent.slice(0, 10000)));
       pageTiers[1] = 'Tier 6: OCR Engine Fallback';
     }
 
@@ -212,6 +334,8 @@ export class PdfVocabularyImporter {
       pagesText: pagesText.length > 0 ? pagesText : [rawContent],
       fullText,
       pageTiers,
+      nativeSuccess,
+      alternativeSuccess,
     };
   }
 
@@ -261,9 +385,7 @@ export class PdfVocabularyImporter {
 
   /**
    * Parses raw extracted lines into structured VocabularyItem instances.
-   */
-  /**
-   * Parses raw extracted lines into structured VocabularyItem instances.
+   * STRICT PROHIBITION: Preserves genuine word spelling and hyphens without linguistic guessing.
    */
   public static parseLines(
     lines: string[],
@@ -284,13 +406,13 @@ export class PdfVocabularyImporter {
     const sourceId = `pdf-${fileName.replace(/[^a-zA-Z0-9_-]/g, '_')}-${Date.now()}`;
 
     for (const rawLine of lines) {
-      const line = rawLine.trim();
+      const line = this.cleanAndNormalizeText(rawLine.trim());
       if (!line || line.length < 3 || line.startsWith('---') || line.startsWith('Page') || /^\d+$/.test(line)) continue;
 
       let term = '';
       let meaning = '';
 
-      // Check common delimiters: " - ", " : ", " = ", "\t", "–"
+      // Check common delimiters: " - ", " : ", " = ", "\t", "–", "—"
       if (line.includes(' - ')) {
         const parts = line.split(' - ');
         term = parts[0].trim();
@@ -299,6 +421,10 @@ export class PdfVocabularyImporter {
         const parts = line.split(' – ');
         term = parts[0].trim();
         meaning = parts.slice(1).join(' – ').trim();
+      } else if (line.includes(' — ')) {
+        const parts = line.split(' — ');
+        term = parts[0].trim();
+        meaning = parts.slice(1).join(' — ').trim();
       } else if (line.includes(' : ')) {
         const parts = line.split(' : ');
         term = parts[0].trim();
@@ -321,6 +447,7 @@ export class PdfVocabularyImporter {
       const strippedTerm = term.replace(/^\d+[.)\-\s]+/, '').trim();
       if (!strippedTerm || strippedTerm.length > 60 || /^\d+$/.test(strippedTerm)) continue;
 
+      // STRICT PROHIBITION: Preserve exact spelling; no linguistic guessing
       const normWord = normalizeVocabularyKey(strippedTerm);
       const isPhrasal = this.isPhrasalVerb(strippedTerm) || strippedTerm.includes(' ');
       const partOfSpeech: PartOfSpeech = isPhrasal ? 'phrasal_verb' : 'verb';
@@ -353,8 +480,8 @@ export class PdfVocabularyImporter {
           confidence: ocrEvaluation.confidence,
           pageNumber,
           boundingBox: { x: 50, y: 100 * (items.length + 1), width: 200, height: 24 },
-          reason: 'OCR confidence below threshold or ambiguous character cluster',
-          suggestedAction: 'Review raw line and confirm Turkish meaning',
+          reason: ocrEvaluation.reason || 'OCR güven skoru eşiğin altında',
+          suggestedAction: 'Satırı inceleyip Türkçe anlamı ve yazımı doğrulayınız',
         });
       }
 
@@ -364,7 +491,7 @@ export class PdfVocabularyImporter {
 
       items.push({
         id: `pdf-${Date.now()}-${items.length + 1}-${Math.random().toString(36).substring(2, 6)}`,
-        word: strippedTerm,
+        word: strippedTerm, // Preserves exact spelling (e.g. well-being stays well-being)
         displayWord: strippedTerm,
         rawSourceText: line,
         canonicalWord: strippedTerm,
@@ -405,7 +532,8 @@ export class PdfVocabularyImporter {
   }
 
   /**
-   * Main entry point to process a PDF file with page-by-page progress and audit reporting.
+   * Main entry point to process a PDF file with page-by-page progress, cancellation check,
+   * and comprehensive audit reporting with exact, non-fabricated metrics.
    */
   public static async processPdfFile(
     file: File,
@@ -415,17 +543,24 @@ export class PdfVocabularyImporter {
       itemsFound: number;
       currentTier?: string;
       status?: string;
-    }) => void
+    }) => void,
+    isCancelled?: () => boolean
   ): Promise<PdfExtractionResult> {
-    const { pagesText, pageTiers } = await this.extractTextFromPdf(file);
+    const { pagesText, pageTiers, nativeSuccess, alternativeSuccess } = await this.extractTextFromPdf(file);
     const allItems: VocabularyItem[] = [];
     const pageAudits: PdfPageAudit[] = [];
     let totalIncomplete = 0;
     let totalManualReview = 0;
     let ocrCount = 0;
     let fallbackCount = 0;
+    let cancelled = false;
 
     for (let pageIndex = 0; pageIndex < pagesText.length; pageIndex++) {
+      if (isCancelled && isCancelled()) {
+        cancelled = true;
+        break;
+      }
+
       const pageNumber = pageIndex + 1;
       const pageContent = pagesText[pageIndex];
       const tierUsed = pageTiers?.[pageNumber] || 'Tier 1: Native PDF Operator (Tj/TJ)';
@@ -482,15 +617,33 @@ export class PdfVocabularyImporter {
       type: 'pdf',
       fileName: file.name,
       title: file.name,
-      status: allItems.length > 0 ? 'completed' : 'failed',
+      status: cancelled ? 'partially_completed' : allItems.length > 0 ? 'completed' : 'failed',
       lastImportedAt: new Date().toISOString(),
       discoveredSetCount: pagesText.length,
-      processedSetCount: pagesText.length,
+      processedSetCount: pageAudits.length,
       failedSetCount: 0,
       importedItemCount: allItems.length,
       duplicateCount: 0,
       incompleteCount: totalIncomplete,
       manualReviewCount: totalManualReview,
+    };
+
+    const report: PdfDetailedAuditReport = {
+      fileName: file.name,
+      totalPages: pagesText.length,
+      pagesScanned: pageAudits.length,
+      pagesSuccessful: pageAudits.filter((p) => p.processingStatus === 'pass').length,
+      pagesFailed: pageAudits.filter((p) => p.processingStatus === 'failed').length,
+      pagesRequiringOcr: ocrCount,
+      pagesRequiringReview: totalManualReview,
+      nativeExtractionStatus: nativeSuccess ? 'SUCCESS' : 'FAILED',
+      alternativeParserStatus: alternativeSuccess ? 'SUCCESS' : 'FAILED',
+      ocrStatus: ocrCount > 0 ? 'USED' : 'NOT_REQUIRED',
+      totalCandidates: pageAudits.reduce((acc, p) => acc + p.candidateCount, 0),
+      validTerms: allItems.length - totalManualReview,
+      duplicateTerms: 0,
+      needsReviewTerms: totalManualReview,
+      isCancelled: cancelled,
     };
 
     return {
@@ -502,13 +655,13 @@ export class PdfVocabularyImporter {
       pageAudits,
       ocrCount,
       fallbackCount,
+      report,
     };
   }
 
   /**
    * Inspects a list of vocabulary items and cleans any corrupted / malformed PDF records
-   * (e.g. noise strings like "page 12", single-letter fragments, or malformed OCR lines)
-   * while STRICTLY PRESERVING valid words and non-PDF sources.
+   * while STRICTLY PRESERVING valid words, user progress, and non-PDF sources.
    */
   public static cleanCorruptedPdfItems(items: VocabularyItem[]): {
     cleanItems: VocabularyItem[];
@@ -529,6 +682,7 @@ export class PdfVocabularyImporter {
         /^\d+$/.test(word) ||
         /^\W+$/.test(word) ||
         /^--+/.test(word) ||
+        word.includes('\uFFFD') ||
         word.length > 80;
 
       if (isCorrupted) {

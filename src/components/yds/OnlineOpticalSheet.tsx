@@ -127,7 +127,7 @@ export const OnlineOpticalSheet: React.FC<OnlineOpticalSheetProps> = ({
 
       {/* Mobile Drawer */}
       {isMobileDrawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex justify-end animate-fadeIn">
+        <div className="lg:hidden fixed inset-0 z-50 bg-slate-900/25 dark:bg-black/30 backdrop-blur-md flex justify-end animate-fadeIn">
           <div className="w-80 h-full bg-white dark:bg-slate-900 p-4 flex flex-col justify-between shadow-2xl">
             <div className="flex items-center justify-between mb-3">
               <span className="font-bold text-sm">Online Optik</span>

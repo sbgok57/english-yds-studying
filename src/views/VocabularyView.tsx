@@ -8,7 +8,6 @@ import {
   WORD_LEARNING_STATUS_CONFIG,
 } from '../types';
 import { speechService } from '../services/speech';
-import { exportVocabularyToCsv } from '../services/csv';
 import { dbService } from '../services/db';
 import {
   createInitialLearningState,
@@ -25,10 +24,10 @@ import { VisualMemoryCard } from '../components/common/VisualMemoryCard';
 import { AuditDashboardModal } from '../components/common/AuditDashboardModal';
 import { ModernFlashcard } from '../components/vocabulary/ModernFlashcard';
 import { CelebrationCharacter } from '../components/common/CelebrationCharacter';
+import { ErrorBoundary } from '../components/common/ErrorBoundary';
 import {
   Search,
   Volume2,
-  Download,
   Upload,
   BookmarkPlus,
   Check,
@@ -83,6 +82,17 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
   const [isAuditOpen, setIsAuditOpen] = useState(false);
   const [isAuditDashboardOpen, setIsAuditDashboardOpen] = useState(false);
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<VocabularyItem | null>(null);
+
+  // Lock body scroll when detail modal is open
+  useEffect(() => {
+    if (selectedItemForDetail) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [selectedItemForDetail]);
   const [sources, setSources] = useState<VocabularySource[]>([]);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
 
@@ -131,13 +141,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
       v.sourceRefs?.some((r) => r.sourceType === 'pdf')
   ).length;
 
-  const totalCsvWords = vocabulary.filter(
-    (v) =>
-      v.source.toLowerCase().includes('csv') ||
-      v.sourceRefs?.some((r) => r.sourceType === 'csv')
-  ).length;
-
-  const totalCoreWords = vocabulary.length - (totalQuizletWords + totalPdfWords + totalCsvWords);
+  const totalCoreWords = vocabulary.length - (totalQuizletWords + totalPdfWords);
 
   // Daily Dashboard Stats Computation
   const now = useMemo(() => new Date(), []);
@@ -173,6 +177,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
   }, [vocabulary, learningStates, now]);
 
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showEncouragement, setShowEncouragement] = useState(false);
 
   // Filtered Vocabulary for Card Grid & Sub-modes
   const filteredVocabulary = useMemo(() => {
@@ -406,6 +411,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
     } else {
       setQuizScore((prev) => ({ ...prev, incorrect: prev.incorrect + 1 }));
       setMissedInQuiz((prev) => [...prev, currentQ.vocabularyId]);
+      setShowEncouragement(true);
     }
 
     // Save learning state
@@ -431,20 +437,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
     }
   };
 
-  const handleExportCsv = () => {
-    const csvData = exportVocabularyToCsv(vocabulary);
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute(
-      'download',
-      `ydt_yds_vocabulary_complete_${new Date().toISOString().split('T')[0]}.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  
 
   return (
     <div className="space-y-6 animate-fadeIn pb-12">
@@ -482,12 +475,7 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
           >
             <Upload className="w-3.5 h-3.5" /> İçe Aktar
           </button>
-          <button
-            onClick={handleExportCsv}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all shadow-sm"
-          >
-            <Download className="w-3.5 h-3.5" /> CSV
-          </button>
+          
         </div>
       </div>
 
@@ -952,14 +940,24 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
                 })}
               </div>
 
-              {/* Instant Pedagogical Feedback */}
+              {/* Instant Pedagogical Feedback with "Nasıl Çözülürdü?" */}
               {isAnswerSubmitted && (
-                <div className="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900/50 space-y-2 text-xs animate-fadeIn">
-                  <div className="flex items-center gap-2 font-bold text-indigo-900 dark:text-indigo-200">
+                <div
+                  className={`p-4 rounded-2xl border space-y-2 text-xs animate-fadeIn ${
+                    selectedOptionId === quizQuestions[quizIndex].correctOptionId
+                      ? 'bg-indigo-50/70 dark:bg-indigo-950/30 border-indigo-200 dark:border-indigo-900/50'
+                      : 'bg-amber-50/80 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900/50'
+                  }`}
+                >
+                  <div className="flex items-center gap-2 font-bold">
                     <Sparkles className="w-4 h-4 text-amber-500" />
-                    <span>Çözüm &amp; YDS Pedagojik Analizi:</span>
+                    <span className={selectedOptionId === quizQuestions[quizIndex].correctOptionId ? 'text-indigo-900 dark:text-indigo-200' : 'text-amber-900 dark:text-amber-200'}>
+                      {selectedOptionId === quizQuestions[quizIndex].correctOptionId
+                        ? 'Tebrikler! Çözüm & YDS Pedagojik Analizi:'
+                        : '💡 Nasıl Çözülürdü? (Strateji & Çözüm Mantığı):'}
+                    </span>
                   </div>
-                  <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                  <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                     {quizQuestions[quizIndex].whyCorrect}
                   </p>
                   <p className="text-slate-600 dark:text-slate-400 italic">
@@ -1318,7 +1316,6 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
               <option value="all">Tüm Kaynaklar ({vocabulary.length})</option>
               <option value="quizlet">Quizlet Kaynaklı ({totalQuizletWords})</option>
               <option value="pdf">PDF Kaynaklı ({totalPdfWords})</option>
-              <option value="csv">CSV Kaynaklı ({totalCsvWords})</option>
               <option value="core">YDS Çekirdek ({Math.max(0, totalCoreWords)})</option>
             </select>
           </div>
@@ -1604,33 +1601,80 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
         </div>
       )}
 
-      {/* Visual Memory Detail Modal */}
+      {/* Visual Memory Detail Modal - Anchored at top (5vh) in front of user */}
       {selectedItemForDetail && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-lg">
-            <button
-              onClick={() => setSelectedItemForDetail(null)}
-              aria-label="Kapat"
-              className="absolute -top-3 -right-3 z-10 p-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <VisualMemoryCard vocab={selectedItemForDetail} />
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Kelime Detayı: ${selectedItemForDetail.word}`}
+          className="fixed inset-0 z-50 flex items-start justify-center pt-4 sm:pt-[5vh] p-3 sm:p-4 bg-slate-900/25 dark:bg-black/30 backdrop-blur-md overflow-hidden animate-fadeIn"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedItemForDetail(null);
+          }}
+        >
+          <div className="relative w-full max-w-lg max-h-[92vh] sm:max-h-[88vh] flex flex-col bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            {/* STICKY HEADER: Close button, Word, Pronunciation & Audio */}
+            <div className="sticky top-0 z-20 px-5 py-3.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <h3 className="text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight truncate">
+                  {selectedItemForDetail.displayWord || selectedItemForDetail.word}
+                </h3>
+                {selectedItemForDetail.pronunciation && (
+                  <span className="text-xs font-mono text-slate-400 shrink-0">
+                    /{selectedItemForDetail.pronunciation}/
+                  </span>
+                )}
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={() => speechService.speakWoman(selectedItemForDetail.word)}
+                  title="Kadın Sesiyle Dinle"
+                  className="p-1.5 rounded-lg bg-pink-50 dark:bg-pink-950/50 text-pink-600 dark:text-pink-400 hover:bg-pink-100 transition-colors"
+                >
+                  <Volume2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => speechService.speakMan(selectedItemForDetail.word)}
+                  title="Erkek Sesiyle Dinle"
+                  className="p-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 hover:bg-blue-100 transition-colors"
+                >
+                  <Volume2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setSelectedItemForDetail(null)}
+                  aria-label="Kapat"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ml-1"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* INTERNAL SCROLL CONTAINER */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-5">
+              <VisualMemoryCard
+                vocab={selectedItemForDetail}
+                hideHeader={true}
+                learningState={learningStates.get(selectedItemForDetail.id)}
+              />
+            </div>
           </div>
         </div>
       )}
 
-      {/* Multi-Source Vocabulary Import Modal */}
-      <VocabularyImportModal
-        isOpen={isImportModalOpen}
-        onClose={() => setIsImportModalOpen(false)}
-        existingVocabulary={vocabulary}
-        onImportComplete={() => {
-          onRefreshData();
-          loadSources();
-          setIsImportModalOpen(false);
-        }}
-      />
+      {/* Multi-Source Vocabulary Import Modal with Error Boundary */}
+      <ErrorBoundary fallbackTitle="İçe Aktarım Sırasında Bir Hata Oluştu" onReset={() => setIsImportModalOpen(false)}>
+        <VocabularyImportModal
+          isOpen={isImportModalOpen}
+          onClose={() => setIsImportModalOpen(false)}
+          existingVocabulary={vocabulary}
+          onImportComplete={() => {
+            onRefreshData();
+            loadSources();
+            setIsImportModalOpen(false);
+          }}
+        />
+      </ErrorBoundary>
 
       {/* Admin Audit & Diagnostics Dashboard Modal */}
       <AuditDashboardModal
@@ -1643,7 +1687,15 @@ export const VocabularyView: React.FC<VocabularyViewProps> = ({
       {/* Correct Answer Celebration Character */}
       <CelebrationCharacter
         show={showCelebration}
+        type="celebration"
         onComplete={() => setShowCelebration(false)}
+      />
+
+      {/* Gentle Encouragement Character for Incorrect Answers */}
+      <CelebrationCharacter
+        show={showEncouragement}
+        type="encouragement"
+        onComplete={() => setShowEncouragement(false)}
       />
     </div>
   );
