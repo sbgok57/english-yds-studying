@@ -13,6 +13,7 @@ const NAV = [
   { href: "/reading", label: "Reading", emoji: "🔬" },
   { href: "/kilavuz", label: "Kılavuz", emoji: "📘" },
   { href: "/avatars", label: "Avatarlar", emoji: "👤" },
+  { href: "/hesap", label: "Hesap", emoji: "🔑" },
   { href: "/import", label: "İçe Aktar", emoji: "📤" },
 ];
 
@@ -50,7 +51,7 @@ export default function Header() {
         </nav>
 
         <button
-          className="xl:hidden w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-xl"
+          className="xl:hidden w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-xl text-white"
           onClick={() => setOpen(!open)}
           aria-label="Menü"
         >

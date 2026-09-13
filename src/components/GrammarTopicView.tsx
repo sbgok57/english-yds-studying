@@ -9,6 +9,7 @@ import RichText from "@/components/RichText";
 import Tip from "@/components/Tip";
 import VideoModal, { type VideoOption } from "@/components/VideoModal";
 import SceneAnim from "@/components/SceneAnim";
+import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { recordGrammar, useUsage } from "@/lib/store";
 
 function mediaOptions(title: string): VideoOption[] {
@@ -129,7 +130,7 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
         </div>
 
         {/* Media linkleri */}
-        <div className="flex flex-wrap gap-2 mt-5">
+        <div className="flex flex-wrap items-center gap-2 mt-5">
           {media.map((m) => (
             <button
               key={m.label}
@@ -143,6 +144,11 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
               {m.emoji} {m.label} ▶
             </button>
           ))}
+          <Tip tip={MEDIA_SOURCE_TIP} marker>
+            <button className="text-xs font-bold px-2.5 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 hover:text-white transition-all">
+              ℹ️
+            </button>
+          </Tip>
         </div>
       </div>
 
@@ -274,11 +280,11 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
             {topic.example.options.map((o) => {
               const isAnswer = o.id === topic.example.answer;
               const isChosen = o.id === choice;
-              let cls = "border-white/15 bg-white/[0.04] hover:border-white/35";
+              let cls = "border-white/15 bg-white/[0.04] hover:border-white/35 text-white/85";
               if (answered) {
-                if (isAnswer) cls = "border-emerald-400/70 bg-emerald-500/20";
-                else if (isChosen) cls = "border-rose-400/70 bg-rose-500/20 anim-shake";
-                else cls = "border-white/10 bg-white/[0.02] opacity-50";
+                if (isAnswer) cls = "border-emerald-400/70 bg-emerald-500/20 text-emerald-200 font-bold";
+                else if (isChosen) cls = "border-rose-400/70 bg-rose-500/20 anim-shake text-rose-200";
+                else cls = "border-white/10 bg-white/[0.02] opacity-50 text-white/40";
               }
               return (
                 <button

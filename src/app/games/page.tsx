@@ -7,19 +7,21 @@ import WhackMole from "@/components/games/WhackMole";
 import SpinWheel from "@/components/games/SpinWheel";
 import TrueFalse from "@/components/games/TrueFalse";
 import ListeningGame from "@/components/games/ListeningGame";
+import DiceGame from "@/components/games/DiceGame";
 
 const GAMES = [
   { id: "match", label: "Eşleştirme", emoji: "🧩", desc: "Kelime ↔ anlam hafıza oyunu" },
   { id: "mole", label: "Köstebek Vur", emoji: "🐹", desc: "Doğru kelimeyi yakala" },
+  { id: "dice", label: "Zar At", emoji: "🎲", desc: "Zarı at, kelimenin anlamını bil" },
   { id: "wheel", label: "Çarkıfelek", emoji: "🎡", desc: "Çevir, soru gel, çöz" },
   { id: "tf", label: "Doğru / Yanlış", emoji: "⚖️", desc: "Gramer mitleri" },
-  { id: "listen", label: "Dinle & Seç", emoji: "🎧", desc: "Kelimeyi duy, anlamı bul" },
+  { id: "listen", label: "Dinle & Seç", emoji: "🎧", desc: "5 aksanda kelimeyi duy, anlamı bul" },
 ];
 
 export default function GamesPage() {
   const [tab, setTab] = useState("match");
 
-  const active = GAMES.find((g) => g.id === tab) || GAMES[0];
+  const active = GAMES.find((g) => g.id === tab)!;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -27,38 +29,35 @@ export default function GamesPage() {
         <h1 className="text-4xl sm:text-5xl font-black mb-2">
           🎮 <span className="gradient-text">Oyun Merkezi</span>
         </h1>
-        <p className="text-white/60">
-          Kanka, eğlenerek netleri katla! 5 farklı oyun ile kelime ve gramer pratiği yap.
+        <p className="text-white/60 max-w-2xl mx-auto">
+          Kanka, Wordwall tadında oyunlar! Her doğru cevapta havai fişek, her yanlışta dostça
+          bir pat pat. Öğrenirken eğlen, netler uçsun! 🎆
         </p>
       </header>
 
-      {/* Oyun seçici sekmeler */}
-      <div className="flex flex-wrap justify-center gap-2 mb-10">
-        {GAMES.map((g) => {
-          const isSel = tab === g.id;
-          return (
-            <button
-              key={g.id}
-              onClick={() => setTab(g.id)}
-              className={`px-5 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all ${
-                isSel
-                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-xl shadow-purple-500/25 scale-105"
-                  : "bg-white/5 hover:bg-white/10 text-white/70 border border-white/10"
-              }`}
-            >
-              <span className="text-xl">{g.emoji}</span>
-              <div className="text-left">
-                <div className="text-sm leading-tight">{g.label}</div>
-                <div className="text-[10px] text-white/50">{g.desc}</div>
-              </div>
-            </button>
-          );
-        })}
+      {/* Oyun sekmeleri */}
+      <div className="flex flex-wrap gap-2 justify-center mb-8">
+        {GAMES.map((g) => (
+          <button
+            key={g.id}
+            onClick={() => setTab(g.id)}
+            className={`px-4 py-2.5 rounded-full font-bold text-sm transition-all ${
+              tab === g.id
+                ? "bg-gradient-to-r from-pink-500 to-purple-600 shadow-lg shadow-pink-500/30 text-white scale-105"
+                : "border border-white/15 text-white/60 hover:text-white bg-white/5"
+            }`}
+          >
+            {g.emoji} {g.label}
+          </button>
+        ))}
       </div>
 
-      <ErrorBoundary label={active.label}>
+      <p className="text-center text-xs text-white/40 mb-6">{active.desc}</p>
+
+      <ErrorBoundary label="Oyun">
         {tab === "match" && <MatchPairs />}
         {tab === "mole" && <WhackMole />}
+        {tab === "dice" && <DiceGame />}
         {tab === "wheel" && <SpinWheel />}
         {tab === "tf" && <TrueFalse />}
         {tab === "listen" && <ListeningGame />}

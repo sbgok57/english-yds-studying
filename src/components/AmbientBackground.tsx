@@ -2,14 +2,12 @@
 
 import { useUsage } from "@/lib/store";
 
+// CPU dostu: 4 blob, GPU-friendly transform animasyonları (left/top değil).
 const BLOBS = [
-  { color: "#ec4899", size: "48vw", cls: "ambient-1", left: "-6%", top: "-8%" },
-  { color: "#f97316", size: "40vw", cls: "ambient-2", left: "58%", top: "2%" },
-  { color: "#eab308", size: "36vw", cls: "ambient-3", left: "20%", top: "44%" },
-  { color: "#22c55e", size: "42vw", cls: "ambient-2", left: "68%", top: "50%" },
-  { color: "#06b6d4", size: "38vw", cls: "ambient-1", left: "-4%", top: "60%" },
-  { color: "#8b5cf6", size: "44vw", cls: "ambient-3", left: "38%", top: "-12%" },
-  { color: "#f43f5e", size: "30vw", cls: "ambient-1", left: "24%", top: "70%" },
+  { color: "#ec4899", size: "34vw", cls: "ambient-1", left: "-6%", top: "-8%" },
+  { color: "#f59e0b", size: "30vw", cls: "ambient-2", left: "60%", top: "6%" },
+  { color: "#22c55e", size: "30vw", cls: "ambient-3", left: "70%", top: "52%" },
+  { color: "#8b5cf6", size: "34vw", cls: "ambient-1", left: "8%", top: "58%" },
 ];
 
 export default function AmbientBackground() {
@@ -46,9 +44,7 @@ export default function AmbientBackground() {
         className="fixed bottom-4 left-4 z-40 flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/15 bg-slate-900/80 backdrop-blur-xl text-sm font-bold text-white/80 hover:text-white hover:scale-105 transition-all shadow-xl"
         title="Gökkuşağı ambiansını aç/kapat"
       >
-        <span className={on ? "animate-spin-slow inline-block" : "inline-block opacity-40"}>
-          🌈
-        </span>
+        <span className={on ? "" : "inline-block opacity-40"}>🌈</span>
         {on ? "Ortam Açık" : "Ortam Kapalı"}
       </button>
     </>

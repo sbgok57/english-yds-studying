@@ -165,3 +165,26 @@ export const LEGACY_AVATARS: AvatarOption[] = AVATARS.map((a) => ({
   motto: a.motivation,
   gradient: a.theme,
 }));
+
+export function avatarSvg(indexOrId: number | string): string {
+  let idx = 0;
+  if (typeof indexOrId === "number") {
+    idx = Math.abs(indexOrId) % AVATARS.length;
+  } else {
+    const foundIdx = AVATARS.findIndex((a) => a.id === indexOrId);
+    idx = foundIdx >= 0 ? foundIdx : 0;
+  }
+  const av = AVATARS[idx] || AVATARS[0];
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+    <defs>
+      <linearGradient id="av-grad-${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ec4899" />
+        <stop offset="50%" stop-color="#8b5cf6" />
+        <stop offset="100%" stop-color="#06b6d4" />
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="48" fill="url(#av-grad-${idx})" />
+    <circle cx="50" cy="50" r="44" fill="#090d16" fill-opacity="0.3" />
+    <text x="50" y="56" font-size="44" text-anchor="middle" dominant-baseline="middle">${av.emoji}</text>
+  </svg>`;
+}
