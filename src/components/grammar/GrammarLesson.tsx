@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, AlertTriangle, Key, CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 import type { GrammarTopic } from "@/lib/grammar-data";
 import { cn } from "@/lib/utils";
+import GrammarVisuals from "./GrammarVisuals";
 
 export default function GrammarLesson({ topic }: { topic: GrammarTopic }) {
   const [activeSection, setActiveSection] = useState(0);
@@ -136,6 +137,9 @@ export default function GrammarLesson({ topic }: { topic: GrammarTopic }) {
                   </div>
                 ))}
               </div>
+
+              {/* İnteraktif Görsel Hafıza Animasyonu */}
+              <GrammarVisuals slug={topic.slug} />
             </motion.div>
           </AnimatePresence>
 

@@ -2,12 +2,17 @@ import { notFound } from "next/navigation";
 import GrammarLesson from "@/components/grammar/GrammarLesson";
 import { GRAMMAR_TOPICS } from "@/lib/grammar-data";
 
-export default function GrammarSlugPage({
+export const dynamic = "force-dynamic";
+
+export default async function GrammarSlugPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }> | { slug: string };
 }) {
-  const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams?.slug;
+
+  const topic = GRAMMAR_TOPICS.find((t) => t.slug === slug);
 
   if (!topic) {
     notFound();

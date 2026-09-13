@@ -588,4 +588,574 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
       },
     ],
   },
+
+  {
+    slug: "simple-present",
+    title: "Simple Present Tense (Geniş Zaman)",
+    emoji: "☀️",
+    colorTheme: "from-amber-500 via-orange-500 to-yellow-600",
+    simpleSummary: "Bilimsel gerçekler, değişmeyen doğa kanunları, genel doğrular ve akademik araştırma raporlamaları (studies show that...).",
+    sections: [
+      {
+        heading: "Temel Kullanım & Bilimsel Gerçekler",
+        explanation: "Simple Present Tense, zaman sınırı olmayan evrensel gerçeklerde ve akademik çalışmalarda araştırmacının vardığı değişmez sonuçları aktarmada kullanılır.",
+        formula: "[Özne] + [V1 / V-s/es] ... Örnek: Water boils at 100°C.",
+        memoryCode: "🧠 KOD: 'Güneş her gün doğar' kuralı — Evrensel gerçek varsa şıklarda Present arayacaksın!",
+        examples: [
+          { en: "Photosynthesis converts solar energy into chemical energy.", tr: "Fotosentez güneş enerjisini kimyasal enerjiye dönüştürür." },
+          { en: "Recent studies indicate that adequate sleep enhances cognitive functions.", tr: "Son çalışmalar yeterli uykunun bilişsel işlevleri artırdığını göstermektedir." }
+        ],
+        visualHint: "Güneşin doğuşu ve dünyanın dönmesi: Değişmez döngü."
+      },
+      {
+        heading: "Zaman Çizelgeleri & Gelecek Anlamı",
+        explanation: "Resmi programlar, sınav saatleri, uçak/tren seferleri gibi takvime bağlı eylemlerde Simple Present gelecek anlamı taşır.",
+        formula: "[Programlı Eylem] + V1 (tomorrow / at 09:00)",
+        memoryCode: "🧠 KOD: 'Tarife kuralı' — Tren tarifesi will almaz, Simple Present ile kalkar!",
+        examples: [
+          { en: "The international symposium begins tomorrow at 09:00 AM.", tr: "Uluslararası sempozyum yarın sabah 09:00'da başlıyor." }
+        ],
+        visualHint: "Havalimanı kalkış panosu."
+      }
+    ],
+    trapAlerts: [
+      "Tuzak 1: 'studies show that' gördüğünde cümlenin past olduğunu sanıp Past Tense seçme; araştırmanın genel sonucu Present ile aktarılır.",
+      "Tuzak 2: 'Every day', 'usually', 'rarely' gibi sıklık zarfları Simple Present'ın en belirgin sinyalleridir."
+    ],
+    signalWords: ["always", "usually", "often", "generally", "regularly", "studies indicate that", "as a rule"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Extensive climatological data _____ that greenhouse gas emissions directly _____ the atmospheric heat retention capacity.",
+        options: ["show / increase", "showed / will increase", "has shown / increased", "shows / is increasing", "had shown / would increase"],
+        correct: "A",
+        explanation: "Genel bilimsel bir gerçeği ifade eden özne 'data' ve nesnel bir sonuç söz konusu olduğu için her iki tarafta Simple Present (show / increase) kullanılır.",
+        memoryCode: "Bilimsel gerçeklik = Çift taraflı Present uyumu!"
+      }
+    ]
+  },
+  {
+    slug: "present-continuous",
+    title: "Present Continuous Tense (Şimdiki Zaman)",
+    emoji: "🏃",
+    colorTheme: "from-blue-500 via-cyan-500 to-teal-600",
+    simpleSummary: "Şu an devam eden süreçler, geçici durumlar ve günümüzde hızla değişmekte olan küresel trendler.",
+    sections: [
+      {
+        heading: "Değişen Trendler & Küresel Süreçler",
+        explanation: "YDS'de Present Continuous genellikle 'increasingly', 'gradually', 'currently', 'nowadays' gibi zarflarla birlikte küresel dönüşümleri ifade etmek için sorulur.",
+        formula: "[Özne] + am/is/are + [V-ing]",
+        memoryCode: "🧠 KOD: 'Merdiven basamakları' — Gittikçe artan veya azalan her şey Continuous'tır!",
+        examples: [
+          { en: "The world population is aging at an unprecedented rate.", tr: "Dünya nüfusu benzeri görülmemiş bir hızla yaşlanmaktadır." },
+          { en: "Renewable energy sources are becoming increasingly cost-effective.", tr: "Yenilenebilir enerji kaynakları giderek daha uygun maliyetli hale geliyor." }
+        ],
+        visualHint: "Yukarı doğru hızla tırmanan renkli grafik eğrisi."
+      }
+    ],
+    trapAlerts: [
+      "Stative Verbs (Durum fiilleri: know, believe, understand, belong) -ing almaz; bu fiillerle Continuous şıklarını anında ele!"
+    ],
+    signalWords: ["currently", "nowadays", "at present", "increasingly", "gradually", "day by day"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Due to rapid urbanization, natural wildlife habitats _____ at an alarming rate across developing nations.",
+        options: ["are shrinking", "shrank", "had shrunk", "will have shrunk", "have been shrinking"],
+        correct: "A",
+        explanation: "'At an alarming rate' ve devam eden küresel bir eğilim Present Continuous ile karşılanır.",
+        memoryCode: "Dinamik küresel trend = is/are V-ing!"
+      }
+    ]
+  },
+  {
+    slug: "present-perfect",
+    title: "Present Perfect Tense (Yakın Geçmiş / Etkisi Süren Zaman)",
+    emoji: "🌉",
+    colorTheme: "from-purple-600 via-indigo-600 to-blue-600",
+    simpleSummary: "Geçmiş ile şimdiki zaman arasındaki köprü: since, for, in recent years, so far.",
+    sections: [
+      {
+        heading: "Köprü Zamanı: have/has V3",
+        explanation: "Present Perfect geçmişte başlamış ve etkisi veya sonucu ŞU AN devam eden olayların zamanıdır.",
+        formula: "[Özne] + have/has + [V3]",
+        memoryCode: "🧠 KOD: 'have/has bir elini düne, diğer elini bugüne uzatır!'",
+        examples: [
+          { en: "Over the past two decades, technology has revolutionized global commerce.", tr: "Son yirmi yılda teknoloji küresel ticarette devrim yarattı." }
+        ],
+        visualHint: "Geçmişten bugüne uzanan ışıklı altın köprü."
+      }
+    ],
+    trapAlerts: [
+      "Net geçmiş zaman zarfları (yesterday, in 2010, two days ago) ASLA Present Perfect ile kullanılmaz, Simple Past (V2) gerektirir!"
+    ],
+    signalWords: ["since", "for", "recently", "lately", "so far", "over the past decade", "in recent years"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Over the last century, medical advancements _____ average life expectancy considerably in developed countries.",
+        options: ["have increased", "increased", "had increased", "will increase", "were increasing"],
+        correct: "A",
+        explanation: "'Over the last century' geçmişten bugüne uzanan süreci belirtir; have/has V3 gerektirir.",
+        memoryCode: "Over the last... = Kesin Present Perfect!"
+      }
+    ]
+  },
+  {
+    slug: "present-perfect-continuous",
+    title: "Present Perfect Continuous (Süregelen Zaman)",
+    emoji: "🌊",
+    colorTheme: "from-cyan-600 via-blue-600 to-indigo-700",
+    simpleSummary: "Geçmişte başlayıp ŞU ANA KADAR kesintisiz devam eden ve eylemin süresinin vurgulandığı yapılar.",
+    sections: [
+      {
+        heading: "Kesintisiz Efor & Vurgulanan Süreç",
+        explanation: "have/has been V-ing formülü, eylemin ne kadar uzun süredir aralıksız yapıldığını ve halen sürdüğünü vurgular.",
+        formula: "[Özne] + have/has been + [V-ing]",
+        memoryCode: "🧠 KOD: 'Akan nehir' — Geçmişten çıkmış, şu an hâlâ gürül gürül akıyor!",
+        examples: [
+          { en: "Astrophysicists have been analyzing the deep space signals for over three years.", tr: "Astrofizikçiler üç yılı aşkın süredir derin uzay sinyallerini analiz etmektedirler." }
+        ],
+        visualHint: "Geçmişten şimdiki zamana uzanan kesintisiz mavi nehir."
+      }
+    ],
+    trapAlerts: [
+      "Kaç kez yapıldığı (sayı veya adet) belirtiliyorsa Continuous kullanılmaz, düz Present Perfect kullanılır (I have read 3 books, NOT have been reading 3 books)."
+    ],
+    signalWords: ["for hours", "since morning", "all day", "how long", "lately"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Marine biologists _____ the migration corridors of humpback whales since the tracking expedition began.",
+        options: ["have been monitoring", "monitored", "had monitored", "were monitoring", "will monitor"],
+        correct: "A",
+        explanation: "'Since' ile başlayan süreçte ana cümlede eylemin devamlılığı vurgulandığından have been monitoring doğru yanıttır.",
+        memoryCode: "Since + V2 -> have been V-ing / have V3!"
+      }
+    ]
+  },
+  {
+    slug: "simple-past",
+    title: "Simple Past Tense (Geçmiş Zaman)",
+    emoji: "📜",
+    colorTheme: "from-amber-700 via-stone-700 to-slate-800",
+    simpleSummary: "Geçmişte belirli bir tarihte yaşanıp tamamlanmış ve bitmiş olaylar (V2 / did).",
+    sections: [
+      {
+        heading: "Geçmişte Kapanan Kutu",
+        explanation: "Simple Past, eylemin geçmişte belirli bir zamanda gerçekleştiğini ve günümüzle bir bağının kalmadığını gösterir.",
+        formula: "[Özne] + [V2 / did not V1]",
+        memoryCode: "🧠 KOD: 'Kapağı kilitli sandık' — Zamanı bellidir (in 1995, ago, last year) ve bugüne uzanmaz!",
+        examples: [
+          { en: "Alexander Fleming discovered penicillin in 1928 by pure coincidence.", tr: "Alexander Fleming 1928'de tamamen tesadüf eseri penisilini keşfetti." }
+        ],
+        visualHint: "Tarih mühürlü antika bir parşömen."
+      }
+    ],
+    trapAlerts: [
+      "Cümlede 'in the past', 'originally', 'initially', 'during antiquity' varsa şıklar doğrudan Simple Past (V2)'ye yönelmelidir."
+    ],
+    signalWords: ["yesterday", "ago", "last week", "in 1945", "originally", "initially", "during the Ottoman era"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "The ancient library of Alexandria _____ substantial structural devastation during several conflicts in antiquity.",
+        options: ["suffered", "has suffered", "is suffering", "had been suffering", "will suffer"],
+        correct: "A",
+        explanation: "'In antiquity' (antik çağda) ifadesi net bir geçmiş zaman dilimidir, Simple Past (suffered) gerektirir.",
+        memoryCode: "Antik çağ / net tarih = Kesin V2!"
+      }
+    ]
+  },
+  {
+    slug: "past-continuous",
+    title: "Past Continuous Tense (Geçmişte Süregelen Zaman)",
+    emoji: "🎞️",
+    colorTheme: "from-blue-700 via-indigo-800 to-slate-900",
+    simpleSummary: "Geçmişte devam eden eylemler ve bu eylemler sürerken başka bir olayın araya girmesi (while / when).",
+    sections: [
+      {
+        heading: "Kesilme & Eşzamanlı Geçmiş",
+        explanation: "Geçmişte uzun süren bir fon eylemi (was/were V-ing) devam ederken anlık bir olay (V2) gerçekleştiğinde kullanılır.",
+        formula: "While + [was/were V-ing] , [Özne + V2]",
+        memoryCode: "🧠 KOD: 'Film şeridi akarken fotoğraf flaşı patladı!' Film: was V-ing, flaş: V2!",
+        examples: [
+          { en: "While the archaeologists were excavating the tomb, they stumbled upon an intact sarcophagus.", tr: "Arkeologlar mezarı kazarken bozulmamış bir lahite rastladılar." }
+        ],
+        visualHint: "Akan bir sinema filmi karesinde çakan şimşek."
+      }
+    ],
+    trapAlerts: [
+      "'While' arkasından çoğunlukla Continuous (was/were V-ing) gelir, 'When' arkasından ise anlık eylem (V2) gelir."
+    ],
+    signalWords: ["while", "as", "just as", "when", "at this time yesterday"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "While astronomers _____ the electromagnetic spectrum, an anomalous cosmic ray pulse _____ their detectors.",
+        options: ["were calibrating / struck", "calibrated / was striking", "had calibrated / strikes", "would calibrate / has struck", "are calibrating / struck"],
+        correct: "A",
+        explanation: "'While' devam eden kalibrasyon sürecini (were calibrating) alır, anlık çarpma olayı V2 (struck) olur.",
+        memoryCode: "While + was/were V-ing, V2!"
+      }
+    ]
+  },
+  {
+    slug: "past-perfect",
+    title: "Past Perfect Tense (Öncelik-Sonralık / Had V3)",
+    emoji: "⏮️",
+    colorTheme: "from-purple-800 via-indigo-900 to-slate-950",
+    simpleSummary: "Geçmişin geçmişi: Geçmişte gerçekleşmiş iki olaydan daha önce tamamlanmış olanı.",
+    sections: [
+      {
+        heading: "1. Olay (Had V3) & 2. Olay (V2)",
+        explanation: "Past Perfect tek başına kullanılmaz; geçmişteki başka bir referans noktasına göre 'daha önce' olduğunu göstermek için vardır.",
+        formula: "By the time + [V2] , [Özne + had V3]",
+        memoryCode: "🧠 KOD: 'By the time Past, diğeri Had V3!' — Zaman makinesinde bir vites daha geriye gitmek!",
+        examples: [
+          { en: "By the time firefighters arrived at the chemical plant, the blaze had engulfed the central warehouse.", tr: "İtfaiyeciler tesise vardığında alevler merkezi depoyu çoktan yutmuştu." }
+        ],
+        visualHint: "Geri sarma butonu (rewind) ve iki basamaklı geçmiş merdiveni."
+      }
+    ],
+    trapAlerts: [
+      "Sırf geçmişten bahsediliyor diye her cümleye had V3 yapıştırma! Had V3 için mutlaka daha yakın bir geçmiş (V2) referansı şarttır."
+    ],
+    signalWords: ["by the time + V2", "before + V2", "after + had V3", "hardly... when", "no sooner... than"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "By the time regulatory agencies _____ formal sanctions, the fraudulent corporation _____ its overseas assets.",
+        options: ["imposed / had liquidated", "had imposed / liquidated", "impose / would liquidate", "were imposing / liquidates", "have imposed / has liquidated"],
+        correct: "A",
+        explanation: "'By the time + V2 (imposed)' kalıbında ana cümle daha önce tamamlandığı için 'had V3 (had liquidated)' olmalıdır.",
+        memoryCode: "By the time + Past, Had V3!"
+      }
+    ]
+  },
+  {
+    slug: "past-perfect-continuous",
+    title: "Past Perfect Continuous (Geçmişte Sürmüş Süreç)",
+    emoji: "⏳",
+    colorTheme: "from-indigo-900 via-purple-950 to-black",
+    simpleSummary: "Geçmişteki bir referans noktasına kadar belli bir süre boyunca kesintisiz sürmüş süreçler.",
+    sections: [
+      {
+        heading: "Geçmişteki Süreç & Kesinti Noktası",
+        explanation: "Had been V-ing yapısı, geçmişteki bir olay gerçekleşmeden önce başka bir eylemin ne kadar süredir devam ettiğini açıklar.",
+        formula: "[Özne] + had been [V-ing] ... before [Özne + V2]",
+        memoryCode: "🧠 KOD: 'Yorulmuş geçmiş' — Geçmişteki bir ana kadar nefes nefese koşmuş olmak!",
+        examples: [
+          { en: "The engine had been overheating for hours before it completely stalled.", tr: "Motor tamamen durmadan önce saatlerdir aşırı ısınıyordu." }
+        ],
+        visualHint: "Zamanı tükenen antik kum saati."
+      }
+    ],
+    trapAlerts: [
+      "Durum fiilleri (stative verbs) continuous almaz, had been being değil had been kullanılır."
+    ],
+    signalWords: ["for hours before", "until that moment", "had been doing when"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Geologists _____ anomalous seismic micro-tremors for weeks before the volcanic caldera finally erupted.",
+        options: ["had been recording", "recorded", "have recorded", "were recording", "would record"],
+        correct: "A",
+        explanation: "'For weeks before + V2' kalıbı kesintisiz geçmiş süreci vurguladığı için had been recording doğru yanıttır.",
+        memoryCode: "For weeks before V2 -> had been V-ing!"
+      }
+    ]
+  },
+  {
+    slug: "simple-future",
+    title: "Simple Future (Will / Shall)",
+    emoji: "🔮",
+    colorTheme: "from-pink-600 via-purple-600 to-indigo-700",
+    simpleSummary: "Anlık kararlar, geleceğe yönelik tahminler, vaatler ve şart cümlelerinin temel sonuç yapıları.",
+    sections: [
+      {
+        heading: "Tahminler, Şart Sonuçları & İrade",
+        explanation: "Will yapısı kesin kanıt bulunmayan kişisel inanç/tahminlerde (think, believe, hope) ve Type 1 şart cümlelerinin temelinde yer alır.",
+        formula: "[Özne] + will + [V1]",
+        memoryCode: "🧠 KOD: 'Kristal küre' — Veriye değil, genel inanç ve öngörüye dayanan gelecek!",
+        examples: [
+          { en: "Many economists believe automated logistics will reduce shipping overheads.", tr: "Birçok ekonomist otomatik lojistiğin nakliye giderlerini düşüreceğine inanıyor." }
+        ],
+        visualHint: "Geleceği gösteren parlayan kristal küre."
+      }
+    ],
+    trapAlerts: [
+      "Zaman bağlaçlarının (when, after, as soon as, until) bulunduğu YAN CÜMLE içine ASLA 'will' gelemez! Gelecek anlamı Present Tense ile verilir."
+    ],
+    signalWords: ["tomorrow", "next year", "probably", "I think", "I believe", "in the future"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "As soon as the peer-review process _____, the editorial board _____ the breakthrough manuscript.",
+        options: ["concludes / will publish", "will conclude / publishes", "concluded / will publish", "has concluded / published", "will conclude / will publish"],
+        correct: "A",
+        explanation: "Zaman bağlacı 'as soon as' yan cümleye 'will' almaz (concludes), ana cümle 'will publish' olur.",
+        memoryCode: "Zaman bağlacı içine will yasak!"
+      }
+    ]
+  },
+  {
+    slug: "be-going-to",
+    title: "Be Going To & Gelecek Planları",
+    emoji: "🗓️",
+    colorTheme: "from-emerald-600 via-teal-600 to-cyan-700",
+    simpleSummary: "Önceden planlanmış niyetler ve şu anki somut kanıtlara dayanan kesin tahminler.",
+    sections: [
+      {
+        heading: "Kanıtlı Gelecek & Hazırlanmış Plan",
+        explanation: "Gözle görülür bir kanıt (evidence) olduğunda veya önceden ajandaya yazılmış bir karar varsa be going to tercih edilir.",
+        formula: "[Özne] + am/is/are going to + [V1]",
+        memoryCode: "🧠 KOD: 'Bilet cebinde!' — Karar verilmiş, hazırlık yapılmış kesin gelecek!",
+        examples: [
+          { en: "According to current fiscal deficits, the council is going to introduce austerity measures.", tr: "Mevcut mali açıklara göre konsey kemer sıkma politikalarını devreye sokacak." }
+        ],
+        visualHint: "İşaretlenmiş takvim ve eldeki uçak bileti."
+      }
+    ],
+    trapAlerts: [
+      "Was/were going to yapısı 'yapacaktım ama yapamadım' (gerçekleşmemiş niyet) anlamı verir."
+    ],
+    signalWords: ["look at that", "evidence shows", "already decided", "plan to"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Given the severe structural cracks discovered in the foundation, authorities _____ the suspension bridge tomorrow.",
+        options: ["are going to close", "will have closed", "close", "had closed", "were closing"],
+        correct: "A",
+        explanation: "Eldeki somut kanıt (severe cracks) ve planlı eylem gereği 'are going to close' en uygundur.",
+        memoryCode: "Somut kanıt = Be going to!"
+      }
+    ]
+  },
+  {
+    slug: "future-continuous",
+    title: "Future Continuous (Gelecekte Devam Edecek Zaman)",
+    emoji: "🛫",
+    colorTheme: "from-sky-500 via-blue-600 to-indigo-700",
+    simpleSummary: "Gelecekte belirli bir zaman noktasında gerçekleşmekte ve devam ediyor olacak eylemler.",
+    sections: [
+      {
+        heading: "Gelecekteki Dinamik Süreç",
+        explanation: "Will be V-ing yapısı, gelecekteki belirli bir zaman diliminde eylemin tam ortasında olunacağını anlatır.",
+        formula: "[Özne] + will be + [V-ing]",
+        memoryCode: "🧠 KOD: 'Yarın bu saatte havadayım!' — Gelecekteki o anda devam eden süreç!",
+        examples: [
+          { en: "At this time next decade, thousands of autonomous shuttles will be operating in urban centers.", tr: "Önümüzdeki on yılın bu vaktinde, şehir merkezlerinde binlerce otonom araç çalışıyor olacak." }
+        ],
+        visualHint: "Bulutların üzerinde süzülen süpersonik jet uçağı."
+      }
+    ],
+    trapAlerts: [
+      "'At this time tomorrow' veya 'in ten years\' time' kalıpları Future Continuous'ın en büyük ipuçlarıdır."
+    ],
+    signalWords: ["at this time tomorrow", "this time next week", "in the next decade"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "By this time next semester, doctoral candidates _____ their field research across multiple biomes.",
+        options: ["will be conducting", "conduct", "have conducted", "had conducted", "conducted"],
+        correct: "A",
+        explanation: "'By this time next semester' gelecekte o anda devam eden süreci gösterir: will be conducting.",
+        memoryCode: "This time next... = will be V-ing!"
+      }
+    ]
+  },
+  {
+    slug: "future-perfect",
+    title: "Future Perfect (By + Gelecek / Will have V3)",
+    emoji: "🏁",
+    colorTheme: "from-emerald-500 via-teal-600 to-blue-700",
+    simpleSummary: "Gelecekteki belirli bir tarihe kadar tamamlanmış ve sonuçlanmış olacak eylemler.",
+    sections: [
+      {
+        heading: "By + Gelecek Zaman = Will Have V3",
+        explanation: "YDS'de 'By 2050', 'By the end of this century' gibi ifadeler görüldüğünde ana cümlede %99 'will have V3' aranır.",
+        formula: "By + [Gelecek Tarih] , [Özne + will have V3]",
+        memoryCode: "🧠 KOD: 'By Gelecek = Will Have V3!' YDS'nin en garantili matematiksel formülüdür!",
+        examples: [
+          { en: "By 2050, researchers will have mapped the complete neural connectivity of the human cortex.", tr: "2050 yılına kadar araştırmacılar insan korteksinin tam sinirsel bağlantısını haritalamış olacaklar." }
+        ],
+        visualHint: "2050 yazan damalı bitiş bayrağı."
+      }
+    ],
+    trapAlerts: [
+      "By the time arkasından Present gelirse ana cümle 'will have V3', Past gelirse ana cümle 'had V3' olur. Bu ikisini asla karıştırma!"
+    ],
+    signalWords: ["by 2030", "by the end of", "by next year", "by the time + Present"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "By the middle of the twenty-first century, renewable infrastructure _____ conventional fossil fuels in primary energy grids.",
+        options: ["will have superseded", "superseded", "has superseded", "had superseded", "supersedes"],
+        correct: "A",
+        explanation: "'By the middle of the twenty-first century' (gelecek tarih) doğrudan 'will have V3' gerektirir.",
+        memoryCode: "By + Gelecek = will have V3!"
+      }
+    ]
+  },
+  {
+    slug: "modals-perfect",
+    title: "Perfect Modals (Geçmiş Çıkarımlar & Pişmanlıklar)",
+    emoji: "🕰️",
+    colorTheme: "from-amber-600 via-red-600 to-purple-800",
+    simpleSummary: "Geçmişe dair güçlü çıkarımlar (must have V3), imkânsızlıklar (can't have V3) ve pişmanlıklar (should have V3).",
+    sections: [
+      {
+        heading: "Geçmiş Çıkarım Matrisi",
+        explanation: "Modal + have V3 yapıları her zaman GEÇMİŞİ anlatır. Must have V3 = yapmış olmalı (%95 emin), Can't have V3 = yapmış olamaz (%95 imkânsız), Should have V3 = yapmalıydı ama yapmadı.",
+        formula: "Modal + have + [V3]",
+        memoryCode: "🧠 KOD: 'Dedektif büyüteci' — Geçmişteki delillere bakıp kesin çıkarım yapmak!",
+        examples: [
+          { en: "The ancient civilization must have experienced severe drought, as all reservoirs were dry.", tr: "Bütün su depoları kuruduğuna göre antik uygarlık şiddetli bir kuraklık yaşamış olmalı." },
+          { en: "You should have consulted the legal department before signing the contract.", tr: "Sözleşmeyi imzalamadan önce hukuk departmanına danışmalıydın (ama danışmadın)." }
+        ],
+        visualHint: "Geçmiş suç mahallini inceleyen dedektif büyüteci."
+      }
+    ],
+    trapAlerts: [
+      "Must V1 = şu anki zorunluluktur; geçmiş çıkarım için MUTLAKA 'must have V3' gerekir."
+    ],
+    signalWords: ["must have V3", "cannot have V3", "could have V3", "should have V3", "might have V3"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Given the catastrophic structural failure, the architects _____ critical seismic tolerances during initial construction.",
+        options: ["must have underestimated", "should underestimate", "could underestimate", "will have underestimated", "must underestimate"],
+        correct: "A",
+        explanation: "Yıkımın büyüklüğü geçmişteki hataya dair kesin ve güçlü bir çıkarım (must have V3) gerektirir.",
+        memoryCode: "Geçmiş kesin çıkarım = must have V3!"
+      }
+    ]
+  },
+  {
+    slug: "wish-clauses",
+    title: "Wish Clauses & If Only (Dilek Cümleleri)",
+    emoji: "🌠",
+    colorTheme: "from-indigo-600 via-violet-600 to-purple-900",
+    simpleSummary: "Şu an veya geçmiş için gerçek dışı dilekler: Zamanı daima BİR DERECE GERİ alma kuralı.",
+    sections: [
+      {
+        heading: "Zaman Bir Vites Geri Kuralı",
+        explanation: "Wish / If Only yapılarından sonra ASLA Present Tense gelemez! Şu an için dilek: V2/would, Geçmiş pişmanlık: had V3.",
+        formula: "I wish + [Özne + V2 / had V3 / could V1]",
+        memoryCode: "🧠 KOD: 'Zaman makinesinde geri vites' — Wish kapısından geçen her zaman bir derece eskir!",
+        examples: [
+          { en: "Environmentalists wish global carbon output were declining faster.", tr: "Çevreciler küresel karbon salınımının daha hızlı düşüyor olmasını dilerdi (şu an düşmüyor)." },
+          { en: "The delegates wish they had ratified the treaty last year.", tr: "Delegeler anlaşmayı geçen yıl onaylamış olmayı dilerdi (onaylamadılar, pişmanlar)." }
+        ],
+        visualHint: "Kayan bir yıldız ve dilek tutan silüet."
+      }
+    ],
+    trapAlerts: [
+      "Wish cümlesinde Present Tense (am, is, are, have, will) olan tüm şıkları saniyede ele!"
+    ],
+    signalWords: ["I wish", "if only", "wish + were", "wish + had V3"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Many climatologists wish international governments _____ more rigorous restrictions at the Kyoto summit years ago.",
+        options: ["had enacted", "enacted", "have enacted", "would enact", "enact"],
+        correct: "A",
+        explanation: "'Years ago' (geçmiş) dileği olduğu için wish kuralı gereği had V3 (had enacted) zorunludur.",
+        memoryCode: "Wish + Geçmiş = had V3!"
+      }
+    ]
+  },
+  {
+    slug: "articles-quantifiers",
+    title: "Articles & Quantifiers (Belirteçler & Miktar İfadeleri)",
+    emoji: "🔢",
+    colorTheme: "from-amber-500 via-emerald-600 to-teal-700",
+    simpleSummary: "A/an/the kullanımı, sayılabilen ve sayılamayan isimler, a few vs few, much vs many.",
+    sections: [
+      {
+        heading: "Few / Little vs A Few / A Little",
+        explanation: "Başında 'a' olmayan few ve little olumsuzdur ('neredeyse hiç yok'). 'A few' ve 'a little' ise az ama yeterli miktarı ifade eder.",
+        formula: "Few/Many + [Çoğul İsim] | Little/Much + [Sayılamayan İsim]",
+        memoryCode: "🧠 KOD: 'A harfi bardağı doldurur!' — A varsa az da olsa var (+), A yoksa neredeyse hiç yok (-)!",
+        examples: [
+          { en: "Few politicians were willing to acknowledge the impending financial crisis.", tr: "Pek az (neredeyse hiç) politikacı yaklaşan finansal krizi kabul etmeye yanaştı." }
+        ],
+        visualHint: "Yarı dolu bardak (a little) ve dibinde damla kalan bardak (little)."
+      }
+    ],
+    trapAlerts: [
+      "Information, research, evidence, equipment kelimeleri sayılamaz; ASLA çoğul eki (-s) veya 'many' almaz!"
+    ],
+    signalWords: ["few", "a few", "little", "a little", "much", "many", "a great deal of", "a number of"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "Because _____ empirical evidence was submitted to substantiate the hypothesis, the committee rejected the grant proposal.",
+        options: ["little", "a few", "many", "a great deal of", "several"],
+        correct: "A",
+        explanation: "'Evidence' sayılamaz (uncountable) bir isimdir ve komitenin projeyi reddetmesi kanıtın neredeyse hiç olmadığını (olumsuz: little) gösterir.",
+        memoryCode: "Evidence sayılamaz + red kararı = little!"
+      }
+    ]
+  },
+  {
+    slug: "participles-inversion",
+    title: "Participles & Inversion (Kısaltmalar & Devrik Cümleler)",
+    emoji: "🎓",
+    colorTheme: "from-violet-700 via-purple-900 to-slate-950",
+    simpleSummary: "Akademik YDS'nin en prestijli konuları: Having V3 kısaltmaları ve olumsuz zarflarla devrik cümleler.",
+    sections: [
+      {
+        heading: "Having V3: Öncelikli Kısaltma",
+        explanation: "Yan cümledeki eylem ana cümledeki eylemden daha önce yapılmışsa 'Having V3' (aktif) veya 'Having been V3' (pasif) kullanılır.",
+        formula: "Having + V3 ... , [Özne + V2]",
+        memoryCode: "🧠 KOD: 'Önce ödevini bitirdi (Having finished), sonra dışarı çıktı!'",
+        examples: [
+          { en: "Having exhausted all diplomatic channels, the delegates referred the dispute to the international tribunal.", tr: "Tüm diplomatik kanalları tükettikten sonra, delegeler anlaşmazlığı uluslararası mahkemeye taşıdı." }
+        ],
+        visualHint: "Kürsüde konuşan diplomat ve arkasında yanan onay mührü."
+      },
+      {
+        heading: "Inversion: Devrik Cümle Kalıpları",
+        explanation: "Cümle olumsuz bir zarfla (Not only, Hardly, Seldom, Rarely, Under no circumstances) başlarsa cümle soru formatında devrilir: Zarf + Yardımcı Fiil + Özne + Fiil.",
+        formula: "Not only + [did/does/is + Özne] ... but also ...",
+        memoryCode: "🧠 KOD: 'Olumsuzluk başa gelirse yardımcı fiil öne fırlar!'",
+        examples: [
+          { en: "Hardly had the vaccine been approved when global distribution commenced.", tr: "Aşı onaylanır onaylanmaz küresel dağıtım başladı." }
+        ],
+        visualHint: "Ters dönen piramit: Soru kalıbı gibi dizilen devrik cümle."
+      }
+    ],
+    trapAlerts: [
+      "Hardly ... when | No sooner ... than | Scarcely ... when kalıpları YDS'de soru kalıbı olarak direkt boşluk doldurma olarak sorulur!"
+    ],
+    signalWords: ["hardly... when", "no sooner... than", "seldom", "rarely", "under no circumstances", "having V3"],
+    questionCount: 100,
+    practiceQuestions: [
+      {
+        id: 1,
+        text: "_____ had the preliminary clinical trials concluded _____ the pharmaceutical consortium announced mass manufacturing.",
+        options: ["No sooner / than", "Hardly / than", "Scarcely / that", "Not only / when", "Neither / nor"],
+        correct: "A",
+        explanation: "'No sooner' daima 'than' ile eşleşir ve devrik yapı oluşturur (had the trials concluded).",
+        memoryCode: "No sooner ... THAN!"
+      }
+    ]
+  },
 ];

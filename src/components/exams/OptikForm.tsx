@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { 
@@ -13,10 +13,14 @@ import {
   ChevronLeft, 
   ChevronRight,
   Sparkles,
-  Award
+  Award,
+  ArrowLeft,
+  FileText
 } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { safeStorage } from "@/lib/safe-storage";
 
 export interface ExamQuestion {
   id: number;
@@ -49,15 +53,31 @@ interface SavedSession {
   net?: number;
 }
 
+const triggerConfetti = (opts: any) => {
+  try {
+    if (typeof window !== "undefined") {
+      confetti(opts);
+    }
+  } catch (err) {
+    console.warn("Confetti could not run:", err);
+  }
+};
+
 export default function OptikForm({
   examId,
   examTitle,
-  questions,
+  questions = [],
   durationMinutes = STANDARD_DURATION,
   isRealExam = true,
 }: OptikFormProps) {
   const storageKey = `yds-exam-${examId}`;
-  const totalQuestions = questions.length || 80;
+  
+  // Savunmacı dizi doğrulaması — asla undefined/null olamaz
+  const safeQuestions: ExamQuestion[] = useMemo(() => {
+    return Array.isArray(questions) ? questions.filter(Boolean) : [];
+  }, [questions]);
+
+  const totalQuestions = safeQuestions.length || 80;
 
   const [phase, setPhase] = useState<"intro" | "resume" | "running" | "result">("intro");
   const [answers, setAnswers] = useState<Record<number, Choice>>({});
@@ -78,10 +98,10 @@ export default function OptikForm({
     timeSpent: number;
   } | null>(null);
 
-  // Açılışta localStorage kontrolü
+  // Açılışta safeStorage kontrolü (SSR güvenli)
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(storageKey);
+      const raw = safeStorage.get(storageKey);
       if (!raw) return;
       const session: SavedSession = JSON.parse(raw);
 
@@ -105,7 +125,7 @@ export default function OptikForm({
         calculateResults(session.answers || {}, session.startedAt, true);
       }
     } catch {
-      localStorage.removeItem(storageKey);
+      safeStorage.remove(storageKey);
     }
   }, [storageKey, durationMinutes]);
 
@@ -118,7 +138,7 @@ export default function OptikForm({
         startedAt: now,
         finished: false,
       };
-      localStorage.setItem(storageKey, JSON.stringify(freshSession));
+      safeStorage.set(storageKey, JSON.stringify(freshSession));
       setAnswers({});
       setStartedAt(now);
       setSecondsLeft(durationMinutes * 60);
@@ -126,81 +146,12 @@ export default function OptikForm({
     setPhase("running");
   };
 
-  // Zamanlayıcı (Cihaz saatine göre hesaplanır)
-  useEffect(() => {
-    if (phase !== "running") return;
-
-    const interval = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-      const remaining = durationMinutes * 60 - elapsed;
-
-      if (remaining <= 0) {
-        clearInterval(interval);
-        setSecondsLeft(0);
-        calculateResults(answers, startedAt, true);
-        return;
-      }
-
-      setSecondsLeft(remaining);
-
-      // Süre uyarıları
-      if (remaining <= 1800 && !warned30) {
-        setWarned30(true);
-        toast.warning("⏰ Son 30 dakika! Boş soruları gözden geçirin.", { duration: 6000 });
-        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-      }
-      if (remaining <= 600 && !warned10) {
-        setWarned10(true);
-        toast.warning("⏰ Son 10 dakika! Optik formunuzu kontrol edin.", { duration: 6000 });
-        if (navigator.vibrate) navigator.vibrate([150, 50, 150]);
-      }
-      if (remaining <= 300 && !warned5) {
-        setWarned5(true);
-        toast.error("🚨 Son 5 dakika! Süre bitmek üzere!", { duration: 7000 });
-        if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]);
-      }
-      if (remaining <= 60 && !warned1) {
-        setWarned1(true);
-        toast.error("🚨 Son 1 dakika! Otomatik teslim edilecek!", { duration: 8000 });
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [phase, startedAt, answers, durationMinutes, warned30, warned10, warned5, warned1]);
-
-  const selectAnswer = (questionIndex: number, choice: Choice) => {
-    if (phase !== "running") return;
-    const qNum = questionIndex + 1;
-    const updated = {
-      ...answers,
-      [qNum]: answers[qNum] === choice ? undefined : choice,
-    };
-    // Undefined temizliği
-    const cleanAnswers: Record<number, Choice> = {};
-    Object.entries(updated).forEach(([k, v]) => {
-      if (v) cleanAnswers[Number(k)] = v;
-    });
-
-    setAnswers(cleanAnswers);
-
-    // Her tıkta anında localStorage'a kaydet (veri kaybı sıfır)
-    const session: SavedSession = {
-      examId,
-      answers: cleanAnswers,
-      startedAt,
-      finished: false,
-    };
-    localStorage.setItem(storageKey, JSON.stringify(session));
-
-    if (navigator.vibrate) navigator.vibrate(12);
-  };
-
   const calculateResults = useCallback(
     async (currentAnswers: Record<number, Choice>, sessionStart: number, autoSubmit = false) => {
       let correct = 0;
       let wrong = 0;
 
-      questions.forEach((q, idx) => {
+      safeQuestions.forEach((q, idx) => {
         const userChoice = currentAnswers[idx + 1];
         if (userChoice) {
           if (userChoice === q.correct) correct++;
@@ -208,17 +159,18 @@ export default function OptikForm({
         }
       });
 
-      const empty = totalQuestions - correct - wrong;
+      const qTotal = safeQuestions.length || 80;
+      const empty = Math.max(0, qTotal - correct - wrong);
       const net = Math.max(0, correct - wrong / 4);
       // Standart ÖSYM puan karşılığı: 80 soru -> 100 puan (her doğru 1.25 puan)
-      const score = Math.round((correct / totalQuestions) * 100);
+      const score = Math.round((correct / qTotal) * 100);
       const timeSpent = Math.min(durationMinutes * 60, Math.floor((Date.now() - sessionStart) / 1000));
 
       const finalResult = { correct, wrong, empty, net, score, timeSpent };
       setResult(finalResult);
       setPhase("result");
 
-      // Bitmiş olarak localStorage'a yaz
+      // Bitmiş olarak safeStorage'a yaz
       const session: SavedSession = {
         examId,
         answers: currentAnswers,
@@ -227,10 +179,10 @@ export default function OptikForm({
         score,
         net,
       };
-      localStorage.setItem(storageKey, JSON.stringify(session));
+      safeStorage.set(storageKey, JSON.stringify(session));
 
       if (net >= 40 || score >= 60) {
-        confetti({
+        triggerConfetti({
           particleCount: 180,
           spread: 90,
           origin: { y: 0.5 },
@@ -255,78 +207,198 @@ export default function OptikForm({
         console.warn("Sunucuya sınav sonucu iletilemedi, yerel veri korundu:", err);
       }
     },
-    [examId, questions, totalQuestions, durationMinutes, storageKey]
+    [examId, safeQuestions, durationMinutes, storageKey]
   );
 
-  const formatTimer = (totalSeconds: number) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const secs = totalSeconds % 60;
-    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  // Zamanlayıcı (Cihaz saatine göre hesaplanır)
+  useEffect(() => {
+    if (phase !== "running") return;
+
+    const interval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+      const remaining = durationMinutes * 60 - elapsed;
+
+      if (remaining <= 0) {
+        clearInterval(interval);
+        setSecondsLeft(0);
+        calculateResults(answers, startedAt, true);
+        return;
+      }
+
+      setSecondsLeft(remaining);
+
+      // Süre uyarıları
+      if (remaining <= 1800 && !warned30) {
+        setWarned30(true);
+        toast.warning("⏰ Son 30 dakika! Boş soruları gözden geçirin.", { duration: 6000 });
+        if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([100, 50, 100]);
+      }
+      if (remaining <= 600 && !warned10) {
+        setWarned10(true);
+        toast.warning("⏰ Son 10 dakika! Optik formunuzu kontrol edin.", { duration: 6000 });
+        if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([150, 50, 150]);
+      }
+      if (remaining <= 300 && !warned5) {
+        setWarned5(true);
+        toast.error("🚨 Son 5 dakika! Süre bitmek üzere!", { duration: 7000 });
+        if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 200]);
+      }
+      if (remaining <= 60 && !warned1) {
+        setWarned1(true);
+        toast.error("🚨 Son 1 dakika! Otomatik teslim edilecek!", { duration: 8000 });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [phase, startedAt, answers, durationMinutes, warned30, warned10, warned5, warned1, calculateResults]);
+
+  const selectAnswer = (questionIndex: number, choice: Choice) => {
+    if (phase !== "running") return;
+    const qNum = questionIndex + 1;
+    const updated = {
+      ...answers,
+      [qNum]: answers[qNum] === choice ? undefined : choice,
+    };
+    // Undefined temizliği
+    const cleanAnswers: Record<number, Choice> = {};
+    Object.entries(updated).forEach(([k, v]) => {
+      if (v) cleanAnswers[Number(k)] = v;
+    });
+
+    setAnswers(cleanAnswers);
+
+    // Her tıkta anında safeStorage'a kaydet (veri kaybı sıfır)
+    const session: SavedSession = {
+      examId,
+      answers: cleanAnswers,
+      startedAt,
+      finished: false,
+    };
+    safeStorage.set(storageKey, JSON.stringify(session));
+
+    if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(12);
   };
 
-  const answeredCount = Object.values(answers).filter(Boolean).length;
+  const formatTimer = (seconds: number) => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
+
+  const answeredCount = Object.keys(answers).length;
+
+  // ===== EĞER SORULAR YÜKLENMEMİŞSE VEYA BOŞSA: ASLA ÇÖKME, BİLGİ EKRANI GÖSTER =====
+  if (safeQuestions.length === 0) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center p-4">
+        <div className="bg-gradient-to-br from-amber-500/20 via-orange-500/20 to-slate-900 border-2 border-amber-500/40 rounded-3xl p-8 max-w-md text-center shadow-2xl space-y-4 text-white">
+          <div className="w-16 h-16 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mx-auto text-4xl">
+            🚧
+          </div>
+          <h2 className="text-2xl font-black text-amber-300">{examTitle}</h2>
+          <p className="font-semibold text-sm text-white/90">
+            Bu sınavın içeriği hazırlanıyor (0/80 soru yüklendi).
+          </p>
+          <p className="text-xs text-white/70">
+            PDF / Quizlet içe aktarma arayüzünden soruları ekleyebilir veya arşivdeki diğer sınavları çözebilirsiniz.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center pt-3">
+            <Link
+              href="/exams"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-extrabold px-6 py-3 rounded-full text-sm shadow-lg hover:scale-105 transition-transform"
+            >
+              <ArrowLeft className="w-4 h-4" /> Diğer Sınavlara Bak
+            </Link>
+            <Link
+              href="/import"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-3 rounded-full text-sm border border-white/20 transition-colors"
+            >
+              <FileText className="w-4 h-4" /> Soru Yükle
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const currentQIndex = Math.min(Math.max(0, currentQ), safeQuestions.length - 1);
+  const activeQuestion = safeQuestions[currentQIndex];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      {/* ================= GİRİŞ EKRANI ================= */}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* ================= GİRİŞ EKRANI (INTRO) ================= */}
       {phase === "intro" && (
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="max-w-xl mx-auto rounded-3xl p-8 md:p-10 text-center text-white bg-gradient-to-br from-red-950 via-rose-950 to-slate-950 border-2 border-red-500/30 shadow-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-2xl mx-auto card-vibrant p-8 md:p-10 text-center space-y-6"
         >
-          <div className="w-20 h-20 mx-auto rounded-3xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-4xl mb-4 shadow-lg">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-4xl mx-auto shadow-xl shadow-yellow-500/20">
             ⏱️
           </div>
-          <h1 className="text-3xl font-black mb-2 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-red-400">
-            {examTitle}
-          </h1>
-          <p className="text-white/80 text-sm mb-6">
-            ÖSYM Standartlarında Gerçek YDS Simülasyonu
-          </p>
 
-          <div className="bg-black/40 rounded-2xl p-5 mb-8 text-left text-sm space-y-3 border border-white/10">
-            <div className="flex items-center justify-between">
-              <span className="text-white/70">Toplam Soru:</span>
-              <span className="font-bold text-yellow-300">{totalQuestions} Soru</span>
+          <div>
+            <span className="glass-pill text-xs font-bold text-yellow-300 uppercase tracking-wider">
+              {isRealExam ? "ÖSYM Çıkmış Sınav Simülatörü" : "Özgün Deneme Sınavı"}
+            </span>
+            <h1 className="text-2xl md:text-4xl font-black text-white mt-2">
+              {examTitle}
+            </h1>
+            <p className="text-sm text-white/70 mt-2">
+              Gerçek 180 dakika, 80 soru, online optik form ve anlık süre koruması
+            </p>
+          </div>
+
+          {/* Sınav Kuralları */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+            <div className="bg-white/5 rounded-2xl p-3.5 border border-white/10">
+              <span className="text-[11px] text-white/60 block">Süre</span>
+              <strong className="text-sm text-yellow-300">{durationMinutes} Dakika</strong>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-white/70">Resmi Sınav Süresi:</span>
-              <span className="font-bold text-cyan-300">{durationMinutes} Dakika (3 Saat)</span>
+            <div className="bg-white/5 rounded-2xl p-3.5 border border-white/10">
+              <span className="text-[11px] text-white/60 block">Soru Sayısı</span>
+              <strong className="text-sm text-cyan-300">{totalQuestions} Soru</strong>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="text-white/70">Yanlış Götürme:</span>
-              <span className="font-bold text-rose-300">YDS'de 4 yanlış 1 doğruyu GÖTÜRMEZ</span>
+            <div className="bg-white/5 rounded-2xl p-3.5 border border-white/10">
+              <span className="text-[11px] text-white/60 block">Yanlış Götürme</span>
+              <strong className="text-sm text-emerald-300">4 Yanlış 1 Doğru</strong>
             </div>
-            <div className="flex items-center justify-between border-t border-white/10 pt-2">
-              <span className="text-white/70">Veri Güvenliği:</span>
-              <span className="font-bold text-emerald-400">Yenileme ve kapanma korumalı</span>
+            <div className="bg-white/5 rounded-2xl p-3.5 border border-white/10">
+              <span className="text-[11px] text-white/60 block">Veri Güvenliği</span>
+              <strong className="text-sm text-purple-300">Otomatik Kayıt</strong>
+            </div>
+          </div>
+
+          <div className="bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 text-left text-xs text-amber-200 flex items-start gap-3">
+            <AlertTriangle className="w-5 h-5 flex-shrink-0 text-amber-400 mt-0.5" />
+            <div>
+              <strong>Önemli Kural:</strong> Sayfayı yenileseniz veya sekme kapansa bile süre sayacınız cihaz saatinizle senkron çalışmaya devam eder ve cevaplarınız kaybolmaz.
             </div>
           </div>
 
           <button
             onClick={() => startExam(false)}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-slate-950 font-black text-lg shadow-xl hover:scale-105 transition-transform"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 text-white font-black text-lg shadow-xl shadow-pink-500/30 hover:scale-[1.02] transition-transform"
           >
-            🚀 Sınavı Başlat (180 Dakika)
+            🚀 Sınavı ve 180 Dakikalık Sayacı Başlat
           </button>
         </motion.div>
       )}
 
-      {/* ================= DEVAM ET (RESUME) EKRANI ================= */}
+      {/* ================= DEVAM ETME EKRANI (RESUME) ================= */}
       {phase === "resume" && (
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="max-w-xl mx-auto rounded-3xl p-8 text-center text-white bg-gradient-to-br from-amber-950 via-orange-950 to-slate-950 border-2 border-amber-500/40 shadow-2xl"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md mx-auto card-vibrant p-8 text-center"
         >
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-3xl mb-4">
-            ⏸️
+          <div className="w-16 h-16 rounded-2xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-3xl mx-auto mb-4">
+            💾
           </div>
-          <h2 className="text-2xl font-black mb-2 text-yellow-300">
-            Yarım Kalan Sınav Oturumu Bulundu!
-          </h2>
+          <h2 className="text-xl font-black text-white mb-2">Devam Eden Oturum Bulundu!</h2>
           <p className="text-sm text-white/80 mb-6">
             Daha önce bu sınavda {answeredCount} soru işaretlediniz.
           </p>
@@ -349,7 +421,7 @@ export default function OptikForm({
             </button>
             <button
               onClick={() => {
-                localStorage.removeItem(storageKey);
+                safeStorage.remove(storageKey);
                 startExam(false);
               }}
               className="px-6 py-3.5 rounded-2xl bg-white/10 border border-white/20 text-white/80 font-bold hover:bg-white/20"
@@ -402,34 +474,34 @@ export default function OptikForm({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Sol / Orta: Soru Görüntüleme Alanı */}
             <div className="lg:col-span-2 space-y-4">
-              {questions[currentQ] && (
+              {activeQuestion && (
                 <div className="card-vibrant p-6 md:p-8 min-h-[420px] flex flex-col justify-between">
                   <div>
                     {/* Soru Başlığı */}
                     <div className="flex items-center justify-between mb-4">
                       <span className="glass-pill text-xs font-bold text-yellow-300">
-                        Soru {currentQ + 1} / {totalQuestions}
+                        Soru {currentQIndex + 1} / {totalQuestions}
                       </span>
                       <span className="glass-pill text-xs text-cyan-300">
-                        {questions[currentQ].type}
+                        {activeQuestion.type}
                       </span>
                     </div>
 
                     {/* Soru Metni */}
                     <p className="text-base md:text-lg leading-relaxed text-white/95 font-medium mb-8 whitespace-pre-wrap">
-                      {questions[currentQ].text}
+                      {activeQuestion.text}
                     </p>
 
                     {/* Şıklar */}
                     <div className="space-y-3">
-                      {questions[currentQ].options.map((opt, idx) => {
+                      {(Array.isArray(activeQuestion.options) ? activeQuestion.options : []).map((opt, idx) => {
                         const letter = CHOICES[idx];
-                        const isSelected = answers[currentQ + 1] === letter;
+                        const isSelected = answers[currentQIndex + 1] === letter;
 
                         return (
                           <button
-                            key={letter}
-                            onClick={() => selectAnswer(currentQ, letter)}
+                            key={letter || idx}
+                            onClick={() => selectAnswer(currentQIndex, letter)}
                             className={cn(
                               "w-full text-left p-4 rounded-2xl border-2 transition-all flex items-start gap-3.5",
                               isSelected
@@ -460,14 +532,14 @@ export default function OptikForm({
                   <div className="flex items-center justify-between border-t border-white/15 pt-5 mt-6">
                     <button
                       onClick={() => setCurrentQ((q) => Math.max(0, q - 1))}
-                      disabled={currentQ === 0}
+                      disabled={currentQIndex === 0}
                       className="flex items-center gap-1 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-30 text-sm font-bold"
                     >
                       <ChevronLeft className="w-4 h-4" /> Önceki Soru
                     </button>
                     <button
-                      onClick={() => setCurrentQ((q) => Math.min(totalQuestions - 1, q + 1))}
-                      disabled={currentQ === totalQuestions - 1}
+                      onClick={() => setCurrentQ((q) => Math.min(safeQuestions.length - 1, q + 1))}
+                      disabled={currentQIndex >= safeQuestions.length - 1}
                       className="flex items-center gap-1 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-30 text-sm font-bold"
                     >
                       Sonraki Soru <ChevronRight className="w-4 h-4" />
@@ -484,7 +556,7 @@ export default function OptikForm({
                   ONLİNE OPTİK FORM
                 </h3>
                 <p className="text-[11px] text-white/60 font-mono">
-                  80 Soru • 5 Seçenekli Kabarcıklar
+                  {totalQuestions} Soru • 5 Seçenekli Kabarcıklar
                 </p>
               </div>
 
@@ -492,7 +564,7 @@ export default function OptikForm({
               <div className="grid grid-cols-5 gap-y-2.5 gap-x-1 text-xs">
                 {Array.from({ length: totalQuestions }, (_, i) => i + 1).map((qNum) => {
                   const selectedChoice = answers[qNum];
-                  const isCurrent = currentQ + 1 === qNum;
+                  const isCurrent = currentQIndex + 1 === qNum;
 
                   return (
                     <div key={qNum} className="flex flex-col items-center">
@@ -589,13 +661,19 @@ export default function OptikForm({
             <div className="mt-8 flex justify-center gap-3">
               <button
                 onClick={() => {
-                  localStorage.removeItem(storageKey);
+                  safeStorage.remove(storageKey);
                   startExam(false);
                 }}
                 className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-sm font-bold"
               >
                 🔄 Sıfırla ve Tekrar Çöz
               </button>
+              <Link
+                href="/exams"
+                className="px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold"
+              >
+                ← Diğer Sınavlar
+              </Link>
             </div>
           </div>
 
@@ -605,7 +683,7 @@ export default function OptikForm({
               📋 Detaylı Çözüm Mantığı ve Taktik Kodlamaları
             </h3>
 
-            {questions.map((q, idx) => {
+            {safeQuestions.map((q, idx) => {
               const qNum = idx + 1;
               const userPick = answers[qNum];
               const isCorrect = userPick === q.correct;

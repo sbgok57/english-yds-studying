@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { seedQuotes } from "./seed-quotes";
+import { seedWords } from "./seed-words";
 import { GRAMMAR_TOPICS } from "../src/lib/grammar-data";
-import fs from "fs";
-import path from "path";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -13,55 +12,11 @@ async function main() {
   // 1. Seed 500 Quotes
   await seedQuotes();
 
-  // 2. Seed Canonical Vocabulary from Quizlet Pipeline Output
-  const canonicalPath = path.resolve(__dirname, "../src/data/canonical-vocabulary.json");
-  if (fs.existsSync(canonicalPath)) {
-    const raw = fs.readFileSync(canonicalPath, "utf-8");
-    const canonicalData = JSON.parse(raw);
-    console.log(`Loading canonical Quizlet cards from ${canonicalPath}...`);
+  // 2. Seed Full Vocabulary (Canonical + 436 Genuine YDS Words)
+  await seedWords();
 
-    let wordCount = 0;
-    for (const set of canonicalData.sets) {
-      for (const card of set.cards) {
-        await prisma.word.upsert({
-          where: {
-            english_turkish: {
-              english: card.term,
-              turkish: card.meaningTr,
-            },
-          },
-          update: {
-            definitionEn: card.definitionEn,
-            source: set.id,
-            sourceRow: card.sourceRow,
-            integrityHash: card.integrityHash,
-          },
-          create: {
-            id: card.id,
-            english: card.term,
-            turkish: card.meaningTr,
-            definitionEn: card.definitionEn,
-            examples: JSON.stringify([
-              `The team decided to ${card.term} due to unforeseen circumstances.`,
-              `Understanding how to ${card.term} is crucial for YDS success.`,
-            ]),
-            synonyms: JSON.stringify([card.term, "key term"]),
-            level: "B2-YDS",
-            type: set.id.includes("adverbs") ? "zarf" : set.id.includes("phrasal") ? "phrasal verb" : "genel",
-            source: set.id,
-            sourceRow: card.sourceRow,
-            integrityHash: card.integrityHash,
-            approved: true,
-          },
-        });
-        wordCount++;
-      }
-    }
-    console.log(`✅ Seeded ${wordCount} canonical vocabulary cards.`);
-  }
-
-  // 3. Seed Grammar Topics
-  console.log("Seeding 15 Grammar Topics...");
+  // 3. Seed Grammar Topics (All 27 Topics + Aliases)
+  console.log(`Seeding ${GRAMMAR_TOPICS.length} Grammar Topics...`);
   for (const topic of GRAMMAR_TOPICS) {
     await prisma.grammarTopic.upsert({
       where: { slug: topic.slug },
@@ -113,7 +68,7 @@ async function main() {
       });
     }
   }
-  console.log("✅ 15 Grammar topics and practice questions seeded.");
+  console.log(`✅ ${GRAMMAR_TOPICS.length} Grammar topics and practice questions seeded.`);
 
   // 4. Seed Exams (2013 - 2026 Past Exams + 100 Practice Mock Exams)
   console.log("Seeding Exams (2013-2026 + 100 Mock Exams)...");
@@ -157,7 +112,7 @@ async function main() {
   }
   console.log("✅ 28 Real Exams and 100 Mock Exams slots seeded.");
 
-  // 5. Seed Default User
+  // 5. Seed Default User with clean genuine starting data (0 streak, 0 points)
   const passwordHash = await bcrypt.hash("yds123456", 10);
   await prisma.user.upsert({
     where: { email: "ogrenci@ydsmaster.com" },
@@ -167,9 +122,9 @@ async function main() {
       username: "ydskasifi",
       passwordHash,
       avatarId: "astronaut",
-      level: "B1",
-      streak: 7,
-      totalPoints: 1250,
+      level: "A1",
+      streak: 0,
+      totalPoints: 0,
     },
   });
   console.log("✅ Default student account created: ogrenci@ydsmaster.com / yds123456");

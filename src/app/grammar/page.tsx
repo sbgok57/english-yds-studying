@@ -1,38 +1,94 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { BookOpen, Sparkles, ArrowRight, Key, AlertTriangle } from "lucide-react";
+import { BookOpen, Sparkles, ArrowRight, Key, AlertTriangle, Layers } from "lucide-react";
 import { GRAMMAR_TOPICS } from "@/lib/grammar-data";
+import { GRAMMAR_CURRICULUM } from "@/lib/grammar-curriculum";
 import { cn } from "@/lib/utils";
 
+// 27 resmi konuyu sırasıyla getir
+const CURRICULUM_TOPICS = GRAMMAR_CURRICULUM.map((c) => {
+  const fullData = GRAMMAR_TOPICS.find((t) => t.slug === c.slug);
+  return {
+    slug: c.slug,
+    title: c.title,
+    emoji: c.emoji,
+    category: c.category,
+    level: c.level,
+    summary: fullData?.simpleSummary || c.summary,
+    colorTheme: fullData?.colorTheme || "from-indigo-600 to-purple-700",
+    signalWords: fullData?.signalWords || ["YDS", "Grammar", "Taktik"],
+  };
+});
+
+const CATEGORIES = [
+  { id: "all", label: "Tüm Müfredat (27)" },
+  { id: "tenses", label: "12 Tense Zamanlar (12)" },
+  { id: "clauses", label: "Cümlecikler & Bağlaçlar (5)" },
+  { id: "structures", label: "Yapılar & Edatlar (9)" },
+  { id: "advanced", label: "İleri Düzey (1)" },
+];
+
 export default function GrammarPage() {
+  const [activeCat, setActiveCat] = useState("all");
+
+  const filteredTopics = activeCat === "all"
+    ? CURRICULUM_TOPICS
+    : CURRICULUM_TOPICS.filter((t) => t.category === activeCat);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       {/* Üst Banner */}
-      <div className="rounded-3xl p-8 md:p-10 bg-gradient-to-r from-purple-950 via-indigo-950 to-pink-950 border-2 border-purple-500/30 shadow-2xl space-y-3">
+      <div className="rounded-3xl p-8 md:p-10 bg-gradient-to-r from-purple-950 via-indigo-950 to-pink-950 border-2 border-purple-500/30 shadow-2xl space-y-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300">
           <BookOpen className="w-4 h-4" />
-          <span>15 Temel YDS Gramer Konusu • Renk Kodlu Formüller</span>
+          <span>27 Tam YDS Gramer Konusu • 12 Ayrı Tense • İnteraktif Animasyonlar</span>
         </div>
         <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-          YDS Gramerini Formüllerle & Kafada Kodlayarak Çözün
+          YDS Gramerini Formüllerle & Görsel Hafızayla Çözün
         </h1>
         <p className="text-xs md:text-sm text-white/80 max-w-2xl leading-relaxed">
-          A1 seviyesinin anlayacağı sadelikte Türkçe anlatım, renk kodlu zaman çizelgeleri, YDS tuzak uyarıları ve her konu için 100'er soruluk optik test şablonu.
+          A1 seviyesinin anlayacağı sadelikte Türkçe anlatım, interaktif zaman çizelgesi animasyonları (TenseTimeline), YDS tuzak uyarıları ve her konu için 100'er soruluk optik test şablonu.
         </p>
+
+        {/* Kategori Filtresi */}
+        <div className="flex flex-wrap gap-2 pt-2">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCat(cat.id)}
+              className={cn(
+                "px-4 py-2 rounded-full text-xs font-bold transition-all border",
+                activeCat === cat.id
+                  ? "bg-yellow-300 text-slate-950 border-yellow-300 shadow-lg scale-105"
+                  : "bg-white/10 hover:bg-white/20 text-white/80 border-white/10"
+              )}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* 15 Konu Izgarası */}
+      {/* 27 Konu Izgarası */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {GRAMMAR_TOPICS.map((topic, idx) => (
+        {filteredTopics.map((topic, idx) => (
           <div
             key={topic.slug}
-            className="card-vibrant p-6 space-y-4 flex flex-col justify-between hover:border-purple-400/50 group"
+            className="card-vibrant p-6 space-y-4 flex flex-col justify-between hover:border-purple-400/50 group transition-all"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-4xl">{topic.emoji}</span>
-                <span className="glass-pill text-[10px] font-mono text-yellow-300">
-                  Konu #{idx + 1}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="glass-pill text-[10px] text-cyan-300 font-bold">
+                    {topic.level}
+                  </span>
+                  <span className="glass-pill text-[10px] font-mono text-yellow-300">
+                    Konu #{idx + 1}
+                  </span>
+                </div>
               </div>
 
               <h3 className="text-xl font-black text-white group-hover:text-yellow-300 transition-colors">
@@ -40,7 +96,7 @@ export default function GrammarPage() {
               </h3>
 
               <p className="text-xs text-white/75 leading-relaxed bg-black/20 p-3 rounded-2xl border border-white/10">
-                💡 {topic.simpleSummary}
+                💡 {topic.summary}
               </p>
 
               <div className="flex flex-wrap gap-1 pt-1">
@@ -62,7 +118,7 @@ export default function GrammarPage() {
                 topic.colorTheme
               )}
             >
-              <span>Konuyu & 100 Soruyu Aç</span>
+              <span>Konuyu & Animasyonu Aç</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
