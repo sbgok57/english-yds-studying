@@ -1,207 +1,186 @@
 "use client";
 
-import { useState } from "react";
-import { FileSpreadsheet, Sparkles, BookOpen, CheckCircle2, ChevronRight, X } from "lucide-react";
-import TTSPlayer from "@/components/tts/TTSPlayer";
-import { cn } from "@/lib/utils";
+import { useMemo, useState } from "react";
+import { PASSAGES } from "@/lib/data-reading";
+import ReadingQuiz from "@/components/ReadingQuiz";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
-interface ReadingPassage {
-  id: string;
-  title: string;
-  category: string;
-  level: string;
+function HighlightedText({
+  text,
+  glossary,
+}: {
   text: string;
-  vocabularyMap: Record<string, string>;
-  questions: {
-    id: number;
-    prompt: string;
-    sampleAnswer: string;
-    rubricHint: string;
-  }[];
-}
+  glossary: { word: string; tr: string }[];
+}) {
+  const [open, setOpen] = useState<string | null>(null);
 
-const SAMPLE_PASSAGES: ReadingPassage[] = [
-  {
-    id: "neuroplasticity-and-language",
-    title: "Neuroplasticity and Second Language Acquisition",
-    category: "Nörobilim & Dil Edinimi",
-    level: "B2 - YDS Düzeyi",
-    text: `For decades, neuroscientists posited that the adult human brain was an immutable organ, structurally fixed after critical developmental windows in early childhood. However, ground-breaking neuroimaging studies have thoroughly dismantled this rigid doctrine, demonstrating that neuroplasticity persists across the entire human lifespan. 
+  const parts = useMemo(() => {
+    const words = glossary.map((g) => g.word).sort((a, b) => b.length - a.length);
+    const regex = new RegExp(
+      `(${words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+      "gi"
+    );
+    return text.split(regex);
+  }, [text, glossary]);
 
-When adults embark on mastering a new language, cortical networks undergo substantial structural and functional reorganization. Synaptogenesis intensifies in the left temporal lobe, while the corpus callosum exhibits heightened myelination, accelerating inter-hemispheric communication. Far from being a passive memorization task, vocabulary acquisition and grammar synthesis compel the brain to construct novel neural circuits, effectively shielding against premature neurodegenerative decline. Consequently, linguistic immersion serves not merely as a practical communicative tool, but as a robust cognitive safeguard.`,
-    vocabularyMap: {
-      posited: "öne sürdü, varsaydı",
-      immutable: "değişmez, sabit",
-      dismantled: "çürüttü, parçalara ayırdı",
-      doctrine: "öğreti, ilke",
-      neuroplasticity: "beyin esnekliği, sinirsel uyum yeteneği",
-      substantial: "büyük ölçüde, önemli",
-      intensifies: "yoğunlaşır, artar",
-      myelination: "miyelin kılıf oluşumu",
-      compel: "zorlamak, sevk etmek",
-      safeguard: "güvence, koruma kalkanı",
-    },
-    questions: [
-      {
-        id: 1,
-        prompt: "According to the passage, what traditional view regarding the adult human brain was disproven by modern neuroimaging?",
-        sampleAnswer: "Traditional neuroscience viewed the adult brain as an immutable, structurally fixed organ that could not change after childhood; modern studies proved neuroplasticity continues throughout life.",
-        rubricHint: "Cevabınızda 'immutable / structurally fixed' ve 'neuroplasticity persists throughout life' karşıtlığını belirttiniz mi?",
-      },
-      {
-        id: 2,
-        prompt: "Which specific anatomical regions of the brain experience structural transformations during adult language learning?",
-        sampleAnswer: "The left temporal lobe (increased synaptogenesis) and the corpus callosum (heightened myelination).",
-        rubricHint: "Sol temporal lob ve corpus callosum bölgelerine değindiniz mi?",
-      },
-      {
-        id: 3,
-        prompt: "How does second language acquisition contribute to long-term neurological health?",
-        sampleAnswer: "It compels the brain to generate new neural circuits, which acts as a protective shield against early neurodegenerative decline.",
-        rubricHint: "Yeni sinir yolları inşa ederek nörodejeneratif gerilemeye karşı koruma sağladığını açıkladınız mı?",
-      },
-    ],
-  },
-];
-
-export default function ReadingPage() {
-  const [selectedWord, setSelectedWord] = useState<{ word: string; meaning: string } | null>(null);
-  const [revealedAnswers, setRevealedAnswers] = useState<Record<number, boolean>>({});
-
-  const passage = SAMPLE_PASSAGES[0];
-
-  const handleWordClick = (rawWord: string) => {
-    const cleaned = rawWord.toLowerCase().replace(/[^a-zA-Z]/g, "");
-    const meaning = passage.vocabularyMap[cleaned];
-    if (meaning) {
-      setSelectedWord({ word: cleaned, meaning });
-    } else {
-      setSelectedWord({ word: cleaned, meaning: "Sözlükte anlam aramak için çift tıklayın." });
-    }
-  };
-
-  const toggleAnswer = (qId: number) => {
-    setRevealedAnswers((prev) => ({ ...prev, [qId]: !prev[qId] }));
-  };
+  const findDef = (w: string) => glossary.find((g) => g.word.toLowerCase() === w.toLowerCase());
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Üst Başlık */}
-      <div className="rounded-3xl p-8 bg-gradient-to-r from-emerald-950 via-teal-950 to-slate-950 border-2 border-emerald-500/30 shadow-2xl space-y-2">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-xs font-bold text-emerald-300">
-          <FileSpreadsheet className="w-4 h-4" />
-          <span>Reader at Work Tarzı • Açık Uçlu Soru & Sözlük</span>
-        </div>
-        <h1 className="text-3xl md:text-4xl font-black text-white">
-          Akademik Reading & Anında Sözlük Laboratuvarı
-        </h1>
-        <p className="text-xs md:text-sm text-white/70">
-          Metindeki altı çizili veya herhangi bir kelimeye tıklayarak Türkçe karşılığını anında görün.
-        </p>
-      </div>
-
-      {/* Okuma Metni Kartı */}
-      <div className="card-vibrant p-6 md:p-10 space-y-6 relative">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-          <div>
-            <span className="glass-pill text-[10px] text-cyan-300 mr-2">
-              {passage.category}
-            </span>
-            <span className="glass-pill text-[10px] text-yellow-300">
-              {passage.level}
-            </span>
-            <h2 className="text-2xl md:text-3xl font-black text-white mt-2">
-              {passage.title}
-            </h2>
-          </div>
-          <TTSPlayer text={passage.text.slice(0, 300)} size="md" showControls={true} />
-        </div>
-
-        {/* Tıklanabilir Paragraf Metni */}
-        <div className="text-base md:text-lg leading-relaxed text-white/90 font-serif space-y-4">
-          {passage.text.split("\n\n").map((para, pIdx) => (
-            <p key={pIdx}>
-              {para.split(" ").map((word, wIdx) => {
-                const clean = word.toLowerCase().replace(/[^a-zA-Z]/g, "");
-                const isHighlight = Boolean(passage.vocabularyMap[clean]);
-                return (
-                  <span
-                    key={wIdx}
-                    onClick={() => handleWordClick(word)}
-                    className={cn(
-                      "cursor-pointer hover:bg-yellow-400/20 transition-colors rounded px-0.5 inline-block",
-                      isHighlight && "border-b-2 border-cyan-400 font-semibold text-cyan-200"
-                    )}
-                  >
-                    {word}{" "}
-                  </span>
-                );
-              })}
-            </p>
-          ))}
-        </div>
-
-        {/* Anlık Sözlük Popover'ı */}
-        {selectedWord && (
-          <div className="p-4 rounded-2xl bg-slate-900 border-2 border-cyan-400 shadow-2xl flex items-center justify-between gap-3 animate-fade-in">
-            <div>
-              <span className="text-xs font-mono text-cyan-300 uppercase block font-bold">
-                📖 Seçilen Kelime: {selectedWord.word}
-              </span>
-              <p className="text-base font-black text-yellow-300">
-                {selectedWord.meaning}
-              </p>
-            </div>
+    <p className="leading-relaxed text-white/80">
+      {parts.map((p, i) => {
+        const def = findDef(p);
+        if (!def) return <span key={i}>{p}</span>;
+        const isOpen = open === p;
+        return (
+          <span key={i} className="relative inline-block">
             <button
-              onClick={() => setSelectedWord(null)}
-              className="p-1.5 rounded-full hover:bg-white/10 text-white/60"
+              onClick={() => setOpen(isOpen ? null : p)}
+              className={`rounded px-0.5 underline decoration-dotted underline-offset-4 transition-colors ${
+                isOpen ? "bg-amber-400/25 text-amber-200" : "text-cyan-300 hover:bg-cyan-400/15"
+              }`}
             >
-              <X className="w-4 h-4" />
+              {p}
             </button>
-          </div>
-        )}
-      </div>
+            {isOpen && (
+              <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-10 w-max max-w-[240px] rounded-xl bg-slate-800 border border-white/15 px-3 py-1.5 text-xs text-white shadow-xl anim-pop">
+                <b className="text-amber-300">{def.word}</b> → {def.tr}
+              </span>
+            )}
+          </span>
+        );
+      })}
+    </p>
+  );
+}
 
-      {/* 5 Açık Uçlu Soru ve Değerlendirme Rubriği */}
-      <div className="space-y-4">
-        <h3 className="text-2xl font-black text-white flex items-center gap-2">
-          <BookOpen className="w-6 h-6 text-emerald-400" />
-          Metin Kavrama & Kendi Kendini Değerlendirme (Rubrik)
-        </h3>
+export default function ReadingPage() {
+  const [pid, setPid] = useState(0);
+  const [revealed, setRevealed] = useState<Record<number, boolean>>({});
+  const [mode, setMode] = useState<"read" | "quiz">("read");
 
-        {passage.questions.map((q) => (
-          <div key={q.id} className="card-vibrant p-6 space-y-4">
-            <h4 className="text-base font-bold text-white">
-              Soru {q.id}: {q.prompt}
-            </h4>
+  const passage = PASSAGES[pid] || PASSAGES[0];
 
-            <textarea
-              placeholder="Kendi cevabınızı buraya yazın..."
-              className="w-full h-24 p-3.5 rounded-2xl bg-black/40 border border-white/15 text-sm text-white focus:outline-none focus:border-emerald-400"
-            />
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl sm:text-5xl font-black mb-2">
+          🔬 <span className="gradient-text">Reading Lab</span>
+        </h1>
+        <p className="text-white/60">
+          Kanka, okumadan net olmaz! Özgün parçalar · kelimeye tıkla, anında sözlük · havai fişekli mini test
+        </p>
+        <div className="flex justify-center gap-2 mt-5">
+          <button
+            onClick={() => setMode("read")}
+            className={`px-5 py-2.5 rounded-full font-bold text-sm transition-all ${
+              mode === "read"
+                ? "bg-gradient-to-r from-sky-500 to-blue-600"
+                : "border border-white/15 text-white/60 hover:text-white"
+            }`}
+          >
+            📖 Okuma Modu
+          </button>
+          <button
+            onClick={() => setMode("quiz")}
+            className={`px-5 py-2.5 rounded-full font-bold text-sm transition-all ${
+              mode === "quiz"
+                ? "bg-gradient-to-r from-sky-500 to-blue-600"
+                : "border border-white/15 text-white/60 hover:text-white"
+            }`}
+          >
+            🧪 Mini Test (havai fişekli)
+          </button>
+        </div>
+      </header>
 
-            <div className="flex justify-between items-center pt-2">
+      {mode === "quiz" ? (
+        <ErrorBoundary label="Reading mini test">
+          <ReadingQuiz />
+        </ErrorBoundary>
+      ) : (
+        <>
+          {/* Parça seçici */}
+          <div className="flex flex-wrap gap-2 justify-center mb-8">
+            {PASSAGES.map((p, i) => (
               <button
-                onClick={() => toggleAnswer(q.id)}
-                className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-emerald-300 transition-colors"
+                key={p.id}
+                onClick={() => {
+                  setPid(i);
+                  setRevealed({});
+                }}
+                className={`px-4 py-2 rounded-full text-sm font-bold border transition-all ${
+                  pid === i
+                    ? "bg-gradient-to-r from-sky-500 to-blue-600 border-transparent"
+                    : "border-white/15 text-white/60 hover:text-white"
+                }`}
               >
-                {revealedAnswers[q.id] ? "Örnek Cevabı Gizle" : "Örnek Cevabı & Rubriği Gör"}
+                {p.emoji ?? "📄"} {p.title}
               </button>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-[1fr_300px] gap-6">
+            {/* Metin */}
+            <div className="card-vibrant p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <h2 className="text-2xl font-black">{passage.title}</h2>
+                <span className="text-xs font-mono px-2 py-1 rounded-full bg-white/10 text-white/60">
+                  {passage.level}
+                </span>
+                <span className="text-xs font-mono px-2 py-1 rounded-full bg-sky-500/15 text-sky-300">
+                  {passage.topic}
+                </span>
+              </div>
+              <div className="space-y-4">
+                {passage.paragraphs.map((p, i) => (
+                  <HighlightedText key={i} text={p} glossary={passage.glossary} />
+                ))}
+              </div>
+
+              {/* Sorular */}
+              <div className="mt-8 border-t border-white/10 pt-6">
+                <h3 className="font-black mb-4">❓ Kavrama Soruları</h3>
+                <div className="space-y-3">
+                  {passage.questions.map((q, i) => (
+                    <div key={i} className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+                      <p className="text-sm text-white/85 leading-relaxed">
+                        <span className="font-black text-cyan-300 mr-2">{i + 1}.</span>
+                        {q.q}
+                      </p>
+                      {revealed[i] ? (
+                        <p className="mt-3 text-sm text-emerald-200 bg-emerald-500/10 border border-emerald-400/20 rounded-lg p-3 leading-relaxed anim-pop">
+                          ✅ {q.a}
+                        </p>
+                      ) : (
+                        <button
+                          onClick={() => setRevealed((r) => ({ ...r, [i]: true }))}
+                          className="mt-3 text-xs font-bold text-white/50 hover:text-white underline underline-offset-4"
+                        >
+                          Cevabı göster
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {revealedAnswers[q.id] && (
-              <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 space-y-2 text-xs">
-                <p className="text-emerald-200">
-                  <strong>✅ İdeal Akademik Yanıt:</strong> {q.sampleAnswer}
-                </p>
-                <p className="text-white/70 italic border-t border-emerald-500/20 pt-2">
-                  <strong>📋 Değerlendirme Rubriği:</strong> {q.rubricHint}
-                </p>
+            {/* Sözlük */}
+            <aside className="card-vibrant p-5 h-fit lg:sticky lg:top-20">
+              <p className="font-black mb-3">📖 Kelime Sözlüğü</p>
+              <p className="text-xs text-white/40 mb-4">Metinde altı çizili kelimelere tıklayarak da görebilirsin.</p>
+              <div className="space-y-2">
+                {passage.glossary.map((g) => (
+                  <div key={g.word} className="rounded-lg bg-white/[0.04] border border-white/10 px-3 py-2">
+                    <p className="font-mono text-sm font-bold text-cyan-300">{g.word}</p>
+                    <p className="text-xs text-white/60">{g.tr}</p>
+                  </div>
+                ))}
               </div>
-            )}
+            </aside>
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 }

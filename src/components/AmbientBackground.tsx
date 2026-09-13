@@ -3,12 +3,13 @@
 import { useUsage } from "@/lib/store";
 
 const BLOBS = [
-  { color: "#ec4899", size: "46vw", cls: "ambient-1", left: "-6%", top: "-8%" },
-  { color: "#f97316", size: "38vw", cls: "ambient-2", left: "58%", top: "2%" },
-  { color: "#eab308", size: "34vw", cls: "ambient-3", left: "20%", top: "46%" },
-  { color: "#22c55e", size: "40vw", cls: "ambient-2", left: "70%", top: "52%" },
-  { color: "#06b6d4", size: "36vw", cls: "ambient-1", left: "-4%", top: "62%" },
-  { color: "#8b5cf6", size: "42vw", cls: "ambient-3", left: "40%", top: "-10%" },
+  { color: "#ec4899", size: "48vw", cls: "ambient-1", left: "-6%", top: "-8%" },
+  { color: "#f97316", size: "40vw", cls: "ambient-2", left: "58%", top: "2%" },
+  { color: "#eab308", size: "36vw", cls: "ambient-3", left: "20%", top: "44%" },
+  { color: "#22c55e", size: "42vw", cls: "ambient-2", left: "68%", top: "50%" },
+  { color: "#06b6d4", size: "38vw", cls: "ambient-1", left: "-4%", top: "60%" },
+  { color: "#8b5cf6", size: "44vw", cls: "ambient-3", left: "38%", top: "-12%" },
+  { color: "#f43f5e", size: "30vw", cls: "ambient-1", left: "24%", top: "70%" },
 ];
 
 export default function AmbientBackground() {

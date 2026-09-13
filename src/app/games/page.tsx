@@ -1,113 +1,68 @@
-import Link from "next/link";
-import { Sparkles, Gamepad2, ArrowRight, Trophy, Zap, Layers, HelpCircle, Shuffle } from "lucide-react";
-import { cn } from "@/lib/utils";
+"use client";
+
+import { useState } from "react";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import MatchPairs from "@/components/games/MatchPairs";
+import WhackMole from "@/components/games/WhackMole";
+import SpinWheel from "@/components/games/SpinWheel";
+import TrueFalse from "@/components/games/TrueFalse";
+import ListeningGame from "@/components/games/ListeningGame";
 
 const GAMES = [
-  {
-    id: "matching",
-    title: "Resimli 3D Kart Eşleştirme",
-    subtitle: "Memory Pairs 3D",
-    emoji: "🃏",
-    color: "from-violet-600 to-purple-800",
-    description: "İngilizce kelimeler ile Türkçe anlamları 3D çift yüzlü çevirerek hafızanda eşleştir.",
-    type: "Kelime & Görsel Hafıza",
-    popular: true,
-  },
-  {
-    id: "balloon",
-    title: "Balon Patlatma",
-    subtitle: "Balloon Pop Reflex",
-    emoji: "🎈",
-    color: "from-rose-500 to-red-700",
-    description: "Uçuşan renkli balonlar arasından doğru Türkçe anlamı veya gramer yapısını patlat!",
-    type: "Refleks & Kelime",
-    popular: true,
-  },
-  {
-    id: "wheel",
-    title: "Kelime Çarkıfeleği",
-    subtitle: "Spin the Wheel",
-    emoji: "🎡",
-    color: "from-amber-500 to-orange-600",
-    description: "Şans çarkını çevir, çıkan akademik YDS kelimesinin anlamını zihninde canlandır.",
-    type: "Rastgele Pratik",
-    popular: false,
-  },
-  {
-    id: "anagram",
-    title: "Harf Karıştırma (Anagram)",
-    subtitle: "Letter Scramble",
-    emoji: "🔤",
-    color: "from-cyan-500 to-blue-700",
-    description: "Karışık verilmiş harfleri ipuçlarına bakarak doğru YDS kelimesine dönüştür.",
-    type: "Yazım & Aktif Hatırlama",
-    popular: false,
-  },
+  { id: "match", label: "Eşleştirme", emoji: "🧩", desc: "Kelime ↔ anlam hafıza oyunu" },
+  { id: "mole", label: "Köstebek Vur", emoji: "🐹", desc: "Doğru kelimeyi yakala" },
+  { id: "wheel", label: "Çarkıfelek", emoji: "🎡", desc: "Çevir, soru gel, çöz" },
+  { id: "tf", label: "Doğru / Yanlış", emoji: "⚖️", desc: "Gramer mitleri" },
+  { id: "listen", label: "Dinle & Seç", emoji: "🎧", desc: "Kelimeyi duy, anlamı bul" },
 ];
 
-export default function GamesDirectoryPage() {
+export default function GamesPage() {
+  const [tab, setTab] = useState("match");
+
+  const active = GAMES.find((g) => g.id === tab) || GAMES[0];
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
-      {/* Üst Başlık */}
-      <div className="rounded-3xl p-8 md:p-10 bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 border-2 border-purple-500/30 shadow-2xl space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-xs font-bold text-purple-300">
-          <Gamepad2 className="w-4 h-4" />
-          <span>Wordwall Tarzı Eğitici Oyunlar • Görsel Hafıza Odaklı</span>
-        </div>
-        <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-          Oyun Oynayarak YDS Kelimelerini & Gramerini Fethedin
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl sm:text-5xl font-black mb-2">
+          🎮 <span className="gradient-text">Oyun Merkezi</span>
         </h1>
-        <p className="text-xs md:text-sm text-white/80 max-w-2xl leading-relaxed">
-          Ezberlemek sıkıcı olmak zorunda değil! 3D kart eşleştirmeden balon patlatmaya kadar interaktif oyunlarla kelimeleri kalıcı hafızanıza yazın.
+        <p className="text-white/60">
+          Kanka, eğlenerek netleri katla! 5 farklı oyun ile kelime ve gramer pratiği yap.
         </p>
-      </div>
+      </header>
 
-      {/* Oyun Kartları Izgarası */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {GAMES.map((game) => (
-          <div
-            key={game.id}
-            className="card-vibrant p-6 md:p-8 space-y-5 flex flex-col justify-between group hover:border-yellow-400/40 transition-all"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-5xl">{game.emoji}</span>
-                {game.popular && (
-                  <span className="glass-pill text-[10px] text-yellow-300 font-bold flex items-center gap-1">
-                    <Zap className="w-3 h-3 text-yellow-400" /> Çok Oynanan
-                  </span>
-                )}
+      {/* Oyun seçici sekmeler */}
+      <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {GAMES.map((g) => {
+          const isSel = tab === g.id;
+          return (
+            <button
+              key={g.id}
+              onClick={() => setTab(g.id)}
+              className={`px-5 py-3 rounded-2xl font-bold flex items-center gap-2 transition-all ${
+                isSel
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-xl shadow-purple-500/25 scale-105"
+                  : "bg-white/5 hover:bg-white/10 text-white/70 border border-white/10"
+              }`}
+            >
+              <span className="text-xl">{g.emoji}</span>
+              <div className="text-left">
+                <div className="text-sm leading-tight">{g.label}</div>
+                <div className="text-[10px] text-white/50">{g.desc}</div>
               </div>
-
-              <span className="text-xs font-mono uppercase tracking-widest text-cyan-300 font-bold">
-                {game.subtitle}
-              </span>
-              <h3 className="text-2xl font-black text-white group-hover:text-yellow-300 transition-colors mt-0.5">
-                {game.title}
-              </h3>
-              <p className="text-xs md:text-sm text-white/75 mt-2 leading-relaxed">
-                {game.description}
-              </p>
-            </div>
-
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs text-white/60 font-semibold">
-                Tür: <strong className="text-white">{game.type}</strong>
-              </span>
-              <Link
-                href={`/games/${game.id}`}
-                className={cn(
-                  "px-6 py-2.5 rounded-full text-white font-extrabold text-xs shadow-lg hover:scale-105 transition-transform flex items-center gap-1.5 bg-gradient-to-r",
-                  game.color
-                )}
-              >
-                <span>Hemen Oyna</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        ))}
+            </button>
+          );
+        })}
       </div>
+
+      <ErrorBoundary label={active.label}>
+        {tab === "match" && <MatchPairs />}
+        {tab === "mole" && <WhackMole />}
+        {tab === "wheel" && <SpinWheel />}
+        {tab === "tf" && <TrueFalse />}
+        {tab === "listen" && <ListeningGame />}
+      </ErrorBoundary>
     </div>
   );
 }

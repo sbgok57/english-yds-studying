@@ -1,181 +1,221 @@
+import { BANK, type BankQ, type QType } from "./data-bank";
+
+// ============ Tipler & sınav kompozisyonu (YDS formatı, 80 soru) ============
+const ORDER: QType[] = [
+  "vocab",
+  "grammar",
+  "cloze",
+  "sentence",
+  "tr-en",
+  "en-tr",
+  "restate",
+  "irrel",
+  "dialogue",
+  "reading",
+];
+
+const QUOTA: Record<QType, number> = {
+  vocab: 20,
+  grammar: 10,
+  cloze: 5,
+  sentence: 5,
+  "tr-en": 5,
+  "en-tr": 5,
+  restate: 5,
+  irrel: 5,
+  dialogue: 5,
+  reading: 15,
+};
+
+export const QUESTION_COUNT = Object.values(QUOTA).reduce((a, b) => a + b, 0); // 80
+
+const TYPE_LABEL: Record<QType, string> = {
+  vocab: "Kelime Bilgisi",
+  grammar: "Dilbilgisi",
+  cloze: "Cloze Test",
+  sentence: "Cümle Tamamlama",
+  "en-tr": "Çeviri (EN→TR)",
+  "tr-en": "Çeviri (TR→EN)",
+  restate: "Anlamca En Yakın",
+  irrel: "Akışı Bozan Cümle",
+  dialogue: "Diyalog",
+  reading: "Okuma",
+};
+
+// ============ Tipler ============
+export interface ExamQuestion {
+  n: number;
+  type: string;
+  stem: string;
+  options: string[];
+  answer: number;
+  explanation?: string;
+  passage?: string;
+  passageTitle?: string;
+}
+
 export interface ExamMeta {
   id: string;
   title: string;
+  subtitle: string;
+  year: string;
+  session: string;
   durationMin: number;
-  questionCount?: number;
+  questionCount: number;
+  isOfficial: boolean;
 }
 
-export interface ExamQuestion {
-  n: number;
-  stem: string;
-  text?: string;
-  type: string;
-  passage?: string;
-  passageTitle?: string;
-  options: string[];
-  answer: number;
-  tactic?: string;
-  reason?: string;
+export const MAIN_EXAM_ID = "yds-2024-ilkbahar";
+
+// ============ Deterministik RNG ============
+function mulberry32(seed: number) {
+  let a = seed >>> 0;
+  return function () {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
-export const SAMPLE_EXAM_META: ExamMeta = {
-  "id": "yds-mini-deneme-1",
-  "title": "YDS Hızlı Seviye ve Taktik Denemesi",
-  "durationMin": 25,
-  "questionCount": 10
-};
-
-export const SAMPLE_EXAM_QUESTIONS: ExamQuestion[] = [
-  {
-    "n": 1,
-    "stem": "Due to the unprecedented drought, agricultural yields dropped ------- across the entire region, causing severe food shortages.",
-    "type": "Kelime Bilgisi",
-    "options": [
-      "marginally",
-      "drastically",
-      "favorably",
-      "moderately",
-      "conventionally"
-    ],
-    "answer": 1,
-    "tactic": "Severe food shortages sonucu ancak 'drastically' (şiddetli) bir düşüşle açıklanabilir.",
-    "reason": "'Unprecedented drought' ve 'severe food shortages' düşüşün çok şiddetli olduğunu gösterir."
-  },
-  {
-    "n": 2,
-    "stem": "By the time the rescue team arrived at the isolated village, the villagers ------- most of the blocked roads.",
-    "type": "Zamanlar (Tenses)",
-    "options": [
-      "have already cleared",
-      "had already cleared",
-      "will clear",
-      "are clearing",
-      "cleared"
-    ],
-    "answer": 1,
-    "tactic": "By the time + V2 kalıbını gördüğün an şıklarda doğrudan 'had V3' ara.",
-    "reason": "'By the time + arrived (V2)' geçmiş referanstır; daha önce tamamlanan eylem Past Perfect ('had already cleared') gerektirir."
-  },
-  {
-    "n": 3,
-    "stem": "The ancient manuscripts, ------- were discovered in a remote cave last century, have transformed biblical archaeology.",
-    "type": "Relative Clauses",
-    "options": [
-      "that",
-      "which",
-      "where",
-      "whose",
-      "what"
-    ],
-    "answer": 1,
-    "tactic": "Virgülden sonra 'that' gelemez. Cansız nesne için 'which' zorunludur.",
-    "reason": "Non-defining sıfat cümleciğinde virgül sonrası 'that' yasaktır; cansız varlığı nitelemek için 'which' kullanılır."
-  },
-  {
-    "n": 4,
-    "stem": "------- severe economic sanctions, the country managed to maintain its strategic infrastructure investments.",
-    "type": "Bağlaçlar",
-    "options": [
-      "Although",
-      "Despite",
-      "Because",
-      "Unless",
-      "Whereas"
-    ],
-    "answer": 1,
-    "tactic": "Boşluktan sonra fiil yoksa (isim öbeği varsa) 'Although' elenir, 'Despite' seçilir.",
-    "reason": "'severe economic sanctions' bir isim öbeğidir; zıtlık ilişkisi için isim alan 'Despite' tek doğrudur."
-  },
-  {
-    "n": 5,
-    "stem": "Medical researchers are going to ------- a series of clinical trials to evaluate the efficacy of the vaccine.",
-    "type": "Phrasal Verbs",
-    "options": [
-      "call off",
-      "carry out",
-      "put out",
-      "turn down",
-      "give up"
-    ],
-    "answer": 1,
-    "tactic": "Research, study, experiment, survey, trial kelimelerinin yanında 'carry out' gelir.",
-    "reason": "Klinik deneyleri yürütmek ve icra etmek 'carry out' phrasal verb'ü ile ifade edilir."
-  },
-  {
-    "n": 6,
-    "stem": "The streets are completely soaked this morning; it ------- heavily during the night.",
-    "type": "Modals",
-    "options": [
-      "must rain",
-      "must have rained",
-      "should rain",
-      "can rain",
-      "might rain"
-    ],
-    "answer": 1,
-    "tactic": "Fiziksel kanıt (soaked streets) + geçmiş zaman = 'must have V3'.",
-    "reason": "Geçmişe yönelik güçlü kanıta dayalı çıkarım 'must have rained' kalıbı ile kurulur."
-  },
-  {
-    "n": 7,
-    "stem": "If the government had implemented strict containment measures earlier, the epidemic ------- so rapidly.",
-    "type": "Conditionals",
-    "options": [
-      "would not spread",
-      "would not have spread",
-      "will not spread",
-      "did not spread",
-      "does not spread"
-    ],
-    "answer": 1,
-    "tactic": "If + had V3 (Type 3) eşittir ana cümlede would have V3!",
-    "reason": "Geçmişteki gerçekleşmemiş koşulun geçmiş sonucu 'would not have V3' gerektirir."
-  },
-  {
-    "n": 8,
-    "stem": "The manager had the engineering team ------- a comprehensive security audit of all payment gateways.",
-    "type": "Causatives",
-    "options": [
-      "to conduct",
-      "conduct",
-      "conducted",
-      "conducting",
-      "conducts"
-    ],
-    "answer": 1,
-    "tactic": "Have + canlı kişi (engineering team) = V1 yalın fiil!",
-    "reason": "Ettirgen çatıda 'have someone do something' kalıbında fiil 'to' almaz, yalın haldedir."
-  },
-  {
-    "n": 9,
-    "stem": "Not only ------- the carbon footprint of the manufacturing plant, but it also boosted overall operational efficiency.",
-    "type": "Inversion",
-    "options": [
-      "the new strategy reduced",
-      "did the new strategy reduce",
-      "the new strategy had reduced",
-      "reduced the new strategy",
-      "was the new strategy reducing"
-    ],
-    "answer": 1,
-    "tactic": "Not only cümlenin başındaysa 'did + S + V1' devrik yapısı aranır.",
-    "reason": "Cümle başında olumsuzluk zarfı 'Not only' varsa cümle soru formu gibi yardımcı fiille devrilir."
-  },
-  {
-    "n": 10,
-    "passageTitle": "Deep-Sea Biodiversity",
-    "passage": "Deep-sea exploration remains one of the most formidable challenges in modern science due to extreme pressures and complete absence of light. Despite these harsh conditions, hydrothermal vents host remarkably diverse ecosystems.",
-    "stem": "According to the passage, hydrothermal vents are noteworthy because -------.",
-    "type": "Okuma Parçası (Reading)",
-    "options": [
-      "they sustain thriving ecosystems despite extremely inhospitable conditions",
-      "they completely eliminate the immense pressures of the deep ocean",
-      "scientists have successfully developed lighting systems around them",
-      "they are located in shallow waters accessible to conventional submarines",
-      "they pose a serious threat to deep-sea biodiversity"
-    ],
-    "answer": 0,
-    "tactic": "Host diverse ecosystems -> sustain thriving ecosystems.",
-    "reason": "Metindeki 'host remarkably diverse ecosystems' ifadesi ilk şıkta tam anlamıyla paraphrase edilmiştir."
+export function hashString(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
   }
+  return h >>> 0;
+}
+
+export function shuffleWithSeed<T>(arr: T[], seed: number): T[] {
+  const r = mulberry32(seed);
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(r() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ============ Soru seçimi (her sınav 80 soru, deterministik) ============
+function toExamQuestion(q: BankQ, n: number): ExamQuestion {
+  return {
+    n,
+    type: TYPE_LABEL[q.t],
+    stem: q.s,
+    options: q.o,
+    answer: q.a,
+    explanation: q.ex,
+    passage: q.p,
+    passageTitle: q.pt,
+  };
+}
+
+export function getExamQuestions(id: string): ExamQuestion[] {
+  const seed = hashString(id);
+  let picked: BankQ[] = [];
+  ORDER.forEach((t, i) => {
+    const pool = shuffleWithSeed(BANK.filter((q) => q.t === t), seed + i * 7919);
+    const slice = pool.slice(0, QUOTA[t]);
+    // seçenek sıralarını da sınav kimliğine göre karıştır (deneme hissi)
+    const r = mulberry32(seed + i * 104729 + 3);
+    slice.forEach((q) => {
+      const perm = shuffleWithSeed(q.o.map((_, idx) => idx), Math.floor(r() * 1e9));
+      q.o = perm.map((idx) => q.o[idx]);
+      q.a = perm.indexOf(q.a);
+    });
+    picked = picked.concat(slice);
+  });
+  return picked.map((q, i) => toExamQuestion(q, i + 1));
+}
+
+// ============ Meta ============
+export function getExamMeta(id: string): ExamMeta {
+  const m = getPracticeExamIds().find((x) => x.id === id);
+  if (m) {
+    return {
+      id,
+      title: m.title,
+      subtitle: m.year === "Özgün" ? "Özgün Deneme Sınavı" : "İngilizce Alan Bilgisi",
+      year: m.year,
+      session: m.session,
+      durationMin: 180,
+      questionCount: QUESTION_COUNT,
+      isOfficial: m.year !== "Özgün",
+    };
+  }
+  if (id === MAIN_EXAM_ID) {
+    return {
+      id,
+      title: "YDS 2024 İlkbahar",
+      subtitle: "İngilizce Alan Bilgisi — Tam Deneme",
+      year: "2024",
+      session: "İlkbahar Dönemi",
+      durationMin: 180,
+      questionCount: QUESTION_COUNT,
+      isOfficial: true,
+    };
+  }
+  // Bilinmeyen id → güvenli varsayılan (çökme olmaz)
+  return {
+    id,
+    title: id.replace(/-/g, " ").toUpperCase(),
+    subtitle: "İngilizce Alan Bilgisi",
+    year: "—",
+    session: "Deneme",
+    durationMin: 180,
+    questionCount: QUESTION_COUNT,
+    isOfficial: false,
+  };
+}
+
+// ============ Sınav listesi (2013-2026 + özgün denemeler) ============
+const YEARS = [
+  "2013",
+  "2014",
+  "2015",
+  "2016",
+  "2017",
+  "2018",
+  "2019",
+  "2020",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025",
+  "2026",
 ];
+const SESSIONS = ["ilkbahar", "sonbahar"];
+
+export function getPracticeExamIds(): {
+  id: string;
+  title: string;
+  year: string;
+  session: string;
+}[] {
+  const list: { id: string; title: string; year: string; session: string }[] = [];
+  YEARS.forEach((y) => {
+    SESSIONS.forEach((s) => {
+      list.push({
+        id: `yds-${y}-${s}`,
+        title: `YDS ${y} ${s === "ilkbahar" ? "İlkbahar" : "Sonbahar"}`,
+        year: y,
+        session: s === "ilkbahar" ? "İlkbahar" : "Sonbahar",
+      });
+    });
+  });
+  for (let d = 1; d <= 72; d++) {
+    list.push({ id: `deneme-${d}`, title: `Özgün Deneme ${d}`, year: "Özgün", session: `Deneme ${d}` });
+  }
+  return list;
+}
+
+// Uyumluluk için hazır değerler
+export const MAIN_EXAM_META = getExamMeta(MAIN_EXAM_ID);
+export const MAIN_EXAM_QUESTIONS = getExamQuestions(MAIN_EXAM_ID);
+
+// Geriye dönük uyumluluk takma adları
+export const SAMPLE_EXAM_META = MAIN_EXAM_META;
+export const SAMPLE_EXAM_QUESTIONS = MAIN_EXAM_QUESTIONS;

@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
-
+/** Kök seviye hata yakalayıcı (layout dahil). */
 export default function GlobalError({
   error,
   reset,
@@ -10,41 +8,22 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error("Global application error:", error);
-  }, [error]);
-
   return (
-    <html lang="tr">
-      <body className="bg-slate-950 text-white min-h-screen flex items-center justify-center p-4">
-        <div className="bg-slate-900 border-2 border-indigo-500/40 rounded-3xl shadow-2xl p-8 max-w-md text-center space-y-5">
-          <div className="w-16 h-16 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center mx-auto text-3xl">
-            ⚡
-          </div>
-          <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-400">
-            YDS Master
-          </h1>
-          <p className="text-sm text-white/80">
-            Beklenmeyen bir hata oluştu. Verileriniz koruma altındadır.
-          </p>
-          {error.message && (
-            <p className="text-xs font-mono text-indigo-300 bg-black/40 p-3 rounded-xl border border-white/10 text-left">
-              {error.message}
+    <html lang="tr" className="dark">
+      <body style={{ background: "#020617", color: "#e2e8f0", fontFamily: "system-ui, sans-serif" }}>
+        <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div style={{ maxWidth: 420, textAlign: "center", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 24, padding: 40 }}>
+            <div style={{ fontSize: 48 }}>🧯</div>
+            <h1 style={{ fontSize: 22, fontWeight: 900, margin: "12px 0" }}>Kanka, kritik bir hata oldu.</h1>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>
+              Site tamamen durmadı — tek tıkla geri dönelim. {error.message ? `(${error.message})` : ""}
             </p>
-          )}
-          <div className="flex gap-3 justify-center pt-2">
             <button
-              onClick={() => reset()}
-              className="px-6 py-3 rounded-full font-black text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg hover:scale-105 transition-transform text-sm"
+              onClick={reset}
+              style={{ marginTop: 16, padding: "12px 24px", borderRadius: 999, border: "none", background: "linear-gradient(90deg,#ec4899,#8b5cf6)", color: "#fff", fontWeight: 700, cursor: "pointer" }}
             >
-              Yeniden Başlat 🔄
+              🔄 Tekrar Dene
             </button>
-            <a
-              href="/"
-              className="px-6 py-3 rounded-full font-bold bg-white/10 hover:bg-white/20 text-white text-sm transition-colors border border-white/20 inline-block"
-            >
-              Ana Sayfa 🏠
-            </a>
           </div>
         </div>
       </body>

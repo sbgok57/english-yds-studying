@@ -8,16 +8,18 @@ export default function Celebration({
   message,
   sub,
   onDone,
+  short = false,
 }: {
   show: boolean;
   message: string;
   sub?: string;
   onDone: () => void;
+  short?: boolean;
 }) {
   useEffect(() => {
     if (!show) return;
-    launchFireworks(2800);
-    const t = setTimeout(onDone, 3000);
+    launchFireworks(short ? 1200 : 2800);
+    const t = setTimeout(onDone, short ? 1500 : 3000);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
