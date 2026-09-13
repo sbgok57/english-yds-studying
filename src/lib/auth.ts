@@ -25,7 +25,6 @@ let memUsed = false;
 
 function canStore(): boolean {
   try {
-    if (typeof window === "undefined") return false;
     window.localStorage.setItem("__t", "1");
     window.localStorage.removeItem("__t");
     return true;
@@ -35,7 +34,7 @@ function canStore(): boolean {
 }
 
 function readAccounts(): Account[] {
-  if (typeof window === "undefined" || !canStore()) return memAccounts;
+  if (!canStore()) return memAccounts;
   try {
     const raw = window.localStorage.getItem(ACCOUNTS_KEY);
     const list = raw ? (JSON.parse(raw) as Account[]) : [];
@@ -50,7 +49,7 @@ function readAccounts(): Account[] {
 function writeAccounts(list: Account[]) {
   memAccounts = list;
   memUsed = true;
-  if (typeof window !== "undefined" && canStore()) {
+  if (canStore()) {
     try {
       window.localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list));
     } catch {
@@ -60,7 +59,7 @@ function writeAccounts(list: Account[]) {
 }
 
 function readSession(): string | null {
-  if (typeof window === "undefined" || !canStore()) return memSession;
+  if (!canStore()) return memSession;
   try {
     const s = window.localStorage.getItem(SESSION_KEY);
     memSession = s;
@@ -74,7 +73,7 @@ function readSession(): string | null {
 function writeSession(email: string | null) {
   memSession = email;
   memUsed = true;
-  if (typeof window !== "undefined" && canStore()) {
+  if (canStore()) {
     try {
       if (email) window.localStorage.setItem(SESSION_KEY, email);
       else window.localStorage.removeItem(SESSION_KEY);
@@ -105,13 +104,22 @@ async function hash(text: string): Promise<string> {
   return "fb" + h.toString(16);
 }
 
+export interface CodeRequest {
+  ok: boolean;
+  demo: boolean;
+  code?: string;
+  challenge?: string;
+  message: string;
+}
+
 export interface AuthApi {
   account: Account | null;
   busy: boolean;
   error: string;
   notice: string;
   login: (email: string, pass: string) => Promise<boolean>;
-  register: (email: string, name: string, pass: string) => Promise<boolean>;
+  sendCode: (email: string) => Promise<CodeRequest>;
+  register: (email: string, name: string, pass: string, code: string, challenge: string) => Promise<boolean>;
   logout: () => void;
   clearAll: () => void;
   storageOk: boolean;
@@ -157,39 +165,99 @@ export function useAccount(): AuthApi {
     }
   }, []);
 
-  const register = useCallback(async (email: string, name: string, pass: string) => {
+  const sendCode = useCallback(async (email: string): Promise<CodeRequest> => {
     setBusy(true);
     setError("");
     try {
       const e = email.trim().toLowerCase();
-      const n = name.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
-        setError("Geçerli bir e-posta gir kanka (örn. kanka@mail.com).");
-        return false;
+        const msg = "Geçerli bir e-posta gir kanka (örn. kanka@mail.com).";
+        setError(msg);
+        return { ok: false, demo: false, message: msg };
       }
-      if (pass.length < 6) {
-        setError("Şifre en az 6 karakter olsun kanka.");
-        return false;
+      const res = await fetch("/api/auth/send-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: e }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.ok) {
+        setError(data.message || "Kod gönderilemedi kanka.");
+        return { ok: false, demo: false, message: data.message || "Kod gönderilemedi." };
       }
-      if (readAccounts().some((a) => a.email === e)) {
-        setError("Bu e-posta zaten kayıtlı. Giriş yap kanka!");
-        return false;
-      }
-      const acc: Account = {
-        email: e,
-        name: n || "Kanka",
-        passHash: await hash(pass),
-        createdAt: Date.now(),
+      setNotice(data.message);
+      return {
+        ok: true,
+        demo: !!data.demo,
+        code: data.code,
+        challenge: data.challenge,
+        message: data.message,
       };
-      writeAccounts([...readAccounts(), acc]);
-      writeSession(e);
-      setAccount(acc);
-      setNotice(`Kayıt tamam kanka, hoş geldin ${acc.name}! 🎉`);
-      return true;
+    } catch {
+      const msg = "Sunucuya ulaşılamadı kanka. İnternetini kontrol et.";
+      setError(msg);
+      return { ok: false, demo: false, message: msg };
     } finally {
       setBusy(false);
     }
   }, []);
+
+  const register = useCallback(
+    async (email: string, name: string, pass: string, code: string, challenge: string) => {
+      setBusy(true);
+      setError("");
+      try {
+        const e = email.trim().toLowerCase();
+        const n = name.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+          setError("Geçerli bir e-posta gir kanka (örn. kanka@mail.com).");
+          return false;
+        }
+        if (pass.length < 6) {
+          setError("Şifre en az 6 karakter olsun kanka.");
+          return false;
+        }
+        if (!/^\d{6}$/.test(code.trim())) {
+          setError("Doğrulama kodu 6 haneli olmalı kanka.");
+          return false;
+        }
+        if (readAccounts().some((a) => a.email === e)) {
+          setError("Bu e-posta zaten kayıtlı. Giriş yap kanka!");
+          return false;
+        }
+
+        // Sunucu tarafında e-posta doğrulaması
+        const res = await fetch("/api/auth/verify-code", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: e, code: code.trim(), challenge }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          setError(data.message || "Doğrulama başarısız kanka.");
+          return false;
+        }
+
+        const acc: Account = {
+          email: e,
+          name: n || "Kanka",
+          passHash: await hash(pass),
+          createdAt: Date.now(),
+        };
+        writeAccounts([...readAccounts(), acc]);
+        writeSession(e);
+        setAccount(acc);
+        setNotice(`E-posta doğrulandı, kayıt tamam kanka! Hoş geldin ${acc.name}! 🎉`);
+        return true;
+      } catch {
+        setError("Sunucuya ulaşılamadı kanka. İnternetini kontrol et.");
+        return false;
+      } finally {
+        setBusy(false);
+      }
+    },
+    []
+  );
 
   const logout = useCallback(() => {
     writeSession(null);
@@ -204,5 +272,5 @@ export function useAccount(): AuthApi {
     setNotice("Tüm hesaplar silindi.");
   }, []);
 
-  return { account, busy, error, notice, login, register, logout, clearAll, storageOk };
+  return { account, busy, error, notice, login, sendCode, register, logout, clearAll, storageOk };
 }

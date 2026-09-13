@@ -1,76 +1,68 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-const VOICES: Record<string, { female: string; male: string }> = {
-  "en-GB": { female: "en-GB-SoniaNeural", male: "en-GB-RyanNeural" },
-  "en-US": { female: "en-US-JennyNeural", male: "en-US-GuyNeural" },
-  "en-AU": { female: "en-AU-NatashaNeural", male: "en-AU-WilliamNeural" },
-  "en-NZ": { female: "en-NZ-MollyNeural", male: "en-NZ-MitchellNeural" },
-  "en-IN": { female: "en-IN-NeerjaNeural", male: "en-IN-PrabhatNeural" },
-};
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+// Microsoft Edge neural sesleri — 5 aksan × (kadın/erkek) = 10 garantili farklı ses
+const VALID_VOICES = new Set([
+  "en-GB-SoniaNeural", // İngiliz · Kadın
+  "en-GB-RyanNeural", //  İngiliz · Erkek
+  "en-US-JennyNeural", // Amerikan · Kadın
+  "en-US-GuyNeural", //   Amerikan · Erkek
+  "en-AU-NatashaNeural", // Avustralya · Kadın
+  "en-AU-WilliamNeural", // Avustralya · Erkek
+  "en-NZ-MollyNeural", //   Yeni Zelanda · Kadın
+  "en-NZ-MitchellNeural", // Yeni Zelanda · Erkek
+  "en-IN-NeerjaNeural", //  Hint · Kadın
+  "en-IN-PrabhatNeural", // Hint · Erkek
+]);
+
+// Bellek içi önbellek → aynı kelime tekrar tekrar sentezlenmez (CPU + ağ tasarrufu)
+const cache = new Map<string, Buffer>();
+const MAX_CACHE = 300;
+
+async function synthesize(voice: string, text: string): Promise<Buffer> {
+  const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
+  const tts = new MsEdgeTTS();
+  await tts.setMetadata(voice, OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3);
+  const { audioStream } = tts.toStream(text);
+  const chunks: Buffer[] = [];
+  for await (const chunk of audioStream) chunks.push(Buffer.from(chunk));
+  return Buffer.concat(chunks);
+}
 
 export async function GET(req: NextRequest) {
-  const text = req.nextUrl.searchParams.get("text") ?? "";
-  const accent = req.nextUrl.searchParams.get("accent") ?? "en-GB";
-  const gender = (req.nextUrl.searchParams.get("gender") ?? "female") as "female" | "male";
+  const url = new URL(req.url);
+  const voice = url.searchParams.get("voice") || "";
+  const text = (url.searchParams.get("text") || "").slice(0, 300).trim();
 
-  if (!text || text.length > 500) {
-    return NextResponse.json({ error: "Geçersiz metin" }, { status: 400 });
+  if (!VALID_VOICES.has(voice) || !text) {
+    return new Response("geçersiz istek", { status: 400 });
   }
 
-  const voice = VOICES[accent]?.[gender];
-  if (!voice) {
-    return NextResponse.json({ error: "Geçersiz aksan veya ses seçimi" }, { status: 400 });
-  }
+  const key = voice + "\u0000" + text;
+  let buf = cache.get(key);
 
-  const azureKey = process.env.AZURE_SPEECH_KEY;
-  const azureRegion = process.env.AZURE_SPEECH_REGION || "westeurope";
-
-  // Azure anahtarı yapılandırılmamışsa, istemcinin Web Speech API kullanması için 200 dön
-  if (!azureKey || azureKey.trim() === "") {
-    return NextResponse.json({
-      fallbackWebSpeech: true,
-      text,
-      accent,
-      gender,
-      message: "Web Speech API fallback devrede",
-    });
-  }
-
-  try {
-    const res = await fetch(
-      `https://${azureRegion}.tts.speech.microsoft.com/cognitiveservices/v1`,
-      {
-        method: "POST",
-        headers: {
-          "Ocp-Apim-Subscription-Key": azureKey,
-          "Content-Type": "application/ssml+xml",
-          "X-Microsoft-OutputFormat": "audio-24khz-48kbitrate-mono-mp3",
-          "User-Agent": "YDSMasterApp",
-        },
-        body: `<speak version='1.0' xml:lang='${accent}'>
-                 <voice name='${voice}'>${text}</voice>
-               </speak>`,
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error(`Azure Speech API yanıtı: ${res.status}`);
+  if (!buf) {
+    try {
+      buf = await synthesize(voice, text);
+    } catch {
+      return new Response("ses üretilemedi", { status: 502 });
     }
-
-    const audioBuffer = await res.arrayBuffer();
-    return new NextResponse(audioBuffer, {
-      headers: {
-        "Content-Type": "audio/mpeg",
-        "Cache-Control": "public, max-age=31536000, immutable",
-      },
-    });
-  } catch (error) {
-    console.warn("Azure TTS API çağrısı başarısız, Web Speech fallback devreye giriyor:", error);
-    return NextResponse.json({
-      fallbackWebSpeech: true,
-      text,
-      accent,
-      gender,
-    });
+    if (cache.size >= MAX_CACHE) {
+      const keys = [...cache.keys()];
+      for (let i = 0; i < Math.floor(MAX_CACHE / 2); i++) cache.delete(keys[i]);
+    }
+    cache.set(key, buf);
   }
+
+  return new Response(new Uint8Array(buf), {
+    status: 200,
+    headers: {
+      "Content-Type": "audio/mpeg",
+      "Content-Length": String(buf.length),
+      "Cache-Control": "public, max-age=86400",
+    },
+  });
 }
+

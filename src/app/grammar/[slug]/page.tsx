@@ -1,7 +1,10 @@
-import { notFound } from "next/navigation";
 import { GRAMMAR_TOPICS } from "@/lib/data-grammar";
 import GrammarTopicView from "@/components/GrammarTopicView";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import TopicFallback from "@/components/TopicFallback";
+
+// Bilinmeyen slug'lar da sunucuda işlenebilsin → asla 404 olmaz.
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return GRAMMAR_TOPICS.map((t) => ({ slug: t.slug }));
@@ -16,7 +19,17 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 
 export default function GrammarTopicPage({ params }: { params: { slug: string } }) {
   const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
-  if (!topic) notFound();
+  if (!topic) {
+    // 404 yerine dost bir yönlendirme ekranı → kullanıcı asla çıkmaza girmez
+    return (
+      <TopicFallback
+        title="Gramer konusu"
+        slug={params.slug}
+        items={GRAMMAR_TOPICS.map((t) => ({ slug: t.slug, title: t.title, emoji: t.emoji }))}
+        listHref="/grammar"
+      />
+    );
+  }
   return (
     <ErrorBoundary label="Gramer konusu">
       <GrammarTopicView topic={topic} />

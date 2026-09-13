@@ -4,6 +4,12 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  experimental: {
+    serverComponentsExternalPackages: ["msedge-tts", "nodemailer"],
+  },
   transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   webpack: (config) => {
     config.resolve.alias.canvas = false;

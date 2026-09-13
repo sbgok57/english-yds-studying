@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useAccount } from "@/lib/auth";
 import { useUsage } from "@/lib/store";
 import { avatarSvg } from "@/lib/avatars";
@@ -13,12 +13,25 @@ function hashStr(s: string): number {
 }
 
 export default function HesapPage() {
-  const { account, busy, error, notice, login, register, logout, storageOk } = useAccount();
+  const { account, busy, error, notice, login, sendCode, register, logout, storageOk } = useAccount();
   const { usage } = useUsage();
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
+  const [code, setCode] = useState("");
+  const [challenge, setChallenge] = useState("");
+  const [demoCode, setDemoCode] = useState<string | null>(null);
+  const [cooldown, setCooldown] = useState(0);
+  const codeRef = useRef<HTMLInputElement>(null);
+
+  // Tekrar gönder geri sayımı
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setInterval(() => setCooldown((c) => c - 1), 1000);
+    return () => clearInterval(t);
+  }, [cooldown]);
 
   const avatarId = useMemo(() => {
     const base = account ? hashStr(account.email) : hashStr("kanka");
@@ -27,7 +40,28 @@ export default function HesapPage() {
 
   const submit = async () => {
     if (mode === "login") await login(email, pass);
-    else await register(email, name, pass);
+  };
+
+  const requestCode = async () => {
+    const r = await sendCode(email);
+    if (r.ok) {
+      setChallenge(r.challenge || "");
+      setDemoCode(r.demo && r.code ? r.code : null);
+      setStep(2);
+      setCooldown(60);
+      setTimeout(() => codeRef.current?.focus(), 100);
+    }
+  };
+
+  const verifyAndRegister = async () => {
+    await register(email, name, pass, code, challenge);
+  };
+
+  const resetRegister = () => {
+    setStep(1);
+    setCode("");
+    setChallenge("");
+    setDemoCode(null);
   };
 
   return (
@@ -37,7 +71,7 @@ export default function HesapPage() {
           🔑 <span className="gradient-text">Hesabım</span>
         </h1>
         <p className="text-white/60 text-sm">
-          Kanka, e-posta ve şifreyle kişisel hesabını aç. İlerlemen bu hesaba bağlanır!
+          Kanka, e-posta ve şifreyle kişisel hesabını aç. E-postana doğrulama kodu göndeririz!
         </p>
         {!storageOk && (
           <p className="text-xs text-amber-300 mt-2">
@@ -54,6 +88,7 @@ export default function HesapPage() {
           />
           <h2 className="text-2xl font-black">{account.name}</h2>
           <p className="text-sm text-white/50 font-mono">{account.email}</p>
+          <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>
           <p className="text-xs text-white/40 mt-1">
             Üyelik: {new Date(account.createdAt).toLocaleDateString("tr-TR")}
           </p>
@@ -95,20 +130,26 @@ export default function HesapPage() {
           {/* Sekmeler */}
           <div className="flex gap-2 mb-6">
             <button
-              onClick={() => setMode("login")}
+              onClick={() => {
+                setMode("login");
+                resetRegister();
+              }}
               className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all ${
                 mode === "login"
-                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white"
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600"
                   : "border border-white/15 text-white/60"
               }`}
             >
               Giriş Yap
             </button>
             <button
-              onClick={() => setMode("register")}
+              onClick={() => {
+                setMode("register");
+                resetRegister();
+              }}
               className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all ${
                 mode === "register"
-                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white"
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600"
                   : "border border-white/15 text-white/60"
               }`}
             >
@@ -116,59 +157,161 @@ export default function HesapPage() {
             </button>
           </div>
 
-          <div className="space-y-3">
-            {mode === "register" && (
+          {mode === "login" ? (
+            <div className="space-y-3">
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="E-posta adresin"
+                className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
+              />
+              <input
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
+                type="password"
+                placeholder="Şifre"
+                className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
+                onKeyDown={(e) => e.key === "Enter" && submit()}
+              />
+
+              {error && (
+                <p className="text-xs text-rose-300 bg-rose-500/10 border border-rose-400/20 rounded-xl px-3 py-2">
+                  {error}
+                </p>
+              )}
+              {notice && (
+                <p className="text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-400/20 rounded-xl px-3 py-2">
+                  {notice}
+                </p>
+              )}
+
+              <button
+                onClick={submit}
+                disabled={busy}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 font-black hover:scale-[1.02] transition-transform disabled:opacity-50"
+              >
+                {busy ? "Bekle kanka..." : "Giriş Yap →"}
+              </button>
+            </div>
+          ) : step === 1 ? (
+            <div className="space-y-3">
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Adın (örn. Kanka)"
                 className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
               />
-            )}
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="E-posta adresin"
-              className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
-            />
-            <input
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              type="password"
-              placeholder="Şifre (en az 6 karakter)"
-              className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
-              onKeyDown={(e) => e.key === "Enter" && submit()}
-            />
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="E-posta adresin"
+                className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
+              />
+              <input
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
+                type="password"
+                placeholder="Şifre (en az 6 karakter)"
+                className="w-full rounded-full bg-white/5 border border-white/15 px-4 py-3 text-sm focus:outline-none focus:border-cyan-400"
+                onKeyDown={(e) => e.key === "Enter" && requestCode()}
+              />
 
-            {error && (
-              <p className="text-xs text-rose-300 bg-rose-500/10 border border-rose-400/20 rounded-xl px-3 py-2">
-                {error}
-              </p>
-            )}
-            {notice && (
-              <p className="text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-400/20 rounded-xl px-3 py-2">
-                {notice}
-              </p>
-            )}
+              {error && (
+                <p className="text-xs text-rose-300 bg-rose-500/10 border border-rose-400/20 rounded-xl px-3 py-2">
+                  {error}
+                </p>
+              )}
 
-            <button
-              onClick={submit}
-              disabled={busy}
-              className="w-full py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 font-black hover:scale-[1.02] transition-transform disabled:opacity-50 text-white"
-            >
-              {busy ? "Bekle kanka..." : mode === "login" ? "Giriş Yap →" : "Hesap Aç →"}
-            </button>
-
-            <Tip
-              tip="Bu hesap tarayıcına kaydedilir (localStorage). Şifren hash'lenerek saklanır, düz metin tutulmaz. Gerçek çoklu-cihaz senkronu için bir sunucu bağlanabilir."
-              marker
-            >
-              <p className="text-[11px] text-white/40 text-center cursor-help underline decoration-dotted underline-offset-4">
-                ℹ️ Hesap nasıl çalışıyor?
+              <button
+                onClick={requestCode}
+                disabled={busy}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-black hover:scale-[1.02] transition-transform disabled:opacity-50"
+              >
+                {busy ? "Gönderiliyor..." : "📧 Doğrulama Kodu Gönder →"}
+              </button>
+              <p className="text-[11px] text-white/40 text-center">
+                E-postana 6 haneli bir kod gönderilecek. Gelen kutunu (ve spam'i) kontrol et kanka.
               </p>
-            </Tip>
-          </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3 text-center">
+                <p className="text-sm font-bold text-white/80">
+                  📬 Kod gönderildi: <span className="text-cyan-300">{email}</span>
+                </p>
+                <p className="text-[11px] text-white/40 mt-1">E-postandaki 6 haneli kodu aşağıya gir.</p>
+              </div>
+
+              {demoCode && (
+                <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 p-3 text-center">
+                  <p className="text-xs text-amber-200 font-bold mb-1">
+                    🔧 Demo modu (gerçek e-posta ayarı yapılmadı) — kodun:
+                  </p>
+                  <p className="text-2xl font-black tracking-[8px] text-amber-100">{demoCode}</p>
+                </div>
+              )}
+
+              <input
+                ref={codeRef}
+                value={code}
+                onChange={(e) => setCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                inputMode="numeric"
+                placeholder="• • • • • •"
+                className="w-full text-center text-2xl font-black tracking-[10px] rounded-full bg-white/5 border border-white/15 px-4 py-3 focus:outline-none focus:border-cyan-400"
+                onKeyDown={(e) => e.key === "Enter" && verifyAndRegister()}
+              />
+
+              {error && (
+                <p className="text-xs text-rose-300 bg-rose-500/10 border border-rose-400/20 rounded-xl px-3 py-2">
+                  {error}
+                </p>
+              )}
+              {notice && (
+                <p className="text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-400/20 rounded-xl px-3 py-2">
+                  {notice}
+                </p>
+              )}
+
+              <button
+                onClick={verifyAndRegister}
+                disabled={busy || code.length !== 6}
+                className="w-full py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 font-black hover:scale-[1.02] transition-transform disabled:opacity-50"
+              >
+                {busy ? "Doğrulanıyor..." : "✅ Doğrula & Hesabı Aç →"}
+              </button>
+
+              <div className="flex items-center justify-between gap-2">
+                <button
+                  onClick={resetRegister}
+                  className="text-xs text-white/50 hover:text-white font-bold"
+                >
+                  ↩ Geri dön
+                </button>
+                <button
+                  onClick={requestCode}
+                  disabled={busy || cooldown > 0}
+                  className="text-xs text-cyan-300 hover:text-cyan-200 font-bold disabled:opacity-40"
+                >
+                  {cooldown > 0 ? `Kodu tekrar gönder (${cooldown}s)` : "🔁 Kodu tekrar gönder"}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {mode === "register" && (
+            <div className="mt-5">
+              <Tip
+                tip="Kayıt için e-postana 6 haneli doğrulama kodu gider. E-posta gönderimi SMTP/Resend ile yapılandırılana kadar kod ekranda 'demo modu' olarak görünür."
+                marker
+              >
+                <p className="text-[11px] text-white/40 text-center cursor-help underline decoration-dotted underline-offset-4">
+                  ℹ️ Doğrulama nasıl çalışıyor?
+                </p>
+              </Tip>
+            </div>
+          )}
         </div>
       )}
     </div>
