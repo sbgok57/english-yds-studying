@@ -1,0 +1,3499 @@
+export interface VocabWord {
+  word: string;
+  type: string;
+  tr: string;
+  hint: string;
+  example: string;
+  exampleTr: string;
+}
+
+export const WORDS: VocabWord[] = [
+  {
+    "word": "mitigate",
+    "type": "v.",
+    "tr": "hafifletmek, azaltmak, yatıştırmak",
+    "hint": "Eşdizim: mitigate risks, mitigate effects, mitigate damage",
+    "example": "Governments must take immediate action to mitigate the severe consequences of global climate change.",
+    "exampleTr": "Hükümetler küresel iklim değişikliğinin ağır sonuçlarını hafifletmek için derhal harekete geçmelidir."
+  },
+  {
+    "word": "deteriorate",
+    "type": "v.",
+    "tr": "kötüleşmek, bozulmak, fenalaşmak",
+    "hint": "Eşdizim: deteriorate rapidly, condition deteriorates, health deteriorates",
+    "example": "Relations between the two countries began to deteriorate rapidly after the trade dispute.",
+    "exampleTr": "Ticaret anlaşmazlığından sonra iki ülke arasındaki ilişkiler hızla kötüleşmeye başladı."
+  },
+  {
+    "word": "detrimental",
+    "type": "adj.",
+    "tr": "zararlı, hasar veren, hasar verici",
+    "hint": "Eşdizim: detrimental effect, detrimental impact, highly detrimental",
+    "example": "Excessive consumption of sugar has a detrimental effect on cognitive performance.",
+    "exampleTr": "Aşırı şeker tüketiminin bilişsel performans üzerinde zararlı bir etkisi vardır."
+  },
+  {
+    "word": "comprehensive",
+    "type": "adj.",
+    "tr": "kapsamlı, ayrıntılı, geniş çaplı",
+    "hint": "Eşdizim: comprehensive study, comprehensive review, comprehensive guide",
+    "example": "The research team conducted a comprehensive study of renewable energy alternatives in Europe.",
+    "exampleTr": "Araştırma ekibi Avrupa'daki yenilenebilir enerji alternatiflerine ilişkin kapsamlı bir çalışma yürüttü."
+  },
+  {
+    "word": "ubiquitous",
+    "type": "adj.",
+    "tr": "her yerde bulunan, yaygın",
+    "hint": "Eşdizim: ubiquitous presence, become ubiquitous, almost ubiquitous",
+    "example": "Smartphones have become ubiquitous in modern urban life across all generations.",
+    "exampleTr": "Akıllı telefonlar modern şehir yaşamında her nesil arasında her yerde bulunur hale geldi."
+  },
+  {
+    "word": "alleviate",
+    "type": "v.",
+    "tr": "hafifletmek, dindirmek, teskin etmek",
+    "hint": "Eşdizim: alleviate poverty, alleviate symptoms, alleviate pain",
+    "example": "The local charity distributed clean water to alleviate the suffering of drought victims.",
+    "exampleTr": "Yerel yardım kuruluşu kuraklık mağdurlarının acısını hafifletmek için temiz su dağıttı."
+  },
+  {
+    "word": "drastically",
+    "type": "adv.",
+    "tr": "ciddi biçimde, büyük ölçüde, radikal bir şekilde",
+    "hint": "Eşdizim: drop drastically, change drastically, reduce drastically",
+    "example": "Fuel consumption dropped drastically after the introduction of electric transport networks.",
+    "exampleTr": "Elektrikli ulaşım ağlarının devreye girmesinin ardından yakıt tüketimi ciddi biçimde düştü."
+  },
+  {
+    "word": "reluctantly",
+    "type": "adv.",
+    "tr": "isteksizce, gönülsüzce, isteksiz olarak",
+    "hint": "Eşdizim: reluctantly agree, reluctantly accept, reluctantly admit",
+    "example": "The board members reluctantly accepted the new budget cuts due to market pressure.",
+    "exampleTr": "Yönetim kurulu üyeleri piyasa baskısı nedeniyle yeni bütçe kısıntılarını isteksizce kabul etti."
+  },
+  {
+    "word": "scarcely",
+    "type": "adv.",
+    "tr": "neredeyse hiç, hemen hemen hiç, güçbela, ucu ucuna hemen hemen hiç",
+    "hint": "Eşdizim: scarcely any, scarcely able to, scarcely believable",
+    "example": "There was scarcely enough food left in the storage to sustain the expedition through the winter.",
+    "exampleTr": "Depoda keşif heyetini kış boyunca hayatta tutmaya neredeyse yetecek kadar yiyecek kalmamıştı."
+  },
+  {
+    "word": "account for",
+    "type": "phrasal_verb",
+    "tr": "oluşturmak, açıklamak, sorumlu olmak",
+    "hint": "Eşdizim: account for the difference, account for the majority, account for sales",
+    "example": "Renewable resources now account for nearly forty percent of national electricity output.",
+    "exampleTr": "Yenilenebilir kaynaklar artık ulusal elektrik üretiminin yaklaşık yüzde kırkını oluşturuyor."
+  },
+  {
+    "word": "bring about",
+    "type": "phrasal_verb",
+    "tr": "sebep olmak, yol açmak, meydana getirmek",
+    "hint": "Eşdizim: bring about change, bring about reform, bring about collapse",
+    "example": "The technological revolution has brought about fundamental shifts in communication.",
+    "exampleTr": "Teknolojik devrim iletişimde köklü değişikliklere yol açtı."
+  },
+  {
+    "word": "cope with",
+    "type": "phrasal_verb",
+    "tr": "başa çıkmak, üstesinden gelmek",
+    "hint": "Eşdizim: cope with stress, cope with problems, cope with difficulty",
+    "example": "Modern healthcare systems struggle to cope with the demands of an aging population.",
+    "exampleTr": "Modern sağlık sistemleri yaşlanan nüfusun talepleriyle başa çıkmakta zorlanıyor."
+  },
+  {
+    "word": "carry out",
+    "type": "phrasal_verb",
+    "tr": "yürütmek, gerçekleştirmek, uygulamak",
+    "hint": "Eşdizim: carry out research, carry out an experiment, carry out an investigation",
+    "example": "Scientists decided to carry out further laboratory experiments to verify the hypothesis.",
+    "exampleTr": "Bilim insanları hipotezi doğrulamak için daha fazla laboratuvar deneyi yürütmeye karar verdiler."
+  },
+  {
+    "word": "make up for",
+    "type": "phrasal_verb",
+    "tr": "telafi etmek, açığı kapatmak",
+    "hint": "Eşdizim: make up for lost time, make up for the loss, make up for shortcomings",
+    "example": "He studied extra hours during the weekend to make up for the lectures he had missed.",
+    "exampleTr": "Kaçırdığı dersleri telafi etmek için hafta sonu fazladan saatler boyunca çalıştı."
+  },
+  {
+    "word": "discrepancy",
+    "type": "n.",
+    "tr": "tutarsızlık, çelişki, farklılık",
+    "hint": "Eşdizim: glaring discrepancy, discrepancy between, reconcile discrepancy",
+    "example": "Auditors discovered a noticeable discrepancy between the recorded inventory and physical stock.",
+    "exampleTr": "Denetçiler kayıtlı envanter ile fiziki stok arasında dikkat çekici bir tutarsızlık tespit etti."
+  },
+  {
+    "word": "consensus",
+    "type": "n.",
+    "tr": "fikir birliği, uzlaşma, ortak görüş",
+    "hint": "Eşdizim: reach a consensus, general consensus, broad consensus",
+    "example": "There is a broad scientific consensus that human activities contribute to rising global temperatures.",
+    "exampleTr": "İnsan faaliyetlerinin yükselen küresel sıcaklıklara katkıda bulunduğuna dair geniş bir bilimsel fikir birliği vardır."
+  },
+  {
+    "word": "feasibility",
+    "type": "n.",
+    "tr": "uygulanabilirlik, yapılabilirlik, fizibilite",
+    "hint": "Eşdizim: feasibility study, assess feasibility, economic feasibility",
+    "example": "Engineers are evaluating the technical and financial feasibility of the proposed underwater tunnel.",
+    "exampleTr": "Mühendisler önerilen sualtı tünelinin teknik ve mali uygulanabilirliğini değerlendiriyor."
+  },
+  {
+    "word": "inevitably",
+    "type": "adv.",
+    "tr": "kaçınılmaz olarak, ister istemez, kaçınılmaz bir şekilde",
+    "hint": "Eşdizim: lead inevitably to, will inevitably, inevitably result in",
+    "example": "Rapid urbanization inevitably strains existing public transport infrastructure.",
+    "exampleTr": "Hızlı şehirleşme kaçınılmaz olarak mevcut toplu taşıma altyapısını zorlamaktadır."
+  },
+  {
+    "word": "nonetheless",
+    "type": "conjunction",
+    "tr": "yine de, buna rağmen, bununla birlikte",
+    "hint": "Eşdizim: but nonetheless, was difficult, nonetheless",
+    "example": "The climb was perilous and icy; nonetheless, the mountaineers reached the peak before twilight.",
+    "exampleTr": "Tırmanış tehlikeli ve buzlu idi; yine de dağcılar alacakaranlıktan önce zirveye ulaştı."
+  },
+  {
+    "word": "undermine",
+    "type": "v.",
+    "tr": "zayıflatmak, baltalamak, temelini sarsmak",
+    "hint": "Eşdizim: undermine confidence, undermine authority, undermine credibility",
+    "example": "Spreading unsubstantiated rumors can severely undermine public confidence in democratic institutions.",
+    "exampleTr": "Dayanaksız söylentiler yaymak, demokratik kurumlara yönelik kamuoyu güvenini ciddi biçimde baltalayabilir."
+  },
+  {
+    "word": "prevalent",
+    "type": "adj.",
+    "tr": "yaygın, hakim, sık rastlanan, mevcut, olagelen",
+    "hint": "Eşdizim: widely prevalent, prevalent among, prevalent belief",
+    "example": "Waterborne diseases remain prevalent in rural regions lacking sanitation infrastructure.",
+    "exampleTr": "Su kaynaklı hastalıklar, sanitasyon altyapısından yoksun kırsal bölgelerde yaygın olmaya devam ediyor."
+  },
+  {
+    "word": "scrutiny",
+    "type": "n.",
+    "tr": "dikkatli inceleme, yakın denetim, mercek altına alma",
+    "hint": "Eşdizim: close scrutiny, under scrutiny, come under scrutiny",
+    "example": "Financial transactions of multinational corporations are subjected to intense regulatory scrutiny.",
+    "exampleTr": "Çokuluslu şirketlerin mali işlemleri yoğun yasal denetime tabi tutulur."
+  },
+  {
+    "word": "vulnerable",
+    "type": "adj.",
+    "tr": "savunmasız, hassas, kırılgan, korunmasız",
+    "hint": "Eşdizim: vulnerable to disease, vulnerable group, highly vulnerable",
+    "example": "Elderly citizens and newborns are especially vulnerable to respiratory infections in winter.",
+    "exampleTr": "Yaşlı vatandaşlar ve yeni doğanlar kışın solunum yolu enfeksiyonlarına karşı özellikle savunmasızdır."
+  },
+  {
+    "word": "plausible",
+    "type": "adj.",
+    "tr": "makul, akla yatkın, inandırıcı",
+    "hint": "Eşdizim: plausible explanation, plausible scenario, perfectly plausible",
+    "example": "The detective presented a plausible explanation that accounted for all witness statements.",
+    "exampleTr": "Dedektif tüm tanık ifadelerini açıklayan akla yatkın bir açıklama sundu."
+  },
+  {
+    "word": "facilitate",
+    "type": "v.",
+    "tr": "kolaylaştırmak, olanak sağlamak, hafifletmek",
+    "hint": "Eşdizim: facilitate communication, facilitate learning, facilitate growth",
+    "example": "Digital learning platforms facilitate independent study by giving learners instant feedback.",
+    "exampleTr": "Dijital öğrenme platformları, öğrencilere anında geri bildirim sağlayarak bağımsız çalışmayı kolaylaştırır."
+  },
+  {
+    "word": "efficiently",
+    "type": "adv.",
+    "tr": "etkili bir şekilde, yeterli bir şekilde",
+    "hint": "efficiently -> etkili bir şekilde, yeterli bir şekilde",
+    "example": "It is essential to make sure businesses operate efficiently to maximize profits.",
+    "exampleTr": "Örnek: etkili bir şekilde yeterli bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "significantly",
+    "type": "adv.",
+    "tr": "önemli derecede",
+    "hint": "significantly -> önemli derecede",
+    "example": "People who smoke have a significantly greater risk of developing lung cancer than people who don't.",
+    "exampleTr": "Örnek: önemli derecede bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "widely",
+    "type": "adv.",
+    "tr": "yaygın bir şekilde, geniş ölçüde",
+    "hint": "widely -> yaygın bir şekilde, geniş ölçüde",
+    "example": "The books are widely read by adults as well as children.",
+    "exampleTr": "Örnek: yaygın bir şekilde geniş ölçüde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "extremely",
+    "type": "adv.",
+    "tr": "oldukça, son derece",
+    "hint": "extremely -> oldukça, son derece",
+    "example": "Mark knew he had behaved extremely badly.",
+    "exampleTr": "Örnek: oldukça son derece bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "initially",
+    "type": "adv.",
+    "tr": "başlangıçta",
+    "hint": "initially -> başlangıçta",
+    "example": "The damage was far more serious than initially believed.",
+    "exampleTr": "Örnek: başlangıçta bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "absolutely",
+    "type": "adv.",
+    "tr": "kesinlikle, tamamen",
+    "hint": "absolutely -> kesinlikle, tamamen",
+    "example": "It’s absolutely impossible to work with you.",
+    "exampleTr": "Örnek: kesinlikle\ntamamen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "apparently",
+    "type": "adv.",
+    "tr": "görünüşe bakılırsa, görünüşte",
+    "hint": "apparently -> görünüşe bakılırsa, görünüşte",
+    "example": "I heard a rumour that he’s leaving, but apparently it’s not true.",
+    "exampleTr": "Örnek: görünüşe bakılırsa görünüşte bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "briefly",
+    "type": "adv.",
+    "tr": "kısaca",
+    "hint": "briefly -> kısaca",
+    "example": "Let me tell you briefly what happened.",
+    "exampleTr": "Örnek: kısaca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "carefully",
+    "type": "adv.",
+    "tr": "dikkatlice",
+    "hint": "carefully -> dikkatlice",
+    "example": "Drive carefully, it’s raining.",
+    "exampleTr": "Örnek: dikkatlice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "certainly",
+    "type": "adv.",
+    "tr": "elbette, kesinlikle",
+    "hint": "certainly -> elbette, kesinlikle",
+    "example": "She had a friend called Tom, but I don’t know whether he was her boyfriend.",
+    "exampleTr": "Örnek: elbette kesinlikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "equally",
+    "type": "adv.",
+    "tr": "eşit derecede",
+    "hint": "equally -> eşit derecede",
+    "example": "In an ideal world, everyone would get treated equally.",
+    "exampleTr": "Örnek: eşit derecede bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "directly",
+    "type": "adv.",
+    "tr": "doğrudan, direkt olarak",
+    "hint": "directly -> doğrudan, direkt olarak",
+    "example": "The disease is directly linked to poor drainage systems.",
+    "exampleTr": "Örnek: doğrudan direkt olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "clearly",
+    "type": "adv.",
+    "tr": "açıkça, anlaşılır biçimde",
+    "hint": "clearly -> açıkça, anlaşılır biçimde",
+    "example": "The accident was clearly your fault, you should have driven more carefully.",
+    "exampleTr": "Örnek: açıkça anlaşılır biçimde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "essentially",
+    "type": "adv.",
+    "tr": "aslında, aslen, esasen",
+    "hint": "essentially -> aslında, aslen, esasen",
+    "example": "Her new album is essentially a collection of her greatest hits.",
+    "exampleTr": "Örnek: aslında/aslen\nesasen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fairly",
+    "type": "adv.",
+    "tr": "oldukça, adil bir şekilde",
+    "hint": "fairly -> oldukça, adil bir şekilde",
+    "example": "He claimed that he hadn’t been treated fairly by his employers.",
+    "exampleTr": "Örnek: oldukça adil bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "closely",
+    "type": "adv.",
+    "tr": "yakından",
+    "hint": "closely -> yakından",
+    "example": "We are working closely with the detective.\nHe walked into the room, closely folllowed by his sister.",
+    "exampleTr": "Örnek: yakından\n(hem ilişki hem de mesafe için kullanılır) bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "generally",
+    "type": "adv.",
+    "tr": "genellikle",
+    "hint": "generally -> genellikle",
+    "example": "The baby generally wakes up four times during the night.",
+    "exampleTr": "Örnek: genellikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "incredibly",
+    "type": "adv.",
+    "tr": "son derece, inanılması güç",
+    "hint": "incredibly -> son derece, inanılması güç",
+    "example": "This coffee is incredibly smooth and rich.\nWe missed our flight but, incredibly, got there on time.",
+    "exampleTr": "Örnek: son derece inanılması güç bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "mainly",
+    "type": "adv.",
+    "tr": "başlıca",
+    "hint": "mainly -> başlıca",
+    "example": "Cheetahs are mainly found in Africa.",
+    "exampleTr": "Örnek: başlıca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "gradually",
+    "type": "adv.",
+    "tr": "aşama aşama, giderek",
+    "hint": "gradually -> aşama aşama, giderek",
+    "example": "Gradually, she realized that he was cheating on her.",
+    "exampleTr": "Örnek: aşama aşama giderek bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "largely",
+    "type": "adv.",
+    "tr": "büyük ölçüde",
+    "hint": "largely -> büyük ölçüde",
+    "example": "The decision was based largely on consumer feedback.",
+    "exampleTr": "Örnek: büyük ölçüde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "merely",
+    "type": "adv.",
+    "tr": "sadece, ancak, sırf",
+    "hint": "merely -> sadece, ancak, sırf",
+    "example": "I wasn’t complaining, I merely said that I was tired.",
+    "exampleTr": "Örnek: sadece ancak sırf bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "nearly",
+    "type": "adv.",
+    "tr": "yaklaşık, neredeyse",
+    "hint": "nearly -> yaklaşık, neredeyse",
+    "example": "I’ve nearly finished that book you lent me.",
+    "exampleTr": "Örnek: yaklaşık bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "greatly",
+    "type": "adv.",
+    "tr": "büyük oranda, geniş ölçüde",
+    "hint": "greatly -> büyük oranda, geniş ölçüde",
+    "example": "I feel that I have benefited greatly from her wisdom.",
+    "exampleTr": "Örnek: büyük oranda geniş ölçüde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "currently",
+    "type": "adv.",
+    "tr": "şu anda, mevcut durumda",
+    "hint": "currently -> şu anda, mevcut durumda",
+    "example": "The device is currently available only in Japan.",
+    "exampleTr": "Örnek: şu anda mevcut durumda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "necessarily",
+    "type": "adv.",
+    "tr": "illa, ister istemez",
+    "hint": "necessarily -> illa, ister istemez",
+    "example": "Servants necessarily had close contact with their employers.",
+    "exampleTr": "Örnek: illa ister istemez bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "obviously",
+    "type": "adv.",
+    "tr": "açıkçası, besbelli",
+    "hint": "obviously -> açıkçası, besbelli",
+    "example": "They were obviously exhausted after the game.",
+    "exampleTr": "Örnek: açıkçası\nbesbelli bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "notably",
+    "type": "adv.",
+    "tr": "özellikle, bilhassa önemli derecede",
+    "hint": "notably -> özellikle, bilhassa önemli derecede",
+    "example": "The house had many drawbacks, most notably its price.",
+    "exampleTr": "Örnek: özellikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "particularly",
+    "type": "adv.",
+    "tr": "özellikle, bilhassa ayrıntılı olarak",
+    "hint": "particularly -> özellikle, bilhassa ayrıntılı olarak",
+    "example": "They don’t seem particularly worried about the situation.\nThe story focuses particularly on the main character.",
+    "exampleTr": "Örnek: özellikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "highly",
+    "type": "adv.",
+    "tr": "yüksek derecede, çok",
+    "hint": "highly -> yüksek derecede, çok",
+    "example": "She had a highly successful career as a translator.",
+    "exampleTr": "Örnek: yüksek derecede bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "hopefully",
+    "type": "adv.",
+    "tr": "ümit ederim ki, umutla",
+    "hint": "hopefully -> ümit ederim ki, umutla",
+    "example": "Hopefully, we’ll arrive before dark.",
+    "exampleTr": "Örnek: ümit ederim ki umutla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "partly",
+    "type": "adv.",
+    "tr": "kısmen, bir dereceye kadar",
+    "hint": "partly -> kısmen, bir dereceye kadar",
+    "example": "The house is partly owned by her sister.",
+    "exampleTr": "Örnek: kısmen\nbir dereceye kadar bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "heavily",
+    "type": "adv.",
+    "tr": "aşırı derecede, ağır bir şekilde",
+    "hint": "heavily -> aşırı derecede, ağır bir şekilde",
+    "example": "The country depends heavily on foreign aid.",
+    "exampleTr": "Örnek: aşırı derecede ağır bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "occasionally",
+    "type": "adv.",
+    "tr": "ara sıra, arada sırada",
+    "hint": "occasionally -> ara sıra, arada sırada",
+    "example": "This type of allergy can very occasionally be fatal.",
+    "exampleTr": "Örnek: ara sıra\narada sırada bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "precisely",
+    "type": "adv.",
+    "tr": "tam olarak, açık olarak, kesinlikle",
+    "hint": "precisely -> tam olarak, açık olarak, kesinlikle",
+    "example": "The fireworks begin at eight o’clock precisely.",
+    "exampleTr": "Örnek: tam olarak açık olarak kesinlikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "similarly",
+    "type": "adv.",
+    "tr": "aynı şekilde, benzer olarak",
+    "hint": "similarly -> aynı şekilde, benzer olarak",
+    "example": "The United States won most of the track and field events. Similarly, in swimming, the top three places went to Americans.",
+    "exampleTr": "Örnek: aynı şekilde\nbenzer olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "rapidly",
+    "type": "adv.",
+    "tr": "hızlıca",
+    "hint": "rapidly -> hızlıca",
+    "example": "The country’s oil reserves are rapidly declining.",
+    "exampleTr": "Örnek: hızlıca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "truly",
+    "type": "adv.",
+    "tr": "tam anlamıyla, gerçekten",
+    "hint": "truly -> tam anlamıyla, gerçekten",
+    "example": "This is a desperate situation which requires a truly radical solution.",
+    "exampleTr": "Örnek: tam anlamıyla gerçekten bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "suddenly",
+    "type": "adv.",
+    "tr": "aniden, birdenbire",
+    "hint": "suddenly -> aniden, birdenbire",
+    "example": "I was reading a book when suddenly I heard a scream from outside.",
+    "exampleTr": "Örnek: aniden birdenbire bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "relatively",
+    "type": "adv.",
+    "tr": "nispeten, diğerine nazaran",
+    "hint": "relatively -> nispeten, diğerine nazaran",
+    "example": "Online sales are relatively easy to track.",
+    "exampleTr": "Örnek: nispeten diğerine nazaran bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "virtually",
+    "type": "adv.",
+    "tr": "hemen hemen, yaklaşık",
+    "hint": "virtually -> hemen hemen, yaklaşık",
+    "example": "He virtually admitted he was guilty.",
+    "exampleTr": "Örnek: hemen hemen\nyaklaşık bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "ultimately",
+    "type": "adv.",
+    "tr": "nihayetinde, eninde sonunda",
+    "hint": "ultimately -> nihayetinde, eninde sonunda",
+    "example": "A poor diet ultimately lead to illness.",
+    "exampleTr": "Örnek: nihayetinde eninde sonunda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "roughly",
+    "type": "adv.",
+    "tr": "yaklaşık olarak, aşağı yukarı",
+    "hint": "roughly -> yaklaşık olarak, aşağı yukarı",
+    "example": "The town’s population has roughly doubled.",
+    "exampleTr": "Örnek: yaklaşık olarak aşağı yukarı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "commonly",
+    "type": "adv.",
+    "tr": "sık sık, çoğunlukla",
+    "hint": "commonly -> sık sık, çoğunlukla",
+    "example": "Knee injuries are commonly found in football players.",
+    "exampleTr": "Örnek: sık sık bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "randomly",
+    "type": "adv.",
+    "tr": "rastgele, gelişigüzel",
+    "hint": "randomly -> rastgele, gelişigüzel",
+    "example": "The winner is randomly selected by computer.",
+    "exampleTr": "Örnek: rastgele gelişigüzel bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "formerly",
+    "type": "adv.",
+    "tr": "eskiden, önceden",
+    "hint": "formerly -> eskiden, önceden",
+    "example": "The European Union was formerly called the European Community.",
+    "exampleTr": "Örnek: eskiden önceden bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "adversely",
+    "type": "adv.",
+    "tr": "olumsuz şekilde, tersine",
+    "hint": "adversely -> olumsuz şekilde, tersine",
+    "example": "A lot of companies have been adversely affected by the recession.",
+    "exampleTr": "Örnek: olumsuz şekilde\ntersine bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "solely",
+    "type": "adv.",
+    "tr": "sadece, yalnızca",
+    "hint": "solely -> sadece, yalnızca",
+    "example": "He is solely in charge of the operation.",
+    "exampleTr": "Örnek: sadece\nyalnızca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "permanently",
+    "type": "adv.",
+    "tr": "kalıcı bir şekilde, daimi olarak",
+    "hint": "permanently -> kalıcı bir şekilde, daimi olarak",
+    "example": "The stroke left his right side permanently damaged.",
+    "exampleTr": "Örnek: kalıcı bir şekilde daimi olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "conversely",
+    "type": "adv.",
+    "tr": "aksine, diğer taraftan, buna karşılık",
+    "hint": "conversely -> aksine, diğer taraftan, buna karşılık",
+    "example": "I thought that it would rain; conversely, it was sunny.",
+    "exampleTr": "Örnek: aksine\ndiğer taraftan/buna karşılık bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "dramatically",
+    "type": "adv.",
+    "tr": "çarpıcı bir şekilde, önemli ölçüde",
+    "hint": "dramatically -> çarpıcı bir şekilde, önemli ölçüde",
+    "example": "Her health has improved dramatically since she started on this new diet.",
+    "exampleTr": "Örnek: çarpıcı bir şekilde önemli ölçüde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "remarkably",
+    "type": "adv.",
+    "tr": "dikkate değer şekilde, önemli derecede",
+    "hint": "remarkably -> dikkate değer şekilde, önemli derecede",
+    "example": "Remarkably, he wasn’t hurt in the crash.",
+    "exampleTr": "Örnek: dikkate değer şekilde önemli derecede bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "profoundly",
+    "type": "adv.",
+    "tr": "derinlemesine, kökten son derece",
+    "hint": "profoundly -> derinlemesine, kökten son derece",
+    "example": "Society has changed profoundly over the last 40 years.",
+    "exampleTr": "Örnek: derinlemesine bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "vaguely",
+    "type": "adv.",
+    "tr": "belirsiz bir şekilde",
+    "hint": "vaguely -> belirsiz bir şekilde",
+    "example": "I vaguely remembered having met him before.",
+    "exampleTr": "Örnek: belirsiz bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "consequently",
+    "type": "adv.",
+    "tr": "sonuç olarak",
+    "hint": "consequently -> sonuç olarak",
+    "example": "He is always bad-tempered, and consequently doesn’t have many friends.",
+    "exampleTr": "Örnek: sonuç olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "densely",
+    "type": "adv.",
+    "tr": "yoğun olarak, yoğun bir şekilde",
+    "hint": "densely -> yoğun olarak, yoğun bir şekilde",
+    "example": "England was once a densely wooded country.",
+    "exampleTr": "Örnek: yoğun olarak yoğun bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "distinctly",
+    "type": "adv.",
+    "tr": "belirgin biçimde, açıkça farklı olarak",
+    "hint": "distinctly -> belirgin biçimde, açıkça farklı olarak",
+    "example": "I began to feel distinctly disturbed.",
+    "exampleTr": "Örnek: belirgin biçimde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "chiefly",
+    "type": "adv.",
+    "tr": "başlıca",
+    "hint": "chiefly -> başlıca",
+    "example": "The city chiefly attracts upmarket tourists.",
+    "exampleTr": "Örnek: başlıca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fortunately",
+    "type": "adv.",
+    "tr": "şans eseri, neyse ki",
+    "hint": "fortunately -> şans eseri, neyse ki",
+    "example": "I was late, but fortunately, the lesson hadn’t started.",
+    "exampleTr": "Örnek: şans eseri neyse ki bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "lately",
+    "type": "adv.",
+    "tr": "son zamanlarda",
+    "hint": "lately -> son zamanlarda",
+    "example": "Have you seen her lately?",
+    "exampleTr": "Örnek: son zamanlarda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "abruptly",
+    "type": "adv.",
+    "tr": "ansızın, birdenbire",
+    "hint": "abruptly -> ansızın, birdenbire",
+    "example": "The call ended abruptly.",
+    "exampleTr": "Örnek: ansızın birdenbire bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "indefinitely",
+    "type": "adv.",
+    "tr": "belirsiz olarak süresiz olarak",
+    "hint": "indefinitely -> belirsiz olarak süresiz olarak",
+    "example": "The negotiations have been postponed indefinitely.",
+    "exampleTr": "Örnek: belirsiz olarak süresiz olasak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "sufficiently",
+    "type": "adv.",
+    "tr": "yeteri kadar, yeterli miktarda",
+    "hint": "sufficiently -> yeteri kadar, yeterli miktarda",
+    "example": "The following day she felt sufficiently well to go to work.",
+    "exampleTr": "Örnek: yeteri kadar yeterli miktarda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "casually",
+    "type": "adv.",
+    "tr": "gelişigüzel bir biçimde günlük, sıradan",
+    "hint": "casually -> gelişigüzel bir biçimde günlük, sıradan",
+    "example": "He glanced casually out of the window.",
+    "exampleTr": "Örnek: gelişigüzel bir biçimde günlük bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "abundantly",
+    "type": "adv.",
+    "tr": "bol bol, fazlasıyla",
+    "hint": "abundantly -> bol bol, fazlasıyla",
+    "example": "Calcium is found most abundantly in milk.",
+    "exampleTr": "Örnek: bol bol bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "repeatedly",
+    "type": "adv.",
+    "tr": "tekrar tekrar",
+    "hint": "repeatedly -> tekrar tekrar",
+    "example": "Your mother called you repeatedly, why didn’t you pick up the phone?",
+    "exampleTr": "Örnek: tekrar tekrar bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "severely",
+    "type": "adv.",
+    "tr": "ciddi olarak, ağır biçimde",
+    "hint": "severely -> ciddi olarak, ağır biçimde",
+    "example": "Several people were severely injured in the accident.",
+    "exampleTr": "Örnek: ciddi olarak ağır biçimde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "accurately",
+    "type": "adv.",
+    "tr": "kesin, tam olarak doğru olarak",
+    "hint": "accurately -> kesin, tam olarak doğru olarak",
+    "example": "The adverb \"Accurately\" is commonly tested in academic reading passages.",
+    "exampleTr": "\"Accurately\" zarfı akademik YDS metinlerinde sıklıkla karşımıza çıkar."
+  },
+  {
+    "word": "voluntarily",
+    "type": "adv.",
+    "tr": "gönüllü olarak, kendi isteğiyle",
+    "hint": "voluntarily -> gönüllü olarak, kendi isteğiyle",
+    "example": "She went voluntarily to the police to explain what she had done.",
+    "exampleTr": "Örnek: gönüllü olarak kendi isteğiyle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "tightly",
+    "type": "adv.",
+    "tr": "sıkı olarak",
+    "hint": "tightly -> sıkı olarak",
+    "example": "Her eyes were tightly closed.",
+    "exampleTr": "Örnek: sıkı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "continually",
+    "type": "adv.",
+    "tr": "devamlı, durmadan",
+    "hint": "continually -> devamlı, durmadan",
+    "example": "New products are continually being developed.",
+    "exampleTr": "Örnek: devamlı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "effortlessly",
+    "type": "adv.",
+    "tr": "çaba harcamadan",
+    "hint": "effortlessly -> çaba harcamadan",
+    "example": "She got used to her new dorm effortlessly.",
+    "exampleTr": "Örnek: çaba harcamadan bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "intentionally",
+    "type": "adv.",
+    "tr": "kasıtlı olarak, bile bile",
+    "hint": "intentionally -> kasıtlı olarak, bile bile",
+    "example": "I didn’t ignore her intentionally, I just didn’t recognize her.",
+    "exampleTr": "Örnek: kasıtlı olarak bile bile bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "inconsiderately",
+    "type": "adv.",
+    "tr": "düşüncesizce başkalarının düşüncelerini, umursamadan",
+    "hint": "inconsiderately -> düşüncesizce başkalarının düşüncelerini, umursamadan",
+    "example": "People often drive carelessly and inconsiderately.",
+    "exampleTr": "Örnek: düşüncesizce başkalarının düşüncelerini\numursamadan bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "selectively",
+    "type": "adv.",
+    "tr": "seçerek, titizlikle",
+    "hint": "selectively -> seçerek, titizlikle",
+    "example": "They selectively removed trees that were diseased.",
+    "exampleTr": "Örnek: seçerek bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "confidentially",
+    "type": "adv.",
+    "tr": "sır olarak, gizlice",
+    "hint": "confidentially -> sır olarak, gizlice",
+    "example": "All information supplied must be treated confidentially.",
+    "exampleTr": "Örnek: sır olarak gizlice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "exceedingly",
+    "type": "adv.",
+    "tr": "fazlasıyla, çok",
+    "hint": "exceedingly -> fazlasıyla, çok",
+    "example": "The team played exceedingly well.",
+    "exampleTr": "Örnek: fazlasıyla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "plainly",
+    "type": "adv.",
+    "tr": "açıkça, sade bir şekilde",
+    "hint": "plainly -> açıkça, sade bir şekilde",
+    "example": "Every footstep could be painly heard. a plainly furnished room",
+    "exampleTr": "Örnek: açıkça sade bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "urgently",
+    "type": "adv.",
+    "tr": "acilen",
+    "hint": "urgently -> acilen",
+    "example": "I need to speak to her urgently.",
+    "exampleTr": "Örnek: acilen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "superficially",
+    "type": "adv.",
+    "tr": "yüzeysel, üstünkörü",
+    "hint": "superficially -> yüzeysel, üstünkörü",
+    "example": "The arguments were superficially discussed.",
+    "exampleTr": "Örnek: yüzeysel bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "desperately",
+    "type": "adv.",
+    "tr": "aşırı, umutsuzca",
+    "hint": "desperately -> aşırı, umutsuzca",
+    "example": "They fought desperately for their lives.",
+    "exampleTr": "Örnek: aşırı\numutsuzca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "excessively",
+    "type": "adv.",
+    "tr": "aşırı şekilde, haddinden fazla",
+    "hint": "excessively -> aşırı şekilde, haddinden fazla",
+    "example": "The music was excessively loud, so I couldn’t sleep.",
+    "exampleTr": "Örnek: aşırı şekilde\nhaddinden fazla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "uniquely",
+    "type": "adv.",
+    "tr": "eşsiz olarak",
+    "hint": "uniquely -> eşsiz olarak",
+    "example": "She was a uniquely gifted teacher.",
+    "exampleTr": "Örnek: eşsiz olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "tremendously",
+    "type": "adv.",
+    "tr": "son derece, olağanüstü düzeyde",
+    "hint": "tremendously -> son derece, olağanüstü düzeyde",
+    "example": "Our water resources are tremendously important.",
+    "exampleTr": "Örnek: son derece olağanüstü düzeyde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "enormously",
+    "type": "adv.",
+    "tr": "çokça, pek çok",
+    "hint": "enormously -> çokça, pek çok",
+    "example": "He worked enormously hard on the project.",
+    "exampleTr": "Örnek: çokça bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "adequately",
+    "type": "adv.",
+    "tr": "yeterli olarak",
+    "hint": "adequately -> yeterli olarak",
+    "example": "We have not invested adequately in the public health capacity of developing countries.",
+    "exampleTr": "Örnek: yeterli olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fluently",
+    "type": "adv.",
+    "tr": "akıcı bir şekilde",
+    "hint": "fluently -> akıcı bir şekilde",
+    "example": "I’d like to speak French fluently.",
+    "exampleTr": "Örnek: akıcı bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "kindly",
+    "type": "adv.",
+    "tr": "nazikçe, kibarca",
+    "hint": "kindly -> nazikçe, kibarca",
+    "example": "She has very kindly offered to help.",
+    "exampleTr": "Örnek: nazikçe bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "potentially",
+    "type": "adv.",
+    "tr": "imkan dahilinde, potansiyel olarak",
+    "hint": "potentially -> imkan dahilinde, potansiyel olarak",
+    "example": "Hepatitis is a potentially fatal disease.",
+    "exampleTr": "Örnek: imkan dahilinde potansiyel olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "appropriately",
+    "type": "adv.",
+    "tr": "uygun bir şekilde",
+    "hint": "appropriately -> uygun bir şekilde",
+    "example": "She didn’t dress appropriately for the wedding.",
+    "exampleTr": "Örnek: uygun bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "conveniently",
+    "type": "adv.",
+    "tr": "rahatlıkla, kolayca",
+    "hint": "conveniently -> rahatlıkla, kolayca",
+    "example": "The report can be conveniently divided into three sections.",
+    "exampleTr": "Örnek: rahatlıkla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "traditionally",
+    "type": "adv.",
+    "tr": "geleneksel olarak",
+    "hint": "traditionally -> geleneksel olarak",
+    "example": "The festival is traditionally held in May.",
+    "exampleTr": "Örnek: geleneksel olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "promptly",
+    "type": "adv.",
+    "tr": "derhal, acilen tam zamanında",
+    "hint": "promptly -> derhal, acilen tam zamanında",
+    "example": "I try to answer readers’ letters as promptly as I can.",
+    "exampleTr": "Örnek: derhal bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "firmly",
+    "type": "adv.",
+    "tr": "sıkı bir şekilde, kesin olarak",
+    "hint": "firmly -> sıkı bir şekilde, kesin olarak",
+    "example": "He shook my hand firmly.",
+    "exampleTr": "Örnek: sıkı bir şekilde kesin olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "instantly",
+    "type": "adv.",
+    "tr": "hemen, anında birden",
+    "hint": "instantly -> hemen, anında birden",
+    "example": "Her voice is instantly recognizable.",
+    "exampleTr": "Örnek: hemen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "inadequately",
+    "type": "adv.",
+    "tr": "yarım yamalak, yetersiz bir şekilde",
+    "hint": "inadequately -> yarım yamalak, yetersiz bir şekilde",
+    "example": "Staff were inadequately trained and failed to carry out their duties.",
+    "exampleTr": "Örnek: yarım yamalak yetersiz bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "safely",
+    "type": "adv.",
+    "tr": "güvenli bir şekilde",
+    "hint": "safely -> güvenli bir şekilde",
+    "example": "Drive safely, don’t take any risks!",
+    "exampleTr": "Örnek: güvenli bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "reliably",
+    "type": "adv.",
+    "tr": "hatasız, eksiksiz, güvenilir",
+    "hint": "reliably -> hatasız, eksiksiz, güvenilir",
+    "example": "I’m reliably informed that you’ve been talking about resigning from the company.",
+    "exampleTr": "Örnek: hatasız bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "socially",
+    "type": "adv.",
+    "tr": "sosyal açıdan",
+    "hint": "socially -> sosyal açıdan",
+    "example": "Divorce is becoming more socially accepted.",
+    "exampleTr": "Örnek: sosyal açıdan bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "consistently",
+    "type": "adv.",
+    "tr": "sürekli olarak",
+    "hint": "consistently -> sürekli olarak",
+    "example": "The president has consistently denied the rumours.",
+    "exampleTr": "Örnek: sürekli olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "immensely",
+    "type": "adv.",
+    "tr": "son derece, çok fazla",
+    "hint": "immensely -> son derece, çok fazla",
+    "example": "He was immensely popular in his day.",
+    "exampleTr": "Örnek: son derece bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "arguably",
+    "type": "adv.",
+    "tr": "tartışmaya açık bir şekilde",
+    "hint": "arguably -> tartışmaya açık bir şekilde",
+    "example": "He is arguably the world’s best football player.",
+    "exampleTr": "Örnek: tartışmaya açık bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "legally",
+    "type": "adv.",
+    "tr": "hukuken, yasal olarak",
+    "hint": "legally -> hukuken, yasal olarak",
+    "example": "Children under 16 are not legally allowed to buy cigarattes.",
+    "exampleTr": "Örnek: hukuken bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "conclusively",
+    "type": "adv.",
+    "tr": "kesin olarak",
+    "hint": "conclusively -> kesin olarak",
+    "example": "The story had been conclusively debunked.",
+    "exampleTr": "Örnek: kesin olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "doubtfully",
+    "type": "adv.",
+    "tr": "tereddütle, kuşkuyla",
+    "hint": "doubtfully -> tereddütle, kuşkuyla",
+    "example": "“Are you telling me the truth?” she asked doubtfully.",
+    "exampleTr": "Örnek: tereddütle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "violently",
+    "type": "adv.",
+    "tr": "şiddetle, kuvvetle",
+    "hint": "violently -> şiddetle, kuvvetle",
+    "example": "He claimed to have been violently assaulted while in detention.",
+    "exampleTr": "Örnek: şiddetle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "cautiously",
+    "type": "adv.",
+    "tr": "dikkatlice, temkinli",
+    "hint": "cautiously -> dikkatlice, temkinli",
+    "example": "She moved slowly and cautiously along the dark rocky path.",
+    "exampleTr": "Örnek: dikkatlice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "suitably",
+    "type": "adv.",
+    "tr": "uygun bir şekilde",
+    "hint": "suitably -> uygun bir şekilde",
+    "example": "He was afraid he might not have behaved suitably.",
+    "exampleTr": "Örnek: uygun bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "abnormally",
+    "type": "adv.",
+    "tr": "anormal bir şekilde",
+    "hint": "abnormally -> anormal bir şekilde",
+    "example": "The success rate was abnormally low.",
+    "exampleTr": "Örnek: anormal bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "brutally",
+    "type": "adv.",
+    "tr": "vahşice, hunharca",
+    "hint": "brutally -> vahşice, hunharca",
+    "example": "The old lady had been brutally attacked.",
+    "exampleTr": "Örnek: vahşice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "decisively",
+    "type": "adv.",
+    "tr": "kati surette, kararlı bir biçimde",
+    "hint": "decisively -> kati surette, kararlı bir biçimde",
+    "example": "My bet is that he will desicively win the next election.",
+    "exampleTr": "Örnek: kati surette bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "favourably",
+    "type": "adv.",
+    "tr": "tercihen, daha iyisi, uygun olarak",
+    "hint": "favourably -> tercihen, daha iyisi, uygun olarak",
+    "example": "Our products compare favourably with all the leading brands.",
+    "exampleTr": "Örnek: tercihen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "evenly",
+    "type": "adv.",
+    "tr": "aynı oranda, tarafsızca eşit olarak",
+    "hint": "evenly -> aynı oranda, tarafsızca eşit olarak",
+    "example": "Divide the mixture evenly between the two pans.",
+    "exampleTr": "Örnek: aynı oranda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "inclusively",
+    "type": "adv.",
+    "tr": "kapsamlı bir şekilde",
+    "hint": "inclusively -> kapsamlı bir şekilde",
+    "example": "The contracts are prepared very inclusively by the law department of the publishers.",
+    "exampleTr": "Örnek: kapsamlı bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "indifferently",
+    "type": "adv.",
+    "tr": "kayıtsızca, ilgisizce",
+    "hint": "indifferently -> kayıtsızca, ilgisizce",
+    "example": "“You can try,” said Harry indifferently.",
+    "exampleTr": "Örnek: kayıtsızca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "mutually",
+    "type": "adv.",
+    "tr": "karşılıklı olarak",
+    "hint": "mutually -> karşılıklı olarak",
+    "example": "Can we find a mutually convenient time to meet?",
+    "exampleTr": "Örnek: karşılıklı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "sensitively",
+    "type": "adv.",
+    "tr": "duyarlı, hassas bir şekilde",
+    "hint": "sensitively -> duyarlı, hassas bir şekilde",
+    "example": "She worried that she might have reacted too sensitively.",
+    "exampleTr": "Örnek: duyarlı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "attentively",
+    "type": "adv.",
+    "tr": "dikkatlice",
+    "hint": "attentively -> dikkatlice",
+    "example": "The children listened attentively to the story.",
+    "exampleTr": "Örnek: dikkatlice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "successively",
+    "type": "adv.",
+    "tr": "art arda, sıra ile",
+    "hint": "successively -> art arda, sıra ile",
+    "example": "This concept has been applied successively to painting and architecture.",
+    "exampleTr": "Örnek: art arda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "flexibly",
+    "type": "adv.",
+    "tr": "esnek bir şekilde, değişken",
+    "hint": "flexibly -> esnek bir şekilde, değişken",
+    "example": "Managers must respond flexibly to new developments in business.",
+    "exampleTr": "Örnek: esnek bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "recklessly",
+    "type": "adv.",
+    "tr": "düşünmeden, çekinmeden",
+    "hint": "recklessly -> düşünmeden, çekinmeden",
+    "example": "After the accident, he admitted driving recklessly.",
+    "exampleTr": "Örnek: düşünmeden bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "plausibly",
+    "type": "adv.",
+    "tr": "makul bir biçimde",
+    "hint": "plausibly -> makul bir biçimde",
+    "example": "He argued very plausibly that the claims were true.",
+    "exampleTr": "Örnek: makul bir biçimde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "coincidentally",
+    "type": "adv.",
+    "tr": "tesadüfen, şans eseri",
+    "hint": "coincidentally -> tesadüfen, şans eseri",
+    "example": "Coincidentally, they had both studied in Los Angeles.",
+    "exampleTr": "Örnek: tesadüfen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "distantly",
+    "type": "adv.",
+    "tr": "mesafeli, soğuk bir şekilde",
+    "hint": "distantly -> mesafeli, soğuk bir şekilde",
+    "example": "She spoke to me distantly.",
+    "exampleTr": "Örnek: mesafeli bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "externally",
+    "type": "adv.",
+    "tr": "dıştan, harici olarak",
+    "hint": "externally -> dıştan, harici olarak",
+    "example": "The university has many externally funded research projects.",
+    "exampleTr": "Örnek: dıştan bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "ingeniously",
+    "type": "adv.",
+    "tr": "ustalıkla",
+    "hint": "ingeniously -> ustalıkla",
+    "example": "Rooms ingeniously designed to withstand the most devastating earthquakes.",
+    "exampleTr": "Örnek: ustalıkla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "offensively",
+    "type": "adv.",
+    "tr": "saldırganca, kırıcı bir şekilde",
+    "hint": "offensively -> saldırganca, kırıcı bir şekilde",
+    "example": "He later apologized for speaking offensively about her.",
+    "exampleTr": "Örnek: saldırganca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "painfully",
+    "type": "adv.",
+    "tr": "acı verici abartılı",
+    "hint": "painfully -> acı verici abartılı",
+    "example": "He banged his pinky finger painfully.",
+    "exampleTr": "Örnek: acı verici abartılı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "conditionally",
+    "type": "adv.",
+    "tr": "bir şarta bağlı olarak",
+    "hint": "conditionally -> bir şarta bağlı olarak",
+    "example": "The offer was made conditionally.",
+    "exampleTr": "Örnek: bir şarta bağlı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "relevantly",
+    "type": "adv.",
+    "tr": "yararlı bir şekilde, ilgili bir şekilde",
+    "hint": "relevantly -> yararlı bir şekilde, ilgili bir şekilde",
+    "example": "The applicant has experience in teaching and, more relevantly, in industry.",
+    "exampleTr": "Örnek: yararlı bir şekilde ilgili bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "compulsively",
+    "type": "adv.",
+    "tr": "zorlayıcı olarak, zorunlu",
+    "hint": "compulsively -> zorlayıcı olarak, zorunlu",
+    "example": "I constantly counted calories and exercised compulsively.",
+    "exampleTr": "Örnek: zorlayıcı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "suspiciously",
+    "type": "adv.",
+    "tr": "kuşkuyla, şüpheyle",
+    "hint": "suspiciously -> kuşkuyla, şüpheyle",
+    "example": "He was arrested after behaving suspiciously.",
+    "exampleTr": "Örnek: kuşkuyla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "entirely",
+    "type": "adv.",
+    "tr": "tümüyle, büsbütün",
+    "hint": "entirely -> tümüyle, büsbütün",
+    "example": "The traffic seemed to consist entirely of black cabs.",
+    "exampleTr": "Örnek: tümüyle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "primarily",
+    "type": "adv.",
+    "tr": "öncelikle, ilk olarak",
+    "hint": "primarily -> öncelikle, ilk olarak",
+    "example": "The problem is not primarily a financial one.",
+    "exampleTr": "Örnek: öncelikle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "rarely",
+    "type": "adv.",
+    "tr": "nadiren, ender olarak",
+    "hint": "rarely -> nadiren, ender olarak",
+    "example": "I rarely have time to readthe newspaper.",
+    "exampleTr": "Örnek: nadiren bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "vividly",
+    "type": "adv.",
+    "tr": "belirgin bir şekilde, açıkça algılanabilir bir şekilde",
+    "hint": "vividly -> belirgin bir şekilde, açıkça algılanabilir bir şekilde",
+    "example": "I vividly remember my first day at school.",
+    "exampleTr": "Örnek: belirgin bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "divisively",
+    "type": "adv.",
+    "tr": "bölücü, ara bozucu olarak",
+    "hint": "divisively -> bölücü, ara bozucu olarak",
+    "example": "The Institute must be seen as bringing groups of people together, not as acting divisively.",
+    "exampleTr": "Örnek: bölücü bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "allegedly",
+    "type": "adv.",
+    "tr": "iddiaya göre, söylentilere göre",
+    "hint": "allegedly -> iddiaya göre, söylentilere göre",
+    "example": "He was arrested for allegedly stealing a car.",
+    "exampleTr": "Örnek: iddiaya göre söylentilere göre bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "deficiently",
+    "type": "adv.",
+    "tr": "eksik şekilde",
+    "hint": "deficiently -> eksik şekilde",
+    "example": "The system was deficiently designed and implemented.",
+    "exampleTr": "Örnek: eksik şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "politely",
+    "type": "adv.",
+    "tr": "kibarca, nazikçe",
+    "hint": "politely -> kibarca, nazikçe",
+    "example": "He told them politely to leave him in peace.",
+    "exampleTr": "Örnek: kibarca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "frankly",
+    "type": "adv.",
+    "tr": "açıkçası, açıkça",
+    "hint": "frankly -> açıkçası, açıkça",
+    "example": "She spoke very frankly about her experiences.",
+    "exampleTr": "Örnek: açıkçası bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "deliberately",
+    "type": "adv.",
+    "tr": "kasten, bilerek",
+    "hint": "deliberately -> kasten, bilerek",
+    "example": "I think she says these things deliberately to annoy me.",
+    "exampleTr": "Örnek: kasten bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "preciously",
+    "type": "adv.",
+    "tr": "ender olarak, değerli bir biçimde",
+    "hint": "preciously -> ender olarak, değerli bir biçimde",
+    "example": "Thank you for treating me preciously.",
+    "exampleTr": "Örnek: ender olarak değerli bir biçimde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "eventually",
+    "type": "adv.",
+    "tr": "eninde sonunda",
+    "hint": "eventually -> eninde sonunda",
+    "example": "After a long search, they eventually found the missing papers.",
+    "exampleTr": "Örnek: eninde sonunda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "sincerely",
+    "type": "adv.",
+    "tr": "samimi olarak candan, içtenlikle",
+    "hint": "sincerely -> samimi olarak candan, içtenlikle",
+    "example": "I sincerely believe that this is the right decision.",
+    "exampleTr": "Örnek: samimi olarak candan bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "annually",
+    "type": "adv.",
+    "tr": "her yıl, yılda bir",
+    "hint": "annually -> her yıl, yılda bir",
+    "example": "The exhibition is held annually.",
+    "exampleTr": "Örnek: her yıl bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "privately",
+    "type": "adv.",
+    "tr": "özel olarak",
+    "hint": "privately -> özel olarak",
+    "example": "Can we speak privately?",
+    "exampleTr": "Örnek: özel olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "formally",
+    "type": "adv.",
+    "tr": "resmi olarak",
+    "hint": "formally -> resmi olarak",
+    "example": "The accounts were formally approved by the board.",
+    "exampleTr": "Örnek: resmi olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "ineffectively",
+    "type": "adv.",
+    "tr": "başarısız bir şekilde etkisiz, sonuçsuz olarak",
+    "hint": "ineffectively -> başarısız bir şekilde etkisiz, sonuçsuz olarak",
+    "example": "The government is dealing ineffectively with these economic problems.",
+    "exampleTr": "Örnek: başarısız bir şekilde etkisiz bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "incomparably",
+    "type": "adv.",
+    "tr": "benzersiz, kıyaslanamaz bir biçimde",
+    "hint": "incomparably -> benzersiz, kıyaslanamaz bir biçimde",
+    "example": "Her latest book is incomparably better than her earlier ones.",
+    "exampleTr": "Örnek: benzersiz bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "hospitably",
+    "type": "adv.",
+    "tr": "misafirperver olarak",
+    "hint": "hospitably -> misafirperver olarak",
+    "example": "She welcomed us hospitably.",
+    "exampleTr": "Örnek: misafirperver olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "sarcastically",
+    "type": "adv.",
+    "tr": "alaycı bir şekilde",
+    "hint": "sarcastically -> alaycı bir şekilde",
+    "example": "‘John can’t come.’ ‘What a shame,’ my sister said sarcastically.",
+    "exampleTr": "Örnek: alaycı bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "seriously",
+    "type": "adv.",
+    "tr": "ciddi bir şekilde",
+    "hint": "seriously -> ciddi bir şekilde",
+    "example": "You are not seriously thinking of going, are you?",
+    "exampleTr": "Örnek: ciddi bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "alternatively",
+    "type": "adv.",
+    "tr": "alternatif olarak",
+    "hint": "alternatively -> alternatif olarak",
+    "example": "Mix two tablespoons of sugar, or alternatively honey, into the mixture.",
+    "exampleTr": "Örnek: alternatif olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "consecutively",
+    "type": "adv.",
+    "tr": "ardışık olarak, peş peşe",
+    "hint": "consecutively -> ardışık olarak, peş peşe",
+    "example": "The plays will be performed consecutively and will last eight hours.",
+    "exampleTr": "Örnek: ardışık olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "anxiously",
+    "type": "adv.",
+    "tr": "endişeyle",
+    "hint": "anxiously -> endişeyle",
+    "example": "Residents are anxiously awaiting a decision.",
+    "exampleTr": "Örnek: endişeyle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "broadly",
+    "type": "adv.",
+    "tr": "genişçe, kapsamlı bir biçimde",
+    "hint": "broadly -> genişçe, kapsamlı bir biçimde",
+    "example": "Broadly speaking, there are five artistic categories within the Western tradition.",
+    "exampleTr": "Örnek: genişçe bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "vehemently",
+    "type": "adv.",
+    "tr": "hararetli bir şekilde",
+    "hint": "vehemently -> hararetli bir şekilde",
+    "example": "The president has vehemently denied having an affair.",
+    "exampleTr": "Örnek: hararetli bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "acutely",
+    "type": "adv.",
+    "tr": "keskin, güçlü bir şekilde yoğun bir şekilde",
+    "hint": "acutely -> keskin, güçlü bir şekilde yoğun bir şekilde",
+    "example": "I’m acutely aware of the difficulties we face.",
+    "exampleTr": "Örnek: keskin/güçlü bir şekilde yoğun bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "assertively",
+    "type": "adv.",
+    "tr": "güçlü, özgüvenli bir şekilde",
+    "hint": "assertively -> güçlü, özgüvenli bir şekilde",
+    "example": "We should not be afraid to assertively condemn such actions.",
+    "exampleTr": "Örnek: güçlü/özgüvenli bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "dependently",
+    "type": "adv.",
+    "tr": "başka bir duruma bağlı olarak",
+    "hint": "dependently -> başka bir duruma bağlı olarak",
+    "example": "A relationship with someone arises dependently on many causes.",
+    "exampleTr": "Örnek: başka bir duruma bağlı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "protectively",
+    "type": "adv.",
+    "tr": "koruyucu bir şekilde",
+    "hint": "protectively -> koruyucu bir şekilde",
+    "example": "He put an arm around her shoulder protectively.",
+    "exampleTr": "Örnek: koruyucu bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "progressively",
+    "type": "adv.",
+    "tr": "devamlı olarak, artan bir şekilde",
+    "hint": "progressively -> devamlı olarak, artan bir şekilde",
+    "example": "My eyesight has got progressively worse over the years.",
+    "exampleTr": "Örnek: devamlı olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "unfairly",
+    "type": "adv.",
+    "tr": "haksızca, adaletsiz bir biçimde",
+    "hint": "unfairly -> haksızca, adaletsiz bir biçimde",
+    "example": "They claim the police treat minorities unfairly.",
+    "exampleTr": "Örnek: haksızca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "comfortably",
+    "type": "adv.",
+    "tr": "rahat bir şekilde",
+    "hint": "comfortably -> rahat bir şekilde",
+    "example": "All the rooms were comfortably furnished.",
+    "exampleTr": "Örnek: rahat bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "ambiguously",
+    "type": "adv.",
+    "tr": "muğlak, belirsiz olarak",
+    "hint": "ambiguously -> muğlak, belirsiz olarak",
+    "example": "The novel ends ambiguously, so I’m not sure what happened.",
+    "exampleTr": "Örnek: muğlak/belirsiz olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "briskly",
+    "type": "adv.",
+    "tr": "istenilen hızda, hareketli bir şekilde",
+    "hint": "briskly -> istenilen hızda, hareketli bir şekilde",
+    "example": "She walked briskly over to the phone and answered it.",
+    "exampleTr": "Örnek: istenilen hızda bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "covertly",
+    "type": "adv.",
+    "tr": "gizlice, el altından",
+    "hint": "covertly -> gizlice, el altından",
+    "example": "Terrorists have been operating covertly in London.",
+    "exampleTr": "Örnek: gizlice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "flawlessly",
+    "type": "adv.",
+    "tr": "kusursuz bir şekilde",
+    "hint": "flawlessly -> kusursuz bir şekilde",
+    "example": "This is an action film that is very well crafted and flawlessly executed.",
+    "exampleTr": "Örnek: kusursuz bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "hastily",
+    "type": "adv.",
+    "tr": "acilen, apar topar",
+    "hint": "hastily -> acilen, apar topar",
+    "example": "Some thought the government acted too hastily.",
+    "exampleTr": "Örnek: acilen bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "savagely",
+    "type": "adv.",
+    "tr": "vahşice",
+    "hint": "savagely -> vahşice",
+    "example": "The man had been savagely beaten.",
+    "exampleTr": "Örnek: vahşice bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "tenderly",
+    "type": "adv.",
+    "tr": "kibarca, nazikçe",
+    "hint": "tenderly -> kibarca, nazikçe",
+    "example": "He tenderly nursed the patient back to health.",
+    "exampleTr": "Örnek: kibarca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "meticulously",
+    "type": "adv.",
+    "tr": "özenle, titizlikle",
+    "hint": "meticulously -> özenle, titizlikle",
+    "example": "The entire project was meticulously planned.",
+    "exampleTr": "Örnek: özenle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "vainly",
+    "type": "adv.",
+    "tr": "boşuna, boş yere",
+    "hint": "vainly -> boşuna, boş yere",
+    "example": "He shouted after them, vainly trying to attract their attention.",
+    "exampleTr": "Örnek: boşuna bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "delicately",
+    "type": "adv.",
+    "tr": "dikkatle, incelikle, büyük bir özenle",
+    "hint": "delicately -> dikkatle, incelikle, büyük bir özenle",
+    "example": "Some goods needs to be handled delicately.",
+    "exampleTr": "Örnek: dikkatle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "passionately",
+    "type": "adv.",
+    "tr": "tutkuyla",
+    "hint": "passionately -> tutkuyla",
+    "example": "They are all passionately interested in environmental issues.",
+    "exampleTr": "Örnek: tutkuyla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "loosely",
+    "type": "adv.",
+    "tr": "gevşek bir şekilde",
+    "hint": "loosely -> gevşek bir şekilde",
+    "example": "The parcel had only been loosely wrapped, and the paper had come off.",
+    "exampleTr": "Örnek: gevşek bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fiercely",
+    "type": "adv.",
+    "tr": "güçlü, korkutucu bir şekilde",
+    "hint": "fiercely -> güçlü, korkutucu bir şekilde",
+    "example": "They remain fiercely opposed to outside intervention.",
+    "exampleTr": "Örnek: güçlü bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "readily",
+    "type": "adv.",
+    "tr": "kolaylıkla, rahatlıkla, hemen anında",
+    "hint": "readily -> kolaylıkla, rahatlıkla, hemen anında",
+    "example": "All ingredients are readily available from your local store.",
+    "exampleTr": "Örnek: kolaylıkla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "rigidly",
+    "type": "adv.",
+    "tr": "sıkı sıkıya, sert bir şekilde",
+    "hint": "rigidly -> sıkı sıkıya, sert bir şekilde",
+    "example": "The speed limit must be rigidly enforced.",
+    "exampleTr": "Örnek: sıkı sıkıya bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "eagerly",
+    "type": "adv.",
+    "tr": "hevesle",
+    "hint": "eagerly -> hevesle",
+    "example": "They eagerly accepted my offer of hospitality.",
+    "exampleTr": "Örnek: hevesle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "endlessly",
+    "type": "adv.",
+    "tr": "sonsuz bir şekilde, durmadan",
+    "hint": "endlessly -> sonsuz bir şekilde, durmadan",
+    "example": "She talks endlessly about her problems.",
+    "exampleTr": "Örnek: sonsuz bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "quickly",
+    "type": "adv.",
+    "tr": "hızlıca",
+    "hint": "quickly -> hızlıca",
+    "example": "The disease spreads quickly.",
+    "exampleTr": "Örnek: hızlıca bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "securely",
+    "type": "adv.",
+    "tr": "emniyetli, güvenli",
+    "hint": "securely -> emniyetli, güvenli",
+    "example": "She locked the door securely behind her.",
+    "exampleTr": "Örnek: emniyetli bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "diligently",
+    "type": "adv.",
+    "tr": "özenli bir şekilde",
+    "hint": "diligently -> özenli bir şekilde",
+    "example": "They worked diligently on the task they had been given.",
+    "exampleTr": "Örnek: özenli bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "dreadfully",
+    "type": "adv.",
+    "tr": "korkunç bir şekilde, çok fena",
+    "hint": "dreadfully -> korkunç bir şekilde, çok fena",
+    "example": "She behaved dreadfully.",
+    "exampleTr": "Örnek: korkunç bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "irreversibly",
+    "type": "adv.",
+    "tr": "geri dönülemez bir şekilde",
+    "hint": "irreversibly -> geri dönülemez bir şekilde",
+    "example": "The monument has already been irreversibly damaged.",
+    "exampleTr": "Örnek: geri dönülemez bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "possibly",
+    "type": "adv.",
+    "tr": "muhtemel, mümkün",
+    "hint": "possibly -> muhtemel, mümkün",
+    "example": "He may possibly decide not to come, in which case there is no problem.",
+    "exampleTr": "Örnek: muhtemel bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "steadily",
+    "type": "adv.",
+    "tr": "istikrarlı bir şekilde, sabit",
+    "hint": "steadily -> istikrarlı bir şekilde, sabit",
+    "example": "Prices have risen steadily.",
+    "exampleTr": "Örnek: istikrarlı bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "hesitantly",
+    "type": "adv.",
+    "tr": "tereddütle",
+    "hint": "hesitantly -> tereddütle",
+    "example": "She approached the teacher hesitantly.",
+    "exampleTr": "Örnek: tereddütle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fruitfully",
+    "type": "adv.",
+    "tr": "yararlı, kazançlı bir şekilde",
+    "hint": "fruitfully -> yararlı, kazançlı bir şekilde",
+    "example": "The research tools can be fruitfully. applied to other questions.",
+    "exampleTr": "Örnek: yararlı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "persistently",
+    "type": "adv.",
+    "tr": "sürekli, ısrarla, devamlı olarak",
+    "hint": "persistently -> sürekli, ısrarla, devamlı olarak",
+    "example": "Schools with persistently low test scores would get an extra funding.",
+    "exampleTr": "Örnek: sürekli bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "willingly",
+    "type": "adv.",
+    "tr": "seve seve, isteyerek",
+    "hint": "willingly -> seve seve, isteyerek",
+    "example": "I would willingly help you if I weren’t going away tomorrow.",
+    "exampleTr": "Örnek: seve seve bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "comprehensively",
+    "type": "adv.",
+    "tr": "kapsamlı, ayrıntılı bir şekilde",
+    "hint": "comprehensively -> kapsamlı, ayrıntılı bir şekilde",
+    "example": "The matter has been comprehensively discussed.",
+    "exampleTr": "Örnek: kapsamlı bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "inherently",
+    "type": "adv.",
+    "tr": "doğal olarak, özü gereği",
+    "hint": "inherently -> doğal olarak, özü gereği",
+    "example": "She felt the system was inherently unfair and unequal.",
+    "exampleTr": "Örnek: doğal olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "hopelessly",
+    "type": "adv.",
+    "tr": "ümitsiz bir şekilde",
+    "hint": "hopelessly -> ümitsiz bir şekilde",
+    "example": "They met at university and fell hopelessly in love.",
+    "exampleTr": "Örnek: ümitsiz bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "alertly",
+    "type": "adv.",
+    "tr": "tetikte olarak",
+    "hint": "alertly -> tetikte olarak",
+    "example": "She walked alertly down the street.",
+    "exampleTr": "Örnek: tetikte olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "fatally",
+    "type": "adv.",
+    "tr": "ölümcül bir şekilde",
+    "hint": "fatally -> ölümcül bir şekilde",
+    "example": "The plan was fatally flawed from the start.",
+    "exampleTr": "Örnek: ölümcül bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "justly",
+    "type": "adv.",
+    "tr": "adaletle, doğru olarak",
+    "hint": "justly -> adaletle, doğru olarak",
+    "example": "He was justly condemned to a long prison sentence.",
+    "exampleTr": "Örnek: adaletle bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "wrongly",
+    "type": "adv.",
+    "tr": "hatalı bir şekilde",
+    "hint": "wrongly -> hatalı bir şekilde",
+    "example": "Several people were wrongly convicted.",
+    "exampleTr": "Örnek: hatalı bir şekilde bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "determinedly",
+    "type": "adv.",
+    "tr": "kesin olarak, kararlı bir şekilde",
+    "hint": "determinedly -> kesin olarak, kararlı bir şekilde",
+    "example": "He continued determinedly despite his injury.",
+    "exampleTr": "Örnek: kesin olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "narrowly",
+    "type": "adv.",
+    "tr": "güç bela, anca, dar",
+    "hint": "narrowly -> güç bela, anca, dar",
+    "example": "The car narrowly missed a cyclist.",
+    "exampleTr": "Örnek: güç bela bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "officially",
+    "type": "adv.",
+    "tr": "resmi olarak",
+    "hint": "officially -> resmi olarak",
+    "example": "Many of those living on the streets are not officially homeless.",
+    "exampleTr": "Örnek: resmi olarak bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "prosperously",
+    "type": "adv.",
+    "tr": "refahla, saadetle",
+    "hint": "prosperously -> refahla, saadetle",
+    "example": "The town is a prosperously suburban place.",
+    "exampleTr": "Örnek: refahla bağlamında kurulan YDS cümlesi."
+  },
+  {
+    "word": "cause",
+    "type": "v.",
+    "tr": "neden olmak yol açmak",
+    "hint": "Eşdizim: cause in practice, academic cause",
+    "example": "Most heart attacks are caused by blood clots.",
+    "exampleTr": "Örnek: \"neden olmak yol açmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "prediction",
+    "type": "n.",
+    "tr": "tahmin öngörü",
+    "hint": "Eşdizim: prediction in practice, academic prediction",
+    "example": "Her predictions turned out to be accurate.",
+    "exampleTr": "Örnek: \"tahmin öngörü\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "speculation",
+    "type": "n.",
+    "tr": "tahmin, dayanaksız görüş",
+    "hint": "Eşdizim: speculation in practice, academic speculation",
+    "example": "Rumours that they are about to marry have been dismissed as pure speculation.",
+    "exampleTr": "Örnek: \"tahmin\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "inclusion",
+    "type": "n.",
+    "tr": "dahil olma, kapsama",
+    "hint": "Eşdizim: inclusion in practice, academic inclusion",
+    "example": "She is being considered for inclusion in the Olympic team.",
+    "exampleTr": "Örnek: \"dahil olma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "expansion",
+    "type": "n.",
+    "tr": "genişleme, yayılma",
+    "hint": "Eşdizim: expansion in practice, academic expansion",
+    "example": "Expansion into new areas of research is possible.",
+    "exampleTr": "Örnek: \"genişleme\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "decisive",
+    "type": "adj.",
+    "tr": "kararlı kesin, nihai, şüphesiz",
+    "hint": "Eşdizim: decisive in practice, academic decisive",
+    "example": "DNA test results were decisive in proving his innocence.",
+    "exampleTr": "Örnek: \"kararlı kesin\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abundant",
+    "type": "adj.",
+    "tr": "bol, çok",
+    "hint": "Eşdizim: abundant in practice, academic abundant",
+    "example": "There is abundant evidence that cars have a harmful effect on the environment.",
+    "exampleTr": "Örnek: \"bol\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "obsolete",
+    "type": "adj.",
+    "tr": "modası geçmiş, kullanılmayan",
+    "hint": "Eşdizim: obsolete in practice, academic obsolete",
+    "example": "Gas lamps became obsolete when electric lighting was invented.",
+    "exampleTr": "Örnek: \"modası geçmiş\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "futile",
+    "type": "adj.",
+    "tr": "nafile, boşuna",
+    "hint": "Eşdizim: futile in practice, academic futile",
+    "example": "It is completely futile trying to reason with him, he just won’t listen.",
+    "exampleTr": "Örnek: \"nafile\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "implicit",
+    "type": "adj.",
+    "tr": "imalı, üstü kapalı",
+    "hint": "Eşdizim: implicit in practice, academic implicit",
+    "example": "He interpreted her comments as an implicit criticism of the government.",
+    "exampleTr": "Örnek: \"imalı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "expand",
+    "type": "v.",
+    "tr": "genişletmek, yayılmak",
+    "hint": "Eşdizim: expand in practice, academic expand",
+    "example": "The air in the balloon expands when heated.",
+    "exampleTr": "Örnek: \"genişletmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "progress",
+    "type": "n.",
+    "tr": "gelişim göstermek, ilerlemek",
+    "hint": "Eşdizim: progress in practice, academic progress",
+    "example": "I’m not making much progress with my French.",
+    "exampleTr": "Örnek: \"gelişim göstermek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "persuade",
+    "type": "v.",
+    "tr": "ikna etmek, inandırmak",
+    "hint": "Eşdizim: persuade in practice, academic persuade",
+    "example": "If he doesn’t want to go, nothing you can say will persuade him.",
+    "exampleTr": "Örnek: \"ikna etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "differ",
+    "type": "v.",
+    "tr": "ters düşmek, değişik olmak",
+    "hint": "Eşdizim: differ in practice, academic differ",
+    "example": "The findings of the various studies differ significantly.",
+    "exampleTr": "Örnek: \"ters düşmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "boost",
+    "type": "v.",
+    "tr": "destekleme, arttırma",
+    "hint": "Eşdizim: boost in practice, academic boost",
+    "example": "I tried to boost his ego by praising his work.",
+    "exampleTr": "Örnek: \"destekleme\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "capability",
+    "type": "n.",
+    "tr": "kabiliyet, yetenek",
+    "hint": "Eşdizim: capability in practice, academic capability",
+    "example": "These tests are beyond the capability of an average ten-year-old.",
+    "exampleTr": "Örnek: \"kabiliyet\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "prejudice",
+    "type": "n.",
+    "tr": "önyargı",
+    "hint": "Eşdizim: prejudice in practice, academic prejudice",
+    "example": "Laws against racial prejudice must be strictly enforced.",
+    "exampleTr": "Örnek: \"önyargı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "deception",
+    "type": "n.",
+    "tr": "aldatmaca, kandırma",
+    "hint": "Eşdizim: deception in practice, academic deception",
+    "example": "He was found guilty of obtaining money by deception.",
+    "exampleTr": "Örnek: \"aldatmaca\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "resistance",
+    "type": "n.",
+    "tr": "direnç, karşı çıkma",
+    "hint": "Eşdizim: resistance in practice, academic resistance",
+    "example": "There should be no resistance to the new management structure.",
+    "exampleTr": "Örnek: \"direnç\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "nomination",
+    "type": "n.",
+    "tr": "adaylık, tayin",
+    "hint": "Eşdizim: nomination in practice, academic nomination",
+    "example": "There have been two nominations for the new job.",
+    "exampleTr": "Örnek: \"adaylık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "compatible",
+    "type": "adj.",
+    "tr": "uyumlu, bağdaşan",
+    "hint": "Eşdizim: compatible in practice, academic compatible",
+    "example": "It was when we started living together that we found we just weren’t compatible.",
+    "exampleTr": "Örnek: \"uyumlu\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "disastrous",
+    "type": "adj.",
+    "tr": "felaket, korkunç",
+    "hint": "Eşdizim: disastrous in practice, academic disastrous",
+    "example": "In 2020, there was a disastrous covid epidemic.",
+    "exampleTr": "Örnek: \"felaket\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "indicative",
+    "type": "adj.",
+    "tr": "belirti, gösterge",
+    "hint": "Eşdizim: indicative in practice, academic indicative",
+    "example": "The fall in demand is indicative of a broader trend in consumer spending.",
+    "exampleTr": "Örnek: \"belirti\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "attach",
+    "type": "v.",
+    "tr": "iliştirmek, eklemek",
+    "hint": "Eşdizim: attach in practice, academic attach",
+    "example": "She attached a photo to her application form.",
+    "exampleTr": "Örnek: \"iliştirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "occupy",
+    "type": "v.",
+    "tr": "işgal etmek, meşgul etmek",
+    "hint": "Eşdizim: occupy in practice, academic occupy",
+    "example": "The house hasn’t been occupied by anyone for a few years.",
+    "exampleTr": "Örnek: \"işgal etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "consider",
+    "type": "v.",
+    "tr": "göz önünde bulundurmak, değerlendirmek",
+    "hint": "Eşdizim: consider in practice, academic consider",
+    "example": "I think he is being considered for the position.",
+    "exampleTr": "Örnek: \"göz önünde bulundurmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "encompass",
+    "type": "v.",
+    "tr": "kapsamak",
+    "hint": "Eşdizim: encompass in practice, academic encompass",
+    "example": "Attica is a historical area of Greece that encompasses the capital, Athens and its environs.",
+    "exampleTr": "Örnek: \"kapsamak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "inhabit",
+    "type": "v.",
+    "tr": "ikamet etmek, yaşamak",
+    "hint": "Eşdizim: inhabit in practice, academic inhabit",
+    "example": "They inhabit rivers and ponds, and their entire bodies are green.",
+    "exampleTr": "Örnek: \"ikamet etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "promise",
+    "type": "v.",
+    "tr": "söz vermek",
+    "hint": "Eşdizim: promise in practice, academic promise",
+    "example": "He promised faithfully to call me every week.",
+    "exampleTr": "Örnek: \"söz vermek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "assumption",
+    "type": "n.",
+    "tr": "varsayım",
+    "hint": "Eşdizim: assumption in practice, academic assumption",
+    "example": "People tend to make assumptions about you when you have a disability.",
+    "exampleTr": "Örnek: \"varsayım\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "priority",
+    "type": "n.",
+    "tr": "öncelik, üstünlük",
+    "hint": "Eşdizim: priority in practice, academic priority",
+    "example": "The president vowed to make education one of his top priorities.",
+    "exampleTr": "Örnek: \"öncelik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "compliment",
+    "type": "n.",
+    "tr": "iltifat, özgü",
+    "hint": "Eşdizim: compliment in practice, academic compliment",
+    "example": "I take it as a compliment when people say I look like my sister.",
+    "exampleTr": "Örnek: \"iltifat\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "artificial",
+    "type": "adj.",
+    "tr": "yapay",
+    "hint": "Eşdizim: artificial in practice, academic artificial",
+    "example": "Her bouquet was made of artificial flowers.",
+    "exampleTr": "Örnek: \"yapay\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "outdated",
+    "type": "adj.",
+    "tr": "modası geçmiş zaman aşımına uğramış",
+    "hint": "Eşdizim: outdated in practice, academic outdated",
+    "example": "Staff shortages and an outdated computer system are blamed for the problem.",
+    "exampleTr": "Örnek: \"modası geçmiş zaman aşımına uğramış\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "enhance",
+    "type": "v.",
+    "tr": "arttırmak, geliştirmek",
+    "hint": "Eşdizim: enhance in practice, academic enhance",
+    "example": "These scandals will not enhance the organization’s reputation.",
+    "exampleTr": "Örnek: \"arttırmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "insist",
+    "type": "v.",
+    "tr": "ısrar etmek",
+    "hint": "Eşdizim: insist in practice, academic insist",
+    "example": "She is 75, but she insists on doing all her own housework.",
+    "exampleTr": "Örnek: \"ısrar etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "require",
+    "type": "v.",
+    "tr": "gerek duymak, ihtiyacı olmak",
+    "hint": "Eşdizim: require in practice, academic require",
+    "example": "Please call me if you require any further information.",
+    "exampleTr": "Örnek: \"gerek duymak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "provide",
+    "type": "v.",
+    "tr": "sağlamak, temin etmek",
+    "hint": "Eşdizim: provide in practice, academic provide",
+    "example": "This booklet provides useful information about local services.",
+    "exampleTr": "Örnek: \"sağlamak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "occupation",
+    "type": "n.",
+    "tr": "uğraş, iş, meşguliyet",
+    "hint": "Eşdizim: occupation in practice, academic occupation",
+    "example": "It seems to me her favourite occupation is writing.",
+    "exampleTr": "Örnek: \"uğraş\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "settlement",
+    "type": "n.",
+    "tr": "yerleşim",
+    "hint": "Eşdizim: settlement in practice, academic settlement",
+    "example": "A large Roman settlement has been discovered just outside the French town.",
+    "exampleTr": "Örnek: \"yerleşim\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "destruction",
+    "type": "n.",
+    "tr": "tahribat, yıkım",
+    "hint": "Eşdizim: destruction in practice, academic destruction",
+    "example": "Unusually high winds left a trail of destruction over the area.",
+    "exampleTr": "Örnek: \"tahribat\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "cultivation",
+    "type": "n.",
+    "tr": "toprağı işleme",
+    "hint": "Eşdizim: cultivation in practice, academic cultivation",
+    "example": "The cultivation of wheat required the most fertile lands.",
+    "exampleTr": "Örnek: \"toprağı işleme\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "invention",
+    "type": "n.",
+    "tr": "buluş, icat",
+    "hint": "Eşdizim: invention in practice, academic invention",
+    "example": "The world changed rapidly after the invention of the phone.",
+    "exampleTr": "Örnek: \"buluş\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "intervention",
+    "type": "n.",
+    "tr": "araya girme, müdahale",
+    "hint": "Eşdizim: intervention in practice, academic intervention",
+    "example": "Repeated interventions on the currency markets failed to prevent the currency’s value falling.",
+    "exampleTr": "Örnek: \"araya girme\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "accomplishment",
+    "type": "n.",
+    "tr": "başarma, becerme, hüner",
+    "hint": "Eşdizim: accomplishment in practice, academic accomplishment",
+    "example": "Winning the award was a major accomplishment for me.",
+    "exampleTr": "Örnek: \"başarma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "condition",
+    "type": "n.",
+    "tr": "hal, koşul, durum, şart",
+    "hint": "Eşdizim: condition in practice, academic condition",
+    "example": "They left the flat in a terrible condition, there was mess everywhere.",
+    "exampleTr": "Örnek: \"hal\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "crucial",
+    "type": "adj.",
+    "tr": "önemli, kritik, elzem",
+    "hint": "Eşdizim: crucial in practice, academic crucial",
+    "example": "His work has been crucial to the project’s success.",
+    "exampleTr": "Örnek: \"önemli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "virtual",
+    "type": "adj.",
+    "tr": "sanal, gerçekte etkili olan",
+    "hint": "Eşdizim: virtual in practice, academic virtual",
+    "example": "In the game players simulate real life in a virtual world.",
+    "exampleTr": "Örnek: \"sanal\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "threaten",
+    "type": "v.",
+    "tr": "tehdit etmek, gözdağı vermek",
+    "hint": "Eşdizim: threaten in practice, academic threaten",
+    "example": "They threatened to blow up the plane if their demands were not met.",
+    "exampleTr": "Örnek: \"tehdit etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "initiate",
+    "type": "v.",
+    "tr": "başlatmak, önayak olmak",
+    "hint": "Eşdizim: initiate in practice, academic initiate",
+    "example": "The Commission has power to initiate legislation.",
+    "exampleTr": "Örnek: \"başlatmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "maintain",
+    "type": "v.",
+    "tr": "sürdürmek, devam ettirmek",
+    "hint": "Eşdizim: maintain in practice, academic maintain",
+    "example": "Despite living in different countries, the two families have maintained close links.",
+    "exampleTr": "Örnek: \"sürdürmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "isolation",
+    "type": "n.",
+    "tr": "izolasyon, soyutlanma",
+    "hint": "Eşdizim: isolation in practice, academic isolation",
+    "example": "The prisoner had been kept in isolation for three days.",
+    "exampleTr": "Örnek: \"izolasyon\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "concern",
+    "type": "n.",
+    "tr": "endişe, kaygı",
+    "hint": "Eşdizim: concern in practice, academic concern",
+    "example": "Concern for the safety of the two missing teenagers is growing.",
+    "exampleTr": "Örnek: \"endişe\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "awareness",
+    "type": "n.",
+    "tr": "farkındalık, bilinçlenme",
+    "hint": "Eşdizim: awareness in practice, academic awareness",
+    "example": "Public awareness of the problem will make politicians take it seriously.",
+    "exampleTr": "Örnek: \"farkındalık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "demand",
+    "type": "n.",
+    "tr": "talep, rağbet, isteme",
+    "hint": "Eşdizim: demand in practice, academic demand",
+    "example": "You can’t give in to children’s demands all the time.",
+    "exampleTr": "Örnek: \"talep\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "variety",
+    "type": "n.",
+    "tr": "çeşitlilik, tür",
+    "hint": "Eşdizim: variety in practice, academic variety",
+    "example": "The company makes a variety of cameras.",
+    "exampleTr": "Örnek: \"çeşitlilik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "negligible",
+    "type": "adj.",
+    "tr": "ihmal edilebilir, gözardı edilebilir",
+    "hint": "Eşdizim: negligible in practice, academic negligible",
+    "example": "The difference between the two products is negligible.",
+    "exampleTr": "Örnek: \"ihmal edilebilir\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "consistent",
+    "type": "adj.",
+    "tr": "istikrarlı, tutarlı",
+    "hint": "Eşdizim: consistent in practice, academic consistent",
+    "example": "There has been a consistent improvement in her attitude.",
+    "exampleTr": "Örnek: \"istikrarlı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "precede",
+    "type": "v.",
+    "tr": "önce olmak, üstün olmak",
+    "hint": "Eşdizim: precede in practice, academic precede",
+    "example": "It would be helpful if you were to precede the report with an introduction.",
+    "exampleTr": "Örnek: \"önce olmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "accelerate",
+    "type": "v.",
+    "tr": "hızlanmak, hızlandırmak",
+    "hint": "Eşdizim: accelerate in practice, academic accelerate",
+    "example": "They use special chemicals to accelerate the growth of crops.",
+    "exampleTr": "Örnek: \"hızlanmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "counter",
+    "type": "v.",
+    "tr": "tezgah sayaç",
+    "hint": "Eşdizim: counter in practice, academic counter",
+    "example": "There was nobody behind the counter when I went into the bank.",
+    "exampleTr": "Örnek: \"tezgah sayaç\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abandon",
+    "type": "v.",
+    "tr": "terk etmek, bırakmak",
+    "hint": "Eşdizim: abandon in practice, academic abandon",
+    "example": "By the time the rebel troops arrived, the village had already been abandoned.",
+    "exampleTr": "Örnek: \"terk etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "bankrupt",
+    "type": "adj.",
+    "tr": "iflas etmek",
+    "hint": "Eşdizim: bankrupt in practice, academic bankrupt",
+    "example": "He went bankrupt after only a year in business.",
+    "exampleTr": "Örnek: \"iflas etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "captivate",
+    "type": "v.",
+    "tr": "cezbetmek, büyülemek",
+    "hint": "Eşdizim: captivate in practice, academic captivate",
+    "example": "With her beauty and charm, she captivated audiences everywhere.",
+    "exampleTr": "Örnek: \"cezbetmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "clarify",
+    "type": "v.",
+    "tr": "açıklığa kavuşmak",
+    "hint": "Eşdizim: clarify in practice, academic clarify",
+    "example": "Could you clarify the first point please?",
+    "exampleTr": "Örnek: \"açıklığa kavuşmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "deduction",
+    "type": "n.",
+    "tr": "sonuç çıkarma",
+    "hint": "Eşdizim: deduction in practice, academic deduction",
+    "example": "All we can do is make deductions from the available facts.",
+    "exampleTr": "Örnek: \"sonuç çıkarma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "demolish",
+    "type": "v.",
+    "tr": "yıkmak, tahrip etmek",
+    "hint": "Eşdizim: demolish in practice, academic demolish",
+    "example": "A number of houses were demolished so that the supermarket could be built.",
+    "exampleTr": "Örnek: \"yıkmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "distinguish",
+    "type": "v.",
+    "tr": "ayırt etmek, farkı görmek",
+    "hint": "Eşdizim: distinguish in practice, academic distinguish",
+    "example": "I sometimes have difficulty distinguishing Spanish from Portuguese.",
+    "exampleTr": "Örnek: \"ayırt etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "edible",
+    "type": "adj.",
+    "tr": "yenilebilir",
+    "hint": "Eşdizim: edible in practice, academic edible",
+    "example": "Only the leaves of the plant are edible.",
+    "exampleTr": "Örnek: \"yenilebilir\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "elaborate",
+    "type": "adj.",
+    "tr": "detaylandırmak, ayrıntılı şekilde hazırlamak",
+    "hint": "Eşdizim: elaborate in practice, academic elaborate",
+    "example": "He refused to elaborate on why he had resigned.",
+    "exampleTr": "Örnek: \"detaylandırmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "hesitate",
+    "type": "v.",
+    "tr": "tereddüt etmek",
+    "hint": "Eşdizim: hesitate in practice, academic hesitate",
+    "example": "She hesitated slightly before answering the question.",
+    "exampleTr": "Örnek: \"tereddüt etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "irresistible",
+    "type": "adj.",
+    "tr": "karşı konulmaz, dayanılmaz",
+    "hint": "Eşdizim: irresistible in practice, academic irresistible",
+    "example": "He gave me one of those irresistible smiles.",
+    "exampleTr": "Örnek: \"karşı konulmaz\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "justify",
+    "type": "v.",
+    "tr": "haklı göstermek, temize çıkarmak",
+    "hint": "Eşdizim: justify in practice, academic justify",
+    "example": "That doesn’t justify getting involved in somebody else’s fight.",
+    "exampleTr": "Örnek: \"haklı göstermek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "kidnap",
+    "type": "v.",
+    "tr": "birini kaçırmak",
+    "hint": "Eşdizim: kidnap in practice, academic kidnap",
+    "example": "Fanatical revolutionaries kidnap a millionaire’s daughter.",
+    "exampleTr": "Örnek: \"birini kaçırmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "launch",
+    "type": "v.",
+    "tr": "(bir işi) piyasaya sürmek, (roket, mekik) fırlatmak",
+    "hint": "Eşdizim: launch in practice, academic launch",
+    "example": "The programme was launched two years ago.",
+    "exampleTr": "Örnek: \"(bir işi) piyasaya sürmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "manufacture",
+    "type": "v.",
+    "tr": "üretmek, imal etmek",
+    "hint": "Eşdizim: manufacture in practice, academic manufacture",
+    "example": "He works for a company that manufactures car parts.",
+    "exampleTr": "Örnek: \"üretmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "medieval",
+    "type": "adj.",
+    "tr": "ortaçağ",
+    "hint": "Eşdizim: medieval in practice, academic medieval",
+    "example": "You really should go and see the lovely medieval court in the castle.",
+    "exampleTr": "Örnek: \"ortaçağ\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "neglect",
+    "type": "v.",
+    "tr": "ihmal etmek, aldırmamak",
+    "hint": "Eşdizim: neglect in practice, academic neglect",
+    "example": "She’s been neglecting her studies this semester.",
+    "exampleTr": "Örnek: \"ihmal etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "obstacle",
+    "type": "n.",
+    "tr": "engel, mani",
+    "hint": "Eşdizim: obstacle in practice, academic obstacle",
+    "example": "We suddenly encountered an obstacle along the trail.",
+    "exampleTr": "Örnek: \"engel\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "pace",
+    "type": "n.",
+    "tr": "tempo, hız, sürat",
+    "hint": "Eşdizim: pace in practice, academic pace",
+    "example": "When she thought she heard someone following her, she quickened her pace.",
+    "exampleTr": "Örnek: \"tempo\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "perceive",
+    "type": "v.",
+    "tr": "algılamak, idrak etmek",
+    "hint": "Eşdizim: perceive in practice, academic perceive",
+    "example": "How do the French perceive the British?",
+    "exampleTr": "Örnek: \"algılamak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "redundant",
+    "type": "adj.",
+    "tr": "lüzumsuz, gereksiz",
+    "hint": "Eşdizim: redundant in practice, academic redundant",
+    "example": "In the sentence “She is a single unmarried woman”, the word “unmarried” is redundant.",
+    "exampleTr": "Örnek: \"lüzumsuz\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "scatter",
+    "type": "v.",
+    "tr": "dağıtmak, saçmak",
+    "hint": "Eşdizim: scatter in practice, academic scatter",
+    "example": "Her ashes were scattered at sea.",
+    "exampleTr": "Örnek: \"dağıtmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abolish",
+    "type": "v.",
+    "tr": "feshetmek, yürürlükten kaldırmak",
+    "hint": "Eşdizim: abolish in practice, academic abolish",
+    "example": "I think bullfighting should be abolished.",
+    "exampleTr": "Örnek: \"feshetmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "burden",
+    "type": "n.",
+    "tr": "yük, sorumluluk",
+    "hint": "Eşdizim: burden in practice, academic burden",
+    "example": "Buying a house often places a large financial burden on young couples.",
+    "exampleTr": "Örnek: \"yük\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "collapse",
+    "type": "v.",
+    "tr": "çöküş, yığılmak, çökmek",
+    "hint": "Eşdizim: collapse in practice, academic collapse",
+    "example": "Thousands of buildings collapsed in the earthquake.",
+    "exampleTr": "Örnek: \"çöküş\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "deficiency",
+    "type": "n.",
+    "tr": "eksiklik, yoksunluk",
+    "hint": "Eşdizim: deficiency in practice, academic deficiency",
+    "example": "Pregnant women often suffer from iron deficiency.",
+    "exampleTr": "Örnek: \"eksiklik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "devote",
+    "type": "v.",
+    "tr": "adamak, vakfetmek",
+    "hint": "Eşdizim: devote in practice, academic devote",
+    "example": "She has devoted all her life to the care of homeless people.",
+    "exampleTr": "Örnek: \"adamak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "estimate",
+    "type": "v.",
+    "tr": "kestirmek, tahmin etmek",
+    "hint": "Eşdizim: estimate in practice, academic estimate",
+    "example": "Government sources estimate a long-term 50 percent increase in rail fares.",
+    "exampleTr": "Örnek: \"kestirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "exhibit",
+    "type": "v.",
+    "tr": "sergilemek, göstermek",
+    "hint": "Eşdizim: exhibit in practice, academic exhibit",
+    "example": "He frequently exhibits at the art gallery.",
+    "exampleTr": "Örnek: \"sergilemek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "gratitude",
+    "type": "n.",
+    "tr": "minnettarlık, şükran",
+    "hint": "Eşdizim: gratitude in practice, academic gratitude",
+    "example": "She sent them a present to show her gratitude.",
+    "exampleTr": "Örnek: \"minnettarlık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "illusion",
+    "type": "n.",
+    "tr": "kuruntu, ilüzyon",
+    "hint": "Eşdizim: illusion in practice, academic illusion",
+    "example": "He had no illusions about his talents as a singer.",
+    "exampleTr": "Örnek: \"kuruntu\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "immune",
+    "type": "adj.",
+    "tr": "bağışık, etkilenmeyen",
+    "hint": "Eşdizim: immune in practice, academic immune",
+    "example": "He seems to be immune to colds, he just never gets them.",
+    "exampleTr": "Örnek: \"bağışık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "slippery",
+    "type": "adj.",
+    "tr": "kaygan",
+    "hint": "Eşdizim: slippery in practice, academic slippery",
+    "example": "The sidewalks were slippery with ice.",
+    "exampleTr": "Örnek: \"kaygan\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "tame",
+    "type": "adj.",
+    "tr": "evcilleştirmek, uslandırmak",
+    "hint": "Eşdizim: tame in practice, academic tame",
+    "example": "Their goats seem very tame.",
+    "exampleTr": "Örnek: \"evcilleştirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "transmit",
+    "type": "v.",
+    "tr": "iletmek, ulaştırmak",
+    "hint": "Eşdizim: transmit in practice, academic transmit",
+    "example": "Your bank will transmit funds by wire to our central bank in New York.",
+    "exampleTr": "Örnek: \"iletmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "underestimate",
+    "type": "v.",
+    "tr": "hafife almak, azımsamak, küçümsemek",
+    "hint": "Eşdizim: underestimate in practice, academic underestimate",
+    "example": "They’ve seriously underestimated the cost of the building project.",
+    "exampleTr": "Örnek: \"hafife almak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "versatile",
+    "type": "adj.",
+    "tr": "çok yönlü",
+    "hint": "Eşdizim: versatile in practice, academic versatile",
+    "example": "This versatile material represents both comfort and strength.",
+    "exampleTr": "Örnek: \"çok yönlü\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "withstand",
+    "type": "v.",
+    "tr": "karşı koymak, direnmek",
+    "hint": "Eşdizim: withstand in practice, academic withstand",
+    "example": "Our toys are designed to withstand the rough treatment of the average six-year-old.",
+    "exampleTr": "Örnek: \"karşı koymak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "acquire",
+    "type": "v.",
+    "tr": "elde etmek, edinmek",
+    "hint": "Eşdizim: acquire in practice, academic acquire",
+    "example": "I was wearing a newly acquired jacket.",
+    "exampleTr": "Örnek: \"elde etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "confront",
+    "type": "v.",
+    "tr": "yüzleşmek, karşı koymak",
+    "hint": "Eşdizim: confront in practice, academic confront",
+    "example": "It’s an issue you’ll have to confront at some point, no matter how unpleasant it is",
+    "exampleTr": "Örnek: \"yüzleşmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "inspiration",
+    "type": "n.",
+    "tr": "esin, ilham",
+    "hint": "Eşdizim: inspiration in practice, academic inspiration",
+    "example": "Perhaps they will become inspiration for another project.",
+    "exampleTr": "Örnek: \"esin\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "eligible",
+    "type": "adj.",
+    "tr": "hak sahibi, uygun",
+    "hint": "Eşdizim: eligible in practice, academic eligible",
+    "example": "She is not considered eligible for legal aid.",
+    "exampleTr": "Örnek: \"hak sahibi\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "prevent",
+    "type": "v.",
+    "tr": "engellemek, önlemek",
+    "hint": "Eşdizim: prevent in practice, academic prevent",
+    "example": "Eating healthfully can help prevent heart disease.gecikmek, ertelemek",
+    "exampleTr": "Örnek: \"engellemek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "delay",
+    "type": "n.",
+    "tr": "",
+    "hint": "Eşdizim: delay in practice, academic delay",
+    "example": "Heavy storm delayed the start of the game.",
+    "exampleTr": "Örnek: \"\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "embark",
+    "type": "v.",
+    "tr": "gemiye bindirmek, gemiye binmek",
+    "hint": "Eşdizim: embark in practice, academic embark",
+    "example": "They stood on the pier and watched as we embarked.",
+    "exampleTr": "Örnek: \"gemiye bindirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "fade",
+    "type": "v.",
+    "tr": "karartmak, soldurmak, solmak",
+    "hint": "Eşdizim: fade in practice, academic fade",
+    "example": "The sun had faded the curtains.",
+    "exampleTr": "Örnek: \"karartmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "frustrate",
+    "type": "v.",
+    "tr": "engellemek, yıldırmak",
+    "hint": "Eşdizim: frustrate in practice, academic frustrate",
+    "example": "The rescue attempt was frustrated by heavy snow.",
+    "exampleTr": "Örnek: \"engellemek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "obligation",
+    "type": "n.",
+    "tr": "yükümlülük, zorunluluk",
+    "hint": "Eşdizim: obligation in practice, academic obligation",
+    "example": "My obligation to the Council requires my presence elsewhere.",
+    "exampleTr": "Örnek: \"yükümlülük\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "miscarry",
+    "type": "v.",
+    "tr": "düşük yapmak",
+    "hint": "Eşdizim: miscarry in practice, academic miscarry",
+    "example": "The disease caused her to miscarry.",
+    "exampleTr": "Örnek: \"düşük yapmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "recognize",
+    "type": "v.",
+    "tr": "tanımak, ayırt etmek",
+    "hint": "Eşdizim: recognize in practice, academic recognize",
+    "example": "I recognized my childhood friend immediately.",
+    "exampleTr": "Örnek: \"tanımak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "tactful",
+    "type": "adj.",
+    "tr": "ince düşünceli, nazik",
+    "hint": "Eşdizim: tactful in practice, academic tactful",
+    "example": "I tried to find a tactful way of telling the truth.",
+    "exampleTr": "Örnek: \"ince düşünceli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "splendid",
+    "type": "adj.",
+    "tr": "muhteşem, olağanüstü",
+    "hint": "Eşdizim: splendid in practice, academic splendid",
+    "example": "She made a lot of money and bought a splendid house.",
+    "exampleTr": "Örnek: \"muhteşem\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "warfare",
+    "type": "n.",
+    "tr": "savaş hali, harp",
+    "hint": "Eşdizim: warfare in practice, academic warfare",
+    "example": "Cyber warfare can have an equally devastating impact.",
+    "exampleTr": "Örnek: \"savaş hali\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "utilize",
+    "type": "v.",
+    "tr": "kullanmak, faydalanmak",
+    "hint": "Eşdizim: utilize in practice, academic utilize",
+    "example": "Vitamin C helps the body utilize the iron present in your body.",
+    "exampleTr": "Örnek: \"kullanmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abstain",
+    "type": "v.",
+    "tr": "çekinmek, kaçınmak",
+    "hint": "Eşdizim: abstain in practice, academic abstain",
+    "example": "He took a vow to abstain from alcohol.",
+    "exampleTr": "Örnek: \"çekinmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "accumulation",
+    "type": "n.",
+    "tr": "birikinti, yığın",
+    "hint": "Eşdizim: accumulation in practice, academic accumulation",
+    "example": "Despite this accumulation of evidence, the polic persisted in doing nothing.",
+    "exampleTr": "Örnek: \"birikinti\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "betray",
+    "type": "v.",
+    "tr": "ihanet etmek, aldatmak",
+    "hint": "Eşdizim: betray in practice, academic betray",
+    "example": "She felt betrayed when she found out the truth about her sister.",
+    "exampleTr": "Örnek: \"ihanet etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "catastrophe",
+    "type": "n.",
+    "tr": "facia, afet, felaket",
+    "hint": "Eşdizim: catastrophe in practice, academic catastrophe",
+    "example": "We’ve had a few catastrophes with the food for the party.",
+    "exampleTr": "Örnek: \"facia\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "decline",
+    "type": "v.",
+    "tr": "geri çevirmek",
+    "hint": "Eşdizim: decline in practice, academic decline",
+    "example": "I politely declined her invitation.",
+    "exampleTr": "Örnek: \"geri çevirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "extract",
+    "type": "v.",
+    "tr": "esans, öz",
+    "hint": "Eşdizim: extract in practice, academic extract",
+    "example": "The cream contained extracts of several plants.",
+    "exampleTr": "Örnek: \"esans\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "keen",
+    "type": "adj.",
+    "tr": "hevesli olmak",
+    "hint": "Eşdizim: keen in practice, academic keen",
+    "example": "Andrew was very keen to help our project.",
+    "exampleTr": "Örnek: \"hevesli olmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "intervene",
+    "type": "v.",
+    "tr": "araya girmek, müdahale etmek",
+    "hint": "Eşdizim: intervene in practice, academic intervene",
+    "example": "He might have been hurt if the neighbours hadn’t intervened.",
+    "exampleTr": "Örnek: \"araya girmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "observation",
+    "type": "n.",
+    "tr": "gözlem, gözetleme",
+    "hint": "Eşdizim: observation in practice, academic observation",
+    "example": "The police are keeping the suspect under observation.",
+    "exampleTr": "Örnek: \"gözlem\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "request",
+    "type": "n.",
+    "tr": "istek, talep",
+    "hint": "Eşdizim: request in practice, academic request",
+    "example": "The boss refused or request to leave work early.",
+    "exampleTr": "Örnek: \"istek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "stroll",
+    "type": "v.",
+    "tr": "gezinmek, gezinti",
+    "hint": "Eşdizim: stroll in practice, academic stroll",
+    "example": "We could stroll along the beach if you want.",
+    "exampleTr": "Örnek: \"gezinmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "uneasy",
+    "type": "adj.",
+    "tr": "huzursuz, tedirgin",
+    "hint": "Eşdizim: uneasy in practice, academic uneasy",
+    "example": "I feel a little uneasy about talking to him.",
+    "exampleTr": "Örnek: \"huzursuz\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "weary",
+    "type": "adj.",
+    "tr": "yorgun, bitap",
+    "hint": "Eşdizim: weary in practice, academic weary",
+    "example": "You must be weary from your long journey.",
+    "exampleTr": "Örnek: \"yorgun\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "outcome",
+    "type": "n.",
+    "tr": "sonuç, çıktı",
+    "hint": "Eşdizim: outcome in practice, academic outcome",
+    "example": "It’s too early to predict the outcome of the discussion.",
+    "exampleTr": "Örnek: \"sonuç\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "bet",
+    "type": "v.",
+    "tr": "iddia etmek bahis",
+    "hint": "Eşdizim: bet in practice, academic bet",
+    "example": "I bet the moment I sit down, my mother will call me.",
+    "exampleTr": "Örnek: \"iddia etmek bahis\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "hostile",
+    "type": "adj.",
+    "tr": "düşmanca",
+    "hint": "Eşdizim: hostile in practice, academic hostile",
+    "example": "He was openly hostile towards his classmates.",
+    "exampleTr": "Örnek: \"düşmanca\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "fierce",
+    "type": "adj.",
+    "tr": "hiddetli, şiddetli",
+    "hint": "Eşdizim: fierce in practice, academic fierce",
+    "example": "Two men were shot during fierce fighting last month.",
+    "exampleTr": "Örnek: \"hiddetli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "speculative",
+    "type": "adj.",
+    "tr": "teorik, kuramsal",
+    "hint": "Eşdizim: speculative in practice, academic speculative",
+    "example": "Her theory was too speculative for most of her colleagues to accept.",
+    "exampleTr": "Örnek: \"teorik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "elimination",
+    "type": "n.",
+    "tr": "eleme, bertaraf etme",
+    "hint": "Eşdizim: elimination in practice, academic elimination",
+    "example": "There were four eliminations in the first round.",
+    "exampleTr": "Örnek: \"eleme\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "application",
+    "type": "n.",
+    "tr": "başvuru, talep",
+    "hint": "Eşdizim: application in practice, academic application",
+    "example": "We have received applications from more than 150 students.",
+    "exampleTr": "Örnek: \"başvuru\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "profitable",
+    "type": "adj.",
+    "tr": "kazançlı, yararlı",
+    "hint": "Eşdizim: profitable in practice, academic profitable",
+    "example": "It’s more profitable to sell directly to the public.",
+    "exampleTr": "Örnek: \"kazançlı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "severe",
+    "type": "adj.",
+    "tr": "şiddetli, ciddi",
+    "hint": "Eşdizim: severe in practice, academic severe",
+    "example": "This is a school for children with serious learning difficulties.",
+    "exampleTr": "Örnek: \"şiddetli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abrupt",
+    "type": "adj.",
+    "tr": "birdenbire, ani",
+    "hint": "Eşdizim: abrupt in practice, academic abrupt",
+    "example": "Our conversation came to an abrupt end when his parents came home.",
+    "exampleTr": "Örnek: \"birdenbire\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "exclude",
+    "type": "v.",
+    "tr": "hariç tutmak, dahil etmemek",
+    "hint": "Eşdizim: exclude in practice, academic exclude",
+    "example": "It wasn’t my intention to exclude her from the list, I just forgot her.",
+    "exampleTr": "Örnek: \"hariç tutmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "deliver",
+    "type": "v.",
+    "tr": "teslim etmek",
+    "hint": "Eşdizim: deliver in practice, academic deliver",
+    "example": "We had the burger delivered.",
+    "exampleTr": "Örnek: \"teslim etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "unearth",
+    "type": "v.",
+    "tr": "gün yüzüne çıkarmak, keşfetmek",
+    "hint": "Eşdizim: unearth in practice, academic unearth",
+    "example": "Thousands of bodies have been unearthed in mass graves.",
+    "exampleTr": "Örnek: \"gün yüzüne çıkarmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "urgency",
+    "type": "n.",
+    "tr": "aciliyet",
+    "hint": "Eşdizim: urgency in practice, academic urgency",
+    "example": "She stressed the urgency of an early solution.",
+    "exampleTr": "Örnek: \"aciliyet\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "incentive",
+    "type": "n.",
+    "tr": "teşvik, neden, isteklendirme",
+    "hint": "Eşdizim: incentive in practice, academic incentive",
+    "example": "The incentive to sell more is large, and it plainly works.",
+    "exampleTr": "Örnek: \"teşvik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "preservation",
+    "type": "n.",
+    "tr": "koruma, muhafaza",
+    "hint": "Eşdizim: preservation in practice, academic preservation",
+    "example": "There is great public concern about some of the chemicals used in food preservation.",
+    "exampleTr": "Örnek: \"koruma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "objectivity",
+    "type": "n.",
+    "tr": "tarafsızlık",
+    "hint": "Eşdizim: objectivity in practice, academic objectivity",
+    "example": "Some have questioned the objectivity of his own investigation into the matter.",
+    "exampleTr": "Örnek: \"tarafsızlık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "initial",
+    "type": "adj.",
+    "tr": "baştaki, birinci",
+    "hint": "Eşdizim: initial in practice, academic initial",
+    "example": "The initial eathquake was followed by a series of aftershocks.",
+    "exampleTr": "Örnek: \"baştaki\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "selective",
+    "type": "adj.",
+    "tr": "seçici, seçmeli",
+    "hint": "Eşdizim: selective in practice, academic selective",
+    "example": "I’m more selective about the books I read than I used to be.",
+    "exampleTr": "Örnek: \"seçici\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "reduce",
+    "type": "v.",
+    "tr": "azaltmak, eksiltmek",
+    "hint": "Eşdizim: reduce in practice, academic reduce",
+    "example": "My weight reduces when I stop eating sugar.",
+    "exampleTr": "Örnek: \"azaltmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "specify",
+    "type": "v.",
+    "tr": "belirtmek, belirlemek",
+    "hint": "Eşdizim: specify in practice, academic specify",
+    "example": "He said we should meet but didn’t specify a time.",
+    "exampleTr": "Örnek: \"belirtmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "vague",
+    "type": "adj.",
+    "tr": "belirsiz, anlaşılmaz",
+    "hint": "Eşdizim: vague in practice, academic vague",
+    "example": "I do have a vague memory of meeting her many years ago.",
+    "exampleTr": "Örnek: \"belirsiz\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "cooperative",
+    "type": "adj.",
+    "tr": "işbirliği",
+    "hint": "Eşdizim: cooperative in practice, academic cooperative",
+    "example": "He went voluntarily and was very cooperative.",
+    "exampleTr": "Örnek: \"işbirliği\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "distribution",
+    "type": "n.",
+    "tr": "dağıtma, dağılım, yayılma",
+    "hint": "Eşdizim: distribution in practice, academic distribution",
+    "example": "She had it printed for distribution among her friends.",
+    "exampleTr": "Örnek: \"dağıtma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "excessive",
+    "type": "adj.",
+    "tr": "aşırı, lüzumsuz",
+    "hint": "Eşdizim: excessive in practice, academic excessive",
+    "example": "The directive will prevent employees from working excessive hours.",
+    "exampleTr": "Örnek: \"aşırı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "valid",
+    "type": "adj.",
+    "tr": "geçerli, mantıklı",
+    "hint": "Eşdizim: valid in practice, academic valid",
+    "example": "The judge remarked that ignorance was not a valid defence.",
+    "exampleTr": "Örnek: \"geçerli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "hazardous",
+    "type": "adj.",
+    "tr": "tehlikeli, riskli",
+    "hint": "Eşdizim: hazardous in practice, academic hazardous",
+    "example": "Heavy snow fell overnight, making road conditions hazardous.",
+    "exampleTr": "Örnek: \"tehlikeli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "spoil",
+    "type": "v.",
+    "tr": "şımartmak, berbat etmek",
+    "hint": "Eşdizim: spoil in practice, academic spoil",
+    "example": "I haven’t read the book, so don’t spoil it for me by telling me what happens.",
+    "exampleTr": "Örnek: \"şımartmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "relieve",
+    "type": "v.",
+    "tr": "rahatlatmak, gönlünü ferahlatmak",
+    "hint": "Eşdizim: relieve in practice, academic relieve",
+    "example": "This cream relieves the swelling caused by insect stings.",
+    "exampleTr": "Örnek: \"rahatlatmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "highlight",
+    "type": "v.",
+    "tr": "altını çizmek, vurgulamak",
+    "hint": "Eşdizim: highlight in practice, academic highlight",
+    "example": "The report highlights the need for safety.",
+    "exampleTr": "Örnek: \"altını çizmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "belongings",
+    "type": "n.",
+    "tr": "kişisel eşyalar",
+    "hint": "Eşdizim: belongings in practice, academic belongings",
+    "example": "I put a few personal belongings in a bag and left the house for the last time.",
+    "exampleTr": "Örnek: \"kişisel eşyalar\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "pattern",
+    "type": "n.",
+    "tr": "model, desen, yapı",
+    "hint": "Eşdizim: pattern in practice, academic pattern",
+    "example": "The curtains had a floral pattern.",
+    "exampleTr": "Örnek: \"model\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "detect",
+    "type": "v.",
+    "tr": "saptamak, belirlemek",
+    "hint": "Eşdizim: detect in practice, academic detect",
+    "example": "Some sounds cannot be detected by the human ear.",
+    "exampleTr": "Örnek: \"saptamak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abstract",
+    "type": "adj.",
+    "tr": "soyut, özetlemek",
+    "hint": "Eşdizim: abstract in practice, academic abstract",
+    "example": "Truth and beauty are abstract concepts.",
+    "exampleTr": "Örnek: \"soyut\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "candidate",
+    "type": "n.",
+    "tr": "aday",
+    "hint": "Eşdizim: candidate in practice, academic candidate",
+    "example": "We have interviewed four candidates for the job.",
+    "exampleTr": "Örnek: \"aday\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "determine",
+    "type": "v.",
+    "tr": "belirlemek, saptamak, kararlaştırmak",
+    "hint": "Eşdizim: determine in practice, academic determine",
+    "example": "Officials will determine whether or not the game will be played.",
+    "exampleTr": "Örnek: \"belirlemek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "accumulate",
+    "type": "v.",
+    "tr": "biriktirmek, yığmak",
+    "hint": "Eşdizim: accumulate in practice, academic accumulate",
+    "example": "We’ve accumulated so much rubbish over the years.",
+    "exampleTr": "Örnek: \"biriktirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "bother",
+    "type": "v.",
+    "tr": "rahatsız etmek, can sıkmak",
+    "hint": "Eşdizim: bother in practice, academic bother",
+    "example": "It bothers me that he is out so much of the time.",
+    "exampleTr": "Örnek: \"rahatsız etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "abbreviate",
+    "type": "v.",
+    "tr": "sadeleştirmek, kısaltmak",
+    "hint": "Eşdizim: abbreviate in practice, academic abbreviate",
+    "example": "“Chief Executive Officer” is abbreviated as “CEO”.",
+    "exampleTr": "Örnek: \"sadeleştirmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "bizarre",
+    "type": "adj.",
+    "tr": "garip, tuhaf",
+    "hint": "Eşdizim: bizarre in practice, academic bizarre",
+    "example": "I had a really bizarre dream last night.",
+    "exampleTr": "Örnek: \"garip\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "circulate",
+    "type": "v.",
+    "tr": "haberi yaymak havanın, sıvının akımını sağlamak",
+    "hint": "Eşdizim: circulate in practice, academic circulate",
+    "example": "News of her retirement quickly circulated around the office.",
+    "exampleTr": "Örnek: \"haberi yaymak havanın\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "rebellious",
+    "type": "adj.",
+    "tr": "isyankar, asi",
+    "hint": "Eşdizim: rebellious in practice, academic rebellious",
+    "example": "His teachers regard him as a rebellious, trouble-making boy.",
+    "exampleTr": "Örnek: \"isyankar\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "unsteady",
+    "type": "adj.",
+    "tr": "istikrarsız, değişken",
+    "hint": "Eşdizim: unsteady in practice, academic unsteady",
+    "example": "The report showed unemployment surging in an unsteady economy.",
+    "exampleTr": "Örnek: \"istikrarsız\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "testimony",
+    "type": "n.",
+    "tr": "tanıklık, delil",
+    "hint": "Eşdizim: testimony in practice, academic testimony",
+    "example": "Some doubts have been expressed about his testimony.",
+    "exampleTr": "Örnek: \"tanıklık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "slight",
+    "type": "adj.",
+    "tr": "hafif, az",
+    "hint": "Eşdizim: slight in practice, academic slight",
+    "example": "I had a slight headache.",
+    "exampleTr": "Örnek: \"hafif\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "cease",
+    "type": "v.",
+    "tr": "son vermek, durdurmak",
+    "hint": "Eşdizim: cease in practice, academic cease",
+    "example": "Whether the protests will cease remains to be seen.",
+    "exampleTr": "Örnek: \"son vermek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "notice",
+    "type": "v.",
+    "tr": "fark etmek",
+    "hint": "Eşdizim: notice in practice, academic notice",
+    "example": "He noticed that the woman staring at him.",
+    "exampleTr": "Örnek: \"fark etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "arrogant",
+    "type": "adj.",
+    "tr": "kibirli, küstah",
+    "hint": "Eşdizim: arrogant in practice, academic arrogant",
+    "example": "I think he is arrogant and rude.",
+    "exampleTr": "Örnek: \"kibirli\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "retreat",
+    "type": "v.",
+    "tr": "geri çekilmek",
+    "hint": "Eşdizim: retreat in practice, academic retreat",
+    "example": "The government is retreating from its promises.",
+    "exampleTr": "Örnek: \"geri çekilmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "deceit",
+    "type": "n.",
+    "tr": "hilekarlık, dolandırıcılık",
+    "hint": "Eşdizim: deceit in practice, academic deceit",
+    "example": "Sociopaths regularly use deceit and manipulation.",
+    "exampleTr": "Örnek: \"hilekarlık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "dwell",
+    "type": "v.",
+    "tr": "ikamet etmek, yaşamak",
+    "hint": "Eşdizim: dwell in practice, academic dwell",
+    "example": "She dwelt in remote parts of Asia for many years.",
+    "exampleTr": "Örnek: \"ikamet etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "inscribe",
+    "type": "v.",
+    "tr": "atfetmek, yazmak",
+    "hint": "Eşdizim: inscribe in practice, academic inscribe",
+    "example": "She inscribed the book, “To my mother.”",
+    "exampleTr": "Örnek: \"atfetmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "well-preserved",
+    "type": "adj.",
+    "tr": "iyi korunmuş, yaşına göre iyi durumda",
+    "hint": "Eşdizim: well-preserved in practice, academic well-preserved",
+    "example": "Most buildings in Paris are extremely well-preserved .",
+    "exampleTr": "Örnek: \"iyi korunmuş\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "conquer",
+    "type": "v.",
+    "tr": "fethetmek, yenmek",
+    "hint": "Eşdizim: conquer in practice, academic conquer",
+    "example": "The Spanish conquered the New World in the 16th century.",
+    "exampleTr": "Örnek: \"fethetmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "offer",
+    "type": "v.",
+    "tr": "teklif vermek",
+    "hint": "Eşdizim: offer in practice, academic offer",
+    "example": "He was offered a job in Ankara.",
+    "exampleTr": "Örnek: \"teklif vermek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "offspring",
+    "type": "n.",
+    "tr": "yavru, çocuk",
+    "hint": "Eşdizim: offspring in practice, academic offspring",
+    "example": "It is unclear how blood pressure may affect offspring gender.",
+    "exampleTr": "Örnek: \"yavru\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "reproduction",
+    "type": "n.",
+    "tr": "çoğalma, yeniden yapma",
+    "hint": "Eşdizim: reproduction in practice, academic reproduction",
+    "example": "The slow reproduction rate makes gorillas vulnerable to any population declines.",
+    "exampleTr": "Örnek: \"çoğalma\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "participate",
+    "type": "v.",
+    "tr": "katılmak, ortak olmak",
+    "hint": "Eşdizim: participate in practice, academic participate",
+    "example": "Foreign firms participate through production-sharing and work contracts.",
+    "exampleTr": "Örnek: \"katılmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "fatalistic",
+    "type": "adj.",
+    "tr": "her şeyi kadere bırakan",
+    "hint": "Eşdizim: fatalistic in practice, academic fatalistic",
+    "example": "The Stoics believed that a fatalistic universe was not such a bad thing.",
+    "exampleTr": "Örnek: \"her şeyi kadere bırakan\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "sacrifice",
+    "type": "v.",
+    "tr": "kurban etmek, feda etmek",
+    "hint": "Eşdizim: sacrifice in practice, academic sacrifice",
+    "example": "His parents made sacrifices so that he could have a good education.",
+    "exampleTr": "Örnek: \"kurban etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "reflect",
+    "type": "v.",
+    "tr": "yansıtmak, göstermek",
+    "hint": "Eşdizim: reflect in practice, academic reflect",
+    "example": "She could see herself reflected in Tom’s eyes.",
+    "exampleTr": "Örnek: \"yansıtmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "appropriate",
+    "type": "adj.",
+    "tr": "münasip, uygun",
+    "hint": "Eşdizim: appropriate in practice, academic appropriate",
+    "example": "It’s not an appropriate time to make a speech.",
+    "exampleTr": "Örnek: \"münasip\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "precursor",
+    "type": "n.",
+    "tr": "önceki, öncü",
+    "hint": "Eşdizim: precursor in practice, academic precursor",
+    "example": "Sulphur dioxide is the main precursor of acid rain.",
+    "exampleTr": "Örnek: \"önceki\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "spread",
+    "type": "v.",
+    "tr": "yaymak, dağıtmak",
+    "hint": "Eşdizim: spread in practice, academic spread",
+    "example": "Never share your toothbrush as this can spread infections.",
+    "exampleTr": "Örnek: \"yaymak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "unavoidable",
+    "type": "adj.",
+    "tr": "kaçınılmaz, iptal edilemez",
+    "hint": "Eşdizim: unavoidable in practice, academic unavoidable",
+    "example": "Credit cards nowadays are an unavoidable necessity.",
+    "exampleTr": "Örnek: \"kaçınılmaz\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "commitment",
+    "type": "n.",
+    "tr": "bağlılık, kararlılık",
+    "hint": "Eşdizim: commitment in practice, academic commitment",
+    "example": "This work requires commitment and full confidentiality.",
+    "exampleTr": "Örnek: \"bağlılık\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "substantial",
+    "type": "adj.",
+    "tr": "varlıklı, önemli",
+    "hint": "Eşdizim: substantial in practice, academic substantial",
+    "example": "She inherited a substantial fortune from her grandfather.",
+    "exampleTr": "Örnek: \"varlıklı\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "dictate",
+    "type": "v.",
+    "tr": "dikte etmek",
+    "hint": "Eşdizim: dictate in practice, academic dictate",
+    "example": "Guide their choices rather than dictate them.",
+    "exampleTr": "Örnek: \"dikte etmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "shortage",
+    "type": "n.",
+    "tr": "eksiklik, kıtlık",
+    "hint": "Eşdizim: shortage in practice, academic shortage",
+    "example": "Water shortage is an increasingly serious problem.",
+    "exampleTr": "Örnek: \"eksiklik\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "conduct",
+    "type": "v.",
+    "tr": "yürütmek, yönetmek",
+    "hint": "Eşdizim: conduct in practice, academic conduct",
+    "example": "We are conducting a survey to find out what our customers think of their local bus service.",
+    "exampleTr": "Örnek: \"yürütmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "emerge",
+    "type": "v.",
+    "tr": "ortaya çıkmak, meydana çıkmak",
+    "hint": "Eşdizim: emerge in practice, academic emerge",
+    "example": "No new evidence emerged during the investigation.",
+    "exampleTr": "Örnek: \"ortaya çıkmak\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "suitable",
+    "type": "adj.",
+    "tr": "uygun, elverişli, münasip",
+    "hint": "Eşdizim: suitable in practice, academic suitable",
+    "example": "This show is not suitable for children.",
+    "exampleTr": "Örnek: \"uygun\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "triumph",
+    "type": "n.",
+    "tr": "zafer, galibiyet",
+    "hint": "Eşdizim: triumph in practice, academic triumph",
+    "example": "The righteous always will triumph in the end.",
+    "exampleTr": "Örnek: \"zafer\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "yearn",
+    "type": "v.",
+    "tr": "özlemek, hasretini çekmek",
+    "hint": "Eşdizim: yearn in practice, academic yearn",
+    "example": "Sometimes I just yearn to be alone.",
+    "exampleTr": "Örnek: \"özlemek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "acknowledge",
+    "type": "v.",
+    "tr": "kabullenmek, tanımak",
+    "hint": "Eşdizim: acknowledge in practice, academic acknowledge",
+    "example": "She does not acknowledge that I haven’t done anything wrong.",
+    "exampleTr": "Örnek: \"kabullenmek\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "foremost",
+    "type": "adj.",
+    "tr": "en başta gelen, en önemli",
+    "hint": "Eşdizim: foremost in practice, academic foremost",
+    "example": "This problem has been foremost in our minds recently.",
+    "exampleTr": "Örnek: \"en başta gelen\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "damaging",
+    "type": "adj.",
+    "tr": "zarar verici, zararlı",
+    "hint": "Eşdizim: damaging in practice, academic damaging",
+    "example": "Studies show that it may protect your skin from the damaging rays of the sun.",
+    "exampleTr": "Örnek: \"zarar verici\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "tendency",
+    "type": "n.",
+    "tr": "eğilim, meyletme",
+    "hint": "Eşdizim: tendency in practice, academic tendency",
+    "example": "Her tendency to exaggerate is well known.",
+    "exampleTr": "Örnek: \"eğilim\" anlamında sınav bağlamında kurulan cümle."
+  },
+  {
+    "word": "undergo",
+    "type": "v.",
+    "tr": "(hastalık) geçirmek, katlanmak",
+    "hint": "Eşdizim: undergo in practice, academic undergo",
+    "example": "He underwent an operation on a tumour in his right lung last year.",
+    "exampleTr": "Örnek: \"(hastalık) geçirmek\" anlamında sınav bağlamında kurulan cümle."
+  }
+];

@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Toaster } from "sonner";
+import AmbientBackground from "@/components/AmbientBackground";
+import AiWidget from "@/components/AiWidget";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="tr" className="dark">
       <body className={inter.className}>
+        <AmbientBackground />
         <Navbar />
         <main className="min-h-[calc(100vh-4rem)]">
           {children}
         </main>
+        <AiWidget />
         <Toaster position="top-right" richColors theme="dark" />
       </body>
     </html>
