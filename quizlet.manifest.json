@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "folder": {
+    "id": "yds-core-vocabulary",
+    "title": "YDS / YDT Temel Kelime Koleksiyonu",
+    "quizletUrl": "https://quizlet.com/user/yds-master-vocab",
+    "expectedSetCount": 3,
+    "expectedTotalCardCount": 30
+  },
+  "outputFile": "src/data/canonical-vocabulary.json",
+  "reportFile": "docs/quizlet-import-report.json",
+  "sets": [
+    {
+      "id": "yds-phrasal-verbs",
+      "title": "YDS Phrasal Verbs",
+      "quizletUrl": "https://quizlet.com/set/yds-phrasal-verbs",
+      "sourceFile": "content/quizlet/raw/yds-phrasal-verbs.tsv",
+      "expectedCardCount": 10,
+      "format": {
+        "fieldSeparator": "\\t",
+        "rowSeparator": "\\n",
+        "columns": [
+          "term",
+          "definitionEn",
+          "meaningTr"
+        ]
+      }
+    },
+    {
+      "id": "yds-frequent-words",
+      "title": "YDT/YDS En Sık Kullanılan Kelimeler",
+      "quizletUrl": "https://quizlet.com/set/yds-frequent-words",
+      "sourceFile": "content/quizlet/raw/yds-frequent-words.tsv",
+      "expectedCardCount": 10,
+      "format": {
+        "fieldSeparator": "\\t",
+        "rowSeparator": "\\n",
+        "columns": [
+          "term",
+          "definitionEn",
+          "meaningTr"
+        ]
+      }
+    },
+    {
+      "id": "yds-frequent-adverbs",
+      "title": "YDT/YDS En Sık Kullanılan Zarflar",
+      "quizletUrl": "https://quizlet.com/set/yds-frequent-adverbs",
+      "sourceFile": "content/quizlet/raw/yds-frequent-adverbs.tsv",
+      "expectedCardCount": 10,
+      "format": {
+        "fieldSeparator": "\\t",
+        "rowSeparator": "\\n",
+        "columns": [
+          "term",
+          "definitionEn",
+          "meaningTr"
+        ]
+      }
+    }
+  ]
+}

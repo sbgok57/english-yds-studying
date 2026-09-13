@@ -1,0 +1,44 @@
+{
+  "result": "PASS",
+  "generatedAt": "2026-09-13T11:51:50.654Z",
+  "manifestFile": "quizlet.manifest.json",
+  "outputFile": "src/data/canonical-vocabulary.json",
+  "encoding": "UTF-8 verified",
+  "folder": {
+    "expectedSetCount": 3,
+    "importedSetCount": 3,
+    "expectedTotalCardCount": 30,
+    "importedTotalCardCount": 30
+  },
+  "sets": [
+    {
+      "setId": "yds-phrasal-verbs",
+      "expectedCardCount": 10,
+      "importedCardCount": 10,
+      "duplicateTerms": [],
+      "possibleHtmlEntities": []
+    },
+    {
+      "setId": "yds-frequent-words",
+      "expectedCardCount": 10,
+      "importedCardCount": 10,
+      "duplicateTerms": [],
+      "possibleHtmlEntities": []
+    },
+    {
+      "setId": "yds-frequent-adverbs",
+      "expectedCardCount": 10,
+      "importedCardCount": 10,
+      "duplicateTerms": [],
+      "possibleHtmlEntities": []
+    }
+  ],
+  "integrity": {
+    "invalidUtf8Files": 0,
+    "replacementCharacters": 0,
+    "hiddenCharacters": 0,
+    "removedDuplicates": 0,
+    "generatedIdentifiersDisplayedAsTerms": false,
+    "persistedDataVerified": true
+  }
+}

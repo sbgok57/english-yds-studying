@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-13T11:51:50.652Z",
+  "sourceType": "user-authorized-quizlet-export",
+  "sourcePolicy": "links-are-provenance-only",
+  "folder": {
+    "id": "yds-core-vocabulary",
+    "title": "YDS / YDT Temel Kelime Koleksiyonu",
+    "quizletUrl": "https://quizlet.com/user/yds-master-vocab"
+  },
+  "totals": {
+    "setCount": 3,
+    "cardCount": 30
+  },
+  "sets": [
+    {
+      "id": "yds-phrasal-verbs",
+      "title": "YDS Phrasal Verbs",
+      "quizletUrl": "https://quizlet.com/set/yds-phrasal-verbs",
+      "sourceFile": "content/quizlet/raw/yds-phrasal-verbs.tsv",
+      "sourceChecksum": "24ea9d12d8c58d1786ecff10bc4e78456436828456461754a85f4f4ec0d14275",
+      "cardCount": 10,
+      "cards": [
+        {
+          "id": "yds-phrasal-verbs-0001",
+          "order": 1,
+          "term": "bring about",
+          "definitionEn": "to cause something to happen",
+          "meaningTr": "neden olmak, yol açmak",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 1,
+          "sourceRowChecksum": "991d86cb06d78c179e1ccf3d82a42454c9aa54c870878a292da6519ae4546f27",
+          "integrityHash": "f8cc0b885b92551b3de47d3930e50eefc28b0dad2ea8a6bc551e65c49452dbd4"
+        },
+        {
+          "id": "yds-phrasal-verbs-0002",
+          "order": 2,
+          "term": "call off",
+          "definitionEn": "to cancel an event or agreement",
+          "meaningTr": "iptal etmek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 2,
+          "sourceRowChecksum": "cbd54091b5934f574a31a8992d6a5e251b1fe42ed25ae7b595bf91d21d6e1e66",
+          "integrityHash": "b91d9605e56095011a20afbe639ec9e8fb562c6a25785f3838c8cebe64e9c6a1"
+        },
+        {
+          "id": "yds-phrasal-verbs-0003",
+          "order": 3,
+          "term": "carry out",
+          "definitionEn": "to perform or conduct a task or experiment",
+          "meaningTr": "yürütmek, gerçekleştirmek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 3,
+          "sourceRowChecksum": "3f691fa10a31bb09330993aa04c82806b754e464e83c760417d992422699526d",
+          "integrityHash": "19a72b042c9a6c97510bce854f60a38321a121d3c930533366bfd6890fc9da52"
+        },
+        {
+          "id": "yds-phrasal-verbs-0004",
+          "order": 4,
+          "term": "cope with",
+          "definitionEn": "to deal successfully with a difficult situation",
+          "meaningTr": "başa çıkmak, üstesinden gelmek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 4,
+          "sourceRowChecksum": "9e48bcb615da75b5a3eb4aa435ab1bf9bc5894c832d58da6809a04e5aee188ee",
+          "integrityHash": "b3b813ea113d0d993170f79a58c60fb149e6cfa953296f790cb440c528eb7e16"
+        },
+        {
+          "id": "yds-phrasal-verbs-0005",
+          "order": 5,
+          "term": "give up",
+          "definitionEn": "to stop trying or doing something",
+          "meaningTr": "vazgeçmek, bırakmak",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 5,
+          "sourceRowChecksum": "66a1d634a15cd830b7affbd668ce603756934789538e5fd0940cfd656c3bd053",
+          "integrityHash": "cd96d0e78b45b75d614d0b3b1485f7343fcd717175f75ccd0d8fd2d5d1236c66"
+        },
+        {
+          "id": "yds-phrasal-verbs-0006",
+          "order": 6,
+          "term": "look into",
+          "definitionEn": "to investigate or examine the facts",
+          "meaningTr": "araştırmak, incelemek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 6,
+          "sourceRowChecksum": "43a63d9de086e7caf3cf4b837614205d26e61f7ec96040485bcbfab784feeb3a",
+          "integrityHash": "bba36834a7925c66d69170bdf4fba2d497010fb2a6c0bcf2679f44a0d1f8c31f"
+        },
+        {
+          "id": "yds-phrasal-verbs-0007",
+          "order": 7,
+          "term": "make up for",
+          "definitionEn": "to compensate for something bad or missing",
+          "meaningTr": "telafi etmek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 7,
+          "sourceRowChecksum": "3b49de6a0087e029d189e09bbc58c6d6a58d4c61e423ed6d63b9bac04a356f7c",
+          "integrityHash": "31d640d9963795b1d9b8865ef21823d01d174238a5767d640f09fdaa26ba21d7"
+        },
+        {
+          "id": "yds-phrasal-verbs-0008",
+          "order": 8,
+          "term": "put off",
+          "definitionEn": "to postpone or delay something",
+          "meaningTr": "ertelemek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 8,
+          "sourceRowChecksum": "a8b52b78a4dd4d9165ed4c221528d14fb513b4adb02aceceaafb9008e2d05db3",
+          "integrityHash": "bef04e063a6228bdc0af3ce2622b56877924c7cee2529f108f8c9973dcae4c13"
+        },
+        {
+          "id": "yds-phrasal-verbs-0009",
+          "order": 9,
+          "term": "rely on",
+          "definitionEn": "to depend on with confidence",
+          "meaningTr": "güvenmek, bel bağlamak",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 9,
+          "sourceRowChecksum": "00a63beaec64edde22268a16357a5b63ece27e4b0ef89ac2670046c363ed8c24",
+          "integrityHash": "542f66fc13cd99ecbaf48933d6a12c88e6f5b21c3ae33ff2612bf59d349c5b19"
+        },
+        {
+          "id": "yds-phrasal-verbs-0010",
+          "order": 10,
+          "term": "turn down",
+          "definitionEn": "to reject or refuse an offer or request",
+          "meaningTr": "reddetmek, geri çevirmek",
+          "sourceSetId": "yds-phrasal-verbs",
+          "sourceRow": 10,
+          "sourceRowChecksum": "d09de3447abc3fe218459b923a1f15c299919cd118fae043f2c8937ae7b0203f",
+          "integrityHash": "7511651d4c0f59b8791b47f40ab2ccacd85e3b708723d5fbe905e0f7280862c7"
+        }
+      ]
+    },
+    {
+      "id": "yds-frequent-words",
+      "title": "YDT/YDS En Sık Kullanılan Kelimeler",
+      "quizletUrl": "https://quizlet.com/set/yds-frequent-words",
+      "sourceFile": "content/quizlet/raw/yds-frequent-words.tsv",
+      "sourceChecksum": "57a8730cf6df554cdf0abcbff74fedbbbc1ccb17b8f840f3ef24649553b6b37c",
+      "cardCount": 10,
+      "cards": [
+        {
+          "id": "yds-frequent-words-0001",
+          "order": 1,
+          "term": "abandon",
+          "definitionEn": "to leave behind or give up completely",
+          "meaningTr": "terk etmek, vazgeçmek",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 1,
+          "sourceRowChecksum": "57c4be4e5a4091ba900986deb2b8db0cf314a5bd468f89a384b90f4a941a1a4a",
+          "integrityHash": "8d5c0dce82e4ee730580ee3efab04910cc6ad403049f74dc96d1706838ad9f55"
+        },
+        {
+          "id": "yds-frequent-words-0002",
+          "order": 2,
+          "term": "accurate",
+          "definitionEn": "correct in all details and exact",
+          "meaningTr": "doğru, hatasız, kesin",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 2,
+          "sourceRowChecksum": "5853096b6b953513431b9a556dd7b314347db72af6e045e6ba0cfcf14b6de4d2",
+          "integrityHash": "a9fa61b4e5ae526e826c349e351ec1ad8b062c5f9ec749b474015380e3da5044"
+        },
+        {
+          "id": "yds-frequent-words-0003",
+          "order": 3,
+          "term": "comprehensive",
+          "definitionEn": "including or dealing with all or nearly all elements",
+          "meaningTr": "kapsamlı, detaylı",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 3,
+          "sourceRowChecksum": "eebd56e8c2b81f5d0a8ec8c975bb7637961ee0efe544290fc4fd1fef057df78f",
+          "integrityHash": "6f6ef416203c80227dbb164c5e62ba703e4561bfc0c2bda6c0085ceaae792d1e"
+        },
+        {
+          "id": "yds-frequent-words-0004",
+          "order": 4,
+          "term": "deteriorate",
+          "definitionEn": "to become progressively worse in quality or condition",
+          "meaningTr": "kötüleşmek, bozulmak",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 4,
+          "sourceRowChecksum": "1ce6a19278a1dd73e4a71e10219767e6113ebcfbe9fbfa51fd20a1089ba5cbb4",
+          "integrityHash": "f0b6b151f3065debd6538b291ca4ed5599270e6d8247354c26c323bed2c7a3ed"
+        },
+        {
+          "id": "yds-frequent-words-0005",
+          "order": 5,
+          "term": "enhance",
+          "definitionEn": "to intensify, increase, or further improve the quality",
+          "meaningTr": "artırmak, geliştirmek",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 5,
+          "sourceRowChecksum": "052c364ca72d2854c3c8f73c4a38e0e8c2a70cb2958778e295a408dec6681e8a",
+          "integrityHash": "a56f991e5b0adc56929338f1d86ae6d6b1a0ae3583dadb24730f2720fd6365ce"
+        },
+        {
+          "id": "yds-frequent-words-0006",
+          "order": 6,
+          "term": "fluctuate",
+          "definitionEn": "to rise and fall irregularly in number or amount",
+          "meaningTr": "dalgalanmak, değişkenlik göstermek",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 6,
+          "sourceRowChecksum": "771de17778fc10eb915d44a64b98422d99ea29255c839c29062e2f51eda5e8be",
+          "integrityHash": "8f74d3cc69d8ef23349af752c8ac2574e21446d22ed712343cb3dfc4a1cf8438"
+        },
+        {
+          "id": "yds-frequent-words-0007",
+          "order": 7,
+          "term": "inevitable",
+          "definitionEn": "certain to happen and unavoidable",
+          "meaningTr": "kaçınılmaz",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 7,
+          "sourceRowChecksum": "fc168d458bdbb9f95de22c639d41a8f06debbe6fdc00ba5f6a96e95668324345",
+          "integrityHash": "22d0d5f8a146ef70dbff73dc0df6df4f143cabff41266edfc80a6867717b568a"
+        },
+        {
+          "id": "yds-frequent-words-0008",
+          "order": 8,
+          "term": "pioneer",
+          "definitionEn": "a person who begins or helps develop something new",
+          "meaningTr": "öncü, çığır açan",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 8,
+          "sourceRowChecksum": "e1f7f9f5f4d3cff4895847a64bdc53e26bb21066864979ee675b6984fad7b398",
+          "integrityHash": "f162895fa0ce30057374c1fd854106068ea6cb2811e6473b2cc13eab868085d2"
+        },
+        {
+          "id": "yds-frequent-words-0009",
+          "order": 9,
+          "term": "reluctant",
+          "definitionEn": "unwilling and hesitant to do something",
+          "meaningTr": "isteksiz, tereddütlü",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 9,
+          "sourceRowChecksum": "d6c6f47ea5efd762c379fbd608aeef5970d435daad257fb58403647943d787ec",
+          "integrityHash": "dad9d7e412edfbfa5986479d430e8c3da7bc8d9e62744d6d556746a11b73b650"
+        },
+        {
+          "id": "yds-frequent-words-0010",
+          "order": 10,
+          "term": "ubiquitous",
+          "definitionEn": "present, appearing, or found everywhere",
+          "meaningTr": "her yerde bulunan, yaygın",
+          "sourceSetId": "yds-frequent-words",
+          "sourceRow": 10,
+          "sourceRowChecksum": "7213c901a35d2dc9a91c245773d6b07bc3ddd61f227b3d5d910181370bf2c829",
+          "integrityHash": "f1093bcd10b8fad8a06150c60f75350f9b4a63cf6b690e2bc643976dde08f182"
+        }
+      ]
+    },
+    {
+      "id": "yds-frequent-adverbs",
+      "title": "YDT/YDS En Sık Kullanılan Zarflar",
+      "quizletUrl": "https://quizlet.com/set/yds-frequent-adverbs",
+      "sourceFile": "content/quizlet/raw/yds-frequent-adverbs.tsv",
+      "sourceChecksum": "044d049dd25651d3ccbead86f593520c9f2dfadb7318400fed8cd4828e07f55f",
+      "cardCount": 10,
+      "cards": [
+        {
+          "id": "yds-frequent-adverbs-0001",
+          "order": 1,
+          "term": "considerably",
+          "definitionEn": "to a notably large or significant extent",
+          "meaningTr": "önemli ölçüde, oldukça",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 1,
+          "sourceRowChecksum": "78be6d82eeaf6b76959cecaf395171755fd840641facd04476b918868898e300",
+          "integrityHash": "57fd5d3a6c30a65cad13029c54e74b282842842ee3f0736f03463630bc067b0d"
+        },
+        {
+          "id": "yds-frequent-adverbs-0002",
+          "order": 2,
+          "term": "drastically",
+          "definitionEn": "in a severe, sudden, or extreme manner",
+          "meaningTr": "ciddi derecede, kökten, sertçe",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 2,
+          "sourceRowChecksum": "df35d6c6f05e565dd13a1f86153bb10499f36304d60660d72afc48fd56a1501c",
+          "integrityHash": "0909230354e6fc7bb1e5371ca4f601d26e1ddc5beb57dc9c5d2b440b46247aa8"
+        },
+        {
+          "id": "yds-frequent-adverbs-0003",
+          "order": 3,
+          "term": "exclusively",
+          "definitionEn": "only and entirely for a specific purpose or group",
+          "meaningTr": "yalnızca, sadece, özel olarak",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 3,
+          "sourceRowChecksum": "bf91553969513b84bce987e545e54cf6fd06410d600176d50defd4c52efc41bf",
+          "integrityHash": "9656c967a545e7bb0ac928b0c03d6b444f4f519469445d1f1883222bdd5bbe57"
+        },
+        {
+          "id": "yds-frequent-adverbs-0004",
+          "order": 4,
+          "term": "gradually",
+          "definitionEn": "slowly over a period of time or in stages",
+          "meaningTr": "yavaş yavaş, kademeli olarak",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 4,
+          "sourceRowChecksum": "f485bacd273cbec7e58e7a7b0e155a4092a71fab19ef46b3158e175012bbd8b8",
+          "integrityHash": "df9c8f12eeb2ada65b45e7941dead95b6914fea1d7c430dee4ad76f945a320b3"
+        },
+        {
+          "id": "yds-frequent-adverbs-0005",
+          "order": 5,
+          "term": "inevitably",
+          "definitionEn": "in a way that cannot be avoided or prevented",
+          "meaningTr": "kaçınılmaz bir şekilde",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 5,
+          "sourceRowChecksum": "fc51d478fd6ddcd0d3fcd5bcd88dacebbf77d606feab1b613f8fb95f5e98aa3c",
+          "integrityHash": "b9c3a95ca4fae7e5561dacbf9b6e420b57c0bac5ad2048d92d9ab8db8b512bb1"
+        },
+        {
+          "id": "yds-frequent-adverbs-0006",
+          "order": 6,
+          "term": "mutually",
+          "definitionEn": "with mutual action or relationship; reciprocally",
+          "meaningTr": "karşılıklı olarak",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 6,
+          "sourceRowChecksum": "156603d5877997fbb02cc80638c97f72683933b9417c82b28de029d274b0cefa",
+          "integrityHash": "560ae34947a7109fc823a37b5a1d5ec6f7083af8eaab2e9020b377833cc330cc"
+        },
+        {
+          "id": "yds-frequent-adverbs-0007",
+          "order": 7,
+          "term": "predominantly",
+          "definitionEn": "mainly, for the most part, or primarily",
+          "meaningTr": "ağırlıklı olarak, çoğunlukla",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 7,
+          "sourceRowChecksum": "54c6ebbbdc0ebbbfab35cd4ca9b9a50f10b2dd29509b39170edfd7eaf0e9e7f7",
+          "integrityHash": "06d93d58954084cf8a908413fafa98477cd8acc93374382d7ce2158753fdc940"
+        },
+        {
+          "id": "yds-frequent-adverbs-0008",
+          "order": 8,
+          "term": "remarkably",
+          "definitionEn": "in a worthy of notice or astonishing way",
+          "meaningTr": "dikkat çekici derecede, olağanüstü",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 8,
+          "sourceRowChecksum": "e30e18ff0b673ed4db6f4c8edb69811218fd7d33a890605e42df0eb82d4df4ab",
+          "integrityHash": "e504063d8a8b115778c8a0f238626dadbba4810099231ece411cdb275cc19860"
+        },
+        {
+          "id": "yds-frequent-adverbs-0009",
+          "order": 9,
+          "term": "scarcely",
+          "definitionEn": "only just or almost not at all",
+          "meaningTr": "hemen hemen hiç, güçbela",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 9,
+          "sourceRowChecksum": "8cbad528e2a52a54f26eeead39be8e61e5719e3a671fe61e6610e682d4e5007d",
+          "integrityHash": "275a6cb3588b8cd18c9843a9de3a357ae6a766d5e7540be2d63dc3e39e297b43"
+        },
+        {
+          "id": "yds-frequent-adverbs-0010",
+          "order": 10,
+          "term": "substantially",
+          "definitionEn": "to a great or significant degree",
+          "meaningTr": "büyük ölçüde, esaslı şekilde",
+          "sourceSetId": "yds-frequent-adverbs",
+          "sourceRow": 10,
+          "sourceRowChecksum": "01299ad178974641646068f01034345d5cafdf613561b42453dc5c530eecc2c9",
+          "integrityHash": "6dcafce8bd1ba2fc55dabbc2d90ce42a2ba04c8907aaa9ac465c05707a91745f"
+        }
+      ]
+    }
+  ]
+}

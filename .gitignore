@@ -1,5 +1,26 @@
+# Dependencies
 node_modules
-dist
-dist-ssr
-*.local
+/.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+*.tsbuildinfo
+
+# Production & Vercel
+.vercel
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment
+.env*.local
+
+# OS files
 .DS_Store
+*.pem
+Thumbs.db

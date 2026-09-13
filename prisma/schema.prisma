@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  username     String        @unique
+  passwordHash String
+  avatarId     String?       @default("astronaut")
+  level        String        @default("A1")
+  streak       Int           @default(1)
+  totalPoints  Int           @default(0)
+  createdAt    DateTime      @default(now())
+  progress     Progress[]
+  wordMastery  WordMastery[]
+  examAttempts ExamAttempt[]
+}
+
+model Word {
+  id            String        @id @default(cuid())
+  english       String
+  turkish       String
+  definitionEn  String        @default("")
+  examples      String        @default("[]")
+  synonyms      String        @default("[]")
+  level         String        @default("A1")
+  type          String        @default("genel")
+  imageUrl      String?
+  funnyImageUrl String?
+  source        String        @default("manuel")
+  sourceRow     Int?
+  integrityHash String?
+  approved      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  mastery       WordMastery[]
+
+  @@unique([english, turkish])
+}
+
+model WordMastery {
+  id          String   @id @default(cuid())
+  userId      String
+  wordId      String
+  easeFactor  Float    @default(2.5)
+  interval    Int      @default(1)
+  repetitions Int      @default(0)
+  nextReview  DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  word        Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, wordId])
+}
+
+model Quote {
+  id        String   @id @default(cuid())
+  text      String   @unique
+  author    String?
+  category  String   // "OZLU" | "MOTIVASYON" | "KOMIK" | "ESPIRILI"
+  animation String   @default("sparkles.json")
+  createdAt DateTime @default(now())
+}
+
+model GrammarTopic {
+  id            String @id @default(cuid())
+  slug          String @unique
+  title         String
+  emoji         String
+  colorTheme    String
+  simpleSummary String
+  sections      String // JSON
+  trapAlerts    String // JSON
+  signalWords   String // JSON
+  questionCount Int    @default(100)
+}
+
+model Question {
+  id             String  @id @default(cuid())
+  examId         String?
+  topicSlug      String?
+  questionNumber Int?
+  type           String
+  text           String
+  options        String  // JSON: ["A...", "B...", ...]
+  correct        String  // "A"|"B"|"C"|"D"|"E"
+  explanation    String
+  memoryCode     String?
+}
+
+model Exam {
+  id              String   @id
+  title           String
+  year            Int?
+  period          String?
+  isReal          Boolean  @default(false)
+  durationMinutes Int      @default(180)
+  questionCount   Int      @default(80)
+  createdAt       DateTime @default(now())
+}
+
+model ExamAttempt {
+  id        String   @id @default(cuid())
+  userId    String?
+  examId    String
+  answers   String   // JSON {1: "A", 2: "C"}
+  correct   Int
+  wrong     Int
+  empty     Int
+  net       Float
+  score     Int
+  timeSpent Int      @default(0)
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Progress {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  data      String   // JSON
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

@@ -1,170 +1,148 @@
-import React from 'react';
-import {
-  LayoutDashboard,
-  BookOpen,
-  Cpu,
-  GraduationCap,
-  AlertCircle,
-  BarChart3,
-  Settings,
-  Flame,
-  Zap,
-  Sparkles,
-  Sun,
-  Moon,
-} from 'lucide-react';
-import { UserProgress } from '../../types';
+"use client";
 
-export type ActiveTab =
-  | 'dashboard'
-  | 'study_session'
-  | 'vocabulary'
-  | 'grammar'
-  | 'yds'
-  | 'yds_essentials'
-  | 'errors'
-  | 'progress'
-  | 'settings';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Sparkles, 
+  Layers, 
+  BookOpen, 
+  Clock, 
+  Award, 
+  UploadCloud, 
+  Menu, 
+  X, 
+  Compass,
+  FileSpreadsheet,
+  Headphones,
+  Flame
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface NavbarProps {
-  activeTab: ActiveTab;
-  setActiveTab: (tab: ActiveTab) => void;
-  userProgress: UserProgress;
-  isDarkMode?: boolean;
-  onToggleDarkMode?: () => void;
-}
+const NAV_LINKS = [
+  { href: "/vocabulary/flashcards", label: "Flashcards 3D", icon: Sparkles, color: "text-amber-300" },
+  { href: "/vocabulary", label: "Kelimeler", icon: Layers, color: "text-orange-400" },
+  { href: "/exams", label: "180 dk Sınav & Optik", icon: Clock, color: "text-rose-400" },
+  { href: "/grammar", label: "Gramer (15 Konu)", icon: BookOpen, color: "text-purple-400" },
+  { href: "/tactics", label: "11 Soru Taktikleri", icon: Compass, color: "text-cyan-400" },
+  { href: "/reading", label: "Reading Lab", icon: FileSpreadsheet, color: "text-emerald-400" },
+  { href: "/listening", label: "Listening TTS", icon: Headphones, color: "text-blue-400" },
+  { href: "/import", label: "PDF / Quizlet", icon: UploadCloud, color: "text-pink-400" },
+  { href: "/dashboard", label: "İlerleme & Avatar", icon: Award, color: "text-yellow-400" },
+];
 
-export const Navbar: React.FC<NavbarProps> = ({
-  activeTab,
-  setActiveTab,
-  userProgress,
-  isDarkMode = false,
-  onToggleDarkMode,
-}) => {
-  const navItems = [
-    { id: 'dashboard', label: 'Ana Sayfa', labelEn: 'Dashboard', icon: LayoutDashboard },
-    { id: 'yds_essentials', label: 'YDS/YDT Altın Kurallar', labelEn: 'YDS/YDT Essentials', icon: Sparkles },
-    { id: 'vocabulary', label: 'Kelimeler', labelEn: 'Vocabulary', icon: BookOpen },
-    { id: 'grammar', label: 'Gramer', labelEn: 'Grammar', icon: Cpu },
-    { id: 'yds', label: 'YDS Çalışma Merkezi', labelEn: 'YDS Study Center', icon: GraduationCap },
-    { id: 'errors', label: 'Hata Defteri', labelEn: 'Error Notebook', icon: AlertCircle },
-    { id: 'progress', label: 'İlerleme', labelEn: 'Progress', icon: BarChart3 },
-    { id: 'settings', label: 'Ayarlar', labelEn: 'Settings', icon: Settings },
-  ] as const;
+export default function Navbar() {
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur shadow-sm">
-      {/* 🔴🟠🟡🟢🔵🟣🟣 Top Rainbow Accent Stripe */}
-      <div className="h-[3px] w-full bg-rainbow-stripe" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo & Brand */}
-          <div
-            onClick={() => setActiveTab('dashboard')}
-            className="flex items-center gap-3 cursor-pointer select-none group"
-          >
-            <div className="w-10 h-10 rounded-xl bg-rainbow-gradient flex items-center justify-center text-white font-black text-xl shadow-md transition-transform group-hover:scale-105">
-              Y
-            </div>
-            <div>
-              <span className="font-extrabold text-lg tracking-tight text-rainbow-gradient block">
-                YDS/YDT Master
-              </span>
-              <span className="hidden sm:block text-[10px] text-slate-400 font-medium">
-                Personal English Tutor
-              </span>
-            </div>
+    <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-2xl border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform">
+            🧠
           </div>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Ana Menü">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`relative flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
-                    isActive
-                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold shadow-sm ring-1 ring-slate-200 dark:ring-slate-700'
-                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800/60'
-                  }`}
-                >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-500' : ''}`} />
-                  <span>{item.label}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-rainbow-stripe" />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* User Progress Stats Header Bar */}
-          <div className="flex items-center gap-3">
-            {/* Streak */}
-            <div
-              title={`${userProgress.dailyStreak} günlük çalışma serisi`}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800/60 text-amber-700 dark:text-amber-300 text-xs font-bold"
-            >
-              <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-              <span>{userProgress.dailyStreak} Gün</span>
-            </div>
-
-            {/* XP / Level */}
-            <div
-              title={`Seviye ${userProgress.level} (${userProgress.xp} XP)`}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-800/60 text-brand-700 dark:text-brand-300 text-xs font-bold"
-            >
-              <Zap className="w-3.5 h-3.5 text-brand-500 fill-brand-500" />
-              <span>{userProgress.xp} XP</span>
-              <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded-full bg-brand-200 dark:bg-brand-900 text-brand-900 dark:text-brand-100">
-                Lv.{userProgress.level}
-              </span>
-            </div>
-
-            {/* Dark Mode Quick Toggle */}
-            {onToggleDarkMode && (
-              <button
-                type="button"
-                onClick={onToggleDarkMode}
-                title={isDarkMode ? 'Aydınlık moda geç' : 'Karanlık moda geç'}
-                aria-label="Tema değiştir"
-                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm"
-              >
-                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-            )}
+          <div>
+            <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
+              YDS Master
+            </span>
+            <span className="block text-[10px] font-mono tracking-widest text-cyan-300 uppercase -mt-1">
+              Görsel Hafıza Platformu
+            </span>
           </div>
-        </div>
+        </Link>
 
-        {/* Mobile Navigation Bar */}
-        <div className="md:hidden flex items-center justify-between border-t border-slate-100 dark:border-slate-800/80 py-2 overflow-x-auto gap-1">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
+        {/* Desktop Navigation Links */}
+        <nav className="hidden xl:flex items-center gap-1">
+          {NAV_LINKS.map((link) => {
+            const Icon = link.icon;
+            const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
             return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center px-2 py-1 rounded-lg text-[10px] font-medium shrink-0 relative ${
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all",
                   isActive
-                    ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-                    : 'text-slate-500 dark:text-slate-400'
-                }`}
-              >
-                <Icon className="w-4 h-4 mb-0.5" />
-                <span>{item.label}</span>
-                {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-rainbow-stripe mt-0.5" />
+                    ? "bg-white/15 text-white shadow-md border border-white/20 scale-105"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
                 )}
-              </button>
+              >
+                <Icon className={cn("w-4 h-4", link.color)} />
+                {link.label}
+              </Link>
             );
           })}
+        </nav>
+
+        {/* Right Status (Streak + Avatar) */}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/40 text-orange-300 text-xs font-bold hover:scale-105 transition-transform"
+            title="Günlük Çalışma Serisi"
+          >
+            <Flame className="w-4 h-4 text-orange-400 animate-pulse" />
+            <span>7 Gün Seri</span>
+          </Link>
+
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 p-1.5 pr-3 rounded-full bg-white/10 border border-white/20 hover:border-white/40 transition-all group"
+          >
+            <span className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 to-purple-800 flex items-center justify-center text-sm shadow">
+              👨‍🚀
+            </span>
+            <span className="text-xs font-bold text-white/90 group-hover:text-yellow-300 transition-colors hidden sm:inline">
+              ydskasifi
+            </span>
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="xl:hidden p-2 rounded-xl bg-white/10 text-white/80 hover:text-white"
+            aria-label="Menüyü Aç"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="xl:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl px-4 py-4 space-y-1"
+          >
+            {NAV_LINKS.map((link) => {
+              const Icon = link.icon;
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all",
+                    isActive
+                      ? "bg-gradient-to-r from-pink-500/20 to-purple-600/20 text-white border border-pink-500/40"
+                      : "text-white/70 hover:bg-white/10"
+                  )}
+                >
+                  <Icon className={cn("w-5 h-5", link.color)} />
+                  {link.label}
+                </Link>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
-};
+}
