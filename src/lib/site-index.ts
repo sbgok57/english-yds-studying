@@ -102,6 +102,8 @@ export interface SiteEntry {
   href: string;
   type: string;
   emoji: string;
+  /** Ek aranabilir metin (örn. İngilizce konu adları) — görüntülenmez. */
+  search?: string;
 }
 
 function tNorm(s: string): string {
@@ -116,9 +118,15 @@ function tNorm(s: string): string {
     .replace(/â/g, "a")
     .replace(/î/g, "i")
     .replace(/û/g, "u")
+    .replace(/[-_/]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
+
+// Kelime ve ekstra veriler:
+import { WORDS } from "./data-vocabulary";
+import { ARCHIVE_WORDS } from "./data-archive-vocab";
+import { GRAMMAR_ALIASES } from "./grammar-extras";
 
 function buildIndex(): SiteEntry[] {
   const entries: SiteEntry[] = [];
@@ -127,7 +135,14 @@ function buildIndex(): SiteEntry[] {
     entries.push({ label: p.label, sub: "Sayfa", href: p.href, type: "Sayfa", emoji: p.emoji })
   );
   GRAMMAR_LINKS.forEach((g) =>
-    entries.push({ label: g.label, sub: "Gramer konusu", href: g.href, type: "Gramer", emoji: g.emoji })
+    entries.push({
+      label: g.label,
+      sub: "Gramer konusu",
+      href: g.href,
+      type: "Gramer",
+      emoji: g.emoji,
+      search: GRAMMAR_ALIASES[g.href.replace("/grammar/", "")]?.join(", "),
+    })
   );
   TACTICS_LINKS.forEach((t) =>
     entries.push({ label: t.label, sub: "Soru taktiği", href: t.href, type: "Taktik", emoji: t.emoji })
@@ -150,10 +165,6 @@ function buildIndex(): SiteEntry[] {
 
   return entries;
 }
-
-// Kelime verileri ayrı dosyalardan (hafif) eklenir:
-import { WORDS } from "./data-vocabulary";
-import { ARCHIVE_WORDS } from "./data-archive-vocab";
 
 const wordEntries: SiteEntry[] = WORDS.map((w) => ({
   label: w.word,
@@ -179,7 +190,7 @@ export function searchSite(q: string, limit = 8): SiteEntry[] {
 
   const scored: { e: SiteEntry; score: number }[] = [];
   for (const e of SEARCH_INDEX) {
-    const hay = tNorm(`${e.label} ${e.sub} ${e.type}`);
+    const hay = tNorm(`${e.label} ${e.sub} ${e.type} ${e.search || ""}`);
     if (!tokens.every((t) => hay.includes(t))) continue;
     const nl = tNorm(e.label);
     let score = 0;

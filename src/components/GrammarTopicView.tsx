@@ -10,6 +10,7 @@ import Tip from "@/components/Tip";
 import VideoModal, { type VideoOption } from "@/components/VideoModal";
 import SceneAnim from "@/components/SceneAnim";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
+import { GRAMMAR_ALIASES, GRAMMAR_EXAMPLES2 } from "@/lib/grammar-extras";
 import { recordGrammar, useUsage } from "@/lib/store";
 
 function mediaOptions(title: string): VideoOption[] {
@@ -26,10 +27,13 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [choice, setChoice] = useState<string | null>(null);
+  const [choice2, setChoice2] = useState<string | null>(null);
   const [celebrate, setCelebrate] = useState(false);
   const [video, setVideo] = useState<VideoOption | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
   const media = mediaOptions(topic.title);
+  const aliases = GRAMMAR_ALIASES[topic.slug] || [];
+  const example2 = GRAMMAR_EXAMPLES2[topic.slug];
 
   const highlighted = useMemo(() => {
     if (step < 0 || step >= topic.anim.length) return topic.example.sentence;
@@ -113,6 +117,23 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
             <h1 className="text-3xl sm:text-4xl font-black">{topic.title}</h1>
           </div>
         </div>
+
+        {aliases.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mt-4">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 self-center">
+              Diğer adları:
+            </span>
+            {aliases.slice(0, 8).map((a) => (
+              <span
+                key={a}
+                className="text-[11px] font-bold px-2 py-0.5 rounded-full border border-white/10 bg-white/[0.04] text-white/60"
+              >
+                {a}
+              </span>
+            ))}
+          </div>
+        )}
+
         <p className="mt-4 text-white/65 leading-relaxed">
           <RichText text={topic.summary} />
         </p>
@@ -323,6 +344,75 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
           )}
         </div>
       </section>
+
+      {/* İkinci örnek soru — ekstra pratik */}
+      {example2 && (
+        <section className="card-vibrant p-8 mb-8 border-t-4 border-t-cyan-400/50">
+          <div className="flex items-center gap-3 mb-2">
+            <h2 className="text-xl font-black">🧪 İkinci Örnek Soru</h2>
+            <Tip marker tip="Konuyu pekiştirmek için ikinci bir soru. Önce kendin çöz, sonra cevabı gör!">
+              <span className="cursor-help text-white/40 text-sm">ℹ️</span>
+            </Tip>
+          </div>
+          <p className="text-xs text-white/40 mb-5">Bir net daha kanka — hadi bu da senin olsun! 💪</p>
+
+          <p className="font-mono text-sm text-cyan-200 bg-slate-900/60 rounded-xl p-4 leading-relaxed">
+            {example2.sentence}
+          </p>
+          <p className="text-xs text-white/40 mt-2 italic">{example2.translation}</p>
+
+          <div className="grid sm:grid-cols-2 gap-2 mt-5">
+            {example2.options.map((o) => {
+              const isAnswer = o.id === example2.answer;
+              const isChosen = o.id === choice2;
+              const answered2 = choice2 !== null;
+              let cls = "border-white/15 bg-white/[0.04] hover:border-white/35 text-white/85";
+              if (answered2) {
+                if (isAnswer) cls = "border-emerald-400/70 bg-emerald-500/20 text-emerald-200 font-bold";
+                else if (isChosen) cls = "border-rose-400/70 bg-rose-500/20 anim-shake text-rose-200";
+                else cls = "border-white/10 bg-white/[0.02] opacity-50 text-white/40";
+              }
+              return (
+                <button
+                  key={o.id}
+                  disabled={answered2}
+                  onClick={() => {
+                    setChoice2(o.id);
+                    recordGrammar(update, topic.slug + "-2", o.id === example2.answer);
+                    if (o.id === example2.answer) setCelebrate(true);
+                  }}
+                  className={`text-left rounded-xl border px-4 py-3 transition-all ${cls}`}
+                >
+                  <span className="font-black text-white/60 mr-2">{o.id})</span>
+                  <span className="text-white/85 text-sm font-mono">{o.text}</span>
+                  {answered2 && isAnswer && <span className="ml-2">✅</span>}
+                  {answered2 && isChosen && !isAnswer && <span className="ml-2">❌</span>}
+                </button>
+              );
+            })}
+          </div>
+
+          {choice2 !== null && (
+            <div className="mt-5 rounded-2xl border border-cyan-400/30 bg-cyan-500/10 p-5 anim-pop">
+              <p className="font-black text-cyan-300 mb-2">
+                Doğru cevap: {example2.answer}
+                {choice2 === example2.answer
+                  ? " — Kanka sen bir efsanesin! 🎉"
+                  : " — Sorun değil kanka, taktiği aşağıda oku, tekrar dene! 💪"}
+              </p>
+              <p className="text-sm text-white/75 leading-relaxed mb-3">
+                <RichText text={example2.explanation} />
+              </p>
+              <div className="rounded-xl bg-white/5 p-4">
+                <p className="text-xs font-mono uppercase tracking-wider text-amber-300 mb-1">🎯 Hızlı Taktik</p>
+                <p className="text-sm text-white/80 leading-relaxed">
+                  <RichText text={example2.tactic} />
+                </p>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

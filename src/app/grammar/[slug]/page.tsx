@@ -1,4 +1,6 @@
+import { redirect } from "next/navigation";
 import { GRAMMAR_TOPICS } from "@/lib/data-grammar";
+import { findGrammarByAlias } from "@/lib/grammar-extras";
 import GrammarTopicView from "@/components/GrammarTopicView";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import TopicFallback from "@/components/TopicFallback";
@@ -18,9 +20,15 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 export default function GrammarTopicPage({ params }: { params: { slug: string } }) {
-  const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+  let topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+
+  // İngilizce/takma adla gelindiyse (örn. "simple-present") doğru konuya yönlendir.
   if (!topic) {
-    // 404 yerine dost bir yönlendirme ekranı → kullanıcı asla çıkmaza girmez
+    const canonical = findGrammarByAlias(params.slug);
+    if (canonical) redirect(`/grammar/${canonical}`);
+  }
+
+  if (!topic) {
     return (
       <TopicFallback
         title="Gramer konusu"
