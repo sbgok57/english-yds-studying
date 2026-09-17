@@ -17,6 +17,9 @@ export interface UsageData {
   ambient: boolean;
   sessions: number;
   lastVisit: number;
+  bookmarks?: string[];
+  wrongQuestions?: Record<string, { id: string; chosen: number; answer: number; date: number; topic?: string; type?: string }>;
+  solvedQuestions?: Record<string, { correct: boolean; date: number }>;
 }
 
 const KEY = "yds-master-usage-v1";
@@ -32,6 +35,9 @@ export function defaultUsage(): UsageData {
     ambient: true,
     sessions: 1,
     lastVisit: 0,
+    bookmarks: [],
+    wrongQuestions: {},
+    solvedQuestions: {},
   };
 }
 
@@ -156,6 +162,64 @@ export function recordExam(
     u.exams.totalCorrect += correct;
     u.exams.totalQuestions += total;
     if (correct > u.exams.bestNet) u.exams.bestNet = correct;
+    return u;
+  });
+}
+
+// PERF & SAFETY: Bounded bookmarking and question tracking
+export function toggleBookmark(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  questionId: string
+) {
+  update((u) => {
+    const list = u.bookmarks || [];
+    if (list.includes(questionId)) {
+      u.bookmarks = list.filter((id) => id !== questionId);
+    } else {
+      u.bookmarks = [...list, questionId];
+    }
+    return u;
+  });
+}
+
+export function recordQuestionResult(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  questionId: string,
+  correct: boolean,
+  chosen: number,
+  answer: number,
+  meta?: { topic?: string; type?: string }
+) {
+  update((u) => {
+    if (!u.solvedQuestions) u.solvedQuestions = {};
+    if (!u.wrongQuestions) u.wrongQuestions = {};
+
+    u.solvedQuestions[questionId] = { correct, date: Date.now() };
+
+    if (correct) {
+      delete u.wrongQuestions[questionId];
+    } else {
+      u.wrongQuestions[questionId] = {
+        id: questionId,
+        chosen,
+        answer,
+        date: Date.now(),
+        topic: meta?.topic,
+        type: meta?.type,
+      };
+    }
+    return u;
+  });
+}
+
+export function removeWrongQuestion(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  questionId: string
+) {
+  update((u) => {
+    if (u.wrongQuestions) {
+      delete u.wrongQuestions[questionId];
+    }
     return u;
   });
 }

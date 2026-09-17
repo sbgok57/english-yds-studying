@@ -52,6 +52,24 @@ export default function GrammarPage() {
           A1 seviyesinin anlayacağı sadelikte Türkçe anlatım, interaktif zaman çizelgesi animasyonları (TenseTimeline), YDS tuzak uyarıları ve her konu için 100'er soruluk optik test şablonu.
         </p>
 
+        {/* Karışık Test & Pratik Butonları */}
+        <div className="flex flex-wrap gap-2.5 pt-2">
+          <Link
+            href="/grammar/mixed-tests"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-black text-xs shadow-lg shadow-purple-500/30 transition-all flex items-center gap-2"
+          >
+            <span>🔀</span>
+            <span>500 Karışık Gramer Sınavı (Zayıf Konu Analizli)</span>
+          </Link>
+          <Link
+            href="/tactics/practice"
+            className="px-4 py-2.5 rounded-full bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 font-bold text-xs transition-all flex items-center gap-1.5"
+          >
+            <span>🎯</span>
+            <span>600 Taktik Sorusu</span>
+          </Link>
+        </div>
+
         {/* Kategori Filtresi */}
         <div className="flex flex-wrap gap-2 pt-2">
           {CATEGORIES.map((cat) => (
@@ -111,16 +129,24 @@ export default function GrammarPage() {
               </div>
             </div>
 
-            <Link
-              href={`/grammar/${topic.slug}`}
-              className={cn(
-                "w-full py-3 rounded-xl text-white font-extrabold text-xs shadow-lg hover:scale-105 transition-transform flex items-center justify-center gap-1.5 bg-gradient-to-r",
-                topic.colorTheme
-              )}
-            >
-              <span>Konuyu & Animasyonu Aç</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            <div className="grid grid-cols-2 gap-2 pt-2">
+              <Link
+                href={`/grammar/${topic.slug}`}
+                className={cn(
+                  "py-2.5 px-3 rounded-xl text-white font-extrabold text-[11px] shadow-md hover:scale-[1.02] transition-transform flex items-center justify-center gap-1 bg-gradient-to-r text-center",
+                  topic.colorTheme
+                )}
+              >
+                <span>Konuyu Aç</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+              <Link
+                href={`/grammar/${topic.slug}/practice`}
+                className="py-2.5 px-3 rounded-xl text-cyan-200 border border-cyan-400/40 bg-cyan-950/40 hover:bg-cyan-900/50 font-extrabold text-[11px] transition-all flex items-center justify-center gap-1 text-center"
+              >
+                <span>🎯 100 Soru</span>
+              </Link>
+            </div>
           </div>
         ))}
       </div>

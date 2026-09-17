@@ -1424,5 +1424,197 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
         "highlight": "did the new policy reduce"
       }
     ]
+  },
+  {
+    "slug": "adverbial-clauses",
+    "title": "Adverbial Clauses (Zarf Cümlecikleri)",
+    "level": "B1 - C1",
+    "color": "from-teal-500 to-emerald-600",
+    "emoji": "🔄",
+    "summary": "Zaman, sebep, zıtlık, koşul, amaç ve sonuç bildiren yan cümlelerdir. YDS'de bağlaç sorularının temelini oluşturur.",
+    "formula": [
+      { "label": "Time", "text": "When / While / As / After / Before + S + V", "color": "bg-teal-500/20 text-teal-300" },
+      { "label": "Contrast", "text": "Although / Even though / Whereas + S + V", "color": "bg-rose-500/20 text-rose-300" },
+      { "label": "Reason & Purpose", "text": "Because / Since / So that + S + V", "color": "bg-amber-500/20 text-amber-300" }
+    ],
+    "rules": [
+      "Zaman ve koşul yan cümleciklerinde (when, after, if, unless) will/would kullanılmaz.",
+      "Zıtlık bağlaçları (although, whereas) iki zıt kutbu (+ / -) birbirine bağlar.",
+      "So that arkasından modal (can, could, will, would) alarak amaç bildirir."
+    ],
+    "coding": [
+      "Zıt Kutup (+/-) = Although / Even though / Despite!",
+      "Amaç = So that + modal (can/could)!",
+      "Zaman bağlacı içine asla will/would koyma!"
+    ],
+    "traps": [
+      {
+        "trap": "Zaman bağlacının (when, as soon as, after) içine 'will/would' koymak.",
+        "fix": "Gelecek anlamı olsa bile yan cümlede Simple Present (V1) kullanılır."
+      }
+    ],
+    "example": {
+      "sentence": "------- the economic sanctions were severe, the nation maintained steady industrial growth.",
+      "translation": "Ekonomik yaptırımlar ağır olmasına rağmen, ülke istikrarlı bir sanayi büyümesi sürdürdü.",
+      "options": [
+        { "id": "A", "text": "Because" },
+        { "id": "B", "text": "Although" },
+        { "id": "C", "text": "Since" },
+        { "id": "D", "text": "Unless" }
+      ],
+      "answer": "B",
+      "reason": "Ağır yaptırımlar (-) ile istikrarlı büyüme (+) arasında açık bir zıtlık vardır; 'Although' gereklidir.",
+      "tactic": "+ / - kutup farkı daima zıtlık bağlacı (Although/Despite) gerektirir.",
+      "explanation": "Ağır yaptırımlar (-) ile istikrarlı büyüme (+) arasında zıtlık ilişkisi olduğundan Although doğru cevaptır."
+    },
+    "anim": [
+      { "label": "1. Kutup Tespiti Yap", "detail": "Yaptırımlar (-) ama büyüme (+) var.", "highlight": "severe" },
+      { "label": "2. Zıtlık Bağlacını Çağır", "detail": "Zıt kutupları bağlayan 'Although' seçilmelidir.", "highlight": "Although" },
+      { "label": "3. Anlamı Onayla", "detail": "Ağır yaptırımlara rağmen büyüme sürdürüldü.", "highlight": "Although" }
+    ]
+  },
+  {
+    "slug": "perfect-modals",
+    "title": "Perfect Modals & Geçmiş Çıkarımlar",
+    "level": "B2 - C1",
+    "color": "from-purple-600 to-indigo-600",
+    "emoji": "🔮",
+    "summary": "Geçmişe yönelik kesin çıkarım, pişmanlık, kaçırılmış fırsat ve eleştiri ifadeleridir. 'Modal + have + V3' yapısıyla kurulur.",
+    "formula": [
+      { "label": "Kesin Çıkarım", "text": "must have + V3 (Geçmişte yapmış olmalı)", "color": "bg-purple-500/20 text-purple-300" },
+      { "label": "Pişmanlık & Eleştiri", "text": "should have + V3 (Yapsaydı iyi olurdu ama yapmadı)", "color": "bg-rose-500/20 text-rose-300" },
+      { "label": "İmkansızlık", "text": "couldn't have + V3 (Yapmış olamaz)", "color": "bg-blue-500/20 text-blue-300" }
+    ],
+    "rules": [
+      "Must have V3 geçmişe dönük kesin kanıta dayalı olumlu çıkarımdır.",
+      "Should have V3 geçmişte yapılması gerekip yapılmayan eylemleri eleştirir.",
+      "Needn't have V3 yapılmasına gerek yokken boş yere yapılmış eylemleri anlatır."
+    ],
+    "coding": [
+      "Somut Kanıt = Must have V3 (yapmış olmalı)!",
+      "Pişmanlık & Sitem = Should have V3 (yapmalıydın)!",
+      "Gereksiz Eylem = Needn't have V3 (gerek yoktu ama yaptın)!"
+    ],
+    "traps": [
+      {
+        "trap": "Must have V3 ifadesini geçmiş zorunluluk sanmak.",
+        "fix": "Geçmiş zorunluluk 'had to V1'dir. Must have V3 yalnızca güçlü kanıta dayalı tahmin/çıkarımdır."
+      }
+    ],
+    "example": {
+      "sentence": "The streets are completely soaked; it ------- heavily during the night.",
+      "translation": "Sokaklar sırılsıklam; gece çok şiddetli yağmış olmalı.",
+      "options": [
+        { "id": "A", "text": "should have rained" },
+        { "id": "B", "text": "must have rained" },
+        { "id": "C", "text": "needn't have rained" },
+        { "id": "D", "text": "could rain" }
+      ],
+      "answer": "B",
+      "reason": "Sokakların ıslak olması güçlü bir kanıttır; geçmişe dönük kesin çıkarım 'must have rained' ile ifade edilir.",
+      "tactic": "Somut kanıt varsa geçmiş çıkarım için 'must have V3' seçilir.",
+      "explanation": "Sokakların ıslak olması geçmişte yağmur yağdığına dair somut kanıttır; must have V3 doğru cevaptır."
+    },
+    "anim": [
+      { "label": "1. Somut Kanıtı Gör", "detail": "Sokaklar tamamen ıslaktır.", "highlight": "soaked" },
+      { "label": "2. Geçmiş Çıkarımı Kur", "detail": "Güçlü kanıta dayalı geçmiş çıkarım: must have rained.", "highlight": "must have rained" },
+      { "label": "3. Doğrula", "detail": "Gece yağmış olmalı çıkarımı tam uyar.", "highlight": "must have rained" }
+    ]
+  },
+  {
+    "slug": "articles",
+    "title": "Articles (A, An, The & Sıfır Belirteç)",
+    "level": "A1 - B2",
+    "color": "from-sky-500 to-blue-600",
+    "emoji": "📰",
+    "summary": "Belirli (the) ve belirsiz (a/an) tanımlıkların doğru kullanımı. Genel kavramlar, coğrafi isimler ve soyut adların kuralları.",
+    "formula": [
+      { "label": "Belirsiz", "text": "a / an + tekil sayılabilir isim", "color": "bg-sky-500/20 text-sky-300" },
+      { "label": "Belirli", "text": "the + bilinen tekil/çoğul isim veya benzersiz varlık", "color": "bg-blue-500/20 text-blue-300" },
+      { "label": "Genel / Sıfır", "text": "Ø + çoğul isim veya sayılamayan soyut isim", "color": "bg-slate-500/20 text-slate-300" }
+    ],
+    "rules": [
+      "Dünyada tek olan varlıklar 'the' alır: the Sun, the Moon, the Earth.",
+      "Dağ sıraları, nehirler, denizler 'the' alır; tek dağlar ve göller article almaz.",
+      "Genel anlamda çoğul isimler article almaz: 'Books are useful'."
+    ],
+    "coding": [
+      "Nehir, Deniz, Okyanus = THE!",
+      "Kıta, Ülke, Şehir = Sıfır Belirteç (Ø)!",
+      "Genel Çoğullar = Sıfır Belirteç (Ø)!"
+    ],
+    "traps": [
+      {
+        "trap": "Genel anlamda çoğul veya soyut isimlerin önüne 'the' koymak.",
+        "fix": "'The nature' veya 'the books' genel anlamda yanlıştır; 'nature' ve 'books' denir."
+      }
+    ],
+    "example": {
+      "sentence": "------- Amazon River is the longest river in ------- South America.",
+      "translation": "Amazon Nehri, Güney Amerika'daki en uzun nehirdir.",
+      "options": [
+        { "id": "A", "text": "The / the" },
+        { "id": "B", "text": "The / Ø" },
+        { "id": "C", "text": "Ø / the" },
+        { "id": "D", "text": "A / Ø" }
+      ],
+      "answer": "B",
+      "reason": "Nehir isimleri 'the' alır (The Amazon River), kıta isimleri ise article almaz (South America).",
+      "tactic": "Nehir, deniz, okyanus = the; kıta, ülke, şehir = Ø.",
+      "explanation": "Nehirler daima 'the' alır, kıtalar ise article almaz; bu nedenle 'The / Ø' doğru seçenektir."
+    },
+    "anim": [
+      { "label": "1. Nehir Kuralını Hatırla", "detail": "Nehir isimleri 'the' gerektirir.", "highlight": "Amazon River" },
+      { "label": "2. Kıta Kuralını Hatırla", "detail": "Kıtaların önüne article konmaz.", "highlight": "South America" },
+      { "label": "3. Seçeneği İşaretle", "detail": "'The / Ø' eşleşmesi doğrudur.", "highlight": "The / Ø" }
+    ]
+  },
+  {
+    "slug": "quantifiers",
+    "title": "Quantifiers (Miktar Belirteçleri)",
+    "level": "A2 - B2",
+    "color": "from-amber-500 to-yellow-600",
+    "emoji": "⚖️",
+    "summary": "Sayılabilen ve sayılamayan isimlerle kullanılan miktar sözcükleri (much, many, few, little, several, all, none).",
+    "formula": [
+      { "label": "Sayılabilen", "text": "many / few / a few / several / a number of + Çoğul İsim", "color": "bg-amber-500/20 text-amber-300" },
+      { "label": "Sayılamayan", "text": "much / little / a little / an amount of + Tekil Sayılamayan İsim", "color": "bg-yellow-500/20 text-yellow-300" },
+      { "label": "Ortak", "text": "some / any / a lot of / plenty of + Çoğul veya Sayılamayan İsim", "color": "bg-emerald-500/20 text-emerald-300" }
+    ],
+    "rules": [
+      "Few (neredeyse hiç, yetersiz) vs. A few (birkaç tane, yeterli).",
+      "Little (neredeyse hiç, yetersiz) vs. A little (biraz, yeterli).",
+      "Sayılamayan isimler tekil fiil alır; önlerine many, few, several gelemez."
+    ],
+    "coding": [
+      "Little / Few = Olumsuz yetersizlik (-)",
+      "A little / A few = Olumlu yeterlilik (+)",
+      "Sayılamayan = Much/Little | Sayılabilen = Many/Few"
+    ],
+    "traps": [
+      {
+        "trap": "'A few' ile 'few' arasındaki anlam farkını karıştırmak.",
+        "fix": "'Few' olumsuz olup 'neredeyse hiç' demektir. 'A few' ise 'birkaç tane/yeterli' demektir."
+      }
+    ],
+    "example": {
+      "sentence": "Unfortunately, we have ------- time left before the deadline, so we cannot review the entire manuscript.",
+      "translation": "Maalesef teslim tarihinden önce neredeyse hiç vaktimiz kalmadı, bu yüzden tüm taslağı inceleyemeyiz.",
+      "options": [
+        { "id": "A", "text": "a few" },
+        { "id": "B", "text": "many" },
+        { "id": "C", "text": "little" },
+        { "id": "D", "text": "a little" }
+      ],
+      "answer": "C",
+      "reason": "'Time' sayılamayan isimdir; 'unfortunately' ve 'cannot review' vaktin yetersiz olduğunu gösterir; 'little' tam uyar.",
+      "tactic": "Unfortunately + olumsuz sonuç = 'little' (neredeyse hiç). 'A little' olumlu yeterlilik verirdi.",
+      "explanation": "Zaman sayılamaz ve olumsuz sonuç (inceleyemeyiz) neredeyse hiç vakit kalmadığını gösterir; 'little' doğru cevaptır."
+    },
+    "anim": [
+      { "label": "1. İsmin Türüne Bak", "detail": "'Time' sayılamayan bir isimdir.", "highlight": "time" },
+      { "label": "2. Duygu Yönünü Belirle", "detail": "Unfortunately ve cannot olumsuz yetersizliği gösterir.", "highlight": "cannot review" },
+      { "label": "3. Doğru Belirteci Seç", "detail": "Yetersiz sayılamayan: little.", "highlight": "little" }
+    ]
   }
 ];

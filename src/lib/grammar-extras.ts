@@ -57,8 +57,22 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   conjunctions: [
     "conjunctions", "conjunction", "linking words", "transitional", "transition words", "however",
     "therefore", "although", "even though", "though", "despite", "in spite of", "whereas", "while",
-    "bağlaçlar", "geçiş ifadeleri", "baglaclar", "adverbial clauses", "adverbial-clauses",
-    "adverbial clause", "adverbial-clause", "zarf tümleci cümlecikleri",
+    "bağlaçlar", "geçiş ifadeleri", "baglaclar",
+  ],
+  "adverbial-clauses": [
+    "adverbial clauses", "adverbial-clauses", "adverbial clause", "adverbial-clause", "zarf tümleci cümlecikleri",
+    "zarf cümlecikleri", "zarf tumleci", "adverbial",
+  ],
+  "perfect-modals": [
+    "perfect modals", "perfect-modals", "perfect modal", "perfect-modal", "modal perfect",
+    "geçmiş çıkarımlar", "must have v3", "should have v3", "could have v3",
+  ],
+  articles: [
+    "articles", "article", "a an the", "tanımlıklar", "tanimliklar", "harf-i tarif", "the a an",
+  ],
+  quantifiers: [
+    "quantifiers", "quantifier", "some any", "much many", "a lot of", "few", "little", "each every",
+    "miktar belirteçleri", "miktar belirtecleri", "miktar",
   ],
   prepositions: [
     "prepositions", "preposition", "at in on", "edatlar", "edat", "prepositional",
@@ -68,9 +82,7 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
     "öbek fiiller", "obek fiiller", "phrasal",
   ],
   determiners: [
-    "determiners", "determiner", "quantifiers", "quantifier", "some any", "much many", "a lot of",
-    "few", "little", "each every", "belirteçler", "belirtecler", "miktar",
-    "articles", "article", "a an the", "tanımlıklar", "tanimliklar", "harf-i tarif",
+    "determiners", "determiner", "belirteçler", "belirtecler",
   ],
   comparatives: [
     "comparatives", "comparative", "superlatives", "superlative", "comparative superlative", "as as",
@@ -282,6 +294,58 @@ export const GRAMMAR_EXAMPLES2: Record<string, Example2> = {
     explanation:
       "'Daha önce hiç böyle görmedim' → Never + devrik (have I seen). Olumsuz zarf başa gelince yardımcı fiil öznenin önüne geçer.",
     tactic: "1) Olumsuz zarf (never, hardly, no sooner) cümle başında mı? → devrik yap. 2) Dizilim: zarf + yardımcı fiil + özne + fiil.",
+  },
+  "adverbial-clauses": {
+    sentence: "------- the weather was atrocious, the mountain rescue team reached the stranded climbers safely.",
+    translation: "Hava berbat olmasına rağmen, dağ kurtarma ekibi mahsur kalan dağcılara güvenle ulaştı.",
+    options: [
+      { id: "A", text: "Because", correct: false },
+      { id: "B", text: "Although", correct: true },
+      { id: "C", text: "Since", correct: false },
+      { id: "D", text: "Unless", correct: false },
+    ],
+    answer: "B",
+    explanation: "Kötü hava (-) ile başarılı kurtarma (+) zıt kutuptur; 'Although' gereklidir.",
+    tactic: "Zıtlık bağlacı (+/- kutup farkı): Although / Even though + S + V.",
+  },
+  "perfect-modals": {
+    sentence: "You ------- the client before sending the contract; now we have legal complications.",
+    translation: "Sözleşmeyi göndermeden önce müvekkile danışmalıydın; şimdi hukuki sorunlar yaşıyoruz.",
+    options: [
+      { id: "A", text: "should have consulted", correct: true },
+      { id: "B", text: "must consult", correct: false },
+      { id: "C", text: "needn't consult", correct: false },
+      { id: "D", text: "would consult", correct: false },
+    ],
+    answer: "A",
+    explanation: "Geçmişte yapılması gerekip yapılmayan eylem için 'should have V3' kullanılır.",
+    tactic: "Geçmişe dönük sitem/pişmanlık = should have + V3.",
+  },
+  articles: {
+    sentence: "------- Nile is widely recognized as the longest river in ------- Africa.",
+    translation: "Nil, Afrika'daki en uzun nehir olarak kabul edilir.",
+    options: [
+      { id: "A", text: "The / Ø", correct: true },
+      { id: "B", text: "Ø / the", correct: false },
+      { id: "C", text: "The / the", correct: false },
+      { id: "D", text: "A / Ø", correct: false },
+    ],
+    answer: "A",
+    explanation: "Nehirler 'the' alır (The Nile); kıtalar ise article almaz (Africa).",
+    tactic: "Nehir, deniz, okyanus = THE | Kıta, ülke, şehir = Ø.",
+  },
+  quantifiers: {
+    sentence: "We have ------- time before the plane departs, so we cannot stop at the duty-free shop.",
+    translation: "Uçak kalkmadan önce neredeyse hiç vaktimiz kalmadı, bu yüzden mağazaya uğrayamayız.",
+    options: [
+      { id: "A", text: "little", correct: true },
+      { id: "B", text: "a few", correct: false },
+      { id: "C", text: "many", correct: false },
+      { id: "D", text: "a little", correct: false },
+    ],
+    answer: "A",
+    explanation: "Zaman sayılamaz ve olumsuz sonuç (uğrayamayız) yetersizliği gösterir; 'little' doğrudur.",
+    tactic: "Sayılamayan + yetersiz olumsuzluk = LITTLE.",
   },
 };
 

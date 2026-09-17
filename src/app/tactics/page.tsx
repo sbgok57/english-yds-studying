@@ -27,6 +27,24 @@ export default function TacticsPage() {
           Her soru tipinin kendine özgü bir şifresi ve hedef süresi vardır. Çözümlü örnek soruları adım adım izleyin, şık eleme sanatını öğrenin ve sınavdaki çeldiricilere asla takılmayın.
         </p>
 
+        {/* 600 Soru ve 100 Önemli Soru Eylemleri */}
+        <div className="flex flex-wrap gap-2.5 pt-2">
+          <Link
+            href="/tactics/practice"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-black text-xs shadow-lg shadow-emerald-500/30 transition-all flex items-center gap-2"
+          >
+            <span>🎯</span>
+            <span>600 Soruluk Taktik Pratik Bankasını Başlat</span>
+          </Link>
+          <Link
+            href="/tactics/practice?star=1"
+            className="px-4 py-2.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 font-bold text-xs transition-all flex items-center gap-1.5"
+          >
+            <span>⭐</span>
+            <span>100 Önemli Çözümlü Soru</span>
+          </Link>
+        </div>
+
         {/* Soru Tipi Seçici Hap Butonlar */}
         <div className="flex flex-wrap gap-2 pt-2">
           {YDS_QUESTION_TYPES.map((type, idx) => (
@@ -63,9 +81,25 @@ export default function TacticsPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 px-4 py-2 rounded-2xl text-xs font-bold">
-            <Clock className="w-4 h-4" />
-            <span>Hedef Süre: {currentType.timeTarget}</span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 bg-yellow-400/15 border border-yellow-400/40 text-yellow-300 px-4 py-2 rounded-2xl text-xs font-bold">
+              <Clock className="w-4 h-4" />
+              <span>Hedef Süre: {currentType.timeTarget}</span>
+            </div>
+            <Link
+              href={`/tactics/${currentType.id}`}
+              className="px-4 py-2 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 font-bold text-xs transition-all flex items-center gap-1.5"
+            >
+              <span>🏆</span>
+              <span>7 Seviye Rehberi & 100 Soru →</span>
+            </Link>
+            <Link
+              href={`/tactics/practice?type=${currentType.id}`}
+              className="px-4 py-2 rounded-2xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-bold text-xs transition-all flex items-center gap-1.5"
+            >
+              <span>🎯</span>
+              <span>Bu Tipi Test Et →</span>
+            </Link>
           </div>
         </div>
 
