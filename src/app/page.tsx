@@ -16,14 +16,14 @@ const STATIONS = [
     href: "/exams",
     emoji: "⏱️",
     title: "180 dk Online Optik Sınav",
-    desc: "2013-2025 çıkmış sınavlar ve özgün denemeler. Baloncuk formu ve otomatik net hesabı.",
+    desc: "2013-2026 çıkmış sınavlar ve özgün denemeler. Baloncuk formu ve otomatik net hesabı.",
     cta: "Sınavları İncele",
     color: "from-amber-500 to-orange-500",
   },
   {
     href: "/grammar",
     emoji: "📖",
-    title: "15 Animasyonlu Gramer Konusu",
+    title: "19 Animasyonlu Gramer Konusu",
     desc: "A1 sadeliğinde Türkçe anlatım, renk kodlu formüller, adım adım animasyonlar ve tuzak uyarıları.",
     cta: "Konuları Keşfet",
     color: "from-violet-500 to-purple-600",
@@ -45,10 +45,34 @@ const STATIONS = [
     color: "from-sky-500 to-blue-600",
   },
   {
+    href: "/games",
+    emoji: "🎮",
+    title: "Oyun Merkezi (Wordwall tadında)",
+    desc: "Eşleştirme, Köstebek Vur, Çarkıfelek, Doğru/Yanlış ve Dinle & Seç — her doğru cevapta havai fişek!",
+    cta: "Oyna",
+    color: "from-rose-500 to-red-600",
+  },
+  {
+    href: "/arsiv",
+    emoji: "🗄️",
+    title: "2013-2026 YDS Arşivi",
+    desc: "Tüm YDS dönemleri + o sınavlarda çıkan kelimeler (Türkçe anlamlarıyla).",
+    cta: "Arşivi Aç",
+    color: "from-amber-500 to-yellow-600",
+  },
+  {
+    href: "/kilavuz",
+    emoji: "📘",
+    title: "Kullanım Kılavuzu",
+    desc: "Siteyi 2 dakikada çöz: her modül + gizli ipuçları kanka dilinde.",
+    cta: "Kılavuzu Oku",
+    color: "from-sky-500 to-indigo-600",
+  },
+  {
     href: "/avatars",
     emoji: "👤",
-    title: "500 Profil & Maskot Avatarı",
-    desc: "Profilini kişiselleştir: 6 kategori, 500 benzersiz, tamamen çevrimdışı çalışan SVG karakter.",
+    title: "1000 Profil & Maskot Avatarı",
+    desc: "Profilini kişiselleştir: 7 kategori, 1000 benzersiz, tamamen çevrimdışı çalışan SVG karakter.",
     cta: "Avatar Seç",
     color: "from-fuchsia-500 to-pink-600",
   },
@@ -63,9 +87,9 @@ const STATIONS = [
 ];
 
 const STATS = [
-  { to: 500, suffix: "", label: "Benzersiz Avatar", emoji: "👤" },
-  { to: 40, suffix: "", label: "Sınav Sorusu Bankası", emoji: "📝" },
-  { to: 15, suffix: "", label: "Animasyonlu Gramer Konusu", emoji: "📖" },
+  { to: 1000, suffix: "", label: "Benzersiz Avatar", emoji: "👤" },
+  { to: 1000, suffix: "", label: "Sınav Sorusu Bankası", emoji: "📝" },
+  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", emoji: "📖" },
   { to: 11, suffix: "", label: "Soru Tipi Taktikleri", emoji: "🎯" },
 ];
 
@@ -78,7 +102,7 @@ export default function Home() {
       <section className="text-center py-14 space-y-6">
         <Reveal>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 anim-pulse-glow">
-            🚀 YDS Zirve Motivasyonu
+            🚀 YDS Zirve Maratonu · 5000 Değişen Motivasyon
           </div>
         </Reveal>
         <Reveal delay={80}>
@@ -98,7 +122,7 @@ export default function Home() {
         <Reveal delay={220}>
           <p className="text-white/60 max-w-3xl mx-auto leading-relaxed">
             Kanka, burası tam sana göre: 3D dönebilen kelime küpleri, 180 dakikalık gerçek online
-            optik form, 500 avatar, animasyonlu gramer anlatımları ve 11 soru tipine özel taktiklerle
+            optik form, 1000 avatar, animasyonlu gramer anlatımları ve 11 soru tipine özel taktiklerle
             YDS'de sıfır hata!
           </p>
         </Reveal>

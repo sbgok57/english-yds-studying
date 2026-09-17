@@ -91,6 +91,27 @@ export default function ExamRunner({
       ? "Fena değil kanka! 💪 Yanlışlarını taktik sayfalarından kapat."
       : "Kanka, moral bozma! 🚀 Yanlışlar senin yol haritan. Gramer ve taktiklere dön.";
 
+  // SAFETY: Boş veya bozuk soru gelmesi durumunda güvenli dönüş ekranı göster (asla çökmez)
+  if (!questions || questions.length === 0 || !q) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-16 text-center">
+        <div className="card-vibrant p-10 space-y-4">
+          <div className="text-5xl">🧭</div>
+          <h2 className="text-2xl font-black text-white">Soru Yüklenemedi</h2>
+          <p className="text-sm text-white/60">
+            Sınav soruları hazırlanırken bir hata oluştu veya soru listesi boş. Panik yok kanka!
+          </p>
+          <Link
+            href="/exams"
+            className="inline-block px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-black text-sm transition-all"
+          >
+            ← Sınav Salonuna Dön
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   if (submitted) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16">
