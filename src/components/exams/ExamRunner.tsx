@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import type { ExamMeta, ExamQuestion } from "@/lib/data-exams";
 import Celebration from "@/components/Celebration";
 import Tip from "@/components/Tip";
 import { recordExam, useUsage } from "@/lib/store";
+import { calculateYdsNet } from "@/lib/exam-validator";
 
 const LETTERS = ["A", "B", "C", "D", "E"];
 
@@ -30,6 +31,7 @@ export default function ExamRunner({
   const [submitted, setSubmitted] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
+  const hasRecordedRef = useRef(false);
   const { update } = useUsage();
 
   // Geri sayım
@@ -48,30 +50,40 @@ export default function ExamRunner({
     return () => clearInterval(iv);
   }, [submitted]);
 
-  const q = questions[current];
+  // Soru dizisi boşsa veya current dışarıdaysa güvenli sınırla
+  const safeCurrent = questions && questions.length > 0
+    ? Math.max(0, Math.min(questions.length - 1, current))
+    : 0;
+  const q = questions && questions.length > 0 ? questions[safeCurrent] : undefined;
 
   const stats = useMemo(() => {
     let correct = 0;
     let wrong = 0;
     let blank = 0;
-    questions.forEach((qq) => {
-      const a = answers[qq.n];
-      if (a === undefined) blank++;
-      else if (a === qq.answer) correct++;
-      else wrong++;
-    });
-    const net = Math.max(0, correct - wrong / 4);
+    if (Array.isArray(questions)) {
+      questions.forEach((qq) => {
+        const a = answers[qq.n];
+        if (a === undefined) blank++;
+        else if (a === qq.answer) correct++;
+        else wrong++;
+      });
+    }
+    const net = calculateYdsNet(correct, wrong);
     return { correct, wrong, blank, net };
   }, [answers, questions]);
 
-  // sınav bittiğinde kayıt al + havai fişek
+  // Sınav bittiğinde kayıt al + havai fişek (idempotent, bir kez çalışır)
   useEffect(() => {
-    if (submitted) {
-      recordExam(update, stats.correct, questions.length);
-      setCelebrate(true);
+    if (submitted && !hasRecordedRef.current && questions && questions.length > 0) {
+      hasRecordedRef.current = true;
+      recordExam(update, stats.correct, questions.length, stats.wrong, stats.net);
+      try {
+        setCelebrate(true);
+      } catch {
+        // PERF & SAFETY: Celebration canvas hatası durumunda sonuç ekranı engellenmez
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitted]);
+  }, [submitted, stats.correct, stats.wrong, stats.net, questions, update]);
 
   const answeredCount = Object.keys(answers).length;
 
@@ -150,6 +162,7 @@ export default function ExamRunner({
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => {
+                hasRecordedRef.current = false;
                 setSubmitted(false);
                 setAnswers({});
                 setFlags({});
@@ -299,16 +312,16 @@ export default function ExamRunner({
             Mavi = işaretli · Sarı = işaretli (bayrak) · Halka = aktif
           </p>
           <div className="grid grid-cols-5 gap-1.5 max-h-[60vh] overflow-y-auto pr-1">
-            {questions.map((qq) => {
+            {questions.map((qq, idx) => {
               const a = answers[qq.n];
-              const isCur = qq.n - 1 === current;
+              const isCur = idx === safeCurrent;
               let cls = "bg-white/[0.05] text-white/60 border-white/10";
               if (flags[qq.n]) cls = "bg-amber-400/20 text-amber-200 border-amber-400/40";
               if (a !== undefined) cls = "bg-cyan-500/25 text-cyan-100 border-cyan-400/50";
               return (
                 <button
                   key={qq.n}
-                  onClick={() => setCurrent(qq.n - 1)}
+                  onClick={() => setCurrent(idx)}
                   className={`h-9 rounded-lg border text-xs font-bold transition-all hover:scale-105 ${cls} ${
                     isCur ? "ring-2 ring-pink-400" : ""
                   }`}

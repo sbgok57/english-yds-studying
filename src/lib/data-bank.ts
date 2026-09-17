@@ -1,41 +1,42 @@
-import { CORE, type BankQ } from "./data-bank-core";
-import { PASSAGES } from "./data-bank-passages";
-
-const ORIGINAL_BANK: BankQ[] = [...CORE, ...PASSAGES];
+import type { BankQ, QType } from "./data-bank-core";
+import { VOCABULARY_QUESTIONS } from "./data-exam-vocabulary";
+import { GRAMMAR_QUESTIONS } from "./data-exam-grammar";
+import { CLOZE_QUESTIONS } from "./data-exam-cloze";
+import { SENTENCE_QUESTIONS } from "./data-exam-sentence";
+import { TRANSLATION_QUESTIONS } from "./data-exam-translation";
+import { DIALOGUE_QUESTIONS } from "./data-exam-dialogue";
+import { PARAGRAPH_QUESTIONS } from "./data-exam-paragraph";
+import { READING_QUESTIONS } from "./data-exam-reading";
 
 /**
- * ÖSYM sorusu değildir: mevcut özgün YDS tarzı çekirdekten 1000 güvenli pratik
- * varyantı üretir. Cevap/şık ilişkisi korunur; ortak kaynak nesneleri mutate edilmez.
+ * Tam 1,000 Özgün YDS Tarzı Soru Bankası.
+ * 8 bağımsız modülden derlenir, isim/şehir değiştirmeli sahte varyant içermez.
+ * Tüm sorular akademik İngilizce ve zengin Türkçe açıklamalarla hazırlanmıştır.
+ * sourceType: "original-yds-style", isOfficial: false
  */
-const NAMES = ["the researchers", "the committee", "the university", "the company", "the project team"];
-const PLACES = ["the region", "the city", "the country", "the coastal area", "the local community"];
-function variant(q: BankQ, index: number): BankQ {
-  const round = Math.floor(index / ORIGINAL_BANK.length);
-  if (round === 0) return { ...q, o: [...q.o] };
-  const name = NAMES[round % NAMES.length];
-  const place = PLACES[(round + index) % PLACES.length];
-  const prefix = q.p ? `Practice set ${round + 1}: ` : "";
-  return {
-    ...q,
-    s: q.s
-      .replace(/the researchers/gi, name)
-      .replace(/the committee/gi, name)
-      .replace(/the region/gi, place),
-    o: [...q.o],
-    p: q.p ? `${prefix}${q.p}` : q.p,
-    pt: q.pt ? `${q.pt} · Practice ${round + 1}` : q.pt,
-    ex: `${q.ex || "Bağlam ve yapı birlikte değerlendirilir."} (Özgün YDS tarzı pratik varyantı ${round + 1}; gerçek ÖSYM sorusu değildir.)`,
-  };
-}
-
-/** Tam 1000 özgün/YDS tarzı pratik soru. */
-export const BANK: BankQ[] = Array.from({ length: 1000 }, (_, i) =>
-  variant(ORIGINAL_BANK[i % ORIGINAL_BANK.length], i)
-);
-
-export type { BankQ, QType } from "./data-bank-core";
+export const BANK: BankQ[] = [
+  ...VOCABULARY_QUESTIONS,
+  ...GRAMMAR_QUESTIONS,
+  ...CLOZE_QUESTIONS,
+  ...SENTENCE_QUESTIONS,
+  ...TRANSLATION_QUESTIONS,
+  ...DIALOGUE_QUESTIONS,
+  ...PARAGRAPH_QUESTIONS,
+  ...READING_QUESTIONS,
+];
 
 export const BANK_SIZE = BANK.length;
 
+export type { BankQ, QType } from "./data-bank-core";
 export * from "./data-bank-core";
-export { PASSAGES, PASSAGES as PASSAGE_BANK_QUESTIONS };
+export { VOCABULARY_QUESTIONS } from "./data-exam-vocabulary";
+export { GRAMMAR_QUESTIONS } from "./data-exam-grammar";
+export { CLOZE_QUESTIONS } from "./data-exam-cloze";
+export { SENTENCE_QUESTIONS } from "./data-exam-sentence";
+export { TRANSLATION_QUESTIONS } from "./data-exam-translation";
+export { DIALOGUE_QUESTIONS } from "./data-exam-dialogue";
+export { PARAGRAPH_QUESTIONS } from "./data-exam-paragraph";
+export { READING_QUESTIONS } from "./data-exam-reading";
+
+// Geriye dönük uyumluluk
+export { PASSAGES, PASSAGES as PASSAGE_BANK_QUESTIONS } from "./data-bank-passages";

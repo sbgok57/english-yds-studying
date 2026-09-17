@@ -112,35 +112,53 @@ function toExamQuestion(q: BankQ, n: number): ExamQuestion {
   };
 }
 
-export function getExamQuestions(id: string): ExamQuestion[] {
-  const seed = hashString(id);
+import { deepCloneQuestion, shuffleOptionsSafely } from "./exam-validator";
+
+export function getExamQuestions(id?: string): ExamQuestion[] {
+  const safeId = typeof id === "string" && id.trim().length > 0 ? id.trim() : MAIN_EXAM_ID;
+  const seed = hashString(safeId);
   let picked: BankQ[] = [];
   ORDER.forEach((t, i) => {
     // SAFETY: Deep clone items before shuffling so shared BANK is never mutated
-    const matching = BANK.filter((q) => q.t === t).map((q) => ({
-      ...q,
-      o: [...q.o],
-    }));
+    const matching = BANK.filter((q) => q.t === t).map((q) => deepCloneQuestion(q));
     const pool = shuffleWithSeed(matching, seed + i * 7919);
     const slice = pool.slice(0, QUOTA[t]);
+    // If pool has fewer questions than quota, safely loop to guarantee quota
+    if (slice.length < QUOTA[t] && pool.length > 0) {
+      while (slice.length < QUOTA[t]) {
+        slice.push(deepCloneQuestion(pool[slice.length % pool.length]));
+      }
+    }
     // seçenek sıralarını da sınav kimliğine göre karıştır (deneme hissi)
     const r = mulberry32(seed + i * 104729 + 3);
     slice.forEach((q) => {
-      const perm = shuffleWithSeed(q.o.map((_, idx) => idx), Math.floor(r() * 1e9));
-      q.o = perm.map((idx) => q.o[idx]);
-      q.a = perm.indexOf(q.a);
+      const shuffled = shuffleOptionsSafely(q.o, q.a, r);
+      q.o = shuffled.options;
+      q.a = shuffled.answer;
     });
     picked = picked.concat(slice);
   });
+
+  // Guarantee exactly QUESTION_COUNT (80)
+  if (picked.length > QUESTION_COUNT) {
+    picked = picked.slice(0, QUESTION_COUNT);
+  } else if (picked.length < QUESTION_COUNT && BANK.length > 0) {
+    const filler = shuffleWithSeed(BANK.map(deepCloneQuestion), seed + 99991);
+    while (picked.length < QUESTION_COUNT) {
+      picked.push(deepCloneQuestion(filler[picked.length % filler.length]));
+    }
+  }
+
   return picked.map((q, i) => toExamQuestion(q, i + 1));
 }
 
 // ============ Meta ============
-export function getExamMeta(id: string): ExamMeta {
-  const m = getPracticeExamIds().find((x) => x.id === id);
+export function getExamMeta(id?: string): ExamMeta {
+  const safeId = typeof id === "string" && id.trim().length > 0 ? id.trim() : MAIN_EXAM_ID;
+  const m = getPracticeExamIds().find((x) => x.id === safeId);
   if (m) {
     return {
-      id,
+      id: safeId,
       title: m.title,
       subtitle: m.year === "Özgün" ? "Özgün Deneme Sınavı" : "İngilizce Alan Bilgisi",
       year: m.year,
@@ -150,9 +168,9 @@ export function getExamMeta(id: string): ExamMeta {
       isOfficial: m.year !== "Özgün",
     };
   }
-  if (id === MAIN_EXAM_ID) {
+  if (safeId === MAIN_EXAM_ID) {
     return {
-      id,
+      id: safeId,
       title: "YDS 2024 İlkbahar",
       subtitle: "İngilizce Alan Bilgisi — Tam Deneme",
       year: "2024",
@@ -164,8 +182,8 @@ export function getExamMeta(id: string): ExamMeta {
   }
   // Bilinmeyen id → güvenli varsayılan (çökme olmaz)
   return {
-    id,
-    title: id.replace(/-/g, " ").toUpperCase(),
+    id: safeId,
+    title: safeId.replace(/-/g, " ").toUpperCase(),
     subtitle: "İngilizce Alan Bilgisi",
     year: "—",
     session: "Deneme",

@@ -41,6 +41,7 @@ export function defaultUsage(): UsageData {
   };
 }
 
+import { migrateUsageData, calculateYdsNet } from "./exam-validator";
 let cache: UsageData | null = null;
 
 export function loadUsage(): UsageData {
@@ -50,18 +51,14 @@ export function loadUsage(): UsageData {
     const raw = window.localStorage.getItem(KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      cache = {
-        ...defaultUsage(),
-        ...parsed,
-        exams: { ...defaultUsage().exams, ...(parsed.exams || {}) },
-      };
+      cache = migrateUsageData(parsed, defaultUsage());
     } else {
       cache = defaultUsage();
     }
   } catch {
     cache = defaultUsage();
   }
-  return cache!;
+  return cache;
 }
 
 export function saveUsage(u: UsageData) {
@@ -155,13 +152,23 @@ export function recordTacticView(
 export function recordExam(
   update: (fn: (u: UsageData) => UsageData) => void,
   correct: number,
-  total: number
+  total: number,
+  wrong: number = 0,
+  net?: number
 ) {
+  const finalNet = typeof net === "number" ? net : calculateYdsNet(correct, wrong);
   update((u) => {
-    u.exams.taken += 1;
-    u.exams.totalCorrect += correct;
-    u.exams.totalQuestions += total;
-    if (correct > u.exams.bestNet) u.exams.bestNet = correct;
+    // SAFETY: Ensure exams object and its properties exist and are valid numbers
+    if (!u.exams || typeof u.exams !== "object") {
+      u.exams = { taken: 0, totalCorrect: 0, totalQuestions: 0, bestNet: 0 };
+    }
+    u.exams.taken = (Number(u.exams.taken) || 0) + 1;
+    u.exams.totalCorrect = (Number(u.exams.totalCorrect) || 0) + Math.max(0, correct);
+    u.exams.totalQuestions = (Number(u.exams.totalQuestions) || 0) + Math.max(0, total);
+    const currentBest = Number(u.exams.bestNet) || 0;
+    if (finalNet > currentBest) {
+      u.exams.bestNet = finalNet;
+    }
     return u;
   });
 }

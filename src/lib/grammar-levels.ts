@@ -979,3 +979,14 @@ export function validateGrammarLevels(): { valid: boolean; count: number; errors
   }
   return { valid: errors.length === 0, count: slugs.length * 6, errors };
 }
+
+// 17 Tense Kapsamlı Seviye Rehberi (A1-YDS, 119 Blok)
+export {
+  TENSE_TOPICS,
+  TENSE_LEVELS,
+  type TenseLevel,
+  type TenseLevelBlock,
+  type TenseTopic,
+  validateAllTensesData,
+} from "./data-tenses-expanded";
+

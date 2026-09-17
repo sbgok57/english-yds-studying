@@ -12,6 +12,7 @@ export type QType =
   | "reading";
 
 export interface BankQ {
+  id?: string;
   t: QType;
   s: string; // stem / soru
   o: string[]; // 5 seçenek
@@ -19,6 +20,10 @@ export interface BankQ {
   ex?: string; // açıklama
   p?: string; // pasaj metni (cloze / reading)
   pt?: string; // pasaj başlığı
+  level?: string;
+  difficulty?: "easy" | "medium" | "hard";
+  sourceType?: "original-yds-style";
+  isOfficial?: boolean;
 }
 
 export const CORE: BankQ[] = [

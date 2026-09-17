@@ -6,11 +6,11 @@ import { Component, type ReactNode } from "react";
  *  "Tekrar Dene" ile kurtarır. Route seviyesindeki app/error.tsx ile birlikte çalışır. */
 export default class ErrorBoundary extends Component<
   { children: ReactNode; label?: string },
-  { hasError: boolean; msg: string }
+  { hasError: boolean; msg: string; resetKey: number }
 > {
   constructor(props: { children: ReactNode; label?: string }) {
     super(props);
-    this.state = { hasError: false, msg: "" };
+    this.state = { hasError: false, msg: "", resetKey: 0 };
   }
 
   static getDerivedStateFromError(err: unknown) {
@@ -20,9 +20,27 @@ export default class ErrorBoundary extends Component<
     };
   }
 
-  componentDidCatch(err: unknown) {
-    console.error("[YDS Master] Bileşen hatası yakalandı:", err);
+  componentDidCatch(err: unknown, errorInfo: unknown) {
+    const errorObj = err instanceof Error ? err : new Error(String(err));
+    // SECTION G TELEMETRY: Structured logging without PII
+    console.error("[TELEMETRY: Component Error]", {
+      name: errorObj.name,
+      message: errorObj.message,
+      stack: process.env.NODE_ENV === "development" ? errorObj.stack : undefined,
+      pathname: typeof window !== "undefined" ? window.location.pathname : undefined,
+      componentLabel: this.props.label || "UnnamedComponent",
+      timestamp: new Date().toISOString(),
+      componentStack: errorInfo,
+    });
   }
+
+  reset = () => {
+    this.setState((prev) => ({
+      hasError: false,
+      msg: "",
+      resetKey: prev.resetKey + 1,
+    }));
+  };
 
   render() {
     if (this.state.hasError) {
@@ -40,7 +58,7 @@ export default class ErrorBoundary extends Component<
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <button
-                onClick={() => this.setState({ hasError: false, msg: "" })}
+                onClick={this.reset}
                 className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-bold hover:scale-105 transition-transform"
               >
                 🔄 Tekrar Dene
@@ -56,6 +74,6 @@ export default class ErrorBoundary extends Component<
         </div>
       );
     }
-    return this.props.children;
+    return <span key={this.state.resetKey}>{this.props.children}</span>;
   }
 }

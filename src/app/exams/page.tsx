@@ -1,13 +1,40 @@
 import Link from "next/link";
 import { Clock, Award, ShieldAlert, Sparkles, BookOpen, ArrowRight } from "lucide-react";
+import { getPracticeExamIds } from "@/lib/data-exams";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export default async function ExamsPage() {
-  const exams = await prisma.exam.findMany({
-    orderBy: [{ isReal: "desc" }, { year: "desc" }, { title: "asc" }],
-  });
+  let exams: Array<{ id: string; title: string; year: string; period: string; isReal: boolean }> = [];
+  try {
+    const dbExams = await prisma.exam.findMany({
+      orderBy: [{ isReal: "desc" }, { year: "desc" }, { title: "asc" }],
+    });
+    if (dbExams && dbExams.length > 0) {
+      exams = dbExams.map((e) => ({
+        id: e.id,
+        title: e.title,
+        year: e.year ? String(e.year) : "2024",
+        period: e.period ?? "Bahar",
+        isReal: Boolean(e.isReal),
+      }));
+    }
+  } catch (err) {
+    console.warn("Prisma exam query failed, falling back to static exam registry:", err);
+  }
+
+  // Fallback to static practice registry if db is empty or unavailable
+  if (exams.length === 0) {
+    const list = getPracticeExamIds();
+    exams = list.map((item) => ({
+      id: item.id,
+      title: item.title,
+      year: item.year,
+      period: item.session,
+      isReal: item.year !== "Özgün",
+    }));
+  }
 
   const realExams = exams.filter((e) => e.isReal);
   const mockExams = exams.filter((e) => !e.isReal);
