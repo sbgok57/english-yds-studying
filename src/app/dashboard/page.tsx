@@ -86,8 +86,9 @@ export default function DashboardPage() {
   const currentAvatar = getAvatar(selectedAvatarId);
 
   const handleSelectAvatar = (a: Avatar) => {
-    setSelectedAvatarId(a.id);
-    safeStorage.set("yds_avatar_id", a.id);
+    const idStr = String(a.id);
+    setSelectedAvatarId(idStr);
+    safeStorage.set("yds_avatar_id", idStr);
     toast.success(`Avatar güncellendi: ${a.label}! "${a.motivation}"`);
     if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(20);
   };

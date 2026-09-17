@@ -11,6 +11,7 @@ import VideoModal, { type VideoOption } from "@/components/VideoModal";
 import SceneAnim from "@/components/SceneAnim";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { GRAMMAR_ALIASES, GRAMMAR_EXAMPLES2 } from "@/lib/grammar-extras";
+import { GRAMMAR_LEVELS, LEVELS, LEVEL_COLORS, type CefrLevel } from "@/lib/grammar-levels";
 import { recordGrammar, useUsage } from "@/lib/store";
 
 function mediaOptions(title: string): VideoOption[] {
@@ -31,9 +32,12 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
   const [celebrate, setCelebrate] = useState(false);
   const [video, setVideo] = useState<VideoOption | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [activeLevel, setActiveLevel] = useState<CefrLevel>("A1");
   const media = mediaOptions(topic.title);
   const aliases = GRAMMAR_ALIASES[topic.slug] || [];
   const example2 = GRAMMAR_EXAMPLES2[topic.slug];
+  const levels = GRAMMAR_LEVELS[topic.slug] || [];
+  const activeBlock = levels.find((b) => b.level === activeLevel) || levels[0];
 
   const highlighted = useMemo(() => {
     if (step < 0 || step >= topic.anim.length) return topic.example.sentence;
@@ -232,6 +236,83 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
           ))}
         </div>
       </section>
+
+      {/* A1→C2 Seviye Rehberi */}
+      {levels.length > 0 && (
+        <section className="card-vibrant p-8 mb-8">
+          <div className="flex items-center gap-2 mb-1">
+            <h2 className="text-xl font-black">📶 A1'den C2'ye Seviye Rehberi</h2>
+            <Tip marker tip="Her seviyede bu konunun ne kadarını bilmen gerektiğini gör: kısa açıklama + örnek + hafıza kodu. Seviyene tıkla!">
+              <span className="cursor-help text-white/40 text-sm">ℹ️</span>
+            </Tip>
+          </div>
+          <p className="text-xs text-white/40 mb-5">
+            Kanka, hangi seviyedeysen ona tıkla — konu sana göre özetlensin. Her seviyede hem anlatım hem kod var. 👇
+          </p>
+
+          <div className="flex flex-wrap gap-2 mb-5">
+            {LEVELS.map((lv) => (
+              <button
+                key={lv}
+                onClick={() => setActiveLevel(lv)}
+                className={`px-4 py-2 rounded-full font-black text-sm border transition-all ${
+                  activeLevel === lv
+                    ? `bg-gradient-to-r ${LEVEL_COLORS[lv]} border-transparent text-white shadow-lg`
+                    : "border-white/15 text-white/60 hover:text-white"
+                }`}
+              >
+                {lv}
+              </button>
+            ))}
+          </div>
+
+          {activeBlock && (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 anim-pop">
+              <div className="flex items-center gap-3 mb-3">
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${LEVEL_COLORS[activeBlock.level]} flex items-center justify-center text-xl`}>
+                  {activeBlock.emoji}
+                </div>
+                <div>
+                  <span className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r ${LEVEL_COLORS[activeBlock.level]} font-black text-white`}>
+                    {activeBlock.level}
+                  </span>
+                  <h3 className="font-black text-lg">{activeBlock.title}</h3>
+                </div>
+              </div>
+
+              {/* Görsel Hafıza Akışı */}
+              <div className="my-3 flex items-center gap-2 text-xs font-bold text-cyan-300/90 bg-cyan-950/40 border border-cyan-500/20 px-3 py-1.5 rounded-lg flex-wrap">
+                <span>👀 İpucunu gör</span>
+                <span>→</span>
+                <span>🧩 Kalıbı kur</span>
+                <span>→</span>
+                <span>✅ Anlamı doğrula</span>
+              </div>
+
+              <p className="text-sm text-white/80 leading-relaxed">{activeBlock.point}</p>
+              
+              <div className="mt-4 rounded-xl bg-slate-900/60 border border-white/10 p-4">
+                <p className="font-mono text-sm text-cyan-200">{activeBlock.example}</p>
+                <p className="text-xs text-white/50 mt-1 italic">{activeBlock.exampleTr}</p>
+              </div>
+              
+              {activeBlock.code && (
+                <p className="mt-3 text-sm text-amber-200 bg-amber-400/10 border border-amber-300/20 rounded-xl px-4 py-3">
+                  <span className="font-bold text-amber-300 mr-2">🎵 Kod:</span>
+                  {activeBlock.code}
+                </p>
+              )}
+
+              {activeBlock.tactic && (
+                <div className="mt-3 text-xs text-emerald-200 bg-emerald-500/10 border border-emerald-400/20 rounded-xl px-4 py-3">
+                  <span className="font-bold text-emerald-300 mr-2">🎯 Seviye Taktiği:</span>
+                  {activeBlock.tactic}
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Tuzaklar */}
       <section className="card-vibrant p-8 mb-8">

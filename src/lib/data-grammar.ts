@@ -45,12 +45,27 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B1 - B2",
     "color": "from-amber-500 to-orange-600",
     "emoji": "⏳",
-    "summary": "YDS'de zaman soruları 'Present-Present' ve 'Past-Past' uyumu kuralına dayanır. Cümlede 'by the time', 'since', 'until' gibi zaman zarları doğru zamanın şifresidir.",
+    "summary": "YDS'de zaman soruları 'Present-Present' ve 'Past-Past' uyumu temelinde çözülür. Simple Future (will), Be Going To ve Future Continuous arasındaki anlamsal ayrımlar ve 'by the time', 'since', 'until' gibi zaman bağlaçları doğru zamanın şifresidir.",
     "formula": [
+      {
+        "label": "Simple Future",
+        "text": "will + V1 (Anlık karar, söz, teklif, kanıtsız tahmin)",
+        "color": "bg-amber-500/20 text-amber-300"
+      },
+      {
+        "label": "Be Going To",
+        "text": "am/is/are + going to + V1 (Önceden niyet veya somut kanıt)",
+        "color": "bg-emerald-500/20 text-emerald-300"
+      },
+      {
+        "label": "Future Continuous",
+        "text": "will be + Ving (Gelecekte o anda süreçte olacak eylem)",
+        "color": "bg-cyan-500/20 text-cyan-300"
+      },
       {
         "label": "Past Harmony",
         "text": "Past + When/While + Past",
-        "color": "bg-amber-500/20 text-amber-300"
+        "color": "bg-indigo-500/20 text-indigo-300"
       },
       {
         "label": "Since Rule",
@@ -59,24 +74,37 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
       },
       {
         "label": "By the time",
-        "text": "By the time + V2, S + had V3",
+        "text": "By the time + V2 -> had V3 | By the time + V1 -> will have V3",
         "color": "bg-blue-500/20 text-blue-300"
       }
     ],
     "rules": [
-      "Zaman bağlaçlarının bulunduğu yan cümlede ASLA 'will' veya 'would' kullanılmaz.",
-      "'Since' bağlacından sonra daima Simple Past (V2), ana cümlede Present Perfect (have/has V3) gelir.",
-      "'By the time + V1/V_s' görürsen ana cümlede 'will have V3' ara; 'By the time + V2' görürsen 'had V3' ara.",
-      "Tarihsel bir geçmiş zaman ifadesi (in 1923, ancient times, during WW2) net Simple Past (V2) gerektirir."
+      "Simple Future (will + V1): Konuşma anında verilen anlık kararlar ('The phone is ringing, I'll answer it'), söz verme, teklif, gönüllülük ve mevcut kanıta dayanmayan tahminlerde ('I think it will snow') kullanılır; her gelecek planı için zorunlu değildir.",
+      "Be Going To: Konuşma anından önce kararlaştırılmış niyetlerde ('She is going to study medicine') ve mevcut gözle görülür kanıta dayanan tahminlerde ('Look at those dark clouds! It is going to rain') kullanılır. Randevulu, kesin planlarda Present Continuous tercih edilir.",
+      "Future Continuous (will be + Ving): Gelecekte belirli bir anda devam ediyor olacak eylemleri ('This time tomorrow, I will be flying over the Alps'), kibarca plan sormayı ('Will you be using the car tonight?') ve olayların doğal akışını anlatır. 'at + saat' ifadesi tek başına bu zamanı zorunlu kılmaz.",
+      "Shall Kullanımı: 1. tekil/çoğul (I, We) öznelerle resmî teklif/öneri ('Shall we begin?') ve hukuki/resmî antlaşma yükümlülüklerinde ('The tenant shall pay the rent on time') kullanılır.",
+      "Zaman ve koşul yan cümlelerinde (when, before, after, as soon as, if, unless) geleceğe gönderme yapılırken 'will' yerine Simple Present (V1) kullanılır ('When he arrives, we will start').",
+      "Since kuralı: 'Since' bağlacından sonra daima Simple Past (V2), ana cümlede Present Perfect (have/has + V3) gelir.",
+      "By the time kuralı: 'By the time + V2' gelirse ana cümlede 'had V3'; 'By the time + V1' gelirse 'will have V3' aranır."
     ],
     "coding": [
+      "Gözle kanıt = going to | Anlık karar & söz = will | Gelecekte süreç = will be + Ving",
+      "Zaman zarfı yan cümlesinde ASLA will olmaz: When + V1, will + V1.",
       "SINCE kuralı: 'S' geçmişe çivi çakar (V2), ana bina göğe yükselir (have/has V3).",
-      "By the time: 'Zaman gelene kadar iş çoktan bitti' -> Had V3."
+      "By the time + V2 -> had V3 (O ana kadar iş çoktan bitti)."
     ],
     "traps": [
       {
-        "trap": "When/After/Before yan cümlesine 'will' koymak en yaygın ÖSYM çeldiricisidir.",
-        "fix": "Zaman bağlacı olan cümlede 'will/would' elenir, Present Simple veya Past Simple seçilir."
+        "trap": "'at 5 PM' ifadesini görünce her zaman Future Continuous zorunlu sanmak.",
+        "fix": "Saat ifadesi tek başına süreci zorunlu kılmaz; anlık başlangıçlarda Simple Future ('The lecture will start at 5 PM'), o anda sürecek eylemlerde Future Continuous ('At 5 PM, I will be working') kullanılır."
+      },
+      {
+        "trap": "Planlı her geleceğe yalnızca 'going to' demek.",
+        "fix": "Tarihi, yeri ve kişileri netleşmiş kesin randevulu planlarda Present Continuous ('I am flying to Paris tomorrow morning') tercih edilir."
+      },
+      {
+        "trap": "When/After/Before/If yan cümlesine 'will' koymak.",
+        "fix": "Zaman ve koşul yan cümlelerinde gelecek anlamı için Simple Present (V1) kullanılır."
       }
     ],
     "example": {
@@ -212,36 +240,64 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B1 - C1",
     "color": "from-sky-500 to-blue-600",
     "emoji": "🎯",
-    "summary": "Zorunluluk, olasılık, tavsiye ve geçmişe yönelik çıkarımlar (Modal + have V3) YDS'nin en çok puan kazandıran alanıdır.",
+    "summary": "Modallar ve Perfect Modals (Modal + have + V3), YDS'de geçmişe dönük çıkarım, olasılık, eleştiri ve pişmanlık ifade eder. 'must have V3' ile 'can't have V3' geçmiş çıkarımın iki zıt kutbudur.",
     "formula": [
       {
-        "label": "Geçmiş Kesin Çıkarım",
-        "text": "must have V3 (yapmış olmalı)",
+        "label": "Must Have V3",
+        "text": "must have + V3 (Geçmiş çıkarım: Yapmış olmalı)",
         "color": "bg-emerald-500/20 text-emerald-300"
       },
       {
-        "label": "Geçmiş İmkânsızlık",
-        "text": "can't / couldn't have V3 (yapmış olamaz)",
+        "label": "Can't/Couldn't Have V3",
+        "text": "can't / couldn't have + V3 (Geçmiş çıkarım: Yapmış olamaz)",
         "color": "bg-rose-500/20 text-rose-300"
       },
       {
-        "label": "Geçmiş Pişmanlık",
-        "text": "should have V3 (yapmalıydı ama yapmadı)",
+        "label": "May/Might/Could Have V3",
+        "text": "may / might / could have + V3 (Geçmiş zayıf olasılık: Yapmış olabilir)",
         "color": "bg-amber-500/20 text-amber-300"
+      },
+      {
+        "label": "Should Have V3",
+        "text": "should / ought to have + V3 (Eleştiri: Yapmalıydı ama yapmadı)",
+        "color": "bg-blue-500/20 text-blue-300"
+      },
+      {
+        "label": "Needn't Have V3",
+        "text": "needn't have + V3 (Boşa çaba: Yapmasına gerek yoktu ama yaptı)",
+        "color": "bg-purple-500/20 text-purple-300"
+      },
+      {
+        "label": "Continuous Perfect",
+        "text": "must have been + Ving (Geçmiş süreç çıkarımı: Yapıyor olmalıydı)",
+        "color": "bg-cyan-500/20 text-cyan-300"
       }
     ],
     "rules": [
-      "Şimdiki çıkarımlarda: 'must be' (%95 kesin), 'might/may/could be' (%50 ihtimal), 'can't be' (imkansız).",
-      "Geçmiş çıkarımlarda mutlaka 'HAVE + V3' eki eklenir (must have done, couldn't have known).",
-      "'Needn't have V3' boşuna yaptı demektir; 'didn't need to' yapmaya gerek yoktu ve yapmadı demektir."
+      "must have + V3: Geçmişe yönelik kuvvetli olumlu çıkarım ('The ground is soaked; it must have rained heavily last night').",
+      "can't / couldn't have + V3: Geçmişe yönelik kuvvetli olumsuz çıkarım ('He was in Istanbul yesterday; he can't have committed the crime in London').",
+      "may / might / could have + V3: Geçmişe yönelik zayıf olasılık ('I cannot find my keys; I might have left them at the office').",
+      "should / ought to have + V3: Geçmişte yapılması gerekip de yapılmayan eylemler için eleştiri ve pişmanlık ('You should have studied harder for the exam').",
+      "shouldn't have + V3: Geçmişte yapılmaması gerekirken yapılan hatalı eylemler ('You shouldn't have driven so fast in the dense fog').",
+      "needn't have + V3: Yapılmasına gerek olmadığı halde boş yere yapılan eylemler ('You needn't have brought your own towels; the hotel provides them').",
+      "would have + V3: Geçmişte gerçekleşmemiş şartlı durumlar veya niyetler ('If I had known the truth, I would have warned you').",
+      "could have + V3: Bağlama göre geçmiş olasılık ('olabilirdi') veya gerçekleşmemiş fırsat/yetenek ('yapabilirdi ama yapmadı') bildirir.",
+      "must have been + Ving: Geçmişte eylemin o esnada devam ediyor olduğuna dair süreç çıkarımı ('She didn't hear the knock; she must have been taking a shower')."
     ],
     "coding": [
-      "HAVE V3 = Zamanda geriye yolculuk bileti! Modalın yanına 'have V3' gelirse olay geçmiştedir."
+      "MUST HAVE V3 = %99 Yapmış olmalı | CAN'T HAVE V3 = %99 Yapmış olamaz",
+      "SHOULD HAVE V3 = Yapmalıydın ama yapmadın (Ah keşke!)",
+      "NEEDN'T HAVE V3 = Gerek yoktu ama boşuna yaptın",
+      "COULD HAVE V3 = Yapabilirdi ama yapmadı (Kaçan fırsat)"
     ],
     "traps": [
       {
-        "trap": "'Must' fiilinin geçmiş hali 'had to'dur; çıkarım geçmiş hali ise 'must have V3'tür, ikisini karıştırma!",
-        "fix": "Zorunluluk geçmişi = had to; Güçlü tahmin geçmişi = must have V3."
+        "trap": "Geçmiş olumsuz çıkarım için 'mustn't have V3' aramak.",
+        "fix": "İngilizcede geçmiş olumsuz çıkarım kalıbı 'can't have V3' veya 'couldn't have V3'tür; mustn't have V3 çıkarım için kullanılmaz."
+      },
+      {
+        "trap": "'didn't need to V1' ile 'needn't have V3' kalıbını eşanlamlı sanmak.",
+        "fix": "didn't need to = gerek yoktu ve yapılmadı; needn't have V3 = gerek yoktu ama gereksiz yere yapıldı."
       }
     ],
     "example": {
@@ -460,37 +516,51 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B2 - C1",
     "color": "from-violet-500 to-purple-700",
     "emoji": "📦",
-    "summary": "Cümlede özne veya nesne görevini üstlenen yapılar: that, whether or not, what, how, why.",
+    "summary": "İsim cümlecikleri (Noun Clauses) cümlede özne veya nesne görevinde kullanılır. Dolaylı anlatımda (Reported Speech) say/tell farkı, backshift kuralları ve soru cümlelerinde düz kelime sırası esastır.",
     "formula": [
       {
-        "label": "Fact",
-        "text": "THAT + tam cümle (bir olgu bildirir)",
-        "color": "bg-violet-500/20 text-violet-300"
+        "label": "Say vs Tell",
+        "text": "say (that) / say to sb vs tell sb (that) [Kişi nesnesi zorunlu]",
+        "color": "bg-indigo-500/20 text-indigo-300"
       },
       {
-        "label": "Doubt / Choice",
-        "text": "WHETHER ... (OR NOT) (olup olmadığı)",
+        "label": "Reported Question",
+        "text": "He asked + Wh- / If / Whether + S + V [Düz cümle sırası]",
+        "color": "bg-cyan-500/20 text-cyan-300"
+      },
+      {
+        "label": "Imperative Shift",
+        "text": "tell / ask / advise + object + to V1 (olumsuz: not to V1)",
         "color": "bg-amber-500/20 text-amber-300"
       },
       {
-        "label": "Missing Element",
-        "text": "WHAT + eksik cümle (= the thing that)",
-        "color": "bg-cyan-500/20 text-cyan-300"
+        "label": "Backshift",
+        "text": "Present -> Past | Past/Perf -> Past Perfect | will -> would",
+        "color": "bg-purple-500/20 text-purple-300"
       }
     ],
     "rules": [
-      "'That' tam bir cümle alır ve cümleden hiçbir öğe eksik olamaz.",
-      "'What' ise nesnesi veya öznesi eksik olan cümlecik ister: 'I know what you did'.",
-      "Edatlardan sonra (about, in, of) 'that' gelmez, 'whether' veya 'what' gelir."
+      "say ve tell farkı: tell mutlaka doğrudan kişi nesnesi alır ('He told me that...', 'She told us...'). say ise nesne almaz veya 'to' ile kullanılır ('He said to me that...'). 'He said me' kesinlikle hatalıdır.",
+      "Backshift (Zaman Kayması): Aktarma fiili geçmiş zamandaysa (said, told, asked) aktarılan cümlenin zamanı bir derece geçmişe kayar: Present Simple -> Past Simple, Present Continuous -> Past Continuous, Past Simple & Present Perfect -> Past Perfect, will -> would, can -> could, may -> might, must/have to -> had to.",
+      "Backshift İstisnaları: Aktarma fiili şimdiki/geniş zamandaysa ('He says...') zaman kaymaz. Ayrıca evrensel gerçekler, bilimsel kurallar ve geçerliliğini koruyan durumlarda da backshift zorunlu değildir ('The teacher explained that water boils at 100°C').",
+      "Reported Questions: Dolaylı sorularda DAİMA düz cümle kelime sırası (Özne + Fiil) kullanılır: 'He asked where I lived' (asla 'where did I live' değil!).",
+      "Yes/No Soruları: Evet/hayır soruları aktarılırken bağlaç olarak 'if' veya 'whether' kullanılır ('She asked if/whether I was ready').",
+      "Emir ve Ricalar: tell / ask / order / advise + nesne + to V1 (olumsuzda 'not to V1') kalıbıyla aktarılır ('The doctor advised me to rest').",
+      "Zaman ve Yer Dönüşümleri: Bakış açısı değiştiğinde dönüşür: tomorrow -> the next/following day, yesterday -> the day before, ago -> before, now -> then, here -> there, this -> that."
     ],
     "coding": [
-      "THAT tam sever, WHAT eksik sever! Cümle tamsa 'that', bir şeyler eksikse 'what'!",
-      "Edat + whether: 'He is uncertain about whether to invest.'"
+      "TELL = MUTLAKA KİME (tell ME, tell US) | SAY = Direkt cümle (say that)",
+      "Dolaylı soru kuralı: Soru biter, düz cümle başlar (Wh- + ÖZNE + FİİL)",
+      "EVET/HAYIR sorusu aktarımı: IF / WHETHER + Özne + Fiil"
     ],
     "traps": [
       {
-        "trap": "Tam cümlenin başına 'what' koymak.",
-        "fix": "Cümle özne+fiil+nesne tam ise 'that' seçilmelidir."
+        "trap": "Dolaylı soruda devrik kelime sırası kurmak ('He asked where was the hotel').",
+        "fix": "Doğru sıra düz cümledir: 'He asked where the hotel was'."
+      },
+      {
+        "trap": "'He said me' veya 'He told that' kullanımı.",
+        "fix": "tell nesne ister ('He told me'); say doğrudan cümle alır ('He said that')."
       }
     ],
     "example": {
@@ -626,36 +696,51 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B2 - C1",
     "color": "from-cyan-500 to-blue-600",
     "emoji": "✂️",
-    "summary": "Relative ve zarf cümlelerinin V-ing (etken) veya V3 (edilgen) ile kısaltılması. Boşlukla başlayan cümlelerde ortak özne kuralı!",
+    "summary": "Participles (Kısaltmalar), Relative Clause ve Adverbial Clause yapılarının sadeleştirilmesidir. Ving aktif, V3 pasif, having V3 ise öncelik-tamamlanmışlık bildirir. Dangling participle mantık hatasıdır.",
     "formula": [
       {
-        "label": "Active Reduction",
-        "text": "V-ing ... , Subject + Verb (etken)",
+        "label": "Aktif Kısaltma",
+        "text": "Ving (Aynı anda veya sebep bildiren aktif eylem)",
+        "color": "bg-emerald-500/20 text-emerald-300"
+      },
+      {
+        "label": "Pasif Kısaltma",
+        "text": "V3 (Edilgen kısaltma: Yapılan / Edilen)",
+        "color": "bg-rose-500/20 text-rose-300"
+      },
+      {
+        "label": "Öncelikli Aktif",
+        "text": "Having + V3 (Daha önce tamamlanmış aktif eylem)",
         "color": "bg-cyan-500/20 text-cyan-300"
       },
       {
-        "label": "Passive Reduction",
-        "text": "V3 (Having been V3) ... , Subject + Verb",
+        "label": "Öncelikli Pasif",
+        "text": "Having been + V3 (Daha önce tamamlanmış edilgen eylem)",
         "color": "bg-purple-500/20 text-purple-300"
-      },
-      {
-        "label": "Prior Action",
-        "text": "Having V3 ... , Subject + Verb (öncelik)",
-        "color": "bg-emerald-500/20 text-emerald-300"
       }
     ],
     "rules": [
-      "Virgüle kadar olan kısaltmanın öznesi, virgülden sonraki ana cümlenin öznesi ile AYNI olmak zorundadır.",
-      "Kısaltılan eylem ana eylemden daha önce olmuşsa 'HAVING V3' (active) veya 'HAVING BEEN V3' (passive) kullanılır.",
-      "Kısaltma nesne almışsa active (V-ing), almamışsa passive (V3) aranır."
+      "Present Participle (Ving) etken (aktif) anlam taşır: 'Hearing the alarm, the employees evacuated the building' (= When they heard the alarm...).",
+      "Past Participle (V3) edilgen (pasif) anlam taşır: 'Written in 1890, the novel still fascinates readers' (= Which was written...).",
+      "Perfect Participle (Having + V3) eylemin ana cümledeki eylemden daha önce tamamlandığını vurgular: 'Having submitted the report, she turned off her computer' (= After she had submitted...).",
+      "Passive Perfect Participle (Having been + V3) eylemin daha önce gerçekleştiğini ve edilgen olduğunu gösterir: 'Having been warned several times, the company took security measures'.",
+      "Dangling Participle (Sallantılı Kısaltma): Kısaltılan yan cümlenin mantıksal öznesi ile ana cümlenin öznesi mutlaka aynı olmalıdır. 'Walking down the road, the trees were beautiful' hatalıdır çünkü ağaçlar yürüyemez!",
+      "Having yapısının yalnızca V3 ile kullanılacağı aşırı genellemesi yanlıştır; 'having + isim' kalıbı isim-fiil (gerund) olarak pek çok cümlede yer alır ('Having enough sleep is vital for health').",
+      "Relative Clause Kısaltmaları: Aktif sıfat cümlecikleri Ving ile ('The man who lives next door' -> 'The man living next door'); pasif sıfat cümlecikleri V3 ile ('The car that was repaired' -> 'The car repaired') kısaltılır."
     ],
     "coding": [
-      "Kısaltmanın can simidi: 'Virgülden sonraki ilk kelimeye bak, eylemi o mu yapıyor, ona mı yapılıyor?'"
+      "ÖZNE İŞİ YAPIYORSA = Ving | ÖZNEYE İŞ YAPILIYORSA = V3",
+      "ÖNCE BİTTİ + AKTİF = HAVING + V3 | ÖNCE BİTTİ + PASİF = HAVING BEEN + V3",
+      "Virgülden sonraki özneye sor: 'Bu işi sen mi yaptın, sana mı yapıldı?'"
     ],
     "traps": [
       {
-        "trap": "Öznesi uyuşmayan 'Dangling Participle' şıklarına kanmak.",
-        "fix": "Virgülden sonraki özne ile kısaltmayı yapan varlığı mutlaka eşleştir."
+        "trap": "Virgülden sonraki özneye bakmadan doğrudan ezbere şık işaretlemek.",
+        "fix": "Kısaltılan cümlenin mantıksal öznesi virgülden hemen sonra gelen öznedir; aktif/pasif kontrolü bu özneye göre yapılır."
+      },
+      {
+        "trap": "'Having' sözcüğünün yalnızca V3 ile kullanılabileceğini sanmak.",
+        "fix": "'Having + V3' perfect participle yapısıdır, ancak 'Having + isim' isim-fiil (gerund) yapısı olarak da kullanılabilir ('Having patience is key')."
       }
     ],
     "example": {
@@ -791,36 +876,58 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B1 - C1",
     "color": "from-red-500 to-rose-600",
     "emoji": "🌉",
-    "summary": "Zıtlık (Although, However), Sebep (Because, Due to), Koşul ve Paralellik bildiren YDS'nin 1 numaralı soru kaynağı.",
+    "summary": "YDS'nin en çok soru çıkan alanıdır. Adverbial Clauses 8 ana grupta incelenir. Cümle alan bağlaçlar ile isim/öbek alan bağlaçların ayrımı soru çözümünün anahtarıdır.",
     "formula": [
       {
-        "label": "Zıtlık + Cümle",
-        "text": "Although / Even though / While + S + V",
+        "label": "Zıtlık Zarf Tümleçleri",
+        "text": "although / even though + Cümle vs despite / in spite of + İsim / Ving",
         "color": "bg-rose-500/20 text-rose-300"
       },
       {
-        "label": "Zıtlık + İsim/Öbek",
-        "text": "Despite / In spite of + Noun / V-ing",
+        "label": "Sebep Zarf Tümleçleri",
+        "text": "because / since / as + Cümle vs because of / due to + İsim / Ving",
+        "color": "bg-emerald-500/20 text-emerald-300"
+      },
+      {
+        "label": "Amaç Zarf Tümleçleri",
+        "text": "so that + Cümle vs in order to / so as to + V1",
+        "color": "bg-blue-500/20 text-blue-300"
+      },
+      {
+        "label": "Sonuç Zarf Tümleçleri",
+        "text": "so + adj/adv + that vs such + (a/an) noun phrase + that",
         "color": "bg-amber-500/20 text-amber-300"
       },
       {
-        "label": "Geçiş Zarfı",
-        "text": "; however, / ; therefore, / ; nevertheless,",
-        "color": "bg-blue-500/20 text-blue-300"
+        "label": "Koşul Zarf Tümleçleri",
+        "text": "unless (= if not) + Olumlu Cümle | provided that + Cümle",
+        "color": "bg-purple-500/20 text-purple-300"
       }
     ],
     "rules": [
-      "Boşluktan sonra tam cümle mi (S+V) yoksa sadece isim/öbek mi var? Bu kontrol şıkların %50'sini eler!",
-      "'Although' tam cümle alır; 'Despite' isim öbeği alır.",
-      "'Due to / Owing to / Because of' isim alır; 'Because / As / Since' cümle alır."
+      "Adverbial Clauses 8 ana gruptur: 1) Zaman (when, while, as, before, after, until, as soon as, once, since, by the time), 2) Sebep (because, since, as, seeing that, now that), 3) Amaç (so that, in order that), 4) Sonuç (so...that, such...that), 5) Zıtlık (although, even though, though, whereas, while), 6) Koşul (if, unless, provided that, as long as, in case), 7) Yer (where, wherever), 8) Tarz (as, as if, as though).",
+      "although / even though arkasından tam cümle (özne + fiil) alırken; despite / in spite of arkasından isim, zamir veya Ving alır.",
+      "because / since / as arkasından tam cümle alırken; because of / due to / owing to arkasından isim veya Ving alır.",
+      "so that cümle alarak amaç bildirir ('He studied hard so that he could pass'); in order to ise yalın fiille bağlanır ('He studied hard in order to pass').",
+      "so + sıfat/zarf + that ('The book was so gripping that I read it in one sitting'); such + isim tamlaması + that ('It was such a gripping book that...').",
+      "unless (= if not) bağlacı kendi içinde olumsuzluk barındırdığı için unless'in yan cümlesinde ikinci bir olumsuzluk eki ('not') genellikle kullanılmaz.",
+      "Geleceğe gönderme yapan zaman ve koşul yan cümlelerinde Simple Present (V1) kullanılır ('When he arrives, we will start').",
+      "İstisna: will bağlaç cümlesinde ancak istek, rica veya inatçı ısrar bağlamında istisnai olarak yer alabilir ('If you will kindly wait a moment...')."
     ],
     "coding": [
-      "+ / - analizi yap! Cümlenin ilk tarafı olumlu, ikinci tarafı olumsuzsa ZITLIK bağlacı tek çaredir."
+      "DESPITE / IN SPITE OF = İsim veya Ving | ALTHOUGH = Cümle (Özne + Fiil)",
+      "BECAUSE OF = İsim / Ving | BECAUSE = Cümle",
+      "SO + Sıfat + THAT | SUCH + (a/an) İsim Tamlaması + THAT",
+      "UNLESS = İçi olumlu, anlamı olumsuz (Yapmadıkça / If not)"
     ],
     "traps": [
       {
-        "trap": "'Despite of' demek. Despite edat almaz, 'In spite of' ise 'of' ile yazılır.",
-        "fix": "Despite + Noun veya In spite of + Noun."
+        "trap": "Despite'tan sonra tam cümle getirmek veya although'dan sonra sadece isim koymak.",
+        "fix": "Boşluktan sonra özne + fiil varsa although/even though; sadece isim/Ving varsa despite/in spite of seçilir."
+      },
+      {
+        "trap": "Unless bulunan yan cümleye 'not' eklemek.",
+        "fix": "Unless zaten olumsuzluk içerir; yan cümlede fazladan 'not' kullanılmaz."
       }
     ],
     "example": {
@@ -1038,36 +1145,53 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "B1 - B2",
     "color": "from-teal-600 to-cyan-700",
     "emoji": "⚖️",
-    "summary": "Sayılabilen ve sayılamayan isimlerle miktar uyumu: few vs little, many vs much, each, every, neither, either.",
+    "summary": "Belirteçler (Determiners) ve tanımlıklar (Articles: a/an/the/zero article), sayılabilen ve sayılamayan isimlerle kullanılan miktar belirteçleri YDS'de soru kökünün belirleyicisidir.",
     "formula": [
       {
-        "label": "Sayılamayan",
-        "text": "little / much / an amount of (+ singular noun)",
-        "color": "bg-teal-500/20 text-teal-300"
+        "label": "Ses Esaslı A/An",
+        "text": "a + ünsüz ses (a university, a European) | an + ünlü ses (an hour, an honest man)",
+        "color": "bg-emerald-500/20 text-emerald-300"
       },
       {
-        "label": "Çoğul Sayılabilen",
-        "text": "few / many / a number of (+ plural noun)",
+        "label": "A number of vs The number of",
+        "text": "a number of + Çoğul İsim + Çoğul Fiil | the number of + Çoğul İsim + Tekil Fiil",
+        "color": "bg-cyan-500/20 text-cyan-300"
+      },
+      {
+        "label": "Miktar Uyumu",
+        "text": "many/few + Çoğul | much/little + Sayılamayan | all/some/most + İkisi de",
         "color": "bg-amber-500/20 text-amber-300"
       },
       {
-        "label": "Olumsuzluk Anlamı",
-        "text": "'few' ve 'little' a'sız gelirse 'neredeyse hiç' demektir",
-        "color": "bg-rose-500/20 text-rose-300"
+        "label": "The + Sıfat Grubu",
+        "text": "the + Sıfat = Çoğul İnsan Grubu (the rich, the elderly -> Çoğul Fiil)",
+        "color": "bg-purple-500/20 text-purple-300"
       }
     ],
     "rules": [
-      "'A few' olumlu (birkaç tane var yeterli), 'few' olumsuzdur (neredeyse hiç yok).",
-      "'Neither of' ve 'Either of' tekil fiille çekimlenir.",
-      "'Each' ve 'Every' tekil sayılabilen isim ister: 'every student'."
+      "a / an seçimi yazılışa değil telaffuz edilen ilk sesin fonetiğine bağlıdır: 'a university' (/juː/ ünsüz sesi), 'a European' (/j/ ünsüz sesi), 'an hour' (okunmayan h, ünlü sesi), 'an honest person' (okunmayan h).",
+      "Zero Article (Tanımlıksız): Genel anlamdaki çoğul isimler ('Books provide knowledge') ve genel sayılamayan isimler ('Water is vital for life') tanımlık almaz.",
+      "Coğrafi İsimler Kuralı: Tekil dağlar (Mount Everest) ve tek adalar zero article alır; dağ sıraları (The Alps) ve ada grupları (The Bahamas) 'the' alır. Nehirler (The Nile), denizler (The Black Sea) ve okyanuslar (The Atlantic) 'the' alır. Tekil ülkeler (Turkey, Germany) zero article; çoğul veya federasyon ülkeler (The United States, The Netherlands, The United Kingdom) 'the' alır.",
+      "Kurum İşlevi vs Bina: Kuruma temel işlevi için gidildiğinde zero article ('go to school' = öğrenci olarak gitmek; 'go to hospital' = hasta olarak yatmak); bina amaçlı gidildiğinde 'the' kullanılır ('go to the school to meet the teacher').",
+      "the + sıfat yapısı tüm bir insan grubunu çoğul olarak niteler: the rich (zenginler), the poor (yoksullar), the elderly (yaşlılar), the unemployed (işsizler) çoğul fiil alır.",
+      "Quantifiers Ayrımı: many, few, a few, several, a number of sadece sayılabilen çoğul isimlerle; much, little, a little sadece sayılamayan isimlerle; all, some, any, a lot of, most ise hem sayılabilen çoğul hem de sayılamayan isimlerle kullanılır ('All evidence was examined' & 'All students were present').",
+      "'a number of' (birçok) çoğul fiil alırken; 'the number of' (sayısı) tekil fiil alır ('A number of students are waiting' vs 'The number of students is fifty').",
+      "Neither of yapısında sınav ve resmî İngilizcede tekil fiil tercih edilir ('Neither of the proposed solutions is viable')."
     ],
     "coding": [
-      "'A' harfi can verir! 'A few / A little' = var, olumlu. 'Few / Little' = yok, olumsuz!"
+      "A NUMBER OF = Çoğul Fiil | THE NUMBER OF = Tekil Fiil",
+      "ALL = Hem çoğul sayılabilir hem sayılamayan isimlerle çalışır (All money / All people)",
+      "FEW / LITTLE = Neredeyse hiç (olumsuz) | A FEW / A LITTLE = Az da olsa yeterli (olumlu)",
+      "A UNIVERSITY (ünsüz ses) | AN HOUR (ünlü ses)"
     ],
     "traps": [
       {
-        "trap": "'Information' veya 'advice' gibi sayılamayan isimlerin önüne 'many' koymak.",
-        "fix": "Sayılamayan isimlerde 'much' veya 'a lot of' kullanılır."
+        "trap": "'All' sözcüğünü sadece çoğul isimlerle sınırlı sanmak.",
+        "fix": "'All' sayılamayan isimlerle de tam uyumludur: 'All information is confidential'."
+      },
+      {
+        "trap": "'university' veya 'European' sözcüklerinin başına 'an' getirmek.",
+        "fix": "Yazılışa değil okunuşa bakılır: /juː/ ünsüz sesle başladıkları için 'a university' ve 'a European' doğrudur."
       }
     ],
     "example": {
@@ -1203,38 +1327,58 @@ export const GRAMMAR_TOPICS: GrammarTopic[] = [
     "level": "C1",
     "color": "from-fuchsia-600 to-purple-800",
     "emoji": "🙃",
-    "summary": "Olumsuzluk veya kısıtlama zarfı başa gelirse cümle soru cümlesi gibi devrilir: Not only ... but also, Scarcely ... when, Never have I seen.",
+    "summary": "Olumsuz veya sınırlayıcı bir ifade cümle başına geldiğinde, cümle devrik hâle gelir: Yardımcı fiil öznenin önüne geçer (Zarf + Yardımcı Fiil + Özne + Esas Fiil).",
     "formula": [
       {
-        "label": "Not Only Devriği",
-        "text": "Not only + DID / HAD + S + V ... but also",
-        "color": "bg-fuchsia-500/20 text-fuchsia-300"
+        "label": "Olumsuz Zarf Devriği",
+        "text": "Never / Rarely / Seldom + Yardımcı Fiil + Özne + Fiil",
+        "color": "bg-rose-500/20 text-rose-300"
       },
       {
-        "label": "Hardly ... When",
-        "text": "Hardly / Scarcely + had S V3 + WHEN + S V2",
+        "label": "Bağlaç Devriği",
+        "text": "Not only + Y.Fiil + Özne... but also... | No sooner had S V3 than...",
+        "color": "bg-amber-500/20 text-amber-300"
+      },
+      {
+        "label": "Sınırlayıcı Zarf",
+        "text": "Only after / Only then / Only by + Y.Fiil + Özne + Fiil [Ana cümlede]",
+        "color": "bg-cyan-500/20 text-cyan-300"
+      },
+      {
+        "label": "Koşul Devriği",
+        "text": "Had I known (Type 3) | Were I (Type 2) | Should you need (Type 1)",
         "color": "bg-purple-500/20 text-purple-300"
       },
       {
-        "label": "No Sooner ... Than",
-        "text": "No sooner + had S V3 + THAN + S V2",
-        "color": "bg-pink-500/20 text-pink-300"
+        "label": "So / Such Devriği",
+        "text": "So + adj + be + Özne + that | Such + be + Özne + that",
+        "color": "bg-emerald-500/20 text-emerald-300"
       }
     ],
     "rules": [
-      "Cümle başında 'Never, Seldom, Rarely, Scarcely, Hardly, Little, Not only' varsa arkasından YARDIMCI FİİL gelir.",
-      "'Hardly' ve 'Scarcely' bağlaç olarak 'WHEN' ile eşleşir.",
-      "'No sooner' bağlacı ise 'THAN' ile eşleşir."
+      "Temel Kural: Cümle başına olumsuz veya sınırlayıcı bir zarf/ifade (Never, Rarely, Seldom, Scarcely, Barely, Little, Under no circumstances) geldiğinde yardımcı fiil öznenin önüne geçer.",
+      "Not only ... but also: 'Not only did he win the championship, but he also broke the world record'.",
+      "No sooner ... than: Geçmişte birbiri ardına gerçekleşen eylemlerde 'No sooner had S V3 than S V2' kalıbı kullanılır ('No sooner had we arrived than the rain started').",
+      "Hardly / Scarcely ... when: 'Hardly had the meeting started when the fire alarm sounded'.",
+      "Only after / Only when / Not until: Bu bağlaçlarla başlayan cümlelerde devriklik YAN CÜMLEDE DEĞİL, ANA CÜMLEDE yapılır: 'Only after the investigation was completed did the police release the report'.",
+      "Under no circumstances / On no account / In no way: Kesin yasaklama ifadeleri cümle başında devrik gerektirir: 'Under no circumstances should you touch this wire'.",
+      "So / Such Devriği: 'So powerful was the explosion that windows shattered miles away' / 'Such was his determination that he overcame all obstacles'.",
+      "Koşul Devrikleri (If atılarak yapılan): Type 1 -> 'Should you require further info...'; Type 2 -> 'Were I you...' / 'Were he to accept...'; Type 3 -> 'Had we known about the blizzard, we would not have traveled'."
     ],
     "coding": [
-      "NO SOONER ... THAN (İkisi de 'N' ile biter/ilişkilidir!).",
-      "HARDLY ... WHEN (Hardly 'W' sesine aşık!).",
-      "Devrik = Soru kalıbı: Başa yardımcı fiili al!"
+      "Olumsuz zarf başa -> Yardımcı fiil öne: ZARF + YARDIMCI FİİL + ÖZNE + FİİL",
+      "No sooner... THAN | Hardly / Scarcely... WHEN",
+      "ONLY AFTER / NOT UNTIL = Yan cümle normal, ANA CÜMLE DEVRİK",
+      "IF UÇTU: Had + S + V3 | Were + S | Should + S + V1"
     ],
     "traps": [
       {
-        "trap": "'Hardly had he arrived than...' demek. Hardly 'than' değil 'when' alır.",
-        "fix": "Hardly ... when / No sooner ... than."
+        "trap": "Only after veya Not until görünce hemen yan cümleyi devrik yapmak.",
+        "fix": "Devriklik yan cümlenin bitiminde, ana cümlenin başında gerçekleşir ('Not until he apologized did I talk to him')."
+      },
+      {
+        "trap": "No sooner bağlacını 'when' ile, Hardly bağlacını 'than' ile eşleştirmek.",
+        "fix": "Eşleşme sabittir: No sooner... THAN | Hardly / Scarcely... WHEN."
       }
     ],
     "example": {

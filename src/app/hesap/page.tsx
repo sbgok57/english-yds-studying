@@ -35,7 +35,7 @@ export default function HesapPage() {
 
   const avatarId = useMemo(() => {
     const base = account ? hashStr(account.email) : hashStr("kanka");
-    return usage.avatar ?? base % 500;
+    return usage.avatar ?? base % 1000;
   }, [account, usage.avatar]);
 
   const submit = async () => {
@@ -82,10 +82,19 @@ export default function HesapPage() {
 
       {account ? (
         <div className="card-vibrant p-8 text-center">
-          <div
-            className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4"
-            dangerouslySetInnerHTML={{ __html: avatarSvg(avatarId) }}
-          />
+          {usage.customAvatar ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={usage.customAvatar}
+              alt={account.name}
+              className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4 object-cover"
+            />
+          ) : (
+            <div
+              className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4"
+              dangerouslySetInnerHTML={{ __html: avatarSvg(avatarId) }}
+            />
+          )}
           <h2 className="text-2xl font-black">{account.name}</h2>
           <p className="text-sm text-white/50 font-mono">{account.email}</p>
           <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>

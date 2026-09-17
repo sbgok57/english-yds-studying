@@ -16,7 +16,9 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
     "simple present", "present simple", "present continuous", "present perfect",
     "past simple", "simple past", "past continuous", "past perfect", "past perfect continuous",
     "present perfect continuous", "future tense", "future perfect", "will", "going to",
-    "tense agreement", "tense", "tenses", "zamanlar", "zaman uyumu",
+    "going-to", "be going to", "be-going-to", "simple future", "simple-future",
+    "future continuous", "future-continuous", "tense agreement", "tense", "tenses",
+    "zamanlar", "zaman uyumu",
   ],
   "passive-voice": [
     "passive", "passive voice", "edilgen", "edilgen çatı", "be done", "active passive", "aktif pasif",
@@ -24,6 +26,7 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   modals: [
     "modals", "modal verbs", "modal", "kipler", "kip", "can", "could", "may", "might",
     "must", "should", "would", "shall", "need", "have to", "ought to",
+    "perfect modals", "perfect-modals", "perfect modal", "perfect-modal", "modal perfect",
   ],
   conditionals: [
     "conditionals", "if clauses", "if clause", "if type 0", "if type 1", "if type 2", "if type 3",
@@ -36,7 +39,8 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   ],
   "noun-clauses": [
     "noun clauses", "noun clause", "that clause", "wh clause", "whether", "if", "indirect question",
-    "isim cümlecikleri", "isim cümleciği", "dolaylı soru",
+    "isim cümlecikleri", "isim cümleciği", "dolaylı soru", "reported speech", "reported-speech",
+    "indirect speech", "indirect-speech", "aktarma cümleleri",
   ],
   "gerunds-infinitives": [
     "gerund", "gerunds", "infinitive", "infinitives", "gerund infinitive", "verb ing", "to infinitive",
@@ -44,7 +48,7 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   ],
   participles: [
     "participles", "participle", "reduction", "reduced relative clause", "reduced", "v3", "v ing",
-    "kısaltma", "kisaltma", "ortaç",
+    "kısaltma", "kisaltma", "ortaç", "participle clauses", "participle clause",
   ],
   causatives: [
     "causatives", "causative", "have something done", "get something done", "make", "let", "have",
@@ -53,7 +57,8 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   conjunctions: [
     "conjunctions", "conjunction", "linking words", "transitional", "transition words", "however",
     "therefore", "although", "even though", "though", "despite", "in spite of", "whereas", "while",
-    "bağlaçlar", "geçiş ifadeleri", "baglaclar",
+    "bağlaçlar", "geçiş ifadeleri", "baglaclar", "adverbial clauses", "adverbial-clauses",
+    "adverbial clause", "adverbial-clause", "zarf tümleci cümlecikleri",
   ],
   prepositions: [
     "prepositions", "preposition", "at in on", "edatlar", "edat", "prepositional",
@@ -65,6 +70,7 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   determiners: [
     "determiners", "determiner", "quantifiers", "quantifier", "some any", "much many", "a lot of",
     "few", "little", "each every", "belirteçler", "belirtecler", "miktar",
+    "articles", "article", "a an the", "tanımlıklar", "tanimliklar", "harf-i tarif",
   ],
   comparatives: [
     "comparatives", "comparative", "superlatives", "superlative", "comparative superlative", "as as",
@@ -72,7 +78,7 @@ export const GRAMMAR_ALIASES: Record<string, string[]> = {
   ],
   inversion: [
     "inversion", "inverted", "devrik yapı", "devrik yapi", "never have i", "not only", "no sooner",
-    "hardly", "barely", "scarcely", "only when",
+    "hardly", "barely", "scarcely", "only when", "devrik cümleler", "devrik cumleler",
   ],
 };
 

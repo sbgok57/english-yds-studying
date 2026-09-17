@@ -116,7 +116,12 @@ export function getExamQuestions(id: string): ExamQuestion[] {
   const seed = hashString(id);
   let picked: BankQ[] = [];
   ORDER.forEach((t, i) => {
-    const pool = shuffleWithSeed(BANK.filter((q) => q.t === t), seed + i * 7919);
+    // SAFETY: Deep clone items before shuffling so shared BANK is never mutated
+    const matching = BANK.filter((q) => q.t === t).map((q) => ({
+      ...q,
+      o: [...q.o],
+    }));
+    const pool = shuffleWithSeed(matching, seed + i * 7919);
     const slice = pool.slice(0, QUOTA[t]);
     // seçenek sıralarını da sınav kimliğine göre karıştır (deneme hissi)
     const r = mulberry32(seed + i * 104729 + 3);

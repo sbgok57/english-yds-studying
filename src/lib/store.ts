@@ -13,6 +13,7 @@ export interface UsageData {
   tactics: Record<string, number>;
   exams: { taken: number; totalCorrect: number; totalQuestions: number; bestNet: number };
   avatar: number | null;
+  customAvatar?: string | null;
   ambient: boolean;
   sessions: number;
   lastVisit: number;
@@ -27,6 +28,7 @@ export function defaultUsage(): UsageData {
     tactics: {},
     exams: { taken: 0, totalCorrect: 0, totalQuestions: 0, bestNet: 0 },
     avatar: null,
+    customAvatar: null,
     ambient: true,
     sessions: 1,
     lastVisit: 0,
