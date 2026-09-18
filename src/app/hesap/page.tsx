@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useAccount } from "@/lib/auth";
 import { useUsage } from "@/lib/store";
 import { avatarSvg } from "@/lib/avatars";
 import Tip from "@/components/Tip";
+import BadgeShowcase from "@/components/profile/BadgeShowcase";
 
 function hashStr(s: string): number {
   let h = 0;
@@ -64,14 +66,24 @@ export default function HesapPage() {
     setDemoCode(null);
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      /* safety */
+    }
+    logout();
+    window.location.href = "/giris";
+  };
+
   return (
-    <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <header className="text-center mb-8">
         <h1 className="text-4xl font-black mb-2">
           🔑 <span className="gradient-text">Hesabım</span>
         </h1>
         <p className="text-white/60 text-sm">
-          Kanka, e-posta ve şifreyle kişisel hesabını aç. E-postana doğrulama kodu göndeririz!
+          Kanka, e-posta ve şifreyle kişisel hesabını yönet, rozetlerini ve çalışma durumunu takip et!
         </p>
         {!storageOk && (
           <p className="text-xs text-amber-300 mt-2">
@@ -81,61 +93,79 @@ export default function HesapPage() {
       </header>
 
       {account ? (
-        <div className="card-vibrant p-8 text-center">
-          {usage.customAvatar ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={usage.customAvatar}
-              alt={account.name}
-              className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4 object-cover"
-            />
-          ) : (
-            <div
-              className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4"
-              dangerouslySetInnerHTML={{ __html: avatarSvg(avatarId) }}
-            />
-          )}
-          <h2 className="text-2xl font-black">{account.name}</h2>
-          <p className="text-sm text-white/50 font-mono">{account.email}</p>
-          <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>
-          <p className="text-xs text-white/40 mt-1">
-            Üyelik: {new Date(account.createdAt).toLocaleDateString("tr-TR")}
-          </p>
+        <div className="space-y-8">
+          {/* User Profile Card */}
+          <div className="card-vibrant p-8 text-center max-w-xl mx-auto">
+            {usage.customAvatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={usage.customAvatar}
+                alt={account.name}
+                className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4 object-cover"
+              />
+            ) : (
+              <div
+                className="w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-cyan-400/50 shadow-lg shadow-cyan-500/20 mb-4"
+                dangerouslySetInnerHTML={{ __html: avatarSvg(avatarId) }}
+              />
+            )}
+            <h2 className="text-2xl font-black">{account.name}</h2>
+            <p className="text-sm text-white/50 font-mono">{account.email}</p>
+            <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>
+            <p className="text-xs text-white/40 mt-1">
+              Üyelik: {new Date(account.createdAt).toLocaleDateString("tr-TR")}
+            </p>
 
-          <div className="grid grid-cols-3 gap-2 mt-6 text-center">
-            <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
-              <div className="text-xl font-black text-emerald-300">
-                {Object.keys(usage.words).length}
+            <div className="grid grid-cols-3 gap-2 mt-6 text-center">
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
+                <div className="text-xl font-black text-emerald-300">
+                  {Object.keys(usage.words).length}
+                </div>
+                <div className="text-[10px] text-white/50">Çalışılan kelime</div>
               </div>
-              <div className="text-[10px] text-white/50">Çalışılan kelime</div>
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
+                <div className="text-xl font-black text-cyan-300">{usage.exams.taken}</div>
+                <div className="text-[10px] text-white/50">Çözülen sınav</div>
+              </div>
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
+                <div className="text-xl font-black text-amber-300">{usage.exams.bestNet}</div>
+                <div className="text-[10px] text-white/50">En iyi net</div>
+              </div>
             </div>
-            <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
-              <div className="text-xl font-black text-cyan-300">{usage.exams.taken}</div>
-              <div className="text-[10px] text-white/50">Çözülen sınav</div>
-            </div>
-            <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
-              <div className="text-xl font-black text-amber-300">{usage.exams.bestNet}</div>
-              <div className="text-[10px] text-white/50">En iyi net</div>
+
+            <div className="flex flex-wrap gap-2 justify-center mt-6">
+              <Link
+                href="/avatars"
+                className="px-4 py-2 rounded-full border border-white/20 font-bold text-xs hover:bg-white/10 transition-all"
+              >
+                👤 Avatar Seç
+              </Link>
+              <Link
+                href="/vocabulary/inventory"
+                className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 font-bold text-xs hover:bg-cyan-400/20 transition-all"
+              >
+                📦 Kelime Envanteri
+              </Link>
+              <Link
+                href="/study-plans"
+                className="px-4 py-2 rounded-full border border-purple-400/30 bg-purple-400/10 text-purple-300 font-bold text-xs hover:bg-purple-400/20 transition-all"
+              >
+                📅 Çalışma Programı
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-rose-500 to-red-600 font-bold text-xs hover:scale-105 transition-transform"
+              >
+                Çıkış Yap
+              </button>
             </div>
           </div>
 
-          <div className="flex gap-3 justify-center mt-6">
-            <a
-              href="/avatars"
-              className="px-5 py-2.5 rounded-full border border-white/20 font-bold text-sm hover:bg-white/10 transition-all"
-            >
-              👤 Avatar Seç
-            </a>
-            <button
-              onClick={logout}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-500 to-red-600 font-bold text-sm hover:scale-105 transition-transform"
-            >
-              Çıkış Yap
-            </button>
-          </div>
+          {/* Badges Showcase Section */}
+          <BadgeShowcase />
         </div>
       ) : (
-        <div className="card-vibrant p-8">
+        <div className="max-w-md mx-auto card-vibrant p-8">
           {/* Sekmeler */}
           <div className="flex gap-2 mb-6">
             <button

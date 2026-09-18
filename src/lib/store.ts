@@ -1,12 +1,66 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import type { CefrLevel, LevelAssessmentResult } from "./data-level-test";
+import {
+  PointsState,
+  PointEvent,
+  defaultPointsState,
+  awardPointsIdempotent,
+} from "./gamification/points-config";
+import {
+  BadgeState,
+  BadgeDefinition,
+  defaultBadgeState,
+  BADGES,
+} from "./gamification/badges-data";
+import {
+  evaluateAllBadges,
+  UserStatsContext,
+} from "./gamification/badges-engine";
 
 export interface WordStat {
   c: number; // doğru
   w: number; // yanlış
   last: number;
 }
+
+export interface LevelTestAttempt {
+  id: string;
+  date: number;
+  level: CefrLevel;
+  confidence: "low" | "medium" | "high";
+  scorePercent: number;
+  totalCorrect: number;
+  totalWrong: number;
+  totalEmpty: number;
+  skillScores: {
+    grammar: number;
+    vocabulary: number;
+    reading: number;
+    usage: number;
+  };
+}
+
+export interface LevelAssessmentState {
+  currentLevel: CefrLevel | null;
+  confidence: "low" | "medium" | "high" | null;
+  lastTestAt: number | null;
+  attempts: LevelTestAttempt[];
+  skillScores: {
+    grammar: number;
+    vocabulary: number;
+    reading: number;
+    usage: number;
+  };
+}
+
+export interface GamificationState {
+  points: PointsState;
+  badges: BadgeState;
+  showcaseBadgeIds: string[];
+}
+
 export interface UsageData {
   words: Record<string, WordStat>;
   grammar: Record<string, { a: number; ok: number }>;
@@ -20,9 +74,34 @@ export interface UsageData {
   bookmarks?: string[];
   wrongQuestions?: Record<string, { id: string; chosen: number; answer: number; date: number; topic?: string; type?: string }>;
   solvedQuestions?: Record<string, { correct: boolean; date: number }>;
+  levelAssessment?: LevelAssessmentState;
+  gamification?: GamificationState;
 }
 
 const KEY = "yds-master-usage-v1";
+
+export function defaultLevelAssessment(): LevelAssessmentState {
+  return {
+    currentLevel: null,
+    confidence: null,
+    lastTestAt: null,
+    attempts: [],
+    skillScores: {
+      grammar: 0,
+      vocabulary: 0,
+      reading: 0,
+      usage: 0,
+    },
+  };
+}
+
+export function defaultGamification(): GamificationState {
+  return {
+    points: defaultPointsState(),
+    badges: defaultBadgeState(),
+    showcaseBadgeIds: [],
+  };
+}
 
 export function defaultUsage(): UsageData {
   return {
@@ -38,6 +117,8 @@ export function defaultUsage(): UsageData {
     bookmarks: [],
     wrongQuestions: {},
     solvedQuestions: {},
+    levelAssessment: defaultLevelAssessment(),
+    gamification: defaultGamification(),
   };
 }
 
@@ -105,7 +186,20 @@ export function useUsage() {
     });
   }, []);
 
-  return { usage, update };
+  const addXp = useCallback(
+    (points: number, sourceId: string = `xp-${Date.now()}`, type: PointEventType = "custom") => {
+      awardUserPoints(update, {
+        id: `xp-evt-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        type,
+        points,
+        sourceId,
+      });
+      checkAndAwardBadges(update);
+    },
+    [update]
+  );
+
+  return { usage, update, addXp };
 }
 
 // ---- kolaylaştırıcı kayıt fonksiyonları ----
@@ -158,7 +252,6 @@ export function recordExam(
 ) {
   const finalNet = typeof net === "number" ? net : calculateYdsNet(correct, wrong);
   update((u) => {
-    // SAFETY: Ensure exams object and its properties exist and are valid numbers
     if (!u.exams || typeof u.exams !== "object") {
       u.exams = { taken: 0, totalCorrect: 0, totalQuestions: 0, bestNet: 0 };
     }
@@ -173,7 +266,6 @@ export function recordExam(
   });
 }
 
-// PERF & SAFETY: Bounded bookmarking and question tracking
 export function toggleBookmark(
   update: (fn: (u: UsageData) => UsageData) => void,
   questionId: string
@@ -229,4 +321,124 @@ export function removeWrongQuestion(
     }
     return u;
   });
+}
+
+// ==================== GAMIFICATION & LEVEL HELPERS ====================
+
+export function awardUserPoints(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  event: Omit<PointEvent, "createdAt"> & { createdAt?: number }
+): boolean {
+  let wasAwarded = false;
+  update((u) => {
+    const currentPoints = u.gamification?.points || defaultPointsState();
+    const { updatedState, awarded } = awardPointsIdempotent(currentPoints, event);
+    wasAwarded = awarded;
+
+    if (!u.gamification) u.gamification = defaultGamification();
+    u.gamification.points = updatedState;
+    return u;
+  });
+  return wasAwarded;
+}
+
+export function recordLevelAssessment(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  result: LevelAssessmentResult
+): void {
+  update((u) => {
+    if (!u.levelAssessment) u.levelAssessment = defaultLevelAssessment();
+
+    const attempt: LevelTestAttempt = {
+      id: `attempt-${Date.now()}`,
+      date: Date.now(),
+      level: result.estimatedLevel,
+      confidence: result.confidence,
+      scorePercent: result.scorePercent,
+      totalCorrect: result.totalCorrect,
+      totalWrong: result.totalWrong,
+      totalEmpty: result.totalEmpty,
+      skillScores: {
+        grammar: result.skillScores.grammar,
+        vocabulary: result.skillScores.vocabulary,
+        reading: result.skillScores.reading,
+        usage: Math.round((result.skillScores.sentence + result.skillScores.translation) / 2),
+      },
+    };
+
+    u.levelAssessment.currentLevel = result.estimatedLevel;
+    u.levelAssessment.confidence = result.confidence;
+    u.levelAssessment.lastTestAt = Date.now();
+    u.levelAssessment.attempts = [attempt, ...(u.levelAssessment.attempts || []).slice(0, 9)];
+    u.levelAssessment.skillScores = attempt.skillScores;
+
+    return u;
+  });
+}
+
+export function setShowcaseBadges(
+  update: (fn: (u: UsageData) => UsageData) => void,
+  badgeIds: string[]
+): void {
+  update((u) => {
+    if (!u.gamification) u.gamification = defaultGamification();
+    // Bounded max 5 showcase badges
+    u.gamification.showcaseBadgeIds = badgeIds.slice(0, 5);
+    return u;
+  });
+}
+
+export function checkAndAwardBadges(
+  update: (fn: (u: UsageData) => UsageData) => void
+): BadgeDefinition[] {
+  let newlyEarned: BadgeDefinition[] = [];
+
+  update((u) => {
+    if (!u.gamification) u.gamification = defaultGamification();
+
+    const wordsSolved = Object.values(u.words || {}).reduce((acc, w) => acc + (w.c + w.w), 0);
+    const grammarSolved = Object.values(u.grammar || {}).reduce((acc, g) => acc + g.a, 0);
+    const errorsFixed = Object.keys(u.solvedQuestions || {}).filter(
+      (k) => u.solvedQuestions?.[k]?.correct && !u.wrongQuestions?.[k]
+    ).length;
+
+    const statsContext: UserStatsContext = {
+      wordsSolved,
+      grammarQuestionsSolved: grammarSolved,
+      examsTaken: u.exams?.taken || 0,
+      bestNet: u.exams?.bestNet || 0,
+      errorsCorrected: errorsFixed,
+      currentLevel: u.levelAssessment?.currentLevel || undefined,
+      levelConfidence: u.levelAssessment?.confidence || undefined,
+      streakDays: Math.min(30, u.sessions || 1),
+      activeDays: Math.min(180, u.sessions || 1),
+      totalStudyMinutes: Math.round((wordsSolved * 1 + grammarSolved * 1.5 + (u.exams?.taken || 0) * 80)),
+    };
+
+    const { updatedState, newBadges } = evaluateAllBadges(
+      u.gamification.badges || defaultBadgeState(),
+      statsContext
+    );
+
+    newlyEarned = newBadges;
+    u.gamification.badges = updatedState;
+
+    // Award XP for each new badge
+    for (const b of newBadges) {
+      if (b.rewardXp > 0) {
+        const { updatedState: ptState } = awardPointsIdempotent(u.gamification.points, {
+          id: `badge-reward:${b.id}`,
+          type: "custom",
+          points: b.rewardXp,
+          sourceId: b.id,
+          metadata: { badgeTitle: b.title },
+        });
+        u.gamification.points = ptState;
+      }
+    }
+
+    return u;
+  });
+
+  return newlyEarned;
 }

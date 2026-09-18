@@ -202,6 +202,56 @@ export function migrateUsageData(raw: unknown, defaultUsage: UsageData): UsageDa
     ? src.bookmarks.filter((b): b is string => typeof b === "string")
     : [];
 
+  // Validate Level Assessment
+  let levelAssessment: UsageData["levelAssessment"] = undefined;
+  if (src.levelAssessment && typeof src.levelAssessment === "object" && !Array.isArray(src.levelAssessment)) {
+    const la = src.levelAssessment as Record<string, unknown>;
+    const currentLevel = (typeof la.currentLevel === "string" && ["A1", "A2", "B1", "B2", "C1", "C2"].includes(la.currentLevel))
+      ? (la.currentLevel as any)
+      : null;
+    const confidence = (typeof la.confidence === "string" && ["low", "medium", "high"].includes(la.confidence))
+      ? (la.confidence as any)
+      : null;
+    const lastTestAt = typeof la.lastTestAt === "number" && !isNaN(la.lastTestAt) ? la.lastTestAt : null;
+    const attempts = Array.isArray(la.attempts) ? la.attempts.slice(0, 10) : [];
+    const skillScores = (typeof la.skillScores === "object" && la.skillScores !== null)
+      ? la.skillScores as any
+      : { grammar: 0, vocabulary: 0, reading: 0, usage: 0 };
+
+    levelAssessment = {
+      currentLevel,
+      confidence,
+      lastTestAt,
+      attempts,
+      skillScores,
+    };
+  }
+
+  // Validate Gamification (Points & Badges)
+  let gamification: UsageData["gamification"] = undefined;
+  if (src.gamification && typeof src.gamification === "object" && !Array.isArray(src.gamification)) {
+    const g = src.gamification as Record<string, unknown>;
+    const pts = (typeof g.points === "object" && g.points !== null) ? (g.points as any) : {};
+    const total = typeof pts.total === "number" && !isNaN(pts.total) && pts.total >= 0 ? pts.total : 0;
+    const events = Array.isArray(pts.events) ? pts.events.slice(0, 500) : [];
+    const awardedSourceKeys = (typeof pts.awardedSourceKeys === "object" && pts.awardedSourceKeys !== null)
+      ? pts.awardedSourceKeys
+      : {};
+
+    const b = (typeof g.badges === "object" && g.badges !== null) ? (g.badges as any) : {};
+    const earned = Array.isArray(b.earned) ? b.earned : [];
+    const progress = (typeof b.progress === "object" && b.progress !== null) ? b.progress : {};
+    const showcaseBadgeIds = Array.isArray(g.showcaseBadgeIds)
+      ? (g.showcaseBadgeIds.filter((id: unknown): id is string => typeof id === "string")).slice(0, 5)
+      : [];
+
+    gamification = {
+      points: { version: 1, total, events, awardedSourceKeys },
+      badges: { version: 1, earned, progress },
+      showcaseBadgeIds,
+    };
+  }
+
   return {
     words,
     grammar,
@@ -219,5 +269,7 @@ export function migrateUsageData(raw: unknown, defaultUsage: UsageData): UsageDa
     solvedQuestions: (typeof src.solvedQuestions === "object" && src.solvedQuestions !== null && !Array.isArray(src.solvedQuestions))
       ? src.solvedQuestions as UsageData["solvedQuestions"]
       : {},
+    levelAssessment,
+    gamification,
   };
 }

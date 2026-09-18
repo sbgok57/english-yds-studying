@@ -6,9 +6,11 @@ import SearchBox from "@/components/SearchBox";
 import MenuDrawer from "@/components/MenuDrawer";
 
 const QUICK = [
+  { href: "/vocabulary/inventory", label: "Envanter", emoji: "📦" },
+  { href: "/study-plans", label: "Planlar", emoji: "📅" },
+  { href: "/level-test", label: "Seviye Testi", emoji: "📊" },
   { href: "/vocabulary/flashcards", label: "Kartlar", emoji: "🃏" },
   { href: "/grammar", label: "Gramer", emoji: "📖" },
-  { href: "/games", label: "Oyunlar", emoji: "🎮" },
   { href: "/exams", label: "Sınavlar", emoji: "⏱️" },
 ];
 

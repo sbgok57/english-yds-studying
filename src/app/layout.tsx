@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import AmbientBackground from "@/components/AmbientBackground";
 import AiWidget from "@/components/AiWidget";
+import { BadgeQueueProvider } from "@/components/gamification/BadgeQueueProvider";
 
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="tr" className="dark">
       <body>
-        <AmbientBackground />
-        <Header />
-        <main className="min-h-[calc(100vh-4rem)]">{children}</main>
-        <AiWidget />
+        <BadgeQueueProvider>
+          <AmbientBackground />
+          <Header />
+          <main className="min-h-[calc(100vh-4rem)]">{children}</main>
+          <AiWidget />
+        </BadgeQueueProvider>
         <footer className="border-t border-white/10 py-8 mt-12">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">

@@ -11,6 +11,9 @@ export interface NavLink {
 // ---------- Sayfalar ----------
 export const PAGES: NavLink[] = [
   { label: "Ana Sayfa", href: "/", emoji: "🏠" },
+  { label: "Kelime Envanteri", href: "/vocabulary/inventory", emoji: "📦" },
+  { label: "Çalışma Programları", href: "/study-plans", emoji: "📅" },
+  { label: "Seviye Tespit Sınavı", href: "/level-test", emoji: "📊" },
   { label: "Kelime Kartları", href: "/vocabulary/flashcards", emoji: "🃏" },
   { label: "Gramer", href: "/grammar", emoji: "📖" },
   { label: "Taktikler", href: "/tactics", emoji: "🎯" },

@@ -2,8 +2,33 @@ import Link from "next/link";
 import { CountUp, Reveal } from "@/components/animations";
 import HomeGreeting from "@/components/HomeGreeting";
 import ProgressPanel from "@/components/ProgressPanel";
+import MotivationBox from "@/components/MotivationBox";
 
 const STATIONS = [
+  {
+    href: "/vocabulary/inventory",
+    emoji: "📦",
+    title: "Kelime Envanteri (A1–C2)",
+    desc: "485 akademik kelime, CEFR seviye filtreleri, kişisel not defteri ve güvenli CSV dışa aktarımı.",
+    cta: "Envanteri Aç",
+    color: "from-cyan-500 to-blue-600",
+  },
+  {
+    href: "/study-plans",
+    emoji: "📅",
+    title: "YDS Çalışma Programları",
+    desc: "7–180 günlük hedefe özel çalışma planları, günlük görev takibi ve CEFR A1–C2 seviye rehberleri.",
+    cta: "Planları İncele",
+    color: "from-purple-500 to-indigo-600",
+  },
+  {
+    href: "/level-test",
+    emoji: "📊",
+    title: "Mini Seviye Tespit Sınavı",
+    desc: "42 soruluk bilimsel teşhis sınavı ile gerçek CEFR seviyeni ve güçlü/zayıf becerilerini öğren.",
+    cta: "Seviyeni Ölç",
+    color: "from-emerald-500 to-green-600",
+  },
   {
     href: "/vocabulary/flashcards",
     emoji: "🃏",
@@ -161,6 +186,9 @@ export default function Home() {
 
       {/* PROGRESS */}
       <ProgressPanel />
+
+      {/* MOTIVATION OF THE DAY */}
+      <MotivationBox context="home" className="my-12" />
 
       {/* STATIONS */}
       <section className="my-16">

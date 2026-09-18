@@ -97,25 +97,60 @@ export function answerAi(raw: string): string {
   }
 
   // ---- net / puan hesabı ----
+  // ---- net / puan hesabı ----
   if (/(net|puan|hesap|doğru yanlış)/.test(q)) {
     return [
-      "🧮 Net hesabı kanka, çok basit:",
-      "YDS'de **4 yanlış 1 doğruyu götürür**.",
-      `Net = Doğru − (Yanlış ÷ 4)`,
-      "Örnek: 60 doğru, 20 yanlış → 60 − (20÷4) = 60 − 5 = **55 net**.",
-      "Boş bırakmak yanlıştan iyidir kanka: emin değilsen işaretleme, netini koru. 🎯",
+      "🧮 YDS Puan Hesabı kanka:",
+      "ÖSYM YDS'de **yanlışlar doğruyu GÖTÜRMEZ!**",
+      "Sınavda 80 soru vardır ve her doğru soru **1.25 puan** değerindedir.",
+      "Puan = Doğru Sayısı × 1.25",
+      "Örnek: 64 doğru = 64 × 1.25 = **80.00 Puan (A Düzeyi)**.",
+      "Bu yüzden YDS'de asla boş bırakma kanka! Çeldiricileri eledikten sonra en mantıklı seçeneği mutlaka işaretle. 🎯",
+    ].join("\n\n");
+  }
+
+  // ---- seviye testi ----
+  if (/(seviye|level|seviyem|hangi seviyedeyim|a1|a2|b1|b2|c1|c2|seviye testi)/.test(q)) {
+    return [
+      "📊 Seviyeni Öğrenmek İster misin Kanka?",
+      "YDS Master'da **42 soruluk Mini Seviye Tespit Sınavı** seni bekliyor!",
+      "A1'den C2'ye kadar her seviyeden sorularla gramer, kelime, okuma ve çeviri becerilerini tek tek ölçüyoruz.",
+      "Hemen teste gir ve tahmini CEFR seviyeni öğren: 👉 **/level-test**",
+    ].join("\n\n");
+  }
+
+  // ---- kelime envanteri ----
+  if (/(envanter|kelime listesi|csv|dışa aktar|kelime tablosu)/.test(q)) {
+    return [
+      "📦 CEFR A1–C2 Kelime Envanteri:",
+      "Sitemizde 485 akademik kelimelik tam teşekküllü bir **Kelime Envanteri** var.",
+      "• Seviyelere göre (A1–C2) filtreleyebilirsin",
+      "• Kişisel notlar ekleyebilir ve öğrendiklerini işaretleyebilirsin",
+      "• Excel/Google Sheets uyumlu güvenli CSV formatında dışa aktarabilirsin",
+      "İncelemek için tıkla: 👉 **/vocabulary/inventory**",
+    ].join("\n\n");
+  }
+
+  // ---- rozet / gamification / xp ----
+  if (/(rozet|xp|puan|unvan|başarım|ödül)/.test(q)) {
+    return [
+      "🏆 YDS Master Rozet & Gamification Sistemi:",
+      "Soru çözdükçe, kelime çalıştıkça ve deneme bitirdikçe XP kazanırsın!",
+      "• Toplam 42 benzersiz koleksiyon rozeti (36 standart + 6 gizli)",
+      "• 11 farklı XP seviye unvanı (Yeni Yolcu'dan Zirve Efsanesi'ne)",
+      "Rozet vitrinini görmek için profilini ziyaret et: 👉 **/hesap**",
     ].join("\n\n");
   }
 
   // ---- çalışma planı ----
   if (/(plan|program|nasıl çalış|çalışma|başla|başlangıç|kaç ay|yol haritası|tavsiye|öner)/.test(q)) {
     return [
-      "📅 Kanka, sana 30 günlük kral planı:",
-      "**Hafta 1-2 (Temel):** Her gün 20 kelime (flashcards) + Tenses & Passive & Modals konuları. Günde 30-40 dk.",
-      "**Hafta 3-4 (Yapı):** Gerund/Infinitive, Relative, Noun Clause, Conditionals. Her konuda 1 örnek soru çöz. Kelime tekrarına devam.",
-      "**Hafta 5-6 (Taktik):** 11 soru tipi taktiğini sırayla oku; her gün 1 cloze + 1 paragraf + 1 çeviri çöz.",
-      "**Hafta 7-8 (Deneme):** Haftada 2-3 optik deneme (180 dk). Yanlışlarını not al, o konulara geri dön.",
-      "Altın kural kanka: **az ama her gün** çalış. Netler her hafta tırmanır, göreceksin! 🚀",
+      "📅 YDS Çalışma Programları & Planlayıcı:",
+      "Sana en uygun tempo hangisi kanka? Sitemizde tam 10 farklı hazır plan ve yapay zekâ destekli özel planlayıcı var:",
+      "• **7 & 14 Gün:** Acil Sınav Kampı ve Sprint Planı",
+      "• **30 & 60 Gün:** Güçlendirme & Standart YDS Maratonu",
+      "• **90 & 180 Gün:** Sıfırdan 80+ Kapsamlı Zirve Planı",
+      "Tüm planları incelemek ve günlük görevlerini takip etmek için: 👉 **/study-plans**",
     ].join("\n\n");
   }
 
