@@ -1,11 +1,14 @@
 "use client";
 
-// Kişisel hesap (e-posta + şifre) — tarayıcı tabanlı (localStorage).
-// Not: Bu bir sunucu hesabı değil; hesap bu tarayıcıya kaydedilir. Şifre asla düz metin
-// tutulmaz (SHA-256 hash). Gerçek çoklu-cihaz senkronu için Supabase/Firebase entegrasyonu
-// bu katmanın üzerine eklenebilir.
-
+// Unified Client Authentication & Account Management
 import { useCallback, useEffect, useState } from "react";
+import {
+  fetchCurrentSession,
+  loginWithApi,
+  logoutWithApi,
+  registerWithApi,
+  syncLocalSession,
+} from "./auth-client";
 
 export interface Account {
   email: string;
@@ -18,7 +21,7 @@ const ACCOUNTS_KEY = "yds-master-accounts";
 const SESSION_KEY = "yds-master-session";
 const SALT = "yds-master-salt-v1";
 
-// localStorage kilitliyse (sandbox iframe vb.) bellek içi yedek
+// Memory fallback if localStorage is disabled/sandboxed
 let memAccounts: Account[] = [];
 let memSession: string | null = null;
 let memUsed = false;
@@ -53,7 +56,7 @@ function writeAccounts(list: Account[]) {
     try {
       window.localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list));
     } catch {
-      /* boş */
+      /* empty */
     }
   }
 }
@@ -78,7 +81,7 @@ function writeSession(email: string | null) {
       if (email) window.localStorage.setItem(SESSION_KEY, email);
       else window.localStorage.removeItem(SESSION_KEY);
     } catch {
-      /* boş */
+      /* empty */
     }
   }
 }
@@ -97,7 +100,6 @@ async function hash(text: string): Promise<string> {
   } catch {
     /* fallback */
   }
-  // djb2 fallback (güvenli olmayan ama çalışır)
   let h = 5381;
   const s = SALT + text;
   for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
@@ -132,13 +134,38 @@ export function useAccount(): AuthApi {
   const [notice, setNotice] = useState("");
   const [storageOk, setStorageOk] = useState(true);
 
+  // Synchronize on mount: check server session first, then localStorage
   useEffect(() => {
     setStorageOk(canStore());
-    const email = readSession();
-    if (email) {
-      const found = readAccounts().find((a) => a.email === email);
-      if (found) setAccount(found);
+
+    async function initSession() {
+      try {
+        const sessionRes = await fetchCurrentSession();
+        if (sessionRes.ok && sessionRes.data?.authenticated && sessionRes.data?.user) {
+          const u = sessionRes.data.user;
+          const serverAcc: Account = {
+            email: u.email,
+            name: u.username,
+            passHash: "server-synced",
+            createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+          };
+          setAccount(serverAcc);
+          writeSession(u.email);
+          return;
+        }
+      } catch {
+        /* ignore network error on initial session check */
+      }
+
+      // Local storage fallback if server has no session
+      const email = readSession();
+      if (email) {
+        const found = readAccounts().find((a) => a.email === email);
+        if (found) setAccount(found);
+      }
     }
+
+    initSession();
   }, []);
 
   const login = useCallback(async (email: string, pass: string) => {
@@ -146,20 +173,37 @@ export function useAccount(): AuthApi {
     setError("");
     try {
       const e = email.trim().toLowerCase();
-      const h = await hash(pass);
-      const found = readAccounts().find((a) => a.email === e);
-      if (!found) {
-        setError("Kanka, bu e-posta ile kayıtlı hesap yok. Önce kayıt ol!");
-        return false;
+
+      // 1. Try server-side authentication
+      const apiRes = await loginWithApi(e, pass);
+      if (apiRes.ok && apiRes.data?.user) {
+        const u = apiRes.data.user;
+        const acc: Account = {
+          email: u.email,
+          name: u.username,
+          passHash: "server-synced",
+          createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+        };
+        setAccount(acc);
+        writeSession(acc.email);
+        setNotice(`Hoş geldin kanka, ${acc.name}! 👋`);
+        return true;
       }
-      if (found.passHash !== h) {
-        setError("Şifre hatalı kanka. Tekrar dene!");
-        return false;
+
+      // 2. Fallback to offline localStorage account if server returned network error
+      if (apiRes.isNetworkError) {
+        const h = await hash(pass);
+        const found = readAccounts().find((a) => a.email === e);
+        if (found && found.passHash === h) {
+          writeSession(found.email);
+          setAccount(found);
+          setNotice(`Hoş geldin kanka (çevrimdışı mod), ${found.name}! 👋`);
+          return true;
+        }
       }
-      writeSession(found.email);
-      setAccount(found);
-      setNotice(`Hoş geldin kanka, ${found.name}! 👋`);
-      return true;
+
+      setError(apiRes.message || "Giriş yapılamadı kanka. Bilgilerini kontrol et!");
+      return false;
     } finally {
       setBusy(false);
     }
@@ -175,23 +219,27 @@ export function useAccount(): AuthApi {
         setError(msg);
         return { ok: false, demo: false, message: msg };
       }
+
       const res = await fetch("/api/auth/send-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: e }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok || !data.ok) {
-        setError(data.message || "Kod gönderilemedi kanka.");
-        return { ok: false, demo: false, message: data.message || "Kod gönderilemedi." };
+        const msg = data.error?.message || data.message || "Kod gönderilemedi kanka.";
+        setError(msg);
+        return { ok: false, demo: false, message: msg };
       }
-      setNotice(data.message);
+
+      setNotice(data.message || "Kod gönderildi!");
       return {
         ok: true,
-        demo: !!data.demo,
-        code: data.code,
-        challenge: data.challenge,
-        message: data.message,
+        demo: !!(data.data?.demo ?? data.demo),
+        code: data.data?.code || data.code,
+        challenge: data.data?.challenge || data.challenge,
+        message: data.message || "Kod gönderildi!",
       };
     } catch {
       const msg = "Sunucuya ulaşılamadı kanka. İnternetini kontrol et.";
@@ -209,6 +257,7 @@ export function useAccount(): AuthApi {
       try {
         const e = email.trim().toLowerCase();
         const n = name.trim();
+
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
           setError("Geçerli bir e-posta gir kanka (örn. kanka@mail.com).");
           return false;
@@ -221,34 +270,33 @@ export function useAccount(): AuthApi {
           setError("Doğrulama kodu 6 haneli olmalı kanka.");
           return false;
         }
-        if (readAccounts().some((a) => a.email === e)) {
-          setError("Bu e-posta zaten kayıtlı. Giriş yap kanka!");
-          return false;
-        }
 
-        // Sunucu tarafında e-posta doğrulaması
-        const res = await fetch("/api/auth/verify-code", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: e, code: code.trim(), challenge }),
-        });
-        const data = await res.json();
-        if (!res.ok || !data.ok) {
-          setError(data.message || "Doğrulama başarısız kanka.");
-          return false;
-        }
-
-        const acc: Account = {
+        // 1. Call server-side register API
+        const apiRes = await registerWithApi({
           email: e,
-          name: n || "Kanka",
-          passHash: await hash(pass),
-          createdAt: Date.now(),
-        };
-        writeAccounts([...readAccounts(), acc]);
-        writeSession(e);
-        setAccount(acc);
-        setNotice(`E-posta doğrulandı, kayıt tamam kanka! Hoş geldin ${acc.name}! 🎉`);
-        return true;
+          username: n || `kullanici_${Date.now().toString().slice(-4)}`,
+          password: pass,
+          code: code.trim(),
+          challenge,
+        });
+
+        if (apiRes.ok && apiRes.data?.user) {
+          const u = apiRes.data.user;
+          const acc: Account = {
+            email: u.email,
+            name: u.username,
+            passHash: "server-synced",
+            createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+          };
+          writeAccounts([...readAccounts().filter((a) => a.email !== e), acc]);
+          writeSession(e);
+          setAccount(acc);
+          setNotice(`E-posta doğrulandı, kayıt tamam kanka! Hoş geldin ${acc.name}! 🎉`);
+          return true;
+        }
+
+        setError(apiRes.message || "Kayıt işlemi tamamlanamadı kanka.");
+        return false;
       } catch {
         setError("Sunucuya ulaşılamadı kanka. İnternetini kontrol et.");
         return false;
@@ -259,7 +307,12 @@ export function useAccount(): AuthApi {
     []
   );
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    try {
+      await logoutWithApi();
+    } catch {
+      /* ignore */
+    }
     writeSession(null);
     setAccount(null);
     setNotice("Çıkış yaptın kanka. Görüşürüz! 👋");

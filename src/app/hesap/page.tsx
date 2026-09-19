@@ -67,12 +67,7 @@ export default function HesapPage() {
   };
 
   const handleLogout = async () => {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } catch {
-      /* safety */
-    }
-    logout();
+    await logout();
     window.location.href = "/giris";
   };
 

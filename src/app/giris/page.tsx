@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import MotivationBox from "@/components/MotivationBox";
+import { loginWithApi } from "@/lib/auth-client";
 
 function LoginForm() {
   const router = useRouter();
@@ -15,40 +16,31 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errorRequestId, setErrorRequestId] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!identifier || !password) {
+    if (!identifier.trim() || !password.trim()) {
       setError("Lütfen e-posta veya kullanıcı adınızı ve şifrenizi girin.");
       return;
     }
 
     setLoading(true);
     setError(null);
+    setErrorRequestId(null);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier, password }),
-      });
+      const res = await loginWithApi(identifier.trim(), password.trim());
 
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        setError(data.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
+      if (!res.ok) {
+        setError(res.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
+        if (res.requestId) setErrorRequestId(res.requestId);
         setLoading(false);
         return;
       }
 
       setSuccess("Giriş başarılı! Yönlendiriliyorsunuz...");
-
-      // Also sync client local session storage for backward-compatibility
-      try {
-        window.localStorage.setItem("yds-master-session", data.user?.email || identifier);
-      } catch {
-        /* ignore */
-      }
 
       setTimeout(() => {
         // Full page reload or router push to ensure middleware picks up the new cookie
@@ -78,8 +70,15 @@ function LoginForm() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 flex items-center gap-2">
-            <span>⚠️</span> {error}
+          <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 space-y-1">
+            <div className="flex items-center gap-2">
+              <span>⚠️</span> <span>{error}</span>
+            </div>
+            {errorRequestId && (
+              <div className="text-[10px] text-white/40 font-mono pl-6">
+                İstek No: {errorRequestId}
+              </div>
+            )}
           </div>
         )}
 

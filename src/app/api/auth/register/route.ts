@@ -3,11 +3,17 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createHmac } from "crypto";
 import { signSessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
+import { AUTH_SECRET } from "@/lib/server-config";
+import {
+  AUTH_ERROR_CODES,
+  authError,
+  authSuccess,
+  generateRequestId,
+  SafeUser,
+} from "@/lib/auth-contract";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const SECRET = process.env.AUTH_SECRET || "yds-master-verification-secret-v1";
 
 function b64urlDecode(str: string): Buffer {
   let b64 = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -25,7 +31,7 @@ function verifyChallengeCode(email: string, code: string, challenge: string): bo
     if (parsed.email !== email) return false;
     if (Date.now() > Number(parsed.exp)) return false;
 
-    const expectedSig = createHmac("sha256", SECRET)
+    const expectedSig = createHmac("sha256", AUTH_SECRET)
       .update(`${email}.${code}.${parsed.exp}`)
       .digest("hex");
     return expectedSig === sig;
@@ -35,6 +41,8 @@ function verifyChallengeCode(email: string, code: string, challenge: string): bo
 }
 
 export async function POST(req: NextRequest) {
+  const requestId = generateRequestId();
+
   try {
     const body = await req.json().catch(() => ({}));
     const email = String(body.email || "").trim().toLowerCase();
@@ -46,22 +54,40 @@ export async function POST(req: NextRequest) {
     // 1. Validation
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
-        { ok: false, message: "Lütfen geçerli bir e-posta adresi girin kanka." },
+        authError(
+          AUTH_ERROR_CODES.INVALID_EMAIL,
+          "Lütfen geçerli bir e-posta adresi girin kanka.",
+          "email",
+          requestId
+        ),
         { status: 400 }
       );
     }
 
-    const username = rawUsername.replace(/[^a-zA-Z0-9_]/g, "").slice(0, 20) || `kullanici_${Date.now().toString().slice(-4)}`;
+    const username =
+      rawUsername.replace(/[^a-zA-Z0-9_]/g, "").slice(0, 20) ||
+      `kullanici_${Date.now().toString().slice(-4)}`;
+
     if (username.length < 3) {
       return NextResponse.json(
-        { ok: false, message: "Kullanıcı adı en az 3 karakter olmalı kanka." },
+        authError(
+          AUTH_ERROR_CODES.INVALID_USERNAME,
+          "Kullanıcı adı en az 3 karakter olmalı kanka.",
+          "username",
+          requestId
+        ),
         { status: 400 }
       );
     }
 
     if (password.length < 6) {
       return NextResponse.json(
-        { ok: false, message: "Şifre en az 6 karakter olmalıdır kanka." },
+        authError(
+          AUTH_ERROR_CODES.WEAK_PASSWORD,
+          "Şifre en az 6 karakter olmalıdır kanka.",
+          "password",
+          requestId
+        ),
         { status: 400 }
       );
     }
@@ -71,7 +97,12 @@ export async function POST(req: NextRequest) {
       const isCodeValid = verifyChallengeCode(email, code, challenge);
       if (!isCodeValid) {
         return NextResponse.json(
-          { ok: false, message: "E-posta doğrulama kodu geçersiz veya süresi dolmuş kanka." },
+          authError(
+            AUTH_ERROR_CODES.INVALID_OR_EXPIRED_CODE,
+            "E-posta doğrulama kodu geçersiz veya süresi dolmuş kanka.",
+            "code",
+            requestId
+          ),
           { status: 400 }
         );
       }
@@ -81,7 +112,12 @@ export async function POST(req: NextRequest) {
     const existingEmail = await prisma.user.findUnique({ where: { email } });
     if (existingEmail) {
       return NextResponse.json(
-        { ok: false, message: "Bu e-posta adresiyle zaten kayıtlı bir hesap var kanka. Giriş yapmayı dene!" },
+        authError(
+          AUTH_ERROR_CODES.EMAIL_ALREADY_IN_USE,
+          "Bu e-posta adresiyle zaten kayıtlı bir hesap var kanka. Giriş yapmayı dene!",
+          "email",
+          requestId
+        ),
         { status: 409 }
       );
     }
@@ -89,7 +125,12 @@ export async function POST(req: NextRequest) {
     const existingUsername = await prisma.user.findUnique({ where: { username } });
     if (existingUsername) {
       return NextResponse.json(
-        { ok: false, message: "Bu kullanıcı adı zaten alınmış kanka. Lütfen başka bir kullanıcı adı seç!" },
+        authError(
+          AUTH_ERROR_CODES.USERNAME_ALREADY_IN_USE,
+          "Bu kullanıcı adı zaten alınmış kanka. Lütfen başka bir kullanıcı adı seç!",
+          "username",
+          requestId
+        ),
         { status: 409 }
       );
     }
@@ -116,19 +157,24 @@ export async function POST(req: NextRequest) {
       name: user.username,
     });
 
-    const res = NextResponse.json({
-      ok: true,
-      message: `Aramıza hoş geldin ${user.username}! Hesabın başarıyla oluşturuldu. 🚀`,
-      user: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        avatarId: user.avatarId,
-        level: user.level,
-        streak: user.streak,
-        totalPoints: user.totalPoints,
-      },
-    });
+    const safeUser: SafeUser = {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      avatarId: user.avatarId,
+      level: user.level,
+      streak: user.streak,
+      totalPoints: user.totalPoints,
+      createdAt: user.createdAt.toISOString(),
+    };
+
+    const responsePayload = authSuccess(
+      { user: safeUser },
+      `Aramıza hoş geldin ${user.username}! Hesabın başarıyla oluşturuldu. 🚀`,
+      requestId
+    );
+
+    const res = NextResponse.json(responsePayload, { status: 201 });
 
     res.cookies.set({
       name: SESSION_COOKIE_NAME,
@@ -140,12 +186,45 @@ export async function POST(req: NextRequest) {
       maxAge: 30 * 24 * 60 * 60,
     });
 
+    console.log(`[AUTH_REGISTER_SUCCESS] ${requestId} - User ${user.username} (${user.email}) registered.`);
     return res;
-  } catch (error) {
-    console.error("Register API error:", error);
+  } catch (error: any) {
+    console.error(`[AUTH_REGISTER_ERROR] ${requestId} -`, {
+      name: error?.name,
+      message: error?.message,
+      code: error?.code,
+      stack: error?.stack,
+    });
+
+    // Catch unique constraint collision (P2002) in race conditions
+    if (error?.code === "P2002") {
+      const target = Array.isArray(error?.meta?.target) ? error.meta.target.join(", ") : "Bilgiler";
+      return NextResponse.json(
+        authError(
+          AUTH_ERROR_CODES.EMAIL_ALREADY_IN_USE,
+          `Bu ${target.includes("email") ? "e-posta" : "kullanıcı adı"} az önce başka bir kullanıcı tarafından alındı.`,
+          target.includes("email") ? "email" : "username",
+          requestId
+        ),
+        { status: 409 }
+      );
+    }
+
+    const isDbError =
+      error?.name === "PrismaClientInitializationError" ||
+      error?.name === "PrismaClientUnknownRequestError" ||
+      error?.message?.includes("readonly") ||
+      error?.message?.includes("database");
+
+    const statusCode = isDbError ? 503 : 500;
+    const errorCode = isDbError ? AUTH_ERROR_CODES.DATABASE_UNAVAILABLE : AUTH_ERROR_CODES.INTERNAL_SERVER_ERROR;
+    const clientMessage = isDbError
+      ? "Veritabanı kayıt servisine şu an erişilemiyor. Lütfen biraz sonra tekrar deneyin."
+      : "Kayıt işlemi sırasında bir hata oluştu kanka. Lütfen tekrar dene.";
+
     return NextResponse.json(
-      { ok: false, message: "Kayıt işlemi sırasında bir hata oluştu kanka. Lütfen tekrar dene." },
-      { status: 500 }
+      authError(errorCode, clientMessage, undefined, requestId),
+      { status: statusCode }
     );
   }
 }

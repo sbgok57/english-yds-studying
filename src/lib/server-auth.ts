@@ -1,4 +1,5 @@
 // Secure Server-Side Session Token Management (Edge & Node compatible via Web Crypto)
+import { AUTH_SECRET } from "./auth-secret";
 
 export interface SessionPayload {
   userId: string;
@@ -9,7 +10,6 @@ export interface SessionPayload {
   iat: number;
 }
 
-const AUTH_SECRET = process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET || "yds-master-jwt-super-secret-key-2026-secure-edge";
 const TOKEN_MAX_AGE = 30 * 24 * 60 * 60; // 30 days in seconds
 export const SESSION_COOKIE_NAME = "yds_session_token";
 

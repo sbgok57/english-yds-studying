@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import MotivationBox from "@/components/MotivationBox";
+import { authRequest, registerWithApi } from "@/lib/auth-client";
 
 function RegisterForm() {
   const router = useRouter();
@@ -21,6 +22,7 @@ function RegisterForm() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errorRequestId, setErrorRequestId] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   const codeInputRef = useRef<HTMLInputElement>(null);
@@ -33,41 +35,45 @@ function RegisterForm() {
 
   const handleRequestCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !username || !password) {
+    if (!email.trim() || !username.trim() || !password.trim()) {
       setError("Lütfen tüm alanları doldurun.");
       return;
     }
 
-    if (password.length < 6) {
+    if (password.trim().length < 6) {
       setError("Şifreniz en az 6 karakter olmalıdır.");
       return;
     }
 
     setLoading(true);
     setError(null);
+    setErrorRequestId(null);
 
     try {
-      const res = await fetch("/api/auth/send-code", {
+      const res = await authRequest<{
+        challenge?: string;
+        demo?: boolean;
+        code?: string;
+      }>("/api/auth/send-code", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email.trim().toLowerCase() }),
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        setError(data.message || "Doğrulama kodu gönderilemedi.");
+      if (!res.ok) {
+        setError(res.message || "Doğrulama kodu gönderilemedi.");
+        if (res.requestId) setErrorRequestId(res.requestId);
         setLoading(false);
         return;
       }
 
-      setChallenge(data.challenge || "");
-      if (data.demo && data.code) {
-        setDemoCode(data.code);
-        setCode(data.code); // auto-fill in demo mode for instant ease
+      setChallenge(res.data?.challenge || "");
+      if (res.data?.demo && res.data?.code) {
+        setDemoCode(res.data.code);
+        setCode(res.data.code); // auto-fill in demo mode for instant ease
       }
       setStep(2);
       setCooldown(60);
-      setSuccess(data.message || "Doğrulama kodu gönderildi!");
+      setSuccess(res.message || "Doğrulama kodu gönderildi!");
       setTimeout(() => codeInputRef.current?.focus(), 150);
     } catch {
       setError("Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.");
@@ -85,35 +91,25 @@ function RegisterForm() {
 
     setLoading(true);
     setError(null);
+    setErrorRequestId(null);
 
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          username,
-          password,
-          code,
-          challenge,
-        }),
+      const res = await registerWithApi({
+        email: email.trim().toLowerCase(),
+        username: username.trim(),
+        password: password.trim(),
+        code: code.trim(),
+        challenge,
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        setError(data.message || "Kayıt tamamlanamadı. Lütfen tekrar deneyin.");
+      if (!res.ok) {
+        setError(res.message || "Kayıt tamamlanamadı. Lütfen tekrar deneyin.");
+        if (res.requestId) setErrorRequestId(res.requestId);
         setLoading(false);
         return;
       }
 
       setSuccess("Tebrikler! Kaydınız başarıyla tamamlandı. Yönlendiriliyorsunuz...");
-
-      // Client session sync
-      try {
-        window.localStorage.setItem("yds-master-session", email);
-      } catch {
-        /* ignore */
-      }
 
       setTimeout(() => {
         window.location.href = returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/";
@@ -142,8 +138,15 @@ function RegisterForm() {
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 flex items-center gap-2">
-            <span>⚠️</span> {error}
+          <div className="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 space-y-1">
+            <div className="flex items-center gap-2">
+              <span>⚠️</span> <span>{error}</span>
+            </div>
+            {errorRequestId && (
+              <div className="text-[10px] text-white/40 font-mono pl-6">
+                İstek No: {errorRequestId}
+              </div>
+            )}
           </div>
         )}
 

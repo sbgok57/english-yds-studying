@@ -1,4 +1,5 @@
 import { chromium, firefox, Browser, Page } from "playwright";
+import { signSessionToken } from "../src/lib/server-auth";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -34,6 +35,26 @@ async function testBrowser(browserType: any, browserName: string) {
 
   const browser: Browser = await browserType.launch({ headless: true });
   const context = await browser.newContext();
+
+  // Set authenticated session cookie for testing protected routes
+  const sessionToken = await signSessionToken({
+    userId: "cmtzr1k6l00ebp2mtgep2qf81",
+    email: "ogrenci@ydsmaster.com",
+    username: "ydskasifi",
+    name: "YDS Kaşifi",
+  });
+  await context.addCookies([
+    {
+      name: "yds_session_token",
+      value: sessionToken,
+      domain: "localhost",
+      path: "/",
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+    },
+  ]);
+
   const page = await context.newPage();
 
   const ctx: TestContext = {
@@ -229,6 +250,29 @@ async function testBrowser(browserType: any, browserName: string) {
     }
     passedFlows++;
     console.log(`✅ [${browserName}] All 10 practice exams loaded without single error`);
+
+    // 16. Auth Pages & Form Smoke Test
+    console.log(`[${browserName}] 16. Testing Auth Pages /giris, /kayit`);
+    const unauthContext = await browser.newContext();
+    const unauthPage = await unauthContext.newPage();
+    try {
+      await unauthPage.goto(`${BASE_URL}/giris`, { waitUntil: "networkidle" });
+      const girisCrash = await unauthPage.locator("text=küçük bir hata verdi").count();
+      if (girisCrash > 0) throw new Error("Error boundary triggered on /giris");
+      const loginBtn = await unauthPage.locator("button:has-text('Giriş Yap')").count();
+      if (loginBtn === 0) throw new Error("Login button not found on /giris");
+
+      await unauthPage.goto(`${BASE_URL}/kayit`, { waitUntil: "networkidle" });
+      const kayitCrash = await unauthPage.locator("text=küçük bir hata verdi").count();
+      if (kayitCrash > 0) throw new Error("Error boundary triggered on /kayit");
+      const regBtn = await unauthPage.locator("button:has-text('Doğrulama Kodu Gönder')").count();
+      if (regBtn === 0) throw new Error("Register button not found on /kayit");
+
+      passedFlows++;
+      console.log(`✅ [${browserName}] /giris and /kayit auth forms rendered perfectly`);
+    } finally {
+      await unauthContext.close();
+    }
 
   } finally {
     await browser.close();

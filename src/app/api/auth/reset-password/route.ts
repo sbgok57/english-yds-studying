@@ -2,11 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createHmac } from "crypto";
+import { AUTH_SECRET } from "@/lib/server-config";
+import {
+  AUTH_ERROR_CODES,
+  authError,
+  authSuccess,
+  generateRequestId,
+} from "@/lib/auth-contract";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const SECRET = process.env.AUTH_SECRET || "yds-master-verification-secret-v1";
 
 function b64urlDecode(str: string): Buffer {
   let b64 = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -24,7 +29,7 @@ function verifyChallengeCode(email: string, code: string, challenge: string): bo
     if (parsed.email !== email) return false;
     if (Date.now() > Number(parsed.exp)) return false;
 
-    const expectedSig = createHmac("sha256", SECRET)
+    const expectedSig = createHmac("sha256", AUTH_SECRET)
       .update(`${email}.${code}.${parsed.exp}`)
       .digest("hex");
     return expectedSig === sig;
@@ -34,6 +39,8 @@ function verifyChallengeCode(email: string, code: string, challenge: string): bo
 }
 
 export async function POST(req: NextRequest) {
+  const requestId = generateRequestId();
+
   try {
     const body = await req.json().catch(() => ({}));
     const email = String(body.email || "").trim().toLowerCase();
@@ -43,14 +50,24 @@ export async function POST(req: NextRequest) {
 
     if (!email || !newPassword) {
       return NextResponse.json(
-        { ok: false, message: "E-posta ve yeni şifre zorunludur kanka." },
+        authError(
+          AUTH_ERROR_CODES.MISSING_FIELDS,
+          "E-posta ve yeni şifre zorunludur kanka.",
+          !email ? "email" : "newPassword",
+          requestId
+        ),
         { status: 400 }
       );
     }
 
     if (newPassword.length < 6) {
       return NextResponse.json(
-        { ok: false, message: "Yeni şifre en az 6 karakter olmalıdır kanka." },
+        authError(
+          AUTH_ERROR_CODES.WEAK_PASSWORD,
+          "Yeni şifre en az 6 karakter olmalıdır kanka.",
+          "newPassword",
+          requestId
+        ),
         { status: 400 }
       );
     }
@@ -59,7 +76,12 @@ export async function POST(req: NextRequest) {
       const isCodeValid = verifyChallengeCode(email, code, challenge);
       if (!isCodeValid) {
         return NextResponse.json(
-          { ok: false, message: "Doğrulama kodu geçersiz veya süresi dolmuş kanka." },
+          authError(
+            AUTH_ERROR_CODES.INVALID_OR_EXPIRED_CODE,
+            "Doğrulama kodu geçersiz veya süresi dolmuş kanka.",
+            "code",
+            requestId
+          ),
           { status: 400 }
         );
       }
@@ -68,7 +90,12 @@ export async function POST(req: NextRequest) {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return NextResponse.json(
-        { ok: false, message: "Bu e-posta adresine sahip bir kullanıcı bulunamadı kanka." },
+        authError(
+          AUTH_ERROR_CODES.USER_NOT_FOUND,
+          "Bu e-posta adresine sahip bir kullanıcı bulunamadı kanka.",
+          "email",
+          requestId
+        ),
         { status: 404 }
       );
     }
@@ -79,14 +106,25 @@ export async function POST(req: NextRequest) {
       data: { passwordHash },
     });
 
-    return NextResponse.json({
-      ok: true,
-      message: "Şifren başarıyla güncellendi kanka! Artık yeni şifrenle giriş yapabilirsin. 🔐",
-    });
-  } catch (error) {
-    console.error("Reset password API error:", error);
+    console.log(`[AUTH_RESET_PASSWORD_SUCCESS] ${requestId} - Password reset for user: ${email}`);
+
     return NextResponse.json(
-      { ok: false, message: "Şifre yenileme sırasında bir hata oluştu kanka." },
+      authSuccess(
+        { reset: true },
+        "Şifren başarıyla güncellendi kanka! Artık yeni şifrenle giriş yapabilirsin. 🔐",
+        requestId
+      ),
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error(`[AUTH_RESET_PASSWORD_ERROR] ${requestId} -`, error);
+    return NextResponse.json(
+      authError(
+        AUTH_ERROR_CODES.INTERNAL_SERVER_ERROR,
+        "Şifre yenileme sırasında bir hata oluştu kanka.",
+        undefined,
+        requestId
+      ),
       { status: 500 }
     );
   }

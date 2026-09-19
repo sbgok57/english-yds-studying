@@ -1,18 +1,21 @@
-
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createHmac, randomInt } from "crypto";
+import { AUTH_SECRET } from "@/lib/server-config";
+import {
+  AUTH_ERROR_CODES,
+  authError,
+  authSuccess,
+  generateRequestId,
+} from "@/lib/auth-contract";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Doğrulama kodu: stateless imzalı "challenge" ile taşınır (sunucu belleği gerekmez,
-// Vercel/serverless ortamlarında da güvenle çalışır).
-const SECRET = process.env.AUTH_SECRET || "yds-master-verification-secret-v1";
-const CODE_TTL_MS = 10 * 60 * 1000; // 10 dakika
+const CODE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
-// Basit hız sınırı (işlem başına, bellek içi)
+// In-memory rate limiting per email (60s window)
 const rate = new Map<string, number>();
-const RATE_WINDOW = 60_000; // 1 dk
+const RATE_WINDOW = 60_000; // 1 min
 
 function b64url(buf: Buffer): string {
   return buf.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
@@ -53,7 +56,7 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
     }
   }
 
-  // 2) SMTP (nodemailer — örn. Gmail uygulama şifresi)
+  // 2) SMTP (nodemailer)
   if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     try {
       const nodemailer = await import("nodemailer");
@@ -76,22 +79,28 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
     }
   }
 
-  // 3) Yapılandırma yok → demo modu (kod arayüzde gösterilir)
+  // 3) Default -> demo mode
   return { ok: true, demo: true };
 }
 
 export async function POST(req: NextRequest) {
+  const requestId = generateRequestId();
   let body: { email?: string } = {};
   try {
     body = await req.json();
   } catch {
-    /* boş */
+    /* empty */
   }
 
   const email = String(body.email || "").trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return Response.json(
-      { ok: false, message: "Geçerli bir e-posta gir kanka (örn. kanka@mail.com)." },
+    return NextResponse.json(
+      authError(
+        AUTH_ERROR_CODES.INVALID_EMAIL,
+        "Geçerli bir e-posta gir kanka (örn. kanka@mail.com).",
+        "email",
+        requestId
+      ),
       { status: 400 }
     );
   }
@@ -100,8 +109,13 @@ export async function POST(req: NextRequest) {
   const last = rate.get(email) || 0;
   if (now - last < RATE_WINDOW) {
     const wait = Math.ceil((RATE_WINDOW - (now - last)) / 1000);
-    return Response.json(
-      { ok: false, message: `Az önce kod gönderdim kanka. ${wait} saniye bekle, sonra tekrar iste.` },
+    return NextResponse.json(
+      authError(
+        AUTH_ERROR_CODES.RATE_LIMITED,
+        `Az önce kod gönderdim kanka. ${wait} saniye bekle, sonra tekrar iste.`,
+        "email",
+        requestId
+      ),
       { status: 429 }
     );
   }
@@ -111,23 +125,42 @@ export async function POST(req: NextRequest) {
   const exp = now + CODE_TTL_MS;
 
   const payload = b64url(Buffer.from(JSON.stringify({ email, exp })));
-  const sig = createHmac("sha256", SECRET).update(`${email}.${code}.${exp}`).digest("hex");
+  const sig = createHmac("sha256", AUTH_SECRET).update(`${email}.${code}.${exp}`).digest("hex");
   const challenge = `${payload}.${sig}`;
 
   const sent = await sendEmail(email, code);
   if (!sent.ok) {
-    return Response.json({ ok: false, message: sent.message }, { status: 502 });
+    return NextResponse.json(
+      authError(
+        AUTH_ERROR_CODES.EMAIL_DELIVERY_FAILED,
+        sent.message || "E-posta gönderimi başarısız oldu.",
+        "email",
+        requestId
+      ),
+      { status: 502 }
+    );
   }
 
-  return Response.json({
-    ok: true,
+  const successMessage = sent.demo
+    ? "Demo modu: e-posta gönderimi yapılandırılmadı, kod aşağıda."
+    : "Doğrulama kodu e-postana gönderildi kanka! 📬 Gelen kutunu (ve spam'i) kontrol et.";
+
+  const responseData = {
     demo: !!sent.demo,
-    // demo modunda kodu arayüze dön (gerçek gönderim yokken kullanıcı akışı test edilebilsin)
     code: sent.demo ? code : undefined,
     challenge,
     expiresIn: CODE_TTL_MS / 1000,
-    message: sent.demo
-      ? "Demo modu: e-posta gönderimi yapılandırılmadı, kod aşağıda."
-      : "Doğrulama kodu e-postana gönderildi kanka! 📬 Gelen kutunu (ve spam'i) kontrol et.",
-  });
+  };
+
+  const responsePayload = {
+    ...authSuccess(responseData, successMessage, requestId),
+    // Backward compatibility fields:
+    demo: !!sent.demo,
+    code: sent.demo ? code : undefined,
+    challenge,
+    expiresIn: CODE_TTL_MS / 1000,
+    message: successMessage,
+  };
+
+  return NextResponse.json(responsePayload, { status: 200 });
 }
