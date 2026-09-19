@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CountUp, Reveal } from "@/components/animations";
 import HomeGreeting from "@/components/HomeGreeting";
 import ProgressPanel from "@/components/ProgressPanel";
+import DailyTasksPanel from "@/components/DailyTasksPanel";
 import MotivationBox from "@/components/MotivationBox";
 
 const STATIONS = [
@@ -186,6 +187,9 @@ export default function Home() {
 
       {/* PROGRESS */}
       <ProgressPanel />
+
+      {/* ADAPTIVE DAILY TASKS */}
+      <DailyTasksPanel />
 
       {/* MOTIVATION OF THE DAY */}
       <MotivationBox context="home" className="my-12" />

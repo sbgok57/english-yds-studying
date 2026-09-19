@@ -52,9 +52,8 @@ export default function StudyPlansPage() {
 
     if (isCompleted) {
       try {
-        const { xpAwarded } = awardPointsIdempotent(`plan_task_${activePlan.id}_${taskId}`, "DAILY_PLAN_TASK");
-        if (xpAwarded > 0 && addXp) {
-          addXp(xpAwarded);
+        if (addXp) {
+          addXp(20, `plan_task_${activePlan.id}_${dayNum}_${taskId}`, "study_plan_daily");
         }
       } catch {
         /* safety */

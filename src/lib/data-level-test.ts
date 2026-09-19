@@ -1,7 +1,11 @@
 // English Level Assessment Bank and Diagnostic Engine
+import { evaluateCefrLevel } from "./adaptive/level-thresholds";
 
 export type CefrLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 export type SkillType = 'grammar' | 'vocabulary' | 'reading' | 'sentence' | 'translation';
+
+export const LEVEL_TEST_RESULT_STORAGE_KEY = "yds-master-level-assessment-result-v1";
+export const LEVEL_TEST_ANSWERS_STORAGE_KEY = "yds-master-level-assessment-answers-v1";
 
 export interface LevelTestQuestion {
   id: string;
@@ -771,8 +775,10 @@ export const VALIDATION_LEVEL_QUESTIONS = LEVEL_TEST_QUESTIONS.filter((q) => !!q
 
 export interface LevelAssessmentResult {
   estimatedLevel: CefrLevel;
+  levelBand?: string;
   confidence: 'low' | 'medium' | 'high';
   borderNote?: string;
+  suggestValidation?: boolean;
   totalCorrect: number;
   totalWrong: number;
   totalEmpty: number;
@@ -853,42 +859,26 @@ export function calculateLevelAssessment(
     translation: skillStats.translation.total ? Math.round((skillStats.translation.correct / skillStats.translation.total) * 100) : 0,
   };
 
-  // Diagnostic Level Evaluation Algorithm
-  let estimatedLevel: CefrLevel = 'A1';
-  let confidence: 'low' | 'medium' | 'high' = 'medium';
-  let borderNote: string | undefined = undefined;
+  // Diagnostic Level Evaluation using evaluateCefrLevel engine
+  const evalResult = evaluateCefrLevel({
+    levelAccuracy: {
+      A1: levelScores.A1.percent,
+      A2: levelScores.A2.percent,
+      B1: levelScores.B1.percent,
+      B2: levelScores.B2.percent,
+      C1: levelScores.C1.percent,
+      C2: levelScores.C2.percent,
+    },
+    skillAccuracy: skillScores,
+    emptyCount: totalEmpty,
+    totalQuestions: activeQuestions.length,
+  });
 
-  const a1Ok = levelScores.A1.percent >= 55;
-  const a2Ok = levelScores.A1.percent >= 70 && levelScores.A2.percent >= 55;
-  const b1Ok = (levelScores.A1.percent + levelScores.A2.percent) / 2 >= 70 && levelScores.B1.percent >= 60;
-  const b2Ok = levelScores.B1.percent >= 70 && levelScores.B2.percent >= 60;
-  const c1Ok = levelScores.B2.percent >= 70 && levelScores.C1.percent >= 65;
-  const c2Ok = levelScores.C1.percent >= 75 && levelScores.C2.percent >= 70 && (levelScores.A1.percent + levelScores.A2.percent + levelScores.B1.percent) / 3 >= 75;
-
-  if (c2Ok) {
-    estimatedLevel = 'C2';
-    confidence = levelScores.C2.percent >= 85 ? 'high' : 'medium';
-  } else if (c1Ok) {
-    estimatedLevel = 'C1';
-    if (levelScores.C1.percent >= 80) confidence = 'high';
-    if (levelScores.C2.percent >= 50) borderNote = 'C1–C2 sınırındasın! Birkaç üst düzey collocation ve reading ile C2 kapıda.';
-  } else if (b2Ok) {
-    estimatedLevel = 'B2';
-    if (levelScores.B2.percent >= 80) confidence = 'high';
-    if (levelScores.C1.percent >= 50) borderNote = 'B2–C1 sınırındasın! İleri gramer ve akademik reading ile C1 seviyesine sıçrayabilirsin.';
-  } else if (b1Ok) {
-    estimatedLevel = 'B1';
-    if (levelScores.B1.percent >= 75) confidence = 'high';
-    if (levelScores.B2.percent >= 50) borderNote = 'B1–B2 sınırındasın! Perfect zamanlar ve bağlaç tekrarı ile B2 çok yakın.';
-  } else if (a2Ok) {
-    estimatedLevel = 'A2';
-    if (levelScores.A2.percent >= 75) confidence = 'high';
-    if (levelScores.B1.percent >= 45) borderNote = "A2–B1 sınırındasın! Düzenli kelime çalışması seni B1'e taşıyacaktır.";
-  } else {
-    estimatedLevel = 'A1';
-    confidence = a1Ok ? 'high' : 'low';
-    if (levelScores.A2.percent >= 40) borderNote = 'A1–A2 sınırındasın! Temel gramer kalıplarını pekiştir.';
-  }
+  const estimatedLevel = evalResult.level;
+  const confidence = evalResult.confidence;
+  const borderNote = evalResult.borderNote;
+  const levelBand = evalResult.levelBand;
+  const suggestValidation = evalResult.suggestValidation;
 
   // Strengths & Weaknesses
   const strengths: string[] = [];
@@ -957,8 +947,10 @@ export function calculateLevelAssessment(
 
   return {
     estimatedLevel,
+    levelBand,
     confidence,
     borderNote,
+    suggestValidation,
     totalCorrect,
     totalWrong,
     totalEmpty,

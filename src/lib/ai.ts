@@ -142,6 +142,45 @@ export function answerAi(raw: string): string {
     ].join("\n\n");
   }
 
+  // ---- bugün ne çalışmalıyım? ----
+  if (/(bugün ne çalış|bugün ne yap|bugünkü görev|günlük plan|günlük görev)/.test(q)) {
+    return [
+      "🎯 Bugün Ne Çalışmalısın Kanka?",
+      "Günde 70 dakikalık adaptif çalışma akışın:",
+      "1. **Kelime & SM-2 Aralıklı Tekrar (15 dk):** Flashcard'larla dünün kelimelerini aktif geri çağır.",
+      "2. **Gramer Formülü & Soru Çözümü (20 dk):** Renk kodlu özetle kuralı pekiştir, 10 pratik soru çöz.",
+      "3. **Akademik Reading Metni (20 dk):** Reader at Work tarzı 1 paragraf oku ve soruları yanıtla.",
+      "4. **Yanlış Defteri Analizi (15 dk):** Daha önce takıldığın soruların çeldiricilerini incele.",
+      "Görevlerini ana sayfadaki panodan anlık işaretleyebilirsin: 👉 Ana Sayfa / Günlük Görevler",
+    ].join("\n\n");
+  }
+
+  // ---- yanlışlarımı tekrar ettir / yanlış defteri ----
+  if (/(yanlış|hata defteri|yanlışlarımı tekrar|çeldirici analizi|hatalarım)/.test(q)) {
+    return [
+      "📝 Yanlış Defteri & Hata Analiz Kılavuzu:",
+      "YDS'de net artışının %80'i yanlış yapılan soruların kök nedenini kavramaktan gelir.",
+      "Hata kategorilerini iyi tanı:",
+      "• **Zaman Uyumu:** Bağlaçla ana cümle zaman uyumu",
+      "• **Güçlü Çeldirici:** Cazip ama kökle uyuşmayan şık",
+      "• **Dikkatsizlik:** Soru kökündeki NOT / EXCEPT gözden kaçması",
+      "• **Çeviri Kayması:** Etken/edilgen ve sıfat öbeği kayması",
+      "Soru çözerken yanlış yaptığın her soru otomatik olarak Yanlış Defterine kaydedilir ve 24 saat sonra tekrar önüne çıkar! 💡",
+    ].join("\n\n");
+  }
+
+  // ---- nereden başlamalıyım? ----
+  if (/(nereden başla|nasıl başla|nereden başlayayım|sıfırdan)/.test(q)) {
+    return [
+      "🧭 YDS'ye Sıfırdan Başlangıç Yol Haritası:",
+      "1. **Adım 1 — Seviyeni Ölç:** Önce 42 soruluk Mini Seviye Tespit Sınavına gir (/level-test). Gerçek CEFR seviyeni öğren.",
+      "2. **Adım 2 — Temel Seviyedeysen (A1–A2):** Ağır denemeler yerine çekirdek 500 kelime ve Simple Present/Past kalıplarına odaklan.",
+      "3. **Adım 3 — Orta Seviyedeysen (B1–B2):** 11 soru tipinin taktiklerini oku (/tactics) ve her gün 1 akademik reading metni çöz (/reading).",
+      "4. **Adım 4 — İleri Seviyedeysen (C1–C2):** 180 dakikalık gerçek çıkmış denemelerle süre yönetimi ve çeldirici eleme hızına odaklan (/exams).",
+      "Hazır mısın? Seviyeni ölçerek başla: 👉 **/level-test**",
+    ].join("\n\n");
+  }
+
   // ---- çalışma planı ----
   if (/(plan|program|nasıl çalış|çalışma|başla|başlangıç|kaç ay|yol haritası|tavsiye|öner)/.test(q)) {
     return [

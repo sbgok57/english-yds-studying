@@ -10,10 +10,12 @@ interface Msg {
 }
 
 const SUGGESTIONS = [
+  "Seviyemi nasıl ölçerim?",
+  "Bugün ne çalışmalıyım?",
+  "Nereden başlamalıyım?",
+  "Yanlışlarımı tekrar ettir",
   "Tenses nedir kanka?",
-  "Passive nasıl anlaşılır?",
   "Net nasıl hesaplanır?",
-  "abundant ne demek?",
   "Bana 30 günlük plan ver",
 ];
 

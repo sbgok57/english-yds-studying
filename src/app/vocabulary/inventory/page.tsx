@@ -89,9 +89,8 @@ export default function VocabularyInventoryPage() {
       updatedIds = [...userData.learnedIds, id];
       // Award XP via gamification
       try {
-        const { xpAwarded } = awardPointsIdempotent(`vocab_learned_${id}`, "VOCAB_STUDY_WORD");
-        if (xpAwarded > 0 && addXp) {
-          addXp(xpAwarded);
+        if (addXp) {
+          addXp(3, `vocab_learned_${id}`, "flashcard_first");
         }
       } catch {
         /* safety */

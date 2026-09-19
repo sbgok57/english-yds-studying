@@ -5,6 +5,7 @@ import type { CefrLevel, LevelAssessmentResult } from "./data-level-test";
 import {
   PointsState,
   PointEvent,
+  PointEventType,
   defaultPointsState,
   awardPointsIdempotent,
 } from "./gamification/points-config";

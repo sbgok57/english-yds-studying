@@ -9,12 +9,10 @@ import {
   LevelTestQuestion,
   calculateLevelAssessment,
   LEVEL_COLORS,
+  LEVEL_TEST_RESULT_STORAGE_KEY,
+  LEVEL_TEST_ANSWERS_STORAGE_KEY,
 } from "@/lib/data-level-test";
-import { awardPointsIdempotent } from "@/lib/gamification/points-config";
 import { useUsage } from "@/lib/store";
-
-export const LEVEL_TEST_RESULT_STORAGE_KEY = "yds-master-level-assessment-result-v1";
-export const LEVEL_TEST_ANSWERS_STORAGE_KEY = "yds-master-level-assessment-answers-v1";
 
 export default function LevelTestPage() {
   const router = useRouter();
@@ -28,6 +26,21 @@ export default function LevelTestPage() {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isFinishing, setIsFinishing] = useState(false);
 
+  // Restore in-progress answers if available
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(LEVEL_TEST_ANSWERS_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          setAnswers(parsed);
+        }
+      }
+    } catch {
+      // SAFETY: storage read failover
+    }
+  }, []);
+
   // Timer
   useEffect(() => {
     const timer = setInterval(() => {
@@ -36,6 +49,17 @@ export default function LevelTestPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // Auto-save answers on update
+  useEffect(() => {
+    if (Object.keys(answers).length > 0) {
+      try {
+        window.localStorage.setItem(LEVEL_TEST_ANSWERS_STORAGE_KEY, JSON.stringify(answers));
+      } catch {
+        // SAFETY: storage write failover
+      }
+    }
+  }, [answers]);
+
   // Format time mm:ss
   const formatTime = (totalSec: number) => {
     const mins = Math.floor(totalSec / 60);
@@ -43,10 +67,12 @@ export default function LevelTestPage() {
     return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
-  const currentQ = questions[currentIndex];
+  const safeIndex = Math.min(Math.max(0, currentIndex), Math.max(0, questions.length - 1));
+  const currentQ = questions[safeIndex] || questions[0];
   const answeredCount = Object.keys(answers).length;
 
   const handleSelectOption = (optionIndex: number) => {
+    if (!currentQ) return;
     setAnswers((prev) => ({
       ...prev,
       [currentQ.id]: optionIndex,
@@ -54,6 +80,7 @@ export default function LevelTestPage() {
   };
 
   const handleClearOption = () => {
+    if (!currentQ) return;
     setAnswers((prev) => {
       const next = { ...prev };
       delete next[currentQ.id];
@@ -62,6 +89,7 @@ export default function LevelTestPage() {
   };
 
   const handleFinishTest = () => {
+    if (isFinishing) return;
     setIsFinishing(true);
 
     const assessment = calculateLevelAssessment(answers, questions);
@@ -71,21 +99,31 @@ export default function LevelTestPage() {
       window.localStorage.setItem(LEVEL_TEST_RESULT_STORAGE_KEY, JSON.stringify(assessment));
       window.localStorage.setItem(LEVEL_TEST_ANSWERS_STORAGE_KEY, JSON.stringify(answers));
     } catch {
-      /* safety */
+      // SAFETY: storage write failover
     }
 
     // Award XP
     try {
-      const { xpAwarded } = awardPointsIdempotent("level_test_complete", "LEVEL_TEST_COMPLETE");
-      if (xpAwarded > 0 && addXp) {
-        addXp(xpAwarded);
+      if (addXp) {
+        addXp(75, "LEVEL_TEST_COMPLETE", "level_test_complete");
       }
     } catch {
-      /* safety */
+      // SAFETY: XP award failover
     }
 
     router.push("/level-test/result");
   };
+
+  if (!currentQ) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-24 text-center space-y-4">
+        <h2 className="text-xl font-bold text-white">Soru verisi yüklenemedi.</h2>
+        <Link href="/" className="text-cyan-400 underline text-sm">
+          Ana Sayfaya Dön
+        </Link>
+      </div>
+    );
+  }
 
   const currentLevelInfo = LEVEL_COLORS[currentQ.level];
 

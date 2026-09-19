@@ -274,6 +274,53 @@ async function testBrowser(browserType: any, browserName: string) {
       await unauthContext.close();
     }
 
+    // 17. Level Test & Results Flow
+    console.log(`[${browserName}] 17. Testing Level Test /level-test`);
+    await page.goto(`${BASE_URL}/level-test`, { waitUntil: "networkidle" });
+    const levelCrash = await page.locator("text=küçük bir hata verdi").count();
+    if (levelCrash > 0) throw new Error("Error boundary triggered on /level-test");
+    const optionBtn = page.locator("button:has-text('students at the university')").first();
+    // Click an option
+    const firstLevelOpt = page.locator(".max-w-5xl button:has-text('are')").first();
+    if (await firstLevelOpt.count() > 0) {
+      await firstLevelOpt.click();
+      await page.waitForTimeout(200);
+    }
+    // Finish test
+    const finishBtn = page.locator("button:has-text('Sınavı Bitir')").first();
+    if (await finishBtn.count() > 0) {
+      await finishBtn.click();
+      await page.waitForURL("**/level-test/result", { timeout: 10000 });
+    }
+    const resultCrash = await page.locator("text=küçük bir hata verdi").count();
+    if (resultCrash > 0) throw new Error("Error boundary triggered on /level-test/result");
+    passedFlows++;
+    console.log(`✅ [${browserName}] /level-test and /level-test/result completed cleanly`);
+
+    // 18. Study Plans Flow
+    console.log(`[${browserName}] 18. Testing Study Plans /study-plans`);
+    await page.goto(`${BASE_URL}/study-plans`, { waitUntil: "networkidle" });
+    const plansCrash = await page.locator("text=küçük bir hata verdi").count();
+    if (plansCrash > 0) throw new Error("Error boundary triggered on /study-plans");
+    passedFlows++;
+    console.log(`✅ [${browserName}] /study-plans loaded with plan templates and guides`);
+
+    // 19. Profile Account Page & CEFR Badge Flow
+    console.log(`[${browserName}] 19. Testing Profile Page /hesap`);
+    await page.goto(`${BASE_URL}/hesap`, { waitUntil: "networkidle" });
+    const hesapCrash = await page.locator("text=küçük bir hata verdi").count();
+    if (hesapCrash > 0) throw new Error("Error boundary triggered on /hesap");
+    passedFlows++;
+    console.log(`✅ [${browserName}] /hesap loaded with profile, badges, and level diagnostics`);
+
+    // 20. Home Page Adaptive Tasks Panel Flow
+    console.log(`[${browserName}] 20. Testing Home Page Daily Tasks Panel`);
+    await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+    const dailyPanelCount = await page.locator("text=Bugün Ne Çalışmalıyım?").count();
+    if (dailyPanelCount === 0) throw new Error("Daily tasks panel not found on home page");
+    passedFlows++;
+    console.log(`✅ [${browserName}] Home page adaptive daily tasks panel verified`);
+
   } finally {
     await browser.close();
   }

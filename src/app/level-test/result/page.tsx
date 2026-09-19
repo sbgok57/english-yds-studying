@@ -9,8 +9,9 @@ import {
   LEVEL_TEST_QUESTIONS,
   LevelTestQuestion,
   CefrLevel,
+  LEVEL_TEST_RESULT_STORAGE_KEY,
+  LEVEL_TEST_ANSWERS_STORAGE_KEY,
 } from "@/lib/data-level-test";
-import { LEVEL_TEST_RESULT_STORAGE_KEY, LEVEL_TEST_ANSWERS_STORAGE_KEY } from "../page";
 
 export default function LevelTestResultPage() {
   const router = useRouter();
@@ -80,12 +81,18 @@ export default function LevelTestResultPage() {
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-black text-white">
-            Tahmini Seviyen: <span className={levelColor.textClass}>{result.estimatedLevel}</span>
+            Tahmini Seviyen: <span className={levelColor.textClass}>{result.levelBand || result.estimatedLevel}</span>
           </h1>
 
           {result.borderNote && (
             <div className="px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-semibold">
               ⚡ {result.borderNote}
+            </div>
+          )}
+
+          {result.suggestValidation && (
+            <div className="px-3 py-1 rounded-xl bg-cyan-400/10 border border-cyan-400/20 text-cyan-300 text-[11px]">
+              ℹ️ Sınırda bir puan aldın; sonuçları teyit etmek için birkaç gün sonra tekrar pratik yapabilirsin.
             </div>
           )}
 

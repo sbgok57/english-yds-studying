@@ -7,6 +7,11 @@ import { useUsage } from "@/lib/store";
 import { avatarSvg } from "@/lib/avatars";
 import Tip from "@/components/Tip";
 import BadgeShowcase from "@/components/profile/BadgeShowcase";
+import {
+  LevelAssessmentResult,
+  LEVEL_COLORS,
+  LEVEL_TEST_RESULT_STORAGE_KEY,
+} from "@/lib/data-level-test";
 
 function hashStr(s: string): number {
   let h = 0;
@@ -26,7 +31,20 @@ export default function HesapPage() {
   const [challenge, setChallenge] = useState("");
   const [demoCode, setDemoCode] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
+  const [levelAssessment, setLevelAssessment] = useState<LevelAssessmentResult | null>(null);
   const codeRef = useRef<HTMLInputElement>(null);
+
+  // Load level assessment if previously completed
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(LEVEL_TEST_RESULT_STORAGE_KEY);
+      if (raw) {
+        setLevelAssessment(JSON.parse(raw));
+      }
+    } catch {
+      // SAFETY: storage read failover
+    }
+  }, []);
 
   // Tekrar gönder geri sayımı
   useEffect(() => {
@@ -155,6 +173,111 @@ export default function HesapPage() {
               </button>
             </div>
           </div>
+
+          {/* CEFR Level Assessment Badge Card */}
+          {levelAssessment ? (
+            <div className="card-vibrant p-6 sm:p-8 max-w-xl mx-auto space-y-5">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-white/50">
+                    CEFR İngilizce Seviyesi
+                  </span>
+                  <h3 className="text-xl font-black text-white flex items-center gap-2">
+                    <span>🎓</span> Seviye Teşhis Kartı
+                  </h3>
+                </div>
+                <div
+                  className={`px-4 py-2 rounded-2xl border font-black text-xl shadow-lg flex items-center gap-2 ${
+                    (LEVEL_COLORS[levelAssessment.estimatedLevel] || LEVEL_COLORS.B1).bgClass
+                  } ${(LEVEL_COLORS[levelAssessment.estimatedLevel] || LEVEL_COLORS.B1).textClass} ${
+                    (LEVEL_COLORS[levelAssessment.estimatedLevel] || LEVEL_COLORS.B1).borderClass
+                  }`}
+                >
+                  <span>{levelAssessment.estimatedLevel}</span>
+                  <span className="text-xs font-bold uppercase text-white/60">
+                    {(LEVEL_COLORS[levelAssessment.estimatedLevel] || LEVEL_COLORS.B1).name} Kuşak
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-xl bg-white/[0.03] border border-white/10 p-2.5">
+                  <div className="text-base font-black text-cyan-300">%{levelAssessment.scorePercent}</div>
+                  <div className="text-[10px] text-white/50">Başarı Oranı</div>
+                </div>
+                <div className="rounded-xl bg-white/[0.03] border border-white/10 p-2.5">
+                  <div className="text-base font-black text-emerald-300">
+                    {levelAssessment.totalCorrect} / {levelAssessment.totalQuestions}
+                  </div>
+                  <div className="text-[10px] text-white/50">Doğru Soru</div>
+                </div>
+                <div className="rounded-xl bg-white/[0.03] border border-white/10 p-2.5">
+                  <div className="text-base font-black text-purple-300 capitalize">{levelAssessment.confidence}</div>
+                  <div className="text-[10px] text-white/50">Güven Düzeyi</div>
+                </div>
+              </div>
+
+              {/* Skill Scores Graph */}
+              <div className="space-y-2 pt-2">
+                <span className="text-[11px] font-bold text-white/60 uppercase">Dil Becerileri</span>
+                <div className="space-y-1.5">
+                  {[
+                    { label: "Gramer", value: levelAssessment.skillScores.grammar },
+                    { label: "Kelime", value: levelAssessment.skillScores.vocabulary },
+                    { label: "Reading", value: levelAssessment.skillScores.reading },
+                    { label: "Cümle", value: levelAssessment.skillScores.sentence },
+                    { label: "Çeviri", value: levelAssessment.skillScores.translation },
+                  ].map((s) => (
+                    <div key={s.label} className="flex items-center gap-2 text-xs">
+                      <span className="w-16 text-white/70 text-[11px]">{s.label}</span>
+                      <div className="flex-1 bg-white/5 h-2 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full"
+                          style={{ width: `${s.value}%` }}
+                        />
+                      </div>
+                      <span className="w-8 text-right font-mono font-bold text-[11px] text-cyan-400">%{s.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {levelAssessment.borderNote && (
+                <p className="text-xs text-amber-300 bg-amber-400/10 border border-amber-400/20 rounded-xl p-3">
+                  ⚡ {levelAssessment.borderNote}
+                </p>
+              )}
+
+              <div className="flex flex-wrap gap-2 pt-2">
+                <Link
+                  href="/study-plans"
+                  className="flex-1 text-center py-2.5 px-4 rounded-xl font-black text-xs text-slate-950 bg-gradient-to-r from-cyan-400 to-emerald-400 hover:brightness-110 shadow-md shadow-cyan-500/20 transition-all"
+                >
+                  Çalışma Programına Başla 🚀
+                </Link>
+                <Link
+                  href="/level-test/result"
+                  className="py-2.5 px-4 rounded-xl font-bold text-xs border border-white/20 bg-white/5 hover:bg-white/10 text-white transition-colors"
+                >
+                  Sonuç Detayı
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="card-vibrant p-6 sm:p-8 max-w-xl mx-auto text-center space-y-3 border border-cyan-500/30">
+              <span className="text-3xl">🎯</span>
+              <h3 className="text-lg font-black text-white">İngilizce Seviyeni Biliyor musun?</h3>
+              <p className="text-xs text-white/60 max-w-md mx-auto">
+                42 soruluk mini seviye tespit sınavını tamamla, A1–C2 aralığındaki gerçek CEFR seviyeni ve sana özel YDS çalışma programını oluştur!
+              </p>
+              <Link
+                href="/level-test"
+                className="inline-block py-2.5 px-6 rounded-xl font-black text-xs text-slate-950 bg-gradient-to-r from-emerald-400 to-cyan-400 hover:brightness-110 shadow-lg shadow-cyan-500/20 transition-all"
+              >
+                Seviye Tespit Sınavına Başla 🎯
+              </Link>
+            </div>
+          )}
 
           {/* Badges Showcase Section */}
           <BadgeShowcase />

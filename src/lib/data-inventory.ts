@@ -25,7 +25,7 @@ export interface VocabularyInventoryItem {
   pronunciation?: string;
   sourceTags: VocabularySource[];
   frequency?: number;
-  ydsPriority?: "low" | "medium" | "high" | "critical";
+  ydsPriority?: "low" | "medium" | "high" | "critical" | "must_know" | "important" | "normal";
   academic?: boolean;
   phrasalVerb?: boolean;
   collocations?: string[];
