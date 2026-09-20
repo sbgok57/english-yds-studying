@@ -160,15 +160,22 @@ export function wordScore(s?: WordStat): number {
 }
 
 function clone<T>(o: T): T {
+  if (typeof structuredClone === "function") {
+    try {
+      return structuredClone(o);
+    } catch {
+      /* fallback */
+    }
+  }
   return JSON.parse(JSON.stringify(o));
 }
 
 export function useUsage() {
-  const [usage, setUsage] = useState<UsageData>(() =>
-    typeof window === "undefined" ? defaultUsage() : loadUsage()
-  );
+  const [usage, setUsage] = useState<UsageData>(defaultUsage);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const u = loadUsage();
     const today = new Date().toDateString();
     if (!u.lastVisit || new Date(u.lastVisit).toDateString() !== today) {
@@ -181,7 +188,8 @@ export function useUsage() {
 
   const update = useCallback((fn: (u: UsageData) => UsageData) => {
     setUsage((prev) => {
-      const next = fn(clone(prev));
+      const base = typeof window !== "undefined" ? loadUsage() : prev;
+      const next = fn(clone(base));
       saveUsage(next);
       return next;
     });
@@ -200,7 +208,7 @@ export function useUsage() {
     [update]
   );
 
-  return { usage, update, addXp };
+  return { usage, update, addXp, mounted };
 }
 
 // ---- kolaylaştırıcı kayıt fonksiyonları ----

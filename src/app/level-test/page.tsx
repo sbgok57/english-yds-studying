@@ -27,46 +27,44 @@ export default function LevelTestPage() {
   // Questions: 42 authentic questions
   const questions: LevelTestQuestion[] = LEVEL_TEST_QUESTIONS;
 
-  const [startedAt, setStartedAt] = useState<number>(() => {
-    if (typeof window === "undefined") return Date.now();
-    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
-    return saved?.startedAt || Date.now();
-  });
-
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    if (typeof window === "undefined") return 0;
-    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
-    return saved?.currentIndex || 0;
-  });
-
-  const [answers, setAnswers] = useState<Record<string, number>>(() => {
-    if (typeof window === "undefined") return {};
-    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
-    if (saved?.answers) return saved.answers;
-    try {
-      const legacy = window.localStorage.getItem(LEVEL_TEST_ANSWERS_STORAGE_KEY);
-      if (legacy) return JSON.parse(legacy);
-    } catch {
-      /* noop */
-    }
-    return {};
-  });
-
-  const [elapsedSeconds, setElapsedSeconds] = useState(() => {
-    return Math.floor((Date.now() - startedAt) / 1000);
-  });
+  const [mounted, setMounted] = useState(false);
+  const [startedAt, setStartedAt] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [isFinishing, setIsFinishing] = useState(false);
+
+  // Restore preserved session safely after hydration (zero SSR mismatch)
+  useEffect(() => {
+    setMounted(true);
+    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
+    if (saved && !saved.completed) {
+      setStartedAt(saved.startedAt || Date.now());
+      if (typeof saved.currentIndex === "number") setCurrentIndex(saved.currentIndex);
+      if (saved.answers) setAnswers(saved.answers);
+    } else {
+      setStartedAt(Date.now());
+      try {
+        const legacy = window.localStorage.getItem(LEVEL_TEST_ANSWERS_STORAGE_KEY);
+        if (legacy) setAnswers(JSON.parse(legacy));
+      } catch {
+        /* noop */
+      }
+    }
+  }, []);
 
   // Timer sync with wall-clock
   useEffect(() => {
+    if (!mounted || startedAt === 0) return;
     const timer = setInterval(() => {
       setElapsedSeconds(Math.floor((Date.now() - startedAt) / 1000));
     }, 1000);
     return () => clearInterval(timer);
-  }, [startedAt]);
+  }, [mounted, startedAt]);
 
   // Auto-save checkpoint on progress
   useEffect(() => {
+    if (!mounted) return;
     if (Object.keys(answers).length > 0 || currentIndex > 0) {
       saveSessionCheckpoint({
         type: "level_test",
@@ -74,7 +72,7 @@ export default function LevelTestPage() {
         url: "/level-test",
         currentIndex,
         answers,
-        startedAt,
+        startedAt: startedAt || Date.now(),
       });
 
       try {
@@ -83,7 +81,7 @@ export default function LevelTestPage() {
         // SAFETY: storage write failover
       }
     }
-  }, [answers, currentIndex, startedAt]);
+  }, [mounted, answers, currentIndex, startedAt]);
 
   // Format time mm:ss
   const formatTime = (totalSec: number) => {

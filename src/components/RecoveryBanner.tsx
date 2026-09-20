@@ -11,17 +11,19 @@ import {
 export default function RecoveryBanner() {
   const [session, setSession] = useState<AnySessionCheckpoint | null>(null);
   const [dismissed, setDismissed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
   useEffect(() => {
+    setMounted(true);
     const unsubscribe = subscribeToRecovery((latest) => {
       setSession(latest);
     });
     return unsubscribe;
   }, []);
 
-  if (!session || dismissed) return null;
+  if (!mounted || !session || dismissed) return null;
 
   // Don't show the banner if the student is currently on that exact page
   if (pathname === session.url || (session.url && pathname.startsWith(session.url))) {

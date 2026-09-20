@@ -30,47 +30,14 @@ export default function ExamRunner({
   meta: ExamMeta;
   questions: ExamQuestion[];
 }) {
-  const [startedAt, setStartedAt] = useState<number>(() => {
-    if (typeof window === "undefined") return Date.now();
-    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
-    if (saved && saved.examId === meta.id && !saved.completed) {
-      return saved.startedAt || Date.now();
-    }
-    return Date.now();
-  });
-
-  const [answers, setAnswers] = useState<Record<number, number>>(() => {
-    if (typeof window === "undefined") return {};
-    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
-    if (saved && saved.examId === meta.id && !saved.completed) {
-      return saved.answers || {};
-    }
-    return {};
-  });
-
-  const [flags, setFlags] = useState<Record<number, boolean>>(() => {
-    if (typeof window === "undefined") return {};
-    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
-    if (saved && saved.examId === meta.id && !saved.completed) {
-      return saved.flags || {};
-    }
-    return {};
-  });
-
-  const [current, setCurrent] = useState(() => {
-    if (typeof window === "undefined") return 0;
-    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
-    if (saved && saved.examId === meta.id && !saved.completed) {
-      return saved.currentQuestion || 0;
-    }
-    return 0;
-  });
+  const [mounted, setMounted] = useState(false);
+  const [startedAt, setStartedAt] = useState<number>(0);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [flags, setFlags] = useState<Record<number, boolean>>({});
+  const [current, setCurrent] = useState(0);
 
   const totalSec = meta.durationMin * 60;
-  const [timeLeft, setTimeLeft] = useState(() => {
-    const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-    return Math.max(0, totalSec - elapsed);
-  });
+  const [timeLeft, setTimeLeft] = useState(totalSec);
   const [submitted, setSubmitted] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
@@ -78,9 +45,23 @@ export default function ExamRunner({
   const isSubmittingRef = useRef(false);
   const { update } = useUsage();
 
+  // Restore preserved session safely after hydration (zero SSR mismatch)
+  useEffect(() => {
+    setMounted(true);
+    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
+    if (saved && saved.examId === meta.id && !saved.completed) {
+      setStartedAt(saved.startedAt || Date.now());
+      if (saved.answers) setAnswers(saved.answers);
+      if (saved.flags) setFlags(saved.flags);
+      if (typeof saved.currentQuestion === "number") setCurrent(saved.currentQuestion);
+    } else {
+      setStartedAt(Date.now());
+    }
+  }, [meta.id]);
+
   // Wall-clock synced countdown (never halts on phone lock or inactive tab)
   useEffect(() => {
-    if (submitted) return;
+    if (!mounted || submitted || startedAt === 0) return;
 
     const checkTime = () => {
       const elapsed = Math.floor((Date.now() - startedAt) / 1000);
@@ -94,10 +75,11 @@ export default function ExamRunner({
     checkTime();
     const iv = setInterval(checkTime, 1000);
     return () => clearInterval(iv);
-  }, [submitted, startedAt, totalSec]);
+  }, [mounted, submitted, startedAt, totalSec]);
 
   // Continuous auto-save checkpoint
   useEffect(() => {
+    if (!mounted) return;
     if (submitted) {
       clearSessionCheckpoint("exam");
       return;
@@ -112,11 +94,11 @@ export default function ExamRunner({
         currentQuestion: current,
         answers,
         flags,
-        startedAt,
+        startedAt: startedAt || Date.now(),
         durationMinutes: meta.durationMin,
       });
     }
-  }, [answers, flags, current, submitted, meta.id, meta.title, startedAt, meta.durationMin]);
+  }, [mounted, answers, flags, current, submitted, meta.id, meta.title, startedAt, meta.durationMin]);
 
   // Soru dizisi boşsa veya current dışarıdaysa güvenli sınırla
   const safeCurrent = questions && questions.length > 0
