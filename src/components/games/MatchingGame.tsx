@@ -156,9 +156,11 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
                   }`}
                 >
                   {c.face === "image" && c.img ? (
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={c.img}
                       alt={c.label}
+                      loading="lazy"
                       className="w-full h-1/2 object-cover rounded-lg mb-1"
                     />
                   ) : null}

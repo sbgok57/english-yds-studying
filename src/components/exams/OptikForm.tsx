@@ -98,54 +98,6 @@ export default function OptikForm({
     timeSpent: number;
   } | null>(null);
 
-  // Açılışta safeStorage kontrolü (SSR güvenli)
-  useEffect(() => {
-    try {
-      const raw = safeStorage.get(storageKey);
-      if (!raw) return;
-      const session: SavedSession = JSON.parse(raw);
-
-      if (session.finished) {
-        setAnswers(session.answers || {});
-        calculateResults(session.answers, session.startedAt, false);
-        setPhase("result");
-        return;
-      }
-
-      const elapsedSec = Math.floor((Date.now() - session.startedAt) / 1000);
-      const remainingSec = durationMinutes * 60 - elapsedSec;
-
-      if (remainingSec > 0) {
-        setAnswers(session.answers || {});
-        setStartedAt(session.startedAt);
-        setSecondsLeft(remainingSec);
-        setPhase("resume");
-      } else {
-        // Süre dolmuş, otomatik hesapla
-        calculateResults(session.answers || {}, session.startedAt, true);
-      }
-    } catch {
-      safeStorage.remove(storageKey);
-    }
-  }, [storageKey, durationMinutes]);
-
-  const startExam = (resume: boolean) => {
-    if (!resume) {
-      const now = Date.now();
-      const freshSession: SavedSession = {
-        examId,
-        answers: {},
-        startedAt: now,
-        finished: false,
-      };
-      safeStorage.set(storageKey, JSON.stringify(freshSession));
-      setAnswers({});
-      setStartedAt(now);
-      setSecondsLeft(durationMinutes * 60);
-    }
-    setPhase("running");
-  };
-
   const calculateResults = useCallback(
     async (currentAnswers: Record<number, Choice>, sessionStart: number, autoSubmit = false) => {
       let correct = 0;
@@ -209,6 +161,55 @@ export default function OptikForm({
     },
     [examId, safeQuestions, durationMinutes, storageKey]
   );
+
+  // Açılışta safeStorage kontrolü (SSR güvenli)
+  useEffect(() => {
+    try {
+      const raw = safeStorage.get(storageKey);
+      if (!raw) return;
+      const session: SavedSession = JSON.parse(raw);
+
+      if (session.finished) {
+        setAnswers(session.answers || {});
+        calculateResults(session.answers, session.startedAt, false);
+        setPhase("result");
+        return;
+      }
+
+      const elapsedSec = Math.floor((Date.now() - session.startedAt) / 1000);
+      const remainingSec = durationMinutes * 60 - elapsedSec;
+
+      if (remainingSec > 0) {
+        setAnswers(session.answers || {});
+        setStartedAt(session.startedAt);
+        setSecondsLeft(remainingSec);
+        setPhase("resume");
+      } else {
+        // Süre dolmuş, otomatik hesapla
+        calculateResults(session.answers || {}, session.startedAt, true);
+      }
+    } catch {
+      safeStorage.remove(storageKey);
+    }
+  }, [storageKey, durationMinutes, calculateResults]);
+
+  const startExam = (resume: boolean) => {
+    if (!resume) {
+      const now = Date.now();
+      const freshSession: SavedSession = {
+        examId,
+        answers: {},
+        startedAt: now,
+        finished: false,
+      };
+      safeStorage.set(storageKey, JSON.stringify(freshSession));
+      setAnswers({});
+      setStartedAt(now);
+      setSecondsLeft(durationMinutes * 60);
+    }
+    setPhase("running");
+  };
+
 
   // Zamanlayıcı (Cihaz saatine göre hesaplanır)
   useEffect(() => {

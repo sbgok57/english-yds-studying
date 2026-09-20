@@ -51,7 +51,10 @@ export default function TacticView({ tactic }: { tactic: Tactic }) {
   }
 
   // Seviye bloklari
-  const levelBlocks: TacticLevelBlock[] = TACTIC_LEVELS_MAP[tactic.slug] || [];
+  const levelBlocks = useMemo<TacticLevelBlock[]>(() => {
+    return TACTIC_LEVELS_MAP[tactic.slug] || [];
+  }, [tactic.slug]);
+
   const currentLevelBlock = useMemo(() => {
     return levelBlocks.find((b) => b.level === activeLevel) || levelBlocks[0] || null;
   }, [levelBlocks, activeLevel]);

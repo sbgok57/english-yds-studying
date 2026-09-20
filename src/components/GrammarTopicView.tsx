@@ -57,7 +57,10 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
   const example2 = GRAMMAR_EXAMPLES2[topic.slug];
 
   // 7 Seviye verisi
-  const levelBlocks7: GrammarLevel7Block[] = GRAMMAR_LEVELS_7_MAP[topic.slug] || [];
+  const levelBlocks7 = useMemo<GrammarLevel7Block[]>(() => {
+    return GRAMMAR_LEVELS_7_MAP[topic.slug] || [];
+  }, [topic.slug]);
+
   const activeBlock7 = useMemo(() => {
     return levelBlocks7.find((b) => b.level === activeLevel7) || levelBlocks7[0] || null;
   }, [levelBlocks7, activeLevel7]);

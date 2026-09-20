@@ -53,8 +53,9 @@ export default function WhackMole() {
 
   useEffect(() => {
     startNewRound();
+    const timer = timerRef;
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timer.current) clearTimeout(timer.current);
     };
   }, [startNewRound]);
 
@@ -76,7 +77,8 @@ export default function WhackMole() {
       setFeedback("❌ Yanlış Köstebek!");
     }
 
-    setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       setFeedback(null);
       startNewRound();
     }, 450);
