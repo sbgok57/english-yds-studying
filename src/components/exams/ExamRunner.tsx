@@ -7,6 +7,12 @@ import Celebration from "@/components/Celebration";
 import Tip from "@/components/Tip";
 import { recordExam, useUsage } from "@/lib/store";
 import { calculateYdsNet } from "@/lib/exam-validator";
+import {
+  saveSessionCheckpoint,
+  loadSessionCheckpoint,
+  clearSessionCheckpoint,
+  ExamCheckpoint,
+} from "@/lib/state-preservation";
 
 const LETTERS = ["A", "B", "C", "D", "E"];
 
@@ -24,31 +30,93 @@ export default function ExamRunner({
   meta: ExamMeta;
   questions: ExamQuestion[];
 }) {
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [flags, setFlags] = useState<Record<number, boolean>>({});
-  const [current, setCurrent] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(meta.durationMin * 60);
+  const [startedAt, setStartedAt] = useState<number>(() => {
+    if (typeof window === "undefined") return Date.now();
+    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
+    if (saved && saved.examId === meta.id && !saved.completed) {
+      return saved.startedAt || Date.now();
+    }
+    return Date.now();
+  });
+
+  const [answers, setAnswers] = useState<Record<number, number>>(() => {
+    if (typeof window === "undefined") return {};
+    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
+    if (saved && saved.examId === meta.id && !saved.completed) {
+      return saved.answers || {};
+    }
+    return {};
+  });
+
+  const [flags, setFlags] = useState<Record<number, boolean>>(() => {
+    if (typeof window === "undefined") return {};
+    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
+    if (saved && saved.examId === meta.id && !saved.completed) {
+      return saved.flags || {};
+    }
+    return {};
+  });
+
+  const [current, setCurrent] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const saved = loadSessionCheckpoint<ExamCheckpoint>("exam");
+    if (saved && saved.examId === meta.id && !saved.completed) {
+      return saved.currentQuestion || 0;
+    }
+    return 0;
+  });
+
+  const totalSec = meta.durationMin * 60;
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+    return Math.max(0, totalSec - elapsed);
+  });
   const [submitted, setSubmitted] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
   const hasRecordedRef = useRef(false);
+  const isSubmittingRef = useRef(false);
   const { update } = useUsage();
 
-  // Geri sayım
+  // Wall-clock synced countdown (never halts on phone lock or inactive tab)
   useEffect(() => {
     if (submitted) return;
-    const iv = setInterval(() => {
-      setTimeLeft((t) => {
-        if (t <= 1) {
-          clearInterval(iv);
-          setSubmitted(true);
-          return 0;
-        }
-        return t - 1;
-      });
-    }, 1000);
+
+    const checkTime = () => {
+      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+      const remaining = Math.max(0, totalSec - elapsed);
+      setTimeLeft(remaining);
+      if (remaining <= 0) {
+        setSubmitted(true);
+      }
+    };
+
+    checkTime();
+    const iv = setInterval(checkTime, 1000);
     return () => clearInterval(iv);
-  }, [submitted]);
+  }, [submitted, startedAt, totalSec]);
+
+  // Continuous auto-save checkpoint
+  useEffect(() => {
+    if (submitted) {
+      clearSessionCheckpoint("exam");
+      return;
+    }
+
+    if (Object.keys(answers).length > 0 || current > 0) {
+      saveSessionCheckpoint({
+        type: "exam",
+        examId: meta.id,
+        title: meta.title,
+        url: `/exams/${meta.id}`,
+        currentQuestion: current,
+        answers,
+        flags,
+        startedAt,
+        durationMinutes: meta.durationMin,
+      });
+    }
+  }, [answers, flags, current, submitted, meta.id, meta.title, startedAt, meta.durationMin]);
 
   // Soru dizisi boşsa veya current dışarıdaysa güvenli sınırla
   const safeCurrent = questions && questions.length > 0
@@ -162,11 +230,14 @@ export default function ExamRunner({
           <div className="flex flex-wrap justify-center gap-3">
             <button
               onClick={() => {
+                clearSessionCheckpoint("exam");
                 hasRecordedRef.current = false;
                 setSubmitted(false);
                 setAnswers({});
                 setFlags({});
                 setCurrent(0);
+                const now = Date.now();
+                setStartedAt(now);
                 setTimeLeft(meta.durationMin * 60);
               }}
               className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-bold hover:scale-105 transition-transform"
@@ -352,6 +423,8 @@ export default function ExamRunner({
               </button>
               <button
                 onClick={() => {
+                  if (isSubmittingRef.current) return;
+                  isSubmittingRef.current = true;
                   setConfirmOpen(false);
                   setSubmitted(true);
                 }}

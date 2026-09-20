@@ -37,6 +37,7 @@ export default function TTSPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   // Web Speech API fallback
   const playWebSpeech = (speakText: string, langCode: string, speakGender: GenderCode) => {
@@ -49,6 +50,7 @@ export default function TTSPlayer({
 
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(speakText);
+    utteranceRef.current = utterance;
     utterance.lang = langCode;
     utterance.rate = 0.95;
 
@@ -70,8 +72,12 @@ export default function TTSPlayer({
       if (navigator.vibrate) navigator.vibrate(25);
     };
 
-    utterance.onend = () => setIsPlaying(false);
+    utterance.onend = () => {
+      utteranceRef.current = null;
+      setIsPlaying(false);
+    };
     utterance.onerror = () => {
+      utteranceRef.current = null;
       setIsPlaying(false);
       setLoading(false);
     };

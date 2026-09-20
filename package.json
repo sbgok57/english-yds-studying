@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "tsx test/auth-unit-tests.ts && tsx test/unit-tests.ts && tsx test/adaptive-unit-tests.ts",
+    "test:unit": "tsx test/hardware-and-resilience-tests.ts && tsx test/auth-unit-tests.ts && tsx test/unit-tests.ts && tsx test/adaptive-unit-tests.ts",
     "test:integration": "tsx test/auth-integration-tests.ts && tsx test/module-tests.ts",
     "test:e2e": "tsx test/e2e-tests.ts",
     "validate:data": "tsx test/validate-data.ts",

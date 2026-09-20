@@ -1,6 +1,7 @@
 "use client";
 
 import { useUsage } from "@/lib/store";
+import { shouldThrottleGraphics } from "@/lib/hardware-optimizer";
 
 // CPU dostu: 4 blob, GPU-friendly transform animasyonları (left/top değil).
 const BLOBS = [
@@ -13,6 +14,7 @@ const BLOBS = [
 export default function AmbientBackground() {
   const { usage, update } = useUsage();
   const on = usage.ambient !== false;
+  const throttled = typeof window !== "undefined" && shouldThrottleGraphics();
 
   return (
     <>
@@ -25,7 +27,7 @@ export default function AmbientBackground() {
           {BLOBS.map((b, i) => (
             <div
               key={i}
-              className={`ambient-blob ${b.cls}`}
+              className={`ambient-blob ${throttled ? "opacity-30" : b.cls}`}
               style={{
                 width: b.size,
                 height: b.size,

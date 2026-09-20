@@ -12,6 +12,12 @@ import {
   LEVEL_TEST_RESULT_STORAGE_KEY,
   LEVEL_TEST_ANSWERS_STORAGE_KEY,
 } from "@/lib/data-level-test";
+import {
+  saveSessionCheckpoint,
+  loadSessionCheckpoint,
+  clearSessionCheckpoint,
+  LevelTestCheckpoint,
+} from "@/lib/state-preservation";
 import { useUsage } from "@/lib/store";
 
 export default function LevelTestPage() {
@@ -21,44 +27,63 @@ export default function LevelTestPage() {
   // Questions: 42 authentic questions
   const questions: LevelTestQuestion[] = LEVEL_TEST_QUESTIONS;
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [startedAt, setStartedAt] = useState<number>(() => {
+    if (typeof window === "undefined") return Date.now();
+    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
+    return saved?.startedAt || Date.now();
+  });
+
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
+    return saved?.currentIndex || 0;
+  });
+
+  const [answers, setAnswers] = useState<Record<string, number>>(() => {
+    if (typeof window === "undefined") return {};
+    const saved = loadSessionCheckpoint<LevelTestCheckpoint>("level_test");
+    if (saved?.answers) return saved.answers;
+    try {
+      const legacy = window.localStorage.getItem(LEVEL_TEST_ANSWERS_STORAGE_KEY);
+      if (legacy) return JSON.parse(legacy);
+    } catch {
+      /* noop */
+    }
+    return {};
+  });
+
+  const [elapsedSeconds, setElapsedSeconds] = useState(() => {
+    return Math.floor((Date.now() - startedAt) / 1000);
+  });
   const [isFinishing, setIsFinishing] = useState(false);
 
-  // Restore in-progress answers if available
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(LEVEL_TEST_ANSWERS_STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-          setAnswers(parsed);
-        }
-      }
-    } catch {
-      // SAFETY: storage read failover
-    }
-  }, []);
-
-  // Timer
+  // Timer sync with wall-clock
   useEffect(() => {
     const timer = setInterval(() => {
-      setElapsedSeconds((s) => s + 1);
+      setElapsedSeconds(Math.floor((Date.now() - startedAt) / 1000));
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [startedAt]);
 
-  // Auto-save answers on update
+  // Auto-save checkpoint on progress
   useEffect(() => {
-    if (Object.keys(answers).length > 0) {
+    if (Object.keys(answers).length > 0 || currentIndex > 0) {
+      saveSessionCheckpoint({
+        type: "level_test",
+        title: "YDS CEFR Seviye Tespit Sınavı",
+        url: "/level-test",
+        currentIndex,
+        answers,
+        startedAt,
+      });
+
       try {
         window.localStorage.setItem(LEVEL_TEST_ANSWERS_STORAGE_KEY, JSON.stringify(answers));
       } catch {
         // SAFETY: storage write failover
       }
     }
-  }, [answers]);
+  }, [answers, currentIndex, startedAt]);
 
   // Format time mm:ss
   const formatTime = (totalSec: number) => {
@@ -110,6 +135,9 @@ export default function LevelTestPage() {
     } catch {
       // SAFETY: XP award failover
     }
+
+    // Clear session checkpoint since test is finished
+    clearSessionCheckpoint("level_test");
 
     router.push("/level-test/result");
   };

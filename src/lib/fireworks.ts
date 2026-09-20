@@ -25,8 +25,10 @@ const COLORS = [
   "#34d399",
 ];
 
+import { shouldThrottleGraphics } from "@/lib/hardware-optimizer";
+
 export function launchFireworks(durationMs = 3400, small = false) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || shouldThrottleGraphics()) return;
 
   let canvas = document.getElementById("yds-fireworks") as HTMLCanvasElement | null;
   if (!canvas) {

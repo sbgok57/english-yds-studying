@@ -181,6 +181,8 @@ export function stopSpeaking() {
   }
 }
 
+let activeSpeechUtterance: SpeechSynthesisUtterance | null = null;
+
 function speakLocal(text: string, a: Accent, gender: Gender, onInfo?: (m: string) => void) {
   const genderLabel = gender === "female" ? "Kadın" : "Erkek";
   if (!("speechSynthesis" in window)) {
@@ -194,10 +196,20 @@ function speakLocal(text: string, a: Accent, gender: Gender, onInfo?: (m: string
   u.lang = a.lang;
   u.rate = 0.85;
   u.pitch = gender === "female" ? 1.05 : 0.95;
+
+  activeSpeechUtterance = u;
+  u.onend = () => {
+    activeSpeechUtterance = null;
+  };
+  u.onerror = () => {
+    activeSpeechUtterance = null;
+  };
+
   try {
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
   } catch {
+    activeSpeechUtterance = null;
     onInfo?.("Ses çalınamadı kanka.");
     return;
   }
