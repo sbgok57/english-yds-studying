@@ -74,6 +74,58 @@ async function runUnitTests() {
   const expiredResult = await verifySessionToken(expiredToken);
   assert.strictEqual(expiredResult, null, "Expired token must be rejected");
 
+  // 6. Database Config Validation & Sanitization
+  console.log("  Testing validateDatabaseConfig & sanitizeEnvUrl...");
+  const { validateDatabaseConfig, sanitizeEnvUrl } = await import("../src/lib/server-config");
+  
+  assert.strictEqual(sanitizeEnvUrl(' "postgresql://user:pass@host/db" '), "postgresql://user:pass@host/db");
+  assert.strictEqual(sanitizeEnvUrl("'file:./dev.db'"), "file:./dev.db");
+  assert.strictEqual(sanitizeEnvUrl(""), "");
+
+  // Test transient DB error detection
+  console.log("  Testing isTransientDbError & withDbRetry...");
+  const { isTransientDbError, withDbRetry } = await import("../src/lib/db-retry");
+
+  assert.strictEqual(isTransientDbError({ code: "P1001" }), true, "P1001 must be transient");
+  assert.strictEqual(isTransientDbError({ code: "ETIMEDOUT" }), true, "ETIMEDOUT must be transient");
+  assert.strictEqual(isTransientDbError({ code: "P2002" }), false, "P2002 unique constraint is not transient");
+  assert.strictEqual(isTransientDbError(new Error("Connection pool is full")), true, "Connection pool message must be transient");
+
+  // Test withDbRetry retry behavior
+  let attemptCount = 0;
+  const retryResult = await withDbRetry(
+    async () => {
+      attemptCount++;
+      if (attemptCount < 2) {
+        const transientErr = new Error("Connection timed out");
+        (transientErr as any).code = "ETIMEDOUT";
+        throw transientErr;
+      }
+      return "recovered_value";
+    },
+    { maxRetries: 2, timeoutMs: 2000, requestId: "test_retry_1" }
+  );
+  assert.strictEqual(retryResult, "recovered_value");
+  assert.strictEqual(attemptCount, 2, "Should have retried once and succeeded on attempt 2");
+
+  // Non-transient errors must fail immediately without retry
+  let nonTransientAttempts = 0;
+  try {
+    await withDbRetry(
+      async () => {
+        nonTransientAttempts++;
+        const nonTransientErr = new Error("User already exists");
+        (nonTransientErr as any).code = "P2002";
+        throw nonTransientErr;
+      },
+      { maxRetries: 2, timeoutMs: 2000, requestId: "test_retry_2" }
+    );
+    assert.fail("Non-transient error should have thrown");
+  } catch (err: any) {
+    assert.strictEqual(nonTransientAttempts, 1, "Non-transient error should not retry");
+    assert.strictEqual(err.code, "P2002");
+  }
+
   console.log("✅ All Auth Unit Tests Passed Successfully!");
 }
 
@@ -81,3 +133,4 @@ runUnitTests().catch((err) => {
   console.error("❌ Auth Unit Tests Failed:", err);
   process.exit(1);
 });
+

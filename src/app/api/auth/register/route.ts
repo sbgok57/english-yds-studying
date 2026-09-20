@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { createHmac } from "crypto";
 import { signSessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
 import { AUTH_SECRET } from "@/lib/server-config";
+import { withDbRetry } from "@/lib/db-retry";
 import {
   AUTH_ERROR_CODES,
   authError,
@@ -108,8 +109,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Existing User Checks
-    const existingEmail = await prisma.user.findUnique({ where: { email } });
+    // 3. Existing User Checks with transient retry
+    const existingEmail = await withDbRetry(
+      () => prisma.user.findUnique({ where: { email } }),
+      { maxRetries: 2, timeoutMs: 5000, requestId, operationName: "check_existing_email" }
+    );
     if (existingEmail) {
       return NextResponse.json(
         authError(
@@ -122,7 +126,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const existingUsername = await prisma.user.findUnique({ where: { username } });
+    const existingUsername = await withDbRetry(
+      () => prisma.user.findUnique({ where: { username } }),
+      { maxRetries: 2, timeoutMs: 5000, requestId, operationName: "check_existing_username" }
+    );
     if (existingUsername) {
       return NextResponse.json(
         authError(
@@ -135,19 +142,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 4. Create User
+    // 4. Create User atomically
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
-      data: {
-        email,
-        username,
-        passwordHash,
-        level: "A1",
-        streak: 1,
-        totalPoints: 50,
-        avatarId: "astronaut",
-      },
-    });
+    const user = await withDbRetry(
+      () =>
+        prisma.user.create({
+          data: {
+            email,
+            username,
+            passwordHash,
+            level: "A1",
+            streak: 1,
+            totalPoints: 50,
+            avatarId: "astronaut",
+          },
+        }),
+      { maxRetries: 2, timeoutMs: 6000, requestId, operationName: "create_user" }
+    );
 
     // 5. Sign Session Token & Issue Cookie
     const token = await signSessionToken({
@@ -169,7 +180,13 @@ export async function POST(req: NextRequest) {
     };
 
     const responsePayload = authSuccess(
-      { user: safeUser },
+      {
+        user: {
+          ...safeUser,
+          name: user.username,
+        },
+        safeUser,
+      },
       `Aramıza hoş geldin ${user.username}! Hesabın başarıyla oluşturuldu. 🚀`,
       requestId
     );
@@ -212,14 +229,25 @@ export async function POST(req: NextRequest) {
 
     const isDbError =
       error?.name === "PrismaClientInitializationError" ||
-      error?.name === "PrismaClientUnknownRequestError" ||
+      error?.name === "PrismaClientKnownRequestError" ||
+      error?.name === "PrismaClientRustPanicError" ||
+      error?.name === "DatabaseTimeoutError" ||
+      error?.code === "ETIMEDOUT" ||
+      error?.code === "ECONNREFUSED" ||
+      error?.code === "P1001" ||
+      error?.code === "P1002" ||
+      error?.code === "P1008" ||
+      error?.code === "P1011" ||
+      error?.code === "P1017" ||
       error?.message?.includes("readonly") ||
-      error?.message?.includes("database");
+      error?.message?.includes("database") ||
+      error?.message?.includes("datasource") ||
+      error?.message?.includes("connection");
 
     const statusCode = isDbError ? 503 : 500;
     const errorCode = isDbError ? AUTH_ERROR_CODES.DATABASE_UNAVAILABLE : AUTH_ERROR_CODES.INTERNAL_SERVER_ERROR;
     const clientMessage = isDbError
-      ? "Veritabanı kayıt servisine şu an erişilemiyor. Lütfen biraz sonra tekrar deneyin."
+      ? "Veritabanı bağlantısı geçici olarak kurulamadı."
       : "Kayıt işlemi sırasında bir hata oluştu kanka. Lütfen tekrar dene.";
 
     return NextResponse.json(

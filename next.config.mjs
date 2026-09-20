@@ -6,6 +6,9 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ["msedge-tts", "nodemailer"],
+    outputFileTracingIncludes: {
+      "/api/**/*": ["./prisma/dev.db", "./prisma/schema.prisma"],
+    },
   },
   transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   webpack: (config) => {

@@ -11,13 +11,68 @@ export const IS_SERVERLESS = !!(
   process.env.NETLIFY
 );
 
+export function sanitizeEnvUrl(val?: string | null): string {
+  if (!val) return "";
+  let clean = val.trim();
+  if ((clean.startsWith('"') && clean.endsWith('"')) || (clean.startsWith("'") && clean.endsWith("'"))) {
+    clean = clean.slice(1, -1).trim();
+  }
+  return clean;
+}
+
+export function validateDatabaseConfig(): { valid: boolean; provider: string; error?: string } {
+  const rawUrl =
+    sanitizeEnvUrl(process.env.DATABASE_URL) ||
+    sanitizeEnvUrl(process.env.POSTGRES_PRISMA_URL) ||
+    sanitizeEnvUrl(process.env.POSTGRES_URL);
+
+  if (!rawUrl) {
+    if (IS_SERVERLESS) {
+      return {
+        valid: true,
+        provider: "sqlite",
+      };
+    }
+    return {
+      valid: true,
+      provider: "sqlite",
+    };
+  }
+
+  if (rawUrl.startsWith("postgresql://") || rawUrl.startsWith("postgres://")) {
+    try {
+      const parsed = new URL(rawUrl);
+      if (!parsed.hostname) {
+        return { valid: false, provider: "postgresql", error: "DATABASE_URL hostname missing" };
+      }
+      return { valid: true, provider: "postgresql" };
+    } catch {
+      return { valid: false, provider: "postgresql", error: "DATABASE_URL malformed" };
+    }
+  }
+
+  if (rawUrl.startsWith("mysql://")) {
+    return { valid: true, provider: "mysql" };
+  }
+
+  if (rawUrl.startsWith("file:")) {
+    return { valid: true, provider: "sqlite" };
+  }
+
+  return { valid: false, provider: "unknown", error: "DATABASE_URL protocol unsupported" };
+}
+
 /**
- * Resolves the SQLite database URL safely for both local development and
- * serverless environments (e.g. Vercel, AWS Lambda) where the execution root is read-only.
+ * Resolves the database URL safely for both local development and
+ * serverless environments (e.g. Vercel, AWS Lambda).
  */
 export function getSafeDatabaseUrl(): string {
-  // 1. If an explicit remote database URL is configured (Postgres, MySQL, LibSQL, Turso), use it directly.
-  const rawUrl = process.env.DATABASE_URL?.trim();
+  // 1. Check for remote connection strings (PostgreSQL / Neon / Supabase / Vercel Postgres)
+  const rawUrl =
+    sanitizeEnvUrl(process.env.DATABASE_URL) ||
+    sanitizeEnvUrl(process.env.POSTGRES_PRISMA_URL) ||
+    sanitizeEnvUrl(process.env.POSTGRES_URL);
+
   if (
     rawUrl &&
     (rawUrl.startsWith("postgresql://") ||
@@ -29,26 +84,30 @@ export function getSafeDatabaseUrl(): string {
     return rawUrl;
   }
 
-  // 2. In Serverless environments (Vercel Lambda), the deployment root is read-only (/var/task).
-  // SQLite write operations require a writable directory, which on Lambda is strictly /tmp.
+  // 2. In Serverless environments (Vercel Lambda), write operations require /tmp
   if (IS_SERVERLESS) {
     const tmpDbPath = "/tmp/dev.db";
 
     try {
       if (!fs.existsSync(tmpDbPath)) {
-        // Find existing seed database in project deployment bundle
         const candidateSourcePaths = [
           path.join(process.cwd(), "prisma", "dev.db"),
           path.resolve(__dirname, "../../prisma/dev.db"),
           path.resolve(__dirname, "../prisma/dev.db"),
           path.join(process.cwd(), "dev.db"),
+          path.resolve("/var/task/prisma/dev.db"),
+          path.resolve("/var/task/dev.db"),
         ];
 
         let foundSource: string | null = null;
         for (const candidate of candidateSourcePaths) {
-          if (fs.existsSync(candidate) && fs.statSync(candidate).size > 0) {
-            foundSource = candidate;
-            break;
+          try {
+            if (fs.existsSync(candidate) && fs.statSync(candidate).size > 0) {
+              foundSource = candidate;
+              break;
+            }
+          } catch {
+            // Ignore access errors on candidate probe
           }
         }
 
@@ -69,13 +128,12 @@ export function getSafeDatabaseUrl(): string {
   }
 
   // 3. In persistent / local development environments:
-  // The canonical database file is prisma/dev.db.
   const canonicalPrismaDb = path.resolve(process.cwd(), "prisma", "dev.db");
   if (fs.existsSync(canonicalPrismaDb) && fs.statSync(canonicalPrismaDb).size > 0) {
     return `file:${canonicalPrismaDb}`;
   }
 
-  // If rawUrl points to an existing non-empty file, use it
+  // If rawUrl points to an existing file, use it
   if (rawUrl && rawUrl.startsWith("file:")) {
     const cleanPath = rawUrl.replace(/^file:/, "");
     const resolvedPath = path.isAbsolute(cleanPath) ? cleanPath : path.resolve(process.cwd(), cleanPath);
@@ -84,6 +142,5 @@ export function getSafeDatabaseUrl(): string {
     }
   }
 
-  // Fallback: canonical prisma/dev.db
   return `file:${canonicalPrismaDb}`;
 }

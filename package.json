@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "postinstall": "prisma generate",
-    "build": "prisma generate && next build",
+    "postinstall": "node prisma/prepare-db.js && prisma generate",
+    "build": "node prisma/prepare-db.js && prisma generate && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
@@ -15,8 +15,8 @@
     "test:e2e": "tsx test/e2e-tests.ts",
     "validate:data": "tsx test/validate-data.ts",
     "verify": "npm run typecheck && npm run lint && npm run validate:data && npm run test:unit && npm run test:integration && npm run build",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push",
+    "prisma:generate": "node prisma/prepare-db.js && prisma generate",
+    "prisma:push": "node prisma/prepare-db.js && prisma db push",
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
