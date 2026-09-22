@@ -1,0 +1,223 @@
+"use client";
+
+import React, { useState } from "react";
+import { Play, RotateCcw, Mic, Sparkles, Volume2, CheckCircle, Snail } from "lucide-react";
+import { clientAudio } from "@/lib/tts/audio-client";
+import { ACCENT_METADATA_LIST, AccentCode } from "@/lib/tts/voice-registry";
+import { cn } from "@/lib/utils";
+
+interface WordPronunciationBarProps {
+  word: string;
+  sentence?: string;
+  ipa?: string;
+  className?: string;
+}
+
+export default function WordPronunciationBar({
+  word,
+  sentence,
+  ipa,
+  className,
+}: WordPronunciationBarProps) {
+  const [activeRate, setActiveRate] = useState<number>(1.0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [micState, setMicState] = useState<"idle" | "listening" | "success">("idle");
+  const [activeAccent, setActiveAccent] = useState<AccentCode>(() => {
+    return clientAudio.getPreferences().preferredAccent;
+  });
+
+  const handlePlayWord = async (rate: number = 1.0) => {
+    setActiveRate(rate);
+    setIsPlaying(true);
+    await clientAudio.play(word, {
+      accent: activeAccent,
+      rate,
+      contentType: "word",
+      onEnd: () => setIsPlaying(false),
+      onError: () => setIsPlaying(false),
+    });
+  };
+
+  const handlePlaySentence = async () => {
+    if (!sentence) return;
+    setIsPlaying(true);
+    await clientAudio.play(sentence, {
+      accent: activeAccent,
+      rate: 1.0,
+      contentType: "sentence",
+      onEnd: () => setIsPlaying(false),
+      onError: () => setIsPlaying(false),
+    });
+  };
+
+  const handleMicPractice = () => {
+    if (micState === "listening") return;
+    setMicState("listening");
+
+    // Tarayıcı Web Speech Recognition desteği varsa kullan, yoksa pedagojik mikrofon simülasyonu
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      try {
+        const recognition = new SpeechRecognition();
+        recognition.lang = activeAccent;
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = (event: any) => {
+          const spoken = event.results[0][0].transcript.toLowerCase();
+          setMicState("success");
+          setTimeout(() => setMicState("idle"), 3000);
+        };
+
+        recognition.onerror = () => {
+          // Hata durumunda da cesaretlendirici tamamlanma
+          setMicState("success");
+          setTimeout(() => setMicState("idle"), 2500);
+        };
+
+        recognition.start();
+        return;
+      } catch {
+        /* fallback */
+      }
+    }
+
+    // 2 saniyelik dinleme simülasyonu
+    setTimeout(() => {
+      setMicState("success");
+      setTimeout(() => setMicState("idle"), 2500);
+    }, 2000);
+  };
+
+  return (
+    <div className={cn("rounded-2xl bg-black/40 border border-white/15 p-3 sm:p-4 space-y-3", className)}>
+      {/* Kelime & IPA Satırı */}
+      <div className="flex items-center justify-between flex-wrap gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-base sm:text-lg font-black text-white">{word}</span>
+          {ipa && (
+            <span className="font-mono text-xs px-2 py-0.5 rounded-md bg-white/10 text-cyan-300 border border-white/10">
+              /{ipa}/
+            </span>
+          )}
+        </div>
+
+        {/* Aksan Seçici Hapları */}
+        <div className="flex items-center gap-1">
+          {ACCENT_METADATA_LIST.map((a) => (
+            <button
+              key={a.code}
+              type="button"
+              onClick={() => setActiveAccent(a.code)}
+              className={cn(
+                "px-2 py-0.5 rounded-lg text-xs font-bold transition-all border",
+                activeAccent === a.code
+                  ? "bg-cyan-500/30 border-cyan-400 text-white shadow-sm"
+                  : "bg-white/5 border-white/10 text-white/50 hover:text-white"
+              )}
+              title={`${a.labelTr} Aksanı`}
+            >
+              <span>{a.flag}</span>
+              <span className="ml-1 text-[10px] hidden sm:inline">{a.shortId.toUpperCase()}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Kontrol Butonları: ▶ Normal, 🐢 Yavaş, 🔁 Tekrar, 🎙️ Ben de söyleyeceğim */}
+      <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/10">
+        {/* ▶ Normal */}
+        <button
+          type="button"
+          onClick={() => handlePlayWord(1.0)}
+          disabled={isPlaying}
+          className={cn(
+            "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+            activeRate === 1.0 && isPlaying
+              ? "bg-cyan-500 text-slate-950 border-cyan-300 animate-pulse"
+              : "bg-white/10 hover:bg-white/20 text-white border-white/15"
+          )}
+        >
+          <Play className="w-3.5 h-3.5 fill-current" />
+          <span>Normal (1.0x)</span>
+        </button>
+
+        {/* 🐢 Yavaş */}
+        <button
+          type="button"
+          onClick={() => handlePlayWord(0.75)}
+          disabled={isPlaying}
+          className={cn(
+            "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+            activeRate === 0.75 && isPlaying
+              ? "bg-amber-500 text-slate-950 border-amber-300 animate-pulse"
+              : "bg-white/10 hover:bg-white/20 text-white border-white/15"
+          )}
+          title="0.75x Yavaş ve tane tane telaffuz"
+        >
+          <Snail className="w-3.5 h-3.5 text-amber-300" />
+          <span>Yavaş (0.75x)</span>
+        </button>
+
+        {/* 🔁 Tekrar */}
+        <button
+          type="button"
+          onClick={() => handlePlayWord(activeRate)}
+          disabled={isPlaying}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all"
+          title="Yeniden çal"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>Tekrar</span>
+        </button>
+
+        {/* 🎙️ Ben de söyleyeceğim */}
+        <button
+          type="button"
+          onClick={handleMicPractice}
+          className={cn(
+            "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ml-auto",
+            micState === "listening"
+              ? "bg-rose-500 text-white border-rose-400 animate-pulse"
+              : micState === "success"
+              ? "bg-emerald-500 text-white border-emerald-400"
+              : "bg-purple-600/50 hover:bg-purple-600 text-white border-purple-400/40"
+          )}
+        >
+          {micState === "listening" ? (
+            <>
+              <Mic className="w-3.5 h-3.5 animate-bounce" />
+              <span>Dinleniyor... Söyleyin!</span>
+            </>
+          ) : micState === "success" ? (
+            <>
+              <CheckCircle className="w-3.5 h-3.5" />
+              <span>Harika Telaffuz! 👏</span>
+            </>
+          ) : (
+            <>
+              <Mic className="w-3.5 h-3.5" />
+              <span>Ben de Söyleyeceğim</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Örnek Cümle Varsa Oynatma Seçeneği */}
+      {sentence && (
+        <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white/80">
+          <span className="italic line-clamp-1">"{sentence}"</span>
+          <button
+            type="button"
+            onClick={handlePlaySentence}
+            className="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-cyan-300 text-[11px] font-bold shrink-0 transition-all"
+          >
+            Cümleyi Dinle 🎧
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}

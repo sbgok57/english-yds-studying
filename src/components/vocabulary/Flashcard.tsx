@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Info, RotateCcw, Check, X, Sparkles, Volume2 } from "lucide-react";
 import TTSPlayer, { ACCENT_OPTIONS, type AccentCode, type GenderCode } from "@/components/tts/TTSPlayer";
 import Word3DScene from "./Word3DScene";
+import WordPronunciationBar from "./WordPronunciationBar";
+import { clientAudio } from "@/lib/tts/audio-client";
 import { cn } from "@/lib/utils";
 
 export interface WordCardData {
@@ -50,6 +52,11 @@ export default function Flashcard({
   const [gender, setGender] = useState<GenderCode>("female");
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [feedbackType, setFeedbackType] = useState<"correct" | "wrong" | null>(null);
+
+  useEffect(() => {
+    clientAudio.stopAll();
+    setFlipped(false);
+  }, [word.id]);
 
   const examplesList = Array.isArray(word.examples)
     ? word.examples
@@ -135,6 +142,7 @@ export default function Flashcard({
       {mode === "3d" ? (
         <div className="space-y-4">
           <Word3DScene english={word.english} turkish={word.turkish} />
+          <WordPronunciationBar word={word.english} sentence={examplesList[0]} />
           <div className="flex justify-center gap-3">
             <button
               onClick={handleKnowClick}

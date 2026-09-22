@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { PASSAGES } from "@/lib/data-reading";
 import ReadingQuiz from "@/components/ReadingQuiz";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import AcademicAudioPlayer from "@/components/reading/AcademicAudioPlayer";
+import { cn } from "@/lib/utils";
 
 function HighlightedText({
   text,
@@ -57,6 +59,7 @@ export default function ReadingPage() {
   const [pid, setPid] = useState(0);
   const [revealed, setRevealed] = useState<Record<number, boolean>>({});
   const [mode, setMode] = useState<"read" | "quiz">("read");
+  const [activeParagraph, setActiveParagraph] = useState(0);
 
   const passage = PASSAGES[pid] || PASSAGES[0];
 
@@ -106,6 +109,7 @@ export default function ReadingPage() {
                 key={p.id}
                 onClick={() => {
                   setPid(i);
+                  setActiveParagraph(0);
                   setRevealed({});
                 }}
                 className={`px-4 py-2 rounded-full text-sm font-bold border transition-all ${
@@ -131,9 +135,30 @@ export default function ReadingPage() {
                   {passage.topic}
                 </span>
               </div>
+
+              {/* Bilimsel/Akademik Metin Ses Oynatıcısı */}
+              <AcademicAudioPlayer
+                title={passage.title}
+                paragraphs={passage.paragraphs}
+                activeParagraph={activeParagraph}
+                onParagraphSelect={setActiveParagraph}
+                className="mb-6"
+              />
+
               <div className="space-y-4">
                 {passage.paragraphs.map((p, i) => (
-                  <HighlightedText key={i} text={p} glossary={passage.glossary} />
+                  <div
+                    key={i}
+                    onClick={() => setActiveParagraph(i)}
+                    className={cn(
+                      "p-3 rounded-2xl transition-all cursor-pointer",
+                      activeParagraph === i
+                        ? "bg-blue-500/10 border border-blue-400/40 shadow-sm"
+                        : "border border-transparent hover:bg-white/[0.02]"
+                    )}
+                  >
+                    <HighlightedText text={p} glossary={passage.glossary} />
+                  </div>
                 ))}
               </div>
 

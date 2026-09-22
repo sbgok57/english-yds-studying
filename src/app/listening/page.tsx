@@ -42,13 +42,13 @@ export default function ListeningPage() {
       <div className="rounded-3xl p-8 bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-950 border-2 border-blue-500/30 shadow-2xl space-y-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-xs font-bold text-blue-300">
           <Headphones className="w-4 h-4" />
-          <span>Multi-Accent TTS • 10 Ses Seçeneği</span>
+          <span>Multi-Accent TTS • 12 Doğal Neural Ses Seçeneği</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-black text-white">
           YDS Dinleme & Çoklu Aksan Laboratuvarı
         </h1>
         <p className="text-xs md:text-sm text-white/70">
-          5 farklı İngilizce aksanı (İngiliz, Amerikan, Avustralya, Yeni Zelanda, Hint) ve hız kontrolleriyle kulak aşinalığı kazanın.
+          6 farklı İngilizce aksanı (İngiliz, Amerikan, Kanada, Avustralya, Yeni Zelanda, Hint) ve stüdyo kalitesinde kadın/erkek neural sesleriyle kulak aşinalığı kazanın.
         </p>
       </div>
 
@@ -58,7 +58,7 @@ export default function ListeningPage() {
           {/* Aksan Seçimi */}
           <div>
             <label className="text-xs font-mono text-cyan-300 uppercase tracking-widest block font-bold mb-2">
-              Aksan Seçimi
+              Aksan Seçimi (6 Aksan)
             </label>
             <div className="flex gap-1.5 flex-wrap">
               {ACCENT_OPTIONS.map((a) => (
@@ -79,34 +79,58 @@ export default function ListeningPage() {
             </div>
           </div>
 
-          {/* Cinsiyet */}
-          <div>
-            <label className="text-xs font-mono text-pink-300 uppercase tracking-widest block font-bold mb-2">
-              Seslendirici
-            </label>
-            <div className="flex gap-1.5">
-              <button
-                onClick={() => setGender("female")}
-                className={cn(
-                  "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
-                  gender === "female"
-                    ? "bg-pink-600 text-white border-pink-400 shadow scale-105"
-                    : "bg-white/5 border-white/10 text-white/70 hover:bg-white/15"
-                )}
-              >
-                👩 Kadın
-              </button>
-              <button
-                onClick={() => setGender("male")}
-                className={cn(
-                  "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
-                  gender === "male"
-                    ? "bg-indigo-600 text-white border-indigo-400 shadow scale-105"
-                    : "bg-white/5 border-white/10 text-white/70 hover:bg-white/15"
-                )}
-              >
-                👨 Erkek
-              </button>
+          {/* Cinsiyet ve Hız Seçimi */}
+          <div className="flex items-center gap-4 flex-wrap">
+            <div>
+              <label className="text-xs font-mono text-pink-300 uppercase tracking-widest block font-bold mb-2">
+                Seslendirici
+              </label>
+              <div className="flex gap-1.5">
+                <button
+                  onClick={() => setGender("female")}
+                  className={cn(
+                    "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+                    gender === "female"
+                      ? "bg-pink-600 text-white border-pink-400 shadow scale-105"
+                      : "bg-white/5 border-white/10 text-white/70 hover:bg-white/15"
+                  )}
+                >
+                  👩 Kadın
+                </button>
+                <button
+                  onClick={() => setGender("male")}
+                  className={cn(
+                    "px-3 py-1.5 rounded-xl text-xs font-bold transition-all border",
+                    gender === "male"
+                      ? "bg-indigo-600 text-white border-indigo-400 shadow scale-105"
+                      : "bg-white/5 border-white/10 text-white/70 hover:bg-white/15"
+                  )}
+                >
+                  👨 Erkek
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-mono text-cyan-300 uppercase tracking-widest block font-bold mb-2">
+                Hız
+              </label>
+              <div className="flex gap-1 bg-black/40 border border-white/10 rounded-xl p-1 text-xs">
+                {[0.75, 0.9, 1.0, 1.1, 1.25].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setSpeed(s)}
+                    className={cn(
+                      "px-2 py-0.5 rounded-lg text-xs font-mono transition-all",
+                      Math.abs(speed - s) < 0.01
+                        ? "bg-cyan-500 text-white font-bold shadow"
+                        : "text-white/60 hover:text-white"
+                    )}
+                  >
+                    {s}x
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -114,13 +138,20 @@ export default function ListeningPage() {
         {/* Oynatıcı Çubuğu */}
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-black/40 border border-white/15">
           <div className="flex items-center gap-3">
-            <TTSPlayer text={listeningAudioText} accent={accent} gender={gender} size="lg" />
+            <TTSPlayer
+              text={listeningAudioText}
+              accent={accent}
+              gender={gender}
+              speed={speed}
+              contentType="long-form"
+              size="lg"
+            />
             <div>
               <span className="text-sm font-bold text-white block">
                 The Industrial Revolution and Urban Shift
               </span>
-              <span className="text-xs text-white/60">
-                Aksan: {accent} • {gender === "female" ? "Kadın Sesi" : "Erkek Sesi"}
+              <span className="text-xs text-emerald-400 font-medium">
+                Doğal Neural Ses • {accent} ({gender === "female" ? "Kadın" : "Erkek"}) • {speed}x Hız
               </span>
             </div>
           </div>

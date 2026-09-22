@@ -3,7 +3,7 @@
 //   → her aksan için hem kadın hem erkek GERÇEK ve FARKLI 10 ses.
 // YEDEK: cihazın kendi Web Speech sesleri (çevrimdışı). Cihazda tam o
 //   aksan/cinsiyet sesi yoksa en yakın sese düşer ve kullanıcıya bildirilir.
-export type AccentId = "uk" | "us" | "au" | "nz" | "in";
+export type AccentId = "uk" | "us" | "ca" | "au" | "nz" | "in";
 export type Gender = "female" | "male";
 
 export interface Accent {
@@ -26,11 +26,12 @@ const GENDER_WORDS: Record<Gender, string[]> = {
     "allison", "michelle", "ava", "emma", "olivia", "victoria", "natasha",
     "karen", "catherine", "hayley", "veena", "heera", "neerja", "sonia",
     "libby", "hazel", "susan", "serena", "kate", "fiona", "molly", "tessa",
+    "clara",
   ],
   male: [
     "male", "man", "boy", "daniel", "alex", "fred", "david", "mark",
     "guy", "ryan", "george", "james", "thomas", "rishi", "ravi", "prabhat",
-    "william", "mitchell", "oliver", "harry", "eric", "lee",
+    "william", "mitchell", "oliver", "harry", "eric", "lee", "liam",
   ],
 };
 
@@ -64,6 +65,20 @@ export const ACCENTS: Accent[] = [
     edgeVoice: { female: "en-US-JennyNeural", male: "en-US-GuyNeural" },
   },
   {
+    id: "ca",
+    label: "Kanada",
+    flag: "🇨🇦",
+    lang: "en-CA",
+    langPrefixes: ["en-ca", "en_ca"],
+    youglish: "us",
+    keywords: ["canadian", "google ca", "clara", "liam"],
+    names: {
+      female: ["canadian female", "clara", "linda", "heather"],
+      male: ["canadian male", "liam"],
+    },
+    edgeVoice: { female: "en-CA-ClaraNeural", male: "en-CA-LiamNeural" },
+  },
+  {
     id: "au",
     label: "Avustralya",
     flag: "🇦🇺",
@@ -75,7 +90,7 @@ export const ACCENTS: Accent[] = [
       female: ["australian female", "natasha", "karen", "catherine", "hayley"],
       male: ["australian male", "james", "william"],
     },
-    edgeVoice: { female: "en-AU-NatashaNeural", male: "en-AU-WilliamNeural" },
+    edgeVoice: { female: "en-AU-NatashaNeural", male: "en-AU-WilliamMultilingualNeural" },
   },
   {
     id: "nz",
@@ -194,8 +209,8 @@ function speakLocal(text: string, a: Accent, gender: Gender, onInfo?: (m: string
   const u = new SpeechSynthesisUtterance(text);
   if (voice) u.voice = voice;
   u.lang = a.lang;
-  u.rate = 0.85;
-  u.pitch = gender === "female" ? 1.05 : 0.95;
+  u.rate = 1.0; // Doğal konuşma hızı
+  u.pitch = 1.0; // SAFETY: Asla robotikleştirici pitch modifikasyonu yapma
 
   activeSpeechUtterance = u;
   u.onend = () => {
@@ -217,7 +232,7 @@ function speakLocal(text: string, a: Accent, gender: Gender, onInfo?: (m: string
   const voiceName = voice ? voice.name : `varsayılan (${a.lang})`;
   onInfo?.(
     exactMatch
-      ? `Cihaz sesi: ${voiceName} (${a.label} · ${genderLabel})`
+      ? `Geçici Tarayıcı Sesi: ${voiceName} (${a.label} · ${genderLabel})`
       : `Cihazında ${a.label} ${genderLabel.toLowerCase()} sesi yok; en yakın ses: ${voiceName}. Gerçek aksan için 🎧 linki.`
   );
 }
@@ -259,9 +274,9 @@ export function speakWithAccent(
 
   stopSpeaking();
 
-  const edgeUrl = `/api/tts?voice=${encodeURIComponent(voice)}&text=${encodeURIComponent(text)}`;
+  const edgeUrl = `/api/tts?voice=${encodeURIComponent(voice)}&text=${encodeURIComponent(text)}&contentType=word`;
 
-  // Garantili ses (bulut) — başarısız olursa yerel yedeğe düş
+  // Garantili ses (bulut neural) — başarısız olursa yerel yedeğe düş
   try {
     const audio = new Audio(edgeUrl);
     currentAudio = audio;
@@ -269,7 +284,7 @@ export function speakWithAccent(
     if (started && typeof started.catch === "function") {
       started
         .then(() => {
-          onInfo?.(`🎙️ ${a.label} · ${genderLabel} (gerçek neural ses: ${voice})`);
+          onInfo?.(`Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`);
         })
         .catch(() => {
           speakLocal(text, a, gender, onInfo);
@@ -277,7 +292,7 @@ export function speakWithAccent(
     }
     // play() promise dönmediyse (eski tarayıcı) sorun yok, çalıyor demektir
     else {
-      onInfo?.(`🎙️ ${a.label} · ${genderLabel} (gerçek neural ses: ${voice})`);
+      onInfo?.(`Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`);
     }
     return { ok: true, info: "yükleniyor…", exactMatch: true, voiceName: voice };
   } catch {

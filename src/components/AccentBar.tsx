@@ -12,7 +12,7 @@ import {
   type Gender,
 } from "@/lib/accents";
 
-/** 5 aksan × (Kadın/Erkek) = 10 telaffuz seçeneği + gerçek aksan (Youglish) linki. */
+/** 6 aksan × (Kadın/Erkek) = 12 doğal telaffuz seçeneği + Youglish linki. */
 export default function AccentBar({ text }: { text: string }) {
   const [accent, setAccent] = useState<AccentId>(() => getStoredAccent());
   const [gender, setGender] = useState<Gender>(() => getStoredGender());

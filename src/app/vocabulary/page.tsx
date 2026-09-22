@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Search, Sparkles, Layers, RefreshCw, AlertCircle, Volume2, Image as ImageIcon } from "lucide-react";
 import TTSPlayer from "@/components/tts/TTSPlayer";
+import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import { cn } from "@/lib/utils";
 
 interface WordItem {
@@ -52,6 +53,7 @@ export default function VocabularyPage() {
   const [selectedType, setSelectedType] = useState("Hepsi");
   const [loading, setLoading] = useState(true);
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
+  const [showVoicePicker, setShowVoicePicker] = useState(false);
 
   const fetchWords = useCallback(async () => {
     setLoading(true);
@@ -113,11 +115,17 @@ export default function VocabularyPage() {
             </span>
           </div>
           <p className="text-xs md:text-sm text-white/70 mt-1">
-            Seviye ve tür bazlı filtrelenebilir, 10 sesli telaffuz destekli görsel hafıza kelime havuzu
+            Seviye ve tür bazlı filtrelenebilir, 12 sesli çoklu aksan telaffuz destekli görsel hafıza kelime havuzu
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <button
+            onClick={() => setShowVoicePicker(!showVoicePicker)}
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-500/30 font-bold text-xs transition-all"
+          >
+            🎙️ Aksan & Ses Ayarları
+          </button>
           <button
             onClick={() => fetchWords()}
             className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all"
@@ -133,6 +141,11 @@ export default function VocabularyPage() {
           </Link>
         </div>
       </div>
+
+      {/* Aksan ve Ses Ayarları Paneli */}
+      {showVoicePicker && (
+        <AccentVoicePicker className="mb-6 animate-in fade-in slide-in-from-top-4 duration-300" />
+      )}
 
       {/* Uyarı Bandı (Gerekirse) */}
       {errorNotice && (
