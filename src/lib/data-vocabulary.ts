@@ -3668,7 +3668,7 @@ export const WORDS: VocabWord[] = [
     "type": "v.",
     "tr": "engellemek, önlemek",
     "hint": "Eşdizim: prevent in practice, academic prevent",
-    "example": "Eating healthfully can help prevent heart disease.gecikmek, ertelemek",
+    "example": "Eating healthfully can help prevent heart disease.",
     "exampleTr": "Örnek: \"engellemek\" anlamında sınav bağlamında kurulan cümle.",
     "id": 333,
     "category": "YDS-Çekirdek",
@@ -3677,10 +3677,10 @@ export const WORDS: VocabWord[] = [
   {
     "word": "delay",
     "type": "n.",
-    "tr": "",
+    "tr": "gecikmek, ertelemek, gecikme",
     "hint": "Eşdizim: delay in practice, academic delay",
     "example": "Heavy storm delayed the start of the game.",
-    "exampleTr": "Örnek: \"\" anlamında sınav bağlamında kurulan cümle.",
+    "exampleTr": "Şiddetli fırtına maçın başlamasını geciktirdi.",
     "id": 334,
     "category": "YDS-Çekirdek",
     "emoji": "📦"
