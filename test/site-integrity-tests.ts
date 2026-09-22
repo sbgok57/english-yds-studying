@@ -8,6 +8,11 @@ import { LEVEL_TEST_QUESTIONS } from "../src/lib/data-level-test";
 import { GRAMMAR_TOPICS } from "../src/lib/data-grammar";
 import { TACTICS } from "../src/lib/data-tactics";
 import { PRESET_STUDY_PLANS } from "../src/lib/data-study-plans";
+import {
+  MOTIVATION_VIDEOS,
+  MOTIVATION_VIDEOS_COUNT,
+  MOTIVATION_VIDEO_CATEGORIES,
+} from "../src/lib/data-motivation-videos";
 
 let passed = 0;
 
@@ -181,6 +186,39 @@ test("All preset study plans have valid duration, target levels, and daily tasks
   }
 });
 
+// 9. Curated Motivation Videos Library (> 100 Clips)
+console.log("\n9. Curated Motivation Videos Library Specification...");
+test("Motivation videos library contains over 100 clips (> 100) with complete metadata", () => {
+  assert(MOTIVATION_VIDEOS && Array.isArray(MOTIVATION_VIDEOS), "MOTIVATION_VIDEOS must be an array");
+  assert(MOTIVATION_VIDEOS_COUNT > 100, `Expected > 100 motivation videos, found ${MOTIVATION_VIDEOS_COUNT}`);
+  assert.strictEqual(MOTIVATION_VIDEOS.length, MOTIVATION_VIDEOS_COUNT, "Length must match MOTIVATION_VIDEOS_COUNT");
+  assert.strictEqual(MOTIVATION_VIDEOS_COUNT, 112, "Curated motivation library must have exactly 112 clips");
+  assert.strictEqual(MOTIVATION_VIDEO_CATEGORIES.length, 8, "Must have 8 unique categories");
+
+  const clipIds = new Set<string>();
+  const validCategories = new Set(MOTIVATION_VIDEO_CATEGORIES.map((c) => c.id));
+
+  for (let i = 0; i < MOTIVATION_VIDEOS.length; i++) {
+    const v = MOTIVATION_VIDEOS[i];
+    assert(v.id && v.id.length > 0, `Clip at index ${i} missing id`);
+    assert(!clipIds.has(v.id), `Duplicate clip id ${v.id}`);
+    clipIds.add(v.id);
+
+    assert.strictEqual(v.provider, "youtube", `Clip ${v.id} provider must be youtube`);
+    assert(v.videoId && v.videoId.trim().length > 0, `Clip ${v.id} missing videoId`);
+    assert(v.title && v.title.trim().length > 0, `Clip ${v.id} missing title`);
+    assert(v.creator && v.creator.trim().length > 0, `Clip ${v.id} missing creator`);
+    assert(validCategories.has(v.category), `Clip ${v.id} has invalid category '${v.category}'`);
+    assert(v.categoryLabelTr && v.categoryLabelTr.length > 0, `Clip ${v.id} missing categoryLabelTr`);
+    assert(v.categoryEmoji && v.categoryEmoji.length > 0, `Clip ${v.id} missing categoryEmoji`);
+    assert.strictEqual(v.embedAllowed, true, `Clip ${v.id} embedAllowed must be true`);
+    assert(v.externalUrl.startsWith("https://www.youtube.com/watch?v="), `Clip ${v.id} invalid externalUrl`);
+    assert(v.keyQuoteTr && v.keyQuoteTr.trim().length > 0, `Clip ${v.id} missing keyQuoteTr`);
+    assert(v.durationApprox && v.durationApprox.trim().length > 0, `Clip ${v.id} missing durationApprox`);
+  }
+});
+
 console.log("\n========================================================");
 console.log(`🎉 ALL ${passed} SITE INTEGRITY TESTS PASSED WITH 100% SUCCESS!`);
 console.log("========================================================\n");
+
