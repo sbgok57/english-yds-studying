@@ -8,6 +8,7 @@ export interface ReadingPassage {
   level: string;
   topic: string;
   paragraphs: string[];
+  content?: string;
   glossary: { word: string; tr: string }[];
   questions: { q: string; a: string }[];
 }
@@ -164,8 +165,102 @@ export const PASSAGES: ReadingPassage[] = [
         a: "To strike an equitable balance between technological innovation, privacy protection, and fair access."
       }
     ]
+  },
+  {
+    id: "quantum-computing-cryptography",
+    emoji: "⚛️",
+    title: "Quantum Supremacy and the Future of Cryptography",
+    level: "C1 - İleri YDS",
+    topic: "Kuantum Fiziği & Kriptografi",
+    paragraphs: [
+      "The realization of fault-tolerant quantum computing represents an existential paradigm shift for global telecommunications and financial infrastructure. Unlike classical computers governed by binary digits that exist strictly as zeros or ones, quantum processors exploit the enigmatic principles of superposition and entanglement through quantum bits, or qubits.",
+      "This fundamental computational leverage enables algorithms, notably Shor's algorithm, to factor gargantuan composite integers in polynomial time. Consequently, the asymmetric public-key cryptographic protocols that secure the global internet—such as RSA and elliptic-curve cryptography—are rendered theoretically obsolete against a sufficiently coherent quantum adversary.",
+      "In response, the international cryptology community is urgently standardizing post-quantum lattice-based cryptographic algorithms to fortify sensitive state secrets and private communications before practical quantum advantage matures."
+    ],
+    glossary: [
+      { word: "fault-tolerant", tr: "hataya dayanıklı" },
+      { word: "existential", tr: "varoluşsal, hayati" },
+      { word: "enigmatic", tr: "gizemli, anlaşılması güç" },
+      { word: "superposition", tr: "üst üste binme, süperpozisyon" },
+      { word: "entanglement", tr: "dolanıklık (kuantum)" },
+      { word: "gargantuan", tr: "devasa, muazzam" },
+      { word: "asymmetric", tr: "asimetrik, simetrik olmayan" },
+      { word: "coherent", tr: "eşevreli, uyumlu" },
+      { word: "fortify", tr: "güçlendirmek, tahkim etmek" },
+      { word: "advantage", tr: "üstünlük, avantaj" }
+    ],
+    questions: [
+      {
+        q: "What fundamental quantum phenomena distinguish quantum computing from binary computing?",
+        a: "Superposition and quantum entanglement allow qubits to process vast multi-state computations simultaneously."
+      },
+      {
+        q: "Why does Shor's algorithm pose an existential threat to current internet security protocols?",
+        a: "It can factor large composite numbers in polynomial time, dismantling RSA and elliptic-curve cryptography."
+      },
+      {
+        q: "What defensive measure is being coordinated internationally against future quantum computers?",
+        a: "The urgent standardization and implementation of post-quantum lattice-based cryptographic algorithms."
+      }
+    ]
+  },
+  {
+    id: "microplastics-marine-bioaccumulation",
+    emoji: "🐟",
+    title: "Microplastics and Bioaccumulation in Aquatic Ecosystems",
+    level: "B2 - YDS Düzeyi",
+    topic: "Çevre Biyolojisi & Ekotoksikoloji",
+    paragraphs: [
+      "Microplastics—synthetic polymer particles measuring less than five millimeters across—have permeated virtually every marine habitat on Earth, from sunlit coastal estuaries to abyssal trenches. Resulting from the progressive mechanical and photodegradative breakdown of mismanaged synthetic debris, these ubiquitous contaminants represent an acute environmental hazard.",
+      "Due to their microscopic proportions, microplastics are readily ingested by primary trophic consumers such as zooplankton and small pelagic organisms. Once consumed, the particles resist enzymatic digestion, accumulating inside digestive tracts and translocating into circulatory systems, while concurrently desorbing toxic plasticizers and heavy metals into biological tissue.",
+      "As smaller organisms are predated by apex predators, contaminant concentrations amplify up the marine food web through biomagnification, ultimately threatening global seafood safety and biodiversity."
+    ],
+    glossary: [
+      { word: "permeated", tr: "nüfuz etti, yayıldı" },
+      { word: "estuaries", tr: "nehir ağızları, haliçler" },
+      { word: "photodegradative", tr: "ışıkla bozunmaya dayalı" },
+      { word: "ubiquitous", tr: "her yerde bulunan, yaygın" },
+      { word: "acute", tr: "şiddetli, akut, kritik" },
+      { word: "ingested", tr: "yutulmuş, sindirilmiş" },
+      { word: "trophic", tr: "beslenme ile ilgili" },
+      { word: "enzymatic", tr: "enzimatik" },
+      { word: "translocating", tr: "yer değiştirerek yayılma" },
+      { word: "biomagnification", tr: "biyobirikim, besin zincirinde zehir artışı" }
+    ],
+    questions: [
+      {
+        q: "How are environmental microplastics predominantly generated in marine settings?",
+        a: "Through the mechanical and photodegradative breakdown of improperly managed synthetic plastic debris."
+      },
+      {
+        q: "What physiological threat do microplastics pose after ingestion by primary consumers?",
+        a: "They accumulate in digestive tracts, translocate into circulatory systems, and release hazardous chemicals into tissue."
+      },
+      {
+        q: "How do toxic contaminants eventually reach apex marine predators and human seafood consumers?",
+        a: "Contaminant concentrations exponentially amplify across trophic levels through the process of biomagnification."
+      }
+    ]
   }
 ];
+
+// Ensure every passage has content populated for full backwards-compatibility
+PASSAGES.forEach((p) => {
+  if (!p.content && p.paragraphs) {
+    p.content = p.paragraphs.join("\n\n");
+  }
+});
+
+// Backward-compatible alias
+export const READING_PASSAGES: ReadingPassage[] = PASSAGES;
+
+export function getReadingPassages(): ReadingPassage[] {
+  return PASSAGES;
+}
+
+export function getReadingPassageById(id: string): ReadingPassage | undefined {
+  return PASSAGES.find((p) => p.id === id);
+}
 
 
 // YDS soru bankası — PASAJLAR (cloze + reading soruları)

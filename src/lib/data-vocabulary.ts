@@ -5,6 +5,7 @@ export interface VocabWord {
   category: string;
   emoji: string;
   tr: string;
+  meaning?: string;
   hint: string;
   example: string;
   exampleTr: string;
@@ -4808,3 +4809,21 @@ export const WORDS: VocabWord[] = [
     "emoji": "⚡"
   }
 ];
+
+// Ensure meaning is populated on all items for backwards-compatibility
+WORDS.forEach((w) => {
+  if (!w.meaning) {
+    w.meaning = w.tr;
+  }
+});
+
+// Backward-compatible alias
+export const VOCABULARY: VocabWord[] = WORDS;
+
+export function getVocabularyWords(): VocabWord[] {
+  return WORDS;
+}
+
+export function getWordById(id: number): VocabWord | undefined {
+  return WORDS.find((w) => w.id === id);
+}

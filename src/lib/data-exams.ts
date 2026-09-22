@@ -49,6 +49,7 @@ export interface ExamQuestion {
   stem: string;
   options: string[];
   answer: number;
+  correctAnswer: number;
   explanation?: string;
   passage?: string;
   passageTitle?: string;
@@ -106,6 +107,7 @@ function toExamQuestion(q: BankQ, n: number): ExamQuestion {
     stem: q.s,
     options: q.o,
     answer: q.a,
+    correctAnswer: q.a,
     explanation: q.ex,
     passage: q.p,
     passageTitle: q.pt,
@@ -242,3 +244,4 @@ export const MAIN_EXAM_QUESTIONS = getExamQuestions(MAIN_EXAM_ID);
 // Geriye dönük uyumluluk takma adları
 export const SAMPLE_EXAM_META = MAIN_EXAM_META;
 export const SAMPLE_EXAM_QUESTIONS = MAIN_EXAM_QUESTIONS;
+export const EXAMS = getPracticeExamIds();
