@@ -1,4 +1,5 @@
 // Çoklu aksan + cinsiyet desteği.
+import { clientAudio } from "./tts/audio-client";
 // ÖNCE garantili ses: Microsoft Edge neural TTS (sunucu /api/tts üzerinden)
 //   → her aksan için hem kadın hem erkek GERÇEK ve FARKLI 10 ses.
 // YEDEK: cihazın kendi Web Speech sesleri (çevrimdışı). Cihazda tam o
@@ -179,20 +180,13 @@ function findLocalVoice(a: Accent, gender: Gender): SpeechSynthesisVoice | undef
 let currentAudio: HTMLAudioElement | null = null;
 
 export function stopSpeaking() {
+  clientAudio.stopAll();
   try {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
   } catch {
     /* boş */
-  }
-  if (currentAudio) {
-    try {
-      currentAudio.pause();
-    } catch {
-      /* boş */
-    }
-    currentAudio = null;
   }
 }
 
@@ -274,31 +268,20 @@ export function speakWithAccent(
 
   stopSpeaking();
 
-  const edgeUrl = `/api/tts?voice=${encodeURIComponent(voice)}&text=${encodeURIComponent(text)}&contentType=word`;
+  clientAudio
+    .play(text, {
+      voiceId: voice,
+      contentType: "word",
+      onInfo: (info) => onInfo?.(info),
+      onError: () => {
+        speakLocal(text, a, gender, onInfo);
+      },
+    })
+    .catch(() => {
+      speakLocal(text, a, gender, onInfo);
+    });
 
-  // Garantili ses (bulut neural) — başarısız olursa yerel yedeğe düş
-  try {
-    const audio = new Audio(edgeUrl);
-    currentAudio = audio;
-    const started = audio.play();
-    if (started && typeof started.catch === "function") {
-      started
-        .then(() => {
-          onInfo?.(`Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`);
-        })
-        .catch(() => {
-          speakLocal(text, a, gender, onInfo);
-        });
-    }
-    // play() promise dönmediyse (eski tarayıcı) sorun yok, çalıyor demektir
-    else {
-      onInfo?.(`Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`);
-    }
-    return { ok: true, info: "yükleniyor…", exactMatch: true, voiceName: voice };
-  } catch {
-    speakLocal(text, a, gender, onInfo);
-    return { ok: false, info: "yerel sese düşüldü", exactMatch: false, voiceName: "" };
-  }
+  return { ok: true, info: `Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`, exactMatch: true, voiceName: voice };
 }
 
 export function youglishUrl(word: string, id: AccentId): string {

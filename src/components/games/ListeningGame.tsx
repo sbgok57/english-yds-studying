@@ -4,6 +4,7 @@ import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
 import AccentBar from "@/components/AccentBar";
 import { getStoredAccent, speakWithAccent } from "@/lib/accents";
+import { clientAudio } from "@/lib/tts/audio-client";
 
 function shuffle<T>(a: T[]): T[] {
   const r = [...a];
@@ -37,15 +38,12 @@ export default function ListeningGame() {
     return shuffle([word.tr, ...distract]);
   }, [word]);
 
-  const speak = (text: string) => {
+  const speak = async (text: string) => {
     try {
-      if (!("speechSynthesis" in window)) {
-        setTtsOk(false);
-        return;
-      }
-      speakWithAccent(text, getStoredAccent(), (info) => {
-        if (info.includes("desteklemiyor")) setTtsOk(false);
+      await clientAudio.play(text, {
+        contentType: "word",
       });
+      setTtsOk(true);
     } catch {
       setTtsOk(false);
     }
@@ -59,11 +57,7 @@ export default function ListeningGame() {
     const t = window.setTimeout(() => speak(word.word), 400);
     return () => {
       window.clearTimeout(t);
-      try {
-        window.speechSynthesis?.cancel();
-      } catch {
-        /* boş */
-      }
+      clientAudio.stopAll();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [round, done]);
