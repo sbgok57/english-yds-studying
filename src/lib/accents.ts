@@ -108,13 +108,6 @@ export const ACCENTS: Accent[] = [
 // ---------- Oynatma katmanı ----------
 export function stopSpeaking() {
   clientAudio.stopAll();
-  try {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-  } catch {
-    /* noop */
-  }
 }
 
 export interface SpeakResult {
