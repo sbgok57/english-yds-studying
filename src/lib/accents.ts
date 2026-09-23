@@ -1,9 +1,6 @@
-// Çoklu aksan + cinsiyet desteği.
+// Çoklu aksan + cinsiyet desteği (Doğal Edge Neural TTS).
 import { clientAudio } from "./tts/audio-client";
-// ÖNCE garantili ses: Microsoft Edge neural TTS (sunucu /api/tts üzerinden)
-//   → her aksan için hem kadın hem erkek GERÇEK ve FARKLI 10 ses.
-// YEDEK: cihazın kendi Web Speech sesleri (çevrimdışı). Cihazda tam o
-//   aksan/cinsiyet sesi yoksa en yakın sese düşer ve kullanıcıya bildirilir.
+
 export type AccentId = "uk" | "us" | "ca" | "au" | "nz" | "in";
 export type Gender = "female" | "male";
 
@@ -20,21 +17,6 @@ export interface Accent {
   /** Garantili Microsoft Edge neural sesleri (kadın/erkek). */
   edgeVoice: Record<Gender, string>;
 }
-
-const GENDER_WORDS: Record<Gender, string[]> = {
-  female: [
-    "female", "woman", "girl", "samantha", "zira", "aria", "jenny",
-    "allison", "michelle", "ava", "emma", "olivia", "victoria", "natasha",
-    "karen", "catherine", "hayley", "veena", "heera", "neerja", "sonia",
-    "libby", "hazel", "susan", "serena", "kate", "fiona", "molly", "tessa",
-    "clara",
-  ],
-  male: [
-    "male", "man", "boy", "daniel", "alex", "fred", "david", "mark",
-    "guy", "ryan", "george", "james", "thomas", "rishi", "ravi", "prabhat",
-    "william", "mitchell", "oliver", "harry", "eric", "lee", "liam",
-  ],
-};
 
 export const ACCENTS: Accent[] = [
   {
@@ -123,62 +105,7 @@ export const ACCENTS: Accent[] = [
   },
 ];
 
-// ---------- Cihaz (Web Speech) sesleri — yedek katman ----------
-let voicesCache: SpeechSynthesisVoice[] = [];
-
-function loadVoices() {
-  try {
-    const v = window.speechSynthesis?.getVoices?.();
-    if (v && v.length > 0) voicesCache = v;
-  } catch {
-    /* boş */
-  }
-}
-
-if (typeof window !== "undefined") {
-  loadVoices();
-  try {
-    window.speechSynthesis?.addEventListener?.("voiceschanged", loadVoices);
-  } catch {
-    /* boş */
-  }
-}
-
-const norm = (l: string) => l.toLowerCase().replace(/_/g, "-");
-
-function langMatches(voiceLang: string, a: Accent): boolean {
-  const n = norm(voiceLang);
-  return a.langPrefixes.some((p) => n.startsWith(p));
-}
-
-function nameMatches(name: string, words: string[]): boolean {
-  const n = name.toLowerCase();
-  return words.some((w) => n.includes(w));
-}
-
-function findLocalVoice(a: Accent, gender: Gender): SpeechSynthesisVoice | undefined {
-  if (voicesCache.length === 0) loadVoices();
-  if (voicesCache.length === 0) return undefined;
-  const en = voicesCache.filter((x) => norm(x.lang).startsWith("en"));
-  const pool = en.length > 0 ? en : voicesCache;
-
-  const gWords = GENDER_WORDS[gender];
-  const accentGenderNames = a.names[gender];
-
-  let v = pool.find(
-    (x) => langMatches(x.lang, a) && nameMatches(x.name, [...accentGenderNames, ...gWords])
-  );
-  if (!v) v = pool.find((x) => nameMatches(x.name, accentGenderNames));
-  if (!v) v = pool.find((x) => langMatches(x.lang, a));
-  if (!v) v = pool.find((x) => nameMatches(x.name, gWords));
-  if (!v) v = pool.find((x) => norm(x.lang).startsWith("en"));
-  if (!v) v = pool[0];
-  return v;
-}
-
 // ---------- Oynatma katmanı ----------
-let currentAudio: HTMLAudioElement | null = null;
-
 export function stopSpeaking() {
   clientAudio.stopAll();
   try {
@@ -186,49 +113,8 @@ export function stopSpeaking() {
       window.speechSynthesis.cancel();
     }
   } catch {
-    /* boş */
+    /* noop */
   }
-}
-
-let activeSpeechUtterance: SpeechSynthesisUtterance | null = null;
-
-function speakLocal(text: string, a: Accent, gender: Gender, onInfo?: (m: string) => void) {
-  const genderLabel = gender === "female" ? "Kadın" : "Erkek";
-  if (!("speechSynthesis" in window)) {
-    const info = "Tarayıcın sesli okumayı desteklemiyor kanka. 🎧 linkinden dinleyebilirsin.";
-    onInfo?.(info);
-    return;
-  }
-  const voice = findLocalVoice(a, gender);
-  const u = new SpeechSynthesisUtterance(text);
-  if (voice) u.voice = voice;
-  u.lang = a.lang;
-  u.rate = 1.0; // Doğal konuşma hızı
-  u.pitch = 1.0; // SAFETY: Asla robotikleştirici pitch modifikasyonu yapma
-
-  activeSpeechUtterance = u;
-  u.onend = () => {
-    activeSpeechUtterance = null;
-  };
-  u.onerror = () => {
-    activeSpeechUtterance = null;
-  };
-
-  try {
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
-  } catch {
-    activeSpeechUtterance = null;
-    onInfo?.("Ses çalınamadı kanka.");
-    return;
-  }
-  const exactMatch = !!voice && langMatches(voice.lang, a) && nameMatches(voice.name, GENDER_WORDS[gender]);
-  const voiceName = voice ? voice.name : `varsayılan (${a.lang})`;
-  onInfo?.(
-    exactMatch
-      ? `Geçici Tarayıcı Sesi: ${voiceName} (${a.label} · ${genderLabel})`
-      : `Cihazında ${a.label} ${genderLabel.toLowerCase()} sesi yok; en yakın ses: ${voiceName}. Gerçek aksan için 🎧 linki.`
-  );
 }
 
 export interface SpeakResult {
@@ -239,9 +125,8 @@ export interface SpeakResult {
 }
 
 /**
- * (aksan, cinsiyet) için konuşmayı başlat.
- * Önce sunucudaki garantili Edge neural sesi dener (her aksanda kadın+erkek),
- * başarısız olursa (çevrimdışı/önizleme kısıtı) cihaz seslerine düşer.
+ * (aksan, cinsiyet) için doğal neural stüdyo kalitesinde konuşmayı başlatır.
+ * 12 farklı Edge Neural sesi doğrudan sunucu üzerinden çalar.
  */
 export function speakWithAccent(
   text: string,
@@ -273,12 +158,12 @@ export function speakWithAccent(
       voiceId: voice,
       contentType: "word",
       onInfo: (info) => onInfo?.(info),
-      onError: () => {
-        speakLocal(text, a, gender, onInfo);
+      onError: (err) => {
+        onInfo?.(`Ses yüklenemedi: ${err?.message || "Ağ hatası"}`);
       },
     })
-    .catch(() => {
-      speakLocal(text, a, gender, onInfo);
+    .catch((err) => {
+      onInfo?.(`Ses çalınamadı: ${err?.message || "Bağlantı hatası"}`);
     });
 
   return { ok: true, info: `Doğal Neural Ses: ${voice} (${a.label} · ${genderLabel})`, exactMatch: true, voiceName: voice };

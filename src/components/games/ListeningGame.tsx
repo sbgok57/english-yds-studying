@@ -128,7 +128,7 @@ export default function ListeningGame() {
         </div>
         {!ttsOk && (
           <p className="text-xs text-amber-300 mt-2">
-            Kanka, tarayıcın sesli okumayı desteklemiyor — kelime: <b className="font-mono">{word.word}</b>
+            Ses bağlantısı sağlanamadı — kelime: <b className="font-mono">{word.word}</b>
           </p>
         )}
         {revealed && (

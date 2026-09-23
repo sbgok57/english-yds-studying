@@ -67,7 +67,7 @@ async function handleTtsRequest(
 
   if (!cleanText) {
     return NextResponse.json(
-      { ok: false, error: "Metin boş olamaz kanka.", fallbackWebSpeech: true },
+      { ok: false, error: "Metin boş olamaz." },
       { status: 400 }
     );
   }
@@ -82,7 +82,6 @@ async function handleTtsRequest(
       {
         ok: false,
         error: `Metin azami ${maxLen} karakter sınırını aşıyor.`,
-        fallbackWebSpeech: true,
       },
       { status: 400 }
     );
@@ -161,8 +160,7 @@ async function handleTtsRequest(
     return NextResponse.json(
       {
         ok: false,
-        error: "Ses sentezlenemedi, geçici olarak yerel sese yönlendiriliyor.",
-        fallbackWebSpeech: true,
+        error: "Ses sentezlenemedi. Lütfen tekrar deneyin.",
       },
       { status: 502 }
     );
@@ -202,7 +200,7 @@ export async function POST(req: NextRequest) {
     return handleTtsRequest(text, voice, accent, gender, rate, contentType);
   } catch {
     return NextResponse.json(
-      { ok: false, error: "Geçersiz JSON gövdesi.", fallbackWebSpeech: true },
+      { ok: false, error: "Geçersiz JSON gövdesi." },
       { status: 400 }
     );
   }

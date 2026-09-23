@@ -77,7 +77,7 @@ export default function AccentBar({ text }: { text: string }) {
           🎧 Gerçek aksan ↗
         </a>
         <span className="text-[10px] text-white/30">
-          Cihazında o ses yoksa en yakın İngilizce ses kullanılır.
+          Doğal stüdyo kalitesinde 96kbps çoklu aksan motoru.
         </span>
       </div>
 

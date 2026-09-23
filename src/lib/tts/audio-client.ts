@@ -35,7 +35,6 @@ const STORAGE_KEYS = {
 
 class ClientAudioManager {
   private currentAudio: HTMLAudioElement | null = null;
-  private currentUtterance: SpeechSynthesisUtterance | null = null;
   private currentBlobUrl: string | null = null;
 
   // Tercihleri yükle
@@ -121,49 +120,10 @@ class ClientAudioManager {
       } catch {
         /* noop */
       }
-      this.currentUtterance = null;
     }
   }
 
-  // Web Speech API Fallback (doğal pitch ile)
-  private playBrowserSpeech(text: string, locale: string, options?: PlaybackOptions): void {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-      options?.onError?.(new Error("Tarayıcınız ses çalmayı desteklemiyor."));
-      return;
-    }
-
-    this.stopAll();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    this.currentUtterance = utterance;
-    utterance.lang = locale;
-    utterance.rate = options?.rate || 1.0;
-    utterance.pitch = 1.0; // SAFETY: Asla robotikleştirici pitch modifikasyonu yapma
-
-    // Tarayıcı seslerini eşleştirmeyi dene
-    const voices = window.speechSynthesis.getVoices();
-    const match = voices.find((v) => v.lang.replace("_", "-").toLowerCase() === locale.toLowerCase());
-    if (match) utterance.voice = match;
-
-    utterance.onstart = () => {
-      options?.onStart?.();
-      options?.onInfo?.("Geçici Tarayıcı Sesi devrede.");
-    };
-
-    utterance.onend = () => {
-      this.currentUtterance = null;
-      options?.onEnd?.();
-    };
-
-    utterance.onerror = (err) => {
-      this.currentUtterance = null;
-      options?.onError?.(err);
-    };
-
-    window.speechSynthesis.speak(utterance);
-  }
-
-  // Sunucu API üzerinden ses çal
+  // Sunucu API üzerinden doğal neural ses çal
   async play(text: string, options?: PlaybackOptions): Promise<void> {
     const prefs = this.getPreferences();
     const voice = options?.voiceId
@@ -173,7 +133,9 @@ class ClientAudioManager {
       : getVoiceProfile(prefs.preferredVoiceId) || findVoice(prefs.preferredAccent, prefs.preferredVoiceGender);
 
     if (!voice) {
-      this.playBrowserSpeech(text, options?.accent || prefs.preferredAccent, options);
+      const err = new Error("Seçilen aksan için ses profili bulunamadı.");
+      options?.onError?.(err);
+      options?.onInfo?.("Aksan profili bulunamadı.");
       return;
     }
 
@@ -199,11 +161,6 @@ class ClientAudioManager {
       const contentTypeHeader = res.headers.get("content-type") || "";
 
       if (!res.ok || contentTypeHeader.includes("application/json")) {
-        const data = await res.json().catch(() => ({}));
-        if (data?.fallbackWebSpeech) {
-          this.playBrowserSpeech(text, voice.locale, options);
-          return;
-        }
         throw new Error(`TTS API Hatası: ${res.status}`);
       }
 
@@ -228,12 +185,15 @@ class ClientAudioManager {
       };
 
       audio.onerror = () => {
-        this.playBrowserSpeech(text, voice.locale, options);
+        const err = new Error("Ses oynatılamadı.");
+        options?.onError?.(err);
+        options?.onInfo?.("Ses dosyası oynatılamadı.");
       };
 
       await audio.play();
-    } catch {
-      this.playBrowserSpeech(text, voice.locale, options);
+    } catch (err: any) {
+      options?.onError?.(err instanceof Error ? err : new Error(String(err)));
+      options?.onInfo?.("Ses bağlantısı kurulamadı. Lütfen tekrar deneyin.");
     }
   }
 
