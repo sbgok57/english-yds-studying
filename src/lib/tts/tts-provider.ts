@@ -74,7 +74,7 @@ export function formatSpeakingRate(rate: number = 1.0): string {
  */
 export class EdgeTtsProvider implements TtsProvider {
   public readonly id = "msedge-neural";
-  private readonly defaultTimeoutMs = 12000; // 12 sn
+  private readonly defaultTimeoutMs = 20000; // 20 sn (cold start resilience)
 
   supportsVoice(voice: VoiceProfile): boolean {
     return voice.provider === this.id && voice.enabled;
@@ -107,7 +107,8 @@ export class EdgeTtsProvider implements TtsProvider {
 
     let lastError: Error | null = null;
     // Transient ağ hataları için 2 deneme (1 yeniden deneme)
-    for (let attempt = 1; attempt <= 2; attempt++) {
+    // SAFETY: Retries on transient socket reset with exponential backoff (max 3 attempts)
+    for (let attempt = 1; attempt <= 3; attempt++) {
       try {
         const audioBuffer = await this.synthesizeWithTimeout(
           MsEdgeTTS,
@@ -133,9 +134,9 @@ export class EdgeTtsProvider implements TtsProvider {
         };
       } catch (err: any) {
         lastError = err;
-        if (attempt < 2) {
-          // 200ms bekle ve tekrar dene
-          await new Promise((res) => setTimeout(res, 200));
+        if (attempt < 3) {
+          // Exponential backoff: 300ms, 600ms
+          await new Promise((res) => setTimeout(res, attempt * 300));
         }
       }
     }

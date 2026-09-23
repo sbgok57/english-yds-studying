@@ -15,6 +15,10 @@ import {
 } from "@/lib/data-inventory";
 import { awardPointsIdempotent } from "@/lib/gamification/points-config";
 import { useUsage } from "@/lib/store";
+import { clientAudio, UserVoicePreferences } from "@/lib/tts/audio-client";
+import { getVoiceProfile, ACCENT_METADATA_LIST } from "@/lib/tts/voice-registry";
+import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
+import WordPronunciationBar from "@/components/vocabulary/WordPronunciationBar";
 
 const CEFR_TABS: { label: string; value: CefrLevel | "ALL" }[] = [
   { label: "Tümü", value: "ALL" },
@@ -52,9 +56,20 @@ export default function VocabularyInventoryPage() {
   // Note editing state for selected word
   const [currentNote, setCurrentNote] = useState("");
 
+  // Voice preferences & natural playback state
+  const [voicePrefs, setVoicePrefs] = useState<UserVoicePreferences>(() => clientAudio.getPreferences());
+  const [showVoicePicker, setShowVoicePicker] = useState(false);
+  const [playingWord, setPlayingWord] = useState<string | null>(null);
+
   useEffect(() => {
     const data = loadInventoryUserData();
     setUserData(data);
+
+    const handleVoiceChange = () => {
+      setVoicePrefs(clientAudio.getPreferences());
+    };
+    window.addEventListener("yds:voice-prefs-changed", handleVoiceChange);
+    return () => window.removeEventListener("yds:voice-prefs-changed", handleVoiceChange);
   }, []);
 
   // Update note when selected word changes
@@ -151,16 +166,20 @@ export default function VocabularyInventoryPage() {
     setCurrentPage(1);
   }, [activeTab, posFilter, statusFilter, searchQuery, pageSize]);
 
-  // Audio pronunciation
-  const speakTerm = (word: string, e?: React.MouseEvent) => {
+  // Audio pronunciation with natural 12-voice multi-accent TTS
+  const speakTerm = async (word: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word);
-      utterance.lang = "en-US";
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
+    if (playingWord === word) {
+      clientAudio.stopAll();
+      setPlayingWord(null);
+      return;
     }
+    setPlayingWord(word);
+    await clientAudio.play(word, {
+      contentType: "word",
+      onEnd: () => setPlayingWord(null),
+      onError: () => setPlayingWord(null),
+    });
   };
 
   return (
@@ -185,6 +204,18 @@ export default function VocabularyInventoryPage() {
 
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             <button
+              onClick={() => setShowVoicePicker(!showVoicePicker)}
+              className="px-4 py-2.5 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 transition-all flex items-center gap-2 shadow-sm"
+              title="Doğal Çoklu Aksan Ses Motoru (6 Aksan, 12 Doğal Konuşmacı)"
+            >
+              <span className="text-base">{ACCENT_METADATA_LIST.find((a) => a.code === voicePrefs.preferredAccent)?.flag || "🎙️"}</span>
+              <span>{getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal Ses"}</span>
+              <span className="text-[10px] text-cyan-300/80 bg-cyan-400/20 border border-cyan-400/30 px-1.5 py-0.5 rounded-full">
+                {getVoiceProfile(voicePrefs.preferredVoiceId)?.gender === "female" ? "Kadın" : "Erkek"}
+              </span>
+              <span className="text-xs text-white/50">{showVoicePicker ? "▲" : "▼"}</span>
+            </button>
+            <button
               onClick={() => downloadInventoryCsv(filteredItems)}
               className="px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-colors flex items-center gap-2"
               title="Excel ve Sheets ile uyumlu güvenli CSV dışa aktarımı"
@@ -200,6 +231,32 @@ export default function VocabularyInventoryPage() {
             </button>
           </div>
         </div>
+
+        {/* Expandable Natural Voice Engine Picker */}
+        {showVoicePicker && (
+          <div className="mt-6 p-6 rounded-2xl bg-slate-900/90 border border-cyan-400/30 backdrop-blur-xl shadow-2xl anim-pop">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+              <div className="flex items-center gap-2.5">
+                <span className="text-xl">🎙️</span>
+                <div>
+                  <h3 className="text-sm font-black text-white">
+                    Doğal Çoklu Aksan Ses Sistemi (12 Konuşmacı)
+                  </h3>
+                  <p className="text-xs text-white/50">
+                    Amerikan, İngiliz, Kanada, Avustralya, Yeni Zelanda ve Hint aksanlarında kadın & erkek sesleri seç
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowVoicePicker(false)}
+                className="text-xs text-white/60 hover:text-white px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
+              >
+                ✕ Kapat
+              </button>
+            </div>
+            <AccentVoicePicker compact={false} />
+          </div>
+        )}
 
         {/* Level metrics pills */}
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 mt-8 pt-6 border-t border-white/10">
@@ -357,10 +414,14 @@ export default function VocabularyInventoryPage() {
                         </span>
                         <button
                           onClick={(e) => speakTerm(item.word, e)}
-                          title="Telaffuzu Dinle"
-                          className="text-white/30 hover:text-cyan-400 text-xs p-1"
+                          title={`${getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal"} ile Dinle`}
+                          className={`text-xs px-1.5 py-0.5 rounded-md border transition-all ${
+                            playingWord === item.word
+                              ? "bg-cyan-500/30 border-cyan-400 text-cyan-300 animate-pulse shadow-sm"
+                              : "border-transparent text-white/30 hover:text-cyan-300 hover:bg-white/5"
+                          }`}
                         >
-                          🔊
+                          {playingWord === item.word ? "🔊" : "🔈"}
                         </button>
                         {hasNote && (
                           <span
@@ -458,10 +519,14 @@ export default function VocabularyInventoryPage() {
                     {selectedWord.word}
                     <button
                       onClick={() => speakTerm(selectedWord.word)}
-                      className="text-base text-cyan-400 hover:text-cyan-300"
-                      title="Telaffuzu Dinle"
+                      className={`text-base p-1.5 rounded-lg border transition-all ${
+                        playingWord === selectedWord.word
+                          ? "bg-cyan-500/30 border-cyan-400 text-cyan-300 animate-pulse"
+                          : "border-transparent text-cyan-400 hover:text-cyan-300 hover:bg-white/5"
+                      }`}
+                      title={`${getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal"} ile Dinle`}
                     >
-                      🔊
+                      {playingWord === selectedWord.word ? "🔊" : "🔈"}
                     </button>
                   </h3>
                   {selectedWord.partOfSpeech && (
@@ -482,6 +547,22 @@ export default function VocabularyInventoryPage() {
 
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-6">
+              {/* Natural Pronunciation & Multi-Accent Practice Bar */}
+              <div className="rounded-2xl bg-white/[0.04] border border-cyan-400/20 p-4 shadow-inner">
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
+                    <span>🎙️</span> Çoklu Aksan Telaffuz & Konuşma Pratiği
+                  </span>
+                  <span className="text-[10px] text-white/50">
+                    6 Aksan &bull; 12 Doğal Konuşmacı &bull; Mikrofon
+                  </span>
+                </div>
+                <WordPronunciationBar
+                  word={selectedWord.word}
+                  sentence={selectedWord.example}
+                />
+              </div>
+
               {/* Meaning and Definition */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-2xl bg-white/5 border border-white/10">

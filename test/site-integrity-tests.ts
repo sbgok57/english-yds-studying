@@ -33,11 +33,11 @@ console.log("========================================================\n");
 
 // 1. Reading Passages
 console.log("1. Reading Passages Specification...");
-test("All reading passages have title, valid paragraphs, and questions (>= 5 passages)", () => {
+test("All 200 reading passages have title, valid paragraphs, and questions (>= 200 passages)", () => {
   assert(PASSAGES && Array.isArray(PASSAGES), "PASSAGES must be an array");
   assert(READING_PASSAGES && Array.isArray(READING_PASSAGES), "READING_PASSAGES must be an array");
   assert.strictEqual(PASSAGES, READING_PASSAGES, "READING_PASSAGES must alias PASSAGES");
-  assert(PASSAGES.length >= 5, `Expected at least 5 reading passages, found ${PASSAGES.length}`);
+  assert(PASSAGES.length >= 200, `Expected at least 200 reading passages, found ${PASSAGES.length}`);
 
   for (let i = 0; i < PASSAGES.length; i++) {
     const p = PASSAGES[i];
