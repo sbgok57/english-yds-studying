@@ -77,9 +77,23 @@ class ClientAudioManager {
     try {
       if (prefs.preferredAccent) {
         window.localStorage.setItem(STORAGE_KEYS.ACCENT, prefs.preferredAccent);
+        // PERF & SYNC: Keep legacy 2-letter accent code in sync
+        const accMap: Record<string, string> = {
+          "en-GB": "uk",
+          "en-US": "us",
+          "en-CA": "ca",
+          "en-AU": "au",
+          "en-NZ": "nz",
+          "en-IN": "in",
+        };
+        const shortId = accMap[prefs.preferredAccent];
+        if (shortId) {
+          window.localStorage.setItem("yds-accent", shortId);
+        }
       }
       if (prefs.preferredVoiceGender) {
         window.localStorage.setItem(STORAGE_KEYS.GENDER, prefs.preferredVoiceGender);
+        window.localStorage.setItem("yds-accent-gender", prefs.preferredVoiceGender);
       }
       if (prefs.preferredVoiceId) {
         window.localStorage.setItem(STORAGE_KEYS.VOICE_ID, prefs.preferredVoiceId);

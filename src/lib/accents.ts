@@ -167,10 +167,29 @@ export function youglishUrl(word: string, id: AccentId): string {
   return `https://youglish.com/pronounce/${encodeURIComponent(word)}/english/${a.youglish}`;
 }
 
+const ACCENT_LOCALE_MAP: Record<AccentId, string> = {
+  uk: "en-GB",
+  us: "en-US",
+  ca: "en-CA",
+  au: "en-AU",
+  nz: "en-NZ",
+  in: "en-IN",
+};
+
 export function getStoredAccent(): AccentId {
   try {
     const s = window.localStorage.getItem("yds-accent") as AccentId | null;
     if (s && ACCENTS.some((a) => a.id === s)) return s;
+
+    const p = window.localStorage.getItem("yds-preferred-accent");
+    if (p) {
+      if (p.includes("GB") || p === "uk") return "uk";
+      if (p.includes("US") || p === "us") return "us";
+      if (p.includes("CA") || p === "ca") return "ca";
+      if (p.includes("AU") || p === "au") return "au";
+      if (p.includes("NZ") || p === "nz") return "nz";
+      if (p.includes("IN") || p === "in") return "in";
+    }
   } catch {
     /* boş */
   }
@@ -180,6 +199,15 @@ export function getStoredAccent(): AccentId {
 export function setStoredAccent(id: AccentId) {
   try {
     window.localStorage.setItem("yds-accent", id);
+    const locale = ACCENT_LOCALE_MAP[id] || "en-US";
+    window.localStorage.setItem("yds-preferred-accent", locale);
+    const a = ACCENTS.find((x) => x.id === id) || ACCENTS[0];
+    const g = getStoredGender();
+    const voice = a.edgeVoice[g];
+    if (voice) {
+      window.localStorage.setItem("yds-preferred-voice-id", voice);
+    }
+    window.dispatchEvent(new CustomEvent("yds:voice-prefs-changed"));
   } catch {
     /* boş */
   }
@@ -187,7 +215,8 @@ export function setStoredAccent(id: AccentId) {
 
 export function getStoredGender(): Gender {
   try {
-    const s = window.localStorage.getItem("yds-accent-gender") as Gender | null;
+    const s = (window.localStorage.getItem("yds-accent-gender") ||
+      window.localStorage.getItem("yds-preferred-gender")) as Gender | null;
     if (s === "female" || s === "male") return s;
   } catch {
     /* boş */
@@ -198,6 +227,14 @@ export function getStoredGender(): Gender {
 export function setStoredGender(g: Gender) {
   try {
     window.localStorage.setItem("yds-accent-gender", g);
+    window.localStorage.setItem("yds-preferred-gender", g);
+    const id = getStoredAccent();
+    const a = ACCENTS.find((x) => x.id === id) || ACCENTS[0];
+    const voice = a.edgeVoice[g];
+    if (voice) {
+      window.localStorage.setItem("yds-preferred-voice-id", voice);
+    }
+    window.dispatchEvent(new CustomEvent("yds:voice-prefs-changed"));
   } catch {
     /* boş */
   }

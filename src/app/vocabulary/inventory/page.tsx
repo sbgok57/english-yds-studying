@@ -19,6 +19,17 @@ import { clientAudio, UserVoicePreferences } from "@/lib/tts/audio-client";
 import { getVoiceProfile, ACCENT_METADATA_LIST } from "@/lib/tts/voice-registry";
 import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import WordPronunciationBar from "@/components/vocabulary/WordPronunciationBar";
+import AccentBar from "@/components/AccentBar";
+import {
+  ACCENTS,
+  getStoredAccent,
+  getStoredGender,
+  setStoredAccent,
+  setStoredGender,
+  speakWithAccent,
+  type AccentId,
+  type Gender,
+} from "@/lib/accents";
 
 const CEFR_TABS: { label: string; value: CefrLevel | "ALL" }[] = [
   { label: "Tümü", value: "ALL" },
@@ -58,6 +69,8 @@ export default function VocabularyInventoryPage() {
 
   // Voice preferences & natural playback state
   const [voicePrefs, setVoicePrefs] = useState<UserVoicePreferences>(() => clientAudio.getPreferences());
+  const [globalAccent, setGlobalAccent] = useState<AccentId>(() => getStoredAccent());
+  const [globalGender, setGlobalGender] = useState<Gender>(() => getStoredGender());
   const [showVoicePicker, setShowVoicePicker] = useState(false);
   const [playingWord, setPlayingWord] = useState<string | null>(null);
 
@@ -67,10 +80,27 @@ export default function VocabularyInventoryPage() {
 
     const handleVoiceChange = () => {
       setVoicePrefs(clientAudio.getPreferences());
+      setGlobalAccent(getStoredAccent());
+      setGlobalGender(getStoredGender());
     };
     window.addEventListener("yds:voice-prefs-changed", handleVoiceChange);
     return () => window.removeEventListener("yds:voice-prefs-changed", handleVoiceChange);
   }, []);
+
+  const selectGlobalAccent = (acc: AccentId) => {
+    setGlobalAccent(acc);
+    setStoredAccent(acc);
+  };
+
+  const selectGlobalGender = (g: Gender) => {
+    setGlobalGender(g);
+    setStoredGender(g);
+  };
+
+  const activeAccentObj = useMemo(
+    () => ACCENTS.find((a) => a.id === globalAccent) || ACCENTS[0],
+    [globalAccent]
+  );
 
   // Update note when selected word changes
   useEffect(() => {
@@ -167,7 +197,7 @@ export default function VocabularyInventoryPage() {
   }, [activeTab, posFilter, statusFilter, searchQuery, pageSize]);
 
   // Audio pronunciation with natural 12-voice multi-accent TTS
-  const speakTerm = async (word: string, e?: React.MouseEvent) => {
+  const speakTerm = (word: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (playingWord === word) {
       clientAudio.stopAll();
@@ -175,11 +205,10 @@ export default function VocabularyInventoryPage() {
       return;
     }
     setPlayingWord(word);
-    await clientAudio.play(word, {
-      contentType: "word",
-      onEnd: () => setPlayingWord(null),
-      onError: () => setPlayingWord(null),
-    });
+    speakWithAccent(word, globalAccent, globalGender);
+    setTimeout(() => {
+      setPlayingWord((curr) => (curr === word ? null : curr));
+    }, 1800);
   };
 
   return (
@@ -208,10 +237,10 @@ export default function VocabularyInventoryPage() {
               className="px-4 py-2.5 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 transition-all flex items-center gap-2 shadow-sm"
               title="Doğal Çoklu Aksan Ses Motoru (6 Aksan, 12 Doğal Konuşmacı)"
             >
-              <span className="text-base">{ACCENT_METADATA_LIST.find((a) => a.code === voicePrefs.preferredAccent)?.flag || "🎙️"}</span>
-              <span>{getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal Ses"}</span>
-              <span className="text-[10px] text-cyan-300/80 bg-cyan-400/20 border border-cyan-400/30 px-1.5 py-0.5 rounded-full">
-                {getVoiceProfile(voicePrefs.preferredVoiceId)?.gender === "female" ? "Kadın" : "Erkek"}
+              <span className="text-base">{activeAccentObj.flag}</span>
+              <span>{activeAccentObj.label} Aksanı</span>
+              <span className="text-[10px] text-cyan-300/80 bg-cyan-400/20 border border-cyan-400/30 px-1.5 py-0.5 rounded-full font-bold">
+                {globalGender === "female" ? "Kadın" : "Erkek"}
               </span>
               <span className="text-xs text-white/50">{showVoicePicker ? "▲" : "▼"}</span>
             </button>
@@ -298,6 +327,71 @@ export default function VocabularyInventoryPage() {
               {tab.label}
             </button>
           ))}
+        </div>
+
+        {/* 6 Aksan × Kadın/Erkek Doğal Ses Seçim Barı */}
+        <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-cyan-400/20 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">🎙️</span>
+            <div>
+              <div className="text-xs font-bold text-white flex items-center gap-2">
+                <span>Doğal Ses & Aksan Seçimi:</span>
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-400/10 text-cyan-300 border border-cyan-400/20 font-bold">
+                  {activeAccentObj.flag} {activeAccentObj.label} &bull; {globalGender === "female" ? "Kadın Sesi" : "Erkek Sesi"}
+                </span>
+              </div>
+              <p className="text-[10px] text-white/50">
+                Tüm kelime envanterini ve detaylarını seçtiğin doğal aksan ve cinsiyetle dinle
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* 6 Aksan Butonları */}
+            <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+              {ACCENTS.map((a) => {
+                const isActive = globalAccent === a.id;
+                return (
+                  <button
+                    key={a.id}
+                    type="button"
+                    onClick={() => selectGlobalAccent(a.id)}
+                    title={`${a.label} Aksanı`}
+                    className={`px-2 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 border ${
+                      isActive
+                        ? "bg-cyan-500/30 border-cyan-400 text-white shadow-sm"
+                        : "border-transparent text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    <span>{a.flag}</span>
+                    <span className="hidden sm:inline text-[11px]">{a.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Kadın / Erkek Cinsiyet Butonları */}
+            <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+              {(["female", "male"] as Gender[]).map((g) => {
+                const isActive = globalGender === g;
+                return (
+                  <button
+                    key={g}
+                    type="button"
+                    onClick={() => selectGlobalGender(g)}
+                    title={g === "female" ? "Kadın Sesi" : "Erkek Sesi"}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all border ${
+                      isActive
+                        ? "bg-gradient-to-r from-cyan-500 to-blue-600 border-transparent text-white shadow-sm"
+                        : "border-transparent text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    {g === "female" ? "👩 Kadın" : "👨 Erkek"}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Search & Select Filters */}
@@ -414,14 +508,18 @@ export default function VocabularyInventoryPage() {
                         </span>
                         <button
                           onClick={(e) => speakTerm(item.word, e)}
-                          title={`${getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal"} ile Dinle`}
-                          className={`text-xs px-1.5 py-0.5 rounded-md border transition-all ${
+                          title={`${activeAccentObj.flag} ${activeAccentObj.label} (${globalGender === "female" ? "Kadın" : "Erkek"}) - Telaffuzu Dinle`}
+                          className={`text-xs px-2 py-0.5 rounded-lg border font-medium transition-all flex items-center gap-1 shrink-0 ${
                             playingWord === item.word
                               ? "bg-cyan-500/30 border-cyan-400 text-cyan-300 animate-pulse shadow-sm"
-                              : "border-transparent text-white/30 hover:text-cyan-300 hover:bg-white/5"
+                              : "border-white/10 bg-white/5 text-white/60 hover:text-cyan-300 hover:border-cyan-400/40"
                           }`}
                         >
-                          {playingWord === item.word ? "🔊" : "🔈"}
+                          <span>{playingWord === item.word ? "🔊" : "🔈"}</span>
+                          <span className="text-[11px]">{activeAccentObj.flag}</span>
+                          <span className="text-[10px] text-white/50 hidden sm:inline">
+                            {globalGender === "female" ? "Kadın" : "Erkek"}
+                          </span>
                         </button>
                         {hasNote && (
                           <span
@@ -524,7 +622,7 @@ export default function VocabularyInventoryPage() {
                           ? "bg-cyan-500/30 border-cyan-400 text-cyan-300 animate-pulse"
                           : "border-transparent text-cyan-400 hover:text-cyan-300 hover:bg-white/5"
                       }`}
-                      title={`${getVoiceProfile(voicePrefs.preferredVoiceId)?.displayName || "Doğal"} ile Dinle`}
+                      title={`${activeAccentObj.flag} ${activeAccentObj.label} (${globalGender === "female" ? "Kadın" : "Erkek"}) - Telaffuzu Dinle`}
                     >
                       {playingWord === selectedWord.word ? "🔊" : "🔈"}
                     </button>
@@ -548,8 +646,8 @@ export default function VocabularyInventoryPage() {
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-6">
               {/* Natural Pronunciation & Multi-Accent Practice Bar */}
-              <div className="rounded-2xl bg-white/[0.04] border border-cyan-400/20 p-4 shadow-inner">
-                <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
+              <div className="rounded-2xl bg-white/[0.04] border border-cyan-400/20 p-4 shadow-inner space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-white/10">
                   <span className="text-[11px] font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
                     <span>🎙️</span> Çoklu Aksan Telaffuz & Konuşma Pratiği
                   </span>
@@ -561,6 +659,11 @@ export default function VocabularyInventoryPage() {
                   word={selectedWord.word}
                   sentence={selectedWord.example}
                 />
+
+                {/* 12 Sesli Tüm Aksanları ve Cinsiyetleri Dinle */}
+                <div className="pt-3 border-t border-white/10">
+                  <AccentBar text={selectedWord.word} />
+                </div>
               </div>
 
               {/* Meaning and Definition */}

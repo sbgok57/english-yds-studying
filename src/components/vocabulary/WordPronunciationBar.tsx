@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { Play, RotateCcw, Mic, Sparkles, Volume2, CheckCircle, Snail } from "lucide-react";
 import { clientAudio } from "@/lib/tts/audio-client";
-import { ACCENT_METADATA_LIST, AccentCode } from "@/lib/tts/voice-registry";
+import { ACCENT_METADATA_LIST, AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
+import { setStoredAccent, setStoredGender, getStoredGender } from "@/lib/accents";
 import { cn } from "@/lib/utils";
 
 interface WordPronunciationBarProps {
@@ -25,12 +26,17 @@ export default function WordPronunciationBar({
   const [activeAccent, setActiveAccent] = useState<AccentCode>(() => {
     return clientAudio.getPreferences().preferredAccent;
   });
+  const [activeGender, setActiveGender] = useState<VoiceGender>(() => {
+    const g = getStoredGender();
+    return g === "male" ? "male" : "female";
+  });
 
   const handlePlayWord = async (rate: number = 1.0) => {
     setActiveRate(rate);
     setIsPlaying(true);
     await clientAudio.play(word, {
       accent: activeAccent,
+      gender: activeGender,
       rate,
       contentType: "word",
       onEnd: () => setIsPlaying(false),
@@ -43,6 +49,7 @@ export default function WordPronunciationBar({
     setIsPlaying(true);
     await clientAudio.play(sentence, {
       accent: activeAccent,
+      gender: activeGender,
       rate: 1.0,
       contentType: "sentence",
       onEnd: () => setIsPlaying(false),
@@ -104,25 +111,54 @@ export default function WordPronunciationBar({
           )}
         </div>
 
-        {/* Aksan Seçici Hapları */}
-        <div className="flex items-center gap-1">
-          {ACCENT_METADATA_LIST.map((a) => (
-            <button
-              key={a.code}
-              type="button"
-              onClick={() => setActiveAccent(a.code)}
-              className={cn(
-                "px-2 py-0.5 rounded-lg text-xs font-bold transition-all border",
-                activeAccent === a.code
-                  ? "bg-cyan-500/30 border-cyan-400 text-white shadow-sm"
-                  : "bg-white/5 border-white/10 text-white/50 hover:text-white"
-              )}
-              title={`${a.labelTr} Aksanı`}
-            >
-              <span>{a.flag}</span>
-              <span className="ml-1 text-[10px] hidden sm:inline">{a.shortId.toUpperCase()}</span>
-            </button>
-          ))}
+        {/* Aksan ve Cinsiyet Seçici */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* 6 Aksan */}
+          <div className="flex items-center gap-1">
+            {ACCENT_METADATA_LIST.map((a) => (
+              <button
+                key={a.code}
+                type="button"
+                onClick={() => {
+                  setActiveAccent(a.code);
+                  setStoredAccent(a.shortId);
+                }}
+                className={cn(
+                  "px-2 py-0.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1",
+                  activeAccent === a.code
+                    ? "bg-cyan-500/30 border-cyan-400 text-white shadow-sm"
+                    : "bg-white/5 border-white/10 text-white/50 hover:text-white"
+                )}
+                title={`${a.labelTr} Aksanı`}
+              >
+                <span>{a.flag}</span>
+                <span className="text-[10px] hidden sm:inline">{a.labelTr}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Kadın / Erkek Cinsiyet Seçimi */}
+          <div className="flex items-center gap-1 pl-1.5 border-l border-white/15">
+            {(["female", "male"] as VoiceGender[]).map((g) => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => {
+                  setActiveGender(g);
+                  setStoredGender(g);
+                }}
+                className={cn(
+                  "px-2 py-0.5 rounded-lg text-xs font-bold transition-all border",
+                  activeGender === g
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 border-transparent text-white shadow-sm"
+                    : "bg-white/5 border-white/10 text-white/50 hover:text-white"
+                )}
+                title={g === "female" ? "Kadın Sesi" : "Erkek Sesi"}
+              >
+                {g === "female" ? "👩 Kadın" : "👨 Erkek"}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
