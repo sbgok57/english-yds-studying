@@ -175,10 +175,26 @@ async function runIntegrationTests() {
 
     console.log("✅ All Auth Integration Tests Passed Successfully!");
   } finally {
-    // Cleanup created test user
-    if (createdUserId) {
-      console.log("  Cleaning up test user:", createdUserId);
-      await prisma.user.deleteMany({ where: { id: createdUserId } });
+    // Cleanup created test user and any dangling test users
+    try {
+      if (createdUserId) {
+        console.log("  Cleaning up test user:", createdUserId);
+        await prisma.user.deleteMany({ where: { id: createdUserId } });
+      }
+      await prisma.user.deleteMany({
+        where: {
+          OR: [
+            { email: { startsWith: "test_" } },
+            { email: { startsWith: "testnew" } },
+            { username: { startsWith: "user_" } },
+            { username: { startsWith: "testnew" } },
+          ],
+        },
+      });
+      // Compact database pages so no dirty byte fragments remain in SQLite B-tree
+      await prisma.$executeRawUnsafe("VACUUM;").catch(() => {});
+    } catch {
+      /* ignore */
     }
   }
 }

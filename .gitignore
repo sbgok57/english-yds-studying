@@ -27,3 +27,9 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# SQLite temporary journal and lock files
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite-journal
