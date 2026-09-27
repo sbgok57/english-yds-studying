@@ -15,6 +15,7 @@ import {
 } from "@/lib/store";
 import Celebration from "@/components/Celebration";
 import RichText from "@/components/RichText";
+import { recordAnswer } from "@/lib/progress/tracker";
 
 export default function TopicPracticeRunner({
   slug,
@@ -95,6 +96,14 @@ export default function TopicPracticeRunner({
       currentQuestion.answer,
       { topic: currentQuestion.topicSlug }
     );
+
+    // 🧩 Modül 5: Kişisel İlerleme Takibi (quiz_answers upsert + RPC trackEvent)
+    recordAnswer({
+      topic: currentQuestion.topicSlug || slug,
+      questionId: currentQuestion.id,
+      chosen: String(choiceIdx),
+      correctAnswer: String(currentQuestion.answer),
+    });
 
     if (isCorrect) {
       setCelebrate(true);

@@ -23,6 +23,7 @@ export const PAGES: NavLink[] = [
   { label: "Reading Lab", href: "/reading", emoji: "🔬" },
   { label: "Avatarlar", href: "/avatars", emoji: "👤" },
   { label: "Sesli Gramer", href: "/grammar/audio", emoji: "🎧" },
+  { label: "İlerlemem", href: "/ilerleme", emoji: "📈" },
   { label: "Hesap", href: "/hesap", emoji: "🔑" },
   { label: "Bildirim & Ayarlar", href: "/ayarlar", emoji: "⚙️" },
   { label: "İçe Aktar", href: "/import", emoji: "📤" },

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { AudioTrack, AUDIO_TRACKS, saveTrackProgress, getTrackProgress } from "@/lib/audio/tracks";
+import { trackEvent, POINTS } from "@/lib/progress/tracker";
+import { createClient } from "@/lib/supabase/client";
 
 interface AudioGrammarPlayerProps {
   initialTrackId?: string;
@@ -30,9 +32,50 @@ export default function AudioGrammarPlayer({
   const [sleepTimerMinutes, setSleepTimerMinutes] = useState<number | null>(null);
   const sleepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 1. Parça Değiştiğinde
+  const lastSyncedSecondRef = useRef<number>(0);
+
+  // 1. Dinleme İlerlemesini Sunucuya Senkronla (Modül 5)
+  const syncListeningProgress = useCallback(
+    async (seconds: number, completed: boolean) => {
+      try {
+        const supabase = createClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user) return;
+
+        await supabase.from("listening_progress").upsert(
+          {
+            user_id: user.id,
+            topic_slug: track.slug,
+            position_seconds: Math.floor(seconds),
+            completed,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: "user_id,topic_slug" }
+        );
+
+        // Dinlenen her 60 saniyede bir puan ver
+        if (Math.floor(seconds) - lastSyncedSecondRef.current >= 60 || completed) {
+          const elapsed = Math.floor(seconds) - lastSyncedSecondRef.current;
+          lastSyncedSecondRef.current = Math.floor(seconds);
+          await trackEvent("listen", {
+            topic: track.slug,
+            points: POINTS.listenMinute,
+            seconds: elapsed > 0 ? elapsed : 60,
+          });
+        }
+      } catch {
+        // // SAFETY: Offline failover
+      }
+    },
+    [track.slug]
+  );
+
+  // 2. Parça Değiştiğinde
   useEffect(() => {
     onTrackChange?.(track);
+    lastSyncedSecondRef.current = 0;
     const saved = getTrackProgress(track.id);
     if (saved?.currentSeconds && saved.currentSeconds > 5 && !saved.completed) {
       setCurrentTime(saved.currentSeconds);
@@ -233,6 +276,7 @@ export default function AudioGrammarPlayer({
             setCurrentTime(cur);
             if (Math.floor(cur) % 5 === 0) {
               saveTrackProgress(track.id, cur, false);
+              syncListeningProgress(cur, false);
             }
           }
         }}
@@ -244,6 +288,7 @@ export default function AudioGrammarPlayer({
         onEnded={() => {
           setIsPlaying(false);
           saveTrackProgress(track.id, duration, true);
+          syncListeningProgress(duration, true);
           handleNext();
         }}
       />

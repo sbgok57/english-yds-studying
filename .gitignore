@@ -36,3 +36,7 @@ __pycache__/
 *.db-wal
 *.db-shm
 *.sqlite-journal
+
+# Supabase CLI temp files
+supabase/.temp/
+supabase/.branches/

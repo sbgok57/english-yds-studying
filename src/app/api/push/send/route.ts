@@ -10,8 +10,10 @@ import {
   reminderPayload,
   motivationPayload,
   funnyPayload,
+  personalizedReminder,
   PushPayload,
 } from '@/lib/push/content';
+import { getProgressDigestForUser } from '@/lib/progress/stats';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60; // 60 saniye limit
@@ -93,15 +95,20 @@ async function handleCron(req: Request) {
     const userPayloadMap = new Map<string, { payload: PushPayload; type: 'reminder' | 'motivation' | 'funny' }>();
 
     for (const u of users) {
-      // A) Hatırlatıcı (Kullanıcının belirlediği saatte, örn: '20:00')
+      // A) Hatırlatıcı (Kullanıcının belirlediği saatte, örn: '20:00' - Modül 5 kişiselleştirmeli)
       const userReminderHour = u.reminder_time ? parseInt(u.reminder_time.slice(0, 2), 10) : 20;
       if (
         u.reminders &&
         userReminderHour === currentHour &&
         u.last_reminder_on !== istanbulDateStr
       ) {
+        const digest = await getProgressDigestForUser(u.user_id).catch(() => null);
+        const payload = digest
+          ? personalizedReminder(digest, u.exam_date)
+          : reminderPayload(u.exam_date);
+
         userPayloadMap.set(u.user_id, {
-          payload: reminderPayload(u.exam_date),
+          payload,
           type: 'reminder',
         });
         continue;

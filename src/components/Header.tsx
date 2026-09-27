@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import SearchBox from "@/components/SearchBox";
 import MenuDrawer from "@/components/MenuDrawer";
+import StreakBadge from "@/components/StreakBadge";
 
 const QUICK = [
   { href: "/vocabulary/inventory", label: "Envanter", emoji: "📦" },
@@ -52,14 +53,17 @@ export default function Header() {
             ))}
           </nav>
 
-          <button
-            onClick={() => setMenu(true)}
-            className="ml-auto xl:ml-0 flex items-center gap-2 px-3 h-10 rounded-xl border border-white/15 bg-white/[0.05] hover:bg-white/10 transition-colors"
-            aria-label="Menüyü aç"
-          >
-            <span className="text-lg leading-none">☰</span>
-            <span className="hidden sm:inline text-xs font-bold text-white/80">Menü</span>
-          </button>
+          <div className="ml-auto xl:ml-0 flex items-center gap-2">
+            <StreakBadge />
+            <button
+              onClick={() => setMenu(true)}
+              className="flex items-center gap-2 px-3 h-10 rounded-xl border border-white/15 bg-white/[0.05] hover:bg-white/10 transition-colors"
+              aria-label="Menüyü aç"
+            >
+              <span className="text-lg leading-none">☰</span>
+              <span className="hidden sm:inline text-xs font-bold text-white/80">Menü</span>
+            </button>
+          </div>
         </div>
       </header>
 

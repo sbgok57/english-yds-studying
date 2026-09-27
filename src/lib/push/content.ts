@@ -108,6 +108,44 @@ export function reminderPayload(examDate?: string | null): PushPayload {
   return { title: '📚 YDS Hatırlatıcı', body, url: '/dashboard', tag: 'yds-reminder' };
 }
 
+export interface PersonalDigest {
+  streak: number;
+  points: number;
+  accuracy: number | null;
+  weakTopic: string | null;
+  weakRate: number | null;
+}
+
+/** Kişiselleştirilmiş hatırlatıcı: seri + zayıf konu + geri sayım (Modül 5 yaması) */
+export function personalizedReminder(d: PersonalDigest, examDate?: string | null): PushPayload {
+  const days = daysUntilExam(examDate);
+
+  if (d.weakTopic) {
+    return {
+      title: `📌 Bugünün hedefi: ${d.weakTopic}`,
+      body: `Bu konudaki başarın %${d.weakRate}. ${
+        d.streak > 0 ? `🔥 ${d.streak} günlük serini bozma — ` : ''
+      }10 soru çöz, yüzdeyi yukarı taşı!${days != null ? ` (Sınava ${days} gün)` : ''}`,
+      url: '/study-plans',
+      tag: 'yds-reminder',
+    };
+  }
+
+  if (d.streak >= 3) {
+    return {
+      title: `🔥 ${d.streak} gündür durmuyorsun!`,
+      body: `Serin ${d.streak} güne çıktı${d.accuracy != null ? `, doğruların %${d.accuracy}` : ''}. Bugün de 25 dakikanı ayır${
+        days != null ? ` — sınava ${days} gün kaldı` : ''
+      }. 💪`,
+      url: '/study-plans',
+      tag: 'yds-reminder',
+    };
+  }
+
+  // İlerleme verisi azsa klasik hatırlatıcıya düş
+  return reminderPayload(examDate);
+}
+
 /** 💪 Motive edici bildirim */
 export function motivationPayload(): PushPayload {
   return { title: '💪 Motivasyon Zamanı', body: pick(MOTIVATION), url: '/dashboard', tag: 'yds-motivation' };
