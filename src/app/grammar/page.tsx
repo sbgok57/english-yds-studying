@@ -55,6 +55,13 @@ export default function GrammarPage() {
         {/* Karışık Test & Pratik Butonları */}
         <div className="flex flex-wrap gap-2.5 pt-2">
           <Link
+            href="/grammar/audio"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs shadow-lg shadow-orange-500/20 transition-all flex items-center gap-2"
+          >
+            <span>🎧</span>
+            <span>Sesli Gramer & Hafıza Kodları</span>
+          </Link>
+          <Link
             href="/grammar/mixed-tests"
             className="px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-black text-xs shadow-lg shadow-purple-500/30 transition-all flex items-center gap-2"
           >

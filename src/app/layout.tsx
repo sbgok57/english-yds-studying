@@ -11,6 +11,16 @@ export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
   description:
     "3D flashcards, 180 dakikalık gerçek online optik form, 500 avatar, 15 animasyonlu gramer konusu ve 11 soru tipi taktikleriyle YDS'yi fethedin.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "YDS Koç",
+  },
+  icons: {
+    icon: "/icons/icon-192.png",
+    apple: "/icons/icon-192.png",
+  },
 };
 
 export default function RootLayout({

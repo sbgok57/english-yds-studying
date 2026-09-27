@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-09-27T19:25:00.000Z",
+  "format": "mp3",
+  "bitrate": "128kbps",
+  "sampleRate": "44.1kHz",
+  "totalTracks": 6,
+  "totalDurationSeconds": 2260,
+  "tracks": [
+    {
+      "id": "ali-cumleci-dede-isimci",
+      "slug": "conjunctions",
+      "title": "Zıtlık Bağlaçları: ALi CÜMLEci vs DEDE İSİMci",
+      "subtitle": "YDS'nin En Çok Soru Çıkaran Bağlaç Formülü",
+      "category": "clauses",
+      "duration": 380,
+      "audioUrl": "/audio/grammar/ali-cumleci-dede-isimci.mp3",
+      "memoryCode": "ALi CÜMLEci (Although) vs DEDE İSİMci (Despite)",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["bağlaçlar", "zıtlık", "although", "despite", "hafıza kodu"]
+    },
+    {
+      "id": "sebahattin-cumleci-sevim-isimci",
+      "slug": "adverbial-clauses",
+      "title": "Sebep Bağlaçları: SEBAHATTİN CÜMLEci vs SEVİM İSİMci",
+      "subtitle": "Because vs Due to Ayrımı ve Sebep Yapıları",
+      "category": "clauses",
+      "duration": 350,
+      "audioUrl": "/audio/grammar/sebahattin-cumleci-sevim-isimci.mp3",
+      "memoryCode": "SEBAHATTİN CÜMLEci (Because) vs SEVİM İSİMci (Due to)",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["sebep", "because", "due to", "inasmuch as", "hafıza kodu"]
+    },
+    {
+      "id": "by-the-time-tense-uyumu",
+      "slug": "tenses",
+      "title": "Tense Uyumu & Altın 'By the time' Formülü",
+      "subtitle": "Zaman Bağlaçlarında Zaman Tüneli Kuralları",
+      "category": "tenses",
+      "duration": 390,
+      "audioUrl": "/audio/grammar/by-the-time-tense-uyumu.mp3",
+      "memoryCode": "By the Time (Past ➔ Had V3 / Present ➔ Will Have V3)",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["tense", "zaman uyumu", "by the time", "perfect tense"]
+    },
+    {
+      "id": "if-clauses-devrik",
+      "slug": "conditionals",
+      "title": "If Clauses & Sınavın Gizli Silahı Devrik (Inversion) Şartlar",
+      "subtitle": "Should, Were ve Had ile Başlayan Gizli Koşul Cümleleri",
+      "category": "structures",
+      "duration": 410,
+      "audioUrl": "/audio/grammar/if-clauses-devrik.mp3",
+      "memoryCode": "İF'siz Koşul: Should (Type 1), Were (Type 2), Had (Type 3)",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["if clauses", "inversion", "devrik", "şart cümleleri"]
+    },
+    {
+      "id": "relative-clause-kisaltmalari",
+      "slug": "relative-clauses",
+      "title": "Relative Clause Kısaltmaları: V-ing vs V3 Formülü",
+      "subtitle": "Akademik Cümlelerin Belkemiği Sıfat Kısaltmaları",
+      "category": "clauses",
+      "duration": 370,
+      "audioUrl": "/audio/grammar/relative-clause-kisaltmalari.mp3",
+      "memoryCode": "Aktifse V-ing, Pasifse V3, Zaman Farkı Varsa Having V3",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["relative clause", "kısaltma", "v-ing", "v3", "participle"]
+    },
+    {
+      "id": "perfect-modals-cikarmalar",
+      "slug": "modals-perfect",
+      "title": "Perfect Modals: Geçmişe Yönelik Çıkarımlar & Pişmanlıklar",
+      "subtitle": "Must have V3, Should have V3, Couldn't have V3",
+      "category": "structures",
+      "duration": 360,
+      "audioUrl": "/audio/grammar/perfect-modals-cikarmalar.mp3",
+      "memoryCode": "Must have (Kesin yapmış), Should have (Yapmalıydı yapmadı)",
+      "speaker": "YDS Hoca & Neural Voice",
+      "tags": ["modals", "must have v3", "should have v3", "çıkarım"]
+    }
+  ]
+}

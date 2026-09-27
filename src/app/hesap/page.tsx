@@ -12,6 +12,7 @@ import {
   LEVEL_COLORS,
   LEVEL_TEST_RESULT_STORAGE_KEY,
 } from "@/lib/data-level-test";
+import PushManager from "@/components/PushManager";
 
 function hashStr(s: string): number {
   let h = 0;
@@ -281,6 +282,11 @@ export default function HesapPage() {
 
           {/* Badges Showcase Section */}
           <BadgeShowcase />
+
+          {/* Push Bildirim ve Hatırlatıcı Ayarları */}
+          <div className="max-w-xl mx-auto">
+            <PushManager />
+          </div>
         </div>
       ) : (
         <div className="max-w-md mx-auto card-vibrant p-8">

@@ -17,8 +17,11 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Environment
+# Environment — never commit real secrets
+.env
+.env.local
 .env*.local
+.env.supabase.example.filled
 
 # OS files
 .DS_Store
