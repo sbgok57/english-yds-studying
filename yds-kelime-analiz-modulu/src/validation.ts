@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 // Tek kelime ya da en fazla 6 kelimelik kalıp/frazal verb kabul edilir.
-// Satır sonu, talimat metni, HTML ve rastgele metin girişini reddeder.
 const lexicalItemPattern = /^[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*(?: +[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*){0,5}$/u;
 
 export const wordInputSchema = z
@@ -30,6 +29,30 @@ export const bulkWordInputSchema = z
       .array(wordInputSchema)
       .min(1, "En az bir kelime gönderin.")
       .max(50, "Bir istekte en fazla 50 kelime ekleyebilirsiniz."),
+  })
+  .strict();
+
+// PDF'ten kelimeleri mevcut parser çıkardıktan sonra bu endpoint'e gönderir.
+export const globalPdfImportSchema = z
+  .object({
+    sourceFileName: z.string().trim().min(1).max(255).optional(),
+    words: z
+      .array(wordInputSchema)
+      .min(1, "PDF'ten en az bir kelime çıkarılmalı.")
+      .max(500, "PDF başına en fazla 500 kelime içe aktarılabilir."),
+  })
+  .strict();
+
+export const wordListQuerySchema = z
+  .object({
+    limit: z.coerce.number().int().min(1).max(100).default(50),
+    cursor: z.string().min(1).max(128).optional(),
+  })
+  .strict();
+
+export const progressInputSchema = z
+  .object({
+    isLearned: z.boolean(),
   })
   .strict();
 

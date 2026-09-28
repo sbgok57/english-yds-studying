@@ -1,195 +1,216 @@
-# YDS Kelime Analiz Modülü — Claude AI
+# YDS Kelime Sistemi — Claude AI + Tek Site Sahibi + Ortak Kelime Havuzu
 
-Bu klasör, YDS kelime sitenize entegre edilebilecek çalışır bir backend referans uygulamasıdır. Kaynak sitenizin kodu/teknoloji bilgisi paylaşılmadığı için mevcut projeye doğrudan bağlanmış değildir; Node.js + TypeScript + Express + PostgreSQL varsayımıyla hazırlanmıştır.
+Bu proje, mevcut YDS sitenize entegre edilebilecek **Node.js + TypeScript + Express + PostgreSQL** referans backend'idir. Sitenizin kaynak kodu/kimlik doğrulama altyapısı paylaşılmadığı için mevcut projeye doğrudan bağlanmış değildir; entegrasyon noktaları aşağıda verilmiştir.
 
-## Neler yapar?
-Kelime eklendiği anda kayıt PENDING durumuyla veritabanına yazılır. Arka plan worker'ı her kayıt için Claude API'yi çağırıp şu bilgileri üretir:
-- Yaklaşık CEFR seviyesi (A1–C2; bilinmiyorsa UNKNOWN)
-- Kelimenin lemma/kök biçimi
-- Kelime türü: noun, verb, adjective, adverb vb. Bir kelime birden fazla türde kullanılabiliyorsa her kullanım ayrı anlam olarak saklanır.
-- Her anlam için Türkçe karşılık ve İngilizce tanım
-- Her anlam için tam 2 İngilizce örnek cümle ve Türkçe çevirisi
-- Yaygın eşdizimler (collocations)
-- Güven seviyesi ve insan kontrolü gerekip gerekmediği
+## İstenen davranış
 
-Toplu ekleme uç noktası her kelimeyi ayrı iş olarak kuyruğa alır. Claude veya ağ geçici olarak çalışmazsa kayıt kaybolmaz; otomatik tekrar denenir. İstenirse başarısız bir kayıt elle yeniden kuyruğa alınabilir.
+1. Site sahibi PDF'ten çıkardığı kelimeleri ortak havuza aktarır.
+2. Ortak kelimeler her giriş yapmış hesabın çalışma listesinde görünür. Her kullanıcı ortak kelime için kendi öğrenme durumunu tutar; diğer kullanıcıların ilerlemesi görünmez.
+3. Kelime havuzunda global kelime bir kez saklanır; her kullanıcıya ayrı kopya oluşturulmaz.
+4. Normal kullanıcıların eklediği kelimeler varsayılan olarak kişisel kalır. İstek gövdesiyle `isGlobal` veya `role=admin` verilerek yetki yükseltilemez.
+5. Yalnızca `OWNER_USER_ID` ile sunucu tarafında tanımlanan **tek hesap** PDF/ortak havuz yönetimini yapabilir. Owner hesabı da normal kullanıcı gibi ders çalışır.
+6. Ortak havuza eklenen her yeni kelime Claude kuyruğuna alınır: lemma, yaklaşık CEFR seviyesi, bir veya birden fazla kelime türü, anlamlar, iki örnek cümle ve Türkçe çevirileri oluşturulur.
 
-**Önemli:** CEFR kelime seviyesi tek ve değişmez/resmî bir değer değildir; anlam, bağlam ve kaynaklara göre değişebilir. Bu modül AI tahmini üretir. Belirsiz durumlarda UNKNOWN, düşük güven ve reviewRequired: true döner. Sınav içeriğinde kullanmadan önce kontrol etmeniz önerilir.
+> Admin menüsünü arayüzde gizlemek tek başına güvenlik değildir. Bu örnekte PDF ekleme ve backfill rotaları ayrıca sunucu tarafında sahibi doğrular. Kimlik doğrulamanın sitenizin gerçek session/JWT middleware'iyle bağlanması gerekir.
 
-## Teknoloji
-- Node.js 20+
-- TypeScript, Express
-- PostgreSQL + Prisma
-- Anthropic TypeScript SDK ve Claude Messages API'nin JSON Schema ile yapılandırılmış çıktısı
+## Kurulum
 
-Varsayılan model claude-sonnet-5 olarak ayarlanmıştır. Hesabınızda erişilebilir başka bir Claude model ID'si varsa .env içindeki CLAUDE_MODEL değerini değiştirebilirsiniz. Anthropic SDK'nin resmi örneği messages.parse ve jsonSchemaOutputFormat ile yapılandırılmış JSON çıktısını gösterir: [TypeScript SDK örneği](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/structured-outputs-json-schema.ts).
+Node.js 20+ ve PostgreSQL gerekir. Veritabanında `yds_words` adında bir database oluşturun.
 
-## 1. Kurulum
-PostgreSQL'de `yds_words` adında bir veritabanı oluşturun. Ardından:
 ```bash
 cd yds-kelime-analiz-modulu
 npm install
 cp .env.example .env
 ```
-.env dosyasını açıp gerçek DATABASE_URL ve ANTHROPIC_API_KEY değerlerini girin. Anthropic anahtarını asla tarayıcıya/frontend koduna koymayın.
+
+`.env` içinde `DATABASE_URL` ve `ANTHROPIC_API_KEY` değerlerini girin. Anthropic anahtarı yalnızca sunucuda saklanmalıdır; tarayıcı koduna koymayın.
+
 ```bash
 npx prisma generate
 npx prisma migrate dev --name init
 npm run dev
 ```
-Servis `http://localhost:3000` adresinde başlar. Sağlık kontrolü:
+
+Bu, **yeni veritabanı** kurulumu içindir. Önceki kelime analiz modülünü aynı veritabanına uyguladıysanız yeni şemayı mevcut migration geçmişinize `global-word-owner` adlı ayrı bir migration olarak ekleyin; `Word.userId` alanı korunur, yeni görünürlük/ilerleme alanları eklenir. Production'da migration'ı deployment adımında `npx prisma migrate deploy` ile uygulayın. Canlı veritabanında migration'ı önce yedek alıp staging ortamında test edin.
+
+Sunucu `http://localhost:3000` üzerinde açılır. Sağlık kontrolü:
+
 ```bash
 curl http://localhost:3000/health
 ```
+
 Üretim derlemesi:
+
 ```bash
 npm run build
 npm start
 ```
 
-## 2. API kullanımı
+Anthropic TypeScript SDK'nin JSON Schema örneği `messages.parse` ve `jsonSchemaOutputFormat` kullanır: [resmî SDK örneği](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/examples/structured-outputs-json-schema.ts). Varsayılan model `.env` içindeki `CLAUDE_MODEL=claude-sonnet-5` ayarıdır; hesabınızda erişilebilir başka bir model ID'si varsa değiştirebilirsiniz.
 
-### Tek kelime ekleme
+## Tek sahip hesabı nasıl belirlenir?
+
+- Önce sitenizde **normal kullanıcı kaydı** ile kendi hesabınızı oluşturun.
+- Kimlik doğrulama sağlayıcınızdan o hesabın değişmeyen kullanıcı ID'sini (Auth UID) alın.
+- Production `.env`/secret ayarına `OWNER_USER_ID="gercek-auth-uid"` girin. Bu değeri istemci tarafından gönderilen e-posta veya form alanından almayın.
+- Kimlik doğrulama middleware'iniz doğruladığı kullanıcıyı `req.user.id` olarak sağlamalıdır.
+- İlk başlangıçta kod, veritabanındaki sabit `SiteOwner.id = 1` kaydını oluşturur. Sonraki başlangıçlarda farklı `OWNER_USER_ID` girilirse uygulama hata vererek açılmaz; sahip otomatik olarak başka hesaba devredilmez.
+
+Development örneğinde `.env.example` içindeki `DEV_USER_ID` ve `OWNER_USER_ID` aynı bırakılmıştır; sadece yerel test içindir. Production'da `DEV_USER_ID` bypass'ı devre dışıdır ve gerçek kullanıcı doğrulaması zorunludur. Public kayıt ekranında `role`, `isAdmin` veya `OWNER_USER_ID` alanı eklemeyin.
+
+## Mevcut PDF yükleme akışına bağlama
+
+Bu örnek sitenizin PDF yükleme/parsing biçimini bilmediği için PDF'i ayrıştırmaz. Mevcut PDF kodunuz kelimeleri çıkardıktan sonra aşağıdaki admin endpoint'ine gönderin. Endpoint yalnızca kelime/bağlam JSON'u alır, ortak havuza kaydeder ve Claude analiz kuyruğuna ekler.
+
+### Endpoint
+
+`POST /api/admin/pdf/import`
+
+Body:
+
+```json
+{
+  "sourceFileName": "yds-kelimeleri.pdf",
+  "words": [
+    { "term": "abandon", "context": "The team abandoned the initial plan." },
+    { "term": "significant" },
+    { "term": "in contrast" }
+  ]
+}
+```
+
+Bir PDF aktarımında en fazla 500 kelime kabul edilir. Aynı PDF içindeki tekrarlar tekilleştirilir. Aynı ortak kelime daha önce eklenmişse yeni kopya oluşturulmaz. Önceki sürümde site sahibinin kişisel listesine eklenmiş aynı kelime bulunursa, o kayıt ortak kayda çevrilir; varsa mevcut analiz ve owner çalışma ilerlemesi korunur.
+
+### Mevcut PDF parser'ından çağırma örneği
+
+Aşağıdaki `extractWordsFromPdf` sizin mevcut PDF kodunuzdur; çıktı biçimini endpoint'in beklediği `[{term, context?}]` şekline dönüştürün:
+
+```ts
+const extracted = await extractWordsFromPdf(pdfFile);
+
+const response = await fetch("/api/admin/pdf/import", {
+  method: "POST",
+  credentials: "include", // mevcut oturum cookie'si
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    sourceFileName: pdfFile.name,
+    words: extracted.map((item) => ({
+      term: item.term,
+      context: item.context,
+    })),
+  }),
+});
+
+if (response.status === 403) {
+  throw new Error("PDF ile ortak kelime ekleme yalnızca site sahibine açıktır.");
+}
+if (!response.ok) {
+  throw new Error("PDF kelimeleri ortak havuza aktarılamadı.");
+}
+const importResult = await response.json();
+// { requested, uniqueInPdf, promotedToShared, queued, alreadyShared, sourceFile }
+```
+
+PDF'ten kelimeleri sunucuda çıkarıyorsanız aynı JSON'u sunucu içinden bu endpoint'e göndermek yerine mevcut upload handler'ınızdan doğrudan çağırabilirsiniz:
+
+```ts
+const result = await importGlobalPdfWords(
+  prisma,
+  req.user.id,                // doğrulanmış kullanıcı ID'si; owner middleware'i geçmiş olmalı
+  extractedWords,             // [{ term, context? }]
+  req.file.originalname,
+);
+```
+
+Bu fonksiyon `src/global-word-import.ts` içindedir. PDF'in tamamını herkese servis etmeyin; kod yalnızca dosya adını kaynak bilgisi olarak saklar.
+
+### Önemli entegrasyon noktası
+
+Mevcut PDF upload kodunuz daha önce kelimeleri doğrudan kişisel `Word` kaydı olarak oluşturuyorsa, sadece UI'da herkese görünür yapmak yeterli değildir. Bu kayıt kodunu `/api/admin/pdf/import` akışına yönlendirin. Admin hesabıyla aynı PDF yeniden içe aktarılırsa önceki kişisel kayıtlar ortak kayda yükseltilir. Eski PDF içeriğinin kelimeleri veritabanında değilse, PDF'i bir kez daha yükleyin.
+
+## API uç noktaları
+
+### Kullanıcının owner durumunu al
+
+```http
+GET /api/session/me
+```
+
+Örnek yanıt: `{"userId":"...","isOwner":false}`. Frontend `isOwner` true ise PDF yükleme/yönetim butonlarını gösterebilir. Örnek: `if (session.isOwner) renderPdfAdminButton();`. Bu sadece arayüz içindir; yetki kontrolü admin endpoint'inde tekrar yapılır. Başka kullanıcı URL'yi bilse veya isteği elle oluştursa bile admin rotası `403` döndürür.
+
+### Çalışma listesini getir
+
+```http
+GET /api/words?limit=50
+GET /api/words?limit=50&cursor=SON_KELIMENIN_IDSI
+```
+
+Yanıt `words` içinde kullanıcının özel kelimeleriyle bütün ortak kelimeleri döndürür. Sayfalama için `nextCursor` değerini sonraki isteğe gönderin. Ortak kelimelerde `isShared: true`; kullanıcının kişisel ilerlemesi `progress` alanındadır.
+
+### Kişisel kelime ekle
+
 ```bash
 curl -X POST http://localhost:3000/api/words \
   -H 'Content-Type: application/json' \
   -d '{"term":"abandon"}'
 ```
-Yanıt 202 Accepted döner. status önce PENDING/PROCESSING, analiz bitince COMPLETED olur. API anahtarı veya ağ hatası olursa kelime kaydı veritabanında kalır ve tekrar denenir.
 
-### Bağlam gönderme (çok anlamlı kelimeler için)
-```json
-{
-  "term": "charge",
-  "context": "The company was charged with violating environmental regulations."
-}
-```
-Bağlam isteğe bağlıdır; doğru anlamı seçmeye yardımcı olur. En fazla 500 karakter kabul edilir.
+Bu rota yalnızca kişisel kelime ekler. İstemci `isGlobal:true` yollasa bile şema bilinmeyen alanı reddeder.
 
-### Analizi kontrol etme
-POST yanıtındaki `word.id` değerini kullanın:
-```bash
-curl http://localhost:3000/api/words/WORD_ID
-```
-`word.analysis` örnek yapısı:
-```json
-{
-  "isRecognized": true,
-  "lemma": "abandon",
-  "overallLevel": "B2",
-  "levelConfidence": "medium",
-  "levelNoteTr": "Bu, yaygın kullanıma göre yaklaşık CEFR tahminidir; bağlama göre değişebilir.",
-  "reviewRequired": false,
-  "senses": [
-    {
-      "partOfSpeech": "verb",
-      "meaningTr": "terk etmek, bırakmak",
-      "definitionEn": "to leave someone or something permanently or for a long time",
-      "cefrLevel": "B2",
-      "examples": [
-        {
-          "sentence": "The researchers abandoned the initial plan after the first trial.",
-          "translationTr": "Araştırmacılar ilk denemeden sonra başlangıç planını bıraktı."
-        },
-        {
-          "sentence": "Several villages were abandoned when the reservoir was built.",
-          "translationTr": "Rezervuar inşa edildiğinde birkaç köy terk edildi."
-        }
-      ],
-      "collocations": ["abandon a plan", "abandon an attempt"]
-    }
-  ]
-}
+### Bir kelimeyi çalışılmış olarak işaretle
+
+```http
+PUT /api/words/KELIME_ID/progress
+Content-Type: application/json
+
+{"isLearned": true}
 ```
 
-### Toplu kelime ekleme
-Tek istekte en fazla 50 kelime gönderilebilir; her biri ayrı ayrı analiz edilir:
-```bash
-curl -X POST http://localhost:3000/api/words/bulk \
-  -H 'Content-Type: application/json' \
-  -d '{"words":[{"term":"abandon"},{"term":"significant"},{"term":"in contrast"}]}'
-```
-Bu limit, bir anda çok fazla AI isteği gönderilmesini ve API sınırlarına takılmayı önlemeye yardımcı olur. Daha büyük listelerde 50'lik gruplara bölün.
+Bu ilerleme yalnızca giriş yapan kullanıcının hesabına kaydedilir. Aynı ortak kelimeyi çalışan diğer kişilerin ilerlemesi etkilenmez.
 
-### Başarısız analizi yeniden deneme
-```bash
-curl -X POST http://localhost:3000/api/words/WORD_ID/retry
-```
-Bu uç nokta, kelimenin sahibi olan oturumla çağrılmalıdır.
+### Analizi kontrol et
 
-### Mevcut analizsiz kelimeleri kuyruğa alma
-Örnek projedeki veritabanında analysis alanı boş olan bütün kelimeleri yeniden kuyruğa alır:
-```bash
-curl -X POST http://localhost:3000/api/admin/backfill \
-  -H 'x-admin-key: ADMIN_API_KEY-degeriniz'
-```
-Bu rota ADMIN_API_KEY ile korunur. Farklı veritabanı/tablo yapısına sahip sitelerde ilgili migration ve backfill sorgusunu kendi şemanıza uyarlayın.
-
-## 3. Mevcut siteye bağlama
-Bu örnek API, Word tablosuna doğrudan kayıt oluşturur. Mevcut sitenizde zaten bir kelime ekleme endpoint'i varsa en temiz entegrasyon iki yoldan biridir:
-1. Mevcut kelime ekleme endpoint'inizi `/api/words` mantığına uyarlayın; yeni kayıt PENDING olarak kaydedilsin.
-2. Ya da siteniz bu servisten ayrıysa, sunucu tarafındaki mevcut kayıt işleminden sonra bu servisin `/api/words` endpoint'ine istek gönderin. Tarayıcıdan Claude API'ye doğrudan istek göndermeyin.
-
-Üretime almadan önce:
-- `requireUser` fonksiyonunu mevcut session/JWT kimlik doğrulama middleware'inizle bağlayın. Kimlik doğrulanan kullanıcı `req.user.id` alanında bulunmalıdır.
-- Veritabanı migration'ını mevcut Word tablonuza uyarlayın. Bu örnek `userId`, `term`, `analysis`, `cefrLevel`, `enrichmentStatus` ve retry alanları kullanır.
-- Kelime okuma/güncelleme sorgularında `userId` kapsamını koruyun. Bu örnek IDOR riskini azaltmak için GET ve retry sorgularını kullanıcı ID'siyle sınırlar.
-- `DEV_USER_ID` yalnızca geliştirme kolaylığı içindir; production ortamında kullanılmaz.
-- `ADMIN_API_KEY` ve `ANTHROPIC_API_KEY` değerlerini secret manager/ortam değişkeninde saklayın; repoya commit etmeyin.
-- Gerçek frontend origin'lerinizi `CORS_ORIGINS` içine tam adresleriyle yazın. Aynı origin kullanıyorsanız CORS ayarı gerekmeyebilir.
-
-### Basit frontend akışı:
-```typescript
-async function addYdsWord(term: string) {
-  const response = await fetch("/api/words", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include", // siteniz cookie/session kullanıyorsa
-    body: JSON.stringify({ term }),
-  });
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
-    throw new Error(error.error ?? "Kelime eklenemedi.");
-  }
-  const { word } = await response.json();
-  // word.id'yi saklayıp GET /api/words/:id ile status=COMPLETED olana kadar
-  // örneğin 1–2 saniyede bir kontrol edin. UI'da bu sırada "AI analiz ediyor" gösterin.
-  return word;
-}
-
-async function waitForYdsAnalysis(id: string) {
-  for (let attempt = 0; attempt < 120; attempt++) { // en fazla yaklaşık 3 dakika
-    const response = await fetch(`/api/words/${encodeURIComponent(id)}`, {
-      credentials: "include",
-    });
-    if (!response.ok) throw new Error("Kelime analizi alınamadı.");
-    const { word } = await response.json();
-    if (word.status === "COMPLETED") return word;
-    if (word.status === "FAILED" && word.attempts >= 5) {
-      throw new Error("Analiz tamamlanamadı; yeniden deneyebilirsiniz.");
-    }
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-  }
-  throw new Error("Analiz beklenenden uzun sürdü; daha sonra tekrar kontrol edin.");
-}
+```http
+GET /api/words/KELIME_ID
 ```
 
-Analiz beklerken kullanıcıya PENDING/PROCESSING durumunu gösterin. COMPLETED olduğunda `analysis.senses` listesini dolaşıp POS etiketini, seviye, anlamları ve örnek cümleleri gösterin. `reviewRequired` true ise “Kontrol önerilir” rozeti ekleyin.
+Yeni kelime önce `PENDING`/`PROCESSING`, analiz tamamlanınca `COMPLETED` olur. Kelime kaydı Claude çağrısından önce yazılır; sağlayıcı hatasında kaybolmaz, worker otomatik dener.
 
-## 4. Kuyruk ve hata davranışı
-- Kayıt AI çağrısından önce yazılır; sağlayıcı hatasında kullanıcı kelimesini kaybetmez.
-- Worker başarısız işlemleri artan bekleme süresiyle en fazla MAX_ATTEMPTS kadar tekrar dener.
-- PROCESSING durumunda worker 15 dakikadan uzun süre kalmış işler yeniden alınabilir.
-- Claude yanıtı API seviyesinde JSON Schema ile, ardından Zod ile doğrulanır. İki örnek cümle yoksa/yanıt alanları bozuksa analiz başarıyla kaydedilmez ve tekrar denenir.
-- Bir kelimenin birden fazla kelime türü olabilir; tür ve seviye anlam başına saklanır. `overallLevel`, ana kullanım için genel tahmindir.
-- Kullanıcı girdisinde İngilizce kelime ya da en fazla 6 kelimelik ifade kabul edilir. Ek bağlam 500 karakterle sınırlıdır.
+### Ortak kelimeleri yeniden analiz etme
 
-## 5. Dosya yapısı
+Yalnızca owner oturumuyla:
+
+```http
+POST /api/admin/backfill
+```
+
+`analysis` alanı boş olan kayıtları kuyruğa ekler.
+
+## Ortak kelime ile kişisel ilerleme ayrımı
+
+- `Word.isGlobal = true`: kelimenin içeriği bütün giriş yapmış kullanıcılara görünür ve yalnızca bir kez saklanır.
+- `UserWordProgress`: o kelimenin belirli kullanıcı tarafından çalışılıp çalışılmadığıdır. Bu kayıt kullanıcıya özeldir.
+- `Word.isGlobal = false`: sadece `Word.userId` sahibi görebilir.
+- Site sahibi de `/api/words` ve `/api/words/:id/progress` kullanarak diğer kullanıcılar gibi çalışır; yönetici olmak çalışma deneyimini engellemez.
+
+## Güvenlik ve üretim notları
+
+- `requireUser` fonksiyonunu kendi session/JWT doğrulama middleware'inizle bağlayın. Bu middleware, imzası doğrulanmış kullanıcının ID'sini `req.user.id` içine koymalıdır. E-postayı veya kullanıcı ID'sini istemciden gelen header/body'ye güvenerek kullanmayın.
+- Admin uç noktalarında `requireUser` **ve** `requireOwner` bulunur. Başka kullanıcılar doğrudan endpoint'e istek atsa da `403` alır.
+- Siteniz cookie tabanlı oturum kullanıyorsa CSRF korumasını mevcut güvenlik katmanınızda sürdürün. `CORS_ORIGINS` yalnızca gerçek frontend origin'lerine ayarlanmalıdır.
+- `OWNER_USER_ID` ve `ANTHROPIC_API_KEY` sunucu secret'ı olmalıdır. Repo'ya `.env` dosyası eklemeyin.
+- Bu worker uzun çalışan Node.js servisi varsayar. Serverless/uyuyan ortamlarda worker'ı ayrı, sürekli çalışan bir worker süreci olarak çalıştırın.
+- Tarama (scan) PDF'lerde metin seçilebilir olmayabilir; PDF parser'ınız OCR yapmıyorsa önce OCR uygulayın ve çıkan kelimeleri aynı import endpoint'ine gönderin.
+- CEFR seviyesi yaklaşık AI tahminidir. Anlam başına seviye, birden fazla kelime türü, `UNKNOWN`, `levelConfidence` ve `reviewRequired` alanları hata riskini azaltmak içindir; eğitim içeriğinde gerektiğinde gözden geçirin.
+
+## Dosyalar
+
 ```text
-prisma/schema.prisma       PostgreSQL veri modeli
-src/ai/word-enricher.ts    Claude istemi, JSON Schema ve Zod doğrulaması
-src/worker.ts              Kalıcı kuyruk, retry ve analiz kaydı
-src/server.ts              REST uç noktaları, doğrulama, rate limit, admin backfill
-src/validation.ts          Tekil/toplu giriş kontrolleri
-src/config.ts              Ortam değişkeni doğrulaması
+prisma/schema.prisma             Tek sahip, kelime ve kullanıcı ilerlemesi veri modeli
+src/site-owner.ts               Owner bootstrap ve eski kelimelerin normalize edilmesi
+src/global-word-import.ts       PDF kelimelerini ortak havuza ekleme/tekilleştirme
+src/ai/word-enricher.ts         Claude JSON Schema analizi ve Zod doğrulaması
+src/worker.ts                   Kalıcı analiz kuyruğu ve retry
+src/server.ts                   Kimlik/owner kontrolleri ve REST API
+src/validation.ts               İstek doğrulamaları
 ```
