@@ -20,11 +20,43 @@ export function sanitizeEnvUrl(val?: string | null): string {
   return clean;
 }
 
+export function findEnvUrl(keys: string[]): string {
+  for (const k of keys) {
+    if (process.env[k]) {
+      const sanitized = sanitizeEnvUrl(process.env[k]);
+      if (sanitized) return sanitized;
+    }
+  }
+  // Check prefixed variables (e.g. from Vercel integration: englishydsstudying_POSTGRES_PRISMA_URL)
+  for (const envKey of Object.keys(process.env)) {
+    for (const k of keys) {
+      if (envKey.endsWith(`_${k}`) || envKey === k) {
+        if (process.env[envKey]) {
+          const sanitized = sanitizeEnvUrl(process.env[envKey]);
+          if (sanitized) return sanitized;
+        }
+      }
+    }
+  }
+  return "";
+}
+
+export function getSafeDirectUrl(): string {
+  return findEnvUrl(["DIRECT_URL", "POSTGRES_URL_NON_POOLING"]);
+}
+
+// Top-level automatic synchronization: ensure process.env.DATABASE_URL & DIRECT_URL are populated
+const resolvedDbInit = findEnvUrl(["DATABASE_URL", "POSTGRES_PRISMA_URL", "POSTGRES_URL"]);
+if (resolvedDbInit && !process.env["DATABASE_URL"]) {
+  process.env["DATABASE_URL"] = resolvedDbInit;
+}
+const resolvedDirectInit = findEnvUrl(["DIRECT_URL", "POSTGRES_URL_NON_POOLING"]);
+if (resolvedDirectInit && !process.env["DIRECT_URL"]) {
+  process.env["DIRECT_URL"] = resolvedDirectInit;
+}
+
 export function validateDatabaseConfig(): { valid: boolean; provider: string; error?: string } {
-  const rawUrl =
-    sanitizeEnvUrl(process.env.DATABASE_URL) ||
-    sanitizeEnvUrl(process.env.POSTGRES_PRISMA_URL) ||
-    sanitizeEnvUrl(process.env.POSTGRES_URL);
+  const rawUrl = findEnvUrl(["DATABASE_URL", "POSTGRES_PRISMA_URL", "POSTGRES_URL"]);
 
   if (!rawUrl) {
     if (IS_SERVERLESS) {
@@ -68,10 +100,7 @@ export function validateDatabaseConfig(): { valid: boolean; provider: string; er
  */
 export function getSafeDatabaseUrl(): string {
   // 1. Check for remote connection strings (PostgreSQL / Neon / Supabase / Vercel Postgres)
-  const rawUrl =
-    sanitizeEnvUrl(process.env.DATABASE_URL) ||
-    sanitizeEnvUrl(process.env.POSTGRES_PRISMA_URL) ||
-    sanitizeEnvUrl(process.env.POSTGRES_URL);
+  const rawUrl = findEnvUrl(["DATABASE_URL", "POSTGRES_PRISMA_URL", "POSTGRES_URL"]);
 
   if (
     rawUrl &&
