@@ -203,7 +203,7 @@ export async function POST(req: NextRequest) {
       maxAge: 30 * 24 * 60 * 60,
     });
 
-    console.log(`[AUTH_REGISTER_SUCCESS] ${requestId} - User ${user.username} (${user.email}) registered.`);
+    console.info(`[AUTH_REGISTER_SUCCESS] ${requestId} - User ${user.username} (${user.email}) registered.`);
     return res;
   } catch (error: any) {
     console.error(`[AUTH_REGISTER_ERROR] ${requestId} -`, {

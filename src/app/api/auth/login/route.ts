@@ -125,7 +125,7 @@ export async function POST(req: NextRequest) {
       maxAge: 30 * 24 * 60 * 60, // 30 days
     });
 
-    console.log(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${user.username} (${user.email}) logged in successfully.`);
+    console.info(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${user.username} (${user.email}) logged in successfully.`);
     return res;
   } catch (error: any) {
     console.error(`[AUTH_LOGIN_ERROR] ${requestId} -`, {
