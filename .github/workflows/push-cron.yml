@@ -1,0 +1,46 @@
+# ============================================================
+# PUSH BİLDİRİM CRON'U — Vercel Hobby uyumlu (ücretsiz)
+#
+# Vercel Hobby'de saatlik cron YASAK (günde 1 çalıştırma limiti).
+# Bu workflow saati GELİRKEN endpoint'i ücretsiz tetikler.
+# İstanbul saatini sunucu tarafı hesaplar; UTC olması sorun değil.
+#
+# Gereken GitHub Secrets (repo → Settings → Secrets → Actions):
+#   PUSH_ENDPOINT_URL = https://SENINSITEN.com/api/push/send
+#   CRON_SECRET       = .env.local'daki CRON_SECRET ile aynı dizi
+#
+# NOT: Scheduled workflow'lar yalnız VARSAYILAN BRANCH'te (main)
+# çalışır → dosya main'e merge edilmeli.
+# ============================================================
+name: Push Hourly Cron
+
+on:
+  schedule:
+    # Her saat başı 5 geçe (GitHub yoğunluğunda birkaç dk kayabilir, sorun değil)
+    - cron: '5 * * * *'
+  workflow_dispatch: # elle tetiklemek için (test!)
+
+jobs:
+  trigger-push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Push endpoint'ini çağır (3 deneme)
+        run: |
+          for i in 1 2 3; do
+            echo "Deneme $i..."
+            code=$(curl -s -o resp.json -w "%{http_code}" \
+              --max-time 60 \
+              -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+              "${{ secrets.PUSH_ENDPOINT_URL }}")
+            echo "HTTP $code"
+            cat resp.json || true
+            echo
+            if [ "$code" = "200" ]; then
+              echo "✅ Bildirim turu tamamlandı."
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "❌ 3 denemede de başarısız."
+          exit 1
