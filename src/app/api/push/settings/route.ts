@@ -3,7 +3,9 @@
 // GET: Kullanıcının bildirim tercihlerini döner.
 // POST / PATCH: Bildirim tercihlerini (saat, sınav tarihi, kategoriler) günceller.
 // ============================================================
-import { NextResponse } from 'next/server';
+import { withApiHandler, jsonOk } from '@/lib/error/with-api-handler';
+import { AppError } from '@/lib/error/app-error';
+import { fromQuery } from '@/lib/supabase/safe-client';
 import { createAdminClient } from '@/lib/push/supabase-admin';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
@@ -48,50 +50,36 @@ const DEFAULT_SETTINGS = {
   timezone: 'Europe/Istanbul',
 };
 
-export async function GET() {
+export const GET = withApiHandler('push.settings.get', async () => {
   const userId = await getUserId();
   if (!userId) {
-    return NextResponse.json(
-      { error: 'Oturum açmalısınız.' },
-      { status: 401 }
-    );
+    throw new AppError('AUTH_REQUIRED', 'Bildirim tercihlerini görmek için oturum açmalısınız.', { status: 401 });
   }
 
-  try {
-    const admin = createAdminClient();
-    const { data, error } = await admin
-      .from('notification_settings')
-      .select('*')
-      .eq('user_id', userId)
-      .maybeSingle();
+  const admin = createAdminClient();
+  const res = await admin
+    .from('notification_settings')
+    .select('*')
+    .eq('user_id', userId)
+    .maybeSingle();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+  const r = fromQuery(res, { route: 'push.settings.get' });
+  if (!r.ok) throw r.error;
 
-    if (!data) {
-      // Varsayılan kayıt oluştur
-      const initial = { user_id: userId, ...DEFAULT_SETTINGS };
-      await admin.from('notification_settings').insert(initial);
-      return NextResponse.json({ settings: initial });
-    }
-
-    return NextResponse.json({ settings: data });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || 'Ayarlar yüklenemedi.' },
-      { status: 500 }
-    );
+  if (!r.data) {
+    // Varsayılan kayıt oluştur
+    const initial = { user_id: userId, ...DEFAULT_SETTINGS };
+    await admin.from('notification_settings').insert(initial);
+    return jsonOk({ settings: initial });
   }
-}
 
-export async function POST(req: Request) {
+  return jsonOk({ settings: r.data });
+});
+
+export const POST = withApiHandler('push.settings.post', async (req) => {
   const userId = await getUserId();
   if (!userId) {
-    return NextResponse.json(
-      { error: 'Oturum açmalısınız.' },
-      { status: 401 }
-    );
+    throw new AppError('AUTH_REQUIRED', 'Bildirim tercihlerini kaydetmek için oturum açmalısınız.', { status: 401 });
   }
 
   const body = await req.json().catch(() => ({}));
@@ -119,26 +107,18 @@ export async function POST(req: Request) {
     }
   }
 
-  try {
-    const admin = createAdminClient();
-    const { data, error } = await admin
-      .from('notification_settings')
-      .upsert(
-        { user_id: userId, ...updates },
-        { onConflict: 'user_id' }
-      )
-      .select()
-      .single();
+  const admin = createAdminClient();
+  const res = await admin
+    .from('notification_settings')
+    .upsert(
+      { user_id: userId, ...updates },
+      { onConflict: 'user_id' }
+    )
+    .select()
+    .single();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+  const r = fromQuery(res, { route: 'push.settings.post' });
+  if (!r.ok) throw r.error;
 
-    return NextResponse.json({ ok: true, settings: data });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message || 'Ayarlar kaydedilemedi.' },
-      { status: 500 }
-    );
-  }
-}
+  return jsonOk({ settings: r.data });
+});

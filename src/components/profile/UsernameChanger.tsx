@@ -40,7 +40,10 @@ export default function UsernameChanger() {
       safeStorage.set("yds_username", data.username);
       try {
         confetti({ particleCount: 50, spread: 60, scalar: 0.8 });
-      } catch {}
+      } catch (err) {
+        // PERF: Confetti is optional visual enhancement
+        void err;
+      }
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(30);
 
       setMsg({ ok: true, text: "Kullanıcı adınız başarıyla güncellendi! ✅" });

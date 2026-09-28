@@ -46,7 +46,10 @@ export default function AnagramGame() {
       setScore((s) => s + 20);
       try {
         confetti({ particleCount: 80, spread: 70 });
-      } catch {}
+      } catch (err) {
+        // PERF: Confetti is optional visual enhancement
+        void err;
+      }
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([40, 40, 40]);
     }
   };

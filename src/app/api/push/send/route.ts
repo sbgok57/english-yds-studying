@@ -1,5 +1,5 @@
 // ============================================================
-// GET /api/push/send — CRON uç noktası (VERCEL HOBBY UYUMLU SÜRÜM)
+// GET / POST /api/push/send — CRON uç noktası (VERCEL HOBBY UYUMLU SÜRÜM)
 //
 // Hobby değişiklikleri:
 //  • maxDuration YOK (Hobby fonksiyon limiti 10 sn; 60 yazmak Pro ister).
@@ -16,7 +16,9 @@
 //    günde tek çağrı yapan servisler için)
 // Güvenlik: Authorization: Bearer <CRON_SECRET> zorunlu.
 // ============================================================
-import { NextResponse } from 'next/server';
+import { withApiHandler, jsonOk } from '@/lib/error/with-api-handler';
+import { AppError } from '@/lib/error/app-error';
+import { fromQuery } from '@/lib/supabase/safe-client';
 import { createAdminClient } from '@/lib/push/supabase-admin';
 import { sendToSubscription } from '@/lib/push/vapid';
 import {
@@ -27,7 +29,6 @@ import {
 } from '@/lib/push/content';
 
 export const dynamic = 'force-dynamic';
-// ⚠️ maxDuration EKLEME — Vercel Hobby'de 10 sn üzeri Pro ister.
 
 const TIME_BUDGET_MS = 8500; // Hobby'nin 10 sn limitinin altında güvenli pay
 
@@ -54,19 +55,11 @@ interface Sub {
   auth_key: string;
 }
 
-export async function GET(req: Request) {
-  return handlePush(req);
-}
-
-export async function POST(req: Request) {
-  return handlePush(req);
-}
-
 async function handlePush(req: Request) {
   // --- 1. Yetki kontrolü ---
   const secret = process.env.CRON_SECRET;
   if (!secret || req.headers.get('authorization') !== `Bearer ${secret}`) {
-    return NextResponse.json({ error: 'Yetkisiz istek.' }, { status: 401 });
+    throw new AppError('CRON_UNAUTHORIZED', 'Yetkisiz istek.', { status: 401 });
   }
 
   const url = new URL(req.url);
@@ -91,7 +84,7 @@ async function handlePush(req: Request) {
   };
 
   // --- 2. Bildirimi açık + en az 1 aboneliği olan kullanıcılar ---
-  const { data: users, error: usersError } = await admin
+  const res = await admin
     .from('notification_settings')
     .select(
       `user_id, reminders, motivation, funny, reminder_time, exam_date,
@@ -100,19 +93,17 @@ async function handlePush(req: Request) {
     )
     .eq('enabled', true);
 
-  if (usersError) {
-    return NextResponse.json({ error: usersError.message }, { status: 500 });
-  }
+  const r = fromQuery(res, { route: 'push.send' });
+  if (!r.ok) throw r.error;
 
   const deadline = Date.now() + TIME_BUDGET_MS;
-  const list = (users ?? []) as any[];
+  const list = (r.data ?? []) as any[];
 
   // --- 3. Kullanıcı bazında gönderim (zaman bütçeli + devam edilebilir) ---
   for (const u of list) {
     summary.usersScanned++;
 
     // Bütçe dolduysa DUR — bu kullanıcı sonraki turda işlenir
-    // (bugün henüz gönderim yapılmadığı için last_*_on koruması onu bekletir).
     if (Date.now() > deadline) {
       summary.budgetExceeded = true;
       break;
@@ -127,14 +118,14 @@ async function handlePush(req: Request) {
     ) => {
       let ok = 0;
       for (const s of subs) {
-        const r = await sendToSubscription(s, payload);
-        if (r === 'ok') {
+        const sendRes = await sendToSubscription(s, payload);
+        if (sendRes === 'ok') {
           ok++;
           await admin
             .from('push_subscriptions')
             .update({ last_success_at: new Date().toISOString(), fail_count: 0 })
             .eq('id', s.id);
-        } else if (r === 'gone') {
+        } else if (sendRes === 'gone') {
           await admin.from('push_subscriptions').delete().eq('id', s.id);
           summary.goneDeleted++;
         } else {
@@ -184,5 +175,8 @@ async function handlePush(req: Request) {
     summary.usersProcessed++;
   }
 
-  return NextResponse.json(summary);
+  return jsonOk(summary);
 }
+
+export const GET = withApiHandler('push.send.get', handlePush);
+export const POST = withApiHandler('push.send.post', handlePush);

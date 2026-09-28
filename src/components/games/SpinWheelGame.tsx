@@ -44,7 +44,10 @@ export default function SpinWheelGame({ items = DEFAULT_ITEMS }: { items?: Wheel
       setSelectedItem(items[randomIndex]);
       try {
         confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-      } catch {}
+      } catch (err) {
+        // PERF: Confetti is optional visual enhancement
+        void err;
+      }
       if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(30);
     }, 3500);
   };

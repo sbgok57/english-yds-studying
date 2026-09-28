@@ -6,6 +6,7 @@ import AiWidget from "@/components/AiWidget";
 import { BadgeQueueProvider } from "@/components/gamification/BadgeQueueProvider";
 import { CrashGuardianProvider } from "@/components/CrashGuardianProvider";
 import RecoveryBanner from "@/components/RecoveryBanner";
+import ErrorToast from "@/components/ErrorToast";
 
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
@@ -38,6 +39,7 @@ export default function RootLayout({
             <main className="min-h-[calc(100vh-4rem)]">{children}</main>
             <AiWidget />
             <RecoveryBanner />
+            <ErrorToast />
           </BadgeQueueProvider>
         </CrashGuardianProvider>
         <footer className="border-t border-white/10 py-8 mt-12">

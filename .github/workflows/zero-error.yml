@@ -1,0 +1,60 @@
+# ============================================================
+# ZERO ERROR GATE — her PR ve main push'unda 4 bariyer:
+#   1) TypeScript tip kontrolü (tsc --noEmit)
+#   2) Production build
+#   3) Sıfır Hata Denetçisi (scripts/zero-error-check.mjs)
+#   4) Health endpoint canlılık testi
+# Biri bile kırmızıysa merge ENGELLENİR → hatalar 0'a iner.
+# ============================================================
+name: Zero Error Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Bağımlılıklar
+        run: npm ci
+
+      - name: 1/4 Tip kontrolü
+        run: npx tsc --noEmit
+
+      - name: 2/4 Production build
+        run: npm run build
+        env:
+          # Build'in çökmemesi için dummy değerler (gerçekleri Vercel integration basar)
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+          NEXT_PUBLIC_VAPID_PUBLIC_KEY: placeholder
+          NEXT_PUBLIC_AUDIO_BASE_URL: /audio
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+      - name: 3/4 Sıfır Hata Denetçisi
+        run: node scripts/zero-error-check.mjs
+
+      - name: 4/4 Health endpoint (başlat ve sorgula)
+        run: |
+          PORT=3111 npm run start -- -p 3111 &
+          sleep 6
+          code=$(curl -s -o health.json -w "%{http_code}" http://localhost:3111/api/health || echo "000")
+          cat health.json 2>/dev/null || true
+          # Health 200 veya 503 dönebilir (dummy env ile supabase'e erişemez);
+          # önemli olan endpoint'in 500/çökme vermemesidir.
+          if [ "$code" = "000" ] || [ "$code" = "500" ]; then
+            echo "Health endpoint çöktü (HTTP $code)"
+            exit 1
+          fi
+          echo "Health endpoint yanıt verdi (HTTP $code) ✅"

@@ -1,35 +1,51 @@
-"use client";
+// ============================================================
+// Segment hata sınırı — hiçbir sayfa beyaz ekranla ölmez.
+// Next.js bunu otomatik yakalar; kullanıcıya Türkçe kart + retry.
+// ============================================================
+'use client';
 
-/** Route seviyesi hata yakalayıcı — Next.js App Router için.
- *  Herhangi bir sayfa çökerse kullanıcıya dost bir kurtarma ekranı gösterir. */
-export default function Error({
+import React, { useEffect } from 'react';
+
+export default function ErrorPage({
   error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    // Üretimde izleme servisi için
+    console.error('[hata-kalkan]', error.digest, error.message);
+  }, [error]);
+
   return (
-    <div className="min-h-[70vh] flex items-center justify-center p-6">
-      <div className="card-vibrant p-10 text-center max-w-md w-full space-y-4">
-        <div className="text-5xl">🧯</div>
-        <h1 className="text-2xl font-black">Kanka, sayfa küçük bir hata verdi.</h1>
-        <p className="text-sm text-white/60 leading-relaxed">
-          Endişelenme — senin verilerin (kayıtların, serilerin) güvende. Sadece bu ekran
-          yenilendi. Tekrar dene, hallederiz!
+    <main className="mx-auto flex min-h-[60vh] max-w-md flex-col items-center justify-center px-4 text-center">
+      <p className="text-5xl">😵💫</p>
+      <h1 className="mt-4 text-xl font-extrabold text-white">Bir şeyler ters gitti</h1>
+      <p className="mt-2 text-sm text-slate-400">
+        Sorun bizden kaynaklanıyor, sende değil. Ekranı yenilemeyi dene; düzelmezse
+        aşağıdaki kodla bize bildir, hemen çözeriz.
+      </p>
+      {error.digest && (
+        <p className="mt-3 rounded-lg bg-slate-800 px-3 py-1 font-mono text-xs text-slate-400">
+          Hata kodu: {error.digest}
         </p>
-        {process.env.NODE_ENV === "development" && (
-          <p className="text-[11px] font-mono text-white/40 break-words">
-            {error.message}
-          </p>
-        )}
+      )}
+      <div className="mt-6 flex gap-3">
         <button
+          type="button"
           onClick={reset}
-          className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-bold hover:scale-105 transition-transform"
+          className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 transition"
         >
-          🔄 Tekrar Dene
+          🔄 Tekrar dene
         </button>
+        <a
+          href="/"
+          className="rounded-xl bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-200 hover:bg-slate-700 transition"
+        >
+          Ana sayfa
+        </a>
       </div>
-    </div>
+    </main>
   );
 }
