@@ -10,10 +10,12 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/push/supabase-admin';
 import { cookies } from 'next/headers';
 import { verifySessionToken, SESSION_COOKIE_NAME } from '@/lib/server-auth';
+import { trace } from '@/lib/debug/tracer';
 
 export const dynamic = 'force-dynamic';
 
 export const POST = withApiHandler('push.subscribe', async (req) => {
+  trace('PUSH', 'push.subscribe started');
   let userId: string | null = null;
 
   // 1. Supabase Auth Kontrolü

@@ -15,11 +15,10 @@ const PUBLIC_PATHS = [
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
-  // 1. Bypass static files, internal Next.js paths, public API routes
+  // 1. Bypass static files, internal Next.js paths, API routes
   if (
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/api/health") ||
+    pathname.startsWith("/api/") ||
     pathname.startsWith("/favicon.ico") ||
     pathname.startsWith("/robots.txt") ||
     pathname.startsWith("/sitemap.xml") ||

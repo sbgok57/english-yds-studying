@@ -6,6 +6,7 @@ import {
   findVoice,
   STANDARD_PREVIEW_TEXT,
 } from "./voice-registry";
+import { trace } from "@/lib/debug/tracer";
 
 export interface PlaybackOptions {
   voiceId?: string;
@@ -160,6 +161,7 @@ class ClientAudioManager {
 
     try {
       options?.onStart?.();
+      trace("AUDIO", `playText started for "${text.slice(0, 30)}..." with voice ${voice.id}`);
 
       const res = await fetch("/api/tts", {
         method: "POST",

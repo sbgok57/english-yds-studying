@@ -7,6 +7,8 @@ import { BadgeQueueProvider } from "@/components/gamification/BadgeQueueProvider
 import { CrashGuardianProvider } from "@/components/CrashGuardianProvider";
 import RecoveryBanner from "@/components/RecoveryBanner";
 import ErrorToast from "@/components/ErrorToast";
+import CaptureBootstrap from "@/components/CaptureBootstrap";
+import DebugPanel from "@/components/DebugPanel";
 
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
@@ -40,6 +42,8 @@ export default function RootLayout({
             <AiWidget />
             <RecoveryBanner />
             <ErrorToast />
+            <CaptureBootstrap />
+            <DebugPanel />
           </BadgeQueueProvider>
         </CrashGuardianProvider>
         <footer className="border-t border-white/10 py-8 mt-12">

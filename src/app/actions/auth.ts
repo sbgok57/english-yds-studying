@@ -8,8 +8,10 @@
 import { safeAction } from '@/lib/error/safe-action';
 import { fromAuthError } from '@/lib/error/app-error';
 import { createClient } from '@/lib/supabase/server';
+import { trace } from '@/lib/debug/tracer';
 
 export async function signupAction(email: string, password: string, fullName?: string) {
+  trace('AUTH', `signupAction started: ${email}`);
   return safeAction('auth.signup', async () => {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.signUp({
@@ -19,7 +21,11 @@ export async function signupAction(email: string, password: string, fullName?: s
         data: { full_name: fullName || '' },
       },
     });
-    if (error) throw fromAuthError(error);
+    if (error) {
+      trace('AUTH', `signupAction error: ${error.message}`);
+      throw fromAuthError(error);
+    }
+    trace('AUTH', `signupAction success: ${data.user?.id}`);
     return {
       userId: data.user?.id,
       needsCode: data.session === null,
@@ -28,6 +34,7 @@ export async function signupAction(email: string, password: string, fullName?: s
 }
 
 export async function verifyCodeAction(email: string, token: string) {
+  trace('AUTH', `verifyCodeAction started: ${email}`);
   return safeAction('auth.verify', async () => {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.verifyOtp({
@@ -35,7 +42,11 @@ export async function verifyCodeAction(email: string, token: string) {
       token: token.trim().replace(/\s/g, ''),
       type: 'signup',
     });
-    if (error) throw fromAuthError(error);
+    if (error) {
+      trace('AUTH', `verifyCodeAction error: ${error.message}`);
+      throw fromAuthError(error);
+    }
+    trace('AUTH', `verifyCodeAction success: ${data.user?.id}`);
     return {
       sessionId: !!data.session?.access_token,
       userId: data.user?.id,
