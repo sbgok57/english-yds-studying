@@ -4,10 +4,20 @@ import { cookies } from 'next/headers';
 import type { Database } from './database.types';
 
 export async function createClient() {
+  const url =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_URL ||
+    '';
+  const key =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.englishydsstudying_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_PUBLISHABLE_KEY ||
+    '';
+
   const cookieStore = await cookies();
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    url,
+    key,
     {
       cookies: {
         getAll: () => cookieStore.getAll(),

@@ -9,8 +9,16 @@ if (typeof window !== 'undefined') {
 }
 
 export function createAdminClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url =
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_URL ||
+    process.env.englishydsstudying_NEXT_PUBLIC_SUPABASE_URL;
+
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.englishydsstudying_SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.englishydsstudying_SUPABASE_SECRET_KEY;
+
   if (!url || !key) {
     throw new Error('NEXT_PUBLIC_SUPABASE_URL ve SUPABASE_SERVICE_ROLE_KEY tanımlı olmalı.');
   }

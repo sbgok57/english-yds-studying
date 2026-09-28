@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL:
+      process.env.NEXT_PUBLIC_SUPABASE_URL ||
+      process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_URL ||
+      process.env.englishydsstudying_NEXT_PUBLIC_SUPABASE_URL ||
+      "",
+    NEXT_PUBLIC_SUPABASE_ANON_KEY:
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      process.env.englishydsstudying_SUPABASE_ANON_KEY ||
+      process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_PUBLISHABLE_KEY ||
+      process.env.englishydsstudying_NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+      "",
+  },
   experimental: {
     serverComponentsExternalPackages: ["msedge-tts", "nodemailer"],
     outputFileTracingIncludes: {

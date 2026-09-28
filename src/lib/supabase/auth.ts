@@ -7,8 +7,15 @@ import { createClient, type AuthChangeEvent, type Session, type User } from '@su
 import type { Database } from './database.types';
 
 // Browser ve SSR/Next.js uyumlu ortam değişkeni okuma
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_URL ||
+  '';
+const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  process.env.englishydsstudying_SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_PUBLISHABLE_KEY ||
+  '';
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {

@@ -6,15 +6,22 @@ if (typeof window !== 'undefined') {
   throw new Error('[supabase/admin] Must not be imported on the client side.');
 }
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const url =
+  process.env.NEXT_PUBLIC_SUPABASE_URL ||
+  process.env.NEXT_PUBLIC_englishydsstudying_SUPABASE_URL ||
+  process.env.englishydsstudying_NEXT_PUBLIC_SUPABASE_URL ||
+  '';
 
-if (!url || !serviceKey) {
-  throw new Error(
-    '[supabase/admin] Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY env vars.'
-  );
-}
+const serviceKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.englishydsstudying_SUPABASE_SERVICE_ROLE_KEY ||
+  process.env.englishydsstudying_SUPABASE_SECRET_KEY ||
+  '';
 
-export const adminClient = createClient<Database>(url, serviceKey, {
-  auth: { autoRefreshToken: false, persistSession: false },
-});
+export const adminClient = createClient<Database>(
+  url || 'https://placeholder.supabase.co',
+  serviceKey || 'placeholder-service-key',
+  {
+    auth: { autoRefreshToken: false, persistSession: false },
+  }
+);

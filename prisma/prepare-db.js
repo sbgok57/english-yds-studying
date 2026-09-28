@@ -15,16 +15,39 @@ function sanitizeUrl(url) {
   return clean;
 }
 
-function resolveDbEnvironment() {
-  // Check common Vercel / Cloud environment variables
-  const rawDbUrl =
-    sanitizeUrl(process.env.DATABASE_URL) ||
-    sanitizeUrl(process.env.POSTGRES_PRISMA_URL) ||
-    sanitizeUrl(process.env.POSTGRES_URL);
+function findEnvVar(keys) {
+  for (const k of keys) {
+    if (process.env[k]) return sanitizeUrl(process.env[k]);
+  }
+  // Check prefixed variables (e.g. englishydsstudying_POSTGRES_PRISMA_URL)
+  for (const envKey of Object.keys(process.env)) {
+    for (const k of keys) {
+      if (envKey.endsWith(`_${k}`) || envKey === k) {
+        if (process.env[envKey]) return sanitizeUrl(process.env[envKey]);
+      }
+    }
+  }
+  return "";
+}
 
-  const rawDirectUrl =
-    sanitizeUrl(process.env.DIRECT_URL) ||
-    sanitizeUrl(process.env.POSTGRES_URL_NON_POOLING);
+function resolveDbEnvironment() {
+  // Check common Vercel / Cloud environment variables (standard or prefixed)
+  const rawDbUrl = findEnvVar(["DATABASE_URL", "POSTGRES_PRISMA_URL", "POSTGRES_URL"]);
+  const rawDirectUrl = findEnvVar(["DIRECT_URL", "POSTGRES_URL_NON_POOLING"]);
+
+  // Auto-export Supabase URL and keys to standard names if prefixed versions exist
+  const supabaseUrl = findEnvVar(["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_URL"]);
+  if (supabaseUrl && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    process.env.NEXT_PUBLIC_SUPABASE_URL = supabaseUrl;
+  }
+  const supabaseAnon = findEnvVar(["NEXT_PUBLIC_SUPABASE_ANON_KEY", "SUPABASE_ANON_KEY", "SUPABASE_PUBLISHABLE_KEY"]);
+  if (supabaseAnon && !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = supabaseAnon;
+  }
+  const supabaseService = findEnvVar(["SUPABASE_SERVICE_ROLE_KEY", "SUPABASE_SECRET_KEY"]);
+  if (supabaseService && !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    process.env.SUPABASE_SERVICE_ROLE_KEY = supabaseService;
+  }
 
   let provider = "sqlite";
   let activeUrl = rawDbUrl;
