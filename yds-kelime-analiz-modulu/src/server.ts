@@ -249,7 +249,7 @@ app.post(
   }),
 );
 
-app.use((_req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).json({ error: "Rota bulunamadı." });
 });
 

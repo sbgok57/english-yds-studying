@@ -8,7 +8,7 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOTS = ['src', 'app', 'lib', 'components', 'public', 'scripts'];
-const SKIP_DIRS = new Set(['node_modules', '.next', '.git', 'dist', 'build', 'audio-out', 'test']);
+const SKIP_DIRS = new Set(['node_modules', '.next', '.git', 'dist', 'build', 'audio-out', 'test', 'yds-kelime-analiz-modulu']);
 const EXTS = new Set(['.ts', '.tsx', '.js', '.jsx', '.mjs', '.json', '.css']);
 
 // KURAL LİSTESİ — level 'error' kapıyı durdurur, 'warn' raporlar
