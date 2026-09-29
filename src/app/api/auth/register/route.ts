@@ -12,6 +12,7 @@ import {
   generateRequestId,
   SafeUser,
 } from "@/lib/auth-contract";
+import { registerPermanentUser } from "@/lib/supabase-auth-service";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -109,85 +110,56 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 3. Existing User Checks with transient retry
-    const existingEmail = await withDbRetry(
-      () => prisma.user.findUnique({ where: { email } }),
-      { maxRetries: 2, timeoutMs: 5000, requestId, operationName: "check_existing_email" }
-    );
-    if (existingEmail) {
-      return NextResponse.json(
-        authError(
-          AUTH_ERROR_CODES.EMAIL_ALREADY_IN_USE,
-          "Bu e-posta adresiyle zaten kayıtlı bir hesap var kanka. Giriş yapmayı dene!",
-          "email",
-          requestId
-        ),
-        { status: 409 }
-      );
-    }
-
-    const existingUsername = await withDbRetry(
-      () => prisma.user.findUnique({ where: { username } }),
-      { maxRetries: 2, timeoutMs: 5000, requestId, operationName: "check_existing_username" }
-    );
-    if (existingUsername) {
-      return NextResponse.json(
-        authError(
-          AUTH_ERROR_CODES.USERNAME_ALREADY_IN_USE,
-          "Bu kullanıcı adı zaten alınmış kanka. Lütfen başka bir kullanıcı adı seç!",
-          "username",
-          requestId
-        ),
-        { status: 409 }
-      );
-    }
-
-    // 4. Create User atomically
-    const passwordHash = await bcrypt.hash(password, 10);
-    const user = await withDbRetry(
-      () =>
-        prisma.user.create({
-          data: {
-            email,
-            username,
-            passwordHash,
-            level: "A1",
-            streak: 1,
-            totalPoints: 50,
-            avatarId: "astronaut",
-          },
-        }),
-      { maxRetries: 2, timeoutMs: 6000, requestId, operationName: "create_user" }
-    );
-
-    // 5. Sign Session Token & Issue Cookie
-    const token = await signSessionToken({
-      userId: user.id,
-      email: user.email,
-      username: user.username,
-      name: user.username,
+    // 3. Create Permanent Cloud-Backed User (Supabase Auth & PostgreSQL + Prisma sync)
+    const regResult = await registerPermanentUser({
+      email,
+      username,
+      password,
     });
 
-    const safeUser: SafeUser = {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-      avatarId: user.avatarId,
-      level: user.level,
-      streak: user.streak,
-      totalPoints: user.totalPoints,
-      createdAt: user.createdAt.toISOString(),
-    };
+    if (!regResult.success || !regResult.user) {
+      const errorCode =
+        regResult.code === "EMAIL_ALREADY_IN_USE"
+          ? AUTH_ERROR_CODES.EMAIL_ALREADY_IN_USE
+          : regResult.code === "USERNAME_ALREADY_IN_USE"
+          ? AUTH_ERROR_CODES.USERNAME_ALREADY_IN_USE
+          : AUTH_ERROR_CODES.DATABASE_UNAVAILABLE;
+
+      const statusCode =
+        regResult.code === "EMAIL_ALREADY_IN_USE" || regResult.code === "USERNAME_ALREADY_IN_USE"
+          ? 409
+          : 503;
+
+      return NextResponse.json(
+        authError(
+          errorCode,
+          regResult.error || "Kayıt işlemi gerçekleştirilemedi.",
+          regResult.field || "email",
+          requestId
+        ),
+        { status: statusCode }
+      );
+    }
+
+    const safeUser: SafeUser = regResult.user;
+
+    // 4. Sign Session Token & Issue Cookie
+    const token = await signSessionToken({
+      userId: safeUser.id,
+      email: safeUser.email,
+      username: safeUser.username,
+      name: safeUser.username,
+    });
 
     const responsePayload = authSuccess(
       {
         user: {
           ...safeUser,
-          name: user.username,
+          name: safeUser.username,
         },
         safeUser,
       },
-      `Aramıza hoş geldin ${user.username}! Hesabın başarıyla oluşturuldu. 🚀`,
+      `Aramıza hoş geldin ${safeUser.username}! Hesabın başarıyla oluşturuldu. 🚀`,
       requestId
     );
 
@@ -203,7 +175,7 @@ export async function POST(req: NextRequest) {
       maxAge: 30 * 24 * 60 * 60,
     });
 
-    console.info(`[AUTH_REGISTER_SUCCESS] ${requestId} - User ${user.username} (${user.email}) registered.`);
+    console.info(`[AUTH_REGISTER_SUCCESS] ${requestId} - User ${safeUser.username} (${safeUser.email}) registered.`);
     return res;
   } catch (error: any) {
     console.error(`[AUTH_REGISTER_ERROR] ${requestId} -`, {

@@ -10,6 +10,7 @@ import {
   generateRequestId,
   SafeUser,
 } from "@/lib/auth-contract";
+import { loginPermanentUser } from "@/lib/supabase-auth-service";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,82 +35,41 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const lowerIdentifier = rawIdentifier.toLowerCase();
-    const isEmail = lowerIdentifier.includes("@");
+    // Authenticate permanently via Supabase cloud + SQLite fallback with auto-migration
+    const loginResult = await loginPermanentUser(rawIdentifier, password);
 
-    // Query user by normalized email or username with transient retry protection
-    const user = await withDbRetry(
-      async () => {
-        return prisma.user.findFirst({
-          where: isEmail
-            ? { email: lowerIdentifier }
-            : {
-                OR: [
-                  { username: rawIdentifier },
-                  { username: lowerIdentifier },
-                ],
-              },
-        });
-      },
-      { maxRetries: 2, timeoutMs: 5000, requestId, operationName: "login_user_lookup" }
-    );
-
-    // Uniform timing / error message for both user-not-found and invalid password
-    if (!user) {
+    if (!loginResult.success || !loginResult.user) {
       return NextResponse.json(
         authError(
           AUTH_ERROR_CODES.INVALID_CREDENTIALS,
-          "Kullanıcı adı/e-posta veya parola hatalı.",
-          "identifier",
+          loginResult.error || "Kullanıcı adı/e-posta veya parola hatalı.",
+          loginResult.field || "identifier",
           requestId
         ),
         { status: 401 }
       );
     }
 
-    // Secure password comparison
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
-    if (!isMatch) {
-      return NextResponse.json(
-        authError(
-          AUTH_ERROR_CODES.INVALID_CREDENTIALS,
-          "Kullanıcı adı/e-posta veya parola hatalı.",
-          "password",
-          requestId
-        ),
-        { status: 401 }
-      );
-    }
+    const safeUser: SafeUser = loginResult.user;
 
     // Sign session token
     const token = await signSessionToken({
-      userId: user.id,
-      email: user.email,
-      username: user.username,
-      name: user.username,
+      userId: safeUser.id,
+      email: safeUser.email,
+      username: safeUser.username,
+      name: safeUser.username,
     });
-
-    const safeUser: SafeUser = {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-      avatarId: user.avatarId,
-      level: user.level,
-      streak: user.streak,
-      totalPoints: user.totalPoints,
-      createdAt: user.createdAt.toISOString(),
-    };
 
     const responsePayload = {
       ok: true,
       data: {
         user: {
           ...safeUser,
-          name: user.username,
+          name: safeUser.username,
         },
         safeUser,
       },
-      message: `Hoş geldin ${user.username}! Başarıyla giriş yapıldı.`,
+      message: `Hoş geldin ${safeUser.username}! Başarıyla giriş yapıldı.`,
       requestId,
     };
 
@@ -125,7 +85,7 @@ export async function POST(req: NextRequest) {
       maxAge: 30 * 24 * 60 * 60, // 30 days
     });
 
-    console.info(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${user.username} (${user.email}) logged in successfully.`);
+    console.info(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${safeUser.username} (${safeUser.email}) logged in successfully.`);
     return res;
   } catch (error: any) {
     console.error(`[AUTH_LOGIN_ERROR] ${requestId} -`, {

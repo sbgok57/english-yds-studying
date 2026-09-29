@@ -6,6 +6,7 @@ import { BookOpen, Sparkles, ArrowRight, Key, AlertTriangle, Layers } from "luci
 import { GRAMMAR_TOPICS } from "@/lib/grammar-data";
 import { GRAMMAR_CURRICULUM } from "@/lib/grammar-curriculum";
 import { cn } from "@/lib/utils";
+import GrammarStarter from "@/components/grammar/GrammarStarter";
 
 // 27 resmi konuyu sırasıyla getir
 const CURRICULUM_TOPICS = GRAMMAR_CURRICULUM.map((c) => {
@@ -24,6 +25,7 @@ const CURRICULUM_TOPICS = GRAMMAR_CURRICULUM.map((c) => {
 
 const CATEGORIES = [
   { id: "all", label: "Tüm Müfredat (27)" },
+  { id: "starter", label: "🌱 Sıfırdan A1/A2 Temeller (24)" },
   { id: "tenses", label: "12 Tense Zamanlar (12)" },
   { id: "clauses", label: "Cümlecikler & Bağlaçlar (5)" },
   { id: "structures", label: "Yapılar & Edatlar (9)" },
@@ -54,6 +56,13 @@ export default function GrammarPage() {
 
         {/* Karışık Test & Pratik Butonları */}
         <div className="flex flex-wrap gap-2.5 pt-2">
+          <Link
+            href="/grammar/starter"
+            className="px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-300 hover:to-teal-400 text-slate-950 font-black text-xs shadow-lg shadow-teal-500/25 transition-all flex items-center gap-2"
+          >
+            <span>🌱</span>
+            <span>Sıfırdan A1/A2 Temel Gramer (Sesli & Doğal Aksanlar)</span>
+          </Link>
           <Link
             href="/grammar/audio"
             className="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs shadow-lg shadow-orange-500/20 transition-all flex items-center gap-2"
@@ -96,8 +105,11 @@ export default function GrammarPage() {
         </div>
       </div>
 
-      {/* 27 Konu Izgarası */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Sıfırdan Temel Modu veya 27 Konu Izgarası */}
+      {activeCat === "starter" ? (
+        <GrammarStarter />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTopics.map((topic, idx) => (
           <div
             key={topic.slug}
@@ -156,7 +168,8 @@ export default function GrammarPage() {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

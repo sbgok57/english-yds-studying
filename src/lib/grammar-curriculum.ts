@@ -228,3 +228,5 @@ export const GRAMMAR_CURRICULUM: readonly CurriculumTopic[] = [
     summary: "Zarf ve sıfat kısaltmaları (Having V3), devrik cümleler (Not only..., Hardly... when).",
   },
 ] as const;
+
+export * from "@/data/grammar-curriculum";

@@ -1,4 +1,23 @@
 import assert from "assert";
+import fs from "fs";
+import path from "path";
+
+// Ensure local env variables are loaded if running standalone
+const envPath = path.resolve(process.cwd(), ".env.local");
+if (fs.existsSync(envPath)) {
+  const content = fs.readFileSync(envPath, "utf8");
+  for (const line of content.split("\n")) {
+    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match && !process.env[match[1]]) {
+      let val = match[2] || "";
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      process.env[match[1]] = val;
+    }
+  }
+}
+
 import { NextRequest } from "next/server";
 import { POST as sendCodePost } from "../src/app/api/auth/send-code/route";
 import { POST as verifyCodePost } from "../src/app/api/auth/verify-code/route";

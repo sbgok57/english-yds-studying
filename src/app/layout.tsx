@@ -21,7 +21,12 @@ export const metadata: Metadata = {
     title: "YDS Koç",
   },
   icons: {
-    icon: "/icons/icon-192.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.svg",
     apple: "/icons/icon-192.png",
   },
 };
