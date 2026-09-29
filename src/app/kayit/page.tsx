@@ -33,14 +33,30 @@ function RegisterForm() {
     return () => clearInterval(interval);
   }, [cooldown]);
 
-  const handleRequestCode = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim() || !username.trim() || !password.trim()) {
+  const handleRequestCode = async (e?: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
+    if (e) e.preventDefault();
+    // PERF & SAFETY: extract values from FormData if submitted via form to capture browser autofill
+    let formEmail = email.trim();
+    let formUsername = username.trim();
+    let formPassword = password.trim();
+
+    if (e && "currentTarget" in e && e.currentTarget instanceof HTMLFormElement) {
+      const formData = new FormData(e.currentTarget);
+      formEmail = (formData.get("email") as string)?.trim() || formEmail;
+      formUsername = (formData.get("username") as string)?.trim() || formUsername;
+      formPassword = (formData.get("password") as string)?.trim() || formPassword;
+    }
+
+    if (formEmail) setEmail(formEmail);
+    if (formUsername) setUsername(formUsername);
+    if (formPassword) setPassword(formPassword);
+
+    if (!formEmail || !formUsername || !formPassword) {
       setError("Lütfen tüm alanları doldurun.");
       return;
     }
 
-    if (password.trim().length < 6) {
+    if (formPassword.length < 6) {
       setError("Şifreniz en az 6 karakter olmalıdır.");
       return;
     }
@@ -56,7 +72,7 @@ function RegisterForm() {
         code?: string;
       }>("/api/auth/send-code", {
         method: "POST",
-        body: JSON.stringify({ email: email.trim().toLowerCase() }),
+        body: JSON.stringify({ email: formEmail.toLowerCase() }),
       });
 
       if (!res.ok) {
@@ -82,9 +98,15 @@ function RegisterForm() {
     }
   };
 
-  const handleCompleteRegister = async (e: React.FormEvent) => {
+  const handleCompleteRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!code || code.length < 6) {
+    const formData = new FormData(e.currentTarget);
+    const formCode = ((formData.get("code") as string) || code).trim();
+    const formEmail = ((formData.get("email") as string) || email).trim().toLowerCase();
+    const formUsername = ((formData.get("username") as string) || username).trim();
+    const formPassword = ((formData.get("password") as string) || password).trim();
+
+    if (!formCode || formCode.length < 6) {
       setError("Lütfen 6 haneli doğrulama kodunu girin.");
       return;
     }
@@ -95,10 +117,10 @@ function RegisterForm() {
 
     try {
       const res = await registerWithApi({
-        email: email.trim().toLowerCase(),
-        username: username.trim(),
-        password: password.trim(),
-        code: code.trim(),
+        email: formEmail,
+        username: formUsername,
+        password: formPassword,
+        code: formCode,
         challenge,
       });
 
@@ -157,13 +179,16 @@ function RegisterForm() {
         )}
 
         {step === 1 ? (
-          <form onSubmit={handleRequestCode} className="space-y-4">
+          <form onSubmit={handleRequestCode} method="post" action="#" className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
+              <label htmlFor="reg-email" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
                 E-posta Adresi
               </label>
               <input
+                id="reg-email"
+                name="email"
                 type="email"
+                autoComplete="email username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="ornek@ogrenci.com"
@@ -173,11 +198,14 @@ function RegisterForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
+              <label htmlFor="reg-username" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
                 Kullanıcı Adı
               </label>
               <input
+                id="reg-username"
+                name="username"
                 type="text"
+                autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="ornek_kullanici"
@@ -187,11 +215,14 @@ function RegisterForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
+              <label htmlFor="reg-password" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
                 Şifre (en az 6 karakter)
               </label>
               <input
+                id="reg-password"
+                name="password"
                 type="password"
+                autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -217,7 +248,12 @@ function RegisterForm() {
             </button>
           </form>
         ) : (
-          <form onSubmit={handleCompleteRegister} className="space-y-4">
+          <form onSubmit={handleCompleteRegister} method="post" action="#" className="space-y-4">
+            {/* Hidden fields so password managers (iCloud Keychain, Google Passwords, Samsung Pass) prompt to save the credentials */}
+            <input type="hidden" name="email" value={email} autoComplete="username" />
+            <input type="hidden" name="username" value={username} autoComplete="username" />
+            <input type="hidden" name="password" value={password} autoComplete="new-password" />
+
             <div className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-200">
               <p className="font-semibold text-white">
                 <span className="font-mono">{email}</span> adresine 6 haneli bir onay kodu gönderdik.
@@ -230,12 +266,16 @@ function RegisterForm() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
+              <label htmlFor="reg-code" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
                 6 Haneli Doğrulama Kodu
               </label>
               <input
                 ref={codeInputRef}
+                id="reg-code"
+                name="code"
                 type="text"
+                inputMode="numeric"
+                autoComplete="one-time-code"
                 maxLength={6}
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}

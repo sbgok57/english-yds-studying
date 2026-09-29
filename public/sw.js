@@ -13,6 +13,24 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim())
 })
 
+// PWA Uyumluluğu: Çevrimdışı önbellek ve ağ yönlendirmesi
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return
+  const url = new URL(event.request.url)
+  if (!url.protocol.startsWith('http')) return
+
+  event.respondWith(
+    fetch(event.request).catch(async () => {
+      const cached = await caches.match(event.request)
+      if (cached) return cached
+      return new Response('YDS Master çevrimdışı mod', {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+        status: 200,
+      })
+    })
+  )
+})
+
 // Sunucudan gelen push mesajını bildirime çevir
 self.addEventListener('push', (event) => {
   let payload = {

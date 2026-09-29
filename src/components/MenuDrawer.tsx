@@ -55,6 +55,28 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
             </button>
           </div>
           <SearchBox />
+          <button
+            onClick={() => {
+              onClose();
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("yds:open-install-modal"));
+              }
+            }}
+            className="w-full mt-3 p-2.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 border border-purple-500/40 hover:border-purple-400 text-left flex items-center justify-between group transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-pink-500 to-cyan-400 flex items-center justify-center text-sm shadow">
+                📲
+              </div>
+              <div>
+                <div className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
+                  Telefona Yükle (iOS & Android)
+                </div>
+                <div className="text-[10px] text-white/50">Ana ekrana ekle, tam ekran çalış</div>
+              </div>
+            </div>
+            <span className="text-xs text-white/40 group-hover:translate-x-0.5 transition-transform">➔</span>
+          </button>
         </div>
 
         <div className="px-5 pb-10">

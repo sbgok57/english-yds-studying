@@ -9,6 +9,7 @@ import RecoveryBanner from "@/components/RecoveryBanner";
 import ErrorToast from "@/components/ErrorToast";
 import CaptureBootstrap from "@/components/CaptureBootstrap";
 import DebugPanel from "@/components/DebugPanel";
+import PwaInstaller from "@/components/pwa/PwaInstaller";
 
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
@@ -74,6 +75,7 @@ export default function RootLayout({
             <ErrorToast />
             <CaptureBootstrap />
             <DebugPanel />
+            <PwaInstaller />
           </BadgeQueueProvider>
         </CrashGuardianProvider>
         <footer className="border-t border-white/10 py-8 mt-12">

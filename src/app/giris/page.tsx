@@ -19,9 +19,13 @@ function LoginForm() {
   const [errorRequestId, setErrorRequestId] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!identifier.trim() || !password.trim()) {
+    const formData = new FormData(e.currentTarget);
+    const formId = String(formData.get("identifier") || identifier || "").trim();
+    const formPass = String(formData.get("password") || password || "").trim();
+
+    if (!formId || !formPass) {
       setError("Lütfen e-posta veya kullanıcı adınızı ve şifrenizi girin.");
       return;
     }
@@ -31,7 +35,7 @@ function LoginForm() {
     setErrorRequestId(null);
 
     try {
-      const res = await loginWithApi(identifier.trim(), password.trim());
+      const res = await loginWithApi(formId, formPass);
 
       if (!res.ok) {
         setError(res.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
@@ -88,13 +92,16 @@ function LoginForm() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} method="post" action="#" className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
+            <label htmlFor="identifier" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
               E-posta veya Kullanıcı Adı
             </label>
             <input
+              id="identifier"
+              name="identifier"
               type="text"
+              autoComplete="username"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
               placeholder="kanka@ydsmaster.com veya ydskasifi"
@@ -105,7 +112,7 @@ function LoginForm() {
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60">
+              <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-white/60">
                 Şifre
               </label>
               <Link
@@ -117,7 +124,10 @@ function LoginForm() {
             </div>
             <div className="relative">
               <input
+                id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
