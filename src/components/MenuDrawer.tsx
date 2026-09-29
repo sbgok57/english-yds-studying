@@ -11,9 +11,23 @@ import {
   DENEME_COUNT,
 } from "@/lib/site-index";
 import SearchBox from "@/components/SearchBox";
+import { useUsage } from "@/lib/store";
+import { calculateStudentProgress } from "@/lib/progress/calculator";
 
 /** Üstteki ☰ (3 çizgi) — sitede yapılabilecek HER ŞEY burada. */
 export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { usage } = useUsage();
+  const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
+  const grammarCount = Object.keys(usage.grammar || {}).length;
+  const tacticsCount = Object.keys(usage.tactics || {}).length;
+
+  const progress = calculateStudentProgress({
+    wordsLearned,
+    grammarCompleted: grammarCount,
+    tacticsCompleted: tacticsCount,
+    questionsSolved: usage.exams?.totalQuestions || 0,
+    examsTaken: usage.exams?.taken || 0,
+  });
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
@@ -77,6 +91,26 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
             </div>
             <span className="text-xs text-white/40 group-hover:translate-x-0.5 transition-transform">➔</span>
           </button>
+
+          {/* Kişisel İlerleme Yüzdesi Kartı */}
+          <Link
+            href="/ilerleme"
+            onClick={onClose}
+            className="w-full mt-2 p-2.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 hover:border-cyan-400 text-left flex items-center justify-between group transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-sm font-black shadow">
+                📈
+              </div>
+              <div>
+                <div className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
+                  Kişisel İlerlemem (%{progress.overallPercent})
+                </div>
+                <div className="text-[10px] text-white/50">{progress.milestoneTitle} · Detaylı analiz</div>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-cyan-400 group-hover:translate-x-0.5 transition-transform">➔</span>
+          </Link>
         </div>
 
         <div className="px-5 pb-10">

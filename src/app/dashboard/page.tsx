@@ -30,6 +30,8 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { safeStorage } from "@/lib/safe-storage";
 import { getClientStreak } from "@/lib/streak";
+import { useUsage } from "@/lib/store";
+import { calculateStudentProgress } from "@/lib/progress/calculator";
 import UsernameChanger from "@/components/profile/UsernameChanger";
 
 const PER_PAGE = 60;
@@ -54,6 +56,20 @@ export default function DashboardPage() {
   const [totalWordsCount, setTotalWordsCount] = useState<number>(436);
   const [totalQuestionsSolved, setTotalQuestionsSolved] = useState<number>(0);
   const [netHistory, setNetHistory] = useState<{ date: string; net: number }[]>([]);
+
+  const { usage } = useUsage();
+  const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
+  const grammarCount = Object.keys(usage.grammar || {}).length;
+  const tacticsCount = Object.keys(usage.tactics || {}).length;
+
+  // PERF: Calculate real weighted overall progress percentage
+  const progress = calculateStudentProgress({
+    wordsLearned: Math.max(wordsLearned, 0),
+    grammarCompleted: grammarCount,
+    tacticsCompleted: tacticsCount,
+    questionsSolved: Math.max(totalQuestionsSolved, usage.exams?.totalQuestions || 0),
+    examsTaken: Math.max(netHistory.length, usage.exams?.taken || 0),
+  });
 
   useEffect(() => {
     // 1. Yerel depodan avatar ve kullanıcı adını al
@@ -132,6 +148,14 @@ export default function DashboardPage() {
 
         {/* Sayaçlar (Tamamen Gerçek Veriler) */}
         <div className="flex items-center gap-3 flex-wrap">
+          <div className="bg-gradient-to-br from-cyan-500/25 via-purple-500/25 to-pink-500/25 px-4 py-2.5 rounded-2xl border border-cyan-400/40 text-center min-w-[95px] shadow-lg">
+            <span className="text-xs text-cyan-300 font-bold block flex items-center justify-center gap-1">
+              <span>📈</span> İlerleme
+            </span>
+            <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-pink-300">
+              %{progress.overallPercent}
+            </span>
+          </div>
           <div className="bg-white/10 px-4 py-2.5 rounded-2xl border border-white/15 text-center min-w-[90px]">
             <span className="text-xs text-orange-400 font-bold block flex items-center justify-center gap-1">
               <Flame className="w-3.5 h-3.5" /> Seri
@@ -150,6 +174,33 @@ export default function DashboardPage() {
             </span>
             <span className="text-xl font-black text-emerald-300">{totalQuestionsSolved} Soru</span>
           </div>
+        </div>
+      </div>
+
+      {/* Genel İlerleme Yüzdesi ve Seviye İlerleme Çubuğu */}
+      <div className="p-5 rounded-3xl bg-slate-900/90 border border-white/15 backdrop-blur-xl space-y-3 shadow-xl">
+        <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">{progress.milestoneEmoji}</span>
+            <div>
+              <span className="font-bold text-white text-sm">{progress.milestoneTitle}</span>
+              <span className="text-white/40 mx-2 hidden sm:inline">•</span>
+              <span className="text-white/60 text-xs hidden sm:inline">{progress.milestoneMessage}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-pink-300 font-semibold">Kelime: %{progress.vocabulary.percent}</span>
+            <span className="text-white/30">|</span>
+            <span className="text-xs text-purple-300 font-semibold">Gramer: %{progress.grammar.percent}</span>
+            <span className="text-white/30">|</span>
+            <span className="text-xs text-cyan-300 font-black font-mono">Genel: %{progress.overallPercent}</span>
+          </div>
+        </div>
+        <div className="h-3 rounded-full bg-black/50 border border-white/10 overflow-hidden p-0.5">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 shadow-md shadow-cyan-500/20 transition-all duration-700"
+            style={{ width: `${Math.max(2, progress.overallPercent)}%` }}
+          />
         </div>
       </div>
 

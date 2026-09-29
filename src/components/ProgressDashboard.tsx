@@ -4,6 +4,7 @@
 // ============================================================
 import { getMyProgress, levelInfo } from '@/lib/progress/stats';
 import { GRAMMAR_CURRICULUM } from '@/lib/grammar-curriculum';
+import { calculateStudentProgress } from '@/lib/progress/calculator';
 import Link from 'next/link';
 
 const TOPIC_TITLES: Record<string, string> = Object.fromEntries(
@@ -63,8 +64,98 @@ export default async function ProgressDashboard() {
     ? Math.round((100 * p.stats.total_correct) / p.stats.total_questions)
     : null;
 
+  // PERF: Calculate real weighted overall progress percentage
+  const progress = calculateStudentProgress({
+    wordsLearned: Math.round((p.stats?.points ?? 0) / 10),
+    grammarCompleted: p.mastery.length,
+    tacticsCompleted: Math.min(11, Math.round(p.mastery.length / 2)),
+    questionsSolved: p.stats?.total_questions ?? 0,
+    examsTaken: p.recentExams.length,
+  });
+
   return (
     <div className="space-y-6">
+      {/* ── Genel YDS Hazırlık Yüzdesi Hero Kartı ── */}
+      <section className="rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950/70 to-purple-950/60 p-6 sm:p-8 text-white shadow-2xl border border-cyan-500/40 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mt-6 -mr-6 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-6 -ml-6 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 relative z-10">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-xs font-black uppercase tracking-wider text-cyan-300">
+              <span>{progress.milestoneEmoji}</span>
+              <span>{progress.milestoneTitle}</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-white">
+              Genel YDS Hazırlık İlerlemesi
+            </h2>
+            <p className="text-xs sm:text-sm text-white/70 max-w-lg">
+              {progress.milestoneMessage}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 bg-white/5 border border-white/10 p-4 rounded-2xl shrink-0">
+            <div className="text-right">
+              <span className="block text-4xl sm:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-300 to-pink-400">
+                %{progress.overallPercent}
+              </span>
+              <span className="text-[11px] text-white/50 font-bold uppercase tracking-wider">
+                Tamamlandı
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Ana İlerleme Çubuğu */}
+        <div className="mt-6 space-y-2 relative z-10">
+          <div className="flex justify-between text-xs font-bold text-white/70">
+            <span>Yolculuk İlerlemesi</span>
+            <span className="text-cyan-300 font-mono">%{progress.overallPercent} / %100</span>
+          </div>
+          <div className="h-4 overflow-hidden rounded-full bg-black/50 border border-white/10 p-0.5">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 shadow-lg shadow-cyan-500/30 transition-all duration-700"
+              style={{ width: `${Math.max(3, progress.overallPercent)}%` }}
+            />
+          </div>
+        </div>
+
+        {/* 4 Ana Alanın Yüzdelik Kırılımı */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-white/10 relative z-10">
+          <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/5 text-center">
+            <span className="text-xs text-white/60 font-semibold block">🧠 Kelime</span>
+            <span className="text-lg font-black text-pink-400">%{progress.vocabulary.percent}</span>
+            <span className="text-[10px] text-white/40 block mt-0.5">
+              {progress.vocabulary.learned} / {progress.vocabulary.total} Kelime
+            </span>
+          </div>
+
+          <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/5 text-center">
+            <span className="text-xs text-white/60 font-semibold block">📖 Gramer</span>
+            <span className="text-lg font-black text-purple-400">%{progress.grammar.percent}</span>
+            <span className="text-[10px] text-white/40 block mt-0.5">
+              {progress.grammar.completed} / {progress.grammar.total} Konu
+            </span>
+          </div>
+
+          <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/5 text-center">
+            <span className="text-xs text-white/60 font-semibold block">🎯 Taktikler</span>
+            <span className="text-lg font-black text-emerald-400">%{progress.tactics.percent}</span>
+            <span className="text-[10px] text-white/40 block mt-0.5">
+              {progress.tactics.completed} / {progress.tactics.total} Taktik
+            </span>
+          </div>
+
+          <div className="p-3 rounded-2xl bg-white/[0.04] border border-white/5 text-center">
+            <span className="text-xs text-white/60 font-semibold block">📝 Soru Pratiği</span>
+            <span className="text-lg font-black text-cyan-400">%{progress.practice.percent}</span>
+            <span className="text-[10px] text-white/40 block mt-0.5">
+              {progress.practice.questionsSolved} Soru · {progress.practice.examsTaken} Deneme
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* ── Seviye Kartı (XP & Rank) ── */}
       <section className="rounded-3xl bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 p-6 sm:p-8 text-white shadow-2xl border border-purple-500/30">
         <div className="flex items-center justify-between gap-4">

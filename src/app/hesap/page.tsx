@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useAccount } from "@/lib/auth";
 import { useUsage } from "@/lib/store";
+import { calculateStudentProgress } from "@/lib/progress/calculator";
 import { avatarSvg } from "@/lib/avatars";
 import Tip from "@/components/Tip";
 import BadgeShowcase from "@/components/profile/BadgeShowcase";
@@ -58,6 +59,18 @@ export default function HesapPage() {
     const base = account ? hashStr(account.email) : hashStr("kanka");
     return usage.avatar ?? base % 1000;
   }, [account, usage.avatar]);
+
+  const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
+  const grammarCount = Object.keys(usage.grammar || {}).length;
+  const tacticsCount = Object.keys(usage.tactics || {}).length;
+
+  const progress = calculateStudentProgress({
+    wordsLearned,
+    grammarCompleted: grammarCount,
+    tacticsCompleted: tacticsCount,
+    questionsSolved: usage.exams?.totalQuestions || 0,
+    examsTaken: usage.exams?.taken || 0,
+  });
 
   const submit = async () => {
     if (mode === "login") await login(email, pass);
@@ -144,6 +157,31 @@ export default function HesapPage() {
               <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3">
                 <div className="text-xl font-black text-amber-300">{usage.exams.bestNet}</div>
                 <div className="text-[10px] text-white/50">En iyi net</div>
+              </div>
+            </div>
+
+            {/* Genel YDS İlerleme Yüzdesi */}
+            <div className="mt-5 p-4 rounded-2xl bg-white/[0.03] border border-cyan-500/30 space-y-2 text-left shadow-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <span>{progress.milestoneEmoji}</span>
+                  <span>Genel İlerleme ({progress.milestoneTitle})</span>
+                </span>
+                <span className="text-base font-black text-cyan-300 font-mono">
+                  %{progress.overallPercent}
+                </span>
+              </div>
+              <div className="h-2 rounded-full bg-black/40 border border-white/10 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 transition-all duration-700"
+                  style={{ width: `${Math.max(3, progress.overallPercent)}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-[10px] text-white/50 pt-0.5 font-mono">
+                <span>Kelime: %{progress.vocabulary.percent}</span>
+                <span>Gramer: %{progress.grammar.percent}</span>
+                <span>Taktik: %{progress.tactics.percent}</span>
+                <span>Pratik: %{progress.practice.percent}</span>
               </div>
             </div>
 
