@@ -111,6 +111,26 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
             </div>
             <span className="text-xs font-bold text-cyan-400 group-hover:translate-x-0.5 transition-transform">➔</span>
           </Link>
+
+          {/* Gündemdeki İngilizce Haberler Kartı */}
+          <Link
+            href="/haberler"
+            onClick={onClose}
+            className="w-full mt-2 p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-400 text-left flex items-center justify-between group transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-black shadow">
+                📰
+              </div>
+              <div>
+                <div className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
+                  Gündem Haberleri (2400+ Makale)
+                </div>
+                <div className="text-[10px] text-white/50">Sesli dinleme, çeviri & gazete küpürleri</div>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-amber-400 group-hover:translate-x-0.5 transition-transform">➔</span>
+          </Link>
         </div>
 
         <div className="px-5 pb-10">

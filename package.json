@@ -11,7 +11,7 @@
     "lint": "next lint",
     "zero-error": "node scripts/zero-error-check.mjs",
     "test": "node prisma/prepare-db.js && prisma generate && npm run test:unit && npm run test:integration",
-    "test:unit": "tsx test/grammar-curriculum-tests.ts && tsx test/site-integrity-tests.ts && tsx test/tts-unit-tests.ts && tsx test/hardware-and-resilience-tests.ts && tsx test/auth-unit-tests.ts && tsx test/unit-tests.ts && tsx test/adaptive-unit-tests.ts && tsx test/error-shield-tests.ts && tsx test/debug-toolkit-tests.ts && tsx test/progress-unit-tests.ts",
+    "test:unit": "tsx test/grammar-curriculum-tests.ts && tsx test/site-integrity-tests.ts && tsx test/tts-unit-tests.ts && tsx test/hardware-and-resilience-tests.ts && tsx test/auth-unit-tests.ts && tsx test/unit-tests.ts && tsx test/adaptive-unit-tests.ts && tsx test/error-shield-tests.ts && tsx test/debug-toolkit-tests.ts && tsx test/progress-unit-tests.ts && tsx test/news-unit-tests.ts",
     "test:integration": "tsx test/tts-integration-tests.ts && tsx test/auth-integration-tests.ts && tsx test/module-tests.ts",
     "test:e2e": "tsx test/e2e-tests.ts",
     "validate:data": "tsx test/validate-data.ts",

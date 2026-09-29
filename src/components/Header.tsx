@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 const QUICK = [
   { href: "/speaking", label: "Speaking", emoji: "🎙️" },
+  { href: "/haberler", label: "Haberler", emoji: "📰" },
   { href: "/sertifikalar", label: "Sertifikalar", emoji: "🏅" },
   { href: "/vocabulary/inventory", label: "Envanter", emoji: "📦" },
   { href: "/study-plans", label: "Planlar", emoji: "📅" },
