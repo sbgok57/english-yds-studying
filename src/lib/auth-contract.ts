@@ -9,6 +9,8 @@ export interface SafeUser {
   streak: number;
   totalPoints: number;
   createdAt?: string | Date;
+  role?: "admin" | "user";
+  isAdmin?: boolean;
 }
 
 export interface AuthSuccessResponse<T = unknown> {

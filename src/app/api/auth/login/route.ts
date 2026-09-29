@@ -75,6 +75,9 @@ export async function POST(req: NextRequest) {
 
     const res = NextResponse.json(responsePayload, { status: 200 });
 
+    const rememberMe = body.rememberMe !== false;
+    const cookieMaxAge = rememberMe ? 365 * 24 * 60 * 60 : 30 * 24 * 60 * 60; // 365 days for permanent account
+
     res.cookies.set({
       name: SESSION_COOKIE_NAME,
       value: token,
@@ -82,7 +85,7 @@ export async function POST(req: NextRequest) {
       path: "/",
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
-      maxAge: 30 * 24 * 60 * 60, // 30 days
+      maxAge: cookieMaxAge,
     });
 
     console.info(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${safeUser.username} (${safeUser.email}) logged in successfully.`);

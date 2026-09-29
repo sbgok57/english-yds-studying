@@ -5,6 +5,7 @@ import { PASSAGES, ReadingPassage } from "@/lib/data-reading";
 import ReadingQuiz from "@/components/ReadingQuiz";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import AcademicAudioPlayer from "@/components/reading/AcademicAudioPlayer";
+import { PronunciationCoachModal } from "@/components/reading/PronunciationCoachModal";
 import { cn } from "@/lib/utils";
 
 interface DomainCat {
@@ -85,6 +86,8 @@ export default function ReadingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState("ALL");
   const [showCatalogModal, setShowCatalogModal] = useState(false);
+  const [coachOpen, setCoachOpen] = useState(false);
+  const [coachTargetText, setCoachTargetText] = useState("");
 
   const passage = PASSAGES[pid] || PASSAGES[0];
 
@@ -259,8 +262,31 @@ export default function ReadingPage() {
                 paragraphs={passage.paragraphs}
                 activeParagraph={activeParagraph}
                 onParagraphSelect={setActiveParagraph}
-                className="mb-6"
+                className="mb-4"
               />
+
+              {/* Pronunciation Coach Bar */}
+              <div className="mb-6 p-3 bg-gradient-to-r from-cyan-950/40 to-slate-900 border border-cyan-500/30 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+                <div className="flex items-center gap-2.5 text-xs text-slate-300">
+                  <span className="text-xl">🎙️</span>
+                  <div>
+                    <span className="font-bold text-cyan-300">Telaffuz & Okuma Antrenmanı:</span>
+                    <span className="text-slate-400 block sm:inline sm:ml-1">
+                      Mikrofona sesli oku, kelime bazında doğru (yeşil) ve hatalı (kırmızı) telaffuzları gör!
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    const textToRead = passage.paragraphs[activeParagraph] || passage.paragraphs[0];
+                    setCoachTargetText(textToRead);
+                    setCoachOpen(true);
+                  }}
+                  className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs rounded-xl shadow-md transition-all shrink-0 flex items-center gap-1.5"
+                >
+                  <span>🎙️</span> Sesli Oku & Test Et
+                </button>
+              </div>
 
               <div className="space-y-4">
                 {passage.paragraphs.map((p, i) => (
@@ -474,6 +500,14 @@ export default function ReadingPage() {
           )}
         </>
       )}
+
+      {/* Pronunciation Coach Modal */}
+      <PronunciationCoachModal
+        isOpen={coachOpen}
+        onClose={() => setCoachOpen(false)}
+        targetText={coachTargetText}
+        passageTitle={passage.title}
+      />
     </div>
   );
 }

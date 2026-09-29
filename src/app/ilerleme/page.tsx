@@ -29,6 +29,12 @@ export default function ProgressPage() {
 
         <div className="flex items-center gap-2">
           <Link
+            href="/sertifikalar"
+            className="px-4 py-2 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-bold text-xs transition-all flex items-center gap-1 shadow-sm"
+          >
+            <span>🏅</span> Sertifikalarım
+          </Link>
+          <Link
             href="/grammar/audio"
             className="px-4 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-white font-bold text-xs transition-all flex items-center gap-1"
           >

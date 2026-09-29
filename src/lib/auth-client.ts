@@ -125,10 +125,10 @@ export function syncLocalSession(user: SafeUser | null) {
   }
 }
 
-export async function loginWithApi(identifier: string, password: string) {
+export async function loginWithApi(identifier: string, password: string, rememberMe: boolean = true) {
   const result = await authRequest<{ user: SafeUser }>("/api/auth/login", {
     method: "POST",
-    body: JSON.stringify({ identifier, password }),
+    body: JSON.stringify({ identifier, password, rememberMe }),
   });
 
   if (result.ok && result.data?.user) {

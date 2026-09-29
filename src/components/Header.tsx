@@ -8,6 +8,8 @@ import StreakBadge from "@/components/StreakBadge";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const QUICK = [
+  { href: "/speaking", label: "Speaking", emoji: "🎙️" },
+  { href: "/sertifikalar", label: "Sertifikalar", emoji: "🏅" },
   { href: "/vocabulary/inventory", label: "Envanter", emoji: "📦" },
   { href: "/study-plans", label: "Planlar", emoji: "📅" },
   { href: "/level-test", label: "Seviye Testi", emoji: "📊" },

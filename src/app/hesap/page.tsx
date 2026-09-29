@@ -204,6 +204,12 @@ export default function HesapPage() {
               >
                 📅 Çalışma Programı
               </Link>
+              <Link
+                href="/sertifikalar"
+                className="px-4 py-2 rounded-full border border-amber-400/40 bg-amber-400/10 text-amber-300 font-bold text-xs hover:bg-amber-400/20 transition-all shadow-sm"
+              >
+                🏅 Sertifikalarım
+              </Link>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 rounded-full bg-gradient-to-r from-rose-500 to-red-600 font-bold text-xs hover:scale-105 transition-transform"

@@ -29,12 +29,30 @@ interface SendResult {
 
 async function sendEmail(to: string, code: string): Promise<SendResult> {
   const subject = "YDS Master — Doğrulama Kodun 🔐";
-  const text = `Kanka, merhaba! 👋\n\nYDS Master hesabın için doğrulama kodun: ${code}\n\nBu kod 10 dakika geçerli. Kodu hesap sayfasına gir ve hesabını aç.\n\n— YDS Master`;
-  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:480px;margin:0 auto;padding:28px;background:#0f172a;color:#e2e8f0;border-radius:16px"><h2 style="margin:0 0 8px">🧠 YDS Master</h2><p style="margin:0 0 16px">Kanka, merhaba! 👋</p><p style="margin:0 0 8px">Hesabın için doğrulama kodun:</p><p style="font-size:36px;font-weight:800;letter-spacing:8px;color:#22d3ee;margin:8px 0 16px">${code}</p><p style="font-size:12px;color:#94a3b8;margin:0">Bu kod 10 dakika geçerli. Kodu hesap sayfasına gir.</p></div>`;
+  const text = `Kanka, merhaba! 👋\n\nYDS Master hesabın için doğrulama kodun: ${code}\n\nBu kod 10 dakika geçerlidir. Kodu hesap sayfasına girerek oturumunu açabilirsin.\n\n— YDS Master Akademik Destek Ekibi`;
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;padding:32px 24px;background:#090d16;color:#e2e8f0;border-radius:20px;border:1px solid #1e293b;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <span style="font-size:32px;">🧠</span>
+        <h2 style="margin:8px 0 0;font-size:24px;font-weight:900;color:#ffffff;letter-spacing:-0.5px;">YDS Master</h2>
+        <p style="margin:4px 0 0;font-size:12px;color:#06b6d4;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;">Görsel Hafıza & Dil Akademisi</p>
+      </div>
+      <div style="background:#131d2e;border:1px solid #1e3a5f;border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;">
+        <p style="margin:0 0 12px;font-size:14px;color:#94a3b8;">Hesap Giriş & Kayıt Doğrulama Kodun:</p>
+        <div style="font-size:40px;font-weight:900;letter-spacing:10px;color:#22d3ee;font-family:monospace;background:#090d16;padding:14px 20px;border-radius:12px;display:inline-block;border:1px dashed #06b6d4;">${code}</div>
+        <p style="margin:16px 0 0;font-size:12px;color:#94a3b8;">Bu tek kullanımlık güvenlik kodu <strong>10 dakika</strong> geçerlidir.</p>
+      </div>
+      <p style="font-size:12px;color:#64748b;line-height:1.6;margin:0 0 12px;">Güvenliğiniz için bu kodu kimseyle paylaşmayınız. Bu işlemi siz başlatmadıysanız bu mesajı görmezden gelebilirsiniz.</p>
+      <div style="border-top:1px solid #1e293b;padding-top:16px;font-size:11px;color:#475569;text-align:center;">
+        YDS Master Destek Ekibi &bull; destek@ydsmaster.com
+      </div>
+    </div>
+  `;
 
   // 1) Resend (HTTP API)
   if (process.env.RESEND_API_KEY) {
     try {
+      const fromSender = process.env.RESEND_FROM || "YDS Master Destek <destek@ydsmaster.com>";
       const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -42,7 +60,7 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
           Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: process.env.RESEND_FROM || "YDS Master <onboarding@resend.dev>",
+          from: fromSender,
           to,
           subject,
           text,

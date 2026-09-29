@@ -29,6 +29,7 @@ export default function AudioGrammarPlayer({
   const [playbackRate, setPlaybackRate] = useState<number>(1);
   const [showTranscript, setShowTranscript] = useState<boolean>(false);
   const [usingSpeechFallback, setUsingSpeechFallback] = useState<boolean>(false);
+  const [voiceGender, setVoiceGender] = useState<"female" | "male">("female");
   const [sleepTimerMinutes, setSleepTimerMinutes] = useState<number | null>(null);
   const sleepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -99,12 +100,25 @@ export default function AudioGrammarPlayer({
   }, []);
 
   const handlePlay = useCallback(() => {
-    if (usingSpeechFallback) {
+    const speakWithVoice = () => {
       if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(track.script);
         utterance.lang = "tr-TR";
         utterance.rate = playbackRate;
+        utterance.pitch = voiceGender === "female" ? 1.08 : 0.88;
+
+        const voices = window.speechSynthesis.getVoices().filter((v) => v.lang.startsWith("tr"));
+        if (voices.length > 0) {
+          if (voiceGender === "female") {
+            const fVoice = voices.find((v) => /female|yelda|filiz|seda|emel|woman/i.test(v.name)) || voices[0];
+            utterance.voice = fVoice;
+          } else {
+            const mVoice = voices.find((v) => /male|ahmet|cem|tolga|man/i.test(v.name)) || voices[voices.length > 1 ? 1 : 0];
+            utterance.voice = mVoice;
+          }
+        }
+
         utterance.onend = () => {
           setIsPlaying(false);
           saveTrackProgress(track.id, duration, true);
@@ -112,6 +126,10 @@ export default function AudioGrammarPlayer({
         window.speechSynthesis.speak(utterance);
         setIsPlaying(true);
       }
+    };
+
+    if (usingSpeechFallback) {
+      speakWithVoice();
       return;
     }
 
@@ -126,22 +144,11 @@ export default function AudioGrammarPlayer({
           .catch(() => {
             // SAFETY: Ses dosyası yoksa Web Speech API ile devam et
             setUsingSpeechFallback(true);
-            if ("speechSynthesis" in window) {
-              window.speechSynthesis.cancel();
-              const utterance = new SpeechSynthesisUtterance(track.script);
-              utterance.lang = "tr-TR";
-              utterance.rate = playbackRate;
-              utterance.onend = () => {
-                setIsPlaying(false);
-                saveTrackProgress(track.id, duration, true);
-              };
-              window.speechSynthesis.speak(utterance);
-              setIsPlaying(true);
-            }
+            speakWithVoice();
           });
       }
     }
-  }, [usingSpeechFallback, track, playbackRate, duration]);
+  }, [usingSpeechFallback, track, playbackRate, duration, voiceGender]);
 
   const handleNext = useCallback(() => {
     handlePause();
@@ -335,21 +342,55 @@ export default function AudioGrammarPlayer({
 
       {/* Ana Oynatma Kontrolleri */}
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-        {/* Hız Seçimi */}
-        <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
-          {[0.75, 1, 1.25, 1.5].map((speed) => (
+        {/* Hız Seçimi & Eğitmen Ses Seçimi */}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+            {[0.75, 1, 1.25, 1.5].map((speed) => (
+              <button
+                key={speed}
+                onClick={() => handleSpeedChange(speed)}
+                className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
+                  playbackRate === speed
+                    ? "bg-purple-500 text-white shadow"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                {speed}x
+              </button>
+            ))}
+          </div>
+
+          {/* Eğitmen Ses Seçimi (Kadın / Erkek) */}
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
             <button
-              key={speed}
-              onClick={() => handleSpeedChange(speed)}
-              className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
-                playbackRate === speed
-                  ? "bg-purple-500 text-white shadow"
+              onClick={() => {
+                setVoiceGender("female");
+                if (isPlaying) handlePause();
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                voiceGender === "female"
+                  ? "bg-pink-500/80 text-white shadow"
                   : "text-white/60 hover:text-white"
               }`}
+              title="Kadın Eğitmen Sesi (Emel)"
             >
-              {speed}x
+              <span>👩</span> Emel
             </button>
-          ))}
+            <button
+              onClick={() => {
+                setVoiceGender("male");
+                if (isPlaying) handlePause();
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                voiceGender === "male"
+                  ? "bg-cyan-600/80 text-white shadow"
+                  : "text-white/60 hover:text-white"
+              }`}
+              title="Erkek Eğitmen Sesi (Ahmet)"
+            >
+              <span>👨</span> Ahmet
+            </button>
+          </div>
         </div>
 
         {/* Oynatıcı Butonları */}

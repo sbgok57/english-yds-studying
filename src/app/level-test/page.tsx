@@ -53,6 +53,10 @@ export default function LevelTestPage() {
     }
   }, []);
 
+  // 60 Dakika (3600 saniye) Resmi Sınav Süresi
+  const TOTAL_EXAM_SECONDS = 3600;
+  const remainingSeconds = Math.max(0, TOTAL_EXAM_SECONDS - elapsedSeconds);
+
   // Timer sync with wall-clock
   useEffect(() => {
     if (!mounted || startedAt === 0) return;
@@ -61,6 +65,13 @@ export default function LevelTestPage() {
     }, 1000);
     return () => clearInterval(timer);
   }, [mounted, startedAt]);
+
+  // Süre dolduğunda sınavı otomatik bitir
+  useEffect(() => {
+    if (mounted && startedAt > 0 && remainingSeconds <= 0 && !isFinishing) {
+      handleFinishTest();
+    }
+  }, [remainingSeconds, mounted, startedAt, isFinishing]);
 
   // Auto-save checkpoint on progress
   useEffect(() => {
@@ -175,8 +186,16 @@ export default function LevelTestPage() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 font-mono text-xs text-white/80 flex items-center gap-1.5">
-            <span>⏱️</span> {formatTime(elapsedSeconds)}
+          <div
+            className={`px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-colors ${
+              remainingSeconds <= 300
+                ? "bg-rose-500/20 border border-rose-500/50 text-rose-300 animate-pulse font-bold"
+                : "bg-white/5 border border-white/10 text-white/80"
+            }`}
+            title="Kalan Sınav Süresi (Toplam: 60 Dakika)"
+          >
+            <span>{remainingSeconds <= 300 ? "⚠️" : "⏱️"}</span>
+            <span>Kalan: {formatTime(remainingSeconds)}</span>
           </div>
 
           <div className="text-xs text-white/60">

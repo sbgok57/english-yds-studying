@@ -249,8 +249,8 @@ export default function MotivationBox({
                 key={currentVideo.videoId}
                 src={`https://www.youtube-nocookie.com/embed/${currentVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}
                 title={currentVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                sandbox="allow-scripts allow-same-origin allow-presentation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
                 className="absolute inset-0 w-full h-full border-0"
               />
             </div>
@@ -296,6 +296,17 @@ export default function MotivationBox({
                     <span className="hidden sm:inline">Sonraki</span>
                     <span>▶</span>
                   </button>
+
+                  <a
+                    href={`https://www.youtube.com/watch?v=${currentVideo.videoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 text-xs font-semibold transition-colors flex items-center gap-1"
+                    title="YouTube'da Aç"
+                  >
+                    <span>▶️</span>
+                    <span className="hidden sm:inline">YouTube</span>
+                  </a>
                 </div>
               </div>
 

@@ -14,10 +14,23 @@ function LoginForm() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorRequestId, setErrorRequestId] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  // Prefill saved username/email
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("yds_remembered_identifier");
+      if (saved) {
+        setIdentifier(saved);
+      }
+    } catch (e) {
+      console.warn("Could not read remembered identifier:", e);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,13 +48,24 @@ function LoginForm() {
     setErrorRequestId(null);
 
     try {
-      const res = await loginWithApi(formId, formPass);
+      const res = await loginWithApi(formId, formPass, rememberMe);
 
       if (!res.ok) {
         setError(res.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
         if (res.requestId) setErrorRequestId(res.requestId);
         setLoading(false);
         return;
+      }
+
+      // Save identifier if rememberMe is enabled
+      try {
+        if (rememberMe) {
+          localStorage.setItem("yds_remembered_identifier", formId);
+        } else {
+          localStorage.removeItem("yds_remembered_identifier");
+        }
+      } catch (e) {
+        console.warn("Could not save remembered identifier:", e);
       }
 
       setSuccess("Giriş başarılı! Yönlendiriliyorsunuz...");
@@ -142,6 +166,20 @@ function LoginForm() {
                 {showPassword ? "👁️" : "🙈"}
               </button>
             </div>
+          </div>
+
+          {/* Beni Hatırla (365 Gün Kalıcı Oturum) */}
+          <div className="flex items-center justify-between py-1">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 rounded bg-white/5 border border-white/20 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-slate-900 cursor-pointer"
+              />
+              <span className="text-xs text-slate-300 font-medium">Beni hatırla (Oturumum açık kalsın)</span>
+            </label>
+            <span className="text-[10px] text-cyan-400/80 font-mono">365 Gün Kalıcı</span>
           </div>
 
           <button
