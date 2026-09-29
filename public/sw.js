@@ -67,5 +67,5 @@ self.addEventListener('notificationclick', (event) => {
 
 // Abonelik tarayıcı tarafından yenilenirse (nadir durum)
 self.addEventListener('pushsubscriptionchange', () => {
-  console.log('[SW] pushsubscriptionchange')
+  console.info('[SW] pushsubscriptionchange')
 })

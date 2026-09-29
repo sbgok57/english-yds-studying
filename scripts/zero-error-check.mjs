@@ -58,6 +58,7 @@ const RULES = [
     id: 'console-log',
     re: /\bconsole\.log\(/g,
     level: 'warn',
+    excludeIn: ['scripts/'],
     msg: 'console.log kaldı mı? (logger kullan)',
   },
   {
