@@ -78,29 +78,45 @@ test("avatar ve kelime hafıza doğrulama şemaları sınırları korur", () => 
   const validSelection = avatarSelectionSchema.parse({ avatarId: 100 });
   assert.equal(validSelection.avatarId, 100);
 
-  const stringParsed = avatarSelectionSchema.parse({ avatarId: "500" });
-  assert.equal(stringParsed.avatarId, 500);
+  const numParsed = avatarSelectionSchema.parse({ avatarId: 500 });
+  assert.equal(numParsed.avatarId, 500);
 
-  assert.throws(() => avatarSelectionSchema.parse({ avatarId: 0 }));
-  assert.throws(() => avatarSelectionSchema.parse({ avatarId: 2001 }));
+  assert.throws(() => avatarSelectionSchema.parse({ avatarId: -1 }));
+  assert.throws(() => avatarSelectionSchema.parse({ avatarId: 2000 }));
 
   // userWordMemoryInputSchema
   const validMemory = userWordMemoryInputSchema.parse({
     mnemonic: "Abundant -> Bol miktarda, 'ab-ı hayat bol akar' kodlaması.",
     personalNote: "2024 ilkbahar sınavında soru 14'te çıktı.",
-    customTag: "akademik",
+    personalExample: "The region has abundant natural resources.",
+    tags: ["akademik", "yds"],
   });
-  assert.equal(validMemory.customTag, "akademik");
+  assert.equal(validMemory.personalNote, "2024 ilkbahar sınavında soru 14'te çıktı.");
+  assert.deepEqual(validMemory.tags, ["akademik", "yds"]);
 
   // max sınır kontrolleri
   assert.throws(() =>
     userWordMemoryInputSchema.parse({
       mnemonic: "a".repeat(501),
+      personalNote: null,
+      personalExample: null,
+      tags: [],
     }),
   );
   assert.throws(() =>
     userWordMemoryInputSchema.parse({
-      customTag: "a".repeat(51),
+      mnemonic: null,
+      personalNote: "a".repeat(2001),
+      personalExample: null,
+      tags: [],
+    }),
+  );
+  assert.throws(() =>
+    userWordMemoryInputSchema.parse({
+      mnemonic: null,
+      personalNote: null,
+      personalExample: null,
+      tags: ["duplicate", "DUPLICATE"],
     }),
   );
 
@@ -108,9 +124,9 @@ test("avatar ve kelime hafıza doğrulama şemaları sınırları korur", () => 
   const query = avatarCatalogQuerySchema.parse({
     category: "heroes",
     limit: "25",
-    page: "3",
+    offset: "40",
   });
   assert.equal(query.category, "heroes");
   assert.equal(query.limit, 25);
-  assert.equal(query.page, 3);
+  assert.equal(query.offset, 40);
 });

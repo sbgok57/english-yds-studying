@@ -39,6 +39,7 @@ model Word {
   updatedAt        DateTime           @updatedAt
   progress         UserWordProgress[]
   reviewEvents     ReviewEvent[]
+  memories         UserWordMemory[]
 
   @@index([enrichmentStatus, nextAttemptAt, createdAt])
   @@index([enrichmentStatus, updatedAt, attempts])
@@ -93,26 +94,29 @@ model ReviewEvent {
   @@index([userId, wordId, reviewedAt])
 }
 
-// Kullanıcının kelimeye eklediği özel kodlama (mnemonic), kişisel not ve etiketler
+// Kullanıcı başına, kelime başına özel mnemonik/not/örnek/tag hafızası.
+// Global Word içeriği ve FSRS progress'inden ayrı tutulur; silinmesi ReviewEvent'i silmez.
 model UserWordMemory {
-  id           String   @id @default(cuid())
-  userId       String   @db.VarChar(128)
-  wordId       String
-  mnemonic     String?  @db.VarChar(500)
-  personalNote String?  @db.VarChar(500)
-  customTag    String?  @db.VarChar(50)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id              String   @id @default(cuid())
+  userId          String   @db.VarChar(128)
+  wordId          String
+  personalNote    String?  @db.VarChar(2000)
+  mnemonic        String?  @db.VarChar(500)
+  personalExample String?  @db.VarChar(500)
+  tags            String[] @default([])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  word            Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
   @@index([userId, updatedAt])
 }
 
-// Kullanıcı profil ve seçili avatar kaydı
+// Avatar seçimleri yalnızca sabit catalogue ID'si saklar; dosya/GIF yüklenmez.
 model UserProfile {
   id        String   @id @default(cuid())
   userId    String   @unique @db.VarChar(128)
-  avatarId  Int      @default(1)
+  avatarId  Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

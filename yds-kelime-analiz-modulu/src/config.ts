@@ -4,7 +4,7 @@ import { z } from "zod";
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1, "DATABASE_URL tanımlanmalı."),
   ANTHROPIC_API_KEY: z.string().min(1, "ANTHROPIC_API_KEY tanımlanmalı."),
-  CLAUDE_MODEL: z.string().min(1).default("claude-sonnet-5"),
+  CLAUDE_MODEL: z.string().min(1).default("claude-sonnet-5-5"),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   DEV_USER_ID: z.string().min(1).max(128).optional(),

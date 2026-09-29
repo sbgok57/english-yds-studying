@@ -189,3 +189,31 @@ export function getAvatarCatalog(options?: {
     avatars,
   };
 }
+
+export const AVATAR_COUNT = TOTAL_AVATARS;
+export const AVATAR_CATEGORY_META = AVATAR_CATEGORIES;
+export const AVATAR_CATEGORY_IDS = [
+  "all",
+  "animals",
+  "robots",
+  "heroes",
+  "scholars",
+  "mythic",
+  "sci-fi",
+  "emojis",
+] as const;
+
+export const getAvatarSvg = generateAvatarSvg;
+
+export function getAvatarPage(offset = 0, limit = 40, category = "all") {
+  const cat = category === "all" ? undefined : category;
+  const page = Math.floor(offset / limit) + 1;
+  const res = getAvatarCatalog({ category: cat, limit, page });
+  return {
+    avatars: res.avatars,
+    offset,
+    limit,
+    total: res.total,
+    hasMore: offset + res.avatars.length < res.total,
+  };
+}

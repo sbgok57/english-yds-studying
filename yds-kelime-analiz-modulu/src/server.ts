@@ -7,6 +7,7 @@ import { Prisma, PrismaClient, UserWordProgress, Word } from "@prisma/client";
 import { ZodError } from "zod";
 import { env } from "./config";
 import { importGlobalPdfWords, normalizeTerm } from "./global-word-import";
+import { AVATAR_CATEGORY_META, AVATAR_COUNT, getAvatarById, getAvatarCatalog, getAvatarPage, getAvatarSvg } from "./avatar-catalog";
 import {
   avatarCatalogQuerySchema,
   avatarSelectionSchema,
@@ -14,17 +15,11 @@ import {
   globalPdfImportSchema,
   progressInputSchema,
   reviewQueueQuerySchema,
-  reviewSubmissionSchema,
   userWordMemoryInputSchema,
+  reviewSubmissionSchema,
   wordInputSchema,
   wordListQuerySchema,
 } from "./validation";
-import {
-  AVATAR_CATEGORIES,
-  getAvatarById,
-  getAvatarCatalog,
-  TOTAL_AVATARS,
-} from "./avatar-catalog";
 import { backfillNormalizedTerms, ensureSingleSiteOwner } from "./site-owner";
 import {
   createInitialCard,
@@ -99,8 +94,8 @@ function requireUser(req: Request, res: Response, next: NextFunction): void {
 
   // Yalnızca development içindir. Production'da sitenin doğrulanmış session/JWT
   // middleware'i req.user.id alanını doldurmalıdır.
-  if (env.NODE_ENV !== "production" && env.DEV_USER_ID) {
-    res.locals.userId = env.DEV_USER_ID;
+  if (process.env.NODE_ENV === "development" && process.env.DEV_USER_ID) {
+    res.locals.userId = process.env.DEV_USER_ID;
     next();
     return;
   }
@@ -277,6 +272,88 @@ app.get(
   asyncHandler(async (_req, res) => {
     const userId = String(res.locals.userId);
     res.json({ userId, isOwner: await isOwner(userId) });
+  }),
+);
+
+// Avatar kataloğu herkese açık, sabit ve yerel SVG'lerden üretilir; dosya upload edilmez.
+app.get(
+  "/api/avatar-catalog",
+  asyncHandler(async (req, res) => {
+    const query = avatarCatalogQuerySchema.parse(req.query);
+    const page = getAvatarPage(query.offset, query.limit, query.category);
+    res.json({
+      catalogTotal: AVATAR_COUNT,
+      categories: AVATAR_CATEGORY_META,
+      ...page,
+    });
+  }),
+);
+
+app.get("/avatars/:avatarId.svg", (req, res) => {
+  const rawId = String(req.params.avatarId ?? "");
+  if (!/^\d{1,4}$/.test(rawId)) {
+    res.status(404).type("text/plain").send("Avatar bulunamadı.");
+    return;
+  }
+  const svg = getAvatarSvg(Number(rawId));
+  if (!svg) {
+    res.status(404).type("text/plain").send("Avatar bulunamadı.");
+    return;
+  }
+  res.setHeader("Cache-Control", "public, max-age=86400");
+  res.type("image/svg+xml").send(svg);
+});
+
+app.get("/api/avatars", (req, res) => {
+  const limit = Math.min(200, Math.max(1, Number(req.query.limit) || 50));
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const category = typeof req.query.category === "string" ? req.query.category : undefined;
+  const catalog = getAvatarCatalog({ limit, page, category });
+  res.json(catalog);
+});
+
+app.get("/api/avatars/:id", (req, res) => {
+  const rawId = Number(req.params.id);
+  if (!Number.isInteger(rawId) || rawId < 1 || rawId > 2000) {
+    sendApiError(res, 404, "NOT_FOUND", "Avatar bulunamadı.");
+    return;
+  }
+  const avatar = getAvatarById(rawId);
+  res.json({ avatar });
+});
+
+app.get(
+  "/api/profile",
+  requireUser,
+  asyncHandler(async (_req, res) => {
+    const userId = String(res.locals.userId);
+    const profile = await prisma.userProfile.findUnique({ where: { userId } });
+    const storedAvatarId = profile?.avatarId;
+    const avatarId = typeof storedAvatarId === "number" && Number.isInteger(storedAvatarId)
+      && storedAvatarId >= 0 && storedAvatarId < AVATAR_COUNT
+      ? storedAvatarId
+      : 0;
+    res.json({
+      profile: {
+        avatarId,
+        updatedAt: profile?.updatedAt ?? null,
+      },
+    });
+  }),
+);
+
+app.put(
+  "/api/profile/avatar",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const input = avatarSelectionSchema.parse(req.body);
+    const userId = String(res.locals.userId);
+    const profile = await prisma.userProfile.upsert({
+      where: { userId },
+      create: { userId, avatarId: input.avatarId },
+      update: { avatarId: input.avatarId },
+    });
+    res.json({ profile: { avatarId: profile.avatarId, updatedAt: profile.updatedAt } });
   }),
 );
 
@@ -480,6 +557,114 @@ app.post(
   }),
 );
 
+// Kullanıcının kişisel not/hatırlatıcı/örneği Word içeriğinden ve diğer hesaplardan ayrıdır.
+app.get(
+  "/api/words/:id/memory",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const id = getRouteId(req);
+    if (!id) {
+      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
+      return;
+    }
+    const userId = String(res.locals.userId);
+    const word = await findVisibleWord(id, userId);
+    if (!word) {
+      sendApiError(res, 404, "WORD_NOT_FOUND", "Kelime bulunamadı.");
+      return;
+    }
+
+    const memory = await prisma.userWordMemory.findUnique({
+      where: { userId_wordId: { userId, wordId: id } },
+    });
+    res.json({
+      memory: memory
+        ? {
+            wordId: memory.wordId,
+            personalNote: memory.personalNote,
+            mnemonic: memory.mnemonic,
+            personalExample: memory.personalExample,
+            tags: memory.tags,
+            updatedAt: memory.updatedAt,
+          }
+        : {
+            wordId: id,
+            personalNote: null,
+            mnemonic: null,
+            personalExample: null,
+            tags: [],
+            updatedAt: null,
+          },
+    });
+  }),
+);
+
+// PUT, kullanıcı başına tam bir kişisel bellek kaydını idempotent biçimde yeniler.
+app.put(
+  "/api/words/:id/memory",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const id = getRouteId(req);
+    if (!id) {
+      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
+      return;
+    }
+    const input = userWordMemoryInputSchema.parse(req.body);
+    const userId = String(res.locals.userId);
+    const word = await findVisibleWord(id, userId);
+    if (!word) {
+      sendApiError(res, 404, "WORD_NOT_FOUND", "Kelime bulunamadı.");
+      return;
+    }
+    const textOrNull = (value: string | null) => {
+      const trimmed = value?.trim();
+      return trimmed ? trimmed : null;
+    };
+    const data = {
+      personalNote: textOrNull(input.personalNote),
+      mnemonic: textOrNull(input.mnemonic),
+      personalExample: textOrNull(input.personalExample),
+      tags: input.tags,
+    };
+    const memory = await prisma.userWordMemory.upsert({
+      where: { userId_wordId: { userId, wordId: id } },
+      create: { userId, wordId: id, ...data },
+      update: data,
+    });
+    res.json({
+      memory: {
+        wordId: memory.wordId,
+        personalNote: memory.personalNote,
+        mnemonic: memory.mnemonic,
+        personalExample: memory.personalExample,
+        tags: memory.tags,
+        updatedAt: memory.updatedAt,
+      },
+    });
+  }),
+);
+
+// Notları temizler; kelimeyi, FSRS progress'ini ve ReviewEvent geçmişini silmez.
+app.delete(
+  "/api/words/:id/memory",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const id = getRouteId(req);
+    if (!id) {
+      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
+      return;
+    }
+    const userId = String(res.locals.userId);
+    const word = await findVisibleWord(id, userId);
+    if (!word) {
+      sendApiError(res, 404, "WORD_NOT_FOUND", "Kelime bulunamadı.");
+      return;
+    }
+    await prisma.userWordMemory.deleteMany({ where: { userId, wordId: id } });
+    res.status(204).end();
+  }),
+);
+
 // Kendi çalışma durumunu yalnızca oturum açan kullanıcı değiştirebilir.
 // Bu sayede ortak kelime havuzu tüm hesaplarda görünürken ilerleme kişisel kalır.
 app.put(
@@ -516,58 +701,6 @@ app.put(
         lastReviewedAt: progress.lastReviewedAt,
       },
     });
-  }),
-);
-
-app.get(
-  "/api/words/:id/memory",
-  requireUser,
-  asyncHandler(async (req, res) => {
-    const wordId = getRouteId(req);
-    if (!wordId) {
-      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
-      return;
-    }
-    const userId = String(res.locals.userId);
-    const memory = await prisma.userWordMemory.findUnique({
-      where: { userId_wordId: { userId, wordId } },
-    });
-    res.json({ memory });
-  }),
-);
-
-app.put(
-  "/api/words/:id/memory",
-  requireUser,
-  asyncHandler(async (req, res) => {
-    const wordId = getRouteId(req);
-    if (!wordId) {
-      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
-      return;
-    }
-    const input = userWordMemoryInputSchema.parse(req.body);
-    const userId = String(res.locals.userId);
-    const word = await findVisibleWord(wordId, userId);
-    if (!word) {
-      sendApiError(res, 404, "WORD_NOT_FOUND", "Kelime bulunamadı.");
-      return;
-    }
-    const memory = await prisma.userWordMemory.upsert({
-      where: { userId_wordId: { userId, wordId } },
-      create: {
-        userId,
-        wordId,
-        mnemonic: input.mnemonic ?? null,
-        personalNote: input.personalNote ?? null,
-        customTag: input.customTag ?? null,
-      },
-      update: {
-        mnemonic: input.mnemonic !== undefined ? input.mnemonic : undefined,
-        personalNote: input.personalNote !== undefined ? input.personalNote : undefined,
-        customTag: input.customTag !== undefined ? input.customTag : undefined,
-      },
-    });
-    res.json({ memory });
   }),
 );
 
@@ -905,68 +1038,6 @@ app.get(
       analysisQueue,
       reviewsLast24h,
       latestFailures,
-    });
-  }),
-);
-
-// 2.000 SVG Avatar Kataloğu ve Kullanıcı Profil Rotaları
-app.get(
-  "/api/avatars",
-  asyncHandler(async (req, res) => {
-    const query = avatarCatalogQuerySchema.parse(req.query);
-    const result = getAvatarCatalog(query);
-    res.json({
-      ...result,
-      categories: AVATAR_CATEGORIES,
-    });
-  }),
-);
-
-app.get(
-  "/api/avatars/:id",
-  asyncHandler(async (req, res) => {
-    const rawId = getRouteId(req);
-    const id = Number(rawId);
-    if (isNaN(id) || id < 1 || id > TOTAL_AVATARS) {
-      sendApiError(res, 400, "INVALID_AVATAR_ID", `Avatar ID 1 ile ${TOTAL_AVATARS} arasında olmalıdır.`);
-      return;
-    }
-    res.json({ avatar: getAvatarById(id) });
-  }),
-);
-
-app.get(
-  "/api/user/profile",
-  requireUser,
-  asyncHandler(async (_req, res) => {
-    const userId = String(res.locals.userId);
-    const profile = await prisma.userProfile.findUnique({
-      where: { userId },
-    });
-    const avatarId = profile?.avatarId ?? 1;
-    res.json({
-      userId,
-      avatarId,
-      avatar: getAvatarById(avatarId),
-      createdAt: profile?.createdAt ?? new Date(),
-    });
-  }),
-);
-
-app.put(
-  "/api/user/avatar",
-  requireUser,
-  asyncHandler(async (req, res) => {
-    const input = avatarSelectionSchema.parse(req.body);
-    const userId = String(res.locals.userId);
-    const profile = await prisma.userProfile.upsert({
-      where: { userId },
-      create: { userId, avatarId: input.avatarId },
-      update: { avatarId: input.avatarId },
-    });
-    res.json({
-      avatarId: profile.avatarId,
-      avatar: getAvatarById(profile.avatarId),
     });
   }),
 );

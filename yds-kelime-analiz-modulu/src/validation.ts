@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { AVATAR_CATEGORY_IDS } from "./avatar-catalog";
 
 // Tek kelime ya da en fazla 6 kelimelik kalıp/frazal verb kabul edilir.
 const lexicalItemPattern = /^[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*(?: +[\p{L}\p{M}]+(?:['’\-][\p{L}\p{M}]+)*){0,5}$/u;
@@ -70,30 +71,50 @@ export const reviewSubmissionSchema = z
   })
   .strict();
 
+const memoryTagPattern = /^[\p{L}\p{M}\p{N}][\p{L}\p{M}\p{N} _-]*$/u;
+const memoryTagSchema = z
+  .string()
+  .trim()
+  .min(1, "Etiket boş olamaz.")
+  .max(30, "Etiket en fazla 30 karakter olabilir.")
+  .transform((value) => value.normalize("NFKC"))
+  .refine((value) => memoryTagPattern.test(value), "Etikette yalnızca harf, sayı, boşluk, tire ve alt çizgi kullanın.");
+
+// Tam PUT gövdesi: tüm alanlar gönderilir; boş metinler sunucuda null yapılır.
 export const userWordMemoryInputSchema = z
   .object({
-    mnemonic: z.string().trim().max(500).optional(),
-    personalNote: z.string().trim().max(500).optional(),
-    customTag: z.string().trim().max(50).optional(),
+    personalNote: z.string().trim().max(2000, "Not en fazla 2000 karakter olabilir.").nullable(),
+    mnemonic: z.string().trim().max(500, "Hatırlatıcı en fazla 500 karakter olabilir.").nullable(),
+    personalExample: z.string().trim().max(500, "Kişisel örnek en fazla 500 karakter olabilir.").nullable(),
+    tags: z.array(memoryTagSchema).max(10, "En fazla 10 etiket ekleyebilirsiniz."),
   })
-  .strict();
+  .strict()
+  .superRefine((memory, context) => {
+    const normalized = memory.tags.map((tag) => tag.toLocaleLowerCase("en-US"));
+    if (new Set(normalized).size !== normalized.length) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Aynı etiketi birden fazla kez ekleyemezsiniz.",
+        path: ["tags"],
+      });
+    }
+  });
 
 export const avatarCatalogQuerySchema = z
   .object({
-    category: z.string().trim().min(1).max(50).optional(),
-    limit: z.coerce.number().int().min(1).max(200).default(50),
-    page: z.coerce.number().int().min(1).default(1),
+    category: z.enum(AVATAR_CATEGORY_IDS).default("all"),
+    offset: z.coerce.number().int().min(0).max(2000).default(0),
+    limit: z.coerce.number().int().min(1).max(80).default(40),
   })
   .strict();
 
 export const avatarSelectionSchema = z
   .object({
-    avatarId: z.coerce.number().int().min(1).max(2000),
+    avatarId: z.number().int().min(0).max(1999),
   })
   .strict();
 
 export type WordInput = z.infer<typeof wordInputSchema>;
-export type ReviewRating = z.infer<typeof reviewSubmissionSchema>["rating"];
 export type UserWordMemoryInput = z.infer<typeof userWordMemoryInputSchema>;
-export type AvatarCatalogQuery = z.infer<typeof avatarCatalogQuerySchema>;
-export type AvatarSelection = z.infer<typeof avatarSelectionSchema>;
+export type AvatarSelectionInput = z.infer<typeof avatarSelectionSchema>;
+export type ReviewRating = z.infer<typeof reviewSubmissionSchema>["rating"];
