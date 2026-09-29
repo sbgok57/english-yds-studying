@@ -12,6 +12,8 @@ const envSchema = z.object({
   CORS_ORIGINS: z.string().optional(),
   WORKER_POLL_MS: z.coerce.number().int().min(250).max(30000).default(1000),
   MAX_ATTEMPTS: z.coerce.number().int().min(1).max(10).default(5),
+  FSRS_RETENTION: z.coerce.number().min(0.8).max(0.97).default(0.9),
+  DAILY_NEW_CARD_LIMIT: z.coerce.number().int().min(1).max(100).default(20),
 });
 
 const parsed = envSchema.safeParse(process.env);

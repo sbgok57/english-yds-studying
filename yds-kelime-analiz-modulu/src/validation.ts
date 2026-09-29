@@ -56,4 +56,19 @@ export const progressInputSchema = z
   })
   .strict();
 
+export const reviewQueueQuerySchema = z
+  .object({
+    limit: z.coerce.number().int().min(1).max(50).default(20),
+    newLimit: z.coerce.number().int().min(0).max(50).default(10),
+  })
+  .strict();
+
+export const reviewSubmissionSchema = z
+  .object({
+    requestId: z.string().uuid(),
+    rating: z.enum(["AGAIN", "HARD", "GOOD", "EASY"]),
+  })
+  .strict();
+
 export type WordInput = z.infer<typeof wordInputSchema>;
+export type ReviewRating = z.infer<typeof reviewSubmissionSchema>["rating"];

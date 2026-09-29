@@ -16,28 +16,29 @@ model SiteOwner {
 }
 
 model Word {
-  id               String   @id @default(cuid())
+  id               String             @id @default(cuid())
   // Private kelimelerde kelimenin sahibi; global kelimelerde ekleyen tek SiteOwner.
-  userId           String   @db.VarChar(128)
-  isGlobal         Boolean  @default(false)
-  normalizedTerm   String   @default("") @db.VarChar(150)
-  source           String   @default("MANUAL") @db.VarChar(16)
-  sourceFile       String?  @db.VarChar(255)
-  term             String   @db.VarChar(100)
-  context          String?  @db.VarChar(500)
-  lemma            String?  @db.VarChar(120)
-  cefrLevel        String?  @db.VarChar(12)
-  confidence       String?  @db.VarChar(12)
+  userId           String             @db.VarChar(128)
+  isGlobal         Boolean            @default(false)
+  normalizedTerm   String             @default("") @db.VarChar(150)
+  source           String             @default("MANUAL") @db.VarChar(16)
+  sourceFile       String?            @db.VarChar(255)
+  term             String             @db.VarChar(100)
+  context          String?            @db.VarChar(500)
+  lemma            String?            @db.VarChar(120)
+  cefrLevel        String?            @db.VarChar(12)
+  confidence       String?            @db.VarChar(12)
   analysis         Json?
-  enrichmentStatus String   @default("PENDING") @db.VarChar(16)
-  attempts         Int      @default(0)
-  nextAttemptAt    DateTime @default(now())
-  lastError        String?  @db.VarChar(1000)
-  analyzedModel    String?  @db.VarChar(100)
+  enrichmentStatus String             @default("PENDING") @db.VarChar(16)
+  attempts         Int                @default(0)
+  nextAttemptAt    DateTime           @default(now())
+  lastError        String?            @db.VarChar(1000)
+  analyzedModel    String?            @db.VarChar(100)
   analyzedAt       DateTime?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
   progress         UserWordProgress[]
+  reviewEvents     ReviewEvent[]
 
   @@index([enrichmentStatus, nextAttemptAt, createdAt])
   @@index([enrichmentStatus, updatedAt, attempts])
@@ -49,16 +50,45 @@ model Word {
 
 // Kelime havuzu ortaktır; çalışma/öğrenme durumu her kullanıcı için ayrıdır.
 model UserWordProgress {
-  id              String   @id @default(cuid())
-  userId          String   @db.VarChar(128)
-  wordId          String
-  isLearned       Boolean  @default(false)
-  reviewCount     Int      @default(0)
-  lastReviewedAt  DateTime?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  word            Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  id             String    @id @default(cuid())
+  userId         String    @db.VarChar(128)
+  wordId         String
+  isLearned      Boolean   @default(false)
+  reviewCount    Int       @default(0)
+  lastReviewedAt DateTime?
+  // FSRS state is stored per user/card; JSON dates are ISO strings.
+  fsrsCard       Json?
+  dueAt          DateTime?
+  fsrsStartedAt  DateTime?
+  lastRating     String?   @db.VarChar(8)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  word           Word      @relation(fields: [wordId], references: [id], onDelete: Cascade)
 
   @@unique([userId, wordId])
+  @@index([userId, dueAt])
   @@index([userId, lastReviewedAt])
+}
+
+// Append-only audit log and idempotency record for each retrieval attempt.
+model ReviewEvent {
+  id                   String   @id @default(cuid())
+  userId               String   @db.VarChar(128)
+  wordId               String
+  requestId            String   @db.VarChar(36)
+  rating               String   @db.VarChar(8)
+  reviewedAt           DateTime @default(now())
+  nextDueAt            DateTime
+  scheduledDays        Float
+  stability            Float
+  difficulty           Float
+  state                String   @db.VarChar(16)
+  retrievabilityBefore Float?
+  isLearnedAfter       Boolean  @default(false)
+  resultingCard        Json
+  word                 Word     @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, requestId])
+  @@index([userId, reviewedAt])
+  @@index([userId, wordId, reviewedAt])
 }

@@ -40,7 +40,7 @@ const senseSchema = z
   })
   .strict();
 
-const analysisSchema = z
+export const analysisSchema = z
   .object({
     isRecognized: z.boolean(),
     lemma: z.string().trim().min(1).max(120),
