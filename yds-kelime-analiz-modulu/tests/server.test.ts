@@ -56,9 +56,24 @@ test("HTTP sınırı: kimlik doğrulama, request-id, parser hataları ve rate li
     const oversizedBody = (await oversizedResponse.json()) as { code: string };
     assert.equal(oversizedBody.code, "PAYLOAD_TOO_LARGE");
 
+    // Avatar katalog endpoint'leri oturum gerektirmez
+    const avatarsResponse = await fetch(`${baseUrl}/api/avatars?limit=5`);
+    assert.equal(avatarsResponse.status, 200);
+    const avatarsBody = (await avatarsResponse.json()) as { total: number; avatars: unknown[] };
+    assert.equal(avatarsBody.total, 2000);
+    assert.equal(avatarsBody.avatars.length, 5);
+
+    const singleAvatarResponse = await fetch(`${baseUrl}/api/avatars/42`);
+    assert.equal(singleAvatarResponse.status, 200);
+    const singleAvatarBody = (await singleAvatarResponse.json()) as { avatar: { id: number; name: string } };
+    assert.equal(singleAvatarBody.avatar.id, 42);
+
     let finalResponse: Response | undefined;
     for (let i = 0; i < 60; i += 1) {
       finalResponse = await fetch(`${baseUrl}/api/session/me`);
+      if (i < 59) {
+        await finalResponse.text();
+      }
     }
     assert.ok(finalResponse);
     assert.equal(finalResponse.status, 429);

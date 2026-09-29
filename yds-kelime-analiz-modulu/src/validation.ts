@@ -70,5 +70,30 @@ export const reviewSubmissionSchema = z
   })
   .strict();
 
+export const userWordMemoryInputSchema = z
+  .object({
+    mnemonic: z.string().trim().max(500).optional(),
+    personalNote: z.string().trim().max(500).optional(),
+    customTag: z.string().trim().max(50).optional(),
+  })
+  .strict();
+
+export const avatarCatalogQuerySchema = z
+  .object({
+    category: z.string().trim().min(1).max(50).optional(),
+    limit: z.coerce.number().int().min(1).max(200).default(50),
+    page: z.coerce.number().int().min(1).default(1),
+  })
+  .strict();
+
+export const avatarSelectionSchema = z
+  .object({
+    avatarId: z.coerce.number().int().min(1).max(2000),
+  })
+  .strict();
+
 export type WordInput = z.infer<typeof wordInputSchema>;
 export type ReviewRating = z.infer<typeof reviewSubmissionSchema>["rating"];
+export type UserWordMemoryInput = z.infer<typeof userWordMemoryInputSchema>;
+export type AvatarCatalogQuery = z.infer<typeof avatarCatalogQuerySchema>;
+export type AvatarSelection = z.infer<typeof avatarSelectionSchema>;

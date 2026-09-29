@@ -8,14 +8,23 @@ import { ZodError } from "zod";
 import { env } from "./config";
 import { importGlobalPdfWords, normalizeTerm } from "./global-word-import";
 import {
+  avatarCatalogQuerySchema,
+  avatarSelectionSchema,
   bulkWordInputSchema,
   globalPdfImportSchema,
   progressInputSchema,
   reviewQueueQuerySchema,
   reviewSubmissionSchema,
+  userWordMemoryInputSchema,
   wordInputSchema,
   wordListQuerySchema,
 } from "./validation";
+import {
+  AVATAR_CATEGORIES,
+  getAvatarById,
+  getAvatarCatalog,
+  TOTAL_AVATARS,
+} from "./avatar-catalog";
 import { backfillNormalizedTerms, ensureSingleSiteOwner } from "./site-owner";
 import {
   createInitialCard,
@@ -510,6 +519,58 @@ app.put(
   }),
 );
 
+app.get(
+  "/api/words/:id/memory",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const wordId = getRouteId(req);
+    if (!wordId) {
+      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
+      return;
+    }
+    const userId = String(res.locals.userId);
+    const memory = await prisma.userWordMemory.findUnique({
+      where: { userId_wordId: { userId, wordId } },
+    });
+    res.json({ memory });
+  }),
+);
+
+app.put(
+  "/api/words/:id/memory",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const wordId = getRouteId(req);
+    if (!wordId) {
+      sendApiError(res, 400, "INVALID_WORD_ID", "Kelime ID'si geçersiz.");
+      return;
+    }
+    const input = userWordMemoryInputSchema.parse(req.body);
+    const userId = String(res.locals.userId);
+    const word = await findVisibleWord(wordId, userId);
+    if (!word) {
+      sendApiError(res, 404, "WORD_NOT_FOUND", "Kelime bulunamadı.");
+      return;
+    }
+    const memory = await prisma.userWordMemory.upsert({
+      where: { userId_wordId: { userId, wordId } },
+      create: {
+        userId,
+        wordId,
+        mnemonic: input.mnemonic ?? null,
+        personalNote: input.personalNote ?? null,
+        customTag: input.customTag ?? null,
+      },
+      update: {
+        mnemonic: input.mnemonic !== undefined ? input.mnemonic : undefined,
+        personalNote: input.personalNote !== undefined ? input.personalNote : undefined,
+        customTag: input.customTag !== undefined ? input.customTag : undefined,
+      },
+    });
+    res.json({ memory });
+  }),
+);
+
 app.post(
   "/api/words/:id/retry",
   requireUser,
@@ -844,6 +905,68 @@ app.get(
       analysisQueue,
       reviewsLast24h,
       latestFailures,
+    });
+  }),
+);
+
+// 2.000 SVG Avatar Kataloğu ve Kullanıcı Profil Rotaları
+app.get(
+  "/api/avatars",
+  asyncHandler(async (req, res) => {
+    const query = avatarCatalogQuerySchema.parse(req.query);
+    const result = getAvatarCatalog(query);
+    res.json({
+      ...result,
+      categories: AVATAR_CATEGORIES,
+    });
+  }),
+);
+
+app.get(
+  "/api/avatars/:id",
+  asyncHandler(async (req, res) => {
+    const rawId = getRouteId(req);
+    const id = Number(rawId);
+    if (isNaN(id) || id < 1 || id > TOTAL_AVATARS) {
+      sendApiError(res, 400, "INVALID_AVATAR_ID", `Avatar ID 1 ile ${TOTAL_AVATARS} arasında olmalıdır.`);
+      return;
+    }
+    res.json({ avatar: getAvatarById(id) });
+  }),
+);
+
+app.get(
+  "/api/user/profile",
+  requireUser,
+  asyncHandler(async (_req, res) => {
+    const userId = String(res.locals.userId);
+    const profile = await prisma.userProfile.findUnique({
+      where: { userId },
+    });
+    const avatarId = profile?.avatarId ?? 1;
+    res.json({
+      userId,
+      avatarId,
+      avatar: getAvatarById(avatarId),
+      createdAt: profile?.createdAt ?? new Date(),
+    });
+  }),
+);
+
+app.put(
+  "/api/user/avatar",
+  requireUser,
+  asyncHandler(async (req, res) => {
+    const input = avatarSelectionSchema.parse(req.body);
+    const userId = String(res.locals.userId);
+    const profile = await prisma.userProfile.upsert({
+      where: { userId },
+      create: { userId, avatarId: input.avatarId },
+      update: { avatarId: input.avatarId },
+    });
+    res.json({
+      avatarId: profile.avatarId,
+      avatar: getAvatarById(profile.avatarId),
     });
   }),
 );

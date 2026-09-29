@@ -92,3 +92,27 @@ model ReviewEvent {
   @@index([userId, reviewedAt])
   @@index([userId, wordId, reviewedAt])
 }
+
+// Kullanıcının kelimeye eklediği özel kodlama (mnemonic), kişisel not ve etiketler
+model UserWordMemory {
+  id           String   @id @default(cuid())
+  userId       String   @db.VarChar(128)
+  wordId       String
+  mnemonic     String?  @db.VarChar(500)
+  personalNote String?  @db.VarChar(500)
+  customTag    String?  @db.VarChar(50)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, wordId])
+  @@index([userId, updatedAt])
+}
+
+// Kullanıcı profil ve seçili avatar kaydı
+model UserProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique @db.VarChar(128)
+  avatarId  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

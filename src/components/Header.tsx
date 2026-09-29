@@ -5,6 +5,7 @@ import { useState } from "react";
 import SearchBox from "@/components/SearchBox";
 import MenuDrawer from "@/components/MenuDrawer";
 import StreakBadge from "@/components/StreakBadge";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const QUICK = [
   { href: "/vocabulary/inventory", label: "Envanter", emoji: "📦" },
@@ -54,6 +55,7 @@ export default function Header() {
           </nav>
 
           <div className="ml-auto xl:ml-0 flex items-center gap-2">
+            <ThemeToggle />
             <StreakBadge />
             <button
               onClick={() => setMenu(true)}

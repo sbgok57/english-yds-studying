@@ -110,6 +110,14 @@ const STATIONS = [
     cta: "İçe Aktar",
     color: "from-cyan-500 to-teal-600",
   },
+  {
+    href: "/vocabulary/flashcards?mode=fsrs",
+    emoji: "🧠",
+    title: "FSRS 2.0 Akıllı Bellek Laboratuvarı",
+    desc: "Bilişsel unutma eğrisi, kişiselleştirilmiş aralıklı tekrar sıklığı ve kalıcı uzun süreli hafıza.",
+    cta: "Laboratuvarı Aç",
+    color: "from-purple-600 to-pink-600",
+  },
 ];
 
 const STATS = [
@@ -171,7 +179,17 @@ export default function Home() {
       </section>
 
       {/* STATS */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 my-16">
+      <section className="my-16">
+        <Reveal>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="text-2xl">⚡</span>
+            <h2 className="text-xl sm:text-2xl font-black text-center tracking-tight">
+              Platform <span className="gradient-text">Güç Göstergeleri</span>
+            </h2>
+            <span className="text-2xl">✨</span>
+          </div>
+        </Reveal>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((s, i) => (
           <Reveal key={i} delay={i * 90}>
             <div className="card-vibrant p-6 text-center">
@@ -183,6 +201,7 @@ export default function Home() {
             </div>
           </Reveal>
         ))}
+        </div>
       </section>
 
       {/* PROGRESS */}
@@ -197,9 +216,13 @@ export default function Home() {
       {/* STATIONS */}
       <section className="my-16">
         <Reveal>
-          <h2 className="text-3xl font-black text-center mb-2">
-            Öğrenme ve Simülasyon <span className="gradient-text">İstasyonları</span>
-          </h2>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <span className="text-3xl">🧭</span>
+            <h2 className="text-3xl font-black text-center">
+              Öğrenme ve Simülasyon <span className="gradient-text">İstasyonları</span>
+            </h2>
+            <span className="text-3xl">🚀</span>
+          </div>
           <p className="text-center text-white/50 mb-10">
             Her aşamada renkli, animasyonlu ve görsel hafıza destekli modüller
           </p>
@@ -232,7 +255,7 @@ export default function Home() {
         <Reveal>
           <div className="card-vibrant p-10 text-center bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10">
             <h3 className="text-2xl sm:text-3xl font-black mb-3">
-              Hazır mısın kanka? <span className="gradient-text">Optik form seni bekliyor.</span>
+              👑 Hazır mısın kanka? <span className="gradient-text">Optik form seni bekliyor.</span>
             </h3>
             <p className="text-white/60 mb-6">80 net hedefine giden yol, doğru taktik + düzenli tekrardan geçer. Kral olma vakti! 👑</p>
             <Link
