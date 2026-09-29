@@ -167,7 +167,11 @@ function clone<T>(o: T): T {
       /* fallback */
     }
   }
-  return JSON.parse(JSON.stringify(o));
+  try {
+    return JSON.parse(JSON.stringify(o));
+  } catch {
+    return o;
+  }
 }
 
 export function useUsage() {

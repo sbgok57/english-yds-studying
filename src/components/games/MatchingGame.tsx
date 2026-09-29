@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { RotateCcw, Trophy, Sparkles } from "lucide-react";
@@ -41,6 +41,14 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
   const [flipped, setFlipped] = useState<string[]>([]);
   const [matched, setMatched] = useState<Set<string>>(new Set());
   const [moves, setMoves] = useState(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear timeouts on unmount to prevent leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const flip = (card: Card) => {
     if (flipped.length === 2 || flipped.includes(card.key) || matched.has(card.pairId)) return;
@@ -51,8 +59,10 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
       setMoves((m) => m + 1);
       const [a, b] = next.map((k) => cards.find((c) => c.key === k)!);
 
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
       if (a && b && a.pairId === b.pairId) {
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           setMatched((prev) => {
             const s = new Set(prev).add(a.pairId);
             if (s.size === Math.min(6, pairs.length)) {
@@ -64,7 +74,7 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
           if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(50);
         }, 500);
       } else {
-        setTimeout(() => setFlipped([]), 900);
+        timeoutRef.current = setTimeout(() => setFlipped([]), 900);
       }
     }
   };
@@ -72,6 +82,7 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
   const isCompleted = matched.size === Math.min(6, pairs.length) && matched.size > 0;
 
   const restartGame = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setFlipped([]);
     setMatched(new Set());
     setMoves(0);

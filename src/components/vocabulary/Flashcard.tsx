@@ -52,23 +52,48 @@ export default function Flashcard({
   const [gender, setGender] = useState<GenderCode>("female");
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
   const [feedbackType, setFeedbackType] = useState<"correct" | "wrong" | null>(null);
+  const feedbackTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // SAFETY: Stop audio and clear pending feedback timer on card transition/unmount
   useEffect(() => {
     clientAudio.stopAll();
     setFlipped(false);
+    return () => {
+      if (feedbackTimerRef.current) {
+        clearTimeout(feedbackTimerRef.current);
+        feedbackTimerRef.current = null;
+      }
+    };
   }, [word.id]);
 
-  const examplesList = Array.isArray(word.examples)
-    ? word.examples
-    : typeof word.examples === "string"
-    ? JSON.parse(word.examples || "[]")
-    : [];
+  // SAFETY: Parse stringified arrays with try/catch to prevent unhandled syntax error crashes
+  const examplesList: string[] = (() => {
+    const raw: unknown = word.examples;
+    if (Array.isArray(raw)) return raw.filter((x): x is string => typeof x === "string");
+    if (typeof raw === "string") {
+      try {
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === "string") : [raw];
+      } catch {
+        return raw.trim() ? [raw] : [];
+      }
+    }
+    return [];
+  })();
 
-  const synonymsList = Array.isArray(word.synonyms)
-    ? word.synonyms
-    : typeof word.synonyms === "string"
-    ? JSON.parse(word.synonyms || "[]")
-    : [];
+  const synonymsList: string[] = (() => {
+    const raw: unknown = word.synonyms;
+    if (Array.isArray(raw)) return raw.filter((x): x is string => typeof x === "string");
+    if (typeof raw === "string") {
+      try {
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed.filter((x): x is string => typeof x === "string") : [raw];
+      } catch {
+        return raw.trim() ? [raw] : [];
+      }
+    }
+    return [];
+  })();
 
   const handleFlip = () => {
     setFlipped(!flipped);
@@ -77,6 +102,7 @@ export default function Flashcard({
 
   const handleKnowClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (feedbackType !== null) return;
     confetti({
       particleCount: 70,
       spread: 60,
@@ -85,7 +111,8 @@ export default function Flashcard({
     });
     setFeedbackType("correct");
     setFeedbackMessage("Harikasın! Beynin bu kelimeyi görsel olarak kodladı 🔥");
-    setTimeout(() => {
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
       setFeedbackType(null);
       setFeedbackMessage(null);
       setFlipped(false);
@@ -95,11 +122,13 @@ export default function Flashcard({
 
   const handleDontKnowClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (feedbackType !== null) return;
     const randomEncourage =
       MOTIVATION_FEEDBACK_WRONG[Math.floor(Math.random() * MOTIVATION_FEEDBACK_WRONG.length)];
     setFeedbackType("wrong");
     setFeedbackMessage(randomEncourage);
-    setTimeout(() => {
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
       setFeedbackType(null);
       setFeedbackMessage(null);
       setFlipped(false);

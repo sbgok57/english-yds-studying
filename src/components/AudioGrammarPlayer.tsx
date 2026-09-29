@@ -87,7 +87,83 @@ export default function AudioGrammarPlayer({
     }
   }, [track, onTrackChange]);
 
-  // 2. Media Session API (Kilit Ekranı & Arka Planda Çalma)
+  // 2. Oynat / Durdur / Fallback İşleyicileri
+  const handlePause = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    setIsPlaying(false);
+  }, []);
+
+  const handlePlay = useCallback(() => {
+    if (usingSpeechFallback) {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(track.script);
+        utterance.lang = "tr-TR";
+        utterance.rate = playbackRate;
+        utterance.onend = () => {
+          setIsPlaying(false);
+          saveTrackProgress(track.id, duration, true);
+        };
+        window.speechSynthesis.speak(utterance);
+        setIsPlaying(true);
+      }
+      return;
+    }
+
+    if (audioRef.current) {
+      audioRef.current.playbackRate = playbackRate;
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            // SAFETY: Ses dosyası yoksa Web Speech API ile devam et
+            setUsingSpeechFallback(true);
+            if ("speechSynthesis" in window) {
+              window.speechSynthesis.cancel();
+              const utterance = new SpeechSynthesisUtterance(track.script);
+              utterance.lang = "tr-TR";
+              utterance.rate = playbackRate;
+              utterance.onend = () => {
+                setIsPlaying(false);
+                saveTrackProgress(track.id, duration, true);
+              };
+              window.speechSynthesis.speak(utterance);
+              setIsPlaying(true);
+            }
+          });
+      }
+    }
+  }, [usingSpeechFallback, track, playbackRate, duration]);
+
+  const handleNext = useCallback(() => {
+    handlePause();
+    setUsingSpeechFallback(false);
+    setCurrentTrackIndex((prev) => (prev + 1) % AUDIO_TRACKS.length);
+  }, [handlePause]);
+
+  const handlePrev = useCallback(() => {
+    handlePause();
+    setUsingSpeechFallback(false);
+    setCurrentTrackIndex((prev) => (prev - 1 + AUDIO_TRACKS.length) % AUDIO_TRACKS.length);
+  }, [handlePause]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      handlePause();
+    } else {
+      handlePlay();
+    }
+  };
+
+  // 3. Media Session API (Kilit Ekranı & Arka Planda Çalma)
   useEffect(() => {
     if (typeof window === "undefined" || !("mediaSession" in navigator)) return;
 
@@ -135,7 +211,7 @@ export default function AudioGrammarPlayer({
     });
 
     return () => {
-      // // SAFETY: Temizleme
+      // SAFETY: Temizleme
       if ("mediaSession" in navigator) {
         navigator.mediaSession.setActionHandler("play", null);
         navigator.mediaSession.setActionHandler("pause", null);
@@ -143,9 +219,9 @@ export default function AudioGrammarPlayer({
         navigator.mediaSession.setActionHandler("nexttrack", null);
       }
     };
-  }, [track, duration]);
+  }, [track, duration, handlePlay, handlePause, handlePrev, handleNext]);
 
-  // 3. Uyku Zamanlayıcısı (Sleep Timer)
+  // 4. Uyku Zamanlayıcısı (Sleep Timer)
   useEffect(() => {
     if (sleepTimeoutRef.current) {
       clearTimeout(sleepTimeoutRef.current);
@@ -162,83 +238,7 @@ export default function AudioGrammarPlayer({
     return () => {
       if (sleepTimeoutRef.current) clearTimeout(sleepTimeoutRef.current);
     };
-  }, [sleepTimerMinutes, isPlaying]);
-
-  // 4. Oynat / Durdur / Fallback
-  const handlePlay = useCallback(() => {
-    if (usingSpeechFallback) {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(track.script);
-        utterance.lang = "tr-TR";
-        utterance.rate = playbackRate;
-        utterance.onend = () => {
-          setIsPlaying(false);
-          saveTrackProgress(track.id, duration, true);
-        };
-        window.speechSynthesis.speak(utterance);
-        setIsPlaying(true);
-      }
-      return;
-    }
-
-    if (audioRef.current) {
-      audioRef.current.playbackRate = playbackRate;
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {
-            // // SAFETY: Ses dosyası yoksa Web Speech API ile devam et
-            setUsingSpeechFallback(true);
-            if ("speechSynthesis" in window) {
-              window.speechSynthesis.cancel();
-              const utterance = new SpeechSynthesisUtterance(track.script);
-              utterance.lang = "tr-TR";
-              utterance.rate = playbackRate;
-              utterance.onend = () => {
-                setIsPlaying(false);
-                saveTrackProgress(track.id, duration, true);
-              };
-              window.speechSynthesis.speak(utterance);
-              setIsPlaying(true);
-            }
-          });
-      }
-    }
-  }, [usingSpeechFallback, track, playbackRate, duration]);
-
-  const handlePause = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-    setIsPlaying(false);
-  }, []);
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      handlePause();
-    } else {
-      handlePlay();
-    }
-  };
-
-  const handleNext = () => {
-    handlePause();
-    setUsingSpeechFallback(false);
-    setCurrentTrackIndex((prev) => (prev + 1) % AUDIO_TRACKS.length);
-  };
-
-  const handlePrev = () => {
-    handlePause();
-    setUsingSpeechFallback(false);
-    setCurrentTrackIndex((prev) => (prev - 1 + AUDIO_TRACKS.length) % AUDIO_TRACKS.length);
-  };
+  }, [sleepTimerMinutes, isPlaying, handlePause]);
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseFloat(e.target.value);

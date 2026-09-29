@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export interface TimelineEvent {
   position: number;        // 0-100: çizgi üzerindeki yüzde konum
@@ -25,10 +25,19 @@ export default function TenseTimeline({
   sentence,
 }: Props) {
   const [playing, setPlaying] = useState(false);
+  const animTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear animation timer on unmount
+  useEffect(() => {
+    return () => {
+      if (animTimerRef.current) clearTimeout(animTimerRef.current);
+    };
+  }, []);
 
   const startAnimation = () => {
+    if (animTimerRef.current) clearTimeout(animTimerRef.current);
     setPlaying(false);
-    setTimeout(() => setPlaying(true), 60);
+    animTimerRef.current = setTimeout(() => setPlaying(true), 60);
   };
 
   return (

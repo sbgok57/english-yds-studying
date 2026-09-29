@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState, useEffect, type ReactNode } from "react";
 
 /** Üzerinde ~0.8 sn bekleyince açıklama baloncuğu gösteren sarmalayıcı.
  *  marker ile küçük bir ℹ️ rozeti eklenebilir (keşfedilebilirlik). */
@@ -18,6 +18,13 @@ export default function Tip({
 }) {
   const [show, setShow] = useState(false);
   const timer = useRef<number | null>(null);
+
+  // SAFETY: Clear timer on unmount to prevent leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (timer.current) window.clearTimeout(timer.current);
+    };
+  }, []);
 
   const enter = () => {
     timer.current = window.setTimeout(() => setShow(true), 800);

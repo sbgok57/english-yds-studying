@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
 
@@ -28,8 +28,17 @@ export default function MatchPairs() {
   const [celebrate, setCelebrate] = useState(false);
   const [msg, setMsg] = useState("");
   const [sub, setSub] = useState("");
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear timeout on unmount to prevent leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const build = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     const picked = shuffle(WORDS).slice(0, 8);
     const c: Card[] = [];
     picked.forEach((w, i) => {
@@ -55,6 +64,7 @@ export default function MatchPairs() {
     if (nextOpen.length === 2) {
       setMoves((m) => m + 1);
       const [a, b] = nextOpen;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (cards[a].pair === cards[b].pair && cards[a].kind !== cards[b].kind) {
         setMatched((prev) => new Set(prev).add(a).add(b));
         setOpen([]);
@@ -62,7 +72,7 @@ export default function MatchPairs() {
         setSub(`${cards[a].text} = ${cards[b].text}`);
         setCelebrate(true);
       } else {
-        setTimeout(() => setOpen([]), 900);
+        timeoutRef.current = setTimeout(() => setOpen([]), 900);
       }
     }
   };

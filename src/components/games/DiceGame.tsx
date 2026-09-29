@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
 
@@ -28,21 +28,39 @@ export default function DiceGame() {
   const [msg, setMsg] = useState("");
   const [sub, setSub] = useState("");
   const [used, setUsed] = useState<number[]>([]);
+  const rollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear interval timer on unmount to prevent leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (rollIntervalRef.current) {
+        clearInterval(rollIntervalRef.current);
+        rollIntervalRef.current = null;
+      }
+    };
+  }, []);
 
   const available = useMemo(() => WORDS.filter((w) => !used.includes(w.id)), [used]);
 
   const roll = () => {
     if (rolling) return;
+    if (rollIntervalRef.current) {
+      clearInterval(rollIntervalRef.current);
+      rollIntervalRef.current = null;
+    }
     setRolling(true);
     setPicked(null);
     setPhase("roll");
     // zar animasyonu
     let ticks = 0;
-    const iv = setInterval(() => {
+    rollIntervalRef.current = setInterval(() => {
       ticks++;
       setFace(Math.floor(Math.random() * 6));
       if (ticks >= 10) {
-        clearInterval(iv);
+        if (rollIntervalRef.current) {
+          clearInterval(rollIntervalRef.current);
+          rollIntervalRef.current = null;
+        }
         const final = Math.floor(Math.random() * 6);
         setFace(final);
         setRolling(false);

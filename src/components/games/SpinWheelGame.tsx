@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, RotateCw, CheckCircle2 } from "lucide-react";
@@ -26,9 +26,18 @@ export default function SpinWheelGame({ items = DEFAULT_ITEMS }: { items?: Wheel
   const [rotation, setRotation] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [selectedItem, setSelectedItem] = useState<WheelItem | null>(null);
+  const spinTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear spin timer on unmount to prevent leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
+    };
+  }, []);
 
   const spin = () => {
     if (spinning) return;
+    if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
     setSpinning(true);
     setSelectedItem(null);
 
@@ -39,7 +48,7 @@ export default function SpinWheelGame({ items = DEFAULT_ITEMS }: { items?: Wheel
 
     setRotation((prev) => prev + targetAngle);
 
-    setTimeout(() => {
+    spinTimerRef.current = setTimeout(() => {
       setSpinning(false);
       setSelectedItem(items[randomIndex]);
       try {

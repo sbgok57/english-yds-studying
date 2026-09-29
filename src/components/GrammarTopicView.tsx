@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { GrammarTopic } from "@/lib/data-grammar";
 import { StepTimeline } from "@/components/animations";
@@ -85,7 +85,23 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
     );
   }, [step, topic]);
 
+  const animIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // SAFETY: Clear animation timer on unmount or topic change to prevent memory leaks and setState on unmounted component
+  useEffect(() => {
+    return () => {
+      if (animIntervalRef.current) {
+        clearInterval(animIntervalRef.current);
+        animIntervalRef.current = null;
+      }
+    };
+  }, [topic.slug]);
+
   const togglePlay = () => {
+    if (animIntervalRef.current) {
+      clearInterval(animIntervalRef.current);
+      animIntervalRef.current = null;
+    }
     if (playing) {
       setPlaying(false);
       return;
@@ -93,10 +109,13 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
     setPlaying(true);
     setStep(0);
     let i = 0;
-    const iv = setInterval(() => {
+    animIntervalRef.current = setInterval(() => {
       i += 1;
       if (i >= topic.anim.length) {
-        clearInterval(iv);
+        if (animIntervalRef.current) {
+          clearInterval(animIntervalRef.current);
+          animIntervalRef.current = null;
+        }
         setPlaying(false);
       } else {
         setStep(i);

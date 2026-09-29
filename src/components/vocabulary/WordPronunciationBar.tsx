@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Play, RotateCcw, Mic, Sparkles, Volume2, CheckCircle, Snail } from "lucide-react";
 import { clientAudio } from "@/lib/tts/audio-client";
 import { ACCENT_METADATA_LIST, AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
@@ -23,6 +23,27 @@ export default function WordPronunciationBar({
   const [activeRate, setActiveRate] = useState<number>(1.0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [micState, setMicState] = useState<"idle" | "listening" | "success">("idle");
+  const micTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const speechRecRef = useRef<any>(null);
+
+  // SAFETY: Clean up mic recognition and timers on unmount or word change
+  useEffect(() => {
+    return () => {
+      if (micTimerRef.current) {
+        clearTimeout(micTimerRef.current);
+        micTimerRef.current = null;
+      }
+      if (speechRecRef.current) {
+        try {
+          speechRecRef.current.abort();
+        } catch {
+          /* noop */
+        }
+        speechRecRef.current = null;
+      }
+    };
+  }, [word]);
+
   const [activeAccent, setActiveAccent] = useState<AccentCode>(() => {
     return clientAudio.getPreferences().preferredAccent;
   });
@@ -59,6 +80,15 @@ export default function WordPronunciationBar({
 
   const handleMicPractice = () => {
     if (micState === "listening") return;
+    if (micTimerRef.current) clearTimeout(micTimerRef.current);
+    if (speechRecRef.current) {
+      try {
+        speechRecRef.current.abort();
+      } catch {
+        /* noop */
+      }
+      speechRecRef.current = null;
+    }
     setMicState("listening");
 
     // Tarayıcı Web Speech Recognition desteği varsa kullan, yoksa pedagojik mikrofon simülasyonu
@@ -68,20 +98,22 @@ export default function WordPronunciationBar({
     if (SpeechRecognition) {
       try {
         const recognition = new SpeechRecognition();
+        speechRecRef.current = recognition;
         recognition.lang = activeAccent;
         recognition.continuous = false;
         recognition.interimResults = false;
 
-        recognition.onresult = (event: any) => {
-          const spoken = event.results[0][0].transcript.toLowerCase();
+        recognition.onresult = () => {
           setMicState("success");
-          setTimeout(() => setMicState("idle"), 3000);
+          if (micTimerRef.current) clearTimeout(micTimerRef.current);
+          micTimerRef.current = setTimeout(() => setMicState("idle"), 3000);
         };
 
         recognition.onerror = () => {
           // Hata durumunda da cesaretlendirici tamamlanma
           setMicState("success");
-          setTimeout(() => setMicState("idle"), 2500);
+          if (micTimerRef.current) clearTimeout(micTimerRef.current);
+          micTimerRef.current = setTimeout(() => setMicState("idle"), 2500);
         };
 
         recognition.start();
@@ -92,9 +124,9 @@ export default function WordPronunciationBar({
     }
 
     // 2 saniyelik dinleme simülasyonu
-    setTimeout(() => {
+    micTimerRef.current = setTimeout(() => {
       setMicState("success");
-      setTimeout(() => setMicState("idle"), 2500);
+      micTimerRef.current = setTimeout(() => setMicState("idle"), 2500);
     }, 2000);
   };
 
