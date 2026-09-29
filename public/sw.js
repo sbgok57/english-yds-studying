@@ -65,7 +65,35 @@ self.addEventListener('notificationclick', (event) => {
   )
 })
 
-// Abonelik tarayıcı tarafından yenilenirse (nadir durum)
-self.addEventListener('pushsubscriptionchange', () => {
-  console.info('[SW] pushsubscriptionchange')
+// Abonelik tarayıcı tarafından yenilenirse (nadir durum: token rotasyonu / izin yenileme)
+self.addEventListener('pushsubscriptionchange', (event) => {
+  // SAFETY: event.waitUntil ile Service Worker'ın işlem bitene kadar sonlandırılması engellenir
+  event.waitUntil(
+    (event.newSubscription
+      ? Promise.resolve(event.newSubscription)
+      : self.registration.pushManager.subscribe(
+          event.oldSubscription ? event.oldSubscription.options : { userVisibleOnly: true }
+        )
+    )
+      .then((subscription) => {
+        if (!subscription) return null
+        const subJson = subscription.toJSON()
+        return fetch('/api/push/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            endpoint: subJson.endpoint,
+            keys: subJson.keys,
+            userAgent: 'ServiceWorker-AutoRenewal',
+          }),
+        })
+      })
+      .catch((err) => {
+        // PERF: Ağ veya sunucu geçici olarak ulaşılamazsa sessizce kurtul, worker çökmesini engelle
+        if (typeof console !== 'undefined' && console.warn) {
+          console.warn('[SW] pushsubscriptionchange renewal failed:', err)
+        }
+      })
+  )
 })
