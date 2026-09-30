@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -66,12 +66,41 @@ export default function LevelTestPage() {
     return () => clearInterval(timer);
   }, [mounted, startedAt]);
 
+  const handleFinishTest = useCallback(() => {
+    if (isFinishing) return;
+    setIsFinishing(true);
+
+    const assessment = calculateLevelAssessment(answers, questions);
+
+    // Save assessment and answers to localStorage
+    try {
+      window.localStorage.setItem(LEVEL_TEST_RESULT_STORAGE_KEY, JSON.stringify(assessment));
+      window.localStorage.setItem(LEVEL_TEST_ANSWERS_STORAGE_KEY, JSON.stringify(answers));
+    } catch {
+      // SAFETY: storage write failover
+    }
+
+    // Award XP
+    try {
+      if (addXp) {
+        addXp(75, "LEVEL_TEST_COMPLETE", "level_test_complete");
+      }
+    } catch {
+      // SAFETY: XP award failover
+    }
+
+    // Clear session checkpoint since test is finished
+    clearSessionCheckpoint("level_test");
+
+    router.push("/level-test/result");
+  }, [isFinishing, answers, questions, addXp, router]);
+
   // Süre dolduğunda sınavı otomatik bitir
   useEffect(() => {
     if (mounted && startedAt > 0 && remainingSeconds <= 0 && !isFinishing) {
       handleFinishTest();
     }
-  }, [remainingSeconds, mounted, startedAt, isFinishing]);
+  }, [remainingSeconds, mounted, startedAt, isFinishing, handleFinishTest]);
 
   // Auto-save checkpoint on progress
   useEffect(() => {
@@ -120,35 +149,6 @@ export default function LevelTestPage() {
       delete next[currentQ.id];
       return next;
     });
-  };
-
-  const handleFinishTest = () => {
-    if (isFinishing) return;
-    setIsFinishing(true);
-
-    const assessment = calculateLevelAssessment(answers, questions);
-
-    // Save assessment and answers to localStorage
-    try {
-      window.localStorage.setItem(LEVEL_TEST_RESULT_STORAGE_KEY, JSON.stringify(assessment));
-      window.localStorage.setItem(LEVEL_TEST_ANSWERS_STORAGE_KEY, JSON.stringify(answers));
-    } catch {
-      // SAFETY: storage write failover
-    }
-
-    // Award XP
-    try {
-      if (addXp) {
-        addXp(75, "LEVEL_TEST_COMPLETE", "level_test_complete");
-      }
-    } catch {
-      // SAFETY: XP award failover
-    }
-
-    // Clear session checkpoint since test is finished
-    clearSessionCheckpoint("level_test");
-
-    router.push("/level-test/result");
   };
 
   if (!currentQ) {

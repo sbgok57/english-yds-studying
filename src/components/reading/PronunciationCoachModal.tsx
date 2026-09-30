@@ -45,6 +45,8 @@ export function PronunciationCoachModal({
     }
   }, [targetText]);
 
+  const evaluateSpeechRef = useRef<(spoken: string) => void>();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const SpeechRecognition =
@@ -67,7 +69,7 @@ export function PronunciationCoachModal({
           }
           currentTranscript = currentTranscript.trim();
           setTranscript(currentTranscript);
-          evaluateSpeech(currentTranscript);
+          evaluateSpeechRef.current?.(currentTranscript);
         };
 
         recognition.onerror = (e: any) => {

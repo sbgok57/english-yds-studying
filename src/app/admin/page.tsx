@@ -48,7 +48,7 @@ export default function AdminPage() {
             const data = await fallbackRes.json();
             if (!isCancelled && data.ok) {
               setStudents(data.students || []);
-              setStats(data.stats || stats);
+              if (data.stats) setStats(data.stats);
               setLoading(false);
               return;
             }
@@ -63,7 +63,7 @@ export default function AdminPage() {
         const data = await res.json();
         if (!isCancelled && data.ok) {
           setStudents(data.students || []);
-          setStats(data.stats || stats);
+          if (data.stats) setStats(data.stats);
         } else if (!isCancelled) {
           setErrorMsg(data.error || "Öğrenci verileri yüklenemedi.");
         }
