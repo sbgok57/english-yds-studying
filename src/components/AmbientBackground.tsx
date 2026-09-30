@@ -3,12 +3,12 @@
 import { useUsage } from "@/lib/store";
 import { shouldThrottleGraphics } from "@/lib/hardware-optimizer";
 
-// CPU dostu: 4 blob, GPU-friendly transform animasyonları (left/top değil).
+// CPU dostu: 4 dinamik blob, seçilen 2.000 renk temasına göre anında reaktif değişir.
 const BLOBS = [
-  { color: "#ec4899", size: "34vw", cls: "ambient-1", left: "-6%", top: "-8%" },
-  { color: "#f59e0b", size: "30vw", cls: "ambient-2", left: "60%", top: "6%" },
-  { color: "#22c55e", size: "30vw", cls: "ambient-3", left: "70%", top: "52%" },
-  { color: "#8b5cf6", size: "34vw", cls: "ambient-1", left: "8%", top: "58%" },
+  { colorVar: "var(--theme-primary, #06b6d4)", size: "36vw", cls: "ambient-1", left: "-6%", top: "-8%" },
+  { colorVar: "var(--theme-secondary, #8b5cf6)", size: "32vw", cls: "ambient-2", left: "60%", top: "6%" },
+  { colorVar: "var(--theme-accent, #f59e0b)", size: "30vw", cls: "ambient-3", left: "70%", top: "52%" },
+  { colorVar: "var(--theme-glow, #3b82f6)", size: "34vw", cls: "ambient-1", left: "8%", top: "58%" },
 ];
 
 export default function AmbientBackground() {
@@ -18,22 +18,22 @@ export default function AmbientBackground() {
 
   return (
     <>
-      {/* Gökkuşağı ambians katmanı */}
+      {/* Tematik dinamik ambians katmanı */}
       {on && (
         <div
-          className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
+          className="fixed inset-0 -z-10 overflow-hidden pointer-events-none transition-colors duration-500"
           aria-hidden
         >
           {BLOBS.map((b, i) => (
             <div
               key={i}
-              className={`ambient-blob ${throttled ? "opacity-30" : b.cls}`}
+              className={`ambient-blob ${throttled ? "opacity-25" : b.cls}`}
               style={{
                 width: b.size,
                 height: b.size,
                 left: b.left,
                 top: b.top,
-                background: `radial-gradient(circle at center, ${b.color} 0%, transparent 70%)`,
+                background: `radial-gradient(circle at center, ${b.colorVar} 0%, transparent 70%)`,
               }}
             />
           ))}

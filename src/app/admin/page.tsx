@@ -314,8 +314,18 @@ export default function AdminPage() {
                     {s.username.slice(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-black text-white">{s.username}</span>
+                      {s.email.toLowerCase().includes("yagiz") && (
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                          ✨ Gerçek Öğrenci (Yağız)
+                        </span>
+                      )}
+                      {(s.username === "sbgok57" || s.email === "sinembuse724@gmail.com") && (
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                          👑 Kurucu Admin
+                        </span>
+                      )}
                       <span
                         className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${lvlStyle.bgClass} ${lvlStyle.textClass} ${lvlStyle.borderClass}`}
                       >

@@ -10,6 +10,7 @@ import ErrorToast from "@/components/ErrorToast";
 import CaptureBootstrap from "@/components/CaptureBootstrap";
 import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
+import ThemeInitializer from "@/components/theme/ThemeInitializer";
 
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
@@ -48,13 +49,15 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var stored = localStorage.getItem('yds_theme');
-                  if (stored === 'light') {
+                  var mode = localStorage.getItem('yds_theme_mode') || (localStorage.getItem('yds_theme') === 'light' ? 'light' : 'dark');
+                  if (mode === 'light') {
                     document.documentElement.classList.remove('dark');
                     document.documentElement.classList.add('light');
+                    document.documentElement.style.colorScheme = 'light';
                   } else {
                     document.documentElement.classList.add('dark');
                     document.documentElement.classList.remove('light');
+                    document.documentElement.style.colorScheme = 'dark';
                   }
                 } catch (e) {
                   void e;
@@ -67,6 +70,7 @@ export default function RootLayout({
       <body>
         <CrashGuardianProvider>
           <BadgeQueueProvider>
+            <ThemeInitializer />
             <AmbientBackground />
             <Header />
             <main className="min-h-[calc(100vh-4rem)]">{children}</main>
