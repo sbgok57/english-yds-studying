@@ -21,8 +21,8 @@ async function runIntegrationTests() {
   assert.ok(health.latencyMs > 0, "Latency ms olmalıdır.");
   console.log(`  ✅ PASS: Provider is healthy, latency: ${health.latencyMs}ms\n`);
 
-  // 2. 12 Sesin Her Biri İçin Doğrudan Sentezleme
-  console.log("  2. Testing Real Server-Side Audio Generation for All 12 Voices...");
+  // 2. 14 Sesin Her Biri İçin Doğrudan Sentezleme
+  console.log("  2. Testing Real Server-Side Audio Generation for All 14 Voices...");
   for (const voice of VOICE_REGISTRY) {
     const t0 = Date.now();
     const result = await defaultTtsProvider.synthesize({
@@ -41,7 +41,7 @@ async function runIntegrationTests() {
     // PERF: Brief pause between requests to respect edge socket rates
     await new Promise((res) => setTimeout(res, 150));
   }
-  console.log("  ✅ PASS: All 12 voice profiles generated valid, crisp 96kbps MP3 audio.\n");
+  console.log("  ✅ PASS: All 14 voice profiles generated valid, crisp 96kbps MP3 audio.\n");
 
   // 3. Kelime Telaffuz Testi (Yavaş ve Normal Hız)
   console.log("  3. Testing Vocabulary Pronunciation (Normal vs Slow)...");

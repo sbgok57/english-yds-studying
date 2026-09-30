@@ -1,7 +1,7 @@
 // Çoklu aksan + cinsiyet desteği (Doğal Edge Neural TTS).
 import { clientAudio } from "./tts/audio-client";
 
-export type AccentId = "uk" | "us" | "ca" | "au" | "nz" | "in";
+export type AccentId = "uk" | "us" | "ca" | "au" | "nz" | "sc" | "in";
 export type Gender = "female" | "male";
 
 export interface Accent {
@@ -90,6 +90,20 @@ export const ACCENTS: Accent[] = [
     edgeVoice: { female: "en-NZ-MollyNeural", male: "en-NZ-MitchellNeural" },
   },
   {
+    id: "sc",
+    label: "İskoçya",
+    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    lang: "en-GB-scotland",
+    langPrefixes: ["en-gb-scotland", "en-scot", "en_gb_scotland"],
+    youglish: "uk",
+    keywords: ["scottish", "scotland", "maisie", "thomas", "fiona"],
+    names: {
+      female: ["scottish female", "fiona", "maisie"],
+      male: ["scottish male", "thomas", "ryan"],
+    },
+    edgeVoice: { female: "en-GB-MaisieNeural", male: "en-GB-ThomasNeural" },
+  },
+  {
     id: "in",
     label: "Hint",
     flag: "🇮🇳",
@@ -173,6 +187,7 @@ const ACCENT_LOCALE_MAP: Record<AccentId, string> = {
   ca: "en-CA",
   au: "en-AU",
   nz: "en-NZ",
+  sc: "en-GB-scotland",
   in: "en-IN",
 };
 
@@ -183,6 +198,7 @@ export function getStoredAccent(): AccentId {
 
     const p = window.localStorage.getItem("yds-preferred-accent");
     if (p) {
+      if (p.includes("scotland") || p.includes("scot") || p === "sc") return "sc";
       if (p.includes("GB") || p === "uk") return "uk";
       if (p.includes("US") || p === "us") return "us";
       if (p.includes("CA") || p === "ca") return "ca";

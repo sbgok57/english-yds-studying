@@ -85,6 +85,7 @@ class ClientAudioManager {
           "en-CA": "ca",
           "en-AU": "au",
           "en-NZ": "nz",
+          "en-GB-scotland": "sc",
           "en-IN": "in",
         };
         const shortId = accMap[prefs.preferredAccent];

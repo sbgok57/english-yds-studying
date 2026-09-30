@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { NewsArticle } from "@/lib/news/types";
+import { ACCENT_OPTIONS, type AccentCode } from "@/components/tts/TTSPlayer";
 
 interface NewsReaderModalProps {
   article: NewsArticle | null;
@@ -14,6 +15,37 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
   const [playbackRate, setPlaybackRate] = useState(1);
   const [showFullTurkish, setShowFullTurkish] = useState(false);
   const [activeWordPlaying, setActiveWordPlaying] = useState<string | null>(null);
+
+  // 7 Farklı Doğal Aksan & Spiker Cinsiyeti Seçimi
+  const [selectedAccent, setSelectedAccent] = useState<AccentCode>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved =
+          window.localStorage.getItem("yds-news-accent") ||
+          window.localStorage.getItem("yds-preferred-accent");
+        if (saved && ACCENT_OPTIONS.some((a) => a.code === saved)) {
+          return saved as AccentCode;
+        }
+      } catch {
+        /* storage failover */
+      }
+    }
+    return "en-GB";
+  });
+
+  const [selectedGender, setSelectedGender] = useState<"female" | "male">(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved =
+          window.localStorage.getItem("yds-news-gender") ||
+          window.localStorage.getItem("yds-preferred-gender");
+        if (saved === "male" || saved === "female") return saved;
+      } catch {
+        /* storage failover */
+      }
+    }
+    return "female";
+  });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -56,74 +88,143 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
   // Build full English text for reading aloud
   const fullArticleText = `${article.titleEn}. ${article.paragraphs.map((p) => p.en).join(" ")}`;
 
+  const startPlayback = (accent: AccentCode, gender: "female" | "male", rate: number) => {
+    // Play full article via TTS audio route with chosen accent and gender
+    const audioUrl = `/api/tts?text=${encodeURIComponent(
+      fullArticleText.slice(0, 1000)
+    )}&accent=${encodeURIComponent(accent)}&gender=${gender}&rate=${rate}&contentType=long-form`;
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+    audio.playbackRate = rate;
+
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        // SAFETY: Fallback to browser SpeechSynthesis with accent mapping
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(fullArticleText);
+          utter.lang = accent === "en-GB-scotland" ? "en-GB" : accent;
+          utter.rate = rate;
+
+          const voices = window.speechSynthesis.getVoices();
+          if (accent === "en-GB-scotland") {
+            const scotVoice = voices.find(
+              (v) =>
+                v.name.toLowerCase().includes("scot") ||
+                v.name.toLowerCase().includes("fiona") ||
+                (v.lang.startsWith("en-GB") &&
+                  (gender === "male"
+                    ? v.name.toLowerCase().includes("male") || v.name.toLowerCase().includes("george")
+                    : v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("maisie") || v.name.toLowerCase().includes("hazel")))
+            );
+            if (scotVoice) utter.voice = scotVoice;
+          } else {
+            const targetVoice = voices.find((v) =>
+              v.lang.toLowerCase().replace("_", "-").startsWith(accent.toLowerCase())
+            );
+            if (targetVoice) utter.voice = targetVoice;
+          }
+
+          utter.onend = () => setIsPlaying(false);
+          utter.onerror = () => setIsPlaying(false);
+          window.speechSynthesis.speak(utter);
+          setIsPlaying(true);
+        }
+      });
+
+    audio.onended = () => setIsPlaying(false);
+    audio.onerror = () => {
+      setIsPlaying(false);
+    };
+  };
+
   const handleTogglePlay = () => {
     if (isPlaying) {
       if (audioRef.current) audioRef.current.pause();
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
       setIsPlaying(false);
     } else {
-      // Play full article via TTS audio route or speech synthesis fallback
-      const audioUrl = `/api/tts?text=${encodeURIComponent(fullArticleText.slice(0, 500))}&accent=en-US&rate=${playbackRate}`;
-      const audio = new Audio(audioUrl);
-      audioRef.current = audio;
-      audio.playbackRate = playbackRate;
+      startPlayback(selectedAccent, selectedGender, playbackRate);
+    }
+  };
 
-      audio
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // SAFETY: Fallback to browser SpeechSynthesis
-          if ("speechSynthesis" in window) {
-            window.speechSynthesis.cancel();
-            const utter = new SpeechSynthesisUtterance(fullArticleText);
-            utter.lang = "en-US";
-            utter.rate = playbackRate;
-            utter.onend = () => setIsPlaying(false);
-            utter.onerror = (e) => {
-              console.warn("Speech error:", e);
-              setIsPlaying(false);
-            };
-            window.speechSynthesis.speak(utter);
-            setIsPlaying(true);
-          }
-        });
+  const handleAccentChange = (accentCode: AccentCode) => {
+    setSelectedAccent(accentCode);
+    try {
+      window.localStorage.setItem("yds-news-accent", accentCode);
+      window.localStorage.setItem("yds-preferred-accent", accentCode);
+    } catch {
+      /* storage failover */
+    }
 
-      audio.onended = () => setIsPlaying(false);
-      audio.onerror = (e) => {
-        console.warn("Audio element error:", e);
-        setIsPlaying(false);
-      };
+    if (isPlaying) {
+      if (audioRef.current) audioRef.current.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      setIsPlaying(false);
+      setTimeout(() => {
+        startPlayback(accentCode, selectedGender, playbackRate);
+      }, 80);
+    }
+  };
+
+  const handleGenderChange = (gender: "female" | "male") => {
+    setSelectedGender(gender);
+    try {
+      window.localStorage.setItem("yds-news-gender", gender);
+      window.localStorage.setItem("yds-preferred-gender", gender);
+    } catch {
+      /* storage failover */
+    }
+
+    if (isPlaying) {
+      if (audioRef.current) audioRef.current.pause();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      setIsPlaying(false);
+      setTimeout(() => {
+        startPlayback(selectedAccent, gender, playbackRate);
+      }, 80);
     }
   };
 
   const playSingleWord = (word: string) => {
     setActiveWordPlaying(word);
-    const audio = new Audio(`/api/tts?text=${encodeURIComponent(word)}&accent=en-US`);
+    const audio = new Audio(
+      `/api/tts?text=${encodeURIComponent(
+        word
+      )}&accent=${encodeURIComponent(selectedAccent)}&gender=${selectedGender}&contentType=word`
+    );
     audio
       .play()
       .then(() => {})
       .catch(() => {
-        if ("speechSynthesis" in window) {
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
           const utter = new SpeechSynthesisUtterance(word);
-          utter.lang = "en-US";
+          utter.lang = selectedAccent === "en-GB-scotland" ? "en-GB" : selectedAccent;
           utter.onend = () => setActiveWordPlaying(null);
-          utter.onerror = (e) => {
-            console.warn("Single word speech error:", e);
-            setActiveWordPlaying(null);
-          };
+          utter.onerror = () => setActiveWordPlaying(null);
           window.speechSynthesis.speak(utter);
         } else {
           setActiveWordPlaying(null);
         }
       });
     audio.onended = () => setActiveWordPlaying(null);
-    audio.onerror = (e) => {
-      console.warn("Single word audio error:", e);
+    audio.onerror = () => {
       setActiveWordPlaying(null);
     };
   };
+
+  const activeAccentOpt =
+    ACCENT_OPTIONS.find((a) => a.code === selectedAccent) || ACCENT_OPTIONS[0];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
@@ -190,8 +291,63 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
             </div>
           </div>
 
-          <div className="text-[11px] text-slate-400 font-mono hidden sm:block">
-            <span>⏱️ {article.readTimeMin} dk &bull; 🇺🇸 Doğal Amerikan Aksanı</span>
+          <div className="text-[11px] text-slate-300 font-mono flex items-center gap-2">
+            <span className="hidden sm:inline text-slate-400">⏱️ {article.readTimeMin} dk &bull;</span>
+            <span className="px-2.5 py-1 rounded-lg bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 font-semibold flex items-center gap-1">
+              <span>{activeAccentOpt.flag}</span>
+              <span>{activeAccentOpt.label} Aksanı</span>
+              <span className="text-slate-400 font-normal">({selectedGender === "female" ? "Kadın" : "Erkek"})</span>
+            </span>
+          </div>
+        </div>
+
+        {/* 7 Accents & Voice Selection Strip */}
+        <div className="px-5 py-2.5 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between gap-3 overflow-x-auto scrollbar-thin">
+          <div className="flex items-center gap-1.5 min-w-max">
+            <span className="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider mr-1 flex items-center gap-1">
+              <span>🎙️</span> Aksan:
+            </span>
+            {ACCENT_OPTIONS.map((opt) => {
+              const isSelected = selectedAccent === opt.code;
+              return (
+                <button
+                  key={opt.code}
+                  onClick={() => handleAccentChange(opt.code)}
+                  className={`px-2.5 py-1 rounded-xl text-xs font-medium flex items-center gap-1.5 transition-all ${
+                    isSelected
+                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-md shadow-cyan-600/30 scale-105"
+                      : "bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60"
+                  }`}
+                  title={`${opt.label} Aksanıyla Sesli Dinle`}
+                >
+                  <span>{opt.flag}</span>
+                  <span>{opt.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-1.5 shrink-0 bg-slate-800/90 p-1 rounded-xl border border-slate-700/60 text-xs">
+            <button
+              onClick={() => handleGenderChange("female")}
+              className={`px-2 py-0.5 rounded-lg text-xs font-semibold transition-all ${
+                selectedGender === "female"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              👩 Kadın
+            </button>
+            <button
+              onClick={() => handleGenderChange("male")}
+              className={`px-2 py-0.5 rounded-lg text-xs font-semibold transition-all ${
+                selectedGender === "male"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              👨 Erkek
+            </button>
           </div>
         </div>
 

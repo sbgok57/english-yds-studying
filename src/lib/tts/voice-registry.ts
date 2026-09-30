@@ -17,6 +17,7 @@ export type AccentCode =
   | "en-CA"
   | "en-AU"
   | "en-NZ"
+  | "en-GB-scotland"
   | "en-IN";
 
 export type VoiceGender = "female" | "male";
@@ -54,7 +55,7 @@ export interface VoiceProfile {
 
 export interface AccentMetadata {
   code: AccentCode;
-  shortId: "uk" | "us" | "ca" | "au" | "nz" | "in";
+  shortId: "uk" | "us" | "ca" | "au" | "nz" | "sc" | "in";
   labelTr: string;
   labelEn: string;
   flag: string;
@@ -128,6 +129,17 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Yeni Zelanda İngilizcesi ve kendine özgü ünlü sesleri",
     femaleVoiceId: "en-NZ-female-molly",
     maleVoiceId: "en-NZ-male-mitchell",
+  },
+  {
+    code: "en-GB-scotland",
+    shortId: "sc",
+    labelTr: "İskoçya",
+    labelEn: "Scottish",
+    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    youglishSlug: "uk",
+    descriptionTr: "Karakteristik İskoç İngilizcesi (Scottish English) ritim ve sesletimi",
+    femaleVoiceId: "en-GB-scotland-female-maisie",
+    maleVoiceId: "en-GB-scotland-male-thomas",
   },
   {
     code: "en-IN",
@@ -421,6 +433,52 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     license: "Microsoft Neural Speech Engine (Service Authorization)",
     description: "Uluslararası standartlarda Hint İngilizcesi erkek sesi",
   },
+
+  // 7. İskoçya (en-GB-scotland)
+  {
+    id: "en-GB-scotland-female-maisie",
+    provider: "msedge-neural",
+    providerVoiceId: "en-GB-MaisieNeural",
+    displayName: "Maisie",
+    locale: "en-GB-scotland",
+    accentLabelTr: "İskoçya",
+    accentLabelEn: "Scottish",
+    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    gender: "female",
+    source: "premium-neural",
+    naturalnessTier: "premium",
+    sampleRateHz: 24000,
+    outputFormat: "mp3",
+    enabled: true,
+    supportsWords: true,
+    supportsSentences: true,
+    supportsLongForm: true,
+    maxCharacters: 2500,
+    license: "Microsoft Neural Speech Engine (Service Authorization)",
+    description: "Otantik İskoç / Kuzey İngilizcesi kadın anlatıcı sesi",
+  },
+  {
+    id: "en-GB-scotland-male-thomas",
+    provider: "msedge-neural",
+    providerVoiceId: "en-GB-ThomasNeural",
+    displayName: "Thomas",
+    locale: "en-GB-scotland",
+    accentLabelTr: "İskoçya",
+    accentLabelEn: "Scottish",
+    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    gender: "male",
+    source: "premium-neural",
+    naturalnessTier: "premium",
+    sampleRateHz: 24000,
+    outputFormat: "mp3",
+    enabled: true,
+    supportsWords: true,
+    supportsSentences: true,
+    supportsLongForm: true,
+    maxCharacters: 2500,
+    license: "Microsoft Neural Speech Engine (Service Authorization)",
+    description: "Karakteristik İskoç / Kuzey İngilizcesi erkek anlatıcı sesi",
+  },
 ];
 
 // Map for ultra-fast O(1) lookup
@@ -469,7 +527,7 @@ export function getVoicesForAccent(locale: AccentCode): VoiceProfile[] {
 }
 
 /**
- * Doğrulama: Tüm 6 aksanda kadın ve erkek olmak üzere tam 12 sesin varlığını test eder.
+ * Doğrulama: Tüm 7 aksanda kadın ve erkek olmak üzere tam 14 sesin varlığını test eder.
  */
 export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
@@ -479,6 +537,7 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
     "en-CA",
     "en-AU",
     "en-NZ",
+    "en-GB-scotland",
     "en-IN",
   ];
 

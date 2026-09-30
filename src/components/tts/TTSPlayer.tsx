@@ -11,6 +11,7 @@ export const ACCENT_OPTIONS = [
   { code: "en-CA", label: "Kanada", flag: "🇨🇦" },
   { code: "en-AU", label: "Avustralya", flag: "🇦🇺" },
   { code: "en-NZ", label: "Y. Zelanda", flag: "🇳🇿" },
+  { code: "en-GB-scotland", label: "İskoçya", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
   { code: "en-IN", label: "Hint", flag: "🇮🇳" },
 ] as const;
 

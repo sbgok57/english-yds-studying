@@ -112,14 +112,14 @@ test("All vocabulary items have valid word, meaning, and examples", () => {
   assert(delayWord.example.includes("delayed"), "Word 'delay' must have valid example sentence");
 });
 
-// 4. TTS 12 Voices Matrix
+// 4. TTS 14 Voices Matrix
 console.log("\n4. TTS Multi-Accent Matrix Specification...");
-test("All 6 accents have both female and male voices registered (12 total)", () => {
+test("All 7 accents have both female and male voices registered (14 total)", () => {
   const result = validateVoiceMatrix();
   assert(result.valid, `Voice matrix validation failed: ${result.errors.join(", ")}`);
-  assert.strictEqual(VOICE_REGISTRY.length, 12, "Voice registry must contain exactly 12 voices");
+  assert.strictEqual(VOICE_REGISTRY.length, 14, "Voice registry must contain exactly 14 voices");
 
-  const expectedLocales = ["en-GB", "en-US", "en-CA", "en-AU", "en-NZ", "en-IN"];
+  const expectedLocales = ["en-GB", "en-US", "en-CA", "en-AU", "en-NZ", "en-GB-scotland", "en-IN"];
   for (const loc of expectedLocales) {
     const female = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female");
     const male = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male");

@@ -21,6 +21,16 @@ function normalizeLocale(code?: string | null): AccentCode {
   if (c === "ca" || c === "en-ca" || c === "en_ca") return "en-CA";
   if (c === "au" || c === "en-au" || c === "en_au") return "en-AU";
   if (c === "nz" || c === "en-nz" || c === "en_nz") return "en-NZ";
+  if (
+    c === "sc" ||
+    c === "sct" ||
+    c === "scot" ||
+    c === "scotland" ||
+    c === "en-gb-scotland" ||
+    c === "en-scot" ||
+    c === "en_scot"
+  )
+    return "en-GB-scotland";
   if (c === "in" || c === "en-in" || c === "en_in") return "en-IN";
   return "en-US";
 }

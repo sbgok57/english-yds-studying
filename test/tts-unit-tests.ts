@@ -15,16 +15,24 @@ import { audioCache } from "../src/lib/tts/audio-cache";
 console.log("▶ Starting TTS Voice Registry & Unit Tests...\n");
 
 // 1. Matris Doğrulaması
-console.log("  1. Testing 12 Voice Matrix Completeness...");
+console.log("  1. Testing 14 Voice Matrix Completeness...");
 const matrix = validateVoiceMatrix();
 assert.strictEqual(matrix.valid, true, `Matrix errors: ${matrix.errors.join(", ")}`);
-assert.strictEqual(VOICE_REGISTRY.length, 12, "Tam olarak 12 ses profili olmalıdır.");
-assert.strictEqual(ACCENT_METADATA_LIST.length, 6, "Tam olarak 6 aksan meta verisi olmalıdır.");
-console.log("  ✅ PASS: Exactly 12 verified voices across 6 accents.\n");
+assert.strictEqual(VOICE_REGISTRY.length, 14, "Tam olarak 14 ses profili olmalıdır.");
+assert.strictEqual(ACCENT_METADATA_LIST.length, 7, "Tam olarak 7 aksan meta verisi olmalıdır.");
+console.log("  ✅ PASS: Exactly 14 verified voices across 7 accents.\n");
 
 // 2. Aksan ve Cinsiyet Birebir Eşleşmesi
 console.log("  2. Testing Accent & Gender Coverage...");
-const requiredLocales: AccentCode[] = ["en-GB", "en-US", "en-CA", "en-AU", "en-NZ", "en-IN"];
+const requiredLocales: AccentCode[] = [
+  "en-GB",
+  "en-US",
+  "en-CA",
+  "en-AU",
+  "en-NZ",
+  "en-GB-scotland",
+  "en-IN",
+];
 for (const loc of requiredLocales) {
   const female = findVoice(loc, "female");
   const male = findVoice(loc, "male");
@@ -42,10 +50,10 @@ for (const loc of requiredLocales) {
     `${loc} kadın ve erkek providerVoiceId aynı olamaz`
   );
 }
-console.log("  ✅ PASS: All 6 locales have distinct, verified female & male voices.\n");
+console.log("  ✅ PASS: All 7 locales have distinct, verified female & male voices.\n");
 
-// 3. Kanada Aksanı Spesifik Doğrulaması
-console.log("  3. Testing Canadian English (en-CA) isolation...");
+// 3. Kanada ve İskoçya Aksanı Spesifik Doğrulaması
+console.log("  3. Testing Canadian (en-CA) and Scottish (en-GB-scotland) isolation...");
 const caVoices = getVoicesForAccent("en-CA");
 assert.strictEqual(caVoices.length, 2, "Kanada için tam 2 ses bulunmalı");
 const caFemale = caVoices.find((v) => v.gender === "female");
@@ -54,7 +62,16 @@ assert.strictEqual(caFemale?.providerVoiceId, "en-CA-ClaraNeural");
 assert.strictEqual(caMale?.providerVoiceId, "en-CA-LiamNeural");
 assert.ok(caFemale?.description.includes("Kanada"));
 assert.ok(caMale?.description.includes("Kanada"));
-console.log("  ✅ PASS: Canadian English uses authentic en-CA neural voices.\n");
+
+const scotVoices = getVoicesForAccent("en-GB-scotland");
+assert.strictEqual(scotVoices.length, 2, "İskoçya için tam 2 ses bulunmalı");
+const scotFemale = scotVoices.find((v) => v.gender === "female");
+const scotMale = scotVoices.find((v) => v.gender === "male");
+assert.strictEqual(scotFemale?.providerVoiceId, "en-GB-MaisieNeural");
+assert.strictEqual(scotMale?.providerVoiceId, "en-GB-ThomasNeural");
+assert.ok(scotFemale?.description.includes("İskoç"));
+assert.ok(scotMale?.description.includes("İskoç"));
+console.log("  ✅ PASS: Canadian and Scottish English use authentic neural voices.\n");
 
 // 4. Cache Anahtarı ve Bounded LRU Önbellek
 console.log("  4. Testing Audio Cache Key and Bounded Storage...");

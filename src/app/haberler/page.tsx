@@ -64,12 +64,12 @@ export default function NewsHubPage() {
               YDS Master İngilizce Haber & Basın Arşivi
             </h1>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
-              Dünya basınından derlenen güncel haberleri gazete küpürleri eşliğinde oku, Amerikan/İngiliz aksanıyla sesli dinle,
+              Dünya basınından derlenen güncel haberleri gazete küpürleri eşliğinde oku; İngiliz, Amerikan, Avustralya, Kanada, Yeni Zelanda, İskoçya ve Hint aksanlarıyla sesli dinle,
               tıklandığında Türkçe çevirisini gör ve YDS için kritik eş anlamlı kelimeleri örnek cümleleriyle öğren!
             </p>
             <div className="pt-2 flex flex-wrap gap-3 text-xs text-slate-300 font-mono">
-              <span className="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700">
-                🔊 Sesli Okuma Destekli
+              <span className="px-3 py-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-semibold">
+                🔊 7 Doğal Aksanla Sesli Dinleme (🇬🇧 🇺🇸 🇦🇺 🇨🇦 🇳🇿 🏴󠁧󠁢󠁳󠁣󠁴󠁿 🇮🇳)
               </span>
               <span className="px-3 py-1.5 rounded-xl bg-slate-800/80 border border-slate-700">
                 🇹🇷 Çift Dilli Çeviri

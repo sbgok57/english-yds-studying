@@ -42,13 +42,13 @@ export default function ListeningPage() {
       <div className="rounded-3xl p-8 bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-950 border-2 border-blue-500/30 shadow-2xl space-y-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/40 text-xs font-bold text-blue-300">
           <Headphones className="w-4 h-4" />
-          <span>Multi-Accent TTS • 12 Doğal Neural Ses Seçeneği</span>
+          <span>Multi-Accent TTS • 14 Doğal Neural Ses Seçeneği</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-black text-white">
           YDS Dinleme & Çoklu Aksan Laboratuvarı
         </h1>
         <p className="text-xs md:text-sm text-white/70">
-          6 farklı İngilizce aksanı (İngiliz, Amerikan, Kanada, Avustralya, Yeni Zelanda, Hint) ve stüdyo kalitesinde kadın/erkek neural sesleriyle kulak aşinalığı kazanın.
+          7 farklı İngilizce aksanı (İngiliz, Amerikan, Avustralya, Kanada, Yeni Zelanda, İskoçya, Hint) ve stüdyo kalitesinde kadın/erkek neural sesleriyle kulak aşinalığı kazanın.
         </p>
       </div>
 
