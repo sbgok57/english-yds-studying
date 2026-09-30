@@ -25,6 +25,8 @@ export default function MotivationBox({
   const [motivation, setMotivation] = useState<MotivationItem>(DEFAULT_MOTIVATION);
   const [mounted, setMounted] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [playerMode, setPlayerMode] = useState<"video" | "native">("video");
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<MotivationVideoCategory | "all">("all");
   const [currentClipIndex, setCurrentClipIndex] = useState(0);
 
@@ -39,12 +41,38 @@ export default function MotivationBox({
     if (!videoOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        if (typeof window !== "undefined" && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        setIsSpeaking(false);
         setVideoOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
   }, [videoOpen]);
+
+  const handleSpeakQuote = useCallback((text: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    if (isSpeaking) {
+      setIsSpeaking(false);
+      return;
+    }
+    const cleanText = text.replace(/^[“"']+|[”"']+$/g, "").trim();
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = "tr-TR";
+    utterance.rate = 0.95;
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  }, [isSpeaking]);
 
   const refresh = () => {
     setMotivation(pickMotivation(context));
@@ -216,7 +244,7 @@ export default function MotivationBox({
                     : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                 }`}
               >
-                Tümü ({MOTIVATION_VIDEOS_COUNT})
+                Tümü ({MOTIVATION_VIDEOS_COUNT.toLocaleString("tr-TR")})
               </button>
               {MOTIVATION_VIDEO_CATEGORIES.map((cat) => {
                 const count = MOTIVATION_VIDEOS.filter((v) => v.category === cat.id).length;
@@ -237,23 +265,105 @@ export default function MotivationBox({
                   >
                     <span>{cat.emoji}</span>
                     <span>{cat.labelTr}</span>
-                    <span className="opacity-60 text-[10px]">({count})</span>
+                    <span className="opacity-60 text-[10px]">({count.toLocaleString("tr-TR")})</span>
                   </button>
                 );
               })}
             </div>
 
-            {/* YouTube Embed Player (Safe 16:9, nocookie) */}
-            <div className="relative pt-[56.25%] w-full bg-black shadow-inner">
-              <iframe
-                key={currentVideo.videoId}
-                src={`https://www.youtube-nocookie.com/embed/${currentVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}
-                title={currentVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
-                className="absolute inset-0 w-full h-full border-0"
-              />
+            {/* Oynatıcı Modu & Hata Kalkanı Çubuğu */}
+            <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2 bg-slate-900 border-b border-white/10 text-xs">
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setPlayerMode("video")}
+                  className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 ${
+                    playerMode === "video"
+                      ? "bg-purple-600 text-white shadow"
+                      : "bg-white/5 text-white/70 hover:text-white"
+                  }`}
+                >
+                  <span>🎬</span>
+                  <span>Video Oynatıcı</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPlayerMode("native")}
+                  className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1.5 ${
+                    playerMode === "native"
+                      ? "bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 shadow"
+                      : "bg-white/5 text-white/70 hover:text-white"
+                  }`}
+                >
+                  <span>🎙️</span>
+                  <span>Kesintisiz Sesli İlham</span>
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-amber-300/80 hidden sm:inline">⚡ Kesintisiz İzleme:</span>
+                <a
+                  href={`https://www.youtube.com/watch?v=${currentVideo.videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 text-[11px] font-bold transition-colors flex items-center gap-1"
+                >
+                  <span>▶️</span>
+                  <span>YouTube'da Doğrudan İzle ↗</span>
+                </a>
+              </div>
             </div>
+
+            {/* Oynatıcı İçeriği */}
+            {playerMode === "video" ? (
+              <div className="relative pt-[56.25%] w-full bg-black shadow-inner">
+                <iframe
+                  key={currentVideo.videoId}
+                  src={`https://www.youtube.com/embed/${currentVideo.videoId}?rel=0&modestbranding=1&enablejsapi=1`}
+                  title={currentVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
+            ) : (
+              <div className="p-8 sm:p-10 bg-gradient-to-br from-slate-950 via-purple-950/40 to-slate-900 border-b border-white/10 text-center space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 text-xs font-bold">
+                  <span>🎙️</span> Kesintisiz Sesli İlham Stüdyosu
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-white max-w-xl mx-auto">
+                  {currentVideo.title}
+                </h3>
+                <p className="text-sm text-purple-300 font-bold">
+                  {currentVideo.creator} &bull; {currentVideo.categoryLabelTr}
+                </p>
+                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 max-w-xl mx-auto text-left space-y-2">
+                  <div className="text-[11px] text-amber-300 uppercase font-black tracking-wider">
+                    Önemli Çıkarım & YDS Motivasyonu:
+                  </div>
+                  <p className="text-base text-white font-medium italic">
+                    &ldquo;{currentVideo.keyQuoteTr}&rdquo;
+                  </p>
+                </div>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => handleSpeakQuote(currentVideo.keyQuoteTr)}
+                    className="px-5 py-2.5 rounded-full bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-950 font-black text-xs hover:brightness-110 shadow-lg shadow-cyan-500/20 transition-all flex items-center gap-2"
+                  >
+                    <span>{isSpeaking ? "⏹️ Dinlemeyi Durdur" : "🔊 Doğal Sesle Dinle"}</span>
+                  </button>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${currentVideo.videoId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 rounded-full bg-red-600 hover:bg-red-500 text-white font-bold text-xs shadow-lg shadow-red-600/20 transition-all flex items-center gap-2"
+                  >
+                    <span>▶️ YouTube'da Kesintisiz Aç</span>
+                  </a>
+                </div>
+              </div>
+            )}
 
             {/* Video Info & Quote */}
             <div className="p-4 sm:p-5 bg-gradient-to-b from-slate-900 to-slate-950 space-y-3">
@@ -310,12 +420,23 @@ export default function MotivationBox({
                 </div>
               </div>
 
-              {/* Turkish Quote Badge */}
-              <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-xs sm:text-sm text-purple-100 flex items-start gap-2.5">
-                <span className="text-base shrink-0">💡</span>
-                <div className="leading-relaxed">
-                  <strong className="text-amber-300 font-bold">Önemli Çıkarım:</strong> &ldquo;{currentVideo.keyQuoteTr}&rdquo;
+              {/* Turkish Quote Badge with Listen Button */}
+              <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-xs sm:text-sm text-purple-100 flex items-start justify-between gap-2.5">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">💡</span>
+                  <div className="leading-relaxed">
+                    <strong className="text-amber-300 font-bold">Önemli Çıkarım:</strong> &ldquo;{currentVideo.keyQuoteTr}&rdquo;
+                  </div>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => handleSpeakQuote(currentVideo.keyQuoteTr)}
+                  className="shrink-0 px-2.5 py-1 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 hover:text-white border border-purple-400/30 text-[11px] font-bold transition-colors flex items-center gap-1"
+                  title="Sesli Dinle"
+                >
+                  <span>{isSpeaking ? "⏹️" : "🔊"}</span>
+                  <span className="hidden sm:inline">{isSpeaking ? "Durdur" : "Dinle"}</span>
+                </button>
               </div>
             </div>
 

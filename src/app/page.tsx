@@ -121,10 +121,10 @@ const STATIONS = [
 ];
 
 const STATS = [
-  { to: 1000, suffix: "", label: "Benzersiz Avatar", emoji: "👤" },
-  { to: 1000, suffix: "", label: "Sınav Sorusu Bankası", emoji: "📝" },
-  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", emoji: "📖" },
-  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", emoji: "🎯" },
+  { to: 10000, suffix: "+", label: "Benzersiz Avatar", emoji: "👤", href: "/avatars" },
+  { to: 1000, suffix: "+", label: "Sınav Sorusu Bankası", emoji: "📝", href: "/exams" },
+  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", emoji: "📖", href: "/grammar" },
+  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", emoji: "🎯", href: "/tactics" },
 ];
 
 export default function Home() {
@@ -136,7 +136,7 @@ export default function Home() {
       <section className="text-center py-14 space-y-6">
         <Reveal>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 anim-pulse-glow">
-            🚀 YDS Zirve Maratonu · 5000 Değişen Motivasyon
+            🚀 YDS Zirve Maratonu · 10.000 Değişen Motivasyon
           </div>
         </Reveal>
         <Reveal delay={80}>
@@ -156,7 +156,7 @@ export default function Home() {
         <Reveal delay={220}>
           <p className="text-white/60 max-w-3xl mx-auto leading-relaxed">
             Kanka, burası tam sana göre: 3D dönebilen kelime küpleri, 180 dakikalık gerçek online
-            optik form, 1000 avatar, animasyonlu gramer anlatımları ve 11 soru tipine özel taktiklerle
+            optik form, 10.000 avatar, animasyonlu gramer anlatımları ve 11 soru tipine özel taktiklerle
             YDS'de sıfır hata!
           </p>
         </Reveal>
@@ -192,13 +192,22 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((s, i) => (
           <Reveal key={i} delay={i * 90}>
-            <div className="card-vibrant p-6 text-center">
-              <div className="text-3xl mb-1">{s.emoji}</div>
+            <Link
+              href={s.href}
+              className="card-vibrant p-6 text-center group cursor-pointer block hover:scale-[1.03] hover:border-cyan-400/50 transition-all duration-300 relative overflow-hidden"
+              title={`${s.label} bölümünü aç`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="text-3xl mb-1 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
               <div className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-cyan-300">
                 <CountUp to={s.to} suffix={s.suffix} />
               </div>
-              <div className="text-sm text-white/50 mt-1 font-semibold">{s.label}</div>
-            </div>
+              <div className="text-sm text-white/70 mt-1 font-semibold group-hover:text-white transition-colors">{s.label}</div>
+              <div className="text-[11px] text-cyan-400/80 mt-1 font-bold flex items-center justify-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <span>Bölümü Aç</span>
+                <span>→</span>
+              </div>
+            </Link>
           </Reveal>
         ))}
         </div>

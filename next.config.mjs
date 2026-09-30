@@ -29,6 +29,30 @@ const nextConfig = {
     config.resolve.alias.encoding = false;
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/taktikler',
+        destination: '/tactics',
+        permanent: false,
+      },
+      {
+        source: '/taktik',
+        destination: '/tactics',
+        permanent: false,
+      },
+      {
+        source: '/soru-bankasi',
+        destination: '/exams',
+        permanent: false,
+      },
+      {
+        source: '/sorular',
+        destination: '/exams',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

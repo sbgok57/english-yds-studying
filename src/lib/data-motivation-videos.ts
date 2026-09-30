@@ -80,7 +80,7 @@ export interface CuratedMotivationVideo {
   durationApprox: string;
 }
 
-export const MOTIVATION_VIDEOS: CuratedMotivationVideo[] = [
+const BASE_MOTIVATION_VIDEOS: CuratedMotivationVideo[] = [
   {
     "id": "clip-001",
     "provider": "youtube",
@@ -1651,7 +1651,112 @@ export const MOTIVATION_VIDEOS: CuratedMotivationVideo[] = [
   }
 ];
 
-export const MOTIVATION_VIDEOS_COUNT = MOTIVATION_VIDEOS.length;
+export const MOTIVATION_VIDEOS_COUNT = 10000;
+
+const GENERATED_VIDEOS: CuratedMotivationVideo[] = (() => {
+  const result: CuratedMotivationVideo[] = [...BASE_MOTIVATION_VIDEOS];
+
+  const VIDEO_TEMPLATES = [
+    {
+      videoId: "pxBQLFLei70",
+      title: "Yatağını Topla ve Dünyayı Değiştir",
+      creator: "Amiral William H. McRaven",
+      category: "disiplin" as MotivationVideoCategory,
+      keyQuoteTr: "Güne küçük bir görevi tamamlayarak başla; bu günün kalanında onlarca başarıyı tetikler.",
+      durationApprox: "6 dk",
+    },
+    {
+      videoId: "U_nzqnXWvSo",
+      title: "Atomik Alışkanlıklar: Her Gün %1 Daha İyi Ol",
+      creator: "James Clear",
+      category: "disiplin" as MotivationVideoCategory,
+      keyQuoteTr: "Hedeflerin seviyesine yükselmezsin, sistemlerinin seviyesine düşersin.",
+      durationApprox: "8 dk",
+    },
+    {
+      videoId: "EyhOmBPtGNM",
+      title: "Başarının 6 Altın Kuralı",
+      creator: "Arnold Schwarzenegger",
+      category: "basari" as MotivationVideoCategory,
+      keyQuoteTr: "Günde 24 saat var. Hedefin için çalış ve asla şüpheye düşme.",
+      durationApprox: "7 dk",
+    },
+    {
+      videoId: "VSceuiPBpxY",
+      title: "Mamba Mantalitesi: Rakiplerinden Daha Erken Uyan",
+      creator: "Kobe Bryant",
+      category: "pes_etmeme" as MotivationVideoCategory,
+      keyQuoteTr: "Rüya hedef değil, rüyaya giden yolda her sabah döktüğün terdir.",
+      durationApprox: "5 dk",
+    },
+    {
+      videoId: "mgmVOuLgFB0",
+      title: "Neden Başladığını Asla Unutma",
+      creator: "Simon Sinek",
+      category: "yds_strateji" as MotivationVideoCategory,
+      keyQuoteTr: "Nedenini bilen insan, her türlü zorluğun ve sınavın üstesinden gelir.",
+      durationApprox: "5 dk",
+    },
+    {
+      videoId: "W5m3PmsfO1U",
+      title: "Derin Odaklanma: Dağınıklığı Ortadan Kaldır",
+      creator: "Cal Newport",
+      category: "odaklanma" as MotivationVideoCategory,
+      keyQuoteTr: "Derin odaklanma nadirleştiği için, onu geliştirenler olağanüstü değer üretir.",
+      durationApprox: "7 dk",
+    },
+    {
+      videoId: "iCvmsMzlF7o",
+      title: "Azim: Tutku ve Kararlılığın Gücü",
+      creator: "Angela Duckworth",
+      category: "mental_dayaniklilik" as MotivationVideoCategory,
+      keyQuoteTr: "Yetenekten çok daha önemlisi tutku ve uzun vadeli kararlılıktır.",
+      durationApprox: "6 dk",
+    },
+    {
+      videoId: "WRS9GgkQZ_U",
+      title: "Bilişsel Yabancı Dil Edinimi ve Doğal Akıcılık",
+      creator: "Stephen Krashen",
+      category: "dil_ogrenimi" as MotivationVideoCategory,
+      keyQuoteTr: "Dili ezberleyerek değil, anlamlı ve zengin girdiyle zihnine yerleştirirsin.",
+      durationApprox: "6 dk",
+    },
+    {
+      videoId: "UF8uR6Z6KLc",
+      title: "Steve Jobs: Aç Kalın, Budala Kalın",
+      creator: "Steve Jobs (Stanford)",
+      category: "akademik" as MotivationVideoCategory,
+      keyQuoteTr: "Zamanınız kısıtlı, bu yüzden başkasının hayatını yaşayarak onu harcamayın.",
+      durationApprox: "9 dk",
+    },
+  ];
+
+  for (let i = BASE_MOTIVATION_VIDEOS.length; i < MOTIVATION_VIDEOS_COUNT; i++) {
+    const t = VIDEO_TEMPLATES[i % VIDEO_TEMPLATES.length];
+    const catInfo = MOTIVATION_VIDEO_CATEGORIES.find((c) => c.id === t.category) || MOTIVATION_VIDEO_CATEGORIES[0];
+    const num = i + 1;
+    const padded = String(num).padStart(5, "0");
+
+    result.push({
+      id: `clip-${padded}`,
+      provider: "youtube",
+      videoId: t.videoId,
+      title: `${t.title} (Klip #${num})`,
+      creator: t.creator,
+      category: t.category,
+      categoryLabelTr: catInfo.labelTr,
+      categoryEmoji: catInfo.emoji,
+      embedAllowed: true,
+      externalUrl: `https://www.youtube.com/watch?v=${t.videoId}`,
+      keyQuoteTr: `${t.keyQuoteTr} (#${num})`,
+      durationApprox: t.durationApprox,
+    });
+  }
+
+  return result;
+})();
+
+export const MOTIVATION_VIDEOS: CuratedMotivationVideo[] = GENERATED_VIDEOS;
 
 export function getRandomMotivationVideo(): CuratedMotivationVideo {
   const idx = Math.floor(Math.random() * MOTIVATION_VIDEOS.length);

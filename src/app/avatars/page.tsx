@@ -1,19 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AVATARS, AVATAR_COUNT, DOJO_COUNT, PROFESSIONS, avatarMeta, avatarSvg } from "@/lib/avatars";
+import {
+  AVATARS,
+  AVATAR_COUNT,
+  MONSTER_COUNT,
+  AVATAR_CATEGORIES,
+  PROFESSIONS,
+  avatarMeta,
+  avatarSvg,
+} from "@/lib/avatars";
 import { useUsage } from "@/lib/store";
-
-const CATEGORIES = [
-  "Tümü",
-  "Canavarlar",
-  "ClassDojo Canavarı",
-  "Meslekler",
-  "Robot",
-  "Hayvan",
-  "Uzaylı",
-  "Sihirli",
-];
 
 interface CustomAvatar {
   id: string;
@@ -65,16 +62,18 @@ export default function AvatarsPage() {
 
   const filtered = useMemo(() => {
     let list = AVATARS;
-    if (cat === "Canavarlar" || cat === "ClassDojo Canavarı") {
-      list = list.filter((a) => a.category === "ClassDojo Canavarı" || a.category === "Canavar");
-    } else if (cat !== "Tümü") {
+    if (cat !== "Tümü") {
       list = list.filter((a) => a.category === cat);
     }
     if (prof !== "Tüm Meslekler") list = list.filter((a) => a.profession === prof);
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       list = list.filter(
-        (a) => a.name.toLowerCase().includes(q) || a.profession.toLowerCase().includes(q)
+        (a) =>
+          a.name.toLowerCase().includes(q) ||
+          a.profession.toLowerCase().includes(q) ||
+          a.category.toLowerCase().includes(q) ||
+          a.label.toLowerCase().includes(q)
       );
     }
     return list;
@@ -154,10 +153,9 @@ export default function AvatarsPage() {
           👤 <span className="gradient-text">Avatar Galerisi</span>
         </h1>
         <p className="text-white/60">
-          <span className="font-black text-cyan-300">{AVATAR_COUNT}</span> benzersiz avatar ·{" "}
-          <span className="font-black text-pink-300">{DOJO_COUNT} sevimli canavar</span> ·{" "}
-          <span className="font-black text-amber-300">{PROFESSIONS.length} meslek</span> · kendi
-          fotoğraf veya GIF'ini de yükleyebilirsin
+          <span className="font-black text-cyan-300">{AVATAR_COUNT.toLocaleString("tr-TR")}</span> benzersiz avatar ·{" "}
+          <span className="font-black text-pink-300">{MONSTER_COUNT.toLocaleString("tr-TR")} canavar</span> ·{" "}
+          <span className="font-black text-amber-300">{PROFESSIONS.length} meslek</span> · gerçekçi portreler, komik & motive edici karakterler
         </p>
       </header>
 
@@ -259,7 +257,7 @@ export default function AvatarsPage() {
 
       {/* Filtreler */}
       <div className="flex flex-wrap items-center gap-2 justify-center mb-4">
-        {CATEGORIES.map((c) => (
+        {AVATAR_CATEGORIES.map((c) => (
           <button
             key={c}
             onClick={() => {
@@ -268,8 +266,8 @@ export default function AvatarsPage() {
             }}
             className={`px-4 py-2 rounded-full text-sm font-bold border transition-all ${
               cat === c
-                ? "bg-gradient-to-r from-pink-500 to-purple-600 border-transparent text-white"
-                : "border-white/15 text-white/60 hover:text-white"
+                ? "bg-gradient-to-r from-pink-500 to-purple-600 border-transparent text-white shadow-md shadow-pink-500/20"
+                : "border-white/15 text-white/60 hover:text-white hover:bg-white/5"
             }`}
           >
             {c}

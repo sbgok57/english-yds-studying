@@ -16,6 +16,7 @@ import {
   ChevronRight,
   ShieldCheck
 } from "lucide-react";
+import CareerGoalCard from "@/components/profile/CareerGoalCard";
 import { 
   ResponsiveContainer, 
   AreaChart, 
@@ -111,10 +112,11 @@ export default function DashboardPage() {
 
   // Avatar filtreleme (Kategori + Arama)
   const filteredAvatars = AVATARS.filter((a) => {
-    const matchesCategory = avatarCategory === "Hepsi" || a.category === avatarCategory;
+    const matchesCategory = avatarCategory === "Hepsi" || avatarCategory === "Tümü" || a.category === avatarCategory;
     const matchesSearch =
       !avatarSearch ||
       a.label.toLowerCase().includes(avatarSearch.toLowerCase()) ||
+      a.profession.toLowerCase().includes(avatarSearch.toLowerCase()) ||
       a.motivation.toLowerCase().includes(avatarSearch.toLowerCase());
     return matchesCategory && matchesSearch;
   });
@@ -176,6 +178,9 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Mesleki / Akademik Hedef Pusulası */}
+      <CareerGoalCard />
 
       {/* Genel İlerleme Yüzdesi ve Seviye İlerleme Çubuğu */}
       <div className="p-5 rounded-3xl bg-slate-900/90 border border-white/15 backdrop-blur-xl space-y-3 shadow-xl">

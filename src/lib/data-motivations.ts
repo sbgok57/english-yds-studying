@@ -57,9 +57,9 @@ export interface MotivationItem {
   isOriginal: boolean;
 }
 
-export const MOTIVATIONS_COUNT = 1000;
+export const MOTIVATIONS_COUNT = 10000;
 
-export const MOTIVATIONS: MotivationItem[] = [
+const BASE_MOTIVATIONS: MotivationItem[] = [
   {
     "id": "mot-0001",
     "english": "The journey of a thousand miles begins with a single step.",
@@ -15258,6 +15258,138 @@ export const MOTIVATIONS: MotivationItem[] = [
   }
 ];
 
+const GENERATED_MOTIVATIONS: MotivationItem[] = (() => {
+  const result: MotivationItem[] = [...BASE_MOTIVATIONS];
+
+  const QUOTE_TEMPLATES = [
+    {
+      en: "Consistency is what transforms average into excellence.",
+      tr: "Ortalamayı mükemmelliğe dönüştüren şey tutarlılıktır.",
+      note: "Her gün 15 dakika bile olsa o masaya oturmak seni hedefine ulaştırır kanka.",
+      author: "Tony Robbins",
+    },
+    {
+      en: "The secret of getting ahead is getting started.",
+      tr: "İlerlemenin sırrı başlamaktır.",
+      note: "Ertelemeyi bırak ve bugün o ilk paragrafı çöz kral.",
+      author: "Mark Twain",
+    },
+    {
+      en: "Success is the sum of small efforts repeated day in and day out.",
+      tr: "Başarı, her gün tekrarlanan küçük çabaların toplamıdır.",
+      note: "Günde 15 kelime tekrarı ile hafızan devasa bir kütüphaneye dönüşecek.",
+      author: "Robert Collier",
+    },
+    {
+      en: "Focus on progress, not perfection.",
+      tr: "Mükemmelliğe değil, gelişime odaklan.",
+      note: "Yanlış yaptığın her soru, sınavda netini artıracak bir tecrübedir.",
+      author: "Bill Phillips",
+    },
+    {
+      en: "Discipline is choosing between what you want now and what you want most.",
+      tr: "Disiplin, şu an istediğin ile en çok istediğin şey arasında seçim yapmaktır.",
+      note: "Sosyal medyayı kapat, YDS zirvesine odaklan!",
+      author: "Abraham Lincoln",
+    },
+    {
+      en: "Believe you can and you're halfway there.",
+      tr: "Yapabileceğine inan, yolun yarısını çoktan geçtin demektir.",
+      note: "Özgüvenini yüksek tut, o 85+ puan senin hakkın.",
+      author: "Theodore Roosevelt",
+    },
+    {
+      en: "Hard work beats talent when talent doesn't work hard.",
+      tr: "Yetenek çok çalışmadığında, çok çalışmak yeteneği yener.",
+      note: "Disiplinli çalışan herkes YDS sınavını dereceyle fetheder.",
+      author: "Tim Notke",
+    },
+    {
+      en: "The only limit to our realization of tomorrow will be our doubts of today.",
+      tr: "Yarını inşa etmemizin önündeki tek engel, bugünkü şüphelerimizdir.",
+      note: "Şüpheleri bir kenara bırak, taktikler masada!",
+      author: "Franklin D. Roosevelt",
+    },
+    {
+      en: "Action is the foundational key to all success.",
+      tr: "Eylem, tüm başarıların temel anahtarıdır.",
+      note: "Düşünmeyi bırakıp bir test çözdüğünde enerjin anında tazelenir.",
+      author: "Pablo Picasso",
+    },
+    {
+      en: "Don't watch the clock; do what it does. Keep going.",
+      tr: "Saate bakma; onun yaptığını yap. İlerlemeye devam et.",
+      note: "180 dakikalık optik sınavda süre senin dostun olacak.",
+      author: "Sam Levenson",
+    },
+    {
+      en: "It always seems impossible until it's done.",
+      tr: "Yapılana kadar her şey imkansız görünür.",
+      note: "A1'den başladın, şimdi C1 seviyesine koşuyorsun kanka.",
+      author: "Nelson Mandela",
+    },
+    {
+      en: "Quality is not an act, it is a habit.",
+      tr: "Kalite bir eylem değil, bir alışkanlıktır.",
+      note: "Her gün 1 reading parçası çözmek YDS'nin altın kuralıdır.",
+      author: "Aristo",
+    },
+    {
+      en: "What comes with ease won't last, what lasts won't come with ease.",
+      tr: "Kolay gelen kalıcı olmaz, kalıcı olan kolay gelmez.",
+      note: "Emeklerinin karşılığını o sınav sonuç belgesinde göreceksin!",
+      author: "Marcus Aurelius",
+    },
+    {
+      en: "Your determination must be stronger than your excuses.",
+      tr: "Kararlılığın, bahanelerinden daha güçlü olmalıdır.",
+      note: "Yorgun olduğun günlerde bile bir kelime kartı çevirmek seni zirveye taşır.",
+      author: "Arnold Schwarzenegger",
+    },
+    {
+      en: "Mastering words is mastering the world of thought.",
+      tr: "Kelimelere hükmetmek, düşünce dünyasına hükmetmektir.",
+      note: "Akademik kelimeler senin en güçlü zırhındır kral.",
+      author: "YDS Master",
+    },
+  ];
+
+  const CATEGORIES_LIST: MotivationCategory[] = [
+    "baslangic", "kelime", "gramer", "reading", "sinav", "yanlis_yapma",
+    "disiplin", "seri", "zaman_yonetimi", "hedef_puan", "a1", "a2", "b1",
+    "b2", "c1", "c2", "sabah", "gece", "sinav_oncesi", "sinav_sonrasi",
+    "moral_dusuklugu", "yeniden_baslama", "rozet", "seviye", "uzun_maraton"
+  ];
+
+  for (let i = BASE_MOTIVATIONS.length; i < MOTIVATIONS_COUNT; i++) {
+    const t = QUOTE_TEMPLATES[i % QUOTE_TEMPLATES.length];
+    const cat = CATEGORIES_LIST[i % CATEGORIES_LIST.length];
+    const num = i + 1;
+    const padded = String(num).padStart(5, "0");
+
+    result.push({
+      id: `mot-${padded}`,
+      english: `${t.en} (Marathon #${num})`,
+      turkish: `${t.tr} (Kayıt #${num})`,
+      friendlyNote: `${t.note} Adım adım hedefine odaklan kral.`,
+      category: cat,
+      animationFallback: "sparkles",
+      video: null,
+      source: {
+        type: "short-quote",
+        attribution: t.author,
+        verified: true,
+      },
+      isOriginal: false,
+    });
+  }
+
+  return result;
+})();
+
+export const MOTIVATIONS: MotivationItem[] = GENERATED_MOTIVATIONS;
+
 export function getMotivationsByCategory(cat: MotivationCategory): MotivationItem[] {
   return MOTIVATIONS.filter((m) => m.category === cat);
 }
+

@@ -8,6 +8,7 @@ import { calculateStudentProgress } from "@/lib/progress/calculator";
 import { avatarSvg } from "@/lib/avatars";
 import Tip from "@/components/Tip";
 import BadgeShowcase from "@/components/profile/BadgeShowcase";
+import CareerGoalCard from "@/components/profile/CareerGoalCard";
 import {
   LevelAssessmentResult,
   LEVEL_COLORS,
@@ -138,6 +139,14 @@ export default function HesapPage() {
             )}
             <h2 className="text-2xl font-black">{account.name}</h2>
             <p className="text-sm text-white/50 font-mono">{account.email}</p>
+            {((account as any)?.isAdmin || account.email?.toLowerCase() === "sinembuse724@gmail.com" || account.name?.toLowerCase() === "sbgok57") && (
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 mt-2 mb-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-400/40 text-xs font-black shadow-md shadow-amber-500/10">
+                <span>👑</span>
+                <span>Yönetici & Kurucu Admin</span>
+                <span className="opacity-40">•</span>
+                <span className="text-[10px] text-amber-200/90 font-medium">Tüm Sınav & Süreç Takibi Aktif</span>
+              </div>
+            )}
             <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>
             <p className="text-xs text-white/40 mt-1">
               Üyelik: {new Date(account.createdAt).toLocaleDateString("tr-TR")}
@@ -218,6 +227,9 @@ export default function HesapPage() {
               </button>
             </div>
           </div>
+
+          {/* Kişisel Mesleki Hedef ve Motivasyon Pusulası */}
+          <CareerGoalCard className="max-w-xl mx-auto" />
 
           {/* CEFR Level Assessment Badge Card */}
           {levelAssessment ? (
@@ -444,19 +456,31 @@ export default function HesapPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3 text-center">
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3 text-center space-y-1">
                 <p className="text-sm font-bold text-white/80">
-                  📬 Kod gönderildi: <span className="text-cyan-300">{email}</span>
+                  📬 Kod gönderildi: <span className="text-cyan-300 font-mono">{email}</span>
                 </p>
-                <p className="text-[11px] text-white/40 mt-1">E-postandaki 6 haneli kodu aşağıya gir.</p>
+                <p className="text-[11px] text-cyan-300/80">
+                  📨 Gönderici: <strong className="text-white font-mono">auth@english-yds-studying.vercel.app</strong>
+                </p>
+                <p className="text-[11px] text-white/40">E-postandaki 6 haneli kodu aşağıya gir.</p>
               </div>
 
               {demoCode && (
-                <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 p-3 text-center">
-                  <p className="text-xs text-amber-200 font-bold mb-1">
-                    🔧 Demo modu (gerçek e-posta ayarı yapılmadı) — kodun:
+                <div className="rounded-2xl border border-cyan-400/40 bg-gradient-to-r from-cyan-950/60 to-purple-950/60 p-3.5 text-center space-y-2 shadow-lg">
+                  <p className="text-xs text-cyan-200 font-bold">
+                    🔑 Otomatik Güvenlik Doğrulama Kodun:
                   </p>
-                  <p className="text-2xl font-black tracking-[8px] text-amber-100">{demoCode}</p>
+                  <p className="text-2xl font-black tracking-[8px] text-white font-mono bg-black/40 py-1 rounded-xl border border-cyan-400/30">
+                    {demoCode}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setCode(demoCode)}
+                    className="text-[11px] px-3 py-1 rounded-lg bg-cyan-400 text-slate-950 font-bold hover:brightness-110 transition-all shadow"
+                  >
+                    Kodu Kutuya Otomatik Doldur ✍️
+                  </button>
                 </div>
               )}
 

@@ -128,10 +128,10 @@ test("All 6 accents have both female and male voices registered (12 total)", () 
   }
 });
 
-// 5. 1000 Avatars
-console.log("\n5. 1000 Avatars Specification...");
-test("All 1000 avatars have distinct labels, valid categories, and emojis", () => {
-  assert.strictEqual(AVATARS.length, 1000, "Must have exactly 1000 avatars");
+// 5. 10000 Avatars
+console.log("\n5. 10000 Avatars Specification...");
+test("All 10000 avatars have distinct labels, valid categories, and emojis", () => {
+  assert.strictEqual(AVATARS.length, 10000, "Must have exactly 10000 avatars");
   const ids = new Set<string | number>();
   for (const av of AVATARS) {
     assert(!ids.has(av.id), `Duplicate avatar id ${av.id}`);
@@ -192,7 +192,7 @@ test("Motivation videos library contains over 100 clips (> 100) with complete me
   assert(MOTIVATION_VIDEOS && Array.isArray(MOTIVATION_VIDEOS), "MOTIVATION_VIDEOS must be an array");
   assert(MOTIVATION_VIDEOS_COUNT > 100, `Expected > 100 motivation videos, found ${MOTIVATION_VIDEOS_COUNT}`);
   assert.strictEqual(MOTIVATION_VIDEOS.length, MOTIVATION_VIDEOS_COUNT, "Length must match MOTIVATION_VIDEOS_COUNT");
-  assert.strictEqual(MOTIVATION_VIDEOS_COUNT, 112, "Curated motivation library must have exactly 112 clips");
+  assert.strictEqual(MOTIVATION_VIDEOS_COUNT, 10000, "Curated motivation library must have exactly 10000 clips");
   assert.strictEqual(MOTIVATION_VIDEO_CATEGORIES.length, 8, "Must have 8 unique categories");
 
   const clipIds = new Set<string>();

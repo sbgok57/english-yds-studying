@@ -67,11 +67,23 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const isDesignatedAdmin =
+      payload.isAdmin ||
+      payload.role === "admin" ||
+      payload.username?.toLowerCase() === "sbgok57" ||
+      payload.email?.toLowerCase() === "sinembuse724@gmail.com";
+
+    const userWithRole = {
+      ...safeUser,
+      role: isDesignatedAdmin ? ("admin" as const) : (payload.role || "user"),
+      isAdmin: isDesignatedAdmin,
+    };
+
     return NextResponse.json(
       authSuccess(
         {
           authenticated: true,
-          user: safeUser,
+          user: userWithRole,
         },
         "Oturum aktif",
         requestId

@@ -62,6 +62,13 @@ export interface GamificationState {
   showcaseBadgeIds: string[];
 }
 
+export interface CareerGoal {
+  profession: string;
+  targetScore: string;
+  motto: string;
+  updatedAt?: number;
+}
+
 export interface UsageData {
   words: Record<string, WordStat>;
   grammar: Record<string, { a: number; ok: number }>;
@@ -69,6 +76,7 @@ export interface UsageData {
   exams: { taken: number; totalCorrect: number; totalQuestions: number; bestNet: number };
   avatar: number | null;
   customAvatar?: string | null;
+  careerGoal?: CareerGoal;
   ambient: boolean;
   sessions: number;
   lastVisit: number;
@@ -120,6 +128,11 @@ export function defaultUsage(): UsageData {
     solvedQuestions: {},
     levelAssessment: defaultLevelAssessment(),
     gamification: defaultGamification(),
+    careerGoal: {
+      profession: "Akademisyenlik & Yurt Dışı Uzmanlığı",
+      targetScore: "85+",
+      motto: "Zirveye odaklan, başarı kaçınılmazdır! ✨",
+    },
   };
 }
 

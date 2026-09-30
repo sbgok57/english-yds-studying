@@ -155,3 +155,35 @@ export function motivationPayload(): PushPayload {
 export function funnyPayload(): PushPayload {
   return { title: '😄 YDS Mizah Molası', body: pick(FUNNY), url: '/games', tag: 'yds-funny' };
 }
+
+/** 🥪 Gün Ortası / Hızlı Pratik Bildirimi */
+export function daytimePayload(): PushPayload {
+  const options = [
+    'Öğle molasında 5 dakikalık hızlı kelime turu! 🥪 10 kelime tekrarı yapalım mı?',
+    'Günün ortasındayız kral! 1 paragraf veya 3 soru çözerek zihnini zinde tut. 🎯',
+    'Kahvenin yanında 3D kelime kartları iyi gider! ☕ 5 dakikanı ayır, netlerin artsın.',
+    'Gündem İngilizce haberlerden 1 kısa haber oku & dinle! 📰 Hem genel kültür hem YDS kelimesi.',
+  ];
+  return {
+    title: '🥪 Gün Ortası Hızlı Pratik',
+    body: pick(options),
+    url: '/vocabulary/flashcards',
+    tag: 'yds-daytime',
+  };
+}
+
+/** 🌙 Gece Kapanışı & Seri Koruma Bildirimi */
+export function nightReviewPayload(): PushPayload {
+  const options = [
+    'Günü kapatmadan önce serini koru! 🔥 5 dakikalık son bir kelime turu ile uyu.',
+    'Yatmadan önce son tekrar zihinde en kalıcı olandır! 🌙 10 akademik kelimeye göz at.',
+    'Bugün gösterdiğin çaba için tebrikler kanka! 🌟 Yarın bir adım daha zirveye yaklaşacaksın.',
+    'Gece rutini: Bugünü boş geçme, mini seviye testini veya kelime kartını tamamla! 🏆',
+  ];
+  return {
+    title: '🌙 Gece Kapanışı & Seri Koruma',
+    body: pick(options),
+    url: '/ilerleme',
+    tag: 'yds-night',
+  };
+}

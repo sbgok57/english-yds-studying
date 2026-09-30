@@ -25,6 +25,8 @@ import {
   reminderPayload,
   motivationPayload,
   funnyPayload,
+  daytimePayload,
+  nightReviewPayload,
   type PushPayload,
 } from '@/lib/push/content';
 
@@ -162,14 +164,24 @@ async function handlePush(req: Request) {
       await deliver('reminder', reminderPayload(u.exam_date), 'last_reminder_on');
     }
 
-    // 💪 Motivasyon: 09:00 Türkiye saati (fullMode'da her saat)
-    if ((fullMode || hour === 9) && u.motivation && u.last_motivation_on !== today) {
+    // 💪 Sabah Motivasyonu: 08:00 - 10:00 Türkiye saati
+    if ((fullMode || (hour >= 8 && hour <= 10)) && u.motivation && u.last_motivation_on !== today) {
       await deliver('motivation', motivationPayload(), 'last_motivation_on');
     }
 
-    // 😄 Komik: 15:00 Türkiye saati (fullMode'da her saat)
-    if ((fullMode || hour === 15) && u.funny && u.last_funny_on !== today) {
+    // 🥪 Gün Ortası / Öğle Molası Pratiği: 12:00 - 14:00 Türkiye saati
+    if ((fullMode || (hour >= 12 && hour <= 14)) && u.reminders && u.last_reminder_on !== today) {
+      await deliver('reminder', daytimePayload(), 'last_reminder_on');
+    }
+
+    // 😄 İkindi Mizah & Taktik Molası: 15:00 - 17:00 Türkiye saati
+    if ((fullMode || (hour >= 15 && hour <= 17)) && u.funny && u.last_funny_on !== today) {
       await deliver('funny', funnyPayload(), 'last_funny_on');
+    }
+
+    // 🌙 Gece Kapanışı & Seri Koruma: 21:00 - 23:00 Türkiye saati
+    if ((fullMode || (hour >= 21 && hour <= 23)) && u.reminders && u.last_reminder_on !== today) {
+      await deliver('reminder', nightReviewPayload(), 'last_reminder_on');
     }
 
     summary.usersProcessed++;

@@ -254,13 +254,18 @@ function RegisterForm() {
             <input type="hidden" name="username" value={username} autoComplete="username" />
             <input type="hidden" name="password" value={password} autoComplete="new-password" />
 
-            <div className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-200">
+            <div className="p-4 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-200 space-y-1.5">
               <p className="font-semibold text-white">
                 <span className="font-mono">{email}</span> adresine 6 haneli bir onay kodu gönderdik.
               </p>
+              <div className="text-[11px] text-cyan-300/80 flex items-center gap-1.5">
+                <span>📨</span>
+                <span>Gönderici: <strong className="text-white font-mono">auth@english-yds-studying.vercel.app</strong></span>
+              </div>
               {demoCode && (
-                <div className="mt-2 p-2 rounded-lg bg-cyan-950/80 border border-cyan-400/40 text-cyan-300 font-mono text-center text-sm font-bold">
-                  🧪 Demo Modu Kodu: <span className="text-white tracking-widest">{demoCode}</span>
+                <div className="mt-2 p-2.5 rounded-xl bg-cyan-950/80 border border-cyan-400/40 text-cyan-300 font-mono text-center text-sm font-bold flex items-center justify-between">
+                  <span>Doğrulama Kodu:</span>
+                  <span className="text-white text-base tracking-widest bg-black/40 px-2 py-0.5 rounded-lg border border-cyan-400/30">{demoCode}</span>
                 </div>
               )}
             </div>

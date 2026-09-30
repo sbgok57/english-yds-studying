@@ -55,7 +55,7 @@ async function runTests() {
   assert(perfectAssessment.totalCorrect === 42, "Correct count must be 42");
 
   // 4. Motivations Data Tests
-  assert(MOTIVATIONS.length === 1000, `Must have exactly 1000 motivations (actual: ${MOTIVATIONS.length})`);
+  assert(MOTIVATIONS.length === 10000, `Must have exactly 10000 motivations (actual: ${MOTIVATIONS.length})`);
   assert(MOTIVATIONS.every((m) => m.id && m.turkish && m.english && m.friendlyNote), "Every motivation must have valid fields");
 
   // 5. Gamification & XP Tests
