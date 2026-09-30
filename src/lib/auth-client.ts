@@ -27,6 +27,7 @@ export async function authRequest<T = unknown>(
 
   try {
     const res = await fetch(endpoint, {
+      credentials: "include",
       ...options,
       signal: controller.signal,
       headers: {

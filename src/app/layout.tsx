@@ -14,7 +14,7 @@ import PwaInstaller from "@/components/pwa/PwaInstaller";
 export const metadata: Metadata = {
   title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
   description:
-    "3D flashcards, 180 dakikalık gerçek online optik form, 500 avatar, 15 animasyonlu gramer konusu ve 11 soru tipi taktikleriyle YDS'yi fethedin.",
+    "3D flashcards, 180 dakikalık gerçek online optik form, 10.000 avatar, 19 animasyonlu gramer konusu ve 11 soru tipi taktikleriyle YDS'yi fethedin.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useAccount } from "@/lib/auth";
 import { useUsage } from "@/lib/store";
 import { calculateStudentProgress } from "@/lib/progress/calculator";
-import { avatarSvg } from "@/lib/avatars";
+import { avatarSvg, AVATAR_COUNT } from "@/lib/avatars";
 import Tip from "@/components/Tip";
 import BadgeShowcase from "@/components/profile/BadgeShowcase";
 import CareerGoalCard from "@/components/profile/CareerGoalCard";
@@ -58,7 +58,7 @@ export default function HesapPage() {
 
   const avatarId = useMemo(() => {
     const base = account ? hashStr(account.email) : hashStr("kanka");
-    return usage.avatar ?? base % 1000;
+    return usage.avatar ?? base % AVATAR_COUNT;
   }, [account, usage.avatar]);
 
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;

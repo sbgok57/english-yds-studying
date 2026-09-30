@@ -23,7 +23,13 @@ import { cn } from "@/lib/utils";
 import SearchBar from "@/components/search/SearchBar";
 import { getClientStreak } from "@/lib/streak";
 import { safeStorage } from "@/lib/safe-storage";
-import { getAvatar } from "@/lib/avatars";
+import {
+  getAvatar,
+  avatarSvg,
+  AVATAR_CHANGED_EVENT,
+  AVATAR_STORAGE_KEY,
+  CUSTOM_AVATAR_KEY,
+} from "@/lib/avatars";
 
 const NAV_LINKS = [
   { href: "/vocabulary/flashcards", label: "Flashcards 3D", icon: Sparkles, color: "text-amber-300" },
@@ -43,19 +49,61 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [streak, setStreak] = useState(0);
   const [username, setUsername] = useState("ydskasifi");
-  const [avatarEmoji, setAvatarEmoji] = useState("🧑‍🚀");
+  const [avatarId, setAvatarId] = useState<string>("astronaut");
+  const [customAvatar, setCustomAvatar] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Gerçek streak ve kullanıcı bilgilerini yükle (asla sahte 7 gün değil!)
+  const reloadUserAvatar = () => {
     const currentStreak = getClientStreak();
     setStreak(currentStreak);
 
     const storedUser = safeStorage.get("yds_username") || "ydskasifi";
     setUsername(storedUser);
 
-    const storedAvatarId = safeStorage.get("yds_avatar_id") || "astronaut";
-    const avatar = getAvatar(storedAvatarId);
-    setAvatarEmoji(avatar.emoji);
+    const storedAvatarId = safeStorage.get(AVATAR_STORAGE_KEY) || "astronaut";
+    setAvatarId(storedAvatarId);
+
+    // Custom avatar check
+    const customKey = safeStorage.get(CUSTOM_AVATAR_KEY);
+    if (customKey) {
+      try {
+        const rawCustomList = window.localStorage.getItem("yds-master-custom-avatars");
+        if (rawCustomList) {
+          const list = JSON.parse(rawCustomList);
+          const found = list.find((c: any) => c.id === customKey);
+          if (found?.dataUrl) {
+            setCustomAvatar(found.dataUrl);
+            return;
+          }
+        }
+      } catch {
+        /* empty */
+      }
+    }
+    // Check usage store
+    try {
+      const usageRaw = window.localStorage.getItem("yds-master-usage-v1");
+      if (usageRaw) {
+        const u = JSON.parse(usageRaw);
+        if (u.customAvatar) {
+          setCustomAvatar(u.customAvatar);
+          return;
+        }
+      }
+    } catch {
+      /* empty */
+    }
+    setCustomAvatar(null);
+  };
+
+  useEffect(() => {
+    reloadUserAvatar();
+    const handleAvatarChange = () => reloadUserAvatar();
+    window.addEventListener(AVATAR_CHANGED_EVENT, handleAvatarChange);
+    window.addEventListener("storage", handleAvatarChange);
+    return () => {
+      window.removeEventListener(AVATAR_CHANGED_EVENT, handleAvatarChange);
+      window.removeEventListener("storage", handleAvatarChange);
+    };
   }, [pathname]);
 
   return (
@@ -119,8 +167,16 @@ export default function Navbar() {
             href="/dashboard"
             className="flex items-center gap-1.5 p-1 pr-2.5 rounded-full bg-white/10 border border-white/20 hover:border-white/40 transition-all group"
           >
-            <span className="w-7 h-7 rounded-full bg-gradient-to-br from-indigo-600 to-purple-800 flex items-center justify-center text-sm shadow">
-              {avatarEmoji}
+            <span className="w-7 h-7 rounded-full overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-800 flex items-center justify-center text-sm shadow">
+              {customAvatar ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={customAvatar} alt="Avatar" className="w-full h-full object-cover" />
+              ) : (
+                <div
+                  className="w-full h-full aspect-square"
+                  dangerouslySetInnerHTML={{ __html: avatarSvg(avatarId, "nav") }}
+                />
+              )}
             </span>
             <span className="text-xs font-bold text-white/90 group-hover:text-yellow-300 transition-colors hidden md:inline truncate max-w-[80px]">
               {username}

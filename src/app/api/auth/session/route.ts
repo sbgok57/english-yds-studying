@@ -68,10 +68,12 @@ export async function GET(req: NextRequest) {
     }
 
     const isDesignatedAdmin =
-      payload.isAdmin ||
+      Boolean(payload.isAdmin) ||
       payload.role === "admin" ||
       payload.username?.toLowerCase() === "sbgok57" ||
-      payload.email?.toLowerCase() === "sinembuse724@gmail.com";
+      payload.email?.toLowerCase() === "sinembuse724@gmail.com" ||
+      safeUser.username?.toLowerCase() === "sbgok57" ||
+      safeUser.email?.toLowerCase() === "sinembuse724@gmail.com";
 
     const userWithRole = {
       ...safeUser,

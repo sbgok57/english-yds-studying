@@ -69,7 +69,7 @@ const SECTIONS = [
     emoji: "👤",
     title: "Avatar & Hesap",
     href: "/avatars",
-    desc: "500 avatar arasından profilini seç, hesabını oluştur (e-posta + şifre). Tüm ilerlemen kaydedilir.",
+    desc: "10.000 avatar arasından profilini seç, hesabını oluştur (e-posta + şifre). Tüm ilerlemen kaydedilir.",
     tip: "Hesap sayfasında (/hesap) kelime, sınav ve net istatistiklerini gör.",
   },
 ];

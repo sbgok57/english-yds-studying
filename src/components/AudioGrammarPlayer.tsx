@@ -276,7 +276,7 @@ export default function AudioGrammarPlayer({
       <audio
         ref={audioRef}
         src={track.audioUrl}
-        preload="metadata"
+        preload="none"
         onTimeUpdate={() => {
           if (audioRef.current) {
             const cur = audioRef.current.currentTime;

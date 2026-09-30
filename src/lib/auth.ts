@@ -15,6 +15,8 @@ export interface Account {
   name: string;
   passHash: string;
   createdAt: number;
+  role?: string;
+  isAdmin?: boolean;
 }
 
 const ACCOUNTS_KEY = "yds-master-accounts";
@@ -148,6 +150,8 @@ export function useAccount(): AuthApi {
             name: u.username,
             passHash: "server-synced",
             createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+            role: (u as any).role,
+            isAdmin: (u as any).isAdmin,
           };
           setAccount(serverAcc);
           writeSession(u.email);
@@ -183,6 +187,8 @@ export function useAccount(): AuthApi {
           name: u.username,
           passHash: "server-synced",
           createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+          role: (u as any).role,
+          isAdmin: (u as any).isAdmin,
         };
         setAccount(acc);
         writeSession(acc.email);
@@ -287,6 +293,8 @@ export function useAccount(): AuthApi {
             name: u.username,
             passHash: "server-synced",
             createdAt: u.createdAt ? new Date(u.createdAt).getTime() : Date.now(),
+            role: (u as any).role,
+            isAdmin: (u as any).isAdmin,
           };
           writeAccounts([...readAccounts().filter((a) => a.email !== e), acc]);
           writeSession(e);

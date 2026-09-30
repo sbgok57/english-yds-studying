@@ -438,7 +438,7 @@ export const LEGACY_AVATARS: AvatarOption[] = AVATARS.slice(0, 100).map((a) => (
 }));
 
 // Geliştirilmiş Canavar SVG Üreticisi (16 renk paleti, 8 gövde tipi, 6 göz tipi, 6 ağız tipi, 8 boynuz/aksesuar)
-function generateMonsterSvg(idx: number): string {
+function generateMonsterSvg(idx: number, suffix = ""): string {
   const p = MONSTER_PALETTES[idx % MONSTER_PALETTES.length];
   const shapeType = idx % 8;
   const eyeType = (idx >> 1) % 6;
@@ -571,15 +571,16 @@ function generateMonsterSvg(idx: number): string {
 
   const cheeks = `<ellipse cx="31" cy="62" rx="4.5" ry="3" fill="#fb7185" opacity="0.65"/><ellipse cx="69" cy="62" rx="4.5" ry="3" fill="#fb7185" opacity="0.65"/>`;
   const belly = `<ellipse cx="50" cy="69" rx="14" ry="8" fill="#ffffff" opacity="0.25"/>`;
+  const gradId = `av-mon-grad-${idx}${suffix ? "-" + suffix : ""}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
     <defs>
-      <linearGradient id="av-grad-${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="${p.c1}" />
         <stop offset="100%" stop-color="${p.c2}" />
       </linearGradient>
     </defs>
-    <circle cx="50" cy="50" r="48" fill="url(#av-grad-${idx})" />
+    <circle cx="50" cy="50" r="48" fill="url(#${gradId})" />
     <circle cx="50" cy="50" r="45" fill="#090d16" fill-opacity="0.22" />
     ${horns}
     ${body}
@@ -591,7 +592,7 @@ function generateMonsterSvg(idx: number): string {
 }
 
 // Realistic Portrait Vector SVG generator for "Gerçekçi & Fotoğraf" category
-function generateRealisticPortraitSvg(idx: number): string {
+function generateRealisticPortraitSvg(idx: number, suffix = ""): string {
   const p = MONSTER_PALETTES[idx % MONSTER_PALETTES.length];
   const skinTones = ["#ffd7ba", "#fec89a", "#f1a208", "#d4a373", "#ffddd2", "#e29578"];
   const skin = skinTones[idx % skinTones.length];
@@ -607,14 +608,16 @@ function generateRealisticPortraitSvg(idx: number): string {
        <line x1="48" y1="46" x2="52" y2="46" stroke="#0f172a" stroke-width="2" />`
     : "";
 
+  const gradId = `av-real-grad-${idx}${suffix ? "-" + suffix : ""}`;
+
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
     <defs>
-      <linearGradient id="av-real-${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="${p.c1}" />
         <stop offset="100%" stop-color="${p.c2}" />
       </linearGradient>
     </defs>
-    <circle cx="50" cy="50" r="48" fill="url(#av-real-${idx})" />
+    <circle cx="50" cy="50" r="48" fill="url(#${gradId})" />
     <circle cx="50" cy="50" r="46" fill="#090d16" fill-opacity="0.3" />
     <!-- Omuzlar & Kıyafet -->
     <path d="M 22 92 C 22 74, 34 68, 50 68 C 66 68, 78 74, 78 92 Z" fill="${suit}" />
@@ -642,7 +645,7 @@ function generateRealisticPortraitSvg(idx: number): string {
   </svg>`;
 }
 
-export function avatarSvg(indexOrId: number | string): string {
+export function avatarSvg(indexOrId: number | string, suffix = ""): string {
   let idx = 0;
   if (typeof indexOrId === "number") {
     idx = Math.abs(indexOrId) % AVATAR_COUNT;
@@ -663,28 +666,56 @@ export function avatarSvg(indexOrId: number | string): string {
 
   // 1. Canavarlar
   if (idx < MONSTER_COUNT) {
-    return generateMonsterSvg(idx);
+    return generateMonsterSvg(idx, suffix);
   }
 
   // 2. Gerçekçi & Fotoğrafik Portreler
   if (idx >= 5000 && idx < 6500) {
-    return generateRealisticPortraitSvg(idx);
+    return generateRealisticPortraitSvg(idx, suffix);
   }
 
   const av = AVATARS[idx] || AVATARS[0];
   const hue1 = (idx * 37) % 360;
   const hue2 = (hue1 + 45) % 360;
+  const gradId = `av-gen-grad-${idx}${suffix ? "-" + suffix : ""}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
     <defs>
-      <linearGradient id="av-grad-${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="hsl(${hue1}, 80%, 55%)" />
         <stop offset="100%" stop-color="hsl(${hue2}, 85%, 45%)" />
       </linearGradient>
     </defs>
-    <circle cx="50" cy="50" r="48" fill="url(#av-grad-${idx})" />
+    <circle cx="50" cy="50" r="48" fill="url(#${gradId})" />
     <circle cx="50" cy="50" r="44" fill="#090d16" fill-opacity="0.35" />
     <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="3 2" />
     <text x="50" y="56" font-size="38" text-anchor="middle" dominant-baseline="middle">${av.emoji}</text>
   </svg>`;
+}
+
+// Unified Avatar Synchronization Across Entire App
+export const AVATAR_STORAGE_KEY = "yds_avatar_id";
+export const CUSTOM_AVATAR_KEY = "yds-master-custom-selected";
+export const CUSTOM_AVATARS_LIST_KEY = "yds-master-custom-avatars";
+export const AVATAR_CHANGED_EVENT = "yds:avatar-changed";
+
+export function syncActiveAvatar(avatarId: number | string, customDataUrl: string | null = null): void {
+  if (typeof window === "undefined") return;
+  try {
+    const idStr = String(avatarId);
+    window.localStorage.setItem(AVATAR_STORAGE_KEY, idStr);
+    if (customDataUrl) {
+      window.localStorage.setItem(CUSTOM_AVATAR_KEY, idStr);
+    } else {
+      window.localStorage.removeItem(CUSTOM_AVATAR_KEY);
+    }
+    // Cross-component reactive notification
+    window.dispatchEvent(
+      new CustomEvent(AVATAR_CHANGED_EVENT, {
+        detail: { avatarId: idStr, customDataUrl },
+      })
+    );
+  } catch {
+    /* empty */
+  }
 }

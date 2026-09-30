@@ -9,6 +9,9 @@ import {
   PROFESSIONS,
   avatarMeta,
   avatarSvg,
+  syncActiveAvatar,
+  AVATAR_STORAGE_KEY,
+  CUSTOM_AVATAR_KEY,
 } from "@/lib/avatars";
 import { useUsage } from "@/lib/store";
 
@@ -19,7 +22,7 @@ interface CustomAvatar {
 }
 
 const CUSTOM_KEY = "yds-master-custom-avatars";
-const CUSTOM_SELECTED = "yds-master-custom-selected";
+const CUSTOM_SELECTED = CUSTOM_AVATAR_KEY;
 
 function loadCustom(): CustomAvatar[] {
   try {
@@ -39,7 +42,7 @@ function saveCustom(list: CustomAvatar[]) {
 }
 
 export default function AvatarsPage() {
-  const { update } = useUsage();
+  const { usage, update } = useUsage();
   const [cat, setCat] = useState("Tümü");
   const [prof, setProf] = useState("Tüm Meslekler");
   const [query, setQuery] = useState("");
@@ -54,11 +57,32 @@ export default function AvatarsPage() {
   useEffect(() => {
     setCustom(loadCustom());
     try {
-      setCustomSelected(window.localStorage.getItem(CUSTOM_SELECTED));
+      const storedCustom = window.localStorage.getItem(CUSTOM_SELECTED);
+      setCustomSelected(storedCustom);
     } catch {
       /* boş */
     }
   }, []);
+
+  // PERF & SAFETY: Sync active selection from usage or localStorage
+  useEffect(() => {
+    if (usage.customAvatar) {
+      setCustomSelected("custom-active");
+    } else if (usage.avatar !== null && usage.avatar !== undefined) {
+      setSelected(usage.avatar);
+      setCustomSelected(null);
+    } else {
+      try {
+        const stored = window.localStorage.getItem(AVATAR_STORAGE_KEY);
+        if (stored) {
+          const num = parseInt(stored, 10);
+          if (!isNaN(num)) setSelected(num);
+        }
+      } catch {
+        /* empty */
+      }
+    }
+  }, [usage.avatar, usage.customAvatar]);
 
   const filtered = useMemo(() => {
     let list = AVATARS;
@@ -114,11 +138,7 @@ export default function AvatarsPage() {
         saveCustom(next);
         setCustom(next);
         setCustomSelected(item.id);
-        try {
-          window.localStorage.setItem(CUSTOM_SELECTED, item.id);
-        } catch {
-          /* boş */
-        }
+        syncActiveAvatar(item.id, dataUrl);
         update((u) => ({ ...u, customAvatar: dataUrl }));
         setUploadMsg("Harika! Profil resmin başarıyla güncellendi. ✅");
       } catch (err) {
@@ -135,16 +155,12 @@ export default function AvatarsPage() {
     setCustom(next);
     if (customSelected === id) {
       setCustomSelected(null);
-      try {
-        window.localStorage.removeItem(CUSTOM_SELECTED);
-      } catch {
-        /* boş */
-      }
+      syncActiveAvatar(0, null);
       update((u) => ({ ...u, customAvatar: null }));
     }
   };
 
-  const selectedCustom = custom.find((c) => c.id === customSelected);
+  const selectedCustom = custom.find((c) => c.id === customSelected) || (usage.customAvatar ? { id: "custom-active", name: "Özel Profil Resmi", dataUrl: usage.customAvatar } : null);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -195,11 +211,8 @@ export default function AvatarsPage() {
                 <button
                   onClick={() => {
                     setCustomSelected(c.id);
-                    try {
-                      window.localStorage.setItem(CUSTOM_SELECTED, c.id);
-                    } catch {
-                      /* boş */
-                    }
+                    setSelected(null);
+                    syncActiveAvatar(c.id, c.dataUrl);
                     update((u) => ({ ...u, customAvatar: c.dataUrl }));
                   }}
                   className={`w-16 h-16 rounded-2xl overflow-hidden border-2 transition-all ${
@@ -238,7 +251,7 @@ export default function AvatarsPage() {
           ) : (
             <div
               className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border border-white/20"
-              dangerouslySetInnerHTML={{ __html: avatarSvg(selected as number) }}
+              dangerouslySetInnerHTML={{ __html: avatarSvg(selected as number, "preview") }}
             />
           )}
           <div>
@@ -262,6 +275,9 @@ export default function AvatarsPage() {
             key={c}
             onClick={() => {
               setCat(c);
+              if (c !== "Meslekler" && c !== "Tümü") {
+                setProf("Tüm Meslekler");
+              }
               setPage(0);
             }}
             className={`px-4 py-2 rounded-full text-sm font-bold border transition-all ${
@@ -306,50 +322,72 @@ export default function AvatarsPage() {
         {filtered.length} avatar bulundu · sayfa {safePage + 1}/{pageCount}
       </p>
 
-      {/* Grid */}
-      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-10 gap-3">
-        {slice.map((a) => (
+      {/* Grid or Empty State */}
+      {filtered.length === 0 ? (
+        <div className="card-vibrant p-8 text-center max-w-md mx-auto my-8">
+          <p className="text-4xl mb-2">🔍</p>
+          <p className="font-bold text-white mb-1">Eşleşen avatar bulunamadı</p>
+          <p className="text-xs text-white/50 mb-4">Arama kriterini değiştirerek veya filtreleri sıfırlayarak arayabilirsin.</p>
           <button
-            key={a.id}
             onClick={() => {
-              const numId = typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0;
-              setSelected(numId);
-              setCustomSelected(null);
-              update((u) => ({ ...u, avatar: numId, customAvatar: null }));
+              setCat("Tümü");
+              setProf("Tüm Meslekler");
+              setQuery("");
+              setPage(0);
             }}
-            className={`group relative rounded-2xl overflow-hidden border-2 transition-all hover:scale-105 ${
-              selected === a.id ? "border-cyan-400 shadow-lg shadow-cyan-500/30" : "border-transparent"
-            }`}
-            title={`#${typeof a.id === "number" ? a.id + 1 : a.id} ${a.name} · ${a.profession}`}
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs font-bold hover:scale-105 transition-transform"
           >
-            <div
-              className="w-full aspect-square"
-              dangerouslySetInnerHTML={{ __html: avatarSvg(a.id) }}
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-black/60 text-[9px] text-white/80 opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1">
-              {a.professionEmoji} {a.profession}
-            </div>
+            Filtreleri Temizle
           </button>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-10 gap-3">
+          {slice.map((a) => (
+            <button
+              key={a.id}
+              onClick={() => {
+                const numId = typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0;
+                setSelected(numId);
+                setCustomSelected(null);
+                syncActiveAvatar(numId, null);
+                update((u) => ({ ...u, avatar: numId, customAvatar: null }));
+              }}
+              className={`group relative rounded-2xl overflow-hidden border-2 transition-all hover:scale-105 ${
+                selected === a.id && !selectedCustom ? "border-cyan-400 shadow-lg shadow-cyan-500/30" : "border-transparent"
+              }`}
+              title={`#${typeof a.id === "number" ? a.id + 1 : a.id} ${a.name} · ${a.profession}`}
+            >
+              <div
+                className="w-full aspect-square"
+                dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }}
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-[9px] text-white/80 opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1">
+                {a.professionEmoji} {a.profession}
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Sayfalama */}
-      <div className="flex justify-center gap-3 mt-8">
-        <button
-          onClick={() => setPage((p) => Math.max(0, p - 1))}
-          disabled={safePage === 0}
-          className="px-5 py-2.5 rounded-xl border border-white/20 font-bold disabled:opacity-30 hover:bg-white/10 transition-all text-white"
-        >
-          ← Önceki
-        </button>
-        <button
-          onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
-          disabled={safePage >= pageCount - 1}
-          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 font-bold hover:scale-105 transition-transform disabled:opacity-30 text-white"
-        >
-          Sonraki →
-        </button>
-      </div>
+      {pageCount > 1 && (
+        <div className="flex justify-center gap-3 mt-8">
+          <button
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={safePage === 0}
+            className="px-5 py-2.5 rounded-xl border border-white/20 font-bold disabled:opacity-30 hover:bg-white/10 transition-all text-white"
+          >
+            ← Önceki
+          </button>
+          <button
+            onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
+            disabled={safePage >= pageCount - 1}
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 font-bold hover:scale-105 transition-transform disabled:opacity-30 text-white"
+          >
+            Sonraki →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

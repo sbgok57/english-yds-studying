@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AVATARS, AVATAR_CATEGORIES, getAvatar, type Avatar } from "@/lib/avatars";
+import { AVATARS, AVATAR_CATEGORIES, getAvatar, avatarSvg, syncActiveAvatar, type Avatar } from "@/lib/avatars";
 import { 
   Award, 
   Flame, 
@@ -58,7 +58,7 @@ export default function DashboardPage() {
   const [totalQuestionsSolved, setTotalQuestionsSolved] = useState<number>(0);
   const [netHistory, setNetHistory] = useState<{ date: string; net: number }[]>([]);
 
-  const { usage } = useUsage();
+  const { usage, update } = useUsage();
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
   const grammarCount = Object.keys(usage.grammar || {}).length;
   const tacticsCount = Object.keys(usage.tactics || {}).length;
@@ -103,9 +103,10 @@ export default function DashboardPage() {
   const currentAvatar = getAvatar(selectedAvatarId);
 
   const handleSelectAvatar = (a: Avatar) => {
-    const idStr = String(a.id);
-    setSelectedAvatarId(idStr);
-    safeStorage.set("yds_avatar_id", idStr);
+    const numId = typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0;
+    setSelectedAvatarId(String(numId));
+    syncActiveAvatar(numId, null);
+    update((u) => ({ ...u, avatar: numId, customAvatar: null }));
     toast.success(`Avatar güncellendi: ${a.label}! "${a.motivation}"`);
     if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(20);
   };
@@ -347,20 +348,23 @@ export default function DashboardPage() {
         {/* Sayfalanmış Avatar Izgarası (60/sayfa) */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {visibleAvatars.map((avatar) => {
-            const isSelected = selectedAvatarId === avatar.id;
+            const isSelected = String(selectedAvatarId) === String(avatar.id);
             return (
               <button
                 key={avatar.id}
                 onClick={() => handleSelectAvatar(avatar)}
                 className={cn(
-                  "p-3.5 rounded-2xl border-2 transition-all flex flex-col items-center text-center group",
+                  "p-3 rounded-2xl border-2 transition-all flex flex-col items-center text-center group",
                   isSelected
                     ? "bg-yellow-300/15 border-yellow-300 shadow-xl shadow-yellow-500/20 scale-105"
                     : "bg-white/5 border-white/10 hover:border-white/30 hover:bg-white/10"
                 )}
               >
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${avatar.theme} flex items-center justify-center text-2xl mb-1.5 shadow group-hover:scale-110 transition-transform`}>
-                  {avatar.emoji}
+                <div className="w-14 h-14 rounded-2xl overflow-hidden mb-1.5 shadow group-hover:scale-110 transition-transform">
+                  <div
+                    className="w-full h-full aspect-square"
+                    dangerouslySetInnerHTML={{ __html: avatarSvg(avatar.id, "dash") }}
+                  />
                 </div>
                 <span className="font-bold text-xs text-white group-hover:text-yellow-300 block truncate w-full">
                   {avatar.label}
