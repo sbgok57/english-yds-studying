@@ -52,7 +52,7 @@ export default function DashboardPage() {
   const [avatarSearch, setAvatarSearch] = useState<string>("");
   const [avatarPage, setAvatarPage] = useState<number>(0);
 
-  const [username, setUsername] = useState<string>("ydskasifi");
+  const [username, setUsername] = useState<string>("Öğrenci");
   const [streak, setStreak] = useState<number>(0);
   const [totalWordsCount, setTotalWordsCount] = useState<number>(436);
   const [totalQuestionsSolved, setTotalQuestionsSolved] = useState<number>(0);
@@ -77,7 +77,8 @@ export default function DashboardPage() {
     const storedAvatar = safeStorage.get("yds_avatar_id") || "astronaut";
     setSelectedAvatarId(storedAvatar);
 
-    const storedUser = safeStorage.get("yds_username") || "ydskasifi";
+    const rawUser = safeStorage.get("yds_username");
+    const storedUser = (!rawUser || rawUser.toLowerCase() === "ydskasifi") ? "Öğrenci" : rawUser;
     setUsername(storedUser);
 
     // 2. Gerçek seriyi hesapla (asla sahte 7 gün değil!)

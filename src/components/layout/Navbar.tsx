@@ -48,7 +48,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [streak, setStreak] = useState(0);
-  const [username, setUsername] = useState("ydskasifi");
+  const [username, setUsername] = useState("Öğrenci");
   const [avatarId, setAvatarId] = useState<string>("astronaut");
   const [customAvatar, setCustomAvatar] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -57,7 +57,8 @@ export default function Navbar() {
     const currentStreak = getClientStreak();
     setStreak(currentStreak);
 
-    const storedUser = safeStorage.get("yds_username") || "ydskasifi";
+    const rawUser = safeStorage.get("yds_username");
+    const storedUser = (!rawUser || rawUser.toLowerCase() === "ydskasifi") ? "Öğrenci" : rawUser;
     setUsername(storedUser);
 
     const isTargetAdmin =

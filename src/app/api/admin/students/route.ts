@@ -78,16 +78,31 @@ export async function GET(req: NextRequest) {
       if (authData?.users) {
         for (const u of authData.users) {
           const email = (u.email || "").toLowerCase().trim();
-          // Filter out synthetic test accounts
-          if (!email || email.startsWith("test_")) continue;
-
           const meta = u.user_metadata || {};
-          const username = meta.username || email.split("@")[0];
+          const username = (meta.username || email.split("@")[0] || "").toLowerCase().trim();
+
+          // SAFETY: P0 Strict Exclusion — Admin is not a student, and dummy/test accounts are blocked
+          if (
+            !email ||
+            email.startsWith("test_") ||
+            email.startsWith("bot_") ||
+            email.startsWith("mock_") ||
+            email === "sinembuse724@gmail.com" ||
+            email === "ogrenci@ydsmaster.com" ||
+            username === "sbgok57" ||
+            username === "ydskasifi" ||
+            meta.isAdmin === true ||
+            meta.role === "admin"
+          ) {
+            continue;
+          }
+
+          const rawUsername = meta.username || email.split("@")[0];
           const level = meta.level || "A1";
 
           studentsMap.set(email, {
             id: u.id,
-            username,
+            username: rawUsername,
             email,
             level,
             streak: 1,
@@ -97,7 +112,7 @@ export async function GET(req: NextRequest) {
             avgNet: 0,
             bestScore: 0,
             lastActive: u.created_at,
-            careerTarget: meta.careerTarget || (username === "yagoo_x" ? "YDS & Akademik İngilizce Başarısı" : undefined),
+            careerTarget: meta.careerTarget || (rawUsername === "yagoo_x" ? "YDS & Akademik İngilizce Başarısı" : undefined),
             attempts: [],
           });
         }
@@ -125,8 +140,21 @@ export async function GET(req: NextRequest) {
       if (dbUsers && dbUsers.length > 0) {
         for (const u of dbUsers) {
           const email = (u.email || "").toLowerCase().trim();
-          // Filter out synthetic test accounts
-          if (!email || email.startsWith("test_")) continue;
+          const username = (u.username || "").toLowerCase().trim();
+
+          // SAFETY: P0 Strict Exclusion — Admin (sbgok57) is never listed as a student, and dummy/test accounts are blocked
+          if (
+            !email ||
+            email.startsWith("test_") ||
+            email.startsWith("bot_") ||
+            email.startsWith("mock_") ||
+            email === "sinembuse724@gmail.com" ||
+            email === "ogrenci@ydsmaster.com" ||
+            username === "sbgok57" ||
+            username === "ydskasifi"
+          ) {
+            continue;
+          }
 
           const attempts: StudentExamAttemptSummary[] = (u.examAttempts || []).map((att) => ({
             id: att.id,
@@ -212,7 +240,20 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const students = Array.from(studentsMap.values());
+    // Strict P0 Guard: Only genuine students (e.g. Yağız), never admin (sbgok57) or test/mock/seed bots
+    const students = Array.from(studentsMap.values()).filter((s) => {
+      const e = s.email.toLowerCase().trim();
+      const u = s.username.toLowerCase().trim();
+      return (
+        e !== "sinembuse724@gmail.com" &&
+        e !== "ogrenci@ydsmaster.com" &&
+        u !== "sbgok57" &&
+        u !== "ydskasifi" &&
+        !e.startsWith("test_") &&
+        !e.startsWith("bot_") &&
+        !e.startsWith("mock_")
+      );
+    });
 
     // Aggregate Platform Statistics for Real Students
     const totalStudents = students.length;

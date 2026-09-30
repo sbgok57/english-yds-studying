@@ -11,7 +11,8 @@ export default function UsernameChanger() {
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
   useEffect(() => {
-    const saved = safeStorage.get("yds_username") || "ydskasifi";
+    const raw = safeStorage.get("yds_username");
+    const saved = (!raw || raw.toLowerCase() === "ydskasifi") ? "" : raw;
     setUsername(saved);
   }, []);
 

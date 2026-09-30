@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
+import { inspectRequestForMalware, applySecurityHeaders } from "@/lib/security/antivirus-shield";
 
 // Publicly accessible paths without login
 const PUBLIC_PATHS = [
@@ -13,6 +14,23 @@ const PUBLIC_PATHS = [
 ];
 
 export async function middleware(req: NextRequest) {
+  // SAFETY: P0 Real-Time Antivirus & Cyber Intrusion Prevention Scan
+  const malwareCheck = inspectRequestForMalware(req);
+  if (!malwareCheck.allowed) {
+    const blockedResponse = new NextResponse(
+      JSON.stringify({
+        error: "403 Forbidden - Güvenlik Kalkanı Tarafından Engellendi",
+        reason: malwareCheck.reason,
+        threat: malwareCheck.threatCategory,
+      }),
+      {
+        status: 403,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+      }
+    );
+    return applySecurityHeaders(blockedResponse);
+  }
+
   const { pathname, search } = req.nextUrl;
 
   // 1. Bypass static files, internal Next.js paths, API routes
@@ -24,7 +42,8 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/sitemap.xml") ||
     /\.(.*)$/.test(pathname) // static files like .png, .jpg, .svg, .json, .css, .js
   ) {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    return applySecurityHeaders(res);
   }
 
   // 2. Check session token in cookie
@@ -38,9 +57,9 @@ export async function middleware(req: NextRequest) {
   if (isAuthenticated && (pathname === "/giris" || pathname === "/kayit")) {
     const returnTo = req.nextUrl.searchParams.get("returnTo");
     if (returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//")) {
-      return NextResponse.redirect(new URL(returnTo, req.url));
+      return applySecurityHeaders(NextResponse.redirect(new URL(returnTo, req.url)));
     }
-    return NextResponse.redirect(new URL("/", req.url));
+    return applySecurityHeaders(NextResponse.redirect(new URL("/", req.url)));
   }
 
   // 4. If unauthenticated user tries to access a protected route -> redirect to /giris
@@ -49,10 +68,10 @@ export async function middleware(req: NextRequest) {
     // Safe returnTo parameter (never external URL)
     const fullPath = pathname + (search || "");
     loginUrl.searchParams.set("returnTo", fullPath);
-    return NextResponse.redirect(loginUrl);
+    return applySecurityHeaders(NextResponse.redirect(loginUrl));
   }
 
-  return NextResponse.next();
+  return applySecurityHeaders(NextResponse.next());
 }
 
 export const config = {

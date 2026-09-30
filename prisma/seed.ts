@@ -112,22 +112,22 @@ async function main() {
   }
   console.log("✅ 28 Real Exams and 100 Mock Exams slots seeded.");
 
-  // 5. Seed Default User with clean genuine starting data (0 streak, 0 points)
+  // 5. Seed Real Student Account (Yağız / yagoo_x)
   const passwordHash = await bcrypt.hash("yds123456", 10);
   await prisma.user.upsert({
-    where: { email: "ogrenci@ydsmaster.com" },
+    where: { email: "yagiz.ilhan32@gmail.com" },
     update: {},
     create: {
-      email: "ogrenci@ydsmaster.com",
-      username: "ydskasifi",
+      email: "yagiz.ilhan32@gmail.com",
+      username: "yagoo_x",
       passwordHash,
       avatarId: "astronaut",
       level: "A1",
-      streak: 0,
-      totalPoints: 0,
+      streak: 1,
+      totalPoints: 50,
     },
   });
-  console.log("✅ Default student account created: ogrenci@ydsmaster.com / yds123456");
+  console.log("✅ Real student account seeded: yagiz.ilhan32@gmail.com / yagoo_x");
 
   console.log("🎉 Database seeding completed successfully!");
 }

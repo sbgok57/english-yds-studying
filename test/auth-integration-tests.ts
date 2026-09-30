@@ -26,6 +26,7 @@ import { POST as loginPost } from "../src/app/api/auth/login/route";
 import { GET as sessionGet } from "../src/app/api/auth/session/route";
 import { POST as logoutPost } from "../src/app/api/auth/logout/route";
 import { prisma } from "../src/lib/prisma";
+import { adminClient } from "../src/lib/supabase/admin";
 
 async function runIntegrationTests() {
   console.log("▶ Starting Auth Integration Tests...");
@@ -199,6 +200,11 @@ async function runIntegrationTests() {
       if (createdUserId) {
         console.log("  Cleaning up test user:", createdUserId);
         await prisma.user.deleteMany({ where: { id: createdUserId } });
+        try {
+          await adminClient.auth.admin.deleteUser(createdUserId);
+        } catch {
+          // ignore
+        }
       }
       await prisma.user.deleteMany({
         where: {

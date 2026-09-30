@@ -128,7 +128,7 @@ function LoginForm() {
               autoComplete="username"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
-              placeholder="kanka@ydsmaster.com veya ydskasifi"
+              placeholder="ornek@gmail.com veya kullanıcı adı"
               required
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-cyan-400 focus:outline-none text-white text-sm placeholder:text-white/30 transition-colors"
             />
