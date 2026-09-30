@@ -118,8 +118,22 @@ export function syncLocalSession(user: SafeUser | null) {
   try {
     if (user) {
       window.localStorage.setItem("yds-master-session", user.email);
+      if (user.username) {
+        window.localStorage.setItem("yds_username", user.username);
+      }
+      const isTargetAdmin =
+        user.username?.toLowerCase() === "sbgok57" ||
+        user.email?.toLowerCase() === "sinembuse724@gmail.com" ||
+        user.role === "admin" ||
+        Boolean(user.isAdmin);
+      if (isTargetAdmin) {
+        window.localStorage.setItem("yds_is_admin", "true");
+      } else {
+        window.localStorage.removeItem("yds_is_admin");
+      }
     } else {
       window.localStorage.removeItem("yds-master-session");
+      window.localStorage.removeItem("yds_is_admin");
     }
   } catch {
     /* ignore storage errors */

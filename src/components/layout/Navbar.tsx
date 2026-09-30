@@ -51,6 +51,7 @@ export default function Navbar() {
   const [username, setUsername] = useState("ydskasifi");
   const [avatarId, setAvatarId] = useState<string>("astronaut");
   const [customAvatar, setCustomAvatar] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const reloadUserAvatar = () => {
     const currentStreak = getClientStreak();
@@ -58,6 +59,12 @@ export default function Navbar() {
 
     const storedUser = safeStorage.get("yds_username") || "ydskasifi";
     setUsername(storedUser);
+
+    const isTargetAdmin =
+      storedUser.toLowerCase() === "sbgok57" ||
+      safeStorage.get("yds_is_admin") === "true" ||
+      safeStorage.get("yds-master-session")?.toLowerCase() === "sinembuse724@gmail.com";
+    setIsAdmin(Boolean(isTargetAdmin));
 
     const storedAvatarId = safeStorage.get(AVATAR_STORAGE_KEY) || "astronaut";
     setAvatarId(storedAvatarId);
@@ -152,8 +159,19 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Status (Real Streak + Avatar) */}
+        {/* Right Status (Real Streak + Admin Badge + Avatar) */}
         <div className="flex items-center gap-2 flex-shrink-0">
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 text-amber-300 text-xs font-black hover:scale-105 transition-transform shadow-md shadow-amber-500/10"
+              title="Kurucu Yönetici Öğrenci Takip Paneli"
+            >
+              <span>👑</span>
+              <span className="hidden sm:inline">Admin</span>
+            </Link>
+          )}
+
           <Link
             href="/dashboard"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/40 text-orange-300 text-xs font-bold hover:scale-105 transition-transform"
@@ -203,6 +221,16 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="2xl:hidden bg-slate-950/95 border-b border-white/10 px-4 py-4 space-y-2 max-h-[80vh] overflow-y-auto"
           >
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 p-3 rounded-2xl text-xs font-black border border-amber-400/50 bg-amber-500/20 text-amber-300 mb-2 shadow-lg shadow-amber-500/10"
+              >
+                <span>👑</span>
+                <span>Yönetici & Öğrenci Takip Paneli</span>
+              </Link>
+            )}
             <div className="grid grid-cols-2 gap-2">
               {NAV_LINKS.map((link) => {
                 const Icon = link.icon;

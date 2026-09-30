@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
 
 export async function POST(
   req: NextRequest,
@@ -10,15 +11,30 @@ export async function POST(
     const body = await req.json();
     const { answers, correct, wrong, empty, net, score, timeSpent } = body;
 
-    // Varsayılan kullanıcıyı al veya bağla
-    const user = await prisma.user.findFirst({
-      orderBy: { createdAt: "asc" },
-    });
+    let targetUserId: string | null = null;
+    const sessionCookie = req.cookies.get(SESSION_COOKIE_NAME)?.value;
+    if (sessionCookie) {
+      try {
+        const payload = await verifySessionToken(sessionCookie);
+        if (payload?.userId) {
+          targetUserId = payload.userId;
+        }
+      } catch {
+        // Fallback to default
+      }
+    }
+
+    if (!targetUserId) {
+      const firstUser = await prisma.user.findFirst({
+        orderBy: { createdAt: "asc" },
+      });
+      targetUserId = firstUser?.id || null;
+    }
 
     const attempt = await prisma.examAttempt.create({
       data: {
         examId: id,
-        userId: user?.id || null,
+        userId: targetUserId,
         answers: JSON.stringify(answers || {}),
         correct: correct || 0,
         wrong: wrong || 0,
@@ -29,13 +45,17 @@ export async function POST(
       },
     });
 
-    if (user) {
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          totalPoints: { increment: Math.round(score * 10) },
-        },
-      });
+    if (targetUserId) {
+      try {
+        await prisma.user.update({
+          where: { id: targetUserId },
+          data: {
+            totalPoints: { increment: Math.round(score * 10) },
+          },
+        });
+      } catch {
+        // Safe degrade
+      }
     }
 
     return NextResponse.json({

@@ -28,12 +28,13 @@ interface SendResult {
 }
 
 const SENDER_EMAIL =
+  process.env.GMAIL_USER ||
   process.env.SYSTEM_SENDER_EMAIL ||
   process.env.RESEND_FROM ||
   process.env.SMTP_FROM ||
-  "auth@english-yds-studying.vercel.app";
+  "ydsmaster.official@gmail.com";
 
-const SENDER_DISPLAY = `YDS Master Otomatik Doğrulama <${SENDER_EMAIL}>`;
+const SENDER_DISPLAY = `YDS Master Akademi <${SENDER_EMAIL}>`;
 
 async function sendEmail(to: string, code: string): Promise<SendResult> {
   const subject = "YDS Master — Doğrulama Kodun 🔐";
@@ -110,16 +111,28 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
     }
   }
 
-  // 3) SMTP (nodemailer)
-  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+  // 3) Gmail & Custom SMTP (nodemailer)
+  const isGmail = Boolean(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
+  const isCustomSmtp = Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+
+  if (isGmail || isCustomSmtp) {
     try {
       const nodemailer = await import("nodemailer");
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT || 465),
-        secure: process.env.SMTP_SECURE === "false" ? false : true,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-      });
+      const transporter = isGmail
+        ? nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: process.env.GMAIL_USER,
+              pass: process.env.GMAIL_APP_PASSWORD,
+            },
+          })
+        : nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: Number(process.env.SMTP_PORT || 465),
+            secure: process.env.SMTP_SECURE === "false" ? false : true,
+            auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+          });
+
       await transporter.sendMail({
         from: SENDER_DISPLAY,
         to,
@@ -127,7 +140,7 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
         text,
         html,
       });
-      console.info(`[EMAIL_SENT_SMTP] From: ${SENDER_EMAIL} To: ${to}`);
+      console.info(`[EMAIL_SENT_${isGmail ? "GMAIL" : "SMTP"}] From: ${SENDER_EMAIL} To: ${to}`);
       return { ok: true };
     } catch (smtpErr) {
       console.warn(`[EMAIL_SMTP_ERR]`, smtpErr);

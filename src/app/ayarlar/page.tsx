@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import PushManager from "@/components/PushManager";
+import ThemeStudio from "@/components/theme/ThemeStudio";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ayarlar & Bildirimler — YDS Master",
-  description: "YDS akıllı telefon ve web push bildirim tercihleri, hatırlatıcı saatleri ve PWA yönetimi.",
+  title: "Ayarlar, 2.000 Renk Teması & Bildirimler — YDS Master",
+  description: "YDS Master 2.000 renk teması, karanlık/aydınlık mod stüdyosu, akıllı telefon ve web push bildirim tercihleri.",
 };
 
 export default function AyarlarPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
         <div>
           <h1 className="text-3xl font-black text-white flex items-center gap-3">
             <span>⚙️</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
-              Ayarlar & Bildirimler
+              Ayarlar & Tema Stüdyosu
             </span>
           </h1>
           <p className="text-sm text-white/60 mt-1">
-            Akıllı bildirim saatlerini yönet, sınav geri sayımını takip et ve YDS koçunu kişiselleştir.
+            2.000 benzersiz tema ve renk paleti arasından tarzını seç, aydınlık/karanlık modunu ayarla ve bildirimlerini yönet.
           </p>
         </div>
 
@@ -38,6 +39,9 @@ export default function AyarlarPage() {
           </Link>
         </div>
       </div>
+
+      {/* 2.000 Tema & Renk Kişiselleştirme Stüdyosu */}
+      <ThemeStudio />
 
       {/* Push Bildirim Yöneticisi */}
       <PushManager />

@@ -4,6 +4,15 @@
 
 :root {
   color-scheme: dark;
+  --theme-primary: #06b6d4;
+  --theme-secondary: #8b5cf6;
+  --theme-accent: #f59e0b;
+  --theme-glow: #06b6d4;
+  --theme-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+  --theme-bg: #030712;
+  --theme-card: #0d1322;
+  --theme-text: #f8fafc;
+  --theme-border: rgba(255, 255, 255, 0.12);
   --gradient-main: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
   --neon-pink: #ff00aa;
   --neon-blue: #00f0ff;
@@ -131,13 +140,43 @@ html.light .bg-white\/10 {
   background-color: rgba(241, 245, 249, 0.85);
 }
 
+html.light .text-slate-400 {
+  color: #475569 !important;
+}
+html.light .text-slate-300 {
+  color: #334155 !important;
+}
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+html.light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-700,
+html.light .border-slate-700\/60,
+html.light .border-slate-700\/80 {
+  border-color: #cbd5e1 !important;
+}
+
+html.light .bg-slate-900,
 html.light .bg-slate-900\/60,
 html.light .bg-slate-900\/80,
 html.light .bg-slate-900\/90,
 html.light .bg-slate-950\/80,
 html.light .bg-slate-950\/90,
 html.light .bg-slate-950 {
-  background-color: rgba(255, 255, 255, 0.94);
+  background-color: rgba(255, 255, 255, 0.96) !important;
+}
+
+html.light .bg-slate-800,
+html.light .bg-slate-800\/90,
+html.light .bg-slate-800\/80,
+html.light .bg-slate-800\/60,
+html.light .bg-slate-800\/40,
+html.light .bg-slate-800\/30 {
+  background-color: #f1f5f9 !important;
 }
 
 /* Renkli veya Gradyan butonların içindeki beyaz yazıyı koru */

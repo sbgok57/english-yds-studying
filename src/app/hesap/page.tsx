@@ -140,11 +140,20 @@ export default function HesapPage() {
             <h2 className="text-2xl font-black">{account.name}</h2>
             <p className="text-sm text-white/50 font-mono">{account.email}</p>
             {((account as any)?.isAdmin || account.email?.toLowerCase() === "sinembuse724@gmail.com" || account.name?.toLowerCase() === "sbgok57") && (
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 mt-2 mb-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-400/40 text-xs font-black shadow-md shadow-amber-500/10">
-                <span>👑</span>
-                <span>Yönetici & Kurucu Admin</span>
-                <span className="opacity-40">•</span>
-                <span className="text-[10px] text-amber-200/90 font-medium">Tüm Sınav & Süreç Takibi Aktif</span>
+              <div className="flex flex-col items-center gap-2 mt-3 mb-1">
+                <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-400/40 text-xs font-black shadow-md shadow-amber-500/10">
+                  <span>👑</span>
+                  <span>Yönetici & Kurucu Admin</span>
+                  <span className="opacity-40">•</span>
+                  <span className="text-[10px] text-amber-200/90 font-medium">Tüm Sınav & Süreç Takibi Aktif</span>
+                </div>
+                <Link
+                  href="/admin"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs hover:scale-105 transition-transform shadow-lg shadow-amber-500/25"
+                >
+                  <span>👑</span>
+                  <span>Öğrenci Sınav Süreçleri & Yönetim Paneli →</span>
+                </Link>
               </div>
             )}
             <p className="text-xs text-emerald-300/80 mt-1">✅ E-posta doğrulanmış hesap</p>

@@ -6,6 +6,7 @@ import {
   AVATAR_COUNT,
   MONSTER_COUNT,
   AVATAR_CATEGORIES,
+  AVATAR_EXPRESSIONS,
   PROFESSIONS,
   avatarMeta,
   avatarSvg,
@@ -45,6 +46,7 @@ export default function AvatarsPage() {
   const { usage, update } = useUsage();
   const [cat, setCat] = useState("Tümü");
   const [prof, setProf] = useState("Tüm Meslekler");
+  const [expr, setExpr] = useState<string>("Tüm İfadeler");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<number | null>(null);
   const [customSelected, setCustomSelected] = useState<string | null>(null);
@@ -90,6 +92,7 @@ export default function AvatarsPage() {
       list = list.filter((a) => a.category === cat);
     }
     if (prof !== "Tüm Meslekler") list = list.filter((a) => a.profession === prof);
+    if (expr !== "Tüm İfadeler") list = list.filter((a) => a.expression === expr);
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       list = list.filter(
@@ -97,11 +100,12 @@ export default function AvatarsPage() {
           a.name.toLowerCase().includes(q) ||
           a.profession.toLowerCase().includes(q) ||
           a.category.toLowerCase().includes(q) ||
+          (a.expression && a.expression.toLowerCase().includes(q)) ||
           a.label.toLowerCase().includes(q)
       );
     }
     return list;
-  }, [cat, prof, query]);
+  }, [cat, prof, expr, query]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const safePage = Math.min(page, pageCount - 1);
@@ -261,7 +265,7 @@ export default function AvatarsPage() {
             <p className="text-sm text-white/60">
               {selectedCustom
                 ? "Kendi yüklediğin resim"
-                : `${avatarMeta(selected as number).name} · ${avatarMeta(selected as number).profession}`}
+                : `${avatarMeta(selected as number).name} · ${avatarMeta(selected as number).profession} · ${avatarMeta(selected as number).expression || "Standart"}`}
             </p>
           </div>
           <span className="ml-auto text-2xl">✅</span>
@@ -307,6 +311,22 @@ export default function AvatarsPage() {
             </option>
           ))}
         </select>
+
+        <select
+          value={expr}
+          onChange={(e) => {
+            setExpr(e.target.value);
+            setPage(0);
+          }}
+          className="px-4 py-2 rounded-full bg-white/5 border border-white/15 text-sm font-bold text-white/80 focus:outline-none focus:border-cyan-400 max-w-[220px]"
+        >
+          {AVATAR_EXPRESSIONS.map((ex) => (
+            <option key={ex} value={ex} className="bg-slate-900 text-white">
+              {ex === "Tüm İfadeler" ? "🎭 Tüm Yüz İfadeleri" : `✨ ${ex}`}
+            </option>
+          ))}
+        </select>
+
         <input
           value={query}
           onChange={(e) => {
@@ -332,6 +352,7 @@ export default function AvatarsPage() {
             onClick={() => {
               setCat("Tümü");
               setProf("Tüm Meslekler");
+              setExpr("Tüm İfadeler");
               setQuery("");
               setPage(0);
             }}
@@ -355,14 +376,14 @@ export default function AvatarsPage() {
               className={`group relative rounded-2xl overflow-hidden border-2 transition-all hover:scale-105 ${
                 selected === a.id && !selectedCustom ? "border-cyan-400 shadow-lg shadow-cyan-500/30" : "border-transparent"
               }`}
-              title={`#${typeof a.id === "number" ? a.id + 1 : a.id} ${a.name} · ${a.profession}`}
+              title={`#${typeof a.id === "number" ? a.id + 1 : a.id} ${a.name} · ${a.profession} (${a.expression || ""})`}
             >
               <div
                 className="w-full aspect-square"
                 dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }}
               />
-              <div className="absolute inset-x-0 bottom-0 bg-black/60 text-[9px] text-white/80 opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1">
-                {a.professionEmoji} {a.profession}
+              <div className="absolute inset-x-0 bottom-0 bg-black/80 text-[9px] text-white/90 opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1 font-medium">
+                {a.professionEmoji} {a.profession} · {a.expression}
               </div>
             </button>
           ))}
