@@ -57,9 +57,12 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
       <aside className="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-slate-950/95 backdrop-blur-2xl border-l border-white/10 overflow-y-auto">
         <div className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-5 py-3">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-black text-lg">
-              🧭 <span className="gradient-text">Menü</span>
-            </span>
+            <div>
+              <span className="font-black text-lg flex items-center gap-2">
+                <span>🧭</span> <span className="gradient-text">Bölümler & Seçenekler</span>
+              </span>
+              <p className="text-[10px] text-white/50 -mt-0.5">Tüm dersler, testler, taktikler ve çalışma araçları</p>
+            </div>
             <button
               onClick={onClose}
               className="w-9 h-9 rounded-xl border border-white/15 flex items-center justify-center text-lg hover:bg-white/10"
@@ -134,7 +137,7 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
         </div>
 
         <div className="px-5 pb-10">
-          <Group title="Sayfalar" emoji="🏠" />
+          <Group title="Ana Bölümler & Modüller" emoji="🏠" />
           <div className="grid grid-cols-2 gap-1.5">
             {PAGES.map((p) => (
               <Link

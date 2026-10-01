@@ -26,6 +26,9 @@ export default function ThemeToggle() {
       document.documentElement.classList.add("light");
       try {
         localStorage.setItem("yds_theme", "light");
+        localStorage.setItem("yds_theme_mode", "light");
+        const savedId = parseInt(localStorage.getItem("yds_theme_id") || "1", 10);
+        import("@/lib/themes/engine").then(({ applyTheme }) => applyTheme(savedId, "light"));
       } catch {
         // SAFETY: localStorage failover
       }
@@ -34,6 +37,9 @@ export default function ThemeToggle() {
       document.documentElement.classList.add("dark");
       try {
         localStorage.setItem("yds_theme", "dark");
+        localStorage.setItem("yds_theme_mode", "dark");
+        const savedId = parseInt(localStorage.getItem("yds_theme_id") || "1", 10);
+        import("@/lib/themes/engine").then(({ applyTheme }) => applyTheme(savedId, "dark"));
       } catch {
         // SAFETY: localStorage failover
       }
