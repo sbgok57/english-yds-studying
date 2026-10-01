@@ -30,10 +30,21 @@ html.theme-transition *::after {
 
 html {
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* ---------- KOYU MOD (Vibrant & Neon) ---------- */
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   @apply text-slate-100 antialiased;
   background-color: var(--theme-bg, #030712) !important;
   color: var(--theme-text, #f8fafc) !important;

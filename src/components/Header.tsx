@@ -24,7 +24,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-2xl border-b border-white/10">
+      <header className="sticky top-0 z-50 w-full left-0 right-0 bg-slate-950/90 backdrop-blur-2xl border-b border-white/10 shadow-lg shadow-black/20" style={{ width: "100%", maxWidth: "100vw" }}>
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 group shrink-0">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center text-xl shadow-lg shadow-purple-500/30 group-hover:scale-105 transition-transform">

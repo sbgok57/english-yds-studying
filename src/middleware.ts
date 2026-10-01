@@ -2,15 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
 import { inspectRequestForMalware, applySecurityHeaders } from "@/lib/security/antivirus-shield";
 
-// Publicly accessible paths without login
-const PUBLIC_PATHS = [
-  "/giris",
-  "/kayit",
-  "/email-dogrulama",
-  "/sifremi-unuttum",
-  "/sifre-yenile",
-  "/gizlilik",
-  "/kullanim-kosullari",
+// Strictly protected routes that require an active session
+const STRICTLY_PROTECTED_PATHS = [
+  "/hesap",
+  "/admin",
 ];
 
 export async function middleware(req: NextRequest) {
@@ -51,19 +46,21 @@ export async function middleware(req: NextRequest) {
   const session = sessionCookie ? await verifySessionToken(sessionCookie) : null;
   const isAuthenticated = !!session;
 
-  const isPublicPath = PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
-
-  // 3. If authenticated user tries to access /giris or /kayit -> redirect to /
+  // 3. If authenticated user tries to access /giris or /kayit -> redirect to returnTo or /
   if (isAuthenticated && (pathname === "/giris" || pathname === "/kayit")) {
     const returnTo = req.nextUrl.searchParams.get("returnTo");
-    if (returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//")) {
+    if (returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//") && returnTo !== "/giris" && returnTo !== "/kayit") {
       return applySecurityHeaders(NextResponse.redirect(new URL(returnTo, req.url)));
     }
     return applySecurityHeaders(NextResponse.redirect(new URL("/", req.url)));
   }
 
-  // 4. If unauthenticated user tries to access a protected route -> redirect to /giris
-  if (!isAuthenticated && !isPublicPath) {
+  // 4. If unauthenticated user tries to access a strictly protected route -> redirect to /giris
+  const requiresAuth = STRICTLY_PROTECTED_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + "/")
+  );
+
+  if (!isAuthenticated && requiresAuth) {
     const loginUrl = new URL("/giris", req.url);
     // Safe returnTo parameter (never external URL)
     const fullPath = pathname + (search || "");
