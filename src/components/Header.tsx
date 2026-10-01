@@ -62,13 +62,12 @@ export default function Header() {
             <StreakBadge />
             <button
               onClick={() => setMenu(true)}
-              className="flex items-center gap-2 px-3.5 h-10 rounded-xl border border-cyan-400/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 hover:text-white transition-all shadow-sm group active:scale-95"
-              aria-label="Tüm Bölümler ve Seçenekler Menüsünü Aç"
-              title="Tüm Bölümler & Seçenekler (Gramer, Taktikler, Sınavlar, Kelimeler)"
+              className="flex items-center gap-2 px-3 h-10 rounded-xl border border-white/15 bg-white/[0.05] hover:bg-white/10 active:scale-95 transition-all text-white/90"
+              aria-label="Menüyü aç (Tüm Bölümler ve Seçenekler)"
+              title="Tüm Bölümler ve Seçenekler"
             >
-              <span className="text-lg leading-none group-hover:scale-110 transition-transform">🧭</span>
-              <span className="hidden sm:inline text-xs font-black tracking-wide">Bölümler & Seçenekler</span>
-              <span className="sm:hidden text-xs font-black">Bölümler</span>
+              <span className="text-xl leading-none font-bold">☰</span>
+              <span className="hidden sm:inline text-xs font-bold text-white/80">Menü</span>
             </button>
           </div>
         </div>

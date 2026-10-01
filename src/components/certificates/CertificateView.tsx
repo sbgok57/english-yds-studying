@@ -143,22 +143,20 @@ export function CertificateView({ cert, onClose, showPrintButton = true }: Certi
         </div>
       )}
 
-      {/* Responsive viewport scroll wrapper for smaller screens */}
-      <div className="w-full overflow-x-auto pb-4 no-scrollbar rounded-3xl">
+      {/* Responsive viewport wrapper: Fits on all screen widths perfectly */}
+      <div className="w-full flex justify-center pb-4 rounded-3xl overflow-hidden">
         {/* ═══════════════════════════════════════════════════════════════════
-            CERTIFICATE DOCUMENT — A4 Landscape (1123×794 px @ 96dpi)
-            All measurements are proportional to real A4 landscape dimensions.
-            Font faces are system-safe: Georgia (serif) + Arial/Helvetica (sans).
+            CERTIFICATE DOCUMENT — A4 Landscape (Aspect 1123 / 794)
+            Fits screen width automatically while preserving PDF output sizing
             ═══════════════════════════════════════════════════════════════════ */}
         <div
           ref={certRef}
-          className="certificate-print-area"
+          className="certificate-print-area w-full max-w-[1123px]"
           style={{
-            /* Fixed A4 landscape pixel dimensions for consistent PDF rendering */
-            width: "1123px",
-            minWidth: "1123px",
-            height: "794px",
-            minHeight: "794px",
+            /* Responsive aspect ratio fitting: shrinks seamlessly on phone/tablet */
+            width: "100%",
+            maxWidth: "1123px",
+            minHeight: "auto",
             margin: "0 auto",
             background: "linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #fefce8 100%)",
             fontFamily: "'Georgia', 'Times New Roman', serif",
@@ -230,10 +228,10 @@ export function CertificateView({ cert, onClose, showPrintButton = true }: Certi
           display: "grid",
           gridTemplateRows: "auto 1fr auto",
           height: "100%",
-          minHeight: "794px",
-          padding: "36px 52px 32px",
+          minHeight: "auto",
+          padding: "clamp(16px, 4vw, 36px) clamp(16px, 5vw, 52px) clamp(16px, 3.5vw, 32px)",
           boxSizing: "border-box",
-          gap: "0",
+          gap: "16px",
         }}>
 
           {/* ── ROW 1: Header ──────────────────────────────────────── */}
@@ -340,12 +338,7 @@ export function CertificateView({ cert, onClose, showPrintButton = true }: Certi
           </div>
 
           {/* ── ROW 2: Body ────────────────────────────────────────── */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 140px 1fr",
-            gap: "24px",
-            alignItems: "center",
-          }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_140px_1fr] gap-6 items-center">
 
             {/* Left column: Recipient & Description */}
             <div>
@@ -582,15 +575,7 @@ export function CertificateView({ cert, onClose, showPrintButton = true }: Certi
           </div>
 
           {/* ── ROW 3: Footer signatures ────────────────────────────── */}
-          <div style={{
-            marginTop: "18px",
-            paddingTop: "14px",
-            borderTop: `1px solid ${meta.color}40`,
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "24px",
-            alignItems: "end",
-          }}>
+          <div className="mt-4 pt-3 border-t grid grid-cols-1 sm:grid-cols-3 gap-4 items-end" style={{ borderColor: `${meta.color}40` }}>
             {/* Signature 1: Academic Director */}
             <div style={{ textAlign: "center" }}>
               <div style={{
