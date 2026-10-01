@@ -51,10 +51,10 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
   );
 
   return (
-    <div className="fixed inset-0 z-[80]">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+    <div className="fixed inset-0 z-[80] transition-opacity duration-300">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
 
-      <aside className="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-slate-950/95 backdrop-blur-2xl border-l border-white/10 overflow-y-auto">
+      <aside className="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-slate-950/95 backdrop-blur-2xl border-l border-white/10 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300">
         <div className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-5 py-3">
           <div className="flex items-center justify-between mb-2">
             <div>

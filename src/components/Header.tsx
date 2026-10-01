@@ -57,17 +57,20 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="ml-auto xl:ml-0 flex items-center gap-2">
+          <div className="ml-auto xl:ml-0 flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
             <StreakBadge />
+            
+            {/* Üç Çizgi (☰) & Üç Nokta (⋮) Yana Açılan Bölümler Menüsü Butonu */}
             <button
               onClick={() => setMenu(true)}
-              className="flex items-center gap-2 px-3 h-10 rounded-xl border border-white/15 bg-white/[0.05] hover:bg-white/10 active:scale-95 transition-all text-white/90"
-              aria-label="Menüyü aç (Tüm Bölümler ve Seçenekler)"
-              title="Tüm Bölümler ve Seçenekler"
+              className="flex items-center gap-1.5 px-3 h-10 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 active:scale-95 transition-all text-cyan-200 hover:text-white shadow-sm group"
+              aria-label="Menüyü ve Bölümleri Aç"
+              title="Tüm Bölümler, Taktikler ve Seçenekler (Yana Açılan Sekme)"
             >
-              <span className="text-xl leading-none font-bold">☰</span>
-              <span className="hidden sm:inline text-xs font-bold text-white/80">Menü</span>
+              <span className="text-lg leading-none font-black tracking-tighter">⋮</span>
+              <span className="text-base leading-none font-bold">☰</span>
+              <span className="text-xs font-bold text-white/90 ml-0.5">Menü</span>
             </button>
           </div>
         </div>
