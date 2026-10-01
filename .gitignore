@@ -41,3 +41,7 @@ __pycache__/
 supabase/.temp/
 supabase/.branches/
 .env*
+
+# Temporary scripts & local DB
+scripts/*.py
+prisma/dev.db
