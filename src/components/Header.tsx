@@ -44,12 +44,13 @@ export default function Header() {
             <SearchBox />
           </div>
 
-          <nav className="hidden xl:flex items-center gap-0.5 ml-auto">
-            {QUICK.map((n) => (
+          {/* Masaüstü Hızlı Menü (Büyük ekranlarda aşırı kalabalık olmaması için en popülerler) */}
+          <nav className="hidden 2xl:flex items-center gap-0.5 ml-auto">
+            {QUICK.slice(0, 6).map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
-                className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-[11px] font-bold transition-all text-white/70 hover:text-white hover:bg-white/10"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition-all text-white/70 hover:text-white hover:bg-white/10 shrink-0"
               >
                 <span>{n.emoji}</span>
                 {n.label}
@@ -57,20 +58,23 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="ml-auto xl:ml-0 flex items-center gap-1.5 sm:gap-2">
+          <div className="ml-auto flex items-center gap-1.5 sm:gap-2 shrink-0">
             <ThemeToggle />
             <StreakBadge />
             
-            {/* Üç Çizgi (☰) & Üç Nokta (⋮) Yana Açılan Bölümler Menüsü Butonu */}
+            {/* HER EKRANDA VE TAM EKRANDA KESİNTİSİZ GÖRÜNEN 3 NOKTA (⋮) YANA AÇILAN MENÜ BUTONU */}
             <button
+              id="global-menu-trigger"
               onClick={() => setMenu(true)}
-              className="flex items-center gap-1.5 px-3 h-10 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 active:scale-95 transition-all text-cyan-200 hover:text-white shadow-sm group"
-              aria-label="Menüyü ve Bölümleri Aç"
-              title="Tüm Bölümler, Taktikler ve Seçenekler (Yana Açılan Sekme)"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 h-10 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500/15 to-purple-500/15 hover:from-cyan-500/25 hover:to-purple-500/25 active:scale-95 transition-all text-cyan-200 hover:text-white shadow-sm shadow-cyan-500/10 group cursor-pointer"
+              aria-label="Tüm Bölümleri ve Menüyü Aç"
+              title="Tüm Bölümler, Taktikler, Sınavlar ve Seçenekler (Yana Açılır Panel)"
             >
-              <span className="text-lg leading-none font-black tracking-tighter">⋮</span>
-              <span className="text-base leading-none font-bold">☰</span>
-              <span className="text-xs font-bold text-white/90 ml-0.5">Menü</span>
+              {/* 3 Nokta İkonu - Dikey Üç Nokta */}
+              <span className="text-xl leading-none font-black text-cyan-300 group-hover:scale-110 transition-transform tracking-tight">⋮</span>
+              {/* 3 Çizgi Hamburger İkonu */}
+              <span className="text-base leading-none text-white/80 group-hover:text-white">☰</span>
+              <span className="text-xs font-black tracking-wide text-white ml-0.5 hidden sm:inline">Menü</span>
             </button>
           </div>
         </div>
