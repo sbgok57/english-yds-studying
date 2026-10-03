@@ -42,35 +42,47 @@ export async function POST(req: NextRequest) {
 
     const { words, source, type } = parsed.data;
 
-    const data = words.map((w) => ({
-      english: w.english.trim(),
-      turkish: w.turkish.trim(),
-      definitionEn: w.definitionEn || "",
-      examples: JSON.stringify([
-        `The student learned how to use '${w.english.trim()}' in academic context.`,
-      ]),
-      synonyms: JSON.stringify([]),
-      level: w.level || "YDS",
-      type: w.type || type,
-      source: w.source || source,
-      approved: true,
-    }));
+    const { enrichWordWithAI } = await import("@/lib/word-enricher");
 
     let addedCount = 0;
-    for (const w of data) {
+    for (const w of words) {
+      const english = w.english.trim();
+      const turkish = w.turkish.trim();
+
+      // Claude AI / Corpus zenginleştirme motoru
+      const enriched = await enrichWordWithAI(english, turkish);
+
+      // Zenginleştirilmiş örnek cümleler
+      const examplesFormatted = enriched.examples.map((ex) =>
+        ex.sentenceTr ? `${ex.sentenceEn} (${ex.sentenceTr})` : ex.sentenceEn
+      );
+
       await prisma.word.upsert({
         where: {
           english_turkish: {
-            english: w.english,
-            turkish: w.turkish,
+            english,
+            turkish,
           },
         },
         update: {
-          definitionEn: w.definitionEn,
-          type: w.type,
-          source: w.source,
+          definitionEn: enriched.definitionEn || w.definitionEn || "",
+          type: enriched.partOfSpeechTr || w.type || type,
+          level: enriched.cefrLevel || w.level || "B2",
+          examples: JSON.stringify(examplesFormatted),
+          synonyms: JSON.stringify(enriched.synonyms || []),
+          source: w.source || source,
         },
-        create: w,
+        create: {
+          english,
+          turkish,
+          definitionEn: enriched.definitionEn || w.definitionEn || "",
+          examples: JSON.stringify(examplesFormatted),
+          synonyms: JSON.stringify(enriched.synonyms || []),
+          level: enriched.cefrLevel || w.level || "B2",
+          type: enriched.partOfSpeechTr || w.type || type,
+          source: w.source || source,
+          approved: true,
+        },
       });
       addedCount++;
     }
