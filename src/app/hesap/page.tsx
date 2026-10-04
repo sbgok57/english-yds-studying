@@ -15,6 +15,7 @@ import {
   LEVEL_TEST_RESULT_STORAGE_KEY,
 } from "@/lib/data-level-test";
 import PushManager from "@/components/PushManager";
+import ThemeStudio from "@/components/theme/ThemeStudio";
 
 function hashStr(s: string): number {
   let h = 0;
@@ -134,10 +135,10 @@ export default function HesapPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <header className="text-center mb-8">
         <h1 className="text-4xl font-black mb-2">
-          🔑 <span className="gradient-text">Hesabım</span>
+          🔑 <span className="gradient-text">Hesabım & Hesap Ayarları</span>
         </h1>
-        <p className="text-white/60 text-sm">
-          Kanka, e-posta ve şifreyle kişisel hesabını yönet, rozetlerini ve çalışma durumunu takip et!
+        <p className="text-white/60 text-sm max-w-xl mx-auto">
+          Kişisel hesabını, çalışma durumunu, 1.000+ canlı renk temasını ve bildirim tercihlerini yönet!
         </p>
         {!storageOk && (
           <p className="text-xs text-amber-300 mt-2">
@@ -236,6 +237,13 @@ export default function HesapPage() {
               >
                 👤 Avatar Seç
               </Link>
+              <a
+                href="#hesap-temalari"
+                className="px-4 py-2 rounded-full border border-pink-400/40 bg-pink-400/10 text-pink-300 font-bold text-xs hover:bg-pink-400/20 transition-all shadow-sm flex items-center gap-1.5"
+              >
+                <span>🎨</span>
+                <span>Temalar (1.000+)</span>
+              </a>
               <Link
                 href="/vocabulary/inventory"
                 className="px-4 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 font-bold text-xs hover:bg-cyan-400/20 transition-all"
@@ -421,13 +429,31 @@ export default function HesapPage() {
             )}
           </div>
 
+          {/* 🎨 Hesap Temaları & Renk Ayarları */}
+          <div id="hesap-temalari" className="max-w-xl mx-auto space-y-3">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🎨</span>
+                <div>
+                  <h3 className="text-base font-black text-white">Hesap Temaları & Renk Ayarları</h3>
+                  <p className="text-[11px] text-white/50">Hesabına özel 1.000+ canlı renk paleti ve SVG arka plan desenleri</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+                1000+ Tema
+              </span>
+            </div>
+            <ThemeStudio />
+          </div>
+
           {/* Push Bildirim ve Hatırlatıcı Ayarları */}
           <div className="max-w-xl mx-auto">
             <PushManager />
           </div>
         </div>
       ) : (
-        <div className="max-w-md mx-auto card-vibrant p-8">
+        <div className="space-y-8">
+          <div className="max-w-md mx-auto card-vibrant p-8">
           {/* Sekmeler */}
           <div className="flex gap-2 mb-6">
             <button
@@ -625,6 +651,24 @@ export default function HesapPage() {
               </Tip>
             </div>
           )}
+        </div>
+
+          {/* Hesap Temaları & Renk Ayarları (1.000+ Algoritmik Tema) */}
+          <div className="max-w-xl mx-auto space-y-3">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🎨</span>
+                <div>
+                  <h3 className="text-base font-black text-white">Hesap Temaları & Renk Ayarları</h3>
+                  <p className="text-[11px] text-white/50">Dilediğin 1.000+ canlı temayı seç, tüm sitede anında canlı uygulansın</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+                1000+ Tema
+              </span>
+            </div>
+            <ThemeStudio />
+          </div>
         </div>
       )}
     </div>
