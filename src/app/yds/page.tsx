@@ -111,6 +111,13 @@ export default function YdsHubPage() {
           >
             <span>🃏 3D YDS Kelime Kartları</span>
           </Link>
+
+          <Link
+            href="/vocabulary/inventory?exam=YDS"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 font-bold text-xs sm:text-sm transition-all"
+          >
+            <span>📖 YDS Kelime Envanteri</span>
+          </Link>
         </div>
       </div>
 

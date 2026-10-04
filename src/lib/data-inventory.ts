@@ -29,8 +29,63 @@ export interface VocabularyInventoryItem {
   academic?: boolean;
   phrasalVerb?: boolean;
   collocations?: string[];
-  memoryCode?: string;
+  targetExams?: ("YDS" | "YDT" | "YÖKDİL")[];
+  examField?: "Sağlık" | "Fen" | "Sosyal" | "Genel";
   notes?: string;
+  memoryCode?: string;
+  synonyms?: string[];
+  antonyms?: string[];
+}
+
+export type TargetExam = "ALL" | "YDS" | "YDT" | "YÖKDİL";
+
+export function getWordExams(item: VocabularyInventoryItem): ("YDS" | "YDT" | "YÖKDİL")[] {
+  if (item.targetExams && item.targetExams.length > 0) {
+    return item.targetExams;
+  }
+  const exams: ("YDS" | "YDT" | "YÖKDİL")[] = [];
+
+  // YDT: A1, A2, B1, B2 and all Phrasal Verbs (ÖSYM Lise / YKS-Dil müfredatı)
+  if (
+    item.level === "A1" ||
+    item.level === "A2" ||
+    item.level === "B1" ||
+    item.phrasalVerb ||
+    (item.level === "B2" && item.frequency && item.frequency > 50)
+  ) {
+    exams.push("YDT");
+  }
+
+  // YDS: B2, C1, C2, akademik ve yüksek öncelikli makale kelimeleri
+  if (
+    item.level === "B2" ||
+    item.level === "C1" ||
+    item.level === "C2" ||
+    item.academic ||
+    item.ydsPriority === "high" ||
+    item.ydsPriority === "critical" ||
+    item.ydsPriority === "must_know"
+  ) {
+    exams.push("YDS");
+  }
+
+  // YÖKDİL: Sağlık, Fen, Sosyal ve akademik terminoloji (B1-C1)
+  if (
+    item.academic ||
+    item.level === "B1" ||
+    item.level === "B2" ||
+    item.level === "C1" ||
+    item.sourceTags?.includes("reading") ||
+    item.sourceTags?.includes("exams")
+  ) {
+    exams.push("YÖKDİL");
+  }
+
+  if (exams.length === 0) {
+    exams.push("YDS", "YDT", "YÖKDİL");
+  }
+
+  return exams;
 }
 
 export interface UserInventoryCustomization {
@@ -13040,6 +13095,9 @@ export const INVENTORY_METRICS = {
   C1: BASE_INVENTORY_ITEMS.filter((i) => i.level === "C1").length,
   C2: BASE_INVENTORY_ITEMS.filter((i) => i.level === "C2").length,
   UNCLASSIFIED: BASE_INVENTORY_ITEMS.filter((i) => i.level === "UNCLASSIFIED").length,
+  YDS: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDS")).length,
+  YDT: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDT")).length,
+  YÖKDİL: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YÖKDİL")).length,
 };
 
 export function loadInventoryUserData(): InventoryUserData {

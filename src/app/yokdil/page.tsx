@@ -149,6 +149,13 @@ export default function YokdilHubPage() {
           >
             <span>🃏 3D YÖKDİL Alan Kelimeleri</span>
           </Link>
+
+          <Link
+            href="/vocabulary/inventory?exam=YÖKDİL"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/40 text-purple-200 font-bold text-xs sm:text-sm transition-all"
+          >
+            <span>📖 YÖKDİL Kelime Envanteri</span>
+          </Link>
         </div>
       </div>
 

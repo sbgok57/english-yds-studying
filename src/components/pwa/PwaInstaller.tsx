@@ -134,10 +134,10 @@ export default function PwaInstaller() {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs sm:text-sm font-bold text-white truncate">
-                YDS Master Uygulamasını Yükle
+                DİL MASTER • iOS & Android&apos;e İndir
               </h4>
               <p className="text-[11px] text-white/60 truncate">
-                Hızlı açılış, tam ekran ve offline çalışma
+                iPhone, iPad & Android için offline ve tam ekran
               </p>
             </div>
           </div>
@@ -145,10 +145,10 @@ export default function PwaInstaller() {
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={handleInstallClick}
-              className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-slate-950 text-xs font-black shadow-md hover:brightness-110 active:scale-95 transition-all flex items-center gap-1"
+              className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-slate-950 text-xs font-black shadow-md hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Yükle</span>
+              <span>iOS & Android&apos;e İndir</span>
             </button>
             <button
               onClick={handleDismiss}
@@ -180,8 +180,8 @@ export default function PwaInstaller() {
                   🧠
                 </div>
                 <div>
-                  <h3 id="pwa-install-guide-title" className="font-black text-base">Telefona Yükle</h3>
-                  <p className="text-xs text-white/50">YDS Master Mobil Kurulumu</p>
+                  <h3 id="pwa-install-guide-title" className="font-black text-base">iOS ve Android&apos;e İndir</h3>
+                  <p className="text-xs text-white/50">DİL MASTER Mobil Kurulumu</p>
                 </div>
               </div>
               <button
@@ -191,6 +191,17 @@ export default function PwaInstaller() {
               >
                 <X className="w-4 h-4" />
               </button>
+            </div>
+
+            {/* Apple iOS Özel Kolay Kılavuz Kartı */}
+            <div className="p-3 rounded-2xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-slate-800 border border-cyan-400/30 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🍏</span>
+                <span className="text-xs font-bold text-white">Apple iOS (iPhone / iPad) Kurulumu</span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-bold border border-cyan-400/30">
+                Safari
+              </span>
             </div>
 
             <div className="space-y-3.5 text-xs">

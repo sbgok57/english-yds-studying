@@ -193,13 +193,16 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                   window.dispatchEvent(new CustomEvent("yds:open-install-modal"));
                 }
               }}
-              className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 transition-all text-left flex flex-col justify-between group"
+              className="p-3 rounded-2xl bg-gradient-to-br from-purple-500/15 to-pink-500/10 border border-purple-500/30 hover:border-purple-400 transition-all text-left flex flex-col justify-between group shadow-sm"
+              title="iPhone, iPad ve Android cihazına tek tıkla yükle"
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xl">📲</span>
-                <span className="text-[10px] font-black text-purple-300 font-mono">PWA</span>
+                <span className="text-[10px] font-black text-purple-300 font-mono">iOS & Android</span>
               </div>
-              <span className="text-xs font-black text-white group-hover:text-purple-300">Telefona Yükle</span>
+              <span className="text-xs font-black text-white group-hover:text-purple-300">
+                iOS ve Android&apos;e İndir
+              </span>
             </button>
           </div>
 
@@ -263,6 +266,69 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 </div>
                 <ChevronRight className="w-4 h-4 text-purple-300 group-hover:translate-x-1 transition-transform" />
               </Link>
+            </div>
+          </div>
+
+          {/* Sınav Bazlı Kelime Envanteri & Yayın Havuzu */}
+          <div>
+            <GroupTitle title="Kelime Envanteri (Sınav Bazlı)" emoji="📚" />
+            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-950/60 via-slate-900 to-cyan-950/40 border border-indigo-400/30 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📖</span>
+                  <div>
+                    <span className="text-xs font-black text-white block">
+                      Akademik Kelime Envanteri
+                    </span>
+                    <span className="text-[10px] text-white/50 block">
+                      Sınavlara göre ayrıştırılmış yayın havuzu
+                    </span>
+                  </div>
+                </div>
+                <Link
+                  href="/vocabulary/inventory"
+                  onClick={handleSafeClose}
+                  className="text-[11px] font-bold text-cyan-300 hover:text-white flex items-center gap-0.5"
+                >
+                  Tümü &rarr;
+                </Link>
+              </div>
+
+              {/* Sınav Seçim Hapları */}
+              <div className="grid grid-cols-3 gap-1.5 pt-1">
+                <Link
+                  href="/vocabulary/inventory?exam=YDS"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-cyan-300 group-hover:text-white block">
+                    🎯 YDS
+                  </span>
+                  <span className="text-[9px] text-white/50 block">Akademik</span>
+                </Link>
+
+                <Link
+                  href="/vocabulary/inventory?exam=YDT"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
+                    🎓 YDT
+                  </span>
+                  <span className="text-[9px] text-white/50 block">YKS-Dil</span>
+                </Link>
+
+                <Link
+                  href="/vocabulary/inventory?exam=YÖKDİL"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
+                    🔬 YÖKDİL
+                  </span>
+                  <span className="text-[9px] text-white/50 block">3 Alan</span>
+                </Link>
+              </div>
             </div>
           </div>
 

@@ -109,6 +109,13 @@ export default function YdtHubPage() {
           >
             <span>🃏 3D YDT Kelime Kartları</span>
           </Link>
+
+          <Link
+            href="/vocabulary/inventory?exam=YDT"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 font-bold text-xs sm:text-sm transition-all"
+          >
+            <span>📖 YDT Kelime Envanteri</span>
+          </Link>
         </div>
       </div>
 

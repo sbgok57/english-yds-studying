@@ -21,6 +21,7 @@ interface WordItem {
 
 const LEVELS = ["Hepsi", "A1", "A2", "B1", "B2", "C1", "YDS"];
 const TYPES = ["Hepsi", "genel", "isim", "fiil", "sıfat", "zarf", "phrasal verb"];
+const EXAMS = ["Hepsi", "YDS", "YDT", "YÖKDİL"];
 
 const FALLBACK_WORDS: WordItem[] = [
   { id: "fb-1", english: "mitigate", turkish: "hafifletmek, azaltmak, yatıştırmak", definitionEn: "To make something less severe or harmful", examples: ["Governments must take immediate action to mitigate climate risks."], synonyms: ["alleviate", "lessen", "reduce"], level: "B2", type: "fiil" },
@@ -49,6 +50,7 @@ const EMOJI_BY_TYPE: Record<string, string> = {
 export default function VocabularyPage() {
   const [words, setWords] = useState<WordItem[]>([]);
   const [search, setSearch] = useState("");
+  const [selectedExam, setSelectedExam] = useState("Hepsi");
   const [selectedLevel, setSelectedLevel] = useState("Hepsi");
   const [selectedType, setSelectedType] = useState("Hepsi");
   const [loading, setLoading] = useState(true);
@@ -98,7 +100,23 @@ export default function VocabularyPage() {
       selectedType === "Hepsi" ||
       w.type.toLowerCase().includes(selectedType.toLowerCase());
 
-    return matchesSearch && matchesLevel && matchesType;
+    const matchesExam = (() => {
+      if (selectedExam === "Hepsi") return true;
+      const lvl = w.level.toUpperCase();
+      const tp = w.type.toLowerCase();
+      if (selectedExam === "YDT") {
+        return lvl === "A1" || lvl === "A2" || lvl === "B1" || lvl === "B2" || tp.includes("phrasal");
+      }
+      if (selectedExam === "YDS") {
+        return lvl === "B2" || lvl === "C1" || lvl === "C2" || lvl.includes("YDS");
+      }
+      if (selectedExam === "YÖKDİL") {
+        return lvl === "B1" || lvl === "B2" || lvl === "C1";
+      }
+      return true;
+    })();
+
+    return matchesSearch && matchesLevel && matchesType && matchesExam;
   });
 
   return (
@@ -199,6 +217,35 @@ export default function VocabularyPage() {
             placeholder="Kelime veya Türkçe anlam ara (örn. ubiquitous, hafifletmek, carry out)..."
             className="w-full bg-black/30 border border-white/15 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-white focus:outline-none focus:border-yellow-300 transition-colors placeholder:text-white/40"
           />
+        </div>
+
+        {/* Sınav Seçimi Barı: Hepsi | 🎯 YDS | 🎓 YDT | 🔬 YÖKDİL */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-white/10">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+            <span className="text-white/60 font-bold text-xs shrink-0">🎯 Sınav:</span>
+            {EXAMS.map((ex) => (
+              <button
+                key={ex}
+                onClick={() => setSelectedExam(ex)}
+                className={cn(
+                  "px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all border",
+                  selectedExam === ex
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-cyan-400 shadow-md shadow-cyan-500/25 font-black scale-105"
+                    : "bg-white/5 text-white/70 border-white/10 hover:bg-white/10 hover:text-white"
+                )}
+              >
+                {ex === "Hepsi" ? "🌐 Tüm Sınavlar" : ex === "YDS" ? "🎯 YDS Master" : ex === "YDT" ? "🎓 YDT (YKS-Dil)" : "🔬 YÖKDİL"}
+              </button>
+            ))}
+          </div>
+
+          <Link
+            href={`/vocabulary/inventory${selectedExam !== "Hepsi" ? `?exam=${selectedExam}` : ""}`}
+            className="px-3.5 py-1.5 rounded-xl bg-purple-500/20 border border-purple-400/40 hover:border-purple-300 text-purple-200 text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 self-start sm:self-auto"
+          >
+            <span>📊</span>
+            <span>Ayrıntılı Kelime Envanteri (Tablo & A-Z) &rarr;</span>
+          </Link>
         </div>
 
         {/* Filtre Sekmeleri */}

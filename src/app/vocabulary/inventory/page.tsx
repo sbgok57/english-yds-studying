@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   INVENTORY_ITEMS,
   INVENTORY_METRICS,
   VocabularyInventoryItem,
   CefrLevel,
+  TargetExam,
+  getWordExams,
   loadInventoryUserData,
   saveInventoryUserData,
   InventoryUserData,
@@ -42,10 +45,23 @@ const CEFR_TABS: { label: string; value: CefrLevel | "ALL" }[] = [
   { label: "Diğer", value: "UNCLASSIFIED" },
 ];
 
-export default function VocabularyInventoryPage() {
+function VocabularyInventoryContent() {
   const { addXp } = useUsage();
+  const searchParams = useSearchParams();
+
+  // Read initial exam from URL ?exam=YDS, YDT, YOKDIL
+  const rawExamParam = searchParams.get("exam")?.toUpperCase();
+  const initialExam: TargetExam =
+    rawExamParam === "YDS"
+      ? "YDS"
+      : rawExamParam === "YDT"
+      ? "YDT"
+      : rawExamParam === "YOKDIL" || rawExamParam === "YÖKDİL"
+      ? "YÖKDİL"
+      : "ALL";
 
   // State
+  const [examFilter, setExamFilter] = useState<TargetExam>(initialExam);
   const [activeTab, setActiveTab] = useState<CefrLevel | "ALL">("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [posFilter, setPosFilter] = useState<string>("ALL");
@@ -156,7 +172,13 @@ export default function VocabularyInventoryPage() {
     const q = searchQuery.toLowerCase().trim();
 
     return (INVENTORY_ITEMS || []).filter((item) => {
-      // 1. Tab filter
+      // 0. Sınav filtresi (YDS - YDT - YÖKDİL)
+      if (examFilter !== "ALL") {
+        const itemExams = getWordExams(item);
+        if (!itemExams.includes(examFilter)) return false;
+      }
+
+      // 1. Tab filter (CEFR)
       if (activeTab !== "ALL" && item.level !== activeTab) return false;
 
       // 2. POS filter
@@ -182,7 +204,7 @@ export default function VocabularyInventoryPage() {
 
       return true;
     });
-  }, [activeTab, posFilter, statusFilter, searchQuery, userData]);
+  }, [activeTab, examFilter, posFilter, statusFilter, searchQuery, userData]);
 
   // Pagination calculations
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / pageSize));
@@ -194,7 +216,7 @@ export default function VocabularyInventoryPage() {
   // Reset page to 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [activeTab, posFilter, statusFilter, searchQuery, pageSize]);
+  }, [activeTab, examFilter, posFilter, statusFilter, searchQuery, pageSize]);
 
   // Audio pronunciation with natural 12-voice multi-accent TTS
   const speakTerm = (word: string, e?: React.MouseEvent) => {
@@ -312,6 +334,49 @@ export default function VocabularyInventoryPage() {
 
       {/* Controls & Filters Bar */}
       <div className="p-6 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-xl space-y-4">
+        {/* 🎯 SINAV BAZLI ÖZEL KELİME AYRIMI (YDS - YDT - YÖKDİL) */}
+        <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2.5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+            <span className="text-xs font-black uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
+              <span>🎯</span> Sınav Külliyatına Göre Kelimeler:
+            </span>
+            <span className="text-[11px] text-white/50">
+              {examFilter === "ALL" && "Tüm sınavların konsolide akademik havuzu"}
+              {examFilter === "YDS" && "YDS: Akademik Çekirdek, B2-C2 & Makale Kelimeleri"}
+              {examFilter === "YDT" && "YDT: Lise Müfredatı, B1-B2, Phrasal Verbs & YKS-Dil"}
+              {examFilter === "YÖKDİL" && "YÖKDİL: Sağlık, Fen & Sosyal Bilimler Alan Terimleri"}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {[
+              { id: "ALL", label: "Tüm Sınavlar", count: INVENTORY_METRICS.total, emoji: "🌐", color: "from-slate-700 to-slate-900 border-white/30" },
+              { id: "YDS", label: "🎯 YDS Master", count: INVENTORY_METRICS.YDS, emoji: "🎯", color: "from-cyan-950/80 to-blue-950/80 border-cyan-400" },
+              { id: "YDT", label: "🎓 YDT (YKS-Dil)", count: INVENTORY_METRICS.YDT, emoji: "🎓", color: "from-amber-950/80 to-orange-950/80 border-amber-400" },
+              { id: "YÖKDİL", label: "🔬 YÖKDİL (3 Alan)", count: INVENTORY_METRICS.YÖKDİL, emoji: "🔬", color: "from-pink-950/80 to-purple-950/80 border-pink-400" },
+            ].map((btn) => {
+              const isSelected = examFilter === btn.id;
+              return (
+                <button
+                  key={btn.id}
+                  onClick={() => setExamFilter(btn.id as TargetExam)}
+                  className={`p-3 rounded-xl border text-left transition-all flex items-center justify-between ${
+                    isSelected
+                      ? `bg-gradient-to-r ${btn.color} shadow-lg text-white font-black scale-[1.02]`
+                      : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  <div>
+                    <span className="text-xs font-bold block">{btn.label}</span>
+                    <span className="text-[10px] text-white/50 block font-mono">{btn.count} Kelime</span>
+                  </div>
+                  <span className="text-lg">{btn.emoji}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* CEFR Level Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin">
           {CEFR_TABS.map((tab) => (
@@ -471,6 +536,7 @@ export default function VocabularyInventoryPage() {
                 <th className="py-3.5 px-4 w-12 text-center">Durum</th>
                 <th className="py-3.5 px-4">Kelime (Word)</th>
                 <th className="py-3.5 px-4">Seviye & Tür</th>
+                <th className="py-3.5 px-4 hidden lg:table-cell">Sınav Hedefi</th>
                 <th className="py-3.5 px-4">Türkçe Anlamı</th>
                 <th className="py-3.5 px-4 hidden md:table-cell">Açıklama / Hafıza Kodu</th>
                 <th className="py-3.5 px-4 text-right">İşlemler</th>
@@ -480,6 +546,7 @@ export default function VocabularyInventoryPage() {
               {paginatedItems.map((item) => {
                 const isLearned = userData.learnedIds.includes(item.id);
                 const hasNote = !!userData.notes[item.id];
+                const itemExams = getWordExams(item);
 
                 return (
                   <tr
@@ -542,6 +609,25 @@ export default function VocabularyInventoryPage() {
                             {item.partOfSpeech.replace("_", " ")}
                           </span>
                         )}
+                      </div>
+                    </td>
+
+                    <td className="py-3 px-4 hidden lg:table-cell">
+                      <div className="flex flex-wrap gap-1">
+                        {itemExams.map((exam) => (
+                          <span
+                            key={exam}
+                            className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase font-mono border ${
+                              exam === "YDS"
+                                ? "bg-cyan-500/15 border-cyan-400/40 text-cyan-300"
+                                : exam === "YDT"
+                                ? "bg-amber-500/15 border-amber-400/40 text-amber-300"
+                                : "bg-pink-500/15 border-pink-400/40 text-pink-300"
+                            }`}
+                          >
+                            {exam}
+                          </span>
+                        ))}
                       </div>
                     </td>
 
@@ -632,6 +718,22 @@ export default function VocabularyInventoryPage() {
                       {selectedWord.partOfSpeech.replace("_", " ")}
                     </span>
                   )}
+                  <div className="flex items-center gap-1.5 mt-1.5">
+                    {getWordExams(selectedWord).map((exam) => (
+                      <span
+                        key={exam}
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase font-mono border ${
+                          exam === "YDS"
+                            ? "bg-cyan-500/20 border-cyan-400 text-cyan-300"
+                            : exam === "YDT"
+                            ? "bg-amber-500/20 border-amber-400 text-amber-300"
+                            : "bg-pink-500/20 border-pink-400 text-pink-300"
+                        }`}
+                      >
+                        {exam} Hedefi
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -770,5 +872,20 @@ export default function VocabularyInventoryPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function VocabularyInventoryPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3 text-white/50">
+          <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm font-medium">Kelime Envanteri Yükleniyor...</p>
+        </div>
+      }
+    >
+      <VocabularyInventoryContent />
+    </Suspense>
   );
 }

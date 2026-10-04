@@ -243,7 +243,7 @@ export default function FlashcardsPage() {
     setTablePage(1);
   }, []);
 
-  // URL parametresinden kelime arama (PERF & UX: /vocabulary/flashcards?word=abate)
+  // URL parametresinden kelime ve sınav filtreleme (PERF & UX: /vocabulary/flashcards?exam=YDT&word=abate)
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
@@ -251,6 +251,15 @@ export default function FlashcardsPage() {
     if (targetWord) {
       setSearchQuery(targetWord);
       setViewMode("card");
+    }
+    const targetExam = params.get("exam");
+    if (targetExam) {
+      const upper = targetExam.toUpperCase();
+      if (upper === "YDS" || upper === "YDT") {
+        setSelectedExam(upper as "YDS" | "YDT");
+      } else if (upper === "YÖKDİL" || upper === "YOKDIL") {
+        setSelectedExam("YÖKDİL");
+      }
     }
   }, []);
 
