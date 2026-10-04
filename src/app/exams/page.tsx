@@ -74,57 +74,105 @@ export default function ExamsPage() {
         </div>
       </div>
 
-      {/* Sınavlara Özel Beceriler (Reading, Listening, Speaking, Writing) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {/* 3 Büyük Sınav Özel Akademisi Butonları */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <Link
+          href="/yds"
+          className="card-vibrant p-4 rounded-2xl flex items-center justify-between border-cyan-400/40 hover:border-cyan-300 transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🎯</span>
+            <div>
+              <h3 className="font-black text-sm text-white group-hover:text-cyan-300">YDS Akademisi</h3>
+              <p className="text-[10px] text-white/50">180 dk • 80 Soru • 7 Beceri Modülü</p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-cyan-300 group-hover:translate-x-1 transition-transform">→</span>
+        </Link>
+
+        <Link
+          href="/ydt"
+          className="card-vibrant p-4 rounded-2xl flex items-center justify-between border-amber-400/40 hover:border-amber-300 transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🎓</span>
+            <div>
+              <h3 className="font-black text-sm text-white group-hover:text-amber-300">YDT (LYS-5) Akademisi</h3>
+              <p className="text-[10px] text-white/50">120 dk • 80 Soru • YKS-Dil Odaklı</p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-amber-300 group-hover:translate-x-1 transition-transform">→</span>
+        </Link>
+
+        <Link
+          href="/yokdil"
+          className="card-vibrant p-4 rounded-2xl flex items-center justify-between border-purple-400/40 hover:border-purple-300 transition-all group"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">🔬</span>
+            <div>
+              <h3 className="font-black text-sm text-white group-hover:text-purple-300">YÖKDİL Alan Akademisi</h3>
+              <p className="text-[10px] text-white/50">180 dk • Sağlık, Fen, Sosyal</p>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-purple-300 group-hover:translate-x-1 transition-transform">→</span>
+        </Link>
+      </div>
+
+      {/* Sınavlara Özel Beceriler (Reading, Listening, Speaking, Writing, Taktikler) */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <Link
           href="/reading"
-          className="card-vibrant p-4 rounded-2xl flex items-center gap-3 hover:border-cyan-400 transition-all group"
+          className="card-vibrant p-3.5 rounded-2xl flex items-center gap-2.5 hover:border-cyan-400 transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-            📖
-          </div>
+          <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">📖</span>
           <div>
-            <h4 className="font-bold text-xs sm:text-sm text-white">Reading Lab</h4>
-            <p className="text-[10px] text-slate-400">YDS/YDT/YÖKDİL Okuma</p>
+            <h4 className="font-bold text-xs text-white">Reading Lab</h4>
+            <p className="text-[10px] text-slate-400">Akademik Okuma</p>
+          </div>
+        </Link>
+
+        <Link
+          href="/listening"
+          className="card-vibrant p-3.5 rounded-2xl flex items-center gap-2.5 hover:border-blue-400 transition-all group"
+        >
+          <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">🎧</span>
+          <div>
+            <h4 className="font-bold text-xs text-white">Listening Lab</h4>
+            <p className="text-[10px] text-slate-400">14 Aksan & Ses</p>
+          </div>
+        </Link>
+
+        <Link
+          href="/writing"
+          className="card-vibrant p-3.5 rounded-2xl flex items-center gap-2.5 hover:border-indigo-400 transition-all group"
+        >
+          <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">✍️</span>
+          <div>
+            <h4 className="font-bold text-xs text-white">Writing Lab</h4>
+            <p className="text-[10px] text-slate-400">Cümle & Çeviri</p>
           </div>
         </Link>
 
         <Link
           href="/speaking"
-          className="card-vibrant p-4 rounded-2xl flex items-center gap-3 hover:border-pink-400 transition-all group"
+          className="card-vibrant p-3.5 rounded-2xl flex items-center gap-2.5 hover:border-pink-400 transition-all group"
         >
-          <div className="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-300 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-            🎙️
-          </div>
+          <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">🎙️</span>
           <div>
-            <h4 className="font-bold text-xs sm:text-sm text-white">Speaking Lab</h4>
-            <p className="text-[10px] text-slate-400">AI Telaffuz & Konuşma</p>
-          </div>
-        </Link>
-
-        <Link
-          href="/grammar/audio"
-          className="card-vibrant p-4 rounded-2xl flex items-center gap-3 hover:border-purple-400 transition-all group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-            🎧
-          </div>
-          <div>
-            <h4 className="font-bold text-xs sm:text-sm text-white">Sesli Dinleme</h4>
-            <p className="text-[10px] text-slate-400">12 Sınav Ses Modülü</p>
+            <h4 className="font-bold text-xs text-white">Speaking Lab</h4>
+            <p className="text-[10px] text-slate-400">AI Konuşma</p>
           </div>
         </Link>
 
         <Link
           href="/tactics"
-          className="card-vibrant p-4 rounded-2xl flex items-center gap-3 hover:border-amber-400 transition-all group"
+          className="card-vibrant p-3.5 rounded-2xl flex items-center gap-2.5 hover:border-amber-400 transition-all group col-span-2 sm:col-span-1"
         >
-          <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-            🎯
-          </div>
+          <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">🎯</span>
           <div>
-            <h4 className="font-bold text-xs sm:text-sm text-white">Soru Taktikleri</h4>
-            <p className="text-[10px] text-slate-400">ÖSYM Çözüm Şifreleri</p>
+            <h4 className="font-bold text-xs text-white">Soru Taktikleri</h4>
+            <p className="text-[10px] text-slate-400">ÖSYM Şifreleri</p>
           </div>
         </Link>
       </div>

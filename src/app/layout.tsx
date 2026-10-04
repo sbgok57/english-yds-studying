@@ -11,6 +11,7 @@ import CaptureBootstrap from "@/components/CaptureBootstrap";
 import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
+import FloatingSideBar from "@/components/FloatingSideBar";
 
 export const metadata: Metadata = {
   title: "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık ve Sınav Akademisi",
@@ -74,6 +75,7 @@ export default function RootLayout({
             <AmbientBackground />
             <Header />
             <main className="min-h-[calc(100vh-4rem)]">{children}</main>
+            <FloatingSideBar />
             <AiWidget />
             <RecoveryBanner />
             <ErrorToast />

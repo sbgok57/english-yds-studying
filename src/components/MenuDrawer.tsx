@@ -11,11 +11,32 @@ import {
   DENEME_COUNT,
 } from "@/lib/site-index";
 import SearchBox from "@/components/SearchBox";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useUsage } from "@/lib/store";
 import { calculateStudentProgress } from "@/lib/progress/calculator";
+import {
+  X,
+  Compass,
+  GraduationCap,
+  Microscope,
+  BookOpen,
+  Headphones,
+  PenTool,
+  Mic,
+  Clock,
+  Sparkles,
+  FileUp,
+  Shield,
+  Layers,
+  ChevronRight,
+} from "lucide-react";
 
-/** Üstteki ☰ (3 çizgi) — sitede yapılabilecek HER ŞEY burada. */
-export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+interface MenuDrawerProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
   const { usage } = useUsage();
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
   const grammarCount = Object.keys(usage.grammar || {}).length;
@@ -28,221 +49,385 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
     questionsSolved: usage.exams?.totalQuestions || 0,
     examsTaken: usage.exams?.taken || 0,
   });
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        document.body.style.overflow = "auto";
+        onClose();
+      }
     }
+
     if (open) {
       document.addEventListener("keydown", onKey);
       document.body.style.overflow = "hidden";
     }
+
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      // // SAFETY: Her zaman gövde kaydırmasını yeniden aktif et
+      document.body.style.overflow = "auto";
     };
   }, [open, onClose]);
 
+  const handleSafeClose = () => {
+    document.body.style.overflow = "auto";
+    onClose();
+  };
+
   if (!open) return null;
 
-  const Group = ({ title, emoji }: { title: string; emoji: string }) => (
-    <h3 className="text-[11px] font-black uppercase tracking-widest text-white/40 flex items-center gap-1.5 mt-6 mb-2 first:mt-0">
+  const GroupTitle = ({ title, emoji }: { title: string; emoji: string }) => (
+    <h3 className="text-[11px] font-black uppercase tracking-widest text-cyan-300/80 flex items-center gap-1.5 mt-6 mb-2.5 first:mt-0 border-b border-white/10 pb-1">
       <span>{emoji}</span> {title}
     </h3>
   );
 
   return (
-    <div className="fixed inset-0 z-[80] transition-opacity duration-300">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose} />
+    <div className="fixed inset-0 z-[100] transition-opacity duration-300">
+      {/* Karartma Katmanı */}
+      <div
+        className="absolute inset-0 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+        onClick={handleSafeClose}
+      />
 
-      <aside className="absolute right-0 top-0 h-full w-full sm:w-[420px] bg-slate-950/95 backdrop-blur-2xl border-l border-white/10 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300">
-        <div className="sticky top-0 z-10 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-5 py-3">
-          <div className="flex items-center justify-between mb-2">
-            <div>
-              <span className="font-black text-lg flex items-center gap-2">
-                <span>🧭</span> <span className="gradient-text">Bölümler & Seçenekler</span>
-              </span>
-              <p className="text-[10px] text-white/50 -mt-0.5">Tüm dersler, testler, taktikler ve çalışma araçları</p>
+      {/* Yan Çekmece (Sidebar) */}
+      <aside className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-950/98 backdrop-blur-3xl border-l border-white/15 overflow-y-auto shadow-2xl shadow-black animate-in slide-in-from-right duration-300 flex flex-col">
+        {/* Üst Sabit Çubuk: Başlık, Tema Değiştirici ve Kapatma Butonu */}
+        <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-2xl border-b border-white/15 px-5 py-3.5 space-y-3 shrink-0">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🧭</span>
+              <div>
+                <span className="font-black text-base text-white block leading-tight">
+                  DİL MASTER Navigasyon
+                </span>
+                <span className="text-[10px] text-cyan-300/80 font-mono">
+                  YDS · YDT · YÖKDİL Tüm Modüller
+                </span>
+              </div>
             </div>
-            <button
-              onClick={onClose}
-              className="w-9 h-9 rounded-xl border border-white/15 flex items-center justify-center text-lg hover:bg-white/10"
-              aria-label="Kapat"
-            >
-              ✕
-            </button>
+
+            {/* Yan Çekmece İçinde Canlı Karanlık/Aydınlık Mod ve Kapat Butonu */}
+            <div className="flex items-center gap-2">
+              <ThemeToggle compact className="!w-9 !h-9 !px-0 rounded-xl" />
+              <button
+                onClick={handleSafeClose}
+                className="w-9 h-9 rounded-xl border border-white/15 bg-white/5 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
+                aria-label="Menüyü Kapat"
+              >
+                <X className="w-5 h-5 text-white/80" />
+              </button>
+            </div>
           </div>
+
           <SearchBox />
-          <button
-            onClick={() => {
-              onClose();
-              if (typeof window !== "undefined") {
-                window.dispatchEvent(new CustomEvent("yds:open-install-modal"));
-              }
-            }}
-            className="w-full mt-3 p-2.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 border border-purple-500/40 hover:border-purple-400 text-left flex items-center justify-between group transition-all"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-pink-500 to-cyan-400 flex items-center justify-center text-sm shadow">
-                📲
-              </div>
-              <div>
-                <div className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
-                  Telefona Yükle (iOS & Android)
-                </div>
-                <div className="text-[10px] text-white/50">Ana ekrana ekle, tam ekran çalış</div>
-              </div>
-            </div>
-            <span className="text-xs text-white/40 group-hover:translate-x-0.5 transition-transform">➔</span>
-          </button>
-
-          {/* Kişisel İlerleme Yüzdesi Kartı */}
-          <Link
-            href="/ilerleme"
-            onClick={onClose}
-            className="w-full mt-2 p-2.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 hover:border-cyan-400 text-left flex items-center justify-between group transition-all"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-sm font-black shadow">
-                📈
-              </div>
-              <div>
-                <div className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
-                  Kişisel İlerlemem (%{progress.overallPercent})
-                </div>
-                <div className="text-[10px] text-white/50">{progress.milestoneTitle} · Detaylı analiz</div>
-              </div>
-            </div>
-            <span className="text-xs font-bold text-cyan-400 group-hover:translate-x-0.5 transition-transform">➔</span>
-          </Link>
-
-          {/* Gündemdeki İngilizce Haberler Kartı */}
-          <Link
-            href="/haberler"
-            onClick={onClose}
-            className="w-full mt-2 p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 hover:border-amber-400 text-left flex items-center justify-between group transition-all"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-sm font-black shadow">
-                📰
-              </div>
-              <div>
-                <div className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-                  Gündem Haberleri (2400+ Makale)
-                </div>
-                <div className="text-[10px] text-white/50">Sesli dinleme, çeviri & gazete küpürleri</div>
-              </div>
-            </div>
-            <span className="text-xs font-bold text-amber-400 group-hover:translate-x-0.5 transition-transform">➔</span>
-          </Link>
-
-          {/* Sistem Denetçisi & Sıfır Hata Onarıcı */}
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              if (typeof window !== "undefined") {
-                window.dispatchEvent(new CustomEvent("yds:open-debug"));
-              }
-            }}
-            className="w-full mt-2 p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-left flex items-center justify-between group transition-all"
-          >
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm font-black shadow">
-                🛡️
-              </div>
-              <div>
-                <div className="text-xs font-black text-white group-hover:text-emerald-300 transition-colors">
-                  Sistem Denetçisi & Sıfır Hata (0 Hata)
-                </div>
-                <div className="text-[10px] text-white/50">Canlı tarama, otomatik onarım ve temizlik</div>
-              </div>
-            </div>
-            <span className="text-xs font-bold text-emerald-400 group-hover:translate-x-0.5 transition-transform">➔</span>
-          </button>
         </div>
 
-        <div className="px-5 pb-10">
-          <Group title="Ana Bölümler & Modüller" emoji="🏠" />
-          <div className="grid grid-cols-2 gap-1.5">
-            {PAGES.map((p) => (
-              <Link
-                key={p.href}
-                href={p.href}
-                onClick={onClose}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 hover:text-white transition-colors"
-              >
-                <span>{p.emoji}</span> {p.label}
-              </Link>
-            ))}
+        {/* Kaydırılabilir İçerik Alanı */}
+        <div className="flex-1 px-5 py-4 space-y-6 overflow-y-auto">
+          {/* Hızlı İlerleme & İndirme Kartları */}
+          <div className="grid grid-cols-2 gap-2">
+            <Link
+              href="/ilerleme"
+              onClick={handleSafeClose}
+              className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 hover:border-cyan-400 transition-all flex flex-col justify-between group"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">📈</span>
+                <span className="text-[10px] font-black text-cyan-300 font-mono">%{progress.overallPercent}</span>
+              </div>
+              <span className="text-xs font-black text-white group-hover:text-cyan-300">İlerlemem</span>
+            </Link>
+
+            <button
+              onClick={() => {
+                handleSafeClose();
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("yds:open-install-modal"));
+                }
+              }}
+              className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 transition-all text-left flex flex-col justify-between group"
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xl">📲</span>
+                <span className="text-[10px] font-black text-purple-300 font-mono">PWA</span>
+              </div>
+              <span className="text-xs font-black text-white group-hover:text-purple-300">Telefona Yükle</span>
+            </button>
           </div>
 
-          <Group title="YDS 2013–2026 Gerçek Sınavlar" emoji="📝" />
-          <div className="rounded-2xl border border-amber-400/20 bg-amber-400/5 p-2 grid grid-cols-2 gap-1">
-            {REAL_EXAMS.map((e) => (
+          {/* 1. ÜÇ BÜYÜK SINAV MERKEZİ (YDS, YDT, YÖKDİL) */}
+          <div>
+            <GroupTitle title="Sınav Özel Merkezleri (YDS / YDT / YÖKDİL)" emoji="🎯" />
+            <div className="space-y-2">
               <Link
-                key={e.href}
-                href={e.href}
-                onClick={onClose}
-                className="px-3 py-2 rounded-lg text-[13px] font-bold text-amber-100/90 hover:bg-amber-400/10 transition-colors"
+                href="/yds"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-gradient-to-r from-cyan-500/15 to-blue-500/15 border border-cyan-400/30 hover:border-cyan-300 flex items-center justify-between group transition-all"
               >
-                {e.emoji} {e.year} {e.session}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg font-black">
+                    🎯
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
+                      YDS Hazırlık & Sınav Merkezi
+                    </h4>
+                    <p className="text-[10px] text-white/50">180 dk • 80 Soru • Kamu & Lisansüstü</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
               </Link>
-            ))}
-          </div>
-          <Link
-            href="/exams"
-            onClick={onClose}
-            className="mt-2 flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold text-white/70 hover:bg-white/10 transition-colors"
-          >
-            <span>🎲 {DENEME_COUNT} Özgün Deneme</span>
-            <span className="text-xs text-white/40">→</span>
-          </Link>
 
-          <Group title="Gramer Konuları (15)" emoji="📖" />
-          <div className="grid grid-cols-1 gap-1">
-            {GRAMMAR_LINKS.map((g) => (
               <Link
-                key={g.href}
-                href={g.href}
-                onClick={onClose}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
+                href="/ydt"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 to-orange-500/15 border border-amber-400/30 hover:border-amber-300 flex items-center justify-between group transition-all"
               >
-                <span>{g.emoji}</span> {g.label}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg font-black">
+                    🎓
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
+                      YDT (YKS-Dil / LYS-5) Merkezi
+                    </h4>
+                    <p className="text-[10px] text-white/50">120 dk • 80 Soru • Üniversite Giriş</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
               </Link>
-            ))}
-          </div>
 
-          <Group title="Soru Taktikleri (11)" emoji="🎯" />
-          <div className="grid grid-cols-1 gap-1">
-            {TACTICS_LINKS.map((t) => (
               <Link
-                key={t.href}
-                href={t.href}
-                onClick={onClose}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
+                href="/yokdil"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 hover:border-purple-300 flex items-center justify-between group transition-all"
               >
-                <span>{t.emoji}</span> {t.label}
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-lg font-black">
+                    🔬
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">
+                      YÖKDİL Alan Merkezi (Sağlık, Fen, Sosyal)
+                    </h4>
+                    <p className="text-[10px] text-white/50">180 dk • 80 Soru • 3 Ayrı Bilim Alanı</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-purple-300 group-hover:translate-x-1 transition-transform" />
               </Link>
-            ))}
+            </div>
           </div>
 
-          <Group title="Oyunlar (6)" emoji="🎮" />
-          <div className="grid grid-cols-2 gap-1.5">
-            {GAME_LINKS.map((g) => (
+          {/* 2. YEDİ TEMEL DİL BECERİSİ (SKILLS) */}
+          <div>
+            <GroupTitle title="7 Temel Dil Becerisi Modülü" emoji="⚡" />
+            <div className="grid grid-cols-2 gap-2">
               <Link
-                key={g.label}
-                href={g.href}
-                onClick={onClose}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold text-white/80 hover:bg-white/10 transition-colors"
+                href="/vocabulary/flashcards"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition-all block group"
               >
-                <span>{g.emoji}</span> {g.label}
+                <span className="text-xl block mb-1">🃏</span>
+                <span className="text-xs font-black text-white group-hover:text-cyan-300 block">
+                  3D Flashcards
+                </span>
+                <span className="text-[10px] text-white/50">2.500+ Kelime & Küp</span>
               </Link>
-            ))}
+
+              <Link
+                href="/grammar"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-purple-400/40 transition-all block group"
+              >
+                <span className="text-xl block mb-1">📖</span>
+                <span className="text-xs font-black text-white group-hover:text-purple-300 block">
+                  Gramer (27 Konu)
+                </span>
+                <span className="text-[10px] text-white/50">Formül & Animasyon</span>
+              </Link>
+
+              <Link
+                href="/reading"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-400/40 transition-all block group"
+              >
+                <span className="text-xl block mb-1">🔬</span>
+                <span className="text-xs font-black text-white group-hover:text-emerald-300 block">
+                  Reading Lab
+                </span>
+                <span className="text-[10px] text-white/50">Tıkla-Öğren Sözlük</span>
+              </Link>
+
+              <Link
+                href="/listening"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-blue-400/40 transition-all block group"
+              >
+                <span className="text-xl block mb-1">🎧</span>
+                <span className="text-xs font-black text-white group-hover:text-blue-300 block">
+                  Listening Lab
+                </span>
+                <span className="text-[10px] text-white/50">14 Aksan & Ses</span>
+              </Link>
+
+              <Link
+                href="/writing"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-pink-400/40 transition-all block group"
+              >
+                <span className="text-xl block mb-1">✍️</span>
+                <span className="text-xs font-black text-white group-hover:text-pink-300 block">
+                  Writing Lab
+                </span>
+                <span className="text-[10px] text-white/50">Cümle Kurma & Çeviri</span>
+              </Link>
+
+              <Link
+                href="/speaking"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-rose-400/40 transition-all block group"
+              >
+                <span className="text-xl block mb-1">🎙️</span>
+                <span className="text-xs font-black text-white group-hover:text-rose-300 block">
+                  Speaking Lab
+                </span>
+                <span className="text-[10px] text-white/50">AI Sesli Pratik</span>
+              </Link>
+            </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-xs text-white/50 leading-relaxed">
-            💡 Kanka, kaybolursan her zaman sağ üstteki ☰ burada. Aradığın kelimeyi üstteki
-            aramaya yaz, Google gibi öneriler çıkar.
+          {/* 3. TÜM DENEME SINAVLARI */}
+          <div>
+            <GroupTitle title="Sınav Denemeleri & Çıkmış Sorular" emoji="⏱️" />
+            <Link
+              href="/exams"
+              onClick={handleSafeClose}
+              className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-cyan-500/20 border border-amber-400/30 hover:border-amber-300 flex items-center justify-between group transition-all"
+            >
+              <div>
+                <span className="text-xs font-black text-white group-hover:text-amber-300 block">
+                  ⏱️ Tüm Sınav Havuzunu Aç
+                </span>
+                <span className="text-[10px] text-white/60">
+                  YDS (2013-2026), YDT (2010-2026), YÖKDİL + 72'şer Özgün Deneme
+                </span>
+              </div>
+              <ChevronRight className="w-5 h-5 text-amber-300 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* 4. AKILLI PDF VE KELİME ARAÇLARI */}
+          <div>
+            <GroupTitle title="Akıllı Araçlar & PDF Aktarıcı" emoji="📄" />
+            <div className="space-y-1.5">
+              <Link
+                href="/import"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📄➕</span>
+                  <div>
+                    <h5 className="text-xs font-black text-white group-hover:text-emerald-300">
+                      Akıllı PDF & Kelime Ekle (Claude AI)
+                    </h5>
+                    <p className="text-[10px] text-white/50">Kitap/deneme yükle, otomatik kelimeleri ayıkla</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-emerald-300" />
+              </Link>
+
+              <Link
+                href="/grammar/audio"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/30 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎧</span>
+                  <div>
+                    <h5 className="text-xs font-black text-white group-hover:text-cyan-300">
+                      Sesli Gramer Kodları (12 Track)
+                    </h5>
+                    <p className="text-[10px] text-white/50">ALi CÜMLEci vs DEDE İSİMci & kilit ekranı</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-cyan-300" />
+              </Link>
+
+              <Link
+                href="/tactics"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-pink-400/30 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎯</span>
+                  <div>
+                    <h5 className="text-xs font-black text-white group-hover:text-pink-300">
+                      Soru Taktikleri (11 Tip / 600 Soru)
+                    </h5>
+                    <p className="text-[10px] text-white/50">Çeldirici eleme & adım adım çözümler</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-pink-300" />
+              </Link>
+
+              <Link
+                href="/games"
+                onClick={handleSafeClose}
+                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-amber-400/30 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎮</span>
+                  <div>
+                    <h5 className="text-xs font-black text-white group-hover:text-amber-300">
+                      Eğitici Oyunlar (6 Oyun)
+                    </h5>
+                    <p className="text-[10px] text-white/50">Eşleştirme, Köstebek Vur, Zar, Çarkıfelek</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-amber-300" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 5. DİĞER SAYFALAR & YÖNETİM */}
+          <div>
+            <GroupTitle title="Genel Sayfalar & Ayarlar" emoji="📘" />
+            <div className="grid grid-cols-2 gap-1.5">
+              {PAGES.slice(0, 10).map((p) => (
+                <Link
+                  key={p.href}
+                  href={p.href}
+                  onClick={handleSafeClose}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white/75 hover:bg-white/10 hover:text-white transition-colors truncate"
+                >
+                  <span>{p.emoji}</span>
+                  <span className="truncate">{p.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Sistem Denetçisi / Sıfır Hata Butonu */}
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                handleSafeClose();
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(new CustomEvent("yds:open-debug"));
+                }
+              }}
+              className="w-full p-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-left flex items-center justify-between transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span>🛡️</span>
+                <span className="text-xs font-black">Sistem Denetçisi & Sıfır Hata (0 Hata)</span>
+              </div>
+              <span className="text-xs">⚡ Tara & Sıfırla</span>
+            </button>
           </div>
         </div>
       </aside>
