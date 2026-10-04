@@ -193,56 +193,65 @@ export function getThemesPage(options: {
   };
 }
 
+let isApplyingTheme = false;
+
 /**
  * Temayı tarayıcı DOM'una ve LocalStorage'a anında uygula
  */
 export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): void {
   if (typeof window === "undefined") return;
+  // // SAFETY: Prevent re-entrant recursive loops
+  if (isApplyingTheme) return;
+  isApplyingTheme = true;
 
-  const targetTheme = ALL_THEMES.find((t) => t.id === themeId) || ALL_THEMES[0];
-  const root = document.documentElement;
-
-  // 1. Mod sınıfını (light/dark) ayarla
-  if (mode === "light") {
-    root.classList.add("light");
-    root.classList.remove("dark");
-    root.style.colorScheme = "light";
-  } else {
-    root.classList.remove("light");
-    root.classList.add("dark");
-    root.style.colorScheme = "dark";
-  }
-
-  // 2. CSS Değişkenlerini (CSS Variables) enjekte et
-  root.style.setProperty("--theme-primary", targetTheme.primary);
-  root.style.setProperty("--theme-secondary", targetTheme.secondary);
-  root.style.setProperty("--theme-accent", targetTheme.accent);
-  root.style.setProperty("--theme-glow", targetTheme.glowColor);
-  root.style.setProperty("--theme-gradient", targetTheme.gradient);
-
-  if (mode === "light") {
-    root.style.setProperty("--theme-bg", targetTheme.lightBg);
-    root.style.setProperty("--theme-card", targetTheme.lightCard);
-    root.style.setProperty("--theme-text", targetTheme.lightText);
-    root.style.setProperty("--theme-border", "#cbd5e1");
-  } else {
-    root.style.setProperty("--theme-bg", targetTheme.darkBg);
-    root.style.setProperty("--theme-card", targetTheme.darkCard);
-    root.style.setProperty("--theme-text", targetTheme.darkText);
-    root.style.setProperty("--theme-border", "rgba(255, 255, 255, 0.12)");
-  }
-
-  // 3. Tercihleri sakla ve reaktif olay fırlat
   try {
-    localStorage.setItem("yds_theme_id", targetTheme.id.toString());
-    localStorage.setItem("yds_theme_mode", mode);
-    window.dispatchEvent(
-      new CustomEvent("yds:theme-changed", {
-        detail: { theme: targetTheme, mode },
-      })
-    );
-  } catch {
-    /* storage failover */
+    const targetTheme = ALL_THEMES.find((t) => t.id === themeId) || ALL_THEMES[0];
+    const root = document.documentElement;
+
+    // 1. Mod sınıfını (light/dark) ayarla
+    if (mode === "light") {
+      root.classList.add("light");
+      root.classList.remove("dark");
+      root.style.colorScheme = "light";
+    } else {
+      root.classList.remove("light");
+      root.classList.add("dark");
+      root.style.colorScheme = "dark";
+    }
+
+    // 2. CSS Değişkenlerini (CSS Variables) enjekte et
+    root.style.setProperty("--theme-primary", targetTheme.primary);
+    root.style.setProperty("--theme-secondary", targetTheme.secondary);
+    root.style.setProperty("--theme-accent", targetTheme.accent);
+    root.style.setProperty("--theme-glow", targetTheme.glowColor);
+    root.style.setProperty("--theme-gradient", targetTheme.gradient);
+
+    if (mode === "light") {
+      root.style.setProperty("--theme-bg", targetTheme.lightBg);
+      root.style.setProperty("--theme-card", targetTheme.lightCard);
+      root.style.setProperty("--theme-text", targetTheme.lightText);
+      root.style.setProperty("--theme-border", "#cbd5e1");
+    } else {
+      root.style.setProperty("--theme-bg", targetTheme.darkBg);
+      root.style.setProperty("--theme-card", targetTheme.darkCard);
+      root.style.setProperty("--theme-text", targetTheme.darkText);
+      root.style.setProperty("--theme-border", "rgba(255, 255, 255, 0.12)");
+    }
+
+    // 3. Tercihleri sakla ve reaktif olay fırlat
+    try {
+      localStorage.setItem("yds_theme_id", targetTheme.id.toString());
+      localStorage.setItem("yds_theme_mode", mode);
+      window.dispatchEvent(
+        new CustomEvent("yds:theme-changed", {
+          detail: { theme: targetTheme, mode },
+        })
+      );
+    } catch {
+      /* storage failover */
+    }
+  } finally {
+    isApplyingTheme = false;
   }
 }
 

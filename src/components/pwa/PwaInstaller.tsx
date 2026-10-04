@@ -124,7 +124,7 @@ export default function PwaInstaller() {
         <aside
           role="region"
           aria-label="Uygulama yükleme bildirimi"
-          className="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-6 sm:max-w-md z-40 bg-slate-900/95 backdrop-blur-xl border border-purple-500/40 rounded-2xl p-3.5 shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-3 animate-fade-in"
+          className="fixed bottom-4 left-4 right-4 sm:right-auto sm:max-w-sm z-30 bg-slate-900/95 backdrop-blur-xl border border-purple-500/40 rounded-2xl p-3 shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-3 animate-fade-in"
         >
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-[1.5px] shrink-0 shadow-md">

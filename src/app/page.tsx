@@ -4,6 +4,7 @@ import HomeGreeting from "@/components/HomeGreeting";
 import ProgressPanel from "@/components/ProgressPanel";
 import DailyTasksPanel from "@/components/DailyTasksPanel";
 import MotivationBox from "@/components/MotivationBox";
+import ExamModeSwitcher from "@/components/ExamModeSwitcher";
 
 const STATIONS = [
   {
@@ -111,6 +112,30 @@ const STATIONS = [
     color: "from-cyan-500 to-teal-600",
   },
   {
+    href: "/writing",
+    emoji: "✍️",
+    title: "Writing & Cümle Kurma Lab",
+    desc: "Akademik cümle mimarisi (S+V+O+MPT), bağlaç şifreleri, devrik yapılar ve interaktif paraphrase.",
+    cta: "Yazmaya Başla",
+    color: "from-indigo-500 to-purple-600",
+  },
+  {
+    href: "/listening",
+    emoji: "🎧",
+    title: "Listening & Dinleme Lab",
+    desc: "Çoklu aksan dinleme parçaları, telaffuz karşılaştırmaları ve 12 sesli stüdyo kaydı.",
+    cta: "Dinlemeye Başla",
+    color: "from-amber-500 to-orange-600",
+  },
+  {
+    href: "/speaking",
+    emoji: "🎙️",
+    title: "AI Speaking Lab",
+    desc: "Yapay zeka ile sesli/yazılı interaktif diyalog pratiği ve telaffuz geribildirimi.",
+    cta: "Konuşmaya Başla",
+    color: "from-rose-500 to-pink-600",
+  },
+  {
     href: "/vocabulary/flashcards?mode=fsrs",
     emoji: "🧠",
     title: "FSRS 2.0 Akıllı Bellek Laboratuvarı",
@@ -133,47 +158,117 @@ export default function Home() {
       <HomeGreeting />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* HERO */}
-      <section className="text-center py-14 space-y-6">
+      <section className="text-center py-10 sm:py-14 space-y-6">
         <Reveal>
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 anim-pulse-glow">
-            🚀 YDS Zirve Maratonu · 10.000 Değişen Motivasyon
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/10 px-4 py-1.5 text-xs font-black text-amber-300 anim-pulse-glow">
+            🚀 DİL MASTER · YDS · YDT · YÖKDİL TAM KAPSAMLI AKADEMİ
           </div>
         </Reveal>
         <Reveal delay={80}>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto italic">
-            “Kanka, bugün çalıştığın her kelime, yarınki netinin teminatıdır. Başarı seninle! ✨”
+          <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto italic font-medium">
+            “Kanka, bugün çalıştığın her kelime ve çözdüğün her soru, yarınki sınav sonucunun teminatıdır! ✨”
           </p>
         </Reveal>
         <Reveal delay={140}>
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
-              YDS'yi Ezberlemeden,
+              DİL MASTER:
             </span>
             <br />
-            <span className="text-white">Görsel Hafızayla Kodlayarak Fethedin!</span>
+            <span className="text-white">YDS, YDT ve YÖKDİL 7 Beceriyle Yanında!</span>
           </h1>
         </Reveal>
         <Reveal delay={220}>
-          <p className="text-white/60 max-w-3xl mx-auto leading-relaxed">
-            Kanka, burası tam sana göre: 3D dönebilen kelime küpleri, 180 dakikalık gerçek online
-            optik form, 10.000 avatar, animasyonlu gramer anlatımları ve 11 soru tipine özel taktiklerle
-            YDS'de sıfır hata!
+          <p className="text-white/70 max-w-3xl mx-auto leading-relaxed text-sm sm:text-base">
+            Sınava özel 80 soruluk gerçek denemeler, 3D görsel flashcards, 27 animasyonlu gramer konusu, 
+            akademik okuma-dinleme-yazma-konuşma laboratuvarları ve 2010-2026 tüm yayınlar soru havuzu.
           </p>
         </Reveal>
-        <Reveal delay={300}>
-          <div className="flex flex-wrap justify-center gap-3">
+
+        {/* 3 BÜYÜK SINAV SEÇİM MERKEZİ (YDS, YDT, YÖKDİL) */}
+        <Reveal delay={280}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left pt-4 max-w-5xl mx-auto">
+            {/* 1. YDS KART */}
             <Link
-              href="/vocabulary/flashcards"
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-bold shadow-lg shadow-pink-500/30 hover:scale-105 transition-transform"
+              href="/yds"
+              className="p-5 rounded-3xl bg-gradient-to-br from-cyan-950/80 via-slate-900 to-slate-950 border-2 border-cyan-400/40 hover:border-cyan-300 transition-all hover:scale-[1.02] shadow-xl shadow-cyan-950/40 group flex flex-col justify-between"
             >
-              🃏 3D Flashcards Başlat
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl">🎯</span>
+                  <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
+                    180 dk • 80 Soru
+                  </span>
+                </div>
+                <h3 className="text-xl font-black text-white group-hover:text-cyan-300 transition-colors">
+                  YDS Sınav Merkezi
+                </h3>
+                <p className="text-xs text-white/60 leading-relaxed">
+                  Kamu personeli, doçentlik ve yüksek lisans adayları için 2013-2026 çıkmış sınavlar, akademik kelimeler ve taktikler.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-cyan-400">
+                <span>YDS Bölümüne Gir</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
             </Link>
+
+            {/* 2. YDT KART */}
             <Link
-              href="/exams/yds-2024-ilkbahar"
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-bold shadow-lg shadow-cyan-500/30 hover:scale-105 transition-transform"
+              href="/ydt"
+              className="p-5 rounded-3xl bg-gradient-to-br from-amber-950/80 via-slate-900 to-slate-950 border-2 border-amber-400/40 hover:border-amber-300 transition-all hover:scale-[1.02] shadow-xl shadow-amber-950/40 group flex flex-col justify-between"
             >
-              180 dk Optik Sınav Çöz
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl">🎓</span>
+                  <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-mono">
+                    120 dk • 80 Soru
+                  </span>
+                </div>
+                <h3 className="text-xl font-black text-white group-hover:text-amber-300 transition-colors">
+                  YDT (LYS-5) Merkezi
+                </h3>
+                <p className="text-xs text-white/60 leading-relaxed">
+                  Üniversite YKS-Dil adayları için soru başı 1.5 dk tempo rehberi, lise müfredatına tam uyum ve 72 özgün deneme.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-amber-400">
+                <span>YDT Bölümüne Gir</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
             </Link>
+
+            {/* 3. YÖKDİL KART */}
+            <Link
+              href="/yokdil"
+              className="p-5 rounded-3xl bg-gradient-to-br from-purple-950/80 via-slate-900 to-slate-950 border-2 border-purple-400/40 hover:border-purple-300 transition-all hover:scale-[1.02] shadow-xl shadow-purple-950/40 group flex flex-col justify-between"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl">🔬</span>
+                  <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30 font-mono">
+                    Sağlık · Fen · Sosyal
+                  </span>
+                </div>
+                <h3 className="text-xl font-black text-white group-hover:text-purple-300 transition-colors">
+                  YÖKDİL Alan Merkezi
+                </h3>
+                <p className="text-xs text-white/60 leading-relaxed">
+                  Sağlık 🩺, Fen ⚡ ve Sosyal 🏛️ bilim alanlarına özel terminoloji havuzları, makale okumaları ve alan denemeleri.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-purple-400">
+                <span>YÖKDİL Bölümüne Gir</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </Link>
+          </div>
+        </Reveal>
+
+        {/* SINAV MODU SEÇİCİ KUTUSU (ÖĞRENCİ KENDİ SINAVINI SEÇER) */}
+        <Reveal delay={340}>
+          <div className="max-w-4xl mx-auto pt-2">
+            <ExamModeSwitcher />
           </div>
         </Reveal>
       </section>

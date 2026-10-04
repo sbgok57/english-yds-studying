@@ -9,6 +9,24 @@ const STRICTLY_PROTECTED_PATHS = [
 ];
 
 export async function middleware(req: NextRequest) {
+  const { pathname, search } = req.nextUrl;
+
+  // 1. Bypass static files, internal Next.js paths, manifest, icons, service worker
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api/health") ||
+    pathname === "/manifest.json" ||
+    pathname === "/sw.js" ||
+    pathname.startsWith("/icons/") ||
+    pathname.startsWith("/favicon") ||
+    pathname.startsWith("/robots.txt") ||
+    pathname.startsWith("/sitemap.xml") ||
+    /\.(png|jpe?g|svg|webp|ico|json|js|css|woff2?|ttf|map)$/i.test(pathname)
+  ) {
+    const res = NextResponse.next();
+    return applySecurityHeaders(res);
+  }
+
   // SAFETY: P0 Real-Time Antivirus & Cyber Intrusion Prevention Scan
   const malwareCheck = inspectRequestForMalware(req);
   if (!malwareCheck.allowed) {
@@ -24,21 +42,6 @@ export async function middleware(req: NextRequest) {
       }
     );
     return applySecurityHeaders(blockedResponse);
-  }
-
-  const { pathname, search } = req.nextUrl;
-
-  // 1. Bypass static files, internal Next.js paths, API routes
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api/") ||
-    pathname.startsWith("/favicon.ico") ||
-    pathname.startsWith("/robots.txt") ||
-    pathname.startsWith("/sitemap.xml") ||
-    /\.(.*)$/.test(pathname) // static files like .png, .jpg, .svg, .json, .css, .js
-  ) {
-    const res = NextResponse.next();
-    return applySecurityHeaders(res);
   }
 
   // 2. Check session token in cookie

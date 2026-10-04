@@ -24,6 +24,31 @@ export default function AdminPage() {
   const [levelFilter, setLevelFilter] = useState("Tümü");
   const [sortBy, setSortBy] = useState<"active" | "net" | "exams" | "score">("active");
   const [selectedStudent, setSelectedStudent] = useState<StudentRecord | null>(null);
+  const [activeModalTab, setActiveModalTab] = useState<"overview" | "timeline" | "exams">("timeline");
+  const [timelineFilter, setTimelineFilter] = useState<string>("all");
+
+  const downloadStudentCsv = (student: StudentRecord) => {
+    const rows = [
+      ["Tarih", "Saat", "Sınav/Kategori", "İşlem Türü", "Başlık", "Harcanan Süre", "Detay/Net"],
+      ...(student.activities || []).map((a) => [
+        a.dateFormatted,
+        a.timeFormatted,
+        a.category,
+        a.type.toUpperCase(),
+        `"${a.title.replace(/"/g, '""')}"`,
+        a.timeSpent,
+        `"${a.details.replace(/"/g, '""')}"`,
+      ]),
+    ];
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + rows.map((e) => e.join(";")).join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `${student.username}_ogrenci_surec_raporu.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const isAdmin = useMemo(() => {
     if (!account) return false;
@@ -492,120 +517,348 @@ export default function AdminPage() {
       {selectedStudent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md anim-fade">
           <div className="card-vibrant w-full max-w-2xl max-h-[85vh] flex flex-col p-6 overflow-hidden border border-cyan-500/40 shadow-2xl">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10 shrink-0">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-wider text-cyan-300">
-                  Öğrenci Sınav Süreç Karnesi
+                  Öğrenci Canlı Süreç & Aktivite Takip Merkezi
                 </span>
                 <h3 className="text-xl font-black text-white flex items-center gap-2">
                   <span>👤</span> {selectedStudent.username}
                 </h3>
                 <p className="text-xs text-white/50 font-mono">{selectedStudent.email}</p>
               </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => downloadStudentCsv(selectedStudent)}
+                  className="px-3 py-1.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
+                  title="Öğrencinin tüm aktivitelerini CSV olarak indir"
+                >
+                  <span>📥</span>
+                  <span>Karnesi İndir (CSV)</span>
+                </button>
+                <button
+                  onClick={() => setSelectedStudent(null)}
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-sm"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Sekmeleri */}
+            <div className="flex items-center gap-1 border-b border-white/10 pt-3 pb-2 shrink-0">
               <button
-                onClick={() => setSelectedStudent(null)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-sm"
+                onClick={() => setActiveModalTab("timeline")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                  activeModalTab === "timeline"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20"
+                    : "text-white/60 hover:text-white"
+                }`}
               >
-                ✕
+                🕒 Canlı Süreç Zaman Çizelgesi ({selectedStudent.activities?.length || 0})
+              </button>
+              <button
+                onClick={() => setActiveModalTab("overview")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                  activeModalTab === "overview"
+                    ? "bg-gradient-to-r from-purple-500 to-pink-600 text-white shadow-md shadow-purple-500/20"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                📊 7 Beceri Süre Analizi
+              </button>
+              <button
+                onClick={() => setActiveModalTab("exams")}
+                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                  activeModalTab === "exams"
+                    ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-amber-500/20"
+                    : "text-white/60 hover:text-white"
+                }`}
+              >
+                📝 Denemeler ({selectedStudent.attempts.length})
               </button>
             </div>
 
             <div className="py-4 overflow-y-auto space-y-4">
               {/* Summary Stats */}
-              <div className="grid grid-cols-4 gap-2 text-center p-3 rounded-xl bg-white/[0.03] border border-white/10">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center p-3 rounded-2xl bg-white/[0.03] border border-white/10">
                 <div>
-                  <span className="text-[10px] text-white/50 block">Seviye</span>
+                  <span className="text-[10px] text-white/50 block font-bold">Seviye</span>
                   <span className="text-base font-black text-cyan-300">{selectedStudent.level}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block">Puan / XP</span>
+                  <span className="text-[10px] text-white/50 block font-bold">Toplam Puan / XP</span>
                   <span className="text-base font-black text-amber-300">{selectedStudent.totalPoints}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block">Ort. Net</span>
-                  <span className="text-base font-black text-emerald-400">{selectedStudent.avgNet}</span>
+                  <span className="text-[10px] text-white/50 block font-bold">Ort. Net Başarısı</span>
+                  <span className="text-base font-black text-emerald-400">{selectedStudent.avgNet} Net</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-white/50 block">En İyi Puan</span>
-                  <span className="text-base font-black text-purple-300">{selectedStudent.bestScore}</span>
+                  <span className="text-[10px] text-white/50 block font-bold">Toplam Harcanan Süre</span>
+                  <span className="text-base font-black text-purple-300 font-mono">
+                    {Math.floor((selectedStudent.skillBreakdown?.totalStudyMinutes || 0) / 60)} sa {(selectedStudent.skillBreakdown?.totalStudyMinutes || 0) % 60} dk
+                  </span>
                 </div>
               </div>
 
               {selectedStudent.careerTarget && (
                 <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-400/20 text-xs text-cyan-200">
-                  <strong>🎯 Öğrencinin Kariyer Hedefi:</strong> {selectedStudent.careerTarget}
+                  <strong>🎯 Öğrencinin Hedefi:</strong> {selectedStudent.careerTarget}
                 </div>
               )}
 
-              {/* Attempts List */}
-              <h4 className="text-xs font-black uppercase tracking-wider text-white/70 pt-2">
-                📝 Çözülen Deneme Sınavları & Detaylı Net Dağılımı ({selectedStudent.attempts.length})
-              </h4>
+              {/* SEKME 1: CANLI ZAMAN ÇİZELGESİ (SAAT KAÇTA, NE KADAR SÜREDE, NE YAPTI) */}
+              {activeModalTab === "timeline" && (
+                <div className="space-y-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-white/70">
+                      🕒 Kronolojik Aktivite Akışı (Saat & Dakika Detaylı)
+                    </span>
+                    <div className="flex items-center gap-1 text-[11px] overflow-x-auto pb-1">
+                      {["all", "exam", "vocabulary", "grammar", "reading", "writing", "speaking"].map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setTimelineFilter(t)}
+                          className={`px-2 py-0.5 rounded-lg font-bold transition-all ${
+                            timelineFilter === t
+                              ? "bg-cyan-500 text-slate-950"
+                              : "bg-white/5 text-white/60 hover:text-white"
+                          }`}
+                        >
+                          {t === "all" ? "Tümü" : t.toUpperCase()}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-              {selectedStudent.attempts.length === 0 ? (
-                <p className="text-xs text-white/40 italic py-4 text-center">
-                  Bu öğrenci henüz tam bir 180 dakikalık deneme sınavı tamamlamadı.
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {selectedStudent.attempts.map((att, idx) => {
-                    const isYdt = att.examId.toLowerCase().startsWith("ydt") || att.examId.toLowerCase().startsWith("lys");
-                    const isYokdil = att.examId.toLowerCase().startsWith("yokdil");
-                    const category = isYdt ? "YDT" : isYokdil ? "YÖKDİL" : "YDS";
-                    const badgeColor = isYdt
-                      ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
-                      : isYokdil
-                      ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
-                      : "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
+                  {(!selectedStudent.activities || selectedStudent.activities.length === 0) ? (
+                    <p className="text-xs text-white/40 italic py-6 text-center">
+                      Henüz kaydedilmiş aktivite bulunmuyor.
+                    </p>
+                  ) : (
+                    <div className="space-y-2.5">
+                      {selectedStudent.activities
+                        .filter((act) => timelineFilter === "all" || act.type === timelineFilter)
+                        .map((act) => {
+                          const isExam = act.type === "exam";
+                          const badgeColor =
+                            act.category === "YDS"
+                              ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/30"
+                              : act.category === "YDT"
+                              ? "bg-amber-500/20 text-amber-300 border-amber-400/30"
+                              : "bg-purple-500/20 text-purple-300 border-purple-400/30";
 
-                    return (
-                      <div
-                        key={att.id || idx}
-                        className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-white/20 transition-all"
-                      >
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${badgeColor}`}>
-                              {category}
-                            </span>
-                            <p className="text-xs font-black text-white">
-                              <span className="uppercase">{att.examId.replace(/-/g, " ")}</span>
-                            </p>
-                          </div>
-                          <p className="text-[10px] text-white/50 mt-1 font-mono">
-                            📅 {new Date(att.createdAt).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "medium" })} · ⏱️ {att.timeSpent || (isYdt ? 120 : 180)} dk
-                          </p>
-                        </div>
+                          const typeEmoji =
+                            act.type === "exam"
+                              ? "📝"
+                              : act.type === "vocabulary"
+                              ? "📚"
+                              : act.type === "grammar"
+                              ? "📖"
+                              : act.type === "reading"
+                              ? "🔬"
+                              : act.type === "listening"
+                              ? "🎧"
+                              : act.type === "writing"
+                              ? "✍️"
+                              : "🎙️";
 
-                        <div className="flex items-center gap-3 text-right">
-                          <div className="text-right">
-                            <span className="text-xs font-black text-emerald-300 font-mono block">
-                              {att.net} Net ({att.score} Puan)
-                            </span>
-                            <span className="text-[10px] text-white/50 font-mono">
-                              ✅ {att.correct}D &nbsp; ❌ {att.wrong}Y &nbsp; ⚪ {att.empty}B
-                            </span>
-                          </div>
-                          <span
-                            className={`text-xs px-2.5 py-1 rounded-lg font-black ${
-                              att.score >= 80
-                                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                                : att.score >= 60
-                                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-                                : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                            }`}
+                          return (
+                            <div
+                              key={act.id}
+                              className={`p-3.5 rounded-2xl border transition-all ${
+                                isExam
+                                  ? "bg-cyan-950/20 border-cyan-500/30"
+                                  : "bg-white/[0.02] border-white/10 hover:border-white/20"
+                              }`}
+                            >
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div className="space-y-1">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="text-base">{typeEmoji}</span>
+                                    <span className="text-xs font-black text-white">{act.title}</span>
+                                    <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${badgeColor}`}>
+                                      {act.category}
+                                    </span>
+                                  </div>
+                                  <p className="text-xs text-white/70 leading-relaxed">{act.details}</p>
+                                </div>
+
+                                <div className="flex sm:flex-col items-center sm:items-end justify-between gap-1 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/5">
+                                  <div className="text-right">
+                                    <span className="text-[11px] font-mono text-cyan-300 font-black block">
+                                      🕒 {act.timeFormatted}
+                                    </span>
+                                    <span className="text-[10px] font-mono text-white/40 block">
+                                      📅 {act.dateFormatted}
+                                    </span>
+                                  </div>
+                                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    ⏱️ {act.timeSpent}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* SEKME 2: 7 BECERİ SÜRE ANALİZİ */}
+              {activeModalTab === "overview" && (
+                <div className="space-y-4">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-white/70">
+                    📊 7 Dil Becerisinde Harcanan Toplam Süreler
+                  </h4>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30">
+                      <span className="text-xs text-cyan-300 font-bold block mb-1">📝 Deneme Sınavları</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.examMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">80 soruluk tam sınavlar</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-pink-500/10 border border-pink-500/30">
+                      <span className="text-xs text-pink-300 font-bold block mb-1">📚 Kelime Çalışmaları</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.vocabularyMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">3D Flashcard & SM-2</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-purple-500/10 border border-purple-500/30">
+                      <span className="text-xs text-purple-300 font-bold block mb-1">📖 Gramer Akademisi</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.grammarMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Konular & testler</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
+                      <span className="text-xs text-emerald-300 font-bold block mb-1">🔬 Reading Lab</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.readingMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Akademik okumalar</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+                      <span className="text-xs text-amber-300 font-bold block mb-1">🎧 Listening Lab</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.listeningMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Sesli kayıtlar</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/30">
+                      <span className="text-xs text-indigo-300 font-bold block mb-1">✍️ Writing Lab</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.writingMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Cümle kurma & çeviri</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30">
+                      <span className="text-xs text-rose-300 font-bold block mb-1">🎙️ AI Speaking Lab</span>
+                      <p className="text-xl font-black text-white font-mono">
+                        {selectedStudent.skillBreakdown?.speakingMinutes || 0} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Sesli diyalog koçu</span>
+                    </div>
+
+                    <div className="p-3.5 rounded-2xl bg-yellow-500/10 border border-yellow-500/30">
+                      <span className="text-xs text-yellow-300 font-bold block mb-1">⚡ Toplam Süre</span>
+                      <p className="text-xl font-black text-yellow-300 font-mono">
+                        {Math.floor((selectedStudent.skillBreakdown?.totalStudyMinutes || 0) / 60)} sa {(selectedStudent.skillBreakdown?.totalStudyMinutes || 0) % 60} dk
+                      </p>
+                      <span className="text-[10px] text-white/50">Tüm platform emeği</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SEKME 3: ÇÖZÜLEN DENEMELER */}
+              {activeModalTab === "exams" && (
+                <div className="space-y-3">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-white/70">
+                    📝 Çözülen Deneme Sınavları & Detaylı Net Dağılımı ({selectedStudent.attempts.length})
+                  </h4>
+
+                  {selectedStudent.attempts.length === 0 ? (
+                    <p className="text-xs text-white/40 italic py-6 text-center">
+                      Bu öğrenci henüz tam bir deneme sınavı tamamlamadı.
+                    </p>
+                  ) : (
+                    <div className="space-y-2">
+                      {selectedStudent.attempts.map((att, idx) => {
+                        const isYdt = att.examId.toLowerCase().startsWith("ydt") || att.examId.toLowerCase().startsWith("lys");
+                        const isYokdil = att.examId.toLowerCase().startsWith("yokdil");
+                        const category = isYdt ? "YDT" : isYokdil ? "YÖKDİL" : "YDS";
+                        const badgeColor = isYdt
+                          ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                          : isYokdil
+                          ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
+                          : "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
+
+                        return (
+                          <div
+                            key={att.id || idx}
+                            className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-white/20 transition-all"
                           >
-                            %{att.score}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${badgeColor}`}>
+                                  {category}
+                                </span>
+                                <p className="text-xs font-black text-white">
+                                  <span className="uppercase">{att.examId.replace(/-/g, " ")}</span>
+                                </p>
+                              </div>
+                              <p className="text-[10px] text-white/50 mt-1 font-mono">
+                                📅 {new Date(att.createdAt).toLocaleDateString("tr-TR")} 🕒 {new Date(att.createdAt).toLocaleTimeString("tr-TR")} · ⏱️ {att.timeSpent || (isYdt ? 120 : 180)} dk
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-3 text-right">
+                              <div className="text-right">
+                                <span className="text-xs font-black text-emerald-300 font-mono block">
+                                  {att.net} Net ({att.score} Puan)
+                                </span>
+                                <span className="text-[10px] text-white/50 font-mono">
+                                  ✅ {att.correct}D &nbsp; ❌ {att.wrong}Y &nbsp; ⚪ {att.empty}B
+                                </span>
+                              </div>
+                              <span
+                                className={`text-xs px-2.5 py-1 rounded-lg font-black ${
+                                  att.score >= 80
+                                    ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                                    : att.score >= 60
+                                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
+                                    : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                                }`}
+                              >
+                                %{att.score}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex justify-end shrink-0">
+            <div className="pt-4 border-t border-white/10 flex justify-between items-center shrink-0">
+              <span className="text-[11px] text-white/40 font-mono">
+                Admin Yetkisi: sbgok57 (Kurucu)
+              </span>
               <button
                 onClick={() => setSelectedStudent(null)}
                 className="px-5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all"

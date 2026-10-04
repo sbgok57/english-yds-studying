@@ -208,23 +208,23 @@ function buildIndex(): SiteEntry[] {
   return entries;
 }
 
-// 7. Kelime Envanteri ve Yayınlar
+// 7. Kelime Envanteri ve Yayınlar (Tüm Yayınlar Korpusu ve Temel Kelimeler)
 const wordEntries: SiteEntry[] = WORDS.map((w) => ({
   label: w.word,
   sub: `${w.tr} (${w.type})`,
-  href: "/vocabulary/flashcards",
+  href: `/vocabulary/flashcards?word=${encodeURIComponent(w.word)}`,
   type: "Kelime",
   emoji: "🃏",
   search: `${w.hint} ${w.exampleTr}`,
 }));
 
-const publicationEntries: SiteEntry[] = YDS_PUBLICATIONS_MASTER_CORPUS.slice(0, 100).map((p) => ({
+const publicationEntries: SiteEntry[] = YDS_PUBLICATIONS_MASTER_CORPUS.map((p) => ({
   label: p.term,
   sub: `${p.meaningsTr.join(", ")} (${p.type}) • ${p.sourceCategory}`,
-  href: "/vocabulary/flashcards",
+  href: `/vocabulary/flashcards?word=${encodeURIComponent(p.term)}`,
   type: "Yayınlar Kelimesi",
   emoji: "🏛️",
-  search: `${p.definitionEn} ${p.synonyms?.join(" ")} ${p.sourceCategory}`,
+  search: `${p.definitionEn} ${p.synonyms?.join(" ")} ${p.sourceCategory} ${p.meaningsTr.join(" ")} ${p.exampleEn}`,
 }));
 
 const archiveEntries: SiteEntry[] = ARCHIVE_WORDS.map((w) => ({

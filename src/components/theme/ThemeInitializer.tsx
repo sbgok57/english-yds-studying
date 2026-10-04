@@ -5,7 +5,7 @@ import { getSavedTheme, applyTheme } from "@/lib/themes/engine";
 
 export default function ThemeInitializer() {
   useEffect(() => {
-    // Apply saved theme immediately on mount
+    // // SAFETY: Apply saved theme once on client hydration
     try {
       const { theme, mode } = getSavedTheme();
       applyTheme(theme.id, mode);
@@ -13,14 +13,20 @@ export default function ThemeInitializer() {
       // Safe fallback
     }
 
-    const handleThemeChange = (e: any) => {
-      if (e.detail?.theme) {
-        applyTheme(e.detail.theme.id, e.detail.mode);
+    // // SAFETY: Cross-tab theme sync without re-entrant recursion
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "yds_theme_id" || e.key === "yds_theme_mode") {
+        try {
+          const { theme, mode } = getSavedTheme();
+          applyTheme(theme.id, mode);
+        } catch {
+          // Safe fallback
+        }
       }
     };
 
-    window.addEventListener("yds:theme-changed", handleThemeChange);
-    return () => window.removeEventListener("yds:theme-changed", handleThemeChange);
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   return null;

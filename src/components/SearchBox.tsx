@@ -28,7 +28,7 @@ export default function SearchBox({ autoFocus = false }: { autoFocus?: boolean }
       setOpen(false);
       return;
     }
-    setResults(searchSite(t, 8));
+    setResults(searchSite(t, 12));
     setOpen(true);
     setActive(-1);
   }, [q]);

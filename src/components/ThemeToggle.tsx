@@ -17,6 +17,15 @@ export default function ThemeToggle({ compact = false, className = "" }: ThemeTo
     // DOM'dan mevcut temayı oku
     const isLight = document.documentElement.classList.contains("light");
     setTheme(isLight ? "light" : "dark");
+
+    const handleThemeChange = (e: any) => {
+      if (e.detail?.mode) {
+        setTheme(e.detail.mode);
+      }
+    };
+
+    window.addEventListener("yds:theme-changed", handleThemeChange);
+    return () => window.removeEventListener("yds:theme-changed", handleThemeChange);
   }, []);
 
   const toggleTheme = () => {

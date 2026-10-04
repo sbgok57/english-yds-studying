@@ -1,7 +1,7 @@
 {
-  "name": "YDS Master — Görsel Hafıza Platformu",
-  "short_name": "YDS Master",
-  "description": "YDS Master: Görsel hafıza, 3D kelime kartları, interaktif denemeler ve akıllı gramer koçu.",
+  "name": "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık Akademisi",
+  "short_name": "DİL MASTER",
+  "description": "DİL MASTER: YDS, YDT ve YÖKDİL için 7 temel beceri, görsel hafıza, 3D kelime kartları ve interaktif denemeler.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

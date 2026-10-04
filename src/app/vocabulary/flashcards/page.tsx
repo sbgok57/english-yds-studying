@@ -25,6 +25,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
+  Volume2,
+  LayoutGrid,
+  Table as TableIcon,
 } from "lucide-react";
 
 export interface UnifiedFlashcardWord {
@@ -70,6 +73,11 @@ export default function FlashcardsPage() {
   const [selectedType, setSelectedType] = useState<string>("Tümü");
   const [selectedPool, setSelectedPool] = useState<"TÜMÜ" | "yayinlar" | "master" | "temel">("TÜMÜ");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Görünüm Modu: 3D Kart vs Tüm Liste Tablosu
+  const [viewMode, setViewMode] = useState<"card" | "table">("card");
+  const [tablePage, setTablePage] = useState(1);
+  const TABLE_PAGE_SIZE = 30;
 
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -213,11 +221,52 @@ export default function FlashcardsPage() {
     setFlipped(false);
   }, [idx, selectedExam, selectedLevel, selectedType, selectedPool]);
 
-  // Filtre değiştiğinde indisi başa al
+  // Filtre değiştiğinde indisi ve tablo sayfasını başa al
   const resetIdx = useCallback(() => {
     setIdx(0);
     setFlipped(false);
+    setTablePage(1);
   }, []);
+
+  // URL parametresinden kelime arama (PERF & UX: /vocabulary/flashcards?word=abate)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const targetWord = params.get("word") || params.get("q");
+    if (targetWord) {
+      setSearchQuery(targetWord);
+      setViewMode("card");
+    }
+  }, []);
+
+  const totalTablePages = Math.max(1, Math.ceil(sortedWords.length / TABLE_PAGE_SIZE));
+  const paginatedWords = useMemo(() => {
+    const start = (tablePage - 1) * TABLE_PAGE_SIZE;
+    return sortedWords.slice(start, start + TABLE_PAGE_SIZE);
+  }, [sortedWords, tablePage]);
+
+  // Sesli Telaffuz (Web Speech API ile hafif ve yerel)
+  const speakWord = (text: string, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+    }
+  };
+
+  const openIn3DCard = (targetWord: UnifiedFlashcardWord) => {
+    const targetIdx = sortedWords.findIndex((w) => w.id === targetWord.id);
+    if (targetIdx !== -1) {
+      setIdx(targetIdx);
+    }
+    setViewMode("card");
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 350, behavior: "smooth" });
+    }
+  };
 
   const go = (delta: number) => {
     if (total === 0) return;
@@ -362,30 +411,60 @@ export default function FlashcardsPage() {
 
       {/* Filtre & Arama Kontrolleri Paneli */}
       <div className="card-vibrant p-5 sm:p-6 space-y-4">
-        {/* Satır 1: Sınav Modu & Arama */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-          {/* Sınav Modu Seçici */}
-          <div className="flex items-center gap-1.5 bg-black/40 p-1.5 rounded-2xl border border-white/10 flex-wrap">
-            <span className="text-[11px] font-bold text-white/50 px-2 flex items-center gap-1">
-              <Filter className="w-3 h-3 text-cyan-400" /> Sınav:
-            </span>
-            {(["TÜMÜ", "YDS", "YDT", "YÖKDİL"] as const).map((ex) => (
+        {/* Satır 1: Sınav Modu & Görünüm Modu & Canlı Arama */}
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Sınav Modu Seçici */}
+            <div className="flex items-center gap-1.5 bg-black/40 p-1.5 rounded-2xl border border-white/10 flex-wrap">
+              <span className="text-[11px] font-bold text-white/50 px-2 flex items-center gap-1">
+                <Filter className="w-3 h-3 text-cyan-400" /> Sınav:
+              </span>
+              {(["TÜMÜ", "YDS", "YDT", "YÖKDİL"] as const).map((ex) => (
+                <button
+                  key={ex}
+                  type="button"
+                  onClick={() => {
+                    setSelectedExam(ex);
+                    resetIdx();
+                  }}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                    selectedExam === ex
+                      ? "bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white shadow-md shadow-cyan-500/20 scale-105"
+                      : "text-white/60 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {ex === "TÜMÜ" ? "🌟 Tüm Sınavlar" : ex === "YDS" ? "🎯 YDS" : ex === "YDT" ? "🎓 YDT" : "🔬 YÖKDİL"}
+                </button>
+              ))}
+            </div>
+
+            {/* Görünüm Modu: 3D Kart vs Tüm Liste Tablosu */}
+            <div className="flex items-center gap-1 bg-black/40 p-1 rounded-2xl border border-white/10 shrink-0">
               <button
-                key={ex}
                 type="button"
-                onClick={() => {
-                  setSelectedExam(ex);
-                  resetIdx();
-                }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
-                  selectedExam === ex
-                    ? "bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white shadow-md shadow-cyan-500/20 scale-105"
+                onClick={() => setViewMode("card")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                  viewMode === "card"
+                    ? "bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white shadow-md shadow-cyan-500/20"
                     : "text-white/60 hover:text-white hover:bg-white/5"
                 }`}
               >
-                {ex === "TÜMÜ" ? "🌟 Tüm Sınavlar" : ex === "YDS" ? "🎯 YDS" : ex === "YDT" ? "🎓 YDT" : "🔬 YÖKDİL"}
+                <LayoutGrid className="w-3.5 h-3.5" />
+                <span>3D Kart</span>
               </button>
-            ))}
+              <button
+                type="button"
+                onClick={() => setViewMode("table")}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+                  viewMode === "table"
+                    ? "bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 text-white shadow-md shadow-cyan-500/20"
+                    : "text-white/60 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <TableIcon className="w-3.5 h-3.5" />
+                <span>Tablo ({sortedWords.length})</span>
+              </button>
+            </div>
           </div>
 
           {/* Canlı Arama Kutusu */}
@@ -554,6 +633,153 @@ export default function FlashcardsPage() {
               Yeni Kelime Ekle &rarr;
             </Link>
           </div>
+        </div>
+      ) : viewMode === "table" ? (
+        <div className="card-vibrant p-4 sm:p-6 space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-white/10">
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                <span>📋</span> Tüm Kelime Envanteri Tablosu
+              </h3>
+              <p className="text-xs text-white/60">
+                Toplam <strong className="text-cyan-300 font-mono">{sortedWords.length}</strong> kelime. İstediğiniz satıra veya &ldquo;3D Aç&rdquo; butonuna basarak kart görünümüne geçebilirsiniz.
+              </p>
+            </div>
+            <div className="text-xs text-white/50 font-mono">
+              Sayfa {tablePage} / {totalTablePages}
+            </div>
+          </div>
+
+          {/* Responsive Tablo */}
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full text-left text-xs text-white/80">
+              <thead className="bg-black/40 text-[11px] uppercase font-bold text-white/60 border-b border-white/10">
+                <tr>
+                  <th className="py-3 px-4">Kelime & Telaffuz</th>
+                  <th className="py-3 px-4">Türkçe Anlamı</th>
+                  <th className="py-3 px-3">Tür</th>
+                  <th className="py-3 px-3">Seviye</th>
+                  <th className="py-3 px-3">Sınav</th>
+                  <th className="py-3 px-4">Kaynak / Havuz</th>
+                  <th className="py-3 px-3 text-right">3D Kart</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {paginatedWords.map((word) => (
+                  <tr
+                    key={word.id}
+                    onClick={() => openIn3DCard(word)}
+                    className="hover:bg-white/[0.06] transition-colors cursor-pointer group"
+                  >
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={(e) => speakWord(word.word, e)}
+                          className="p-1 rounded-lg bg-white/5 hover:bg-cyan-500/20 text-white/50 hover:text-cyan-300 transition-colors"
+                          title="Sesli Dinle (US)"
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="font-bold text-white text-sm group-hover:text-cyan-300 transition-colors">
+                          {word.word}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 font-medium text-white/90">
+                      {word.tr}
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 border border-purple-400/30 capitalize">
+                        {word.type}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                        {word.level}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <div className="flex gap-1 flex-wrap">
+                        {word.exams.map((ex) => (
+                          <span
+                            key={ex}
+                            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-white/10 text-white/70"
+                          >
+                            {ex}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-[11px] text-white/60">
+                      <span className="line-clamp-1" title={word.sourceCategory}>
+                        {word.sourceCategory || "DİL MASTER"}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-right">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          openIn3DCard(word);
+                        }}
+                        className="px-2.5 py-1 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 text-cyan-200 text-[11px] font-bold transition-all shrink-0 inline-flex items-center gap-1"
+                      >
+                        <span>🃏</span>
+                        <span>3D Aç</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Sayfalama Kontrolleri */}
+          {totalTablePages > 1 && (
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-white/10 text-xs">
+              <div className="text-white/50">
+                Toplam <strong>{sortedWords.length}</strong> kelimeden <strong>{(tablePage - 1) * TABLE_PAGE_SIZE + 1}</strong> - <strong>{Math.min(tablePage * TABLE_PAGE_SIZE, sortedWords.length)}</strong> arası gösteriliyor
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  disabled={tablePage === 1}
+                  onClick={() => setTablePage(1)}
+                  className="px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white disabled:opacity-30 disabled:pointer-events-none"
+                >
+                  İlk
+                </button>
+                <button
+                  type="button"
+                  disabled={tablePage === 1}
+                  onClick={() => setTablePage((p) => Math.max(1, p - 1))}
+                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white disabled:opacity-30 disabled:pointer-events-none"
+                >
+                  ← Önceki
+                </button>
+                <span className="px-3 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/40 text-cyan-200 font-bold font-mono">
+                  {tablePage} / {totalTablePages}
+                </span>
+                <button
+                  type="button"
+                  disabled={tablePage === totalTablePages}
+                  onClick={() => setTablePage((p) => Math.min(totalTablePages, p + 1))}
+                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white disabled:opacity-30 disabled:pointer-events-none"
+                >
+                  Sonraki →
+                </button>
+                <button
+                  type="button"
+                  disabled={tablePage === totalTablePages}
+                  onClick={() => setTablePage(totalTablePages)}
+                  className="px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-white disabled:opacity-30 disabled:pointer-events-none"
+                >
+                  Son
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <>

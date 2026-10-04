@@ -12,6 +12,7 @@ import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import FloatingSideBar from "@/components/FloatingSideBar";
+import DesktopSidebar from "@/components/DesktopSidebar";
 
 export const metadata: Metadata = {
   title: "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık ve Sınav Akademisi",
@@ -22,6 +23,9 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "DİL MASTER",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
   },
   icons: {
     icon: [
@@ -74,7 +78,8 @@ export default function RootLayout({
             <ThemeInitializer />
             <AmbientBackground />
             <Header />
-            <main className="min-h-[calc(100vh-4rem)]">{children}</main>
+            <DesktopSidebar />
+            <main className="min-h-[calc(100vh-4rem)] xl:pl-[72px] transition-[padding] duration-300">{children}</main>
             <FloatingSideBar />
             <AiWidget />
             <RecoveryBanner />
@@ -84,7 +89,7 @@ export default function RootLayout({
             <PwaInstaller />
           </BadgeQueueProvider>
         </CrashGuardianProvider>
-        <footer className="border-t border-white/10 py-8 mt-12">
+        <footer className="border-t border-white/10 py-8 mt-12 xl:pl-[72px] transition-[padding] duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
               🧠 YDS Master — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.

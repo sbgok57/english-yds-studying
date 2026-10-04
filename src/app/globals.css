@@ -37,7 +37,7 @@ html {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  overflow-y: auto !important;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -47,8 +47,8 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
-  overflow-y: auto !important;
   position: relative;
   -webkit-overflow-scrolling: touch;
   @apply text-slate-100 antialiased;
@@ -379,10 +379,15 @@ html.light .ambient-blob {
 }
 
 html.light ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.03);
+  background: #f1f5f9;
 }
 html.light ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.5);
+  background: linear-gradient(180deg, #3b82f6 0%, #6366f1 100%);
+  border-radius: 8px;
+  border: 2px solid #f1f5f9;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb 0%, #4f46e5 100%);
 }
 
 /* ---------- animation keyframes (used by components/animations.tsx) ---------- */
@@ -505,10 +510,16 @@ html.light ::-webkit-scrollbar-thumb {
 .bubble:hover { transform: scale(1.12); }
 
 /* scrollbar */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.04); }
-::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.7); }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(180deg, #06b6d4 0%, #8b5cf6 100%); 
+  border-radius: 8px; 
+  border: 2px solid rgba(15, 23, 42, 0.8);
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: linear-gradient(180deg, #22d3ee 0%, #a855f7 100%); 
+}
 
 /* ---------- kritik vurgu (kırmızı + altı çizili) ---------- */
 .crit {

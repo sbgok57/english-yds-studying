@@ -307,17 +307,19 @@ export function scanPayload(raw: string, context = "generic"): ScanResult {
     }
   }
 
-  // 8. SSRF (Server-Side Request Forgery)
-  for (const pattern of SSRF_PATTERNS) {
-    if (pattern.test(normalized)) {
-      recordThreat("SSRF_ATTACK");
-      return {
-        clean: false,
-        score: 85,
-        threatCategory: "SSRF_ATTACK",
-        matchedSignature: pattern.toString(),
-        details: "Sunucu taraflı istek sahteciliği (SSRF) girişimi engellendi.",
-      };
+  // 8. SSRF (Server-Side Request Forgery) - Only scan outbound fetch targets, never incoming user routes or search queries
+  if (context === "outbound_fetch" || context === "webhook_url") {
+    for (const pattern of SSRF_PATTERNS) {
+      if (pattern.test(normalized)) {
+        recordThreat("SSRF_ATTACK");
+        return {
+          clean: false,
+          score: 85,
+          threatCategory: "SSRF_ATTACK",
+          matchedSignature: pattern.toString(),
+          details: "Sunucu taraflı istek sahteciliği (SSRF) girişimi engellendi.",
+        };
+      }
     }
   }
 
