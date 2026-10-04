@@ -18,13 +18,13 @@ export default function TacticsPage() {
       <div className="rounded-3xl p-8 md:p-10 bg-gradient-to-r from-cyan-950 via-blue-950 to-indigo-950 border-2 border-cyan-500/30 shadow-2xl space-y-4">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-xs font-bold text-cyan-300">
           <Compass className="w-4 h-4" />
-          <span>11 Soru Tipi • Adım Adım Çözüm Oynatıcısı & Tuzak Analizi</span>
+          <span>YDS · YDT · YÖKDİL • 11 Soru Tipi • Adım Adım Çözüm & Çeldirici Eleme</span>
         </div>
         <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-          YDS'nin 11 Soru Tipini Çözme Rehberi & Taktik Laboratuvarı
+          DİL MASTER Soru Çözme Rehberi & Taktik Laboratuvarı
         </h1>
         <p className="text-xs md:text-sm text-white/80 max-w-2xl leading-relaxed">
-          Her soru tipinin kendine özgü bir şifresi ve hedef süresi vardır. Çözümlü örnek soruları adım adım izleyin, şık eleme sanatını öğrenin ve sınavdaki çeldiricilere asla takılmayın.
+          YDS, YDT ve YÖKDİL sınavlarında soru tiplerinin stratejik şifreleri, zaman yönetimi (YDT: 120 dk, YDS/YÖKDİL: 180 dk) ve şık eleme sanatını adım adım keşfedin.
         </p>
 
         {/* 600 Soru ve 100 Önemli Soru Eylemleri */}

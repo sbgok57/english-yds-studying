@@ -85,6 +85,7 @@ export interface UsageData {
   solvedQuestions?: Record<string, { correct: boolean; date: number }>;
   levelAssessment?: LevelAssessmentState;
   gamification?: GamificationState;
+  activeExams?: ("YDS" | "YDT" | "YÖKDİL")[];
 }
 
 const KEY = "yds-master-usage-v1";
@@ -128,6 +129,7 @@ export function defaultUsage(): UsageData {
     solvedQuestions: {},
     levelAssessment: defaultLevelAssessment(),
     gamification: defaultGamification(),
+    activeExams: ["YDS", "YDT", "YÖKDİL"],
     careerGoal: {
       profession: "Akademisyenlik & Yurt Dışı Uzmanlığı",
       targetScore: "85+",
@@ -231,7 +233,7 @@ export function useUsage() {
 // ---- kolaylaştırıcı kayıt fonksiyonları ----
 export function recordWord(
   update: (fn: (u: UsageData) => UsageData) => void,
-  id: number,
+  id: number | string,
   correct: boolean
 ) {
   update((u) => {

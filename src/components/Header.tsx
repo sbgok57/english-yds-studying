@@ -7,17 +7,18 @@ import MenuDrawer from "@/components/MenuDrawer";
 import StreakBadge from "@/components/StreakBadge";
 import ThemeToggle from "@/components/ThemeToggle";
 
+import ExamModeSwitcher from "@/components/ExamModeSwitcher";
+
 const QUICK = [
+  { href: "/exams", label: "Sınavlar (YDS/YDT/YÖKDİL)", emoji: "⏱️" },
   { href: "/vocabulary", label: "Kelimeler", emoji: "📚" },
   { href: "/import", label: "PDF / Ekle", emoji: "⚡" },
-  { href: "/vocabulary/flashcards", label: "Kartlar", emoji: "🃏" },
-  { href: "/exams", label: "Sınavlar", emoji: "⏱️" },
+  { href: "/vocabulary/flashcards", label: "3D Kartlar", emoji: "🃏" },
   { href: "/grammar", label: "Gramer", emoji: "📖" },
   { href: "/tactics", label: "Taktikler", emoji: "🎯" },
   { href: "/avatars", label: "Avatarlar", emoji: "🎨" },
   { href: "/speaking", label: "Speaking", emoji: "🎙️" },
   { href: "/haberler", label: "Haberler", emoji: "📰" },
-  { href: "/sertifikalar", label: "Sertifikalar", emoji: "🏅" },
 ];
 
 export default function Header() {
@@ -33,21 +34,26 @@ export default function Header() {
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
-                YDS Master
+                DİL MASTER
               </span>
-              <span className="block text-[10px] font-mono tracking-widest text-cyan-300 uppercase -mt-1">
-                Görsel Hafıza Platformu
+              <span className="block text-[10px] font-mono tracking-wider text-cyan-300 uppercase -mt-1 font-bold">
+                YDS · YDT · YÖKDİL
               </span>
             </div>
           </Link>
 
-          <div className="hidden md:flex flex-1 max-w-xs lg:max-w-sm justify-center">
+          {/* Sınav Modu Seçici (Hızlı Hap Bar) */}
+          <div className="hidden lg:flex shrink-0">
+            <ExamModeSwitcher compact />
+          </div>
+
+          <div className="hidden md:flex flex-1 max-w-xs lg:max-w-xs justify-center">
             <SearchBox />
           </div>
 
           {/* Masaüstü Hızlı Menü */}
           <nav className="hidden xl:flex items-center gap-1">
-            {QUICK.slice(0, 6).map((n) => (
+            {QUICK.slice(0, 5).map((n) => (
               <Link
                 key={n.href}
                 href={n.href}

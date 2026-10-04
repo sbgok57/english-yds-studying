@@ -138,6 +138,26 @@ const PROTOTYPE_POLLUTION_PATTERNS = [
   /Object\.prototype/i,
 ];
 
+// Server-Side Request Forgery (SSRF) signatures
+const SSRF_PATTERNS = [
+  /https?:\/\/(127\.0\.0\.1|localhost|0\.0\.0\.0|169\.254\.169\.254|metadata\.google\.internal)/i,
+  /https?:\/\/10\.\d{1,3}\.\d{1,3}\.\d{1,3}/i,
+  /https?:\/\/172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}/i,
+  /https?:\/\/192\.168\.\d{1,3}\.\d{1,3}/i,
+  /gopher:\/\//i,
+  /dict:\/\//i,
+];
+
+// AI Prompt Injection & Jailbreak signatures
+const PROMPT_INJECTION_PATTERNS = [
+  /ignore\s+(all\s+)?(previous|prior)\s+instructions/i,
+  /disregard\s+(all\s+)?(previous|prior)\s+instructions/i,
+  /you\s+are\s+now\s+(DAN|unfiltered|jailbroken|in\s+developer\s+mode)/i,
+  /reveal\s+(your\s+)?system\s+prompt/i,
+  /output\s+initial\s+prompt/i,
+  /print\s+system\s+instructions/i,
+];
+
 // Known Automated Attack & Vulnerability Scanners
 const SCANNER_USER_AGENTS = [
   /sqlmap/i,
@@ -283,6 +303,34 @@ export function scanPayload(raw: string, context = "generic"): ScanResult {
         threatCategory: "PROTOTYPE_POLLUTION",
         matchedSignature: pattern.toString(),
         details: "JavaScript nesne zehirleme (Prototype Pollution) girişimi engellendi.",
+      };
+    }
+  }
+
+  // 8. SSRF (Server-Side Request Forgery)
+  for (const pattern of SSRF_PATTERNS) {
+    if (pattern.test(normalized)) {
+      recordThreat("SSRF_ATTACK");
+      return {
+        clean: false,
+        score: 85,
+        threatCategory: "SSRF_ATTACK",
+        matchedSignature: pattern.toString(),
+        details: "Sunucu taraflı istek sahteciliği (SSRF) girişimi engellendi.",
+      };
+    }
+  }
+
+  // 9. AI Prompt Injection & Jailbreak
+  for (const pattern of PROMPT_INJECTION_PATTERNS) {
+    if (pattern.test(normalized)) {
+      recordThreat("PROMPT_INJECTION");
+      return {
+        clean: false,
+        score: 80,
+        threatCategory: "PROMPT_INJECTION",
+        matchedSignature: pattern.toString(),
+        details: "Yapay zekâ prompt manipülasyonu / jailbreak girişimi engellendi.",
       };
     }
   }

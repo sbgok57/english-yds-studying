@@ -137,7 +137,7 @@ export default function AdminPage() {
             <span>sbgok57</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white">
-            🎓 Öğrenci Sınav Süreçleri & Gelişim Takip Merkezi
+            🎓 DİL MASTER Öğrenci Takip & Sınav Süreç Merkezi (YDS · YDT · YÖKDİL)
           </h1>
           <p className="text-sm text-white/60 mt-1">
             Siteye kayıtlı öğrencilerin seviye teşhisleri, deneme sınav sonuçları, netleri ve hedeflerini canlı izle.
@@ -548,44 +548,59 @@ export default function AdminPage() {
                 </p>
               ) : (
                 <div className="space-y-2">
-                  {selectedStudent.attempts.map((att, idx) => (
-                    <div
-                      key={att.id || idx}
-                      className="p-3 rounded-xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                    >
-                      <div>
-                        <p className="text-xs font-black text-white flex items-center gap-1.5">
-                          <span className="text-cyan-400">#{(idx + 1)}</span>
-                          <span className="uppercase">{att.examId.replace(/-/g, " ")}</span>
-                        </p>
-                        <p className="text-[10px] text-white/40 mt-0.5">
-                          Tarih: {new Date(att.createdAt).toLocaleDateString("tr-TR", { hour: "2-digit", minute: "2-digit" })} · Süre: {att.timeSpent || 180} dk
-                        </p>
-                      </div>
+                  {selectedStudent.attempts.map((att, idx) => {
+                    const isYdt = att.examId.toLowerCase().startsWith("ydt") || att.examId.toLowerCase().startsWith("lys");
+                    const isYokdil = att.examId.toLowerCase().startsWith("yokdil");
+                    const category = isYdt ? "YDT" : isYokdil ? "YÖKDİL" : "YDS";
+                    const badgeColor = isYdt
+                      ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
+                      : isYokdil
+                      ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
+                      : "bg-cyan-500/20 text-cyan-300 border-cyan-500/40";
 
-                      <div className="flex items-center gap-2 text-right">
-                        <div className="text-right">
-                          <span className="text-xs font-black text-emerald-300 font-mono block">
-                            {att.net} Net ({att.score} Puan)
-                          </span>
-                          <span className="text-[10px] text-white/50 font-mono">
-                            ✅ {att.correct}D &nbsp; ❌ {att.wrong}Y &nbsp; ⚪ {att.empty}B
+                    return (
+                      <div
+                        key={att.id || idx}
+                        className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-white/20 transition-all"
+                      >
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${badgeColor}`}>
+                              {category}
+                            </span>
+                            <p className="text-xs font-black text-white">
+                              <span className="uppercase">{att.examId.replace(/-/g, " ")}</span>
+                            </p>
+                          </div>
+                          <p className="text-[10px] text-white/50 mt-1 font-mono">
+                            📅 {new Date(att.createdAt).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "medium" })} · ⏱️ {att.timeSpent || (isYdt ? 120 : 180)} dk
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-3 text-right">
+                          <div className="text-right">
+                            <span className="text-xs font-black text-emerald-300 font-mono block">
+                              {att.net} Net ({att.score} Puan)
+                            </span>
+                            <span className="text-[10px] text-white/50 font-mono">
+                              ✅ {att.correct}D &nbsp; ❌ {att.wrong}Y &nbsp; ⚪ {att.empty}B
+                            </span>
+                          </div>
+                          <span
+                            className={`text-xs px-2.5 py-1 rounded-lg font-black ${
+                              att.score >= 80
+                                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                                : att.score >= 60
+                                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
+                                : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                            }`}
+                          >
+                            %{att.score}
                           </span>
                         </div>
-                        <span
-                          className={`text-xs px-2 py-1 rounded-lg font-black ${
-                            att.score >= 80
-                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                              : att.score >= 60
-                              ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-                              : "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                          }`}
-                        >
-                          %{att.score}
-                        </span>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

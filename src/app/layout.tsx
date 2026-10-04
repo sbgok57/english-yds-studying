@@ -13,14 +13,14 @@ import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 
 export const metadata: Metadata = {
-  title: "YDS Master — A1/A2'den YDS'ye Görsel Hafıza Odaklı Hazırlık Platformu",
+  title: "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık ve Sınav Akademisi",
   description:
-    "3D flashcards, 180 dakikalık gerçek online optik form, 10.000 avatar, 19 animasyonlu gramer konusu ve 11 soru tipi taktikleriyle YDS'yi fethedin.",
+    "YDS, YDT (LYS-5) ve YÖKDİL için ayrılmış özel bölümler, 2010-2026 tüm yayınlar kelime havuzu, 3D flashcards, akıllı denemeler ve soru taktikleri platformu.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "YDS Master",
+    title: "DİL MASTER",
   },
   icons: {
     icon: [
