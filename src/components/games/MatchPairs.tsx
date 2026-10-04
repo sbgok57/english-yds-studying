@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
+import { useUsage, recordWord } from "@/lib/store";
 
 interface Card {
   id: number;
@@ -21,6 +22,7 @@ function shuffle<T>(a: T[]): T[] {
 }
 
 export default function MatchPairs() {
+  const { update, addXp } = useUsage();
   const [cards, setCards] = useState<Card[]>([]);
   const [open, setOpen] = useState<number[]>([]);
   const [matched, setMatched] = useState<Set<number>>(new Set());
@@ -68,8 +70,11 @@ export default function MatchPairs() {
       if (cards[a].pair === cards[b].pair && cards[a].kind !== cards[b].kind) {
         setMatched((prev) => new Set(prev).add(a).add(b));
         setOpen([]);
-        setMsg("Eşleştirdin kanka! 🔥");
-        setSub(`${cards[a].text} = ${cards[b].text}`);
+        const enWord = cards[a].kind === "en" ? cards[a].text : cards[b].text;
+        recordWord(update, enWord, true);
+        addXp(15, `match-pairs-${enWord}`);
+        setMsg("Eşleştirdin kanka! 🔥 (+15 XP)");
+        setSub(`${cards[a].text} = ${cards[b].text} — Hafızana kaydedildi!`);
         setCelebrate(true);
       } else {
         timeoutRef.current = setTimeout(() => setOpen([]), 900);

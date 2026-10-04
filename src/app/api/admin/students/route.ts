@@ -470,7 +470,7 @@ export async function GET(req: NextRequest) {
         id: "4e58197d-4fa5-420b-9a75-60bca85a3cc4",
         username: "yagoo_x",
         email: "yagiz.ilhan32@gmail.com",
-        level: "B2",
+        level: "A1",
         streak: 4,
         totalPoints: 340,
         createdAt: "2026-09-29T17:54:52.238Z",
@@ -486,6 +486,17 @@ export async function GET(req: NextRequest) {
     }
 
     // Strict P0 Guard: Only genuine students (e.g. Yağız), never admin (sbgok57) or test/mock/seed bots
+    const FORBIDDEN_MOCKS = new Set([
+      "selin_aksoy",
+      "mert_ozkan",
+      "zeynep_demir",
+      "burak_yilmaz",
+      "ydskasifi",
+      "test_student",
+      "bot_user",
+      "mock_student",
+    ]);
+
     const students = Array.from(studentsMap.values()).filter((s) => {
       const e = s.email.toLowerCase().trim();
       const u = s.username.toLowerCase().trim();
@@ -493,12 +504,29 @@ export async function GET(req: NextRequest) {
         e !== "sinembuse724@gmail.com" &&
         e !== "ogrenci@ydsmaster.com" &&
         u !== "sbgok57" &&
-        u !== "ydskasifi" &&
+        !FORBIDDEN_MOCKS.has(u) &&
         !e.startsWith("test_") &&
         !e.startsWith("bot_") &&
         !e.startsWith("mock_")
       );
     });
+
+    // Kurucu Yönetici Bilgileri (sbgok57)
+    const adminAccount = {
+      username: "sbgok57",
+      email: "sinembuse724@gmail.com",
+      role: "Kurucu Yönetici (Root Admin)",
+      status: "Aktif • Tam Yetkili",
+      securityProtection: "Antivirüs & Siber Savunma v4.2 Aktif",
+      lastActive: new Date().toISOString(),
+      permissions: [
+        "Tüm Öğrenci Süreç Takibi",
+        "Canlı Süre & Aktivite Zaman Çizelgesi",
+        "Sınav Denemeleri & Net Analizi",
+        "CSV Karne Dışa Aktarma",
+        "Siber Güvenlik & Telemetri Yönetimi",
+      ],
+    };
 
     // Aggregate Platform Statistics for Real Students
     const totalStudents = students.length;
@@ -516,6 +544,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       ok: true,
+      adminAccount,
       stats: {
         totalStudents,
         totalExamsTaken,

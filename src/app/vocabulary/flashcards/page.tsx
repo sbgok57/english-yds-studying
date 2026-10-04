@@ -79,6 +79,21 @@ export default function FlashcardsPage() {
   const [tablePage, setTablePage] = useState(1);
   const TABLE_PAGE_SIZE = 30;
 
+  // Kişiselleştirilmiş Seviye Tespiti (Senin seviyen bu, buradan başlayalım!)
+  const [userDetectedLevel, setUserDetectedLevel] = useState<string>("A1");
+
+  useEffect(() => {
+    try {
+      const rawTest = localStorage.getItem("yds_level_test_result_v1");
+      if (rawTest) {
+        const parsed = JSON.parse(rawTest);
+        if (parsed.level) setUserDetectedLevel(parsed.level.toUpperCase());
+      }
+    } catch {
+      // safe fallback
+    }
+  }, []);
+
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [streak, setStreak] = useState(0);
@@ -406,6 +421,41 @@ export default function FlashcardsPage() {
               <span>Tüm Liste</span>
             </Link>
           </div>
+        </div>
+      </div>
+
+      {/* 🎯 Kişiselleştirilmiş Seviye Başlangıç Banner'ı */}
+      <div className="rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-cyan-950/40 via-purple-950/40 to-slate-900 border-2 border-cyan-400/40 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-2xl shrink-0 shadow-md">
+            🎯
+          </div>
+          <div>
+            <h4 className="text-sm sm:text-base font-black text-white flex items-center gap-2 flex-wrap">
+              <span>Senin Seviyen:</span>
+              <span className="px-2.5 py-0.5 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-200 text-xs font-mono font-bold">
+                {userDetectedLevel} ({userDetectedLevel === "A1" ? "Başlangıç" : userDetectedLevel === "A2" ? "Temel" : userDetectedLevel === "B1" ? "Orta" : "İleri"})
+              </span>
+              <span className="text-xs text-white/50">• Hadi buradan başlayalım!</span>
+            </h4>
+            <p className="text-xs text-white/60 mt-0.5">
+              Kendi seviyene uygun kelimelerle başlayarak adım adım ilerle; netlerini ve kalıcılığını katla.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedLevel(userDetectedLevel);
+              resetIdx();
+            }}
+            className="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 active:scale-95 transition-all shadow-md shadow-cyan-500/20 flex items-center gap-2"
+          >
+            <span>🚀</span>
+            <span>{userDetectedLevel} Seviyesinden Başla ({consolidatedPool.filter(w => w.level.toUpperCase() === userDetectedLevel.toUpperCase()).length} Kelime)</span>
+          </button>
         </div>
       </div>
 

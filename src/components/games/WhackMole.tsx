@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
+import { useUsage, recordWord } from "@/lib/store";
 
 interface Mole {
   id: number;
@@ -12,6 +13,7 @@ interface Mole {
 }
 
 export default function WhackMole() {
+  const { update, addXp } = useUsage();
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
   const [targetWord, setTargetWord] = useState<{ word: string; tr: string; type: string } | null>(null);
@@ -62,12 +64,14 @@ export default function WhackMole() {
   const whack = (mole: Mole) => {
     if (!mole.active) return;
 
-    if (mole.isTarget) {
+    if (mole.isTarget && targetWord) {
       const nextScore = score + 10;
       const nextStreak = streak + 1;
       setScore(nextScore);
       setStreak(nextStreak);
-      setFeedback("🎯 Tam İsabet!");
+      setFeedback("🎯 Tam İsabet! (+10 XP)");
+      recordWord(update, targetWord.word, true);
+      addXp(10, `whack-mole-${targetWord.word}`);
 
       if (nextStreak > 0 && nextStreak % 5 === 0) {
         setCelebrate(true);

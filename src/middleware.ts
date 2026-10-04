@@ -58,7 +58,15 @@ export async function middleware(req: NextRequest) {
     return applySecurityHeaders(NextResponse.redirect(new URL("/", req.url)));
   }
 
-  // 4. If unauthenticated user tries to access a strictly protected route -> redirect to /giris
+  // 4. If unauthenticated visitor lands on root "/" -> redirect to /giris so login screen appears first
+  const isGuest = req.cookies.get("yds_guest_access")?.value === "true" || req.nextUrl.searchParams.get("guest") === "1";
+  if (pathname === "/" && !isAuthenticated && !isGuest) {
+    const loginUrl = new URL("/giris", req.url);
+    loginUrl.searchParams.set("returnTo", "/");
+    return applySecurityHeaders(NextResponse.redirect(loginUrl));
+  }
+
+  // 5. If unauthenticated user tries to access a strictly protected route -> redirect to /giris
   const requiresAuth = STRICTLY_PROTECTED_PATHS.some(
     (p) => pathname === p || pathname.startsWith(p + "/")
   );

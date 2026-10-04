@@ -198,14 +198,28 @@ function LoginForm() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-white/10 text-center text-xs text-white/50">
-          Henüz hesabın yok mu?{" "}
-          <Link
-            href={`/kayit${returnTo !== "/" ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`}
-            className="font-bold text-cyan-400 hover:underline ml-1"
-          >
-            Hemen Ücretsiz Kayıt Ol
-          </Link>
+        <div className="mt-8 pt-6 border-t border-white/10 text-center text-xs text-white/50 space-y-2">
+          <div>
+            Henüz hesabın yok mu?{" "}
+            <Link
+              href={`/kayit${returnTo !== "/" ? `?returnTo=${encodeURIComponent(returnTo)}` : ""}`}
+              className="font-bold text-cyan-400 hover:underline ml-1"
+            >
+              Hemen Ücretsiz Kayıt Ol
+            </Link>
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={() => {
+                document.cookie = "yds_guest_access=true; path=/; max-age=86400";
+                window.location.href = returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/";
+              }}
+              className="text-[11px] text-white/40 hover:text-white transition-colors underline"
+            >
+              🚀 Giriş Yapmadan Misafir Olarak İncele &rarr;
+            </button>
+          </div>
         </div>
       </div>
     </div>
