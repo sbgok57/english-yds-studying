@@ -10,6 +10,7 @@ import CaptureBootstrap from "@/components/CaptureBootstrap";
 import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import FloatingSideBar from "@/components/FloatingSideBar";
 import DesktopSidebar from "@/components/DesktopSidebar";
 
@@ -74,17 +75,19 @@ export default function RootLayout({
       <body>
         <CrashGuardianProvider>
           <BadgeQueueProvider>
-            <ThemeInitializer />
-            <Header />
-            <DesktopSidebar />
-            <main className="min-h-[calc(100vh-4rem)] xl:pl-[72px] transition-[padding] duration-300">{children}</main>
-            <FloatingSideBar />
-            <AiWidget />
-            <RecoveryBanner />
-            <ErrorToast />
-            <CaptureBootstrap />
-            <DebugPanel />
-            <PwaInstaller />
+            <ThemeProvider>
+              <ThemeInitializer />
+              <Header />
+              <DesktopSidebar />
+              <main className="min-h-[calc(100vh-4rem)] xl:pl-[72px] transition-[padding] duration-300">{children}</main>
+              <FloatingSideBar />
+              <AiWidget />
+              <RecoveryBanner />
+              <ErrorToast />
+              <CaptureBootstrap />
+              <DebugPanel />
+              <PwaInstaller />
+            </ThemeProvider>
           </BadgeQueueProvider>
         </CrashGuardianProvider>
         <footer className="border-t border-white/10 py-8 mt-12 xl:pl-[72px] transition-[padding] duration-300">

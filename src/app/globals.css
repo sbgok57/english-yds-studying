@@ -61,6 +61,23 @@ body {
   background-attachment: fixed;
 }
 
+/* ---------- 1000+ DİNAMİK TEMA SVG DESEN KATMANI ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: var(--theme-pattern, none);
+  background-size: var(--theme-pattern-size, auto);
+  opacity: 0.65;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
 .card-vibrant {
   border: 1px solid var(--theme-border, rgba(255, 255, 255, 0.12)) !important;
   background-color: var(--theme-card, rgba(13, 19, 34, 0.75)) !important;

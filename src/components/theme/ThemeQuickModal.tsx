@@ -105,7 +105,7 @@ export default function ThemeQuickModal({ open, onClose }: ThemeQuickModalProps)
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h3 className="text-base sm:text-lg font-black text-white light:text-slate-900 truncate">
-                  2.000+ Tema ve Renk Stüdyosu
+                  1.000+ Algoritmik Tema Motoru
                 </h3>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 light:bg-cyan-100 light:text-cyan-800 font-bold shrink-0">
                   {THEME_COUNT} Tema

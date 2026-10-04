@@ -1,10 +1,18 @@
-// Comprehensive YDS Study Plans, CEFR Guides, and Plan Generator Engine
+// ============================================================
+// src/lib/data-study-plans.ts
+// DİL MASTER — Çoklu Sınav (YDS, YDT, YÖKDİL Fen/Sağlık/Sosyal)
+// Çalışma Planları, CEFR Kılavuzları ve Dinamik Takvim Motoru
+// ============================================================
+
+import { safeSetStorage, safeGetStorage } from "@/lib/storage-optimizer";
 
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+export type ExamType = "YDS" | "YDT" | "YOKDIL";
+export type YokdilField = "saglik" | "fen" | "sosyal";
 
 export interface StudyTask {
   id: string;
-  module: "vocabulary" | "grammar" | "reading" | "tactics" | "exam" | "review";
+  module: "vocabulary" | "grammar" | "reading" | "tactics" | "exam" | "review" | "translation";
   title: string;
   description: string;
   minutes: number;
@@ -41,8 +49,10 @@ export interface StudyPlan {
   id: string;
   title: string;
   description: string;
+  examType: ExamType;
+  yokdilField?: YokdilField;
   currentLevel: CefrLevel;
-  targetLevel: CefrLevel | "YDS";
+  targetLevel: CefrLevel | "YDS" | "YDT" | "YÖKDİL" | "YOKDIL";
   targetScore?: number;
   startDate: string;
   examDate?: string;
@@ -59,7 +69,7 @@ export interface StudyPlan {
 
 export const STUDY_PLANS_STORAGE_KEY = "yds-master-study-plans-v1";
 
-// ==================== A1-C2 STUDY GUIDES ====================
+// ==================== A1-C2 CEFR STUDY GUIDES ====================
 
 export interface LevelStudyGuide {
   level: CefrLevel;
@@ -98,253 +108,243 @@ export const LEVEL_STUDY_GUIDES: Record<CefrLevel, LevelStudyGuide> = {
       "to be (am / is / are) ve şahıs zamirleri",
       "Simple Present Tense (Geniş Zaman)",
       "can / can't yeterlilik kipi",
-      "have got / has got sahiplik",
-      "there is / there are",
-      "Tekil ve çoğul isimler (regular/irregular)",
-      "Temel yer ve zaman edatları (in, on, at)"
+      "Temel edatlar (in, on, at, under, behind)",
+      "İyelik sıfatları ve tekil/çoğul isimler"
     ],
     keyVocabularyAreas: [
-      "Günlük eylemler, saatler, sayılar, aile",
-      "Ev, okul, ofis ve temel nesneler",
-      "Hava durumu, renkler, temel sıfatlar"
+      "Günlük eylemler, sayılar, renkler",
+      "Aile bireyleri ve meslekler",
+      "Zaman kavramları (günler, aylar, saatler)"
     ],
-    listeningSpeakingStrategy: "Kısa A1 diyaloglarını sesli dinle, Web Speech API ile telaffuz tekrarı yap.",
+    listeningSpeakingStrategy: "Yavaş tempolu diyalogları dinleyip sesli tekrar (shadowing) yapın.",
     memoryRetentionMethods: [
-      "10 dakika sonra, 1 gün sonra, 3 gün sonra ve 7 gün sonra aralıklı tekrar.",
-      "Kelimeleri tek başına değil, iki kelimelik mini öbeklerle ezberle (örn. 'drink water').",
-      "Yanlış yaptığın her soruyu hemen deftere yaz."
+      "Görsel kelime kartları ile günde 2 seans aktif geri çağırma (Active Recall).",
+      "Her kelimeyi Türkçe çevirisi yerine zihninizde bir sahne ile eşleştirin."
     ],
     fastTrackTactics: [
-      "İstisnalara boğulma; sadece en sık geçen 500 kelimeye ve Simple Present'a odaklan.",
-      "Hergün 25 dakikalık 2 Pomodoro bloğu uygula.",
-      "Karmaşık zamanları sonraya bırak."
+      "Ezber yapmayın; basit özne + fiil + nesne (SVO) iskeletine odaklanın.",
+      "Kelimeleri tek tek değil, 'drink coffee', 'go to school' gibi öbeklerle öğrenin."
     ],
-    successCriteria: "Temel bir paragrafı sözlüksüz anlayabilmek ve A1 mini sınavında %70+ almak.",
-    transitionTestRecommendation: "A2 seviye tespit testine girerek en az %60 başarı sağla.",
+    successCriteria: "Temel cümleleri hatasız kurabilmek ve A1 seviye testinden %70+ almak.",
+    transitionTestRecommendation: "A1 Seviye Atlama Sınavı ile A2'ye geçişi doğrulayın.",
     sampleWeeklySchedule: [
-      { day: "Pazartesi", time: "30 dk", focus: "Simple Present", detail: "Özne-fiil uyumu ve 8 yeni kelime" },
-      { day: "Salı", time: "30 dk", focus: "Kelime & Tekrar", detail: "Dünün 8 kelimesi + 8 yeni kelime + flashcard" },
-      { day: "Çarşamba", time: "40 dk", focus: "Kısa Okuma", detail: "A1 mini hikaye okuma ve cümle analizi" },
-      { day: "Perşembe", time: "30 dk", focus: "there is / are & can", detail: "Alıştırma ve 10 mini gramer sorusu" },
-      { day: "Cuma", time: "40 dk", focus: "Haftalık Tekrar", detail: "Haftanın 40 kelimesini aktif geri çağırma ile test et" },
-      { day: "Cumartesi", time: "45 dk", focus: "Karma Mini Test", detail: "20 soruluk A1 karma test + yanlış defteri" },
-      { day: "Pazar", time: "20 dk", focus: "Hafif Dinlenme & Motivasyon", detail: "İngilizce şarkı veya animasyon dinleme" }
+      { day: "Pazartesi", time: "30 dk", focus: "to be & Zamirler", detail: "Konu anlatımı ve 15 alıştırma" },
+      { day: "Salı", time: "30 dk", focus: "Temel Kelimeler", detail: "Görsel kartlarla 10 yeni kelime" },
+      { day: "Çarşamba", time: "30 dk", focus: "Simple Present", detail: "Olumlu, olumsuz ve soru kalıpları" },
+      { day: "Perşembe", time: "30 dk", focus: "Kısa Okuma", detail: "A1 seviyesinde 1 kısa paragraf analizi" },
+      { day: "Cuma", time: "30 dk", focus: "Haftalık Tekrar", detail: "SM-2 algoritmasıyla tüm kelimelerin tekrarı" },
+      { day: "Cumartesi", time: "45 dk", focus: "Karma Mini Test", detail: "20 soruluk pekiştirme testi" },
+      { day: "Pazar", time: "20 dk", focus: "Hata Defteri", detail: "Yanlış yapılan soruların gözden geçirilmesi" }
     ]
   },
   A2: {
     level: "A2",
-    title: "A2 — Geçmiş Zaman ve İletişim Temeli",
-    subtitle: "Temel cümleleri akıcı kurup geçmişe ve geleceğe adım atanlar için",
-    normalDuration: "10–14 Hafta",
-    fastDuration: "6–8 Hafta",
+    title: "A2 — Temel Düzey & Zaman Bağlantıları",
+    subtitle: "Geçmiş zaman, gelecek planları ve basit bağlaçlar",
+    normalDuration: "8–10 Hafta",
+    fastDuration: "4–5 Hafta",
     dailyMinutes: "45–75 Dakika",
-    targetWordCount: "1.000–1.500 Aktif / Pasif Kelime",
+    targetWordCount: "1000–1500 Kelime",
     dailyNewWords: 12,
     weeklyReadingCount: 3,
-    weeklyGrammarQuestions: 50,
+    weeklyGrammarQuestions: 40,
     keyGrammarTopics: [
-      "Simple Past Tense (düzenli ve düzensiz fiiller)",
-      "Past Continuous Tense ve 'when / while' bağlaçları",
-      "Future Forms (will vs be going to)",
-      "Karşılaştırma sıfatları (Comparatives & Superlatives)",
-      "Sayılabilen / sayılamayan isimler ve quantifiers (some, any, much, many, few)",
-      "Temel kipler (must, should, have to)"
+      "Simple Past Tense (Düzenli & Düzensiz fiiller)",
+      "Past Continuous (was / were + V-ing)",
+      "when / while bağlaç kombinasyonları",
+      "be going to & will gelecek zaman ayrımları",
+      "Karşılaştırma kalıpları (Comparatives & Superlatives)"
     ],
     keyVocabularyAreas: [
-      "Seyahat, tatil, ulaşım, yön tarifleri",
-      "Hastalıklar, sağlık, duygular, meslekler",
-      "Alışveriş, para birimleri, çevre olayları"
+      "Hava durumu, seyahat, alışveriş",
+      "Duygular ve fiziksel betimlemeler",
+      "Sık kullanılan bağlaçlar (and, but, because, so)"
     ],
-    listeningSpeakingStrategy: "Kısa haber parçalarını takip et, duyduğun cümleleri durdurup yüksek sesle tekrarla.",
+    listeningSpeakingStrategy: "Kısa haber bültenlerini ve podcast girişlerini takip edin.",
     memoryRetentionMethods: [
-      "Düzensiz fiil V2 ve V3 hallerini ritmik ses kayıtlarıyla tekrar et.",
-      "Kelimeleri zıt anlamlılarıyla eşleştirerek hafıza kancası oluştur."
+      "Aralıklı tekrar (1, 3, 7. gün kuralı).",
+      "Kelime defterine zıt anlamlılarıyla (antonyms) birlikte yazın."
     ],
     fastTrackTactics: [
-      "Geçmiş zaman ve zaman zarfları (yesterday, last week, ago) arasındaki bağı oturt.",
-      "Her gün 1 kısa paragrafı Türkçeye çevirerek cümle yapısını pekiştir."
+      "Düzenli-düzensiz fiil ayrımını şarkı veya sesli ritimle pekiştirin.",
+      "İki zaman arasındaki 'when/while' tuzaklarına dikkat edin."
     ],
-    successCriteria: "Geçmişte yaşanmış bir olayı 10 cümleyle hatasız anlatabilmek, A2 testinde %70+.",
-    transitionTestRecommendation: "B1 geçiş denemesini çözerek Present Perfect temeline başla.",
+    successCriteria: "Geçmiş bir olayı kronolojik sırayla anlatabilmek ve A2 testinden %70+ almak.",
+    transitionTestRecommendation: "A2 Bitirme ve Seviye Atlama Testi.",
     sampleWeeklySchedule: [
-      { day: "Pazartesi", time: "45 dk", focus: "Simple Past", detail: "V2 düzensiz fiiller ve 12 yeni kelime" },
-      { day: "Salı", time: "45 dk", focus: "When / While", detail: "Past Continuous karşılaştırması ve 15 soru" },
-      { day: "Çarşamba", time: "50 dk", focus: "Reading", detail: "A2 düzeyinde 150 kelimelik metin + sözlük analizi" },
-      { day: "Perşembe", time: "45 dk", focus: "Comparatives", detail: "Sıfat derecelendirmeleri ve test çözümü" },
-      { day: "Cuma", time: "50 dk", focus: "Gelecek Zaman", detail: "will vs going to ayrımları ve 20 soru" },
-      { day: "Cumartesi", time: "60 dk", focus: "Haftalık Deneme", detail: "30 soruluk karma A2 sınavı + hata analizi" },
-      { day: "Pazar", time: "30 dk", focus: "Kelime Maratonu", detail: "Flashcard SM-2 tekrarı" }
+      { day: "Pazartesi", time: "45 dk", focus: "Simple Past Düzenli/Düzensiz", detail: "30 fiil çekimi ve konu testi" },
+      { day: "Salı", time: "45 dk", focus: "Seyahat & Yön Kelimeleri", detail: "Kartlarla 12 yeni kelime ve cümle kurma" },
+      { day: "Çarşamba", time: "45 dk", focus: "when & while Cümleleri", detail: "Zaman uyumu kuralı ve 20 soru" },
+      { day: "Perşembe", time: "45 dk", focus: "Orta Düzey Okuma", detail: "2 kısa okuma metni ve kelime çıkarma" },
+      { day: "Cuma", time: "45 dk", focus: "Comparatives & Superlatives", detail: "Karşılaştırma yapıları ve formüller" },
+      { day: "Cumartesi", time: "60 dk", focus: "A2 Denemesi", detail: "30 soruluk karma tarama sınavı" },
+      { day: "Pazar", time: "30 dk", focus: "Haftalık Sentez", detail: "Yanlış defteri ve zayıf konuların tekrarı" }
     ]
   },
   B1: {
     level: "B1",
-    title: "B1 — YDS Eşiği: Karmaşık Cümleler",
-    subtitle: "YDS'nin kalbi olan bağlaçlar, perfect zamanlar ve passive yapılar",
-    normalDuration: "12–16 Hafta",
-    fastDuration: "8–10 Hafta",
+    title: "B1 — Orta Düzey & Akademik Temeller",
+    subtitle: "YDS ve YDT için kritik eşik: Modallar, Passive ve Relative Clauses",
+    normalDuration: "10–12 Hafta",
+    fastDuration: "5–6 Hafta",
     dailyMinutes: "60–90 Dakika",
-    targetWordCount: "2.000–3.000 Kelime",
+    targetWordCount: "2000–2500 Kelime",
     dailyNewWords: 15,
     weeklyReadingCount: 4,
-    weeklyGrammarQuestions: 80,
+    weeklyGrammarQuestions: 60,
     keyGrammarTopics: [
-      "Present Perfect Tense & Since / For kuralı",
-      "Passive Voice (Edilgen Çatı) temelleri",
-      "Conditionals (Type 0, 1, 2, 3)",
-      "Relative Clauses (who, which, that, whose, where)",
-      "Reported Speech (Dolaylı Anlatım)",
-      "Gerund & Infinitive ayrımları",
-      "Temel Neden/Sonuç/Zıtlık bağlaçları (although, because, therefore)"
+      "Present Perfect & Present Perfect Continuous",
+      "Modals (must, should, can, could, might)",
+      "Modal + have V3 çıkarımları (must have, might have)",
+      "Passive Voice (Etken / Edilgen dönüşümleri)",
+      "Relative Clauses (who, which, that, where, whose)"
     ],
     keyVocabularyAreas: [
-      "Bilim, çevre, teknoloji, eğitim ve sosyoloji temaları",
-      "Temel phrasal verbler (give up, take over, carry out, bring about)",
-      "Akademik geçiş sözcükleri"
+      "Eğitim, çevre, teknoloji ve sağlık",
+      "Akademik geçiş bağlaçları (However, Although, Therefore)",
+      "En sık kullanılan 50 Phrasal Verb"
     ],
-    listeningSpeakingStrategy: "TED Talks ve BBC 6 Minute English metinlerini takip ederek telaffuz ve tonlama çalış.",
+    listeningSpeakingStrategy: "Orta düzey akademik TED-Ed videolarını İngilizce altyazıyla izleyin.",
     memoryRetentionMethods: [
-      "Feynman Tekniği: Yeni öğrendiğin bir gramer konusunu sanki hiç bilmeyen birine anlatıyormuş gibi özetle.",
-      "Interleaving: Gramer çalışmasını 3 günde bir kelime ve reading ile çaprazla."
+      "Bağlamsal öğrenme: Her kelimeyi en az 2 gerçek YDS/YDT soru cümlesi içinde görün.",
+      "Kelimeleri türevleriyle (verb, noun, adj, adv) gruplayarak çalışın."
     ],
     fastTrackTactics: [
-      "ÖSYM'nin en çok sorduğu 'Since + V2 -> have/has V3' kalıbına hakim ol.",
-      "Paragrafta özne ve yüklemi tek hamlede bulma pratiği yap."
+      "Relative Clause kısaltmalarını formülize edin.",
+      "Zıtlık bildiren bağlaçların virgül kullanım kurallarını ezberleyin."
     ],
-    successCriteria: "Orta uzunluktaki YDS reading parçalarında ana fikri 90 saniyede tespit edebilmek.",
-    transitionTestRecommendation: "B2 seviye tespit sınavında en az %65 doğruluk.",
+    successCriteria: "YDS denemesinde 50+ puan barajını aşabilmek.",
+    transitionTestRecommendation: "B1 Sertifika ve Seviye Atlama Sınavı.",
     sampleWeeklySchedule: [
-      { day: "Pazartesi", time: "60 dk", focus: "Present Perfect", detail: "Zaman uyumu ve 15 yeni B1 kelimesi" },
-      { day: "Salı", time: "70 dk", focus: "Passive Voice", detail: "Edilgen çatı formülleri ve 25 soru" },
-      { day: "Çarşamba", time: "75 dk", focus: "Reading & Vocabulary", detail: "2 adet B1 akademik metin analizi" },
-      { day: "Perşembe", time: "60 dk", focus: "Relative Clauses", detail: "Sıfat cümlecikleri ve 25 soru" },
-      { day: "Cuma", time: "60 dk", focus: "Conditionals", detail: "Type 1-2-3 kuralları ve tuzak sorular" },
-      { day: "Cumartesi", time: "90 dk", focus: "Soru Tipi Pratiği", detail: "Cümle tamamlama ve çeviri taktikleri (40 soru)" },
-      { day: "Pazar", time: "45 dk", focus: "Yanlış Defteri", detail: "Hafta boyu yanlış çözülen soruların yeniden analizi" }
+      { day: "Pazartesi", time: "60 dk", focus: "Passive Voice Formülleri", detail: "Tüm zamanlarda edilgen yapı ve 25 soru" },
+      { day: "Salı", time: "60 dk", focus: "Akademik Kelime & Phrasal", detail: "15 yeni akademik kelime + 5 phrasal verb" },
+      { day: "Çarşamba", time: "60 dk", focus: "Relative Clauses", detail: "Sıfat cümlecikleri ve kısaltma kuralları" },
+      { day: "Perşembe", time: "60 dk", focus: "Akademik Reading Metni", detail: "Bilimsel bir metin analizi ve ana fikir tespiti" },
+      { day: "Cuma", time: "60 dk", focus: "Modal Perfects (have V3)", detail: "Geçmişe dönük çıkarımlar ve tuzaklar" },
+      { day: "Cumartesi", time: "90 dk", focus: "B1 Mini Denemesi", detail: "40 soruluk çoktan seçmeli sınav" },
+      { day: "Pazar", time: "45 dk", focus: "Yanlış Analiz Seansı", detail: "Hatalı soruların mantığını kavramak" }
     ]
   },
   B2: {
     level: "B2",
-    title: "B2 — YDS 70+ Hedefi: Akademik Yetkinlik",
-    subtitle: "YDS'de 70-80 puan bandını hedefleyen adaylar için tam donanımlı hazırlık",
-    normalDuration: "16–24 Hafta",
-    fastDuration: "10–14 Hafta",
-    dailyMinutes: "75–120 Dakika",
-    targetWordCount: "4.000–5.000 Kelime (Akademik Söz Varlığı)",
+    title: "B2 — İleri-Orta Düzey & Sınav Taktikleri",
+    subtitle: "70+ puan hedefleyenler için bağlaç kombinasyonları ve hızlı okuma",
+    normalDuration: "10–14 Hafta",
+    fastDuration: "6–7 Hafta",
+    dailyMinutes: "75–100 Dakika",
+    targetWordCount: "3000–4000 Kelime",
     dailyNewWords: 20,
-    weeklyReadingCount: 6,
-    weeklyGrammarQuestions: 120,
+    weeklyReadingCount: 5,
+    weeklyGrammarQuestions: 80,
     keyGrammarTopics: [
-      "Past Perfect, Future Perfect ve Continuous kombinasyonları",
-      "Modal Past & Perfect Modals (must have V3, should have V3, could have V3)",
-      "Adverbial Clauses & Geçiş Edatları (in spite of, on account of, whereby)",
-      "Participle Reductions (Having V3, Ving, V3)",
-      "Causative Yapılar (have/get something done)",
-      "Noun Clauses ve Wh- soru eklemleri"
+      "Noun Clauses & Dolaylı anlatım (Reported Speech)",
+      "Conditionals (Type 1, 2, 3 ve Mixed Conditionals)",
+      "İkili bağlaçlar (not only... but also, neither... nor, either... or)",
+      "Zıtlık, sebep, sonuç ve amaç bağlaçlarının tam hakimiyeti",
+      "Gerund & Infinitive istisnaları"
     ],
     keyVocabularyAreas: [
-      "AWL (Academic Word List) çekirdek kelimeleri",
-      "Tıp, ekonomi, uluslararası ilişkiler, arkeoloji terimleri",
-      "İleri phrasal verbler ve collocations"
+      "Küresel ısınma, ekonomi, sosyoloji ve uluslararası ilişkiler",
+      "Akademik eşdizimler (Collocations: pose a threat, conduct research)",
+      "100 Kritik İleri Düzey Phrasal Verb"
     ],
-    listeningSpeakingStrategy: "Akademik paneller ve açık ders kayıtlarını dinleyerek not çıkarma alışkanlığı edin.",
+    listeningSpeakingStrategy: "BBC ve NPR haberlerini dinleyip not alma (note-taking) tekniğini uygulayın.",
     memoryRetentionMethods: [
-      "Elaborative Encoding: Her kelime için kendi hayatından veya YDS bağlamından özgün örnek cümle yaz.",
-      "Dual Coding: Kelimeyi görsel semboller ve hafıza kodlarıyla ilişkilendir."
+      "Collocation odaklı kodlama (kelimeyi yanındaki fiil veya edatla birlikte hafızaya alma).",
+      "Eş anlamlı zincirleri (Synonym chains) oluşturma."
     ],
     fastTrackTactics: [
-      "Seçenek eleme sanatı: Anlamca paralel olan iki şıkkı aynı anda ele.",
-      "Zaman uyumu çaprazlama taktiği: Past ile Future'ın asla birleşemeyeceği kuralını refleks yap."
+      "Paragraf tamamlama sorularında boşluktan önceki ve sonraki referans zamirlerini (this, these, such) takip edin.",
+      "Akışı bozan cümle sorularında konu dışına kayan veya üslubu uymayan seçeneği hızla eleyin."
     ],
-    successCriteria: "YDS denemesinde süre kısıtlaması altında en az 60-70 net aralığına ulaşmak.",
-    transitionTestRecommendation: "Tam süreli 80 soruluk deneme sınavında 65+ net.",
+    successCriteria: "YDS'de 70+ puan baremini düzenli olarak yakalamak.",
+    transitionTestRecommendation: "B2 Seviye Bitirme Sınavı.",
     sampleWeeklySchedule: [
-      { day: "Pazartesi", time: "90 dk", focus: "Perfect Modals", detail: "Geçmiş çıkarımlar ve 30 ileri soru" },
-      { day: "Salı", time: "90 dk", focus: "Akademik Reading", detail: "2 adet zor metin + 8 soru çözümü" },
-      { day: "Çarşamba", time: "80 dk", focus: "Participle Clauses", detail: "Kısaltma teknikleri ve 30 soru" },
-      { day: "Perşembe", time: "90 dk", focus: "Cloze Test & Çeviri", detail: "3 cloze test ve 20 çeviri sorusu" },
-      { day: "Cuma", time: "90 dk", focus: "Zıtlık Bağlaçları", detail: "Nevertheless, whereas, despite soru analizleri" },
-      { day: "Cumartesi", time: "120 dk", focus: "Süreli Mini Deneme", detail: "40 soruluk süreli deneme (60 dk) + 60 dk analiz" },
-      { day: "Pazar", time: "60 dk", focus: "Kelime & Yanlış Defteri", detail: "Haftanın 100 akademik kelimesini SM-2 ile tara" }
+      { day: "Pazartesi", time: "75 dk", focus: "Noun Clauses & Subjunctive", detail: "İsim cümlecikleri ve soru analizi" },
+      { day: "Salı", time: "75 dk", focus: "Collocations & İleri Kelime", detail: "20 akademik kelime ve eşdizimleri" },
+      { day: "Çarşamba", time: "75 dk", focus: "Conditionals & Wish Clauses", detail: "Karma koşul cümleleri ve 'but for' kalıbı" },
+      { day: "Perşembe", time: "75 dk", focus: "2 Ağır Reading Metni", detail: "Paragraf soru tipleri ve çıkarım soruları" },
+      { day: "Cuma", time: "75 dk", focus: "Bağlaçlar Masterclass", detail: "Tüm zıtlık ve neden-sonuç bağlaçları" },
+      { day: "Cumartesi", time: "120 dk", focus: "Tam Deneme (80 Soru)", detail: "Gerçek sınav süre simülasyonu" },
+      { day: "Pazar", time: "60 dk", focus: "Hata Defteri & Strateji", detail: "Boş ve yanlış bırakılan soru analizi" }
     ]
   },
   C1: {
     level: "C1",
-    title: "C1 — YDS 85+ & Zirve Akademik Hakimiyet",
-    subtitle: "85 ve 90 üstü hedefleyen, akademisyenlik ve uzmanlık sınavı adayları",
-    normalDuration: "20–32 Hafta",
-    fastDuration: "12–18 Hafta",
-    dailyMinutes: "90–150 Dakika",
-    targetWordCount: "6.000–8.000 Kelime",
+    title: "C1 — İleri Düzey & Akademik Uzmanlık",
+    subtitle: "80–90+ puan hedefleyenler için devrik cümleler ve üst düzey metinler",
+    normalDuration: "12–16 Hafta",
+    fastDuration: "7–8 Hafta",
+    dailyMinutes: "90–120 Dakika",
+    targetWordCount: "4500–6000 Kelime",
     dailyNewWords: 25,
-    weeklyReadingCount: 8,
-    weeklyGrammarQuestions: 150,
+    weeklyReadingCount: 6,
+    weeklyGrammarQuestions: 100,
     keyGrammarTopics: [
-      "Inversion (Devrik Cümle: Seldom, Hardly, Scarcely, Under no circumstances)",
-      "İleri Düzey Reduction (Being V3, Having been V3, with + Noun + Ving)",
-      "İnce Anlam Nüansları ve Register (Formal / Informal / Academic)",
-      "Mixed Conditionals & Inverted Conditionals (Had it not been for...)",
-      "Subjunctive Mood (suggest, recommend, demand that he be...)"
+      "Inversion (Devrik cümleler: Seldom, Hardly, Under no circumstances)",
+      "Participle Clauses (Having V3, Being V3 kısaltmaları)",
+      "Cleft Sentences (Vurgu cümleleri: It is... that / What I need is...)",
+      "Ağır akademik retorik ve cümle yapıları",
+      "Kelimelerin nadir ve mecazi anlamları"
     ],
     keyVocabularyAreas: [
-      "Felsefi, epistemolojik ve ileri bilimsel terminoloji",
-      "Nadir eş anlamlılar ve ince anlam farkları (concur vs acquiesce)",
-      "Kritik tuzak bağlaçlar"
+      "Felsefe, nöroloji, hukuk ve jeopolitik makaleler",
+      "Akademik jargon ve soyut kavramlar",
+      "İleri düzey bağlama öğeleri (notwithstanding, inasmuch as, albeit)"
     ],
-    listeningSpeakingStrategy: "Yabancı hakemli dergi özetlerini ve bilimsel podcastleri altyazısız takip et.",
+    listeningSpeakingStrategy: "The Economist, Nature ve Scientific American sesli makalelerini dinleyin.",
     memoryRetentionMethods: [
-      "Retrieval Practice: Soruyu çözer çözmez cevaba bakma; neden doğru olduğunu zihninde savun.",
-      "Hata Haritası: Yanlış yaptığın sorunun hangi çeldirici tipine ait olduğunu etiketle."
+      "Aktif sentez: Okunan akademik metnin ana fikrini 2 cümlelik İngilizce özetle yazın.",
+      "Kelimelerin bağlamsal tuzaklarını ve ince anlam farklarını (nuance) kartlayın."
     ],
     fastTrackTactics: [
-      "Çeldirici deşifresi: ÖSYM'nin 'aşırı genelleme' (always, never, solely) tuzaklarını ilk bakışta yakala.",
-      "Akışı bozan cümle sorularında zamir referanslarını (this, these, such) takip et."
+      "Seçeneklerdeki aşırı genellemeleri (always, completely, never) çeldirici olarak değerlendirin.",
+      "Çeviri sorularında cümlenin ana fiilini ve öznesini ilk 15 saniyede tespit edin."
     ],
-    successCriteria: "80 soruluk resmi YDS denemelerinde 75+ nete istikrarlı biçimde oturmak.",
-    transitionTestRecommendation: "C2 ustalık seviye tespit testinde %75+ doğruluk.",
+    successCriteria: "YDS'de 85+ puan alarak A düzeyi dil tazminatı hakkı kazanmak.",
+    transitionTestRecommendation: "C1 İleri Düzey Sertifika Sınavı.",
     sampleWeeklySchedule: [
-      { day: "Pazartesi", time: "100 dk", focus: "Inversion Masterclass", detail: "Tüm devrik yapılar ve 40 zor soru" },
-      { day: "Salı", time: "110 dk", focus: "Ağır Reading", detail: "3 uzun akademik metin ve çıkarım soruları" },
-      { day: "Çarşamba", time: "90 dk", focus: "Restatement (Yakın Anlam)", detail: "25 soru üzerinde çeldirici analizi" },
-      { day: "Perşembe", time: "100 dk", focus: "Cümle Tamamlama", detail: "30 karmaşık yan cümle sorusu" },
-      { day: "Cuma", time: "100 dk", focus: "İleri Kelime", detail: "Nüans ve collocation odaklı 30 soru" },
-      { day: "Cumartesi", time: "180 dk", focus: "TAM YDS DENEMESİ", detail: "80 soruluk süreli deneme (180 dk)" },
-      { day: "Pazar", time: "90 dk", focus: "Deneme Otopsisi", detail: "Yanlış yapılan her sorunun kök neden analizi" }
+      { day: "Pazartesi", time: "90 dk", focus: "Inversion (Devriklik)", detail: "Tüm devrik yapılar ve 30 soru" },
+      { day: "Salı", time: "90 dk", focus: "Nadir Kelimeler & İnce Anlam", detail: "25 C1 düzeyi akademik kelime" },
+      { day: "Çarşamba", time: "90 dk", focus: "Participle Kısaltmaları", detail: "Zaman ve sebep kısaltmaları" },
+      { day: "Perşembe", time: "90 dk", focus: "3 Ağır Reader Metni", detail: "Bilim ve felsefe metinleri tahlili" },
+      { day: "Cuma", time: "90 dk", focus: "Çeviri & Cümle Tamamlama", detail: "Hızlı eleme teknikleri" },
+      { day: "Cumartesi", time: "150 dk", focus: "Zorlaştırılmış Tam Deneme", detail: "80 soruluk C1 provası" },
+      { day: "Pazar", time: "75 dk", focus: "Hata Sıfırlama Seansı", detail: "Tüm soruların ayrıntılı incelemesi" }
     ]
   },
   C2: {
     level: "C2",
-    title: "C2 — Ana Dil Yetkinliği & Dil Stratejisti",
-    subtitle: "Mükemmeliyetçiler, dilbilimciler ve sınavda soru kaçırmak istemeyenler",
-    normalDuration: "24–48 Hafta",
-    fastDuration: "16–24 Hafta",
-    dailyMinutes: "120–180 Dakika",
-    targetWordCount: "8.000+ Kelime ve Deyimsel Derinlik",
+    title: "C2 — Ustalık & YDS 95+ Efsanesi",
+    subtitle: "Kusursuz dil hakimiyeti, sıfır hata payı ve dilbilimsel derinlik",
+    normalDuration: "14–18 Hafta",
+    fastDuration: "8–10 Hafta",
+    dailyMinutes: "90–120 Dakika",
+    targetWordCount: "6000+ Kelime & İdiomlar",
     dailyNewWords: 30,
-    weeklyReadingCount: 10,
-    weeklyGrammarQuestions: 200,
+    weeklyReadingCount: 7,
+    weeklyGrammarQuestions: 120,
     keyGrammarTopics: [
-      "Söylem Çözümlemesi (Discourse Analysis) ve üslup incelikleri",
-      "İnce pragmatik ayrımlar ve örtük anlam çözümlemeleri",
-      "Eski/Arkaik formlar ve edebi İngilizce yapıları",
-      "Stilistik devriklikler ve retorik vurgu araçları",
-      "Yazarın tutumu (sarcastic, cautious, objective, critical) analizi"
+      "Tüm gramer konularının istisnai ve arkaik kullanımları",
+      "Stilistik ve retorik yapılar",
+      "Yüksek düzey eşdizimlilik ve deyişbilim",
+      "Karmaşık metin mimarisi ve örtük anlam çıkarımı"
     ],
     keyVocabularyAreas: [
-      "Latince ve Fransızca kökenli akademik kalıplar (ad hoc, status quo, fait accompli)",
-      "İleri idiomatic yapılar ve edebi metaforlar",
-      "Çok anlamlı sözcüklerin nadir ikincil/üçüncül anlamları"
+      "Özgün akademik literatür, edebi eserler, hukuki metinler",
+      "Yüksek düzey deyimler ve atasözü kullanımları"
     ],
-    listeningSpeakingStrategy: "Yüksek mahkeme kararları ve felsefi tartışma kayıtlarını eleştirel gözle analiz et.",
+    listeningSpeakingStrategy: "Oxford & Cambridge münazara kayıtlarını ve akademik panelleri takip edin.",
     memoryRetentionMethods: [
-      "Zihin Sarayı (Method of Loci): İleri soyut kavramları mekânsal hafıza ile bağdaştır.",
-      "Sürekli maruz kalma: Günlük haber ve akademik okumaları tamamen İngilizceye çevir."
+      "Öğretici yaklaşım: Konuları başkasına anlatır gibi Feynman yöntemiyle analiz edin.",
+      "Sürekli maruz kalma: Günlük haber ve akademik okumaları tamamen İngilizceye çevirin."
     ],
     fastTrackTactics: [
-      "Mükemmeliyetçilik tuzağına düşme; sınavda zamanı en iyi kullanan kazanır.",
-      "Zor metinlerde cümlenin ana eksenini hızlıca çizip detaylarda boğulma."
+      "Mükemmeliyetçilik tuzağına düşmeyin; sınavda zamanı en iyi kullanan kazanır.",
+      "Zor metinlerde cümlenin ana eksenini hızlıca çizip detaylarda boğulmayın."
     ],
     successCriteria: "YDS'de 95+ puan ve sıfıra yakın hata payı.",
-    transitionTestRecommendation: "Uluslararası standart C2 yeterlilik ölçümleri.",
+    transitionTestRecommendation: "C2 Büyük Ustalık Sertifika Sınavı.",
     sampleWeeklySchedule: [
       { day: "Pazartesi", time: "120 dk", focus: "Söylem & Üslup", detail: "Metinlerarası ilişki ve 30 çıkarım sorusu" },
       { day: "Salı", time: "120 dk", focus: "Çok Anlamlılık", detail: "Nadir kelime anlamları ve collocation analizi" },
@@ -357,126 +357,230 @@ export const LEVEL_STUDY_GUIDES: Record<CefrLevel, LevelStudyGuide> = {
   }
 };
 
-// ==================== PRESET STUDY PLANS ====================
+// ==================== PRESET STUDY PLANS (YDS, YDT, YÖKDİL) ====================
 
-export const PRESET_PLAN_TEMPLATES = [
+export interface PresetPlanTemplate {
+  id: string;
+  title: string;
+  description: string;
+  examType: ExamType;
+  yokdilField?: YokdilField;
+  totalDays: number;
+  dailyMinutes: number;
+  targetLevel: CefrLevel | "YDS" | "YDT" | "YÖKDİL";
+  targetScore: number;
+  estimatedCompletion: string;
+  acceleratedAlternative: string;
+  category: "quick" | "intensive" | "standard" | "advanced" | "long_term" | "specialized";
+}
+
+export const PRESET_PLAN_TEMPLATES: PresetPlanTemplate[] = [
+  // ── YDS ŞABLONLARI ──────────────────────────────────────────
   {
-    id: "plan-7-days",
-    title: "7 Günlük Hızlı Başlangıç Kampı",
-    description: "Sınav öncesi veya çalışmaya başlarken tüm ana hatları 1 haftada gözden geçiren yoğun başlangıç.",
-    totalDays: 7,
-    dailyMinutes: 60,
-    targetLevel: "B1",
-    estimatedCompletion: "1 Hafta",
-    acceleratedAlternative: "Günde 90 dk ile 5 günde bitirilebilir.",
-    category: "quick",
-  },
-  {
-    id: "plan-14-days",
-    title: "14 Günlük Temel Gramer & Kelime Tekrarı",
-    description: "Unutulan kuralları tazeleyen, 17 zamanı ve en kritik 300 kelimeyi toparlayan 2 haftalık program.",
-    totalDays: 14,
-    dailyMinutes: 60,
-    targetLevel: "B1",
-    estimatedCompletion: "2 Hafta",
-    acceleratedAlternative: "Günde 90 dk ile 10 günde tamamlanabilir.",
-    category: "quick",
-  },
-  {
-    id: "plan-30-days",
+    id: "yds-plan-30-days",
     title: "30 Günlük Hızlandırılmış YDS Kampı",
-    description: "Sınava 1 ay kala netleri 15-20 puan yukarı çekmeyi hedefleyen taktik ve deneme odaklı kamp.",
+    description: "Sınava 1 ay kala akademik kelime, ileri bağlaçlar ve 80 soruluk deneme simülasyonlarıyla netleri 15-20 puan yükselten yoğun kamp.",
+    examType: "YDS",
     totalDays: 30,
     dailyMinutes: 90,
     targetLevel: "B2",
+    targetScore: 70,
     estimatedCompletion: "1 Ay",
     acceleratedAlternative: "Günde 120 dk ile 20 günde yüksek net odaklı sürüm.",
     category: "intensive",
   },
   {
-    id: "plan-60-days",
+    id: "yds-plan-60-days",
     title: "60 Günlük Dengeli YDS Programı",
-    description: "Haftada 5 gün çalışma ile gramer, kelime ve reading dengesini mükemmel kuran standart plan.",
+    description: "Haftada 5 gün çalışma ile gramer, kelime ve Reader at Work tarzı okuma dengesini mükemmel kuran standart hazırlık.",
+    examType: "YDS",
     totalDays: 60,
     dailyMinutes: 75,
     targetLevel: "B2",
+    targetScore: 75,
     estimatedCompletion: "2 Ay",
     acceleratedAlternative: "Günde 100 dk ile 45 günde bitirilebilir.",
     category: "standard",
   },
   {
-    id: "plan-90-days",
-    title: "90 Günlük Kapsamlı Başarı Programı",
-    description: "Sıfırdan veya B1'den başlayıp 70+ barajını garanti altına alan 3 aylık tam müfredat.",
+    id: "yds-plan-90-days",
+    title: "90 Günlük Kapsamlı YDS Başarı Programı (70+ Baraj)",
+    description: "Sıfırdan veya B1'den başlayıp 70+ barajını garanti altına alan 3 aylık tam müfredatlı YDS başarı rotası.",
+    examType: "YDS",
     totalDays: 90,
     dailyMinutes: 75,
     targetLevel: "B2",
+    targetScore: 80,
     estimatedCompletion: "3 Ay",
     acceleratedAlternative: "Günde 110 dk ile 60 günde tamamlanabilir.",
     category: "standard",
   },
   {
-    id: "plan-120-days",
-    title: "120 Günlük İleri Seviye (80+ Hedef)",
-    description: "Zor soru tipleri, devrik cümleler ve akademik reading ağırlıklı 4 aylık üst düzey hazırlık.",
+    id: "yds-plan-120-days",
+    title: "120 Günlük İleri Düzey YDS (85+ Hedef)",
+    description: "Devrik cümleler, nadir phrasal fiiller, akademik collocation eşdizimleri ve zor soru tipleri ağırlıklı 4 aylık üst düzey hazırlık.",
+    examType: "YDS",
     totalDays: 120,
     dailyMinutes: 90,
     targetLevel: "C1",
+    targetScore: 88,
     estimatedCompletion: "4 Ay",
-    acceleratedAlternative: "Günde 120 dk ile 90 günde 85+ hedefi.",
+    acceleratedAlternative: "Günde 120 dk ile 90 günde 90+ hedeflenebilir.",
+    category: "advanced",
+  },
+
+  // ── YDT (YKS DİL) ŞABLONLARI ────────────────────────────────
+  {
+    id: "ydt-plan-30-days",
+    title: "30 Günlük YDT Son Düzlük Hız Kampı",
+    description: "YKS İngilizce öncesi 80 soruda süre yönetimini geliştiren, Türkçe-İngilizce çeviri ve cümle tamamlama taktiklerine odaklı sprint.",
+    examType: "YDT",
+    totalDays: 30,
+    dailyMinutes: 90,
+    targetLevel: "B2",
+    targetScore: 65,
+    estimatedCompletion: "1 Ay",
+    acceleratedAlternative: "Günde 120 dk ile 20 günde 70+ net hedefi.",
+    category: "intensive",
+  },
+  {
+    id: "ydt-plan-60-days",
+    title: "60 Günlük YDT Net Yükseltme Programı (65+ Net)",
+    description: "YKS Dil gramer temeli, 1200+ YDT kelimesi, diyalog tamamlama ve anlamca en yakın cümle sorularında yüksek isabet sağlayan plan.",
+    examType: "YDT",
+    totalDays: 60,
+    dailyMinutes: 75,
+    targetLevel: "B2",
+    targetScore: 70,
+    estimatedCompletion: "2 Ay",
+    acceleratedAlternative: "Günde 100 dk ile 45 günde 70+ nete ulaşılabilir.",
+    category: "standard",
+  },
+  {
+    id: "ydt-plan-90-days",
+    title: "90 Günlük YDT Derece & Zirve Programı (75+ Net)",
+    description: "İlk 5.000 hedefleyen dil öğrencileri için paragraf analizleri, çeldirici eleme stratejileri ve haftalık tam deneme maratonu.",
+    examType: "YDT",
+    totalDays: 90,
+    dailyMinutes: 90,
+    targetLevel: "C1",
+    targetScore: 78,
+    estimatedCompletion: "3 Ay",
+    acceleratedAlternative: "Günde 120 dk ile 65 günde uygulanabilir.",
     category: "advanced",
   },
   {
-    id: "plan-180-days",
-    title: "180 Günlük Sıfırdan Zirveye YDS",
-    description: "A1 sadeliğinden C1 akademik düzeyine adım adım taşıyan 6 aylık kapsamlı maraton.",
-    totalDays: 180,
+    id: "ydt-plan-120-days",
+    title: "120 Günlük Sıfırdan YDT Başarı Maratonu",
+    description: "Lise İngilizce müfredatından başlayarak tüm ÖSYM YDT soru kalıplarını sıfırdan zirveye taşıyan kapsamlı hazırlık programı.",
+    examType: "YDT",
+    totalDays: 120,
     dailyMinutes: 60,
     targetLevel: "B2",
-    estimatedCompletion: "6 Ay",
-    acceleratedAlternative: "Günde 90 dk ile 120 günde uygulanabilir.",
+    targetScore: 68,
+    estimatedCompletion: "4 Ay",
+    acceleratedAlternative: "Günde 80 dk ile 90 günde bitirilebilir.",
     category: "long_term",
   },
+
+  // ── YÖKDİL SAĞLIK BİLİMLERİ ŞABLONLARI ──────────────────────
   {
-    id: "plan-365-days",
-    title: "12 Aylık Uzun Vadeli & Kalıcı Dil Programı",
-    description: "Günde 30-45 dakika ile yorulmadan, hayatın akışına yedirilmiş 1 yıllık İngilizce ustalığı.",
-    totalDays: 365,
-    dailyMinutes: 45,
-    targetLevel: "C1",
-    estimatedCompletion: "12 Ay",
-    acceleratedAlternative: "Günde 60 dk ile 8 ayda tamamlanabilir.",
-    category: "long_term",
-  },
-  {
-    id: "plan-working-30m",
-    title: "Çalışanlar İçin Günde 30 Dakika",
-    description: "İş temposu yoğun olan adaylar için mikro görevlerle tasarlanmış yüksek verimli plan.",
+    id: "yokdil-saglik-60-days",
+    title: "60 Günlük YÖKDİL Sağlık Bilimleri Başarı Planı",
+    description: "Tıp, anatomi, klinik araştırmalar, farmakoloji terimleri, epidemiyoloji ve sağlık odaklı okuma parçalarına adanmış uzman planı.",
+    examType: "YOKDIL",
+    yokdilField: "saglik",
     totalDays: 60,
-    dailyMinutes: 30,
-    targetLevel: "B1",
-    estimatedCompletion: "2 Ay",
-    acceleratedAlternative: "Hafta sonu ek 1 saat ile süreyi yarıya indirebilirsiniz.",
-    category: "specialized",
-  },
-  {
-    id: "plan-weekend-heavy",
-    title: "Hafta Sonu Ağırlıklı Program",
-    description: "Hafta içi 20 dk tekrar, cumartesi ve pazar günleri 2.5 saatlik derin soru çözümü.",
-    totalDays: 60,
-    dailyMinutes: 45,
+    dailyMinutes: 75,
     targetLevel: "B2",
+    targetScore: 75,
     estimatedCompletion: "2 Ay",
-    acceleratedAlternative: "Günde ekstra 15 dk kelime tekrarı eklenebilir.",
-    category: "specialized",
+    acceleratedAlternative: "Günde 100 dk ile 45 günde 80+ puan.",
+    category: "standard",
+  },
+  {
+    id: "yokdil-saglik-30-days",
+    title: "30 Günlük YÖKDİL Sağlık Hızlı Terim Kampı",
+    description: "Klinik araştırmalarda sık geçen 600 tıbbi terim, hastalık/tedavi kalıpları ve sağlık alan denemeleri içeren hızlandırılmış kamp.",
+    examType: "YOKDIL",
+    yokdilField: "saglik",
+    totalDays: 30,
+    dailyMinutes: 90,
+    targetLevel: "B2",
+    targetScore: 70,
+    estimatedCompletion: "1 Ay",
+    acceleratedAlternative: "Günde 120 dk ile 20 günde uygulanabilir.",
+    category: "intensive",
+  },
+
+  // ── YÖKDİL FEN BİLİMLERİ ŞABLONLARI ─────────────────────────
+  {
+    id: "yokdil-fen-60-days",
+    title: "60 Günlük YÖKDİL Fen Bilimleri Başarı Planı",
+    description: "Mühendislik, astronomi, malzeme bilimi, çevre biyolojisi, yapay zeka ve fizik/kimya terminolojisini içeren kapsamlı fen planı.",
+    examType: "YOKDIL",
+    yokdilField: "fen",
+    totalDays: 60,
+    dailyMinutes: 75,
+    targetLevel: "B2",
+    targetScore: 75,
+    estimatedCompletion: "2 Ay",
+    acceleratedAlternative: "Günde 100 dk ile 45 günde 80+ puan.",
+    category: "standard",
+  },
+  {
+    id: "yokdil-fen-30-days",
+    title: "30 Günlük YÖKDİL Fen Hızlı Soru Çözümü Kampı",
+    description: "Doğa olayları, teknolojik gelişmeler, deney verileri ve fen odaklı cümle tamamlama sorularıyla netleri hızla artıran kamp.",
+    examType: "YOKDIL",
+    yokdilField: "fen",
+    totalDays: 30,
+    dailyMinutes: 90,
+    targetLevel: "B2",
+    targetScore: 70,
+    estimatedCompletion: "1 Ay",
+    acceleratedAlternative: "Günde 120 dk ile 20 günde tamamlanabilir.",
+    category: "intensive",
+  },
+
+  // ── YÖKDİL SOSYAL BİLİMLER ŞABLONLARI ───────────────────────
+  {
+    id: "yokdil-sosyal-60-days",
+    title: "60 Günlük YÖKDİL Sosyal Bilimler Başarı Planı",
+    description: "Tarih, sosyoloji, psikoloji, pedagoji, iktisat, uluslararası ilişkiler ve felsefi metin çözümlemelerine odaklanan uzman planı.",
+    examType: "YOKDIL",
+    yokdilField: "sosyal",
+    totalDays: 60,
+    dailyMinutes: 75,
+    targetLevel: "B2",
+    targetScore: 75,
+    estimatedCompletion: "2 Ay",
+    acceleratedAlternative: "Günde 100 dk ile 45 günde 80+ puan.",
+    category: "standard",
+  },
+  {
+    id: "yokdil-sosyal-30-days",
+    title: "30 Günlük YÖKDİL Sosyal Hızlı Soru Çözümü Kampı",
+    description: "Toplumsal hareketler, ekonomi politikaları, tarihsel gelişmeler ve soyut bağlaç analizleri içeren 1 aylık yoğun kamp.",
+    examType: "YOKDIL",
+    yokdilField: "sosyal",
+    totalDays: 30,
+    dailyMinutes: 90,
+    targetLevel: "B2",
+    targetScore: 70,
+    estimatedCompletion: "1 Ay",
+    acceleratedAlternative: "Günde 120 dk ile 20 günde uygulanabilir.",
+    category: "intensive",
   },
 ];
 
-// ==================== GENERATOR ENGINE ====================
+// ==================== DİNAMİK ÇALIŞMA PLANI OLUŞTURUCU ====================
 
 export interface PlanGeneratorInputs {
+  examType?: ExamType;
+  yokdilField?: YokdilField;
   currentLevel: CefrLevel;
-  targetLevel: CefrLevel | "YDS";
+  targetLevel: CefrLevel | "YDS" | "YDT" | "YOKDIL" | "YÖKDİL";
   targetScore: number;
   totalDays: number;
   dailyMinutes: number;
@@ -490,9 +594,27 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
   const safeDays = Math.max(7, Math.min(365, Number(inputs.totalDays) || 30));
   const safeMinutes = Math.max(20, Math.min(240, Number(inputs.dailyMinutes) || 60));
   const totalWeeks = Math.ceil(safeDays / 7);
+  const exam = inputs.examType || "YDS";
+  const field = inputs.yokdilField || "saglik";
 
-  const planId = `custom-plan-${Date.now()}`;
-  const title = `${safeDays} Günlük Kişiselleştirilmiş YDS Planı (${inputs.currentLevel} → ${inputs.targetScore}+)`;
+  const planId = `plan-${exam.toLowerCase()}-${Date.now()}`;
+
+  // Sınava Özgü Başlık ve Açıklama Üretimi
+  let examTitle = "YDS";
+  let examDescription = "";
+  if (exam === "YDT") {
+    examTitle = "YDT (YKS-Dil)";
+    examDescription = `${inputs.currentLevel} seviyesinden ${inputs.targetScore}+ YDT Netine ulaşmak için çeviri, diyalog, cümle tamamlama ve 80 soru sürati odaklı ${safeDays} günlük kişiselleştirilmiş program.`;
+  } else if (exam === "YOKDIL") {
+    const fieldName = field === "saglik" ? "Sağlık Bilimleri" : field === "fen" ? "Fen Bilimleri" : "Sosyal Bilimler";
+    examTitle = `YÖKDİL ${fieldName}`;
+    examDescription = `${inputs.currentLevel} seviyesinden ${inputs.targetScore}+ puana ulaşmak için ${fieldName} terminolojisi, alan metinleri ve alana özgü soru teknikleri odaklı ${safeDays} günlük plan.`;
+  } else {
+    examTitle = "YDS";
+    examDescription = `${inputs.currentLevel} seviyesinden ${inputs.targetScore}+ YDS puanına ulaşmak için akademik kelime, zor bağlaçlar ve tam denemeler içeren ${safeDays} günlük plan.`;
+  }
+
+  const title = `${safeDays} Günlük Kişiselleştirilmiş ${examTitle} Planı (${inputs.targetScore}+${exam === "YDT" ? " Net" : " Puan"})`;
 
   const weeks: StudyWeek[] = [];
 
@@ -504,83 +626,163 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
       const overallDay = (w - 1) * 7 + d;
       const tasks: StudyTask[] = [];
 
-      // Task 1: Vocabulary (Active Recall)
+      // ── Görev 1: Kelime ve Terminoloji (Sınava Özel) ──────
       const vocabMin = Math.round(safeMinutes * 0.25);
-      tasks.push({
-        id: `task-${overallDay}-vocab`,
-        module: "vocabulary",
-        title: "Kelime Çalışması & SM-2 Tekrarı",
-        description: `${inputs.currentLevel} seviyesinde yeni kelimeleri incele ve dünün kelimelerini aktif geri çağırma ile tekrar et.`,
-        minutes: vocabMin,
-        href: "/vocabulary/flashcards",
-        completed: false,
-        completionCriteria: "En az 10-15 kelime kartını gözden geçir.",
-        memoryTip: "Kelimeyi görür görmez arkasını çevirme; Türkçe anlamını zihninde canlandır.",
-      });
-
-      // Task 2: Grammar or Tactics
-      const grammarMin = Math.round(safeMinutes * 0.35);
-      if (overallDay % 3 === 0) {
+      if (exam === "YDT") {
         tasks.push({
-          id: `task-${overallDay}-tactics`,
-          module: "tactics",
-          title: "Soru Taktikleri & Çeldirici Analizi",
-          description: "Cümle tamamlama veya bağlaç sorularında zaman uyumu ve eleme taktikleri.",
-          minutes: grammarMin,
-          href: "/tactics",
+          id: `task-${overallDay}-ydt-vocab`,
+          module: "vocabulary",
+          title: "YDT & YKS Dil Kelime Çalışması",
+          description: "ÖSYM YDT sınavında en çok çıkan Phrasal Verbs, sıfat-zarf eşdizimleri ve eş anlamlı kelime kartları.",
+          minutes: vocabMin,
+          href: "/vocabulary/flashcards",
           completed: false,
-          completionCriteria: "İlgili taktik konusunu oku ve 10 taktik sorusu çöz.",
-          memoryTip: "Şıklardaki zıt anlamlı ve eş anlamlı çeldiricileri işaretle.",
+          completionCriteria: "En az 15-20 YDT kelimesini aktif hafıza kartlarında tamamla.",
+          memoryTip: "Kelimeleri cümle içinde kurarak defterine not et.",
+        });
+      } else if (exam === "YOKDIL") {
+        const fieldTerm = field === "saglik" ? "Tıbbi & Sağlık" : field === "fen" ? "Fen & Teknoloji" : "Sosyal Bilimler & Tarih";
+        tasks.push({
+          id: `task-${overallDay}-yokdil-vocab`,
+          module: "vocabulary",
+          title: `YÖKDİL ${fieldTerm} Terminolojisi`,
+          description: `${fieldTerm} makalelerinde belirleyici olan temel ve ileri düzey alan kavramlarının SM-2 ile tekrarı.`,
+          minutes: vocabMin,
+          href: "/vocabulary/flashcards",
+          completed: false,
+          completionCriteria: "Alana özgü 15 yeni kelimeyi ve dünün kelimelerini tekrar et.",
+          memoryTip: "Alan kelimesinin kök ve eklerini (prefixes/suffixes) ayrıştır.",
         });
       } else {
         tasks.push({
-          id: `task-${overallDay}-grammar`,
+          id: `task-${overallDay}-yds-vocab`,
+          module: "vocabulary",
+          title: "İleri Akademik YDS Kelimeleri & Eşdizimler",
+          description: "YDS Master akademik envanterinden kritik sıfat-isim tamlamaları ve akademik fiiller.",
+          minutes: vocabMin,
+          href: "/vocabulary/flashcards",
+          completed: false,
+          completionCriteria: "En az 15 akademik kelimeyi gözden geçir.",
+          memoryTip: "Kelimenin varsa zıt anlamlısını da zihninde çağır.",
+        });
+      }
+
+      // ── Görev 2: Gramer veya Taktik & Çeviri ───────────────
+      const grammarMin = Math.round(safeMinutes * 0.35);
+      if (exam === "YDT") {
+        if (overallDay % 2 === 0) {
+          tasks.push({
+            id: `task-${overallDay}-ydt-trans`,
+            module: "translation",
+            title: "YDT Çeviri & Cümle Tamamlama Taktikleri",
+            description: "İngilizce-Türkçe ve Türkçe-İngilizce çeviri sorularında özne-fiil çekimi taktikleri.",
+            minutes: grammarMin,
+            href: "/tactics",
+            completed: false,
+            completionCriteria: "10 çeviri ve 10 cümle tamamlama sorusu çöz.",
+            memoryTip: "Çeviri sorularında önce ana yüklemi bularak seçenek ele.",
+          });
+        } else {
+          tasks.push({
+            id: `task-${overallDay}-ydt-gram`,
+            module: "grammar",
+            title: "YDT Çekirdek Gramer Konuları",
+            description: "Tenses, Modals, Passive ve Relative Clauses kurallarını renk kodlu formüllerle çalış.",
+            minutes: grammarMin,
+            href: "/grammar",
+            completed: false,
+            completionCriteria: "Gramer testinden en az %80 başarı sağla.",
+            memoryTip: "Formülleri bir kağıda şematize et.",
+          });
+        }
+      } else if (exam === "YOKDIL") {
+        tasks.push({
+          id: `task-${overallDay}-yokdil-gram`,
           module: "grammar",
-          title: "Gramer Konu Anlatımı & Pratik",
-          description: "Haftanın odak gramer konusunu renk kodlu formüllerle incele ve testini çöz.",
+          title: "YÖKDİL Bağlaç & Cümle İskeleti Analizi",
+          description: "Sebep-sonuç, zıtlık ve koşul bağlaçlarının bilimsel cümlelerdeki kullanım formülleri.",
           minutes: grammarMin,
           href: "/grammar",
           completed: false,
-          completionCriteria: "Konu testinden en az %75 başarı sağla.",
-          memoryTip: "Kuralı kendi cümlelerinle bir kağıda şematize et.",
+          completionCriteria: "İlgili bağlaç testini %75+ netle tamamla.",
+          memoryTip: "Bağlacın virgülden önce mi sonra mı geldiğine dikkat et.",
         });
+      } else {
+        if (overallDay % 3 === 0) {
+          tasks.push({
+            id: `task-${overallDay}-yds-tactics`,
+            module: "tactics",
+            title: "YDS Soru Taktikleri & Çeldirici Eleme",
+            description: "Paragraf tamamlama ve akışı bozan cümle sorularında zamir takibi ve konu tutarlılığı.",
+            minutes: grammarMin,
+            href: "/tactics",
+            completed: false,
+            completionCriteria: "15 taktik sorusu çöz.",
+            memoryTip: "Şıklardaki aşırı genellemeleri (always, solely) ele.",
+          });
+        } else {
+          tasks.push({
+            id: `task-${overallDay}-yds-gram`,
+            module: "grammar",
+            title: "İleri YDS Gramer & Devrik Cümleler",
+            description: "Devrik yapılar (Inversion), Participle kısaltmaları ve Noun Clauses analizleri.",
+            minutes: grammarMin,
+            href: "/grammar",
+            completed: false,
+            completionCriteria: "Gramer testini başarıyla tamamla.",
+            memoryTip: "Devrik cümle kuralını kendi cümlenle yaz.",
+          });
+        }
       }
 
-      // Task 3: Reading or Mixed Test
+      // ── Görev 3: Okuma (Reading) veya Deneme/Mini Test ─────
       const readingMin = Math.round(safeMinutes * 0.25);
-      if (overallDay % 2 === 0) {
+      if (exam === "YDT") {
         tasks.push({
-          id: `task-${overallDay}-reading`,
+          id: `task-${overallDay}-ydt-reading`,
           module: "reading",
-          title: "Akademik Reading Metni & Sözlük Analizi",
-          description: "1 adet akademik YDS reading parçasını oku, sorularını çöz ve bilmediğin kelimeleri çıkar.",
+          title: "YDT Paragraf & Soru Tipleri Antrenmanı",
+          description: "Diyalog tamamlama, anlamca en yakın cümle veya durum sorularından karma set.",
           minutes: readingMin,
           href: "/reading",
           completed: false,
-          completionCriteria: "Paragraf sorularını tamamla ve sözlükteki kelimeleri incele.",
-          memoryTip: "Her paragrafın ana fikrini kenarına tek bir kelimeyle özetle.",
+          completionCriteria: "2 okuma metni veya 15 diyalog/durum sorusu çöz.",
+          memoryTip: "Diyalogda boşluktan bir önceki cümlenin duygusunu analiz et.",
+        });
+      } else if (exam === "YOKDIL") {
+        const fieldName = field === "saglik" ? "Sağlık" : field === "fen" ? "Fen" : "Sosyal";
+        tasks.push({
+          id: `task-${overallDay}-yokdil-reading`,
+          module: "reading",
+          title: `YÖKDİL ${fieldName} Okuma Metni & Cloze Test`,
+          description: `${fieldName} alanına ait 1 adet akademik makaleyi oku ve cloze test sorularını yanıtla.`,
+          minutes: readingMin,
+          href: "/reading",
+          completed: false,
+          completionCriteria: "Metin sorularını tamamla ve bilmediğin terimleri listene ekle.",
+          memoryTip: "Her paragrafın ana fikrini tek bir cümleyle özetle.",
         });
       } else {
         tasks.push({
-          id: `task-${overallDay}-exam`,
-          module: "exam",
-          title: "Soru Çözümü & Mini Test",
-          description: "Gramer ve kelime sorularından oluşan karma mini test çözümü.",
+          id: `task-${overallDay}-yds-reading`,
+          module: "reading",
+          title: "Akademik Reading Metni & Sözlük Analizi",
+          description: "Özgün Reader at Work tarzı akademik metin analizi ve ana fikir tespiti.",
           minutes: readingMin,
-          href: "/exams",
+          href: "/reading",
           completed: false,
-          completionCriteria: "En az 15-20 soru çöz.",
-          memoryTip: "Süre tutarak hızını kontrol et.",
+          completionCriteria: "Paragraf sorularını tamamla ve kelime sözlüğünü incele.",
+          memoryTip: "Zor metinlerde cümlenin öznesi ile fiilini altını çizerek belirle.",
         });
       }
 
-      // Task 4: Error Notebook & Review
+      // ── Görev 4: Hata Defteri & Gün Sonu Değerlendirmesi ───
       const reviewMin = Math.max(5, safeMinutes - (vocabMin + grammarMin + readingMin));
       tasks.push({
         id: `task-${overallDay}-review`,
         module: "review",
         title: "Yanlış Defteri & Gün Sonu Değerlendirmesi",
-        description: "Bugün çözülen sorularda yapılan yanlışları incele, doğru nedenini not al.",
+        description: "Bugün çözülen sorularda yapılan yanlışların nedenlerini incele ve not al.",
         minutes: reviewMin,
         href: "/hesap",
         completed: false,
@@ -602,8 +804,8 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
       title: `${w}. Hafta: ${w <= 2 ? "Temel Güçlendirme & Çekirdek Kurallar" : w <= 4 ? "Soru Taktikleri & Sürat Kazanımı" : "Deneme Analizi & Zirve Optimizasyonu"}`,
       goals: [
         `Haftalık hedef kelime sayısı: ${Math.round(safeMinutes * 0.5 * 7)} kelime`,
-        "Gramer soru çözümü ve yanlış analizi",
-        "En az 2 tam reading parçası analizi",
+        `${examTitle} soru çözümü ve yanlış analizi`,
+        "En az 3 tam okuma/deneme metni analizi",
       ],
       days: weekDays,
     });
@@ -612,34 +814,36 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
   const checkpoints: StudyCheckpoint[] = [
     {
       day: Math.max(1, Math.floor(safeDays * 0.25)),
-      title: "1. Çeyrek Değerlendirmesi",
-      description: "Temel gramer ve kelime kazanımlarının ölçümü.",
-      criteria: "20 soruluk mini tarama testinde %70+ başarı.",
+      title: "1. Çeyrek Kontrolü",
+      description: `${examTitle} temel kuralları ve kelime kazanımlarının ölçümü.`,
+      criteria: "20 soruluk tarama testinde %70+ başarı.",
     },
     {
       day: Math.max(2, Math.floor(safeDays * 0.5)),
-      title: "Yarıyıl Kontrol Noktası",
-      description: "Reading ve soru tipleri taktiklerinin oturma düzeyi.",
-      criteria: "40 soruluk orta denemede hedeflenen netin en az %60'ına ulaşılması.",
+      title: "Yarıyıl Deneme Provası",
+      description: "Soru tipleri ve süre yönetiminin ilk yarı simülasyonu.",
+      criteria: `Hedeflenen ${inputs.targetScore} barajının en az %60'ına ulaşılması.`,
     },
     {
       day: Math.max(3, Math.floor(safeDays * 0.75)),
-      title: "3. Çeyrek Zirve Provası",
-      description: "Süre yönetimi ve çeldirici eleme hızı kontrolü.",
+      title: "3. Çeyrek Hız ve Çeldirici Kontrolü",
+      description: "Çeldirici seçenekleri eleme ve soru başına süre optimizasyonu.",
       criteria: "Soru başına ortalama sürenin 90 saniyenin altına inmesi.",
     },
     {
       day: safeDays,
-      title: "Final YDS Provası",
-      description: "Gerçek sınav şartlarında 80 soruluk tam deneme.",
-      criteria: `Hedeflenen ${inputs.targetScore}+ puan bareminin aşılması.`,
+      title: `Final ${examTitle} Provası`,
+      description: `Gerçek sınav şartlarında tam ${examTitle} denemesi.`,
+      criteria: `Hedeflenen ${inputs.targetScore}+ seviyesinin aşılması.`,
     },
   ];
 
   return {
     id: planId,
     title,
-    description: `${inputs.currentLevel} seviyesinden ${inputs.targetScore}+ YDS puanına ulaşmak için günde ${safeMinutes} dakika ayrılmış ${safeDays} günlük plan.`,
+    description: examDescription,
+    examType: exam,
+    yokdilField: exam === "YOKDIL" ? field : undefined,
     currentLevel: inputs.currentLevel,
     targetLevel: inputs.targetLevel,
     targetScore: inputs.targetScore,
@@ -661,12 +865,12 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
   };
 }
 
-// ==================== STORAGE & TRACKING HELPERS ====================
+// ==================== DEPOLAMA & TAKİP YARDIMCILARI ====================
 
 export function loadSavedStudyPlans(): StudyPlan[] {
   if (typeof window === "undefined") return [];
   try {
-    const raw = window.localStorage.getItem(STUDY_PLANS_STORAGE_KEY);
+    const raw = safeGetStorage(STUDY_PLANS_STORAGE_KEY, "");
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
@@ -678,7 +882,7 @@ export function loadSavedStudyPlans(): StudyPlan[] {
 export function saveStudyPlans(plans: StudyPlan[]): void {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(STUDY_PLANS_STORAGE_KEY, JSON.stringify(plans));
+    safeSetStorage(STUDY_PLANS_STORAGE_KEY, JSON.stringify(plans));
   } catch {
     /* safety */
   }
@@ -720,15 +924,19 @@ export function togglePlanTask(
 
 export const PRESET_STUDY_PLANS: StudyPlan[] = PRESET_PLAN_TEMPLATES.map((tmpl) => ({
   ...generateCustomStudyPlan({
+    examType: tmpl.examType,
+    yokdilField: tmpl.yokdilField,
     currentLevel: "A2",
     targetLevel: (tmpl.targetLevel as CefrLevel) || "B2",
-    targetScore: 75,
+    targetScore: tmpl.targetScore || 75,
     totalDays: tmpl.totalDays,
     dailyMinutes: tmpl.dailyMinutes,
   }),
   id: tmpl.id,
   title: tmpl.title,
   description: tmpl.description,
+  examType: tmpl.examType,
+  yokdilField: tmpl.yokdilField,
   estimatedCompletion: tmpl.estimatedCompletion,
   acceleratedAlternative: tmpl.acceleratedAlternative,
 }));

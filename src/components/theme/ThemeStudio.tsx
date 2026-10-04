@@ -80,13 +80,13 @@ export default function ThemeStudio() {
         <div className="space-y-1">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold font-mono">
             <Palette className="w-3.5 h-3.5" />
-            <span>2.000 Benzersiz Tema Stüdyosu</span>
+            <span>1.000+ Algoritmik Tema Motoru</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <span>🎨</span> Renk & Tema Kişiselleştirme
+            <span>🎨</span> Renk, Desen & Tema Kişiselleştirme
           </h2>
           <p className="text-xs sm:text-sm text-slate-400">
-            İster koyu (Dark) ister yüksek kontrastlı aydınlık (Light) modda 2.000 farklı tema arasından tarzını seç.
+            İster koyu (Dark) ister yüksek kontrastlı aydınlık (Light) modda 1.000 farklı tema ve SVG desenleri arasından tarzını seç.
           </p>
         </div>
 

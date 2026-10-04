@@ -11,31 +11,36 @@ import {
   togglePlanTask,
   StudyPlan,
   CefrLevel,
+  ExamType,
+  YokdilField,
   LevelStudyGuide,
 } from "@/lib/data-study-plans";
-import { awardPointsIdempotent } from "@/lib/gamification/points-config";
 import { useUsage } from "@/lib/store";
+
+type ExamFilterType = "ALL" | "YDS" | "YDT" | "YOKDIL_SAGLIK" | "YOKDIL_FEN" | "YOKDIL_SOSYAL";
 
 export default function StudyPlansPage() {
   const { addXp } = useUsage();
 
   const [activeTab, setActiveTab] = useState<"MY_PLAN" | "PRESETS" | "GENERATOR" | "GUIDES">("MY_PLAN");
   const [plans, setPlans] = useState<StudyPlan[]>(() => PRESET_STUDY_PLANS || []);
-  const [selectedPreset, setSelectedPreset] = useState<StudyPlan | null>(null);
+  const [selectedExamFilter, setSelectedExamFilter] = useState<ExamFilterType>("ALL");
 
   // Guide tab level
   const [selectedGuideLevel, setSelectedGuideLevel] = useState<CefrLevel>("B1");
 
   // Generator form state
+  const [genExamType, setGenExamType] = useState<ExamType>("YDS");
+  const [genYokdilField, setGenYokdilField] = useState<YokdilField>("saglik");
   const [genCurrentLevel, setGenCurrentLevel] = useState<CefrLevel>("A2");
-  const [genTargetLevel, setGenTargetLevel] = useState<CefrLevel | "YDS">("B2");
+  const [genTargetLevel, setGenTargetLevel] = useState<CefrLevel | "YDS" | "YDT" | "YOKDIL">("B2");
   const [genTargetScore, setGenTargetScore] = useState<number>(75);
   const [genDays, setGenDays] = useState<number>(60);
   const [genMinutes, setGenMinutes] = useState<number>(60);
 
   useEffect(() => {
     const saved = loadSavedStudyPlans();
-    if (saved.length > 0) {
+    if (saved && saved.length > 0) {
       setPlans(saved);
     }
   }, []);
@@ -87,6 +92,8 @@ export default function StudyPlansPage() {
   const handleGeneratePlan = (e: React.FormEvent) => {
     e.preventDefault();
     const newPlan = generateCustomStudyPlan({
+      examType: genExamType,
+      yokdilField: genExamType === "YOKDIL" ? genYokdilField : undefined,
       currentLevel: genCurrentLevel,
       targetLevel: genTargetLevel,
       targetScore: genTargetScore,
@@ -102,6 +109,20 @@ export default function StudyPlansPage() {
     saveStudyPlans(updated);
     setActiveTab("MY_PLAN");
   };
+
+  // Filter presets by selected exam
+  const filteredPresets = useMemo(() => {
+    if (selectedExamFilter === "ALL") return PRESET_STUDY_PLANS;
+    if (selectedExamFilter === "YDS") return PRESET_STUDY_PLANS.filter((p) => p.examType === "YDS");
+    if (selectedExamFilter === "YDT") return PRESET_STUDY_PLANS.filter((p) => p.examType === "YDT");
+    if (selectedExamFilter === "YOKDIL_SAGLIK")
+      return PRESET_STUDY_PLANS.filter((p) => p.examType === "YOKDIL" && p.yokdilField === "saglik");
+    if (selectedExamFilter === "YOKDIL_FEN")
+      return PRESET_STUDY_PLANS.filter((p) => p.examType === "YOKDIL" && p.yokdilField === "fen");
+    if (selectedExamFilter === "YOKDIL_SOSYAL")
+      return PRESET_STUDY_PLANS.filter((p) => p.examType === "YOKDIL" && p.yokdilField === "sosyal");
+    return PRESET_STUDY_PLANS;
+  }, [selectedExamFilter]);
 
   // Calculate plan progress
   const planProgress = useMemo(() => {
@@ -127,28 +148,68 @@ export default function StudyPlansPage() {
 
   const currentGuide: LevelStudyGuide = LEVEL_STUDY_GUIDES[selectedGuideLevel];
 
+  // Helper for exam badge rendering
+  const getExamBadge = (examType: ExamType, yokdilField?: YokdilField) => {
+    if (examType === "YDS") {
+      return (
+        <span className="px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+          📘 YDS Akademik
+        </span>
+      );
+    }
+    if (examType === "YDT") {
+      return (
+        <span className="px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+          🎯 YDT (YKS-Dil)
+        </span>
+      );
+    }
+    if (yokdilField === "saglik") {
+      return (
+        <span className="px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider bg-rose-500/15 text-rose-300 border border-rose-500/30 flex items-center gap-1">
+          🩺 YÖKDİL Sağlık
+        </span>
+      );
+    }
+    if (yokdilField === "fen") {
+      return (
+        <span className="px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+          🔬 YÖKDİL Fen
+        </span>
+      );
+    }
+    return (
+      <span className="px-2.5 py-1 rounded-lg text-[11px] font-black uppercase tracking-wider bg-purple-500/15 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+        📜 YÖKDİL Sosyal
+      </span>
+    );
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header Banner */}
       <header className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-cyan-950/60 via-slate-900/90 to-purple-950/60 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-400/10 text-purple-300 border border-purple-400/20">
-                A1–C2 Kişiselleştirilmiş Planlayıcı
+                YDS · YDT · YÖKDİL Çoklu Sınav Planlayıcı
               </span>
               <span className="text-xs text-white/50">&bull; Spaced Repetition Destekli</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-              YDS Çalışma <span className="gradient-text">Programları</span> 📅
+              Sınav Çalışma <span className="gradient-text">Programları</span> 📅
             </h1>
             <p className="text-sm sm:text-base text-white/60 mt-2 max-w-2xl">
-              Hedef puanına ve ayırabileceğin günlük zamana göre hazırlanmış 7–180 günlük çalışma programları, haftalık hedefler ve CEFR seviye kılavuzları.
+              YDS, YDT (YKS İngilizce) ve YÖKDİL (Sağlık, Fen, Sosyal) hedeflerine göre özelleştirilmiş 7–180 günlük çalışma takvimleri ve CEFR seviye kılavuzları.
             </p>
           </div>
 
           {activePlan && (
             <div className="p-4 rounded-2xl bg-white/5 border border-white/10 shrink-0 text-center sm:text-right">
+              <div className="flex items-center justify-center sm:justify-end gap-2 mb-1">
+                {getExamBadge(activePlan.examType, activePlan.yokdilField)}
+              </div>
               <span className="text-xs text-white/50 block">Aktif Program İlerlemesi</span>
               <span className="text-2xl font-black text-cyan-400">%{planProgress.percent}</span>
               <span className="text-[11px] text-white/40 block mt-0.5">
@@ -164,7 +225,7 @@ export default function StudyPlansPage() {
             onClick={() => setActiveTab("MY_PLAN")}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activeTab === "MY_PLAN"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20 font-black"
                 : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             }`}
           >
@@ -174,7 +235,7 @@ export default function StudyPlansPage() {
             onClick={() => setActiveTab("PRESETS")}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activeTab === "PRESETS"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20 font-black"
                 : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             }`}
           >
@@ -184,7 +245,7 @@ export default function StudyPlansPage() {
             onClick={() => setActiveTab("GENERATOR")}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activeTab === "GENERATOR"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20 font-black"
                 : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             }`}
           >
@@ -194,7 +255,7 @@ export default function StudyPlansPage() {
             onClick={() => setActiveTab("GUIDES")}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activeTab === "GUIDES"
-                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20"
+                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-md shadow-cyan-500/20 font-black"
                 : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
             }`}
           >
@@ -209,32 +270,39 @@ export default function StudyPlansPage() {
           {activePlan ? (
             <div className="space-y-6">
               {/* Active Plan Meta Card */}
-              <div className="p-6 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2">
+              <div className="p-6 sm:p-8 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">
                       Aktif Program
                     </span>
+                    {getExamBadge(activePlan.examType, activePlan.yokdilField)}
                     <span className="text-xs text-white/40">&bull; {activePlan.totalDays} Günlük Plan</span>
                   </div>
-                  <h2 className="text-2xl font-black text-white mt-1">{activePlan.title}</h2>
-                  <p className="text-xs text-white/60 mt-1 max-w-xl">{activePlan.description}</p>
+                  <h2 className="text-2xl sm:text-3xl font-black text-white">{activePlan.title}</h2>
+                  <p className="text-xs sm:text-sm text-white/60 max-w-2xl leading-relaxed">{activePlan.description}</p>
                 </div>
 
-                <div className="flex items-center gap-4 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6">
+                <div className="flex items-center gap-6 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-8 shrink-0">
                   <div>
                     <span className="text-[10px] uppercase font-bold text-white/40 block">Günlük Süre</span>
-                    <span className="text-sm font-bold text-white">{activePlan.dailyMinutes} Dakika</span>
+                    <span className="text-base font-black text-white">{activePlan.dailyMinutes} Dakika</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-white/40 block">Hedef Skor</span>
-                    <span className="text-sm font-bold text-cyan-400">{activePlan.targetScore || 80}+ YDS</span>
+                    <span className="text-[10px] uppercase font-bold text-white/40 block">
+                      {activePlan.examType === "YDT" ? "Hedef Net" : "Hedef Skor"}
+                    </span>
+                    <span className="text-base font-black text-cyan-400">
+                      {activePlan.examType === "YDT"
+                        ? `${activePlan.targetScore || 70} Net YDT`
+                        : `${activePlan.targetScore || 80}+ Puan`}
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Progress bar */}
-              <div className="w-full bg-white/5 h-2.5 rounded-full overflow-hidden border border-white/10">
+              <div className="w-full bg-white/5 h-3 rounded-full overflow-hidden border border-white/10">
                 <div
                   className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 h-full transition-all duration-500"
                   style={{ width: `${planProgress.percent}%` }}
@@ -343,7 +411,7 @@ export default function StudyPlansPage() {
               <p className="text-white/60 text-sm mb-4">Henüz aktif bir çalışma programı seçmedin kanka.</p>
               <button
                 onClick={() => setActiveTab("PRESETS")}
-                className="px-6 py-3 rounded-xl font-bold text-xs bg-cyan-400 text-slate-950 hover:brightness-110"
+                className="px-6 py-3 rounded-xl font-bold text-xs bg-cyan-400 text-slate-950 hover:brightness-110 shadow-lg"
               >
                 Hazır Programları İncele ⚡
               </button>
@@ -354,106 +422,287 @@ export default function StudyPlansPage() {
 
       {/* TAB 2: PRESET PLANS */}
       {activeTab === "PRESETS" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PRESET_STUDY_PLANS.map((preset) => {
-            const isCurrent = activePlan?.id === preset.id;
+        <div className="space-y-6">
+          {/* Sınav Filtreleme Barı */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
+            <button
+              onClick={() => setSelectedExamFilter("ALL")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "ALL"
+                  ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-white/70 hover:bg-white/10"
+              }`}
+            >
+              🎓 Tümü ({PRESET_STUDY_PLANS.length})
+            </button>
+            <button
+              onClick={() => setSelectedExamFilter("YDS")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "YDS"
+                  ? "bg-emerald-400 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-emerald-300 hover:bg-white/10"
+              }`}
+            >
+              📘 YDS (Akademik)
+            </button>
+            <button
+              onClick={() => setSelectedExamFilter("YDT")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "YDT"
+                  ? "bg-amber-400 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-amber-300 hover:bg-white/10"
+              }`}
+            >
+              🎯 YDT (YKS-Dil)
+            </button>
+            <button
+              onClick={() => setSelectedExamFilter("YOKDIL_SAGLIK")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "YOKDIL_SAGLIK"
+                  ? "bg-rose-400 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-rose-300 hover:bg-white/10"
+              }`}
+            >
+              🩺 YÖKDİL Sağlık
+            </button>
+            <button
+              onClick={() => setSelectedExamFilter("YOKDIL_FEN")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "YOKDIL_FEN"
+                  ? "bg-cyan-400 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-cyan-300 hover:bg-white/10"
+              }`}
+            >
+              🔬 YÖKDİL Fen
+            </button>
+            <button
+              onClick={() => setSelectedExamFilter("YOKDIL_SOSYAL")}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                selectedExamFilter === "YOKDIL_SOSYAL"
+                  ? "bg-purple-400 text-slate-950 font-black shadow-md"
+                  : "bg-white/5 text-purple-300 hover:bg-white/10"
+              }`}
+            >
+              📜 YÖKDİL Sosyal
+            </button>
+          </div>
 
-            return (
-              <div
-                key={preset.id}
-                className="p-6 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-xl flex flex-col justify-between hover:border-cyan-400/40 transition-all group"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold uppercase bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">
-                      {preset.totalDays} Gün &bull; {preset.estimatedCompletion}
-                    </span>
-                    <span className="text-xs font-black text-white/50">
-                      Günde {preset.dailyMinutes} dk
-                    </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredPresets.map((preset) => {
+              const isCurrent = activePlan?.id === preset.id;
+
+              return (
+                <div
+                  key={preset.id}
+                  className="p-6 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl shadow-xl flex flex-col justify-between hover:border-cyan-400/40 transition-all group"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      {getExamBadge(preset.examType, preset.yokdilField)}
+                      <span className="text-xs font-black text-white/50">
+                        Günde {preset.dailyMinutes} dk
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-white/10 text-white/70">
+                        {preset.totalDays} Gün &bull; {preset.estimatedCompletion}
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-black text-white group-hover:text-cyan-300 transition-colors">
+                      {preset.title}
+                    </h3>
+                    <p className="text-xs text-white/60 leading-relaxed line-clamp-3">{preset.description}</p>
+
+                    <div className="pt-2 border-t border-white/10 space-y-1 text-xs text-white/70">
+                      <div className="flex justify-between">
+                        <span className="text-white/40">Gereken Seviye:</span>
+                        <span className="font-bold">{preset.currentLevel}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-white/40">
+                          {preset.examType === "YDT" ? "Hedef Net:" : "Hedef Skor:"}
+                        </span>
+                        <span className="font-bold text-cyan-400">
+                          {preset.examType === "YDT"
+                            ? `${preset.targetScore || 70} Net YDT`
+                            : `${preset.targetScore || 75}+ Puan`}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-black text-white group-hover:text-cyan-300 transition-colors">
-                    {preset.title}
-                  </h3>
-                  <p className="text-xs text-white/60 leading-relaxed">{preset.description}</p>
-
-                  <div className="pt-2 border-t border-white/10 space-y-1 text-xs text-white/70">
-                    <div className="flex justify-between">
-                      <span className="text-white/40">Gereken Seviye:</span>
-                      <span className="font-bold">{preset.currentLevel}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-white/40">Hedef Skor:</span>
-                      <span className="font-bold text-cyan-400">{preset.targetScore}+ YDS</span>
-                    </div>
+                  <div className="pt-6">
+                    {isCurrent ? (
+                      <div className="w-full py-2.5 rounded-xl text-center text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        ✓ Şu Anda Aktif Programın
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleStartPreset(preset)}
+                        className="w-full py-2.5 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-400 hover:brightness-110 shadow-lg shadow-cyan-500/20 active:scale-[0.99] transition-all"
+                      >
+                        Bu Planı Başlat 🚀
+                      </button>
+                    )}
                   </div>
                 </div>
-
-                <div className="pt-6">
-                  {isCurrent ? (
-                    <div className="w-full py-2.5 rounded-xl text-center text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      ✓ Şu Anda Aktif Programın
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => handleStartPreset(preset)}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-cyan-400 to-blue-400 hover:brightness-110 shadow-lg shadow-cyan-500/20 active:scale-[0.99] transition-all"
-                    >
-                      Bu Planı Başlat 🚀
-                    </button>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
 
       {/* TAB 3: CUSTOM PLAN GENERATOR */}
       {activeTab === "GENERATOR" && (
-        <div className="max-w-2xl mx-auto p-8 rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl">
+        <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl border border-white/10 bg-slate-900/80 backdrop-blur-xl shadow-2xl">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-black text-white">🤖 Özel YDS Planlayıcı</h2>
+            <h2 className="text-2xl font-black text-white">🤖 Çoklu Sınav Dinamik Planlayıcı</h2>
             <p className="text-xs text-white/50 mt-1">
-              Kendi seviyene, zamanına ve hedef puanına uygun kusursuz çalışma takvimini 1 saniyede oluştur.
+              YDS, YDT veya YÖKDİL sınavına, alanına, hedefine ve zamanına göre kusursuz haftalık takvimini oluştur.
             </p>
           </div>
 
-          <form onSubmit={handleGeneratePlan} className="space-y-4 text-xs">
+          <form onSubmit={handleGeneratePlan} className="space-y-5 text-xs">
+            {/* Sınav Türü Seçimi */}
             <div>
-              <label className="block font-bold uppercase text-white/60 mb-1.5">
-                Mevcut Seviyen (CEFR)
+              <label className="block font-bold uppercase text-white/60 mb-2">
+                1. Hazırlandığın Sınav
               </label>
-              <select
-                value={genCurrentLevel}
-                onChange={(e) => setGenCurrentLevel(e.target.value as CefrLevel)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
-              >
-                <option value="A1">A1 (Başlangıç — Sıfırdan)</option>
-                <option value="A2">A2 (Temel — Basit Cümleler)</option>
-                <option value="B1">B1 (Orta — 40–55 YDS civarı)</option>
-                <option value="B2">B2 (İyi — 55–70 YDS civarı)</option>
-                <option value="C1">C1 (İleri — 70–85 YDS civarı)</option>
-                <option value="C2">C2 (Usta — 85+ YDS)</option>
-              </select>
+              <div className="grid grid-cols-3 gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGenExamType("YDS");
+                    setGenTargetScore(75);
+                  }}
+                  className={`p-3 rounded-2xl border text-center transition-all ${
+                    genExamType === "YDS"
+                      ? "bg-emerald-500/20 border-emerald-400 text-white font-black shadow-lg"
+                      : "bg-white/5 border-white/10 text-white/60 hover:text-white"
+                  }`}
+                >
+                  <span className="text-xl block mb-1">📘</span>
+                  <span className="text-xs font-bold block">YDS</span>
+                  <span className="text-[10px] text-white/40 block mt-0.5">Akademik</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGenExamType("YDT");
+                    setGenTargetScore(65);
+                  }}
+                  className={`p-3 rounded-2xl border text-center transition-all ${
+                    genExamType === "YDT"
+                      ? "bg-amber-500/20 border-amber-400 text-white font-black shadow-lg"
+                      : "bg-white/5 border-white/10 text-white/60 hover:text-white"
+                  }`}
+                >
+                  <span className="text-xl block mb-1">🎯</span>
+                  <span className="text-xs font-bold block">YDT</span>
+                  <span className="text-[10px] text-white/40 block mt-0.5">YKS-Dil</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGenExamType("YOKDIL");
+                    setGenTargetScore(75);
+                  }}
+                  className={`p-3 rounded-2xl border text-center transition-all ${
+                    genExamType === "YOKDIL"
+                      ? "bg-cyan-500/20 border-cyan-400 text-white font-black shadow-lg"
+                      : "bg-white/5 border-white/10 text-white/60 hover:text-white"
+                  }`}
+                >
+                  <span className="text-xl block mb-1">🌐</span>
+                  <span className="text-xs font-bold block">YÖKDİL</span>
+                  <span className="text-[10px] text-white/40 block mt-0.5">Alan Odaklı</span>
+                </button>
+              </div>
             </div>
 
+            {/* YÖKDİL Alan Seçimi */}
+            {genExamType === "YOKDIL" && (
+              <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 space-y-2">
+                <label className="block font-bold uppercase text-cyan-300">
+                  YÖKDİL Alanını Seç:
+                </label>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setGenYokdilField("saglik")}
+                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                      genYokdilField === "saglik"
+                        ? "bg-rose-500/30 border-rose-400 text-rose-200"
+                        : "bg-white/5 border-white/10 text-white/60"
+                    }`}
+                  >
+                    🩺 Sağlık
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setGenYokdilField("fen")}
+                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                      genYokdilField === "fen"
+                        ? "bg-cyan-500/30 border-cyan-400 text-cyan-200"
+                        : "bg-white/5 border-white/10 text-white/60"
+                    }`}
+                  >
+                    🔬 Fen
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setGenYokdilField("sosyal")}
+                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all ${
+                      genYokdilField === "sosyal"
+                        ? "bg-purple-500/30 border-purple-400 text-purple-200"
+                        : "bg-white/5 border-white/10 text-white/60"
+                    }`}
+                  >
+                    📜 Sosyal
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Seviye & Hedef */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold uppercase text-white/60 mb-1.5">
-                  Hedef YDS Puanı
+                  Mevcut Seviyen (CEFR)
+                </label>
+                <select
+                  value={genCurrentLevel}
+                  onChange={(e) => setGenCurrentLevel(e.target.value as CefrLevel)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
+                >
+                  <option value="A1">A1 (Başlangıç — Sıfırdan)</option>
+                  <option value="A2">A2 (Temel — Basit Cümleler)</option>
+                  <option value="B1">B1 (Orta — 40–55 Puan)</option>
+                  <option value="B2">B2 (İyi — 55–70 Puan)</option>
+                  <option value="C1">C1 (İleri — 70–85 Puan)</option>
+                  <option value="C2">C2 (Usta — 85+ Puan)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold uppercase text-white/60 mb-1.5">
+                  {genExamType === "YDT" ? "Hedef Net (Maks. 80)" : "Hedef Puan (Maks. 100)"}
                 </label>
                 <input
                   type="number"
-                  min={50}
-                  max={100}
+                  min={genExamType === "YDT" ? 30 : 50}
+                  max={genExamType === "YDT" ? 80 : 100}
                   value={genTargetScore}
                   onChange={(e) => setGenTargetScore(Number(e.target.value))}
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
                 />
               </div>
+            </div>
 
+            {/* Süre & Günlük Dakika */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-bold uppercase text-white/60 mb-1.5">
                   Toplam Süre (Gün)
@@ -470,34 +719,30 @@ export default function StudyPlansPage() {
                   <option value={90}>90 Gün (3 Ay)</option>
                   <option value={120}>120 Gün (4 Ay)</option>
                   <option value={180}>180 Gün (6 Ay)</option>
-                  <option value={365}>365 Gün (1 Yıl)</option>
                 </select>
               </div>
-            </div>
 
-            <div>
-              <label className="block font-bold uppercase text-white/60 mb-1.5">
-                Günde Ayırabileceğin Zaman (Dakika)
-              </label>
-              <input
-                type="number"
-                min={20}
-                max={300}
-                step={10}
-                value={genMinutes}
-                onChange={(e) => setGenMinutes(Number(e.target.value))}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
-              />
-              <span className="text-[11px] text-white/40 block mt-1">
-                Günde {genMinutes} dk &bull; Haftada yaklaşık {Math.round((genMinutes * 7) / 60)} saat çalışma.
-              </span>
+              <div>
+                <label className="block font-bold uppercase text-white/60 mb-1.5">
+                  Günlük Çalışma (Dakika)
+                </label>
+                <input
+                  type="number"
+                  min={20}
+                  max={300}
+                  step={10}
+                  value={genMinutes}
+                  onChange={(e) => setGenMinutes(Number(e.target.value))}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
+                />
+              </div>
             </div>
 
             <button
               type="submit"
               className="w-full mt-4 py-3.5 px-4 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 hover:brightness-110 shadow-lg shadow-purple-500/20 active:scale-[0.99] transition-all"
             >
-              Kişiselleştirilmiş Programımı Oluştur 🚀
+              Kişiselleştirilmiş Çalışma Programını Oluştur 🚀
             </button>
           </form>
         </div>
