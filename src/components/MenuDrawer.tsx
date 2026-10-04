@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   PAGES,
@@ -12,6 +12,7 @@ import {
 } from "@/lib/site-index";
 import SearchBox from "@/components/SearchBox";
 import ThemeToggle from "@/components/ThemeToggle";
+import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
 import { useUsage } from "@/lib/store";
 import { calculateStudentProgress } from "@/lib/progress/calculator";
 import {
@@ -37,6 +38,7 @@ interface MenuDrawerProps {
 }
 
 export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
+  const [themeModal, setThemeModal] = useState(false);
   const { usage } = useUsage();
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
   const grammarCount = Object.keys(usage.grammar || {}).length;
@@ -85,38 +87,46 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
 
   return (
     <div className="fixed inset-0 z-[100] transition-opacity duration-300">
-      {/* Karartma Katmanı */}
+      {/* Şeffaf Temiz Arkaplan Katmanı (Karanlık çamurlu değil, net cam) */}
       <div
-        className="absolute inset-0 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+        className="absolute inset-0 bg-slate-950/25 dark:bg-black/35 light:bg-slate-900/10 backdrop-blur-[2px] animate-in fade-in duration-200"
         onClick={handleSafeClose}
       />
 
-      {/* Yan Çekmece (Sidebar) */}
-      <aside className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-950/98 backdrop-blur-3xl border-l border-white/15 overflow-y-auto shadow-2xl shadow-black animate-in slide-in-from-right duration-300 flex flex-col">
-        {/* Üst Sabit Çubuk: Başlık, Tema Değiştirici ve Kapatma Butonu */}
-        <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-2xl border-b border-white/15 px-5 py-3.5 space-y-3 shrink-0">
+      {/* Yan Çekmece (Sidebar) - Net, kristal kontrast ve aydınlık uyumu */}
+      <aside className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-900/92 dark:bg-slate-950/92 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col transition-colors">
+        {/* Üst Sabit Çubuk: Başlık, 2000 Tema Butonu, Tema Değiştirici ve Kapatma Butonu */}
+        <div className="sticky top-0 z-20 bg-slate-900/90 dark:bg-slate-950/90 light:bg-white/95 backdrop-blur-2xl border-b border-white/15 light:border-slate-200 px-5 py-3.5 space-y-3 shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-2xl">🧭</span>
               <div>
-                <span className="font-black text-base text-white block leading-tight">
+                <span className="font-black text-base text-white light:text-slate-900 block leading-tight">
                   DİL MASTER Navigasyon
                 </span>
-                <span className="text-[10px] text-cyan-300/80 font-mono">
+                <span className="text-[10px] text-cyan-300/80 light:text-cyan-700 font-mono">
                   YDS · YDT · YÖKDİL Tüm Modüller
                 </span>
               </div>
             </div>
 
-            {/* Yan Çekmece İçinde Canlı Karanlık/Aydınlık Mod ve Kapat Butonu */}
-            <div className="flex items-center gap-2">
+            {/* Yan Çekmece İçinde Canlı Tema Butonları ve Kapat */}
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setThemeModal(true)}
+                className="h-9 px-2.5 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-pink-500/15 to-cyan-500/15 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-1 text-xs font-bold transition-all shadow-sm"
+                title="🎨 2.000+ Tema Stüdyosu"
+              >
+                <span>🎨</span>
+                <span className="text-[10px] font-mono hidden sm:inline">2000+</span>
+              </button>
               <ThemeToggle compact className="!w-9 !h-9 !px-0 rounded-xl" />
               <button
                 onClick={handleSafeClose}
-                className="w-9 h-9 rounded-xl border border-white/15 bg-white/5 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-xl border border-white/15 light:border-slate-300 bg-white/5 light:bg-slate-100 hover:bg-white/15 text-white/80 light:text-slate-700 flex items-center justify-center transition-colors"
                 aria-label="Menüyü Kapat"
               >
-                <X className="w-5 h-5 text-white/80" />
+                <X className="w-5 h-5 text-white/80 light:text-slate-700" />
               </button>
             </div>
           </div>
@@ -543,6 +553,9 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
           </div>
         </div>
       </aside>
+
+      {/* 2.000+ Tema Seçici Modal */}
+      <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
     </div>
   );
 }

@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
     const q = searchParams.get("q")?.trim() || "";
     const type = searchParams.get("type") || undefined;
     const level = searchParams.get("level") || undefined;
+    const exam = searchParams.get("exam") || undefined;
     const source = searchParams.get("source") || undefined;
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
     const limit = Math.min(100, Math.max(10, parseInt(searchParams.get("limit") || "50", 10)));
@@ -48,29 +49,41 @@ export async function GET(req: NextRequest) {
       prisma.word.count({ where: whereClause }),
     ]);
 
-    const formatted = words.map((w) => ({
-      id: w.id,
-      english: w.english,
-      turkish: w.turkish,
-      definitionEn: w.definitionEn,
-      examples: (() => {
-        try {
-          return JSON.parse(w.examples || "[]");
-        } catch {
-          return [];
-        }
-      })(),
-      synonyms: (() => {
-        try {
-          return JSON.parse(w.synonyms || "[]");
-        } catch {
-          return [];
-        }
-      })(),
-      level: w.level,
-      type: w.type,
-      imageUrl: w.imageUrl,
-    }));
+    const formatted = words.map((w) => {
+      const exams: ("YDS" | "YDT" | "YÖKDİL")[] = [];
+      const lvl = (w.level || "B2").toUpperCase();
+      const tp = (w.type || "").toLowerCase();
+      if (lvl === "A1" || lvl === "A2" || lvl === "B1" || lvl === "B2" || tp.includes("phrasal")) exams.push("YDT");
+      if (lvl === "B2" || lvl === "C1" || lvl === "C2" || lvl.includes("YDS")) exams.push("YDS");
+      if (lvl === "B1" || lvl === "B2" || lvl === "C1") exams.push("YÖKDİL");
+      if (exams.length === 0) exams.push("YDS", "YDT", "YÖKDİL");
+
+      return {
+        id: w.id,
+        english: w.english,
+        turkish: w.turkish,
+        definitionEn: w.definitionEn,
+        examples: (() => {
+          try {
+            return JSON.parse(w.examples || "[]");
+          } catch {
+            return [];
+          }
+        })(),
+        synonyms: (() => {
+          try {
+            return JSON.parse(w.synonyms || "[]");
+          } catch {
+            return [];
+          }
+        })(),
+        level: w.level,
+        type: w.type,
+        imageUrl: w.imageUrl,
+        targetExams: exams,
+        sourceCategory: w.source || "ÖSYM / Akademik Yayınlar",
+      };
+    });
 
     // PERF & RELIABILITY: Eğer veritabanında henüz kelime yoksa master korpustan sun
     let finalWords = formatted;
@@ -88,18 +101,25 @@ export async function GET(req: NextRequest) {
           level: p.level,
           type: p.type,
           imageUrl: null,
+          targetExams: ["YDS", "YDT", "YÖKDİL"] as ("YDS" | "YDT" | "YÖKDİL")[],
+          sourceCategory: p.sourceCategory || "Modadil / Akın Dil / YDS Pub",
         })),
-        ...MASTER_VOCABULARY.map((m) => ({
-          id: String(m.id),
-          english: m.word,
-          turkish: m.tr,
-          definitionEn: m.hint || "",
-          examples: m.example ? [m.example, m.exampleTr || ""] : [],
-          synonyms: m.synonyms || [],
-          level: m.level,
-          type: m.type,
-          imageUrl: null,
-        })),
+        ...MASTER_VOCABULARY.map((m) => {
+          const isBeginner = m.level === "A1" || m.level === "A2";
+          return {
+            id: String(m.id),
+            english: m.word,
+            turkish: m.tr,
+            definitionEn: m.hint || "",
+            examples: m.example ? [m.example, m.exampleTr || ""] : [],
+            synonyms: m.synonyms || [],
+            level: m.level,
+            type: m.type,
+            imageUrl: null,
+            targetExams: (isBeginner ? ["YDT"] : ["YDS", "YDT", "YÖKDİL"]) as ("YDS" | "YDT" | "YÖKDİL")[],
+            sourceCategory: `Master Veritabanı (${m.level})`,
+          };
+        }),
       ];
 
       const filtered = combinedPool.filter((w) => {
@@ -115,6 +135,12 @@ export async function GET(req: NextRequest) {
         }
         if (level && level !== "Hepsi" && !w.level.toLowerCase().includes(level.toLowerCase())) {
           return false;
+        }
+        if (exam && exam !== "Hepsi" && exam !== "ALL") {
+          const normExam = exam === "YOKDIL" ? "YÖKDİL" : exam;
+          if (!w.targetExams.includes(normExam as any)) {
+            return false;
+          }
         }
         return true;
       });

@@ -94,7 +94,7 @@ export default function DesktopSidebar() {
     <>
       <aside
         aria-label="Sol Yan Navigasyon Menüsü"
-        className={`fixed left-0 top-16 bottom-0 z-40 hidden xl:flex flex-col justify-between bg-slate-950/95 backdrop-blur-2xl border-r border-white/10 shadow-2xl transition-all duration-300 ${
+        className={`fixed left-0 top-16 bottom-0 z-40 hidden xl:flex flex-col justify-between bg-slate-900/90 dark:bg-slate-950/92 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-r border-white/15 light:border-slate-200 shadow-xl transition-all duration-300 ${
           collapsed ? "w-[72px]" : "w-64"
         }`}
       >

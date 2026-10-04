@@ -3886,5 +3886,481 @@ export const YDS_PUBLICATIONS_MASTER_CORPUS: PublicationWord[] = [
       "immensely"
     ],
     "sourceCategory": "Cambridge / YDS Pub"
+  },
+  {
+    "term": "culminate",
+    "meaningsTr": [
+      "zirveye ulaşmak",
+      "ile sonuçlanmak",
+      "noktalanmak"
+    ],
+    "type": "fiil",
+    "level": "C1",
+    "definitionEn": "To reach a climax or point of highest development; to end with a particular result",
+    "exampleEn": "Years of rigorous laboratory research culminated in the discovery of an effective vaccine.",
+    "exampleTr": "Yıllar süren titiz laboratuvar araştırmaları, etkili bir aşının keşfiyle sonuçlandı.",
+    "synonyms": [
+      "peak",
+      "climax",
+      "conclude",
+      "terminate"
+    ],
+    "collocations": [
+      "culminate in success",
+      "culminate in failure"
+    ],
+    "sourceCategory": "Modadil / Suat Gürcan"
+  },
+  {
+    "term": "pervasive",
+    "meaningsTr": [
+      "yaygın",
+      "her yere sinen",
+      "nüfuz eden"
+    ],
+    "type": "sıfat",
+    "level": "C1",
+    "definitionEn": "Spreading widely throughout an area or a group of people, especially an unwelcome influence",
+    "exampleEn": "Social media has established a pervasive presence in modern adolescent communication.",
+    "exampleTr": "Sosyal medya, modern ergen iletişiminde yaygın bir varlık kurmuştur.",
+    "synonyms": [
+      "prevalent",
+      "omnipresent",
+      "widespread",
+      "permeating"
+    ],
+    "collocations": [
+      "pervasive influence",
+      "pervasive problem"
+    ],
+    "sourceCategory": "Akın Dil / 100 Günde YDS"
+  },
+  {
+    "term": "reluctance",
+    "meaningsTr": [
+      "isteksizlik",
+      "gönülsüzlük",
+      "tereddüt"
+    ],
+    "type": "isim",
+    "level": "B2",
+    "definitionEn": "Unwillingness or disinclination to do something",
+    "exampleEn": "The committee voiced severe reluctance to invest public funds in unproven green technologies.",
+    "exampleTr": "Komite, kamu fonlarını kanıtlanmamış yeşil teknolojilere yatırma konusunda ciddi bir isteksizlik dile getirdi.",
+    "synonyms": [
+      "unwillingness",
+      "hesitation",
+      "disinclination"
+    ],
+    "collocations": [
+      "show reluctance",
+      "overcome reluctance"
+    ],
+    "sourceCategory": "Benim Hocam / Hakkı Şahin"
+  },
+  {
+    "term": "refrain from",
+    "meaningsTr": [
+      "kaçınmak",
+      "sakınmak",
+      "kendini alıkoymak"
+    ],
+    "type": "phrasal verb",
+    "level": "B2",
+    "definitionEn": "To stop oneself from doing something; to abstain",
+    "exampleEn": "Patients taking blood thinners must strictly refrain from consuming alcohol.",
+    "exampleTr": "Kan sulandırıcı kullanan hastalar alkol tüketmekten kesinlikle kaçınmalıdır.",
+    "synonyms": [
+      "abstain from",
+      "avoid",
+      "desist from",
+      "forbear"
+    ],
+    "collocations": [
+      "refrain from smoking",
+      "refrain from comment"
+    ],
+    "sourceCategory": "Remzi Hoca / YÖKDİL Sağlık"
+  },
+  {
+    "term": "embark on",
+    "meaningsTr": [
+      "girişmek",
+      "başlamak",
+      "koyulmak"
+    ],
+    "type": "phrasal verb",
+    "level": "B2",
+    "definitionEn": "To begin a course of action, especially one that is important or challenging",
+    "exampleEn": "The university decided to embark on a comprehensive curriculum reform.",
+    "exampleTr": "Üniversite kapsamlı bir müfredat reformuna girişmeye karar verdi.",
+    "synonyms": [
+      "commence",
+      "undertake",
+      "launch",
+      "initiate"
+    ],
+    "collocations": [
+      "embark on a journey",
+      "embark on a project"
+    ],
+    "sourceCategory": "Dilko / YDT Master"
+  },
+  {
+    "term": "pave the way for",
+    "meaningsTr": [
+      "zemin hazırlamak",
+      "önünü açmak",
+      "olanağı sağlamak"
+    ],
+    "type": "phrasal verb",
+    "level": "C1",
+    "definitionEn": "To create the conditions that make it possible for something else to happen",
+    "exampleEn": "The diplomatic peace accord paved the way for unprecedented regional economic cooperation.",
+    "exampleTr": "Diplomatik barış antlaşması, benzeri görülmemiş bölgesel ekonomik iş birliğine zemin hazırladı.",
+    "synonyms": [
+      "facilitate",
+      "enable",
+      "prepare the ground for",
+      "foster"
+    ],
+    "collocations": [
+      "pave the way for reform",
+      "pave the way for growth"
+    ],
+    "sourceCategory": "ODTÜ GV / More to Read"
+  },
+  {
+    "term": "proliferation",
+    "meaningsTr": [
+      "hızlı artış",
+      "çoğalma",
+      "yayılma"
+    ],
+    "type": "isim",
+    "level": "C1",
+    "definitionEn": "Rapid increase in the number or amount of something; rapid reproduction of cells",
+    "exampleEn": "The alarming proliferation of nuclear arms poses an existential threat to planetary stability.",
+    "exampleTr": "Nükleer silahların endişe verici biçimde hızla çoğalması, gezegenin istikrarına varoluşsal bir tehdit oluşturmaktadır.",
+    "synonyms": [
+      "escalation",
+      "multiplication",
+      "expansion",
+      "spread"
+    ],
+    "collocations": [
+      "nuclear proliferation",
+      "cell proliferation"
+    ],
+    "sourceCategory": "Pelikan / Yediiklim YDS"
+  },
+  {
+    "term": "depict",
+    "meaningsTr": [
+      "tasvir etmek",
+      "betimlemek",
+      "göstermek"
+    ],
+    "type": "fiil",
+    "level": "B2",
+    "definitionEn": "To represent by a drawing, painting, or other art form; to describe in words",
+    "exampleEn": "Renaissance paintings frequently depict historical events with allegorical symbolism.",
+    "exampleTr": "Rönesans tabloları sıklıkla tarihi olayları alegorik sembollerle tasvir eder.",
+    "synonyms": [
+      "portray",
+      "illustrate",
+      "represent",
+      "render"
+    ],
+    "collocations": [
+      "accurately depict",
+      "vividly depict"
+    ],
+    "sourceCategory": "Modadil / YDS Sınav Stratejileri"
+  },
+  {
+    "term": "impair",
+    "meaningsTr": [
+      "bozmak",
+      "zarar vermek",
+      "zayıflatmak"
+    ],
+    "type": "fiil",
+    "level": "B2",
+    "definitionEn": "To weaken or damage something, especially a human faculty or bodily function",
+    "exampleEn": "Prolonged exposure to excessive decibel levels can permanently impair hearing ability.",
+    "exampleTr": "Aşırı desibel seviyelerine uzun süre maruz kalmak, işitme yetisine kalıcı olarak zarar verebilir.",
+    "synonyms": [
+      "damage",
+      "harm",
+      "diminish",
+      "weaken"
+    ],
+    "collocations": [
+      "impair vision",
+      "impair judgment"
+    ],
+    "sourceCategory": "Akın Dil / YÖKDİL Sağlık"
+  },
+  {
+    "term": "precipitate",
+    "meaningsTr": [
+      "tetiklemek",
+      "hızlandırmak",
+      "aniden yol açmak"
+    ],
+    "type": "fiil",
+    "level": "C1",
+    "definitionEn": "To cause an event or situation, typically one that is bad or undesirable, to happen suddenly",
+    "exampleEn": "The unexpected bank bankruptcy precipitated a severe financial downturn nationwide.",
+    "exampleTr": "Beklenmedik banka iflası, ülke çapında şiddetli bir mali gerilemeyi tetikledi.",
+    "synonyms": [
+      "trigger",
+      "instigate",
+      "provoke",
+      "accelerate"
+    ],
+    "collocations": [
+      "precipitate a crisis",
+      "precipitate a collapse"
+    ],
+    "sourceCategory": "Cambridge / Oxford Academic"
+  },
+  {
+    "term": "substantiate",
+    "meaningsTr": [
+      "kanıtlamak",
+      "doğrulamak",
+      "somutlaştırmak"
+    ],
+    "type": "fiil",
+    "level": "C1",
+    "definitionEn": "To provide evidence to support or prove the truth of a claim or hypothesis",
+    "exampleEn": "The defense attorney failed to substantiate the client's alibi with documentary evidence.",
+    "exampleTr": "Savunma avukatı, müvekkilinin mazeretini somut belgeli delillerle kanıtlayamadı.",
+    "synonyms": [
+      "corroborate",
+      "verify",
+      "authenticate",
+      "validate"
+    ],
+    "collocations": [
+      "substantiate a claim",
+      "substantiate allegations"
+    ],
+    "sourceCategory": "Remzi Hoca / YDS Master"
+  },
+  {
+    "term": "resilient",
+    "meaningsTr": [
+      "dirençli",
+      "çabuk toparlanan",
+      "esnek"
+    ],
+    "type": "sıfat",
+    "level": "B2",
+    "definitionEn": "Able to withstand or recover quickly from difficult conditions",
+    "exampleEn": "Coastal mangroves constitute remarkably resilient ecosystems against tropical storms.",
+    "exampleTr": "Kıyı mangrovları, tropikal fırtınalara karşı son derece dirençli ekosistemler oluşturur.",
+    "synonyms": [
+      "tough",
+      "hardy",
+      "adaptable",
+      "robust"
+    ],
+    "collocations": [
+      "resilient economy",
+      "resilient spirit"
+    ],
+    "sourceCategory": "Benim Hocam / YDS YDT"
+  },
+  {
+    "term": "pragmatic",
+    "meaningsTr": [
+      "uygulamacı",
+      "pratik",
+      "faydacı"
+    ],
+    "type": "sıfat",
+    "level": "B2",
+    "definitionEn": "Dealing with things sensibly and realistically in a way that is based on practical rather than theoretical considerations",
+    "exampleEn": "Leaders must adopt a pragmatic approach to resolve territorial disputes peacefully.",
+    "exampleTr": "Liderler, toprak anlaşmazlıklarını barışçıl bir şekilde çözmek için pragmatik bir yaklaşım benimsemelidir.",
+    "synonyms": [
+      "practical",
+      "realistic",
+      "sensible",
+      "matter-of-fact"
+    ],
+    "collocations": [
+      "pragmatic solution",
+      "pragmatic approach"
+    ],
+    "sourceCategory": "ODTÜ GV / Reader at Work"
+  },
+  {
+    "term": "predominantly",
+    "meaningsTr": [
+      "ağırlıklı olarak",
+      "çoğunlukla",
+      "baskın bir şekilde"
+    ],
+    "type": "zarf",
+    "level": "B2",
+    "definitionEn": "Mainly; for the most part; with the greatest power or influence",
+    "exampleEn": "The island's economy is predominantly reliant upon eco-tourism and agricultural exports.",
+    "exampleTr": "Adanın ekonomisi ağırlıklı olarak eko-turizm ve tarım ihracatına dayanmaktadır.",
+    "synonyms": [
+      "primarily",
+      "chiefly",
+      "principally",
+      "mostly"
+    ],
+    "collocations": [
+      "predominantly female",
+      "predominantly agricultural"
+    ],
+    "sourceCategory": "Modadil / Akın Dil"
+  },
+  {
+    "term": "concur with",
+    "meaningsTr": [
+      "aynı fikirde olmak",
+      "katılmak",
+      "hemfikir olmak"
+    ],
+    "type": "phrasal verb",
+    "level": "C1",
+    "definitionEn": "To agree with someone or with an opinion or finding",
+    "exampleEn": "Most independent climate scientists concur with the findings of the international panel.",
+    "exampleTr": "Çoğu bağımsız iklim bilimci, uluslararası panelin bulgularıyla hemfikirdir.",
+    "synonyms": [
+      "agree with",
+      "assent to",
+      "endorse"
+    ],
+    "collocations": [
+      "concur with a view",
+      "concur with a decision"
+    ],
+    "sourceCategory": "Yediiklim / Pelikan"
+  },
+  {
+    "term": "ubiquitous",
+    "meaningsTr": [
+      "her yerde bulunan",
+      "yaygın",
+      "olağan"
+    ],
+    "type": "sıfat",
+    "level": "C1",
+    "definitionEn": "Present, appearing, or found everywhere at the same time",
+    "exampleEn": "Smartphones have achieved an almost ubiquitous status across urban households worldwide.",
+    "exampleTr": "Akıllı telefonlar, dünya genelindeki kentsel hanelerde neredeyse her yerde bulunan bir konuma ulaşmıştır.",
+    "synonyms": [
+      "omnipresent",
+      "pervasive",
+      "universal"
+    ],
+    "collocations": [
+      "ubiquitous presence",
+      "ubiquitous computing"
+    ],
+    "sourceCategory": "Cambridge Academic / Oxford 5000"
+  },
+  {
+    "term": "lucid",
+    "meaningsTr": [
+      "açık",
+      "anlaşılır",
+      "berrak"
+    ],
+    "type": "sıfat",
+    "level": "B2",
+    "definitionEn": "Expressed clearly; easy to understand; showing the ability to think clearly",
+    "exampleEn": "The professor gave an exceptionally lucid explanation of complex quantum mechanics.",
+    "exampleTr": "Profesör, karmaşık kuantum mekaniğine dair son derece açık ve anlaşılır bir açıklama yaptı.",
+    "synonyms": [
+      "clear",
+      "comprehensible",
+      "intelligible",
+      "coherent"
+    ],
+    "collocations": [
+      "lucid explanation",
+      "lucid style"
+    ],
+    "sourceCategory": "Dilko / ELS YDT"
+  },
+  {
+    "term": "conspicuously",
+    "meaningsTr": [
+      "göze çarpar şekilde",
+      "belirgin biçimde",
+      "dikkat çekecek derecede"
+    ],
+    "type": "zarf",
+    "level": "C1",
+    "definitionEn": "In a clearly visible or attractive manner; in a way that attracts notice or attention",
+    "exampleEn": "Several prominent cabinet ministers were conspicuously absent from the inaugural summit.",
+    "exampleTr": "Birkaç önde gelen kabine bakanı, açılış zirvesinde göze çarpar şekilde yoktu.",
+    "synonyms": [
+      "noticeably",
+      "markedly",
+      "prominently",
+      "strikingly"
+    ],
+    "collocations": [
+      "conspicuously absent",
+      "conspicuously present"
+    ],
+    "sourceCategory": "Remzi Hoca / Akın Dil"
+  },
+  {
+    "term": "relentlessly",
+    "meaningsTr": [
+      "amansızca",
+      "durmaksızın",
+      "acımasızca"
+    ],
+    "type": "zarf",
+    "level": "B2",
+    "definitionEn": "In an unceasingly intense or harsh way; without pausing or giving up",
+    "exampleEn": "Human rights advocates campaigned relentlessly against child labor abuses.",
+    "exampleTr": "İnsan hakları savunucuları, çocuk işçiliği suistimallerine karşı amansızca mücadele etti.",
+    "synonyms": [
+      "persistently",
+      "untiringly",
+      "unceasingly",
+      "implacably"
+    ],
+    "collocations": [
+      "pursue relentlessly",
+      "work relentlessly"
+    ],
+    "sourceCategory": "Benim Hocam / Modadil"
+  },
+  {
+    "term": "spontaneously",
+    "meaningsTr": [
+      "kendiliğinden",
+      "doğal olarak",
+      "aniden planlanmadan"
+    ],
+    "type": "zarf",
+    "level": "B2",
+    "definitionEn": "As a result of a sudden impulse and without premeditation or external cause",
+    "exampleEn": "Crowds gathered spontaneously outside the presidential palace to celebrate the ceasefire.",
+    "exampleTr": "Kalabalıklar, ateşkesi kutlamak için başkanlık sarayının önünde kendiliğinden toplandı.",
+    "synonyms": [
+      "impulsively",
+      "instinctively",
+      "voluntarily"
+    ],
+    "collocations": [
+      "erupt spontaneously",
+      "react spontaneously"
+    ],
+    "sourceCategory": "ODTÜ GV / Reader at Work"
   }
 ];

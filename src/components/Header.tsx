@@ -7,6 +7,7 @@ import MenuDrawer from "@/components/MenuDrawer";
 import StreakBadge from "@/components/StreakBadge";
 import ThemeToggle from "@/components/ThemeToggle";
 import ExamModeSwitcher from "@/components/ExamModeSwitcher";
+import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
 
 const EXAM_HUBS = [
   { href: "/yds", label: "YDS", emoji: "🎯", color: "text-cyan-300 hover:text-cyan-200" },
@@ -26,11 +27,12 @@ const SKILL_LINKS = [
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
+  const [themeModal, setThemeModal] = useState(false);
 
   return (
     <>
       <header
-        className="sticky top-0 z-50 w-full left-0 right-0 bg-slate-950/90 backdrop-blur-2xl border-b border-white/10 shadow-lg shadow-black/20"
+        className="sticky top-0 z-50 w-full left-0 right-0 bg-slate-900/80 dark:bg-slate-950/80 light:bg-white/95 backdrop-blur-xl border-b border-white/15 light:border-slate-200 shadow-lg shadow-black/10 transition-colors"
         style={{ width: "100%", maxWidth: "100vw" }}
       >
         <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
@@ -109,6 +111,17 @@ export default function Header() {
               <span className="hidden sm:inline font-bold">Hesabım</span>
             </Link>
 
+            {/* 🎨 2.000+ Tema Seçici Butonu */}
+            <button
+              onClick={() => setThemeModal(true)}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-gradient-to-r from-pink-500/15 to-cyan-500/15 border border-cyan-400/40 hover:border-cyan-300 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
+              title="🎨 2.000+ Renk ve Tema Seçici"
+            >
+              <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
+              <span className="hidden md:inline font-bold">Temalar</span>
+              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden lg:inline">2000+</span>
+            </button>
+
             {/* Karanlık/Aydınlık Mod Butonu */}
             <ThemeToggle compact className="sm:!px-2.5" />
 
@@ -143,6 +156,9 @@ export default function Header() {
 
       {/* Yana Açılır Kapsamlı Menü */}
       <MenuDrawer open={menu} onClose={() => setMenu(false)} />
+
+      {/* 2.000+ Hızlı Tema Seçici Modal */}
+      <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
     </>
   );
 }
