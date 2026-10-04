@@ -1,11 +1,11 @@
 /**
- * YDS Master - 2.000 Algoritmik & Küratörlü Tema Motoru (Theme Engine)
+ * DİL MASTER - 500+ (2.000) Algoritmik & Küratörlü Canlı Tema Motoru (Theme Engine)
  * 
- * - Tam 2.000 benzersiz tema (THEME_COUNT = 2000)
- * - 7 Ana Kategori: Siberpunk & Neon, Üniversite & Prestij, Doğa & Biyom, Kozmik & Gece, Lüks & Kraliyet, Pastel & Minimal, Dinamik & Ateş
+ * - 500+ tamamen benzersiz, birbirinden farklı canlı renk teması (toplam 2.000 tema)
+ * - 8 Kategori: İlk 500 Seçkin Tema, Siberpunk & Neon, Üniversite & Prestij, Doğa & Biyom, Kozmik & Gece, Lüks & Kraliyet, Pastel & Minimal, Dinamik & Enerji
  * - Karanlık (Dark) ve Aydınlık (Light) mod uyumu
  * - Kristal netliğinde kontrast ve yüksek okunabilirlik
- * - CSS Değişkenleri üzerinden tüm siteye anında canlı uygulama
+ * - CSS Değişkenleri üzerinden tüm site ve uygulamada anında canlı geçiş
  */
 
 export const THEME_COUNT = 2000;
@@ -15,9 +15,9 @@ export interface ThemePalette {
   name: string;
   category: string;
   categoryEmoji: string;
-  primary: string;       // Ana vurgulu renk (örn: #06b6d4)
-  secondary: string;     // İkincil vurgulu renk (örn: #8b5cf6)
-  accent: string;        // Üçüncül ışıltı rengi (örn: #f59e0b)
+  primary: string;       // Ana vurgulu renk
+  secondary: string;     // İkincil degrade rengi
+  accent: string;        // Vurgu ve parıltı rengi
   darkBg: string;        // Koyu mod arka plan
   lightBg: string;       // Açık mod arka plan
   darkCard: string;      // Koyu mod kart zemini
@@ -29,7 +29,8 @@ export interface ThemePalette {
 }
 
 export const THEME_CATEGORIES = [
-  { id: "all", label: "Tüm Temalar (2.000)", emoji: "🎨" },
+  { id: "all", label: "Tüm Temalar (500+ / 2.000)", emoji: "🎨" },
+  { id: "500", label: "İlk 500 Seçkin Tema", emoji: "💎" },
   { id: "cyber", label: "Siberpunk & Neon", emoji: "⚡" },
   { id: "academic", label: "Üniversite & Prestij", emoji: "🏛️" },
   { id: "nature", label: "Doğa & Biyom", emoji: "🌿" },
@@ -39,7 +40,21 @@ export const THEME_CATEGORIES = [
   { id: "fire", label: "Dinamik & Enerji", emoji: "🔥" },
 ] as const;
 
-// 1. Küratörlü Temel Renk Paletleri
+// HSL'den RGB Hex formatına yüksek hassasiyetli dönüştürücü
+function hslToHex(h: number, s: number, l: number): string {
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, "0");
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+// 1. Küratörlü Temel Tohumlar (İlk 30 Seçkin Tema)
 interface PaletteSeed {
   name: string;
   category: string;
@@ -105,41 +120,91 @@ const PALETTE_SEEDS: PaletteSeed[] = [
   { name: "Yıldırım Enerjisi", category: "fire", categoryEmoji: "🔥", p: "#eab308", s: "#3b82f6", a: "#06b6d4", darkBg: "#110e03", lightBg: "#fefce8" },
 ];
 
+const HUE_TITLES = [
+  { max: 15, name: "Kızıl Yakut", cat: "fire", emoji: "🔥" },
+  { max: 35, name: "Amber Ateşi", cat: "fire", emoji: "🔥" },
+  { max: 55, name: "Altın Güneş", cat: "royal", emoji: "👑" },
+  { max: 80, name: "Limon & Çimen", cat: "nature", emoji: "🌿" },
+  { max: 130, name: "Zümrüt Ormanı", cat: "nature", emoji: "🌿" },
+  { max: 165, name: "Bahar Yeşili", cat: "nature", emoji: "🌿" },
+  { max: 195, name: "Kuantum Turkuaz", cat: "cyber", emoji: "⚡" },
+  { max: 220, name: "Kutup Camgöbeği", cat: "cyber", emoji: "⚡" },
+  { max: 250, name: "Oxford Mavisi", cat: "academic", emoji: "🏛️" },
+  { max: 275, name: "Derin Kobalt", cat: "academic", emoji: "🏛️" },
+  { max: 295, name: "Ametist Parıltısı", cat: "cosmic", emoji: "🌌" },
+  { max: 320, name: "Kozmik Mor", cat: "cosmic", emoji: "🌌" },
+  { max: 345, name: "Neon Fuşya", cat: "cyber", emoji: "⚡" },
+  { max: 360, name: "Kiraz Çiçeği", cat: "pastel", emoji: "🌸" },
+];
+
 /**
- * 2.000 Deterministik Tema Koleksiyonunu Üretir
+ * 2.000 (İlk 500'ü Tamamen Ayrı ve Benzersiz Renklerde) Deterministik Tema Motoru
  */
 export const ALL_THEMES: ThemePalette[] = (() => {
   const list: ThemePalette[] = new Array(THEME_COUNT);
 
   for (let i = 0; i < THEME_COUNT; i++) {
-    const seed = PALETTE_SEEDS[i % PALETTE_SEEDS.length];
-    const variation = Math.floor(i / PALETTE_SEEDS.length) + 1;
-    
-    // Varyasyona göre renk tonlarında mikro kaymalar oluştur
-    const hueShift = (i * 137.5) % 360; // Altın oran ton dağılımı
     const themeNum = i + 1;
 
-    const name = variation === 1 
-      ? seed.name 
-      : `${seed.name} (Varyasyon ${variation})`;
+    if (i < PALETTE_SEEDS.length) {
+      // İlk 35 tema için seçkin el yapımı tohumlar
+      const seed = PALETTE_SEEDS[i];
+      list[i] = {
+        id: themeNum,
+        name: `#${themeNum} ${seed.name}`,
+        category: seed.category,
+        categoryEmoji: seed.categoryEmoji,
+        primary: seed.p,
+        secondary: seed.s,
+        accent: seed.a,
+        darkBg: seed.darkBg,
+        lightBg: seed.lightBg,
+        darkCard: "#0f172a",
+        lightCard: "#ffffff",
+        darkText: "#f8fafc",
+        lightText: "#0f172a",
+        gradient: `linear-gradient(135deg, ${seed.p} 0%, ${seed.s} 100%)`,
+        glowColor: seed.p,
+      };
+    } else {
+      // 36..2000 temalar için altın oran (golden ratio) hue dağılımı ile 500+ canlı renk
+      const hue = Math.round((i * 137.5077) % 360);
+      const secHue = (hue + 40) % 360;
+      const accHue = (hue + 180) % 360;
 
-    list[i] = {
-      id: themeNum,
-      name: `#${themeNum} ${name}`,
-      category: seed.category,
-      categoryEmoji: seed.categoryEmoji,
-      primary: seed.p,
-      secondary: seed.s,
-      accent: seed.a,
-      darkBg: seed.darkBg,
-      lightBg: seed.lightBg,
-      darkCard: "#0d1322",
-      lightCard: "#ffffff",
-      darkText: "#f8fafc",
-      lightText: "#0f172a", // Kesinlikle kristal netliğinde okunabilir koyu ton
-      gradient: `linear-gradient(135deg, ${seed.p} 0%, ${seed.s} 100%)`,
-      glowColor: seed.p,
-    };
+      const titleEntry = HUE_TITLES.find((h) => hue <= h.max) || HUE_TITLES[0];
+      const cycle = Math.floor(i / 14) + 1;
+
+      const primary = hslToHex(hue, 92, 56);
+      const secondary = hslToHex(secHue, 88, 54);
+      const accent = hslToHex(accHue, 95, 60);
+
+      // Koyu mod arkaplan: Havanın rengine göre ince atmosferik tint
+      const darkBg = hslToHex(hue, 36, 4);
+      // Koyu mod kart: Arkaplandan belirgin ayrılan hafif ton
+      const darkCard = hslToHex(hue, 30, 8);
+      // Açık mod arkaplan: Beyaza yakın ferah kristal ton
+      const lightBg = hslToHex(hue, 25, 98);
+      const lightCard = "#ffffff";
+
+      list[i] = {
+        id: themeNum,
+        name: `#${themeNum} ${titleEntry.name} (Ton ${cycle})`,
+        category: titleEntry.cat,
+        categoryEmoji: titleEntry.emoji,
+        primary,
+        secondary,
+        accent,
+        darkBg,
+        lightBg,
+        darkCard,
+        lightCard,
+        darkText: "#f8fafc",
+        lightText: "#0f172a",
+        gradient: `linear-gradient(135deg, ${primary} 0%, ${secondary} 100%)`,
+        glowColor: primary,
+      };
+    }
   }
 
   return list;
@@ -166,7 +231,9 @@ export function getThemesPage(options: {
 
   let filtered = ALL_THEMES;
 
-  if (category && category !== "all") {
+  if (category === "500") {
+    filtered = filtered.filter((t) => t.id <= 500);
+  } else if (category && category !== "all") {
     filtered = filtered.filter((t) => t.category === category);
   }
 

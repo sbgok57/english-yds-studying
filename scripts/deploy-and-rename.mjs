@@ -18,7 +18,7 @@ const rootDir = path.resolve(__dirname, "..");
 
 const PROJECT_NAME = "english-yds-studying";
 const DEFAULT_NEW_ALIAS = process.env.VERCEL_NEW_DOMAIN || process.argv[2] || "dil-master.vercel.app";
-const PRIMARY_CANONICAL_URL = "https://english-yds-studying.vercel.app";
+const PRIMARY_CANONICAL_URL = "https://dil-master.vercel.app";
 
 console.log("\n🚀 [DİL MASTER] VERCEL CLI DAĞITIM & ALAN ADI OTOMASYONU BAŞLATILDI");
 console.log("──────────────────────────────────────────────────────────────────");

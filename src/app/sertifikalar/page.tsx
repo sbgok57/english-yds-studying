@@ -11,7 +11,7 @@ import { useAccount } from "@/lib/auth";
 
 export default function CertificatesPage() {
   const { account } = useAccount();
-  const userName = account?.name || "YDS Master Öğrencisi";
+  const userName = account?.name || "Dil Master Öğrencisi";
 
   const [certificates, setCertificates] = useState<UserCertificate[]>([]);
   const [selectedCert, setSelectedCert] = useState<UserCertificate | null>(null);
@@ -81,7 +81,7 @@ export default function CertificatesPage() {
               <span>🏅</span> Uluslararası CEFR Standartlarında Doğrulanabilir Belgeler
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-              YDS Master Seviye & Bitirme Sertifikaları
+              DİL MASTER Seviye & Bitirme Sertifikaları
             </h1>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
               Her dil düzeyini (A1’den C2’ye) başarıyla tamamladığında veya seviye bitirme sınavını geçtiğinde,
