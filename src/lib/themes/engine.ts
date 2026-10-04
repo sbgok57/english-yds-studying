@@ -40,12 +40,13 @@ export interface ThemePalette {
 
 export const THEME_CATEGORIES = [
   { id: "all", label: "Tüm Temalar (1.000)", emoji: "🎨" },
+  { id: "patterned", label: "Desenli (250 Tema)", emoji: "📐" },
+  { id: "solid", label: "Desensiz / Düz Renkli (750 Tema)", emoji: "✨" },
   { id: "minimal", label: "Minimal & Odak", emoji: "⚪" },
   { id: "vibrant", label: "Canlı & Neon", emoji: "⚡" },
   { id: "dark", label: "Koyu & Siberpunk", emoji: "🌌" },
   { id: "pastel", label: "Pastel & Yumuşak", emoji: "🌸" },
   { id: "gradient", label: "Degrade & Spektrum", emoji: "🌈" },
-  { id: "patterned", label: "Desenli & Geometrik", emoji: "📐" },
 ] as const;
 
 // HSL'den RGB Hex formatına dönüştürücü
@@ -131,7 +132,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
     let bgSat = 50;
     let cardSat = 42;
 
-    if (id <= 160) {
+    if (id <= 150) {
       // 1. MINIMAL (Sakin, sade, göz yormayan, odaklanma dostu)
       catKey = "minimal";
       pSat = 45;
@@ -140,7 +141,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       cardLight = 11;
       bgSat = 20;
       cardSat = 16;
-    } else if (id <= 330) {
+    } else if (id <= 300) {
       // 2. VIBRANT (Yüksek kontrastlı, canlı neon renkler)
       catKey = "vibrant";
       pSat = 98;
@@ -149,7 +150,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       cardLight = 14;
       bgSat = 60;
       cardSat = 50;
-    } else if (id <= 500) {
+    } else if (id <= 450) {
       // 3. DARK (Derin siberpunk, gece mavisi, derin uzay)
       catKey = "dark";
       pSat = 85;
@@ -158,7 +159,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       cardLight = 10;
       bgSat = 45;
       cardSat = 35;
-    } else if (id <= 670) {
+    } else if (id <= 600) {
       // 4. PASTEL (Yumuşak, şeftali, mint, lila)
       catKey = "pastel";
       pSat = 70;
@@ -167,7 +168,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       cardLight = 15;
       bgSat = 35;
       cardSat = 28;
-    } else if (id <= 840) {
+    } else if (id <= 750) {
       // 5. GRADIENT (Zengin renk geçişleri, auroralar)
       catKey = "gradient";
       pSat = 95;
@@ -177,7 +178,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       bgSat = 55;
       cardSat = 45;
     } else {
-      // 6. PATTERNED (SVG Desenli: Noktalı, Izgara, Çizgili, Geometrik, Mesh)
+      // 6. PATTERNED (SVG Desenli: Noktalı, Izgara, Çizgili, Geometrik, Mesh - 250 Farklı Desenli Tema)
       catKey = "patterned";
       const patternKeys: PatternKey[] = ["dots", "grid", "stripes", "geometric", "mesh"];
       patternType = patternKeys[i % patternKeys.length];
@@ -251,7 +252,13 @@ export function getThemesPage(options: {
   let filtered = ALL_THEMES;
 
   if (category !== "all") {
-    filtered = filtered.filter((t) => t.category === category);
+    if (category === "patterned") {
+      filtered = filtered.filter((t) => t.patternType !== "none");
+    } else if (category === "solid") {
+      filtered = filtered.filter((t) => t.patternType === "none");
+    } else {
+      filtered = filtered.filter((t) => t.category === category);
+    }
   }
 
   if (search) {
@@ -259,6 +266,7 @@ export function getThemesPage(options: {
       (t) =>
         t.name.toLowerCase().includes(search) ||
         t.category.toLowerCase().includes(search) ||
+        t.categoryLabel.toLowerCase().includes(search) ||
         t.id.toString() === search
     );
   }

@@ -27,6 +27,7 @@ export interface StudyDay {
   day: number;
   title: string;
   date?: string;
+  dateFormatted?: string; // Gün / Ay / Yıl: Örn "4 Ekim 2026"
   totalMinutes: number;
   tasks: StudyTask[];
   completed: boolean;
@@ -56,7 +57,11 @@ export interface StudyPlan {
   targetLevel: TargetLevelType;
   targetScore?: number;
   startDate: string;
+  startDateFormatted?: string;
+  endDate?: string;
+  endDateFormatted?: string;
   examDate?: string;
+  examDateFormatted?: string;
   totalDays: number;
   dailyMinutes: number;
   estimatedCompletion: string;
@@ -577,6 +582,21 @@ export const PRESET_PLAN_TEMPLATES: PresetPlanTemplate[] = [
 
 // ==================== DİNAMİK ÇALIŞMA PLANI OLUŞTURUCU ====================
 
+export function formatTrDate(dateInput: Date | string | number | undefined): string {
+  if (!dateInput) return "";
+  try {
+    const d = typeof dateInput === "string" || typeof dateInput === "number" ? new Date(dateInput) : dateInput;
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  } catch {
+    return "";
+  }
+}
+
 export interface PlanGeneratorInputs {
   examType?: ExamType;
   yokdilField?: YokdilField;
@@ -585,6 +605,8 @@ export interface PlanGeneratorInputs {
   targetScore: number;
   totalDays: number;
   dailyMinutes: number;
+  startDate?: string;
+  examDate?: string;
   daysPerWeek?: number;
   weakestArea?: "vocabulary" | "grammar" | "reading" | "translation" | "speed";
   strongestArea?: "vocabulary" | "grammar" | "reading" | "translation" | "speed";
@@ -597,6 +619,19 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
   const totalWeeks = Math.ceil(safeDays / 7);
   const exam = inputs.examType || "YDS";
   const field = inputs.yokdilField || "saglik";
+
+  const startObj = inputs.startDate ? new Date(inputs.startDate) : new Date();
+  const startDateStr = !isNaN(startObj.getTime())
+    ? startObj.toISOString().split("T")[0]
+    : new Date().toISOString().split("T")[0];
+  const startDateFormatted = formatTrDate(startObj);
+
+  const endObj = new Date(startObj);
+  endObj.setDate(endObj.getDate() + (safeDays - 1));
+  const endDateStr = !isNaN(endObj.getTime()) ? endObj.toISOString().split("T")[0] : "";
+  const endDateFormatted = formatTrDate(endObj);
+
+  const examDateFormatted = inputs.examDate ? formatTrDate(inputs.examDate) : undefined;
 
   const planId = `plan-${exam.toLowerCase()}-${Date.now()}`;
 
@@ -791,9 +826,16 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
         memoryTip: "Yanlış soruyu 24 saat sonra yeniden çözmek kalıcılığı %80 artırır.",
       });
 
+      const currentDayDate = new Date(startObj);
+      currentDayDate.setDate(currentDayDate.getDate() + (overallDay - 1));
+      const dayDateStr = !isNaN(currentDayDate.getTime()) ? currentDayDate.toISOString().split("T")[0] : "";
+      const dayDateFormatted = formatTrDate(currentDayDate);
+
       weekDays.push({
         day: overallDay,
         title: `${overallDay}. Gün Programı`,
+        date: dayDateStr,
+        dateFormatted: dayDateFormatted,
         totalMinutes: safeMinutes,
         tasks,
         completed: false,
@@ -848,7 +890,12 @@ export function generateCustomStudyPlan(inputs: PlanGeneratorInputs): StudyPlan 
     currentLevel: inputs.currentLevel,
     targetLevel: inputs.targetLevel,
     targetScore: inputs.targetScore,
-    startDate: new Date().toISOString().split("T")[0],
+    startDate: startDateStr,
+    startDateFormatted,
+    endDate: endDateStr,
+    endDateFormatted,
+    examDate: inputs.examDate,
+    examDateFormatted,
     totalDays: safeDays,
     dailyMinutes: safeMinutes,
     estimatedCompletion: `${Math.ceil(safeDays / 7)} Hafta`,

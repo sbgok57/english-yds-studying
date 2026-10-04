@@ -111,6 +111,16 @@ export default function Header() {
               <span className="hidden sm:inline font-bold">Hesabım</span>
             </Link>
 
+            {/* 📅 Çalışma Planları */}
+            <Link
+              href="/study-plans"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 hover:border-cyan-300 hover:bg-cyan-500/25 text-cyan-300 text-xs font-black transition-all shadow-sm shrink-0 group"
+              title="📅 Sınav Çalışma Planları (Gün / Ay / Yıl Takvimi)"
+            >
+              <span className="text-sm group-hover:scale-110 transition-transform">📅</span>
+              <span className="hidden sm:inline font-bold">Planlar</span>
+            </Link>
+
             {/* 🎨 1.000+ Tema Seçici Butonu */}
             <button
               onClick={() => setThemeModal(true)}
@@ -118,7 +128,7 @@ export default function Header() {
               title="🎨 1.000+ Renk ve Tema Seçici"
             >
               <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
-              <span className="hidden md:inline font-bold">Temalar</span>
+              <span className="hidden sm:inline font-bold">Temalar</span>
               <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden lg:inline">1000+</span>
             </button>
 

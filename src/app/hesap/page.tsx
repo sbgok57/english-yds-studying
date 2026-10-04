@@ -135,10 +135,10 @@ export default function HesapPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <header className="text-center mb-8">
         <h1 className="text-4xl font-black mb-2">
-          🔑 <span className="gradient-text">Hesabım & Hesap Ayarları</span>
+          🔑 <span className="gradient-text">Hesabım</span>
         </h1>
         <p className="text-white/60 text-sm max-w-xl mx-auto">
-          Kişisel hesabını, çalışma durumunu, 1.000+ canlı renk temasını ve bildirim tercihlerini yönet!
+          Kanka, e-posta ve şifreyle kişisel hesabını yönet, rozetlerini, sınav çalışma programını ve temalarını takip et!
         </p>
         {!storageOk && (
           <p className="text-xs text-amber-300 mt-2">
@@ -569,7 +569,7 @@ export default function HesapPage() {
                   📬 Kod gönderildi: <span className="text-cyan-300 font-mono">{email}</span>
                 </p>
                 <p className="text-[11px] text-cyan-300/80">
-                  📨 Gönderici: <strong className="text-white font-mono">auth@english-yds-studying.vercel.app</strong>
+                  📨 Gönderici: <strong className="text-white font-mono">ydsmaster.official@gmail.com</strong>
                 </p>
                 <p className="text-[11px] text-white/40">E-postandaki 6 haneli kodu aşağıya gir.</p>
               </div>

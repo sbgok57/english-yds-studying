@@ -56,6 +56,7 @@ const MANAGEMENT_ITEMS: NavItem[] = [
 ];
 
 const TOOL_ITEMS: NavItem[] = [
+  { href: "/study-plans", label: "📅 Çalışma Planları", shortLabel: "Planlar", emoji: "📅", badge: "Takvim" },
   { href: "/ilerleme", label: "İlerleme & Başarı", shortLabel: "İlerleme", emoji: "📈" },
   { href: "/kelime-ekle", label: "PDF Kelime Yükle", shortLabel: "PDF", emoji: "📤" },
   { href: "/ayarlar", label: "1.000 Tema Stüdyosu", shortLabel: "Temalar", emoji: "🎨" },

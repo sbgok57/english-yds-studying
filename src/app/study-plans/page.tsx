@@ -38,6 +38,8 @@ export default function StudyPlansPage() {
   const [genTargetScore, setGenTargetScore] = useState<number>(75);
   const [genDays, setGenDays] = useState<number>(60);
   const [genMinutes, setGenMinutes] = useState<number>(60);
+  const [genStartDate, setGenStartDate] = useState<string>(() => new Date().toISOString().split("T")[0]);
+  const [genExamDate, setGenExamDate] = useState<string>("");
 
   useEffect(() => {
     const saved = loadSavedStudyPlans();
@@ -100,6 +102,8 @@ export default function StudyPlansPage() {
       targetScore: genTargetScore,
       totalDays: genDays,
       dailyMinutes: genMinutes,
+      startDate: genStartDate,
+      examDate: genExamDate || undefined,
     });
 
     const updated: StudyPlan[] = [
@@ -282,6 +286,28 @@ export default function StudyPlansPage() {
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-black text-white">{activePlan.title}</h2>
                   <p className="text-xs sm:text-sm text-white/60 max-w-2xl leading-relaxed">{activePlan.description}</p>
+
+                  {/* Gün / Ay / Yıl Takvim Bilgileri */}
+                  <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+                    {activePlan.startDateFormatted && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-white/80">
+                        <span>🗓️</span>
+                        <span>Başlangıç: <strong className="text-cyan-300 font-semibold">{activePlan.startDateFormatted}</strong></span>
+                      </span>
+                    )}
+                    {activePlan.endDateFormatted && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-white/80">
+                        <span>🏁</span>
+                        <span>Bitiş: <strong className="text-cyan-300 font-semibold">{activePlan.endDateFormatted}</strong></span>
+                      </span>
+                    )}
+                    {activePlan.examDateFormatted && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-200 font-bold">
+                        <span>🎯</span>
+                        <span>Hedef Sınav: <strong>{activePlan.examDateFormatted}</strong></span>
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-6 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-8 shrink-0">
@@ -347,11 +373,18 @@ export default function StudyPlansPage() {
                                 : "bg-white/[0.02] border-white/10 hover:border-white/20"
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-3">
-                              <span className="text-xs font-black uppercase tracking-wider text-white">
-                                {day.title}
-                              </span>
-                              <span className="text-[11px] text-white/40">
+                            <div className="flex items-start justify-between mb-3 gap-2">
+                              <div>
+                                <span className="text-xs font-black uppercase tracking-wider text-white block">
+                                  {day.title}
+                                </span>
+                                {day.dateFormatted && (
+                                  <span className="inline-flex items-center gap-1 text-[11px] text-cyan-400 font-semibold mt-0.5 font-mono">
+                                    <span>📅</span> {day.dateFormatted}
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-[11px] text-white/50 shrink-0 bg-white/5 px-2 py-0.5 rounded-lg border border-white/5 font-mono">
                                 {day.totalMinutes} dk
                               </span>
                             </div>
@@ -754,6 +787,39 @@ export default function StudyPlansPage() {
                 <option value={120}>120 Gün (4 Ay)</option>
                 <option value={180}>180 Gün (6 Ay)</option>
               </select>
+            </div>
+
+            {/* Gün / Ay / Yıl Takvim Tarihleri */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+              <div>
+                <label className="block font-bold uppercase text-cyan-300 mb-1.5 flex items-center gap-1.5">
+                  <span>📅</span> Başlangıç Tarihi (Gün / Ay / Yıl)
+                </label>
+                <input
+                  type="date"
+                  value={genStartDate}
+                  onChange={(e) => setGenStartDate(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white font-mono"
+                />
+                <span className="text-[10px] text-white/40 block mt-1">
+                  Programın başlangıç tarihi
+                </span>
+              </div>
+
+              <div>
+                <label className="block font-bold uppercase text-purple-300 mb-1.5 flex items-center gap-1.5">
+                  <span>🎯</span> Hedef Sınav Tarihi (İsteğe Bağlı)
+                </label>
+                <input
+                  type="date"
+                  value={genExamDate}
+                  onChange={(e) => setGenExamDate(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white font-mono"
+                />
+                <span className="text-[10px] text-white/40 block mt-1">
+                  Örn: ÖSYM YDS / YDT / YÖKDİL tarihi
+                </span>
+              </div>
             </div>
 
             <button

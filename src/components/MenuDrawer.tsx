@@ -216,6 +216,124 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
             </button>
           </div>
 
+          {/* 🎨 TEMALAR — 1.000+ DESENLİ & DESENSİZ RENKLİ TEMA */}
+          <div>
+            <GroupTitle title="Temalar & Görünüm (1.000+ Desenli & Renkli)" emoji="🎨" />
+            <div className="space-y-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setThemeModal(true);
+                }}
+                className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 border-2 border-pink-400/50 hover:border-pink-300 flex items-center justify-between group transition-all text-left shadow-lg shadow-pink-950/30 cursor-pointer"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 text-white flex items-center justify-center text-xl font-black shadow-md shrink-0">
+                    🎨
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-xs font-black text-white group-hover:text-pink-300 transition-colors">
+                        Temalar (Hızlı Seçici)
+                      </h4>
+                      <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-pink-400/25 text-pink-200 font-mono">
+                        1.000+ Tema
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-white/60 mt-0.5">
+                      200+ SVG desenli, pastel, neon, koyu & degrade renk seçenekleri
+                    </p>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-pink-300 group-hover:translate-x-1 transition-transform shrink-0" />
+              </button>
+
+              <Link
+                href="/ayarlar"
+                onClick={handleSafeClose}
+                className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-base">⚙️</span>
+                  <div>
+                    <h5 className="text-[11px] font-bold text-white group-hover:text-cyan-300">
+                      Detaylı Tema & Ayarlar Stüdyosu
+                    </h5>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 📅 ÇALIŞMA PLANLARI (GÜN / AY / YIL TAKVİMİ) */}
+          <div>
+            <GroupTitle title="Çalışma Planları (Gün · Ay · Yıl Takvimi)" emoji="📅" />
+            <div className="space-y-2">
+              <Link
+                href="/study-plans"
+                onClick={handleSafeClose}
+                className="p-3.5 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 border-2 border-cyan-400/50 hover:border-cyan-300 flex items-center justify-between group transition-all shadow-lg shadow-cyan-950/30"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/25 text-cyan-300 flex items-center justify-center text-xl font-black shrink-0">
+                    📅
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
+                        Sınav Çalışma Planları
+                      </h4>
+                      <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono">
+                        Gün / Ay / Yıl
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-white/60 mt-0.5">
+                      YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) hazır ve kişisel planlar
+                    </p>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-cyan-300 group-hover:translate-x-1 transition-transform shrink-0" />
+              </Link>
+
+              {/* Hızlı Plan Başlatıcı / Sınav Seçenekleri */}
+              <div className="grid grid-cols-3 gap-1.5">
+                <Link
+                  href="/study-plans"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-emerald-300 group-hover:text-white block">
+                    📘 YDS
+                  </span>
+                  <span className="text-[9px] text-white/50 block">30–120 Gün</span>
+                </Link>
+
+                <Link
+                  href="/study-plans"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
+                    🎯 YDT
+                  </span>
+                  <span className="text-[9px] text-white/50 block">Net Artırma</span>
+                </Link>
+
+                <Link
+                  href="/study-plans"
+                  onClick={handleSafeClose}
+                  className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
+                >
+                  <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
+                    🌐 YÖKDİL
+                  </span>
+                  <span className="text-[9px] text-white/50 block">3 Alan</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
           {/* 1. ÜÇ BÜYÜK SINAV MERKEZİ (YDS, YDT, YÖKDİL) */}
           <div>
             <GroupTitle title="Sınav Özel Merkezleri (YDS / YDT / YÖKDİL)" emoji="🎯" />

@@ -260,7 +260,7 @@ function RegisterForm() {
               </p>
               <div className="text-[11px] text-cyan-300/80 flex items-center gap-1.5">
                 <span>📨</span>
-                <span>Gönderici: <strong className="text-white font-mono">auth@english-yds-studying.vercel.app</strong></span>
+                <span>Gönderici: <strong className="text-white font-mono">ydsmaster.official@gmail.com</strong></span>
               </div>
               {demoCode && (
                 <div className="mt-2 p-2.5 rounded-xl bg-cyan-950/80 border border-cyan-400/40 text-cyan-300 font-mono text-center text-sm font-bold flex items-center justify-between">
