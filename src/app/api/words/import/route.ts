@@ -10,9 +10,9 @@ const WordItemSchema = z.object({
     .regex(/^[a-zA-Z0-9\s\-'.,()/;?!:]+$/, "İngilizce alanda geçersiz karakter"),
   turkish: z
     .string()
-    .min(1, "Türkçe anlam boş olamaz")
     .max(200)
-    .regex(/^[a-zA-ZçÇğĞıİöÖşŞüÜâîû0-9\s\-'.,()/;?!:]+$/, "Türkçe alanda geçersiz karakter"),
+    .optional()
+    .default(""),
   definitionEn: z.string().optional(),
   type: z.string().optional(),
   level: z.string().optional(),
@@ -47,10 +47,11 @@ export async function POST(req: NextRequest) {
     let addedCount = 0;
     for (const w of words) {
       const english = w.english.trim();
-      const turkish = w.turkish.trim();
+      const rawTurkish = (w.turkish || "").trim();
 
       // Claude AI / Corpus zenginleştirme motoru
-      const enriched = await enrichWordWithAI(english, turkish);
+      const enriched = await enrichWordWithAI(english, rawTurkish);
+      const turkish = rawTurkish || enriched.meaningTr || "akademik kelime";
 
       // Zenginleştirilmiş örnek cümleler
       const examplesFormatted = enriched.examples.map((ex) =>

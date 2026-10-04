@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { MASTER_VOCABULARY } from "@/lib/vocabulary/master-vocab-database";
+import { YDS_PUBLICATIONS_MASTER_CORPUS } from "@/lib/vocabulary/publications-master-corpus";
 
 export const dynamic = "force-dynamic";
 
@@ -70,13 +72,64 @@ export async function GET(req: NextRequest) {
       imageUrl: w.imageUrl,
     }));
 
+    // PERF & RELIABILITY: Eğer veritabanında henüz kelime yoksa master korpustan sun
+    let finalWords = formatted;
+    let finalTotal = total;
+
+    if (finalTotal === 0) {
+      const combinedPool = [
+        ...YDS_PUBLICATIONS_MASTER_CORPUS.map((p, idx) => ({
+          id: `pub-${idx + 1}`,
+          english: p.term,
+          turkish: p.meaningsTr.join(", "),
+          definitionEn: p.definitionEn,
+          examples: [p.exampleEn, p.exampleTr],
+          synonyms: p.synonyms,
+          level: p.level,
+          type: p.type,
+          imageUrl: null,
+        })),
+        ...MASTER_VOCABULARY.map((m) => ({
+          id: String(m.id),
+          english: m.word,
+          turkish: m.tr,
+          definitionEn: m.hint || "",
+          examples: m.example ? [m.example, m.exampleTr || ""] : [],
+          synonyms: m.synonyms || [],
+          level: m.level,
+          type: m.type,
+          imageUrl: null,
+        })),
+      ];
+
+      const filtered = combinedPool.filter((w) => {
+        if (q) {
+          const matchQ =
+            w.english.toLowerCase().includes(q.toLowerCase()) ||
+            w.turkish.toLowerCase().includes(q.toLowerCase()) ||
+            w.definitionEn.toLowerCase().includes(q.toLowerCase());
+          if (!matchQ) return false;
+        }
+        if (type && type !== "Hepsi" && !w.type.toLowerCase().includes(type.toLowerCase())) {
+          return false;
+        }
+        if (level && level !== "Hepsi" && !w.level.toLowerCase().includes(level.toLowerCase())) {
+          return false;
+        }
+        return true;
+      });
+
+      finalTotal = filtered.length;
+      finalWords = filtered.slice(skip, skip + limit);
+    }
+
     // Hem dizi hem sayfalama uyumluluğu için JSON dön
     return NextResponse.json({
-      words: formatted,
-      total,
+      words: finalWords,
+      total: finalTotal,
       page,
       limit,
-      totalPages: Math.ceil(total / limit) || 1,
+      totalPages: Math.ceil(finalTotal / limit) || 1,
     });
   } catch (error) {
     console.error("Words fetch error:", error);

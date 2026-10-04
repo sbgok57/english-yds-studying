@@ -52,6 +52,9 @@ interface PaletteSeed {
 }
 
 const PALETTE_SEEDS: PaletteSeed[] = [
+  // Gökkuşağı & Cümbüş
+  { name: "Canlı Gökkuşağı Spektrumu", category: "cyber", categoryEmoji: "🌈", p: "#ff4d6d", s: "#ff9f1c", a: "#09b8c8", darkBg: "#050814", lightBg: "#ffffff" },
+
   // Siberpunk & Neon
   { name: "Tokyo Neon Siberpunk", category: "cyber", categoryEmoji: "⚡", p: "#00f0ff", s: "#ff007f", a: "#ffe600", darkBg: "#050811", lightBg: "#f0fdf4" },
   { name: "Matrix Yeşil Kod", category: "cyber", categoryEmoji: "⚡", p: "#00ff66", s: "#00cc88", a: "#a3e635", darkBg: "#020d06", lightBg: "#f0fdf4" },

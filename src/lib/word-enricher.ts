@@ -3,6 +3,7 @@ import { z } from "zod";
 import { MASTER_VOCABULARY } from "./vocabulary/master-vocab-database";
 import { BASE_INVENTORY_ITEMS } from "./data-inventory";
 import { WORDS } from "./data-vocabulary";
+import { YDS_PUBLICATIONS_MASTER_CORPUS } from "./vocabulary/publications-master-corpus";
 
 // =========================================================================
 // 1. Zod Tipleri ve Doğrulama Şeması (Structured Output & Zero-Error)
@@ -173,6 +174,30 @@ function buildLocalCorpusIndex() {
         source: "academic-corpus",
       });
     }
+  }
+
+  // 4. YDS_PUBLICATIONS_MASTER_CORPUS (2013-2026 Modadil, Akın Dil, Remzi Hoca, ODTÜ GV, Cambridge, Oxford...)
+  for (const pub of YDS_PUBLICATIONS_MASTER_CORPUS) {
+    const key = pub.term.toLowerCase().trim();
+    const pos = normalizePartOfSpeech(pub.type);
+    localCorpusIndex.set(key, {
+      word: pub.term,
+      lemma: pub.term,
+      partOfSpeech: pos,
+      partOfSpeechTr: pub.type,
+      cefrLevel: pub.level === "YDS" ? "B2" : (pub.level as CefrLevel),
+      meaningTr: pub.meaningsTr.join(", "),
+      definitionEn: pub.definitionEn,
+      examples: [
+        {
+          sentenceEn: pub.exampleEn,
+          sentenceTr: pub.exampleTr,
+        },
+      ],
+      synonyms: pub.synonyms,
+      collocations: pub.collocations || [],
+      source: "academic-corpus",
+    });
   }
 }
 

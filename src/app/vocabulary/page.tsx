@@ -120,6 +120,14 @@ export default function VocabularyPage() {
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap">
+          <Link
+            href="/import"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 font-black text-xs md:text-sm text-white shadow-lg shadow-teal-500/25 hover:scale-105 active:scale-95 transition-all"
+            title="PDF Yükle veya Claude AI ile Yeni Kelime Ekle"
+          >
+            <span className="text-base">📄➕</span>
+            <span>Kelime Ekle & PDF Aktar</span>
+          </Link>
           <button
             onClick={() => setShowVoicePicker(!showVoicePicker)}
             className="flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 hover:bg-cyan-500/30 font-bold text-xs transition-all"
@@ -140,6 +148,25 @@ export default function VocabularyPage() {
             <Sparkles className="w-4 h-4" /> 3D Flashcard Modu
           </Link>
         </div>
+      </div>
+
+      {/* Hızlı PDF & Yayınlar Aksiyon Bandı */}
+      <div className="p-4 rounded-2xl bg-gradient-to-r from-cyan-500/15 via-purple-500/15 to-pink-500/15 border border-cyan-400/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5 text-white/90">
+          <span className="text-2xl">📚</span>
+          <div>
+            <span className="font-black text-white text-sm">Akıllı PDF Tarayıcı & 2013-2026 Yayınlar Havuzu Hazır!</span>
+            <p className="text-white/60 text-[11px] mt-0.5">
+              Modadil, Akın Dil, Cambridge, Oxford, Remzi Hoca ve Pelikan YDS kelimelerini tek tıkla kütüphanenize ekleyin veya elinizdeki PDF&apos;i yükleyin.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/import"
+          className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-cyan-300 font-bold border border-cyan-400/40 whitespace-nowrap transition-colors"
+        >
+          PDF Yükle / İçe Aktar &rarr;
+        </Link>
       </div>
 
       {/* Aksan ve Ses Ayarları Paneli */}

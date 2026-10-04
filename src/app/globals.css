@@ -4,17 +4,19 @@
 
 :root {
   color-scheme: dark;
-  --theme-primary: #06b6d4;
-  --theme-secondary: #8b5cf6;
-  --theme-accent: #f59e0b;
-  --theme-glow: #06b6d4;
-  --theme-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-  --theme-bg: #030712;
-  --theme-card: #0d1322;
+  --theme-primary: #ff4d6d;
+  --theme-secondary: #ff9f1c;
+  --theme-accent: #09b8c8;
+  --theme-glow: #2878e5;
+  --theme-gradient: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 20%, #f7c948 40%, #2dbb70 60%, #09b8c8 80%, #2878e5 100%);
+  --theme-bg: #050814;
+  --theme-card: #0b1126;
   --theme-text: #f8fafc;
-  --theme-border: rgba(255, 255, 255, 0.12);
-  --gradient-main: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-  --neon-pink: #ff00aa;
+  --theme-border: rgba(255, 255, 255, 0.15);
+  --gradient-main: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 20%, #f7c948 40%, #2dbb70 60%, #09b8c8 80%, #2878e5 100%);
+  --rainbow-spectrum: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 18%, #f7c948 36%, #2dbb70 54%, #09b8c8 72%, #2878e5 88%, #e052b5 100%);
+  --neon-pink: #ff007f;
+  --neon-orange: #ff9f1c;
   --neon-blue: #00f0ff;
   --neon-yellow: #ffff00;
   --neon-green: #00ff88;
@@ -171,6 +173,60 @@ html.light .text-slate-200 {
 }
 html.light .text-slate-100 {
   color: #0f172a !important;
+}
+
+/* Aydınlık mod Yan Çekmece (MenuDrawer) ve Üst Menü Tam Uyum */
+html.light aside {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #17233c !important;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.light aside > div.sticky {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html.light aside a,
+html.light aside span,
+html.light aside button {
+  color: #17233c;
+}
+
+html.light aside a:hover {
+  background-color: #f1f5f9 !important;
+  color: #0284c7 !important;
+}
+
+html.light .bg-slate-950,
+html.light .bg-slate-950\/90,
+html.light .bg-slate-950\/95 {
+  background-color: #ffffff !important;
+  color: #17233c !important;
+}
+
+/* Gökkuşağı Parıltı & Cümbüş Yardımcıları */
+.rainbow-gradient {
+  background: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 18%, #f7c948 36%, #2dbb70 54%, #09b8c8 72%, #2878e5 88%, #e052b5 100%);
+}
+
+.rainbow-text {
+  background: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 20%, #f7c948 40%, #2dbb70 60%, #09b8c8 80%, #2878e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rainbow-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(#050814, #050814), linear-gradient(90deg, #ff4d6d, #ff9f1c, #f7c948, #2dbb70, #09b8c8, #2878e5, #e052b5);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+html.light .rainbow-border {
+  background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(90deg, #ff4d6d, #ff9f1c, #f7c948, #2dbb70, #09b8c8, #2878e5, #e052b5);
 }
 
 html.light .border-slate-800,

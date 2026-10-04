@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
+import { YDS_PUBLICATIONS_MASTER_CORPUS } from "../src/lib/vocabulary/publications-master-corpus";
+import { MASTER_VOCABULARY } from "../src/lib/vocabulary/master-vocab-database";
 
 const prisma = new PrismaClient();
 
@@ -121,6 +123,81 @@ export async function seedWords() {
       }
     } catch (e) {
       console.warn("Full vocab 436 seed warning:", e);
+    }
+  }
+
+  // 3. Seed 2013-2026 YDS Publications Master Corpus (Modadil, Akın Dil, Remzi Hoca, ODTÜ GV, Cambridge, Oxford...)
+  console.log("Seeding 2013-2026 YDS Publications Master Corpus...");
+  for (const item of YDS_PUBLICATIONS_MASTER_CORPUS) {
+    const meaning = item.meaningsTr.join(", ") || "anlam";
+    try {
+      await prisma.word.upsert({
+        where: {
+          english_turkish: {
+            english: item.term,
+            turkish: meaning,
+          },
+        },
+        update: {
+          definitionEn: item.definitionEn,
+          examples: JSON.stringify([item.exampleEn, item.exampleTr]),
+          synonyms: JSON.stringify(item.synonyms),
+          level: item.level,
+          type: item.type,
+          source: item.sourceCategory,
+        },
+        create: {
+          english: item.term,
+          turkish: meaning,
+          definitionEn: item.definitionEn,
+          examples: JSON.stringify([item.exampleEn, item.exampleTr]),
+          synonyms: JSON.stringify(item.synonyms),
+          level: item.level,
+          type: item.type,
+          source: item.sourceCategory,
+          approved: true,
+        },
+      });
+      totalSeeded++;
+    } catch {
+      /* ignore duplicates */
+    }
+  }
+
+  // 4. Seed 2,500 Master Vocabulary (A1-C2)
+  console.log("Seeding Master Graded Vocabulary (2,500 words)...");
+  for (const item of MASTER_VOCABULARY) {
+    try {
+      await prisma.word.upsert({
+        where: {
+          english_turkish: {
+            english: item.word,
+            turkish: item.tr,
+          },
+        },
+        update: {
+          definitionEn: item.hint || "",
+          examples: JSON.stringify(item.example ? [item.example, item.exampleTr || ""] : []),
+          synonyms: JSON.stringify(item.synonyms || []),
+          level: item.level,
+          type: item.type,
+          source: "Master Vocab",
+        },
+        create: {
+          english: item.word,
+          turkish: item.tr,
+          definitionEn: item.hint || "",
+          examples: JSON.stringify(item.example ? [item.example, item.exampleTr || ""] : []),
+          synonyms: JSON.stringify(item.synonyms || []),
+          level: item.level,
+          type: item.type,
+          source: "Master Vocab",
+          approved: true,
+        },
+      });
+      totalSeeded++;
+    } catch {
+      /* ignore duplicates */
     }
   }
 
