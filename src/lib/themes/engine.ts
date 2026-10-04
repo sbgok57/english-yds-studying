@@ -63,61 +63,62 @@ interface PaletteSeed {
   s: string;
   a: string;
   darkBg: string;
+  darkCard: string;
   lightBg: string;
 }
 
 const PALETTE_SEEDS: PaletteSeed[] = [
   // Gökkuşağı & Cümbüş
-  { name: "Canlı Gökkuşağı Spektrumu", category: "cyber", categoryEmoji: "🌈", p: "#ff4d6d", s: "#ff9f1c", a: "#09b8c8", darkBg: "#050814", lightBg: "#ffffff" },
+  { name: "Canlı Gökkuşağı Spektrumu", category: "cyber", categoryEmoji: "🌈", p: "#ff4d6d", s: "#ff9f1c", a: "#09b8c8", darkBg: "#0a0d24", darkCard: "#131842", lightBg: "#ffffff" },
 
   // Siberpunk & Neon
-  { name: "Tokyo Neon Siberpunk", category: "cyber", categoryEmoji: "⚡", p: "#00f0ff", s: "#ff007f", a: "#ffe600", darkBg: "#050811", lightBg: "#f0fdf4" },
-  { name: "Matrix Yeşil Kod", category: "cyber", categoryEmoji: "⚡", p: "#00ff66", s: "#00cc88", a: "#a3e635", darkBg: "#020d06", lightBg: "#f0fdf4" },
-  { name: "Synthwave Günbatımı", category: "cyber", categoryEmoji: "⚡", p: "#f43f5e", s: "#8b5cf6", a: "#38bdf8", darkBg: "#0b0518", lightBg: "#fdf4ff" },
-  { name: "Elektrik Menekşe", category: "cyber", categoryEmoji: "⚡", p: "#a855f7", s: "#3b82f6", a: "#ec4899", darkBg: "#08071a", lightBg: "#f5f3ff" },
-  { name: "Kuantum Camgöbeği", category: "cyber", categoryEmoji: "⚡", p: "#06b6d4", s: "#6366f1", a: "#10b981", darkBg: "#030c14", lightBg: "#ecfeff" },
+  { name: "Tokyo Neon Siberpunk", category: "cyber", categoryEmoji: "⚡", p: "#00f0ff", s: "#ff007f", a: "#ffe600", darkBg: "#060a22", darkCard: "#0d1440", lightBg: "#f0fdf4" },
+  { name: "Matrix Yeşil Kod", category: "cyber", categoryEmoji: "⚡", p: "#00ff66", s: "#00cc88", a: "#a3e635", darkBg: "#03170a", darkCard: "#072b14", lightBg: "#f0fdf4" },
+  { name: "Synthwave Günbatımı", category: "cyber", categoryEmoji: "⚡", p: "#f43f5e", s: "#8b5cf6", a: "#38bdf8", darkBg: "#17061f", darkCard: "#2b0d38", lightBg: "#fdf4ff" },
+  { name: "Elektrik Menekşe", category: "cyber", categoryEmoji: "⚡", p: "#a855f7", s: "#3b82f6", a: "#ec4899", darkBg: "#120721", darkCard: "#220e3d", lightBg: "#f5f3ff" },
+  { name: "Kuantum Camgöbeği", category: "cyber", categoryEmoji: "⚡", p: "#06b6d4", s: "#6366f1", a: "#10b981", darkBg: "#05161f", darkCard: "#0a2838", lightBg: "#ecfeff" },
   
   // Üniversite & Prestij
-  { name: "Oxford Gece Laciverti", category: "academic", categoryEmoji: "🏛️", p: "#38bdf8", s: "#6366f1", a: "#f59e0b", darkBg: "#030712", lightBg: "#f8fafc" },
-  { name: "Cambridge Botanik Zümrütü", category: "academic", categoryEmoji: "🏛️", p: "#10b981", s: "#06b6d4", a: "#fbbf24", darkBg: "#02130e", lightBg: "#f0fdf4" },
-  { name: "Harvard Bordo Asaleti", category: "academic", categoryEmoji: "🏛️", p: "#e11d48", s: "#be123c", a: "#fbbf24", darkBg: "#120307", lightBg: "#fff1f2" },
-  { name: "Yale Kraliyet Mavisi", category: "academic", categoryEmoji: "🏛️", p: "#2563eb", s: "#7c3aed", a: "#38bdf8", darkBg: "#030a1c", lightBg: "#eff6ff" },
-  { name: "Sorbonne Entelektüel", category: "academic", categoryEmoji: "🏛️", p: "#d97706", s: "#4f46e5", a: "#059669", darkBg: "#0e0904", lightBg: "#fffbeb" },
+  { name: "Oxford Gece Laciverti", category: "academic", categoryEmoji: "🏛️", p: "#38bdf8", s: "#6366f1", a: "#f59e0b", darkBg: "#061224", darkCard: "#0c203e", lightBg: "#f8fafc" },
+  { name: "Cambridge Botanik Zümrütü", category: "academic", categoryEmoji: "🏛️", p: "#10b981", s: "#06b6d4", a: "#fbbf24", darkBg: "#041810", darkCard: "#0a2a1c", lightBg: "#f0fdf4" },
+  { name: "Harvard Bordo Asaleti", category: "academic", categoryEmoji: "🏛️", p: "#e11d48", s: "#be123c", a: "#fbbf24", darkBg: "#1a050b", darkCard: "#2b0a13", lightBg: "#fff1f2" },
+  { name: "Yale Kraliyet Mavisi", category: "academic", categoryEmoji: "🏛️", p: "#2563eb", s: "#7c3aed", a: "#38bdf8", darkBg: "#061026", darkCard: "#0d1e45", lightBg: "#eff6ff" },
+  { name: "Sorbonne Entelektüel", category: "academic", categoryEmoji: "🏛️", p: "#d97706", s: "#4f46e5", a: "#059669", darkBg: "#170f05", darkCard: "#2b1c0a", lightBg: "#fffbeb" },
 
   // Doğa & Biyom
-  { name: "Amazon Yağmur Ormanı", category: "nature", categoryEmoji: "🌿", p: "#22c55e", s: "#14b8a6", a: "#eab308", darkBg: "#021207", lightBg: "#f0fdf4" },
-  { name: "İskandinav Fiyordu", category: "nature", categoryEmoji: "🌿", p: "#0ea5e9", s: "#2dd4bf", a: "#60a5fa", darkBg: "#030f17", lightBg: "#f0f9ff" },
-  { name: "Sahra Altın Kumları", category: "nature", categoryEmoji: "🌿", p: "#f59e0b", s: "#ea580c", a: "#eab308", darkBg: "#140c03", lightBg: "#fffbeb" },
-  { name: "Lavanta Vadisi", category: "nature", categoryEmoji: "🌿", p: "#a78bfa", s: "#f472b6", a: "#38bdf8", darkBg: "#0c0717", lightBg: "#faf5ff" },
-  { name: "Mercan Resifi", category: "nature", categoryEmoji: "🌿", p: "#fb7185", s: "#06b6d4", a: "#facc15", darkBg: "#14040a", lightBg: "#fff1f2" },
+  { name: "Amazon Yağmur Ormanı", category: "nature", categoryEmoji: "🌿", p: "#22c55e", s: "#14b8a6", a: "#eab308", darkBg: "#04180a", darkCard: "#082e14", lightBg: "#f0fdf4" },
+  { name: "İskandinav Fiyordu", category: "nature", categoryEmoji: "🌿", p: "#0ea5e9", s: "#2dd4bf", a: "#60a5fa", darkBg: "#051522", darkCard: "#0a253b", lightBg: "#f0f9ff" },
+  { name: "Sahra Altın Kumları", category: "nature", categoryEmoji: "🌿", p: "#f59e0b", s: "#ea580c", a: "#eab308", darkBg: "#1a1004", darkCard: "#2e1c07", lightBg: "#fffbeb" },
+  { name: "Lavanta Vadisi", category: "nature", categoryEmoji: "🌿", p: "#a78bfa", s: "#f472b6", a: "#38bdf8", darkBg: "#140a21", darkCard: "#24133b", lightBg: "#faf5ff" },
+  { name: "Mercan Resifi", category: "nature", categoryEmoji: "🌿", p: "#fb7185", s: "#06b6d4", a: "#facc15", darkBg: "#1c0610", darkCard: "#330c1e", lightBg: "#fff1f2" },
 
   // Kozmik & Gece
-  { name: "Samanyolu Galaksisi", category: "cosmic", categoryEmoji: "🌌", p: "#c084fc", s: "#818cf8", a: "#38bdf8", darkBg: "#06030e", lightBg: "#faf5ff" },
-  { name: "Aurora Borealis", category: "cosmic", categoryEmoji: "🌌", p: "#34d399", s: "#38bdf8", a: "#a78bfa", darkBg: "#020e0d", lightBg: "#ecfdf5" },
-  { name: "Mars Kızıl Gezegeni", category: "cosmic", categoryEmoji: "🌌", p: "#ef4444", s: "#f97316", a: "#fbbf24", darkBg: "#140505", lightBg: "#fef2f2" },
-  { name: "Kozmik Süpernova", category: "cosmic", categoryEmoji: "🌌", p: "#f43f5e", s: "#eab308", a: "#06b6d4", darkBg: "#13040c", lightBg: "#fff1f2" },
-  { name: "Derin Uzay Karadeliği", category: "cosmic", categoryEmoji: "🌌", p: "#60a5fa", s: "#c084fc", a: "#f43f5e", darkBg: "#020409", lightBg: "#f8fafc" },
+  { name: "Samanyolu Galaksisi", category: "cosmic", categoryEmoji: "🌌", p: "#c084fc", s: "#818cf8", a: "#38bdf8", darkBg: "#10061e", darkCard: "#1f0c38", lightBg: "#faf5ff" },
+  { name: "Aurora Borealis", category: "cosmic", categoryEmoji: "🌌", p: "#34d399", s: "#38bdf8", a: "#a78bfa", darkBg: "#041814", darkCard: "#082b24", lightBg: "#ecfdf5" },
+  { name: "Mars Kızıl Gezegeni", category: "cosmic", categoryEmoji: "🌌", p: "#ef4444", s: "#f97316", a: "#fbbf24", darkBg: "#1a0606", darkCard: "#2e0c0c", lightBg: "#fef2f2" },
+  { name: "Kozmik Süpernova", category: "cosmic", categoryEmoji: "🌌", p: "#f43f5e", s: "#eab308", a: "#06b6d4", darkBg: "#1a0511", darkCard: "#310920", lightBg: "#fff1f2" },
+  { name: "Derin Uzay Karadeliği", category: "cosmic", categoryEmoji: "🌌", p: "#60a5fa", s: "#c084fc", a: "#f43f5e", darkBg: "#050917", darkCard: "#0c1430", lightBg: "#f8fafc" },
 
   // Lüks & Kraliyet
-  { name: "İmparatorluk Altını", category: "royal", categoryEmoji: "👑", p: "#eab308", s: "#ca8a04", a: "#fef08a", darkBg: "#120e02", lightBg: "#fefce8" },
-  { name: "Geceyarısı Safiri", category: "royal", categoryEmoji: "👑", p: "#3b82f6", s: "#1d4ed8", a: "#93c5fd", darkBg: "#020714", lightBg: "#eff6ff" },
-  { name: "Zümrüt Taç", category: "royal", categoryEmoji: "👑", p: "#10b981", s: "#047857", a: "#6ee7b7", darkBg: "#02120a", lightBg: "#ecfdf5" },
-  { name: "Kraliyet Yakutu", category: "royal", categoryEmoji: "👑", p: "#e11d48", s: "#9f1239", a: "#fda4af", darkBg: "#140207", lightBg: "#fff1f2" },
-  { name: "Pırlanta Platin", category: "royal", categoryEmoji: "👑", p: "#94a3b8", s: "#cbd5e1", a: "#38bdf8", darkBg: "#090d16", lightBg: "#f8fafc" },
+  { name: "İmparatorluk Altını", category: "royal", categoryEmoji: "👑", p: "#eab308", s: "#ca8a04", a: "#fef08a", darkBg: "#1c1404", darkCard: "#2e2107", lightBg: "#fefce8" },
+  { name: "Geceyarısı Safiri", category: "royal", categoryEmoji: "👑", p: "#3b82f6", s: "#1d4ed8", a: "#93c5fd", darkBg: "#051024", darkCard: "#0a1e3f", lightBg: "#eff6ff" },
+  { name: "Zümrüt Taç", category: "royal", categoryEmoji: "👑", p: "#10b981", s: "#047857", a: "#6ee7b7", darkBg: "#04180d", darkCard: "#082d19", lightBg: "#ecfdf5" },
+  { name: "Kraliyet Yakutu", category: "royal", categoryEmoji: "👑", p: "#e11d48", s: "#9f1239", a: "#fda4af", darkBg: "#1f050d", darkCard: "#360a17", lightBg: "#fff1f2" },
+  { name: "Pırlanta Platin", category: "royal", categoryEmoji: "👑", p: "#94a3b8", s: "#cbd5e1", a: "#38bdf8", darkBg: "#0d1117", darkCard: "#161b22", lightBg: "#f8fafc" },
 
   // Pastel & Minimal
-  { name: "Şeftali Esintisi", category: "pastel", categoryEmoji: "🌸", p: "#fb923c", s: "#f472b6", a: "#facc15", darkBg: "#140905", lightBg: "#fff7ed" },
-  { name: "Mint Şerbeti", category: "pastel", categoryEmoji: "🌸", p: "#2dd4bf", s: "#4ade80", a: "#38bdf8", darkBg: "#031210", lightBg: "#f0fdfa" },
-  { name: "Pudra Pembesi", category: "pastel", categoryEmoji: "🌸", p: "#f472b6", s: "#c084fc", a: "#fbbf24", darkBg: "#140510", lightBg: "#fdf2f8" },
-  { name: "Bebek Mavisi", category: "pastel", categoryEmoji: "🌸", p: "#38bdf8", s: "#818cf8", a: "#34d399", darkBg: "#040d17", lightBg: "#f0f9ff" },
-  { name: "Karamel Kreması", category: "pastel", categoryEmoji: "🌸", p: "#d97706", s: "#f59e0b", a: "#fde047", darkBg: "#130903", lightBg: "#fffbeb" },
+  { name: "Şeftali Esintisi", category: "pastel", categoryEmoji: "🌸", p: "#fb923c", s: "#f472b6", a: "#facc15", darkBg: "#1c0d06", darkCard: "#31180a", lightBg: "#fff7ed" },
+  { name: "Mint Şerbeti", category: "pastel", categoryEmoji: "🌸", p: "#2dd4bf", s: "#4ade80", a: "#38bdf8", darkBg: "#051a17", darkCard: "#0a2f2a", lightBg: "#f0fdfa" },
+  { name: "Pudra Pembesi", category: "pastel", categoryEmoji: "🌸", p: "#f472b6", s: "#c084fc", a: "#fbbf24", darkBg: "#1c0817", darkCard: "#310e28", lightBg: "#fdf2f8" },
+  { name: "Bebek Mavisi", category: "pastel", categoryEmoji: "🌸", p: "#38bdf8", s: "#818cf8", a: "#34d399", darkBg: "#061321", darkCard: "#0d223a", lightBg: "#f0f9ff" },
+  { name: "Karamel Kreması", category: "pastel", categoryEmoji: "🌸", p: "#d97706", s: "#f59e0b", a: "#fde047", darkBg: "#1a0d04", darkCard: "#2e1807", lightBg: "#fffbeb" },
 
   // Dinamik & Enerji
-  { name: "Ateş Dansı", category: "fire", categoryEmoji: "🔥", p: "#f97316", s: "#ef4444", a: "#facc15", darkBg: "#140602", lightBg: "#fff7ed" },
-  { name: "Volkanik Magma", category: "fire", categoryEmoji: "🔥", p: "#dc2626", s: "#ea580c", a: "#fbbf24", darkBg: "#140303", lightBg: "#fef2f2" },
-  { name: "Güneş Patlaması", category: "fire", categoryEmoji: "🔥", p: "#f59e0b", s: "#ef4444", a: "#facc15", darkBg: "#140a02", lightBg: "#fffbeb" },
-  { name: "Lazer Kırmızısı", category: "fire", categoryEmoji: "🔥", p: "#f43f5e", s: "#e11d48", a: "#fb7185", darkBg: "#140308", lightBg: "#fff1f2" },
-  { name: "Yıldırım Enerjisi", category: "fire", categoryEmoji: "🔥", p: "#eab308", s: "#3b82f6", a: "#06b6d4", darkBg: "#110e03", lightBg: "#fefce8" },
+  { name: "Ateş Dansı", category: "fire", categoryEmoji: "🔥", p: "#f97316", s: "#ef4444", a: "#facc15", darkBg: "#1c0904", darkCard: "#311107", lightBg: "#fff7ed" },
+  { name: "Volkanik Magma", category: "fire", categoryEmoji: "🔥", p: "#dc2626", s: "#ea580c", a: "#fbbf24", darkBg: "#1c0505", darkCard: "#310909", lightBg: "#fef2f2" },
+  { name: "Güneş Patlaması", category: "fire", categoryEmoji: "🔥", p: "#f59e0b", s: "#ef4444", a: "#facc15", darkBg: "#1c1104", darkCard: "#311e07", lightBg: "#fffbeb" },
+  { name: "Lazer Kırmızısı", category: "fire", categoryEmoji: "🔥", p: "#f43f5e", s: "#e11d48", a: "#fb7185", darkBg: "#1c050b", darkCard: "#310914", lightBg: "#fff1f2" },
+  { name: "Yıldırım Enerjisi", category: "fire", categoryEmoji: "🔥", p: "#eab308", s: "#3b82f6", a: "#06b6d4", darkBg: "#171405", darkCard: "#2b250a", lightBg: "#fefce8" },
 ];
 
 const HUE_TITLES = [
@@ -159,7 +160,7 @@ export const ALL_THEMES: ThemePalette[] = (() => {
         accent: seed.a,
         darkBg: seed.darkBg,
         lightBg: seed.lightBg,
-        darkCard: "#0f172a",
+        darkCard: seed.darkCard,
         lightCard: "#ffffff",
         darkText: "#f8fafc",
         lightText: "#0f172a",
@@ -179,12 +180,12 @@ export const ALL_THEMES: ThemePalette[] = (() => {
       const secondary = hslToHex(secHue, 88, 54);
       const accent = hslToHex(accHue, 95, 60);
 
-      // Koyu mod arkaplan: Havanın rengine göre ince atmosferik tint
-      const darkBg = hslToHex(hue, 36, 4);
-      // Koyu mod kart: Arkaplandan belirgin ayrılan hafif ton
-      const darkCard = hslToHex(hue, 30, 8);
-      // Açık mod arkaplan: Beyaza yakın ferah kristal ton
-      const lightBg = hslToHex(hue, 25, 98);
+      // Koyu mod arkaplan: Havanın rengine göre belirgin atmosferik zengin renk
+      const darkBg = hslToHex(hue, 50, 7);
+      // Koyu mod kart: Arkaplandan ayrılan canlı ve şık kart tonu
+      const darkCard = hslToHex(hue, 42, 13);
+      // Açık mod arkaplan: Ferah kristal ton
+      const lightBg = hslToHex(hue, 35, 97);
       const lightCard = "#ffffff";
 
       list[i] = {
@@ -260,6 +261,8 @@ export function getThemesPage(options: {
   };
 }
 
+import { safeSetStorage, safeGetStorage } from "@/lib/storage-optimizer";
+
 let isApplyingTheme = false;
 
 /**
@@ -292,6 +295,9 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
     root.style.setProperty("--theme-accent", targetTheme.accent);
     root.style.setProperty("--theme-glow", targetTheme.glowColor);
     root.style.setProperty("--theme-gradient", targetTheme.gradient);
+    root.style.setProperty("--theme-primary-glow", `${targetTheme.primary}33`);
+    root.style.setProperty("--theme-secondary-glow", `${targetTheme.secondary}26`);
+    root.style.setProperty("--theme-accent-glow", `${targetTheme.accent}20`);
 
     if (mode === "light") {
       root.style.setProperty("--theme-bg", targetTheme.lightBg);
@@ -305,18 +311,21 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
       root.style.setProperty("--theme-border", "rgba(255, 255, 255, 0.12)");
     }
 
-    // 3. Tercihleri sakla ve reaktif olay fırlat
-    try {
-      localStorage.setItem("yds_theme_id", targetTheme.id.toString());
-      localStorage.setItem("yds_theme_mode", mode);
-      window.dispatchEvent(
-        new CustomEvent("yds:theme-changed", {
-          detail: { theme: targetTheme, mode },
-        })
-      );
-    } catch {
-      /* storage failover */
+    // Doğrudan body stillerine anında enjekte et
+    if (document.body) {
+      document.body.style.backgroundColor = mode === "light" ? targetTheme.lightBg : targetTheme.darkBg;
+      document.body.style.color = mode === "light" ? targetTheme.lightText : targetTheme.darkText;
     }
+
+    // 3. Tercihleri güvenli depolama koruyucusu ile sakla ve reaktif olay fırlat
+    safeSetStorage("yds_theme_id", targetTheme.id.toString());
+    safeSetStorage("yds_theme_mode", mode);
+
+    window.dispatchEvent(
+      new CustomEvent("yds:theme-changed", {
+        detail: { theme: targetTheme, mode },
+      })
+    );
   } finally {
     isApplyingTheme = false;
   }
@@ -331,8 +340,8 @@ export function getSavedTheme(): { theme: ThemePalette; mode: "dark" | "light" }
   }
 
   try {
-    const savedId = parseInt(localStorage.getItem("yds_theme_id") || "1", 10);
-    const savedMode = (localStorage.getItem("yds_theme_mode") as "dark" | "light") || "dark";
+    const savedId = parseInt(safeGetStorage("yds_theme_id", "1"), 10);
+    const savedMode = (safeGetStorage("yds_theme_mode", "dark") as "dark" | "light") || "dark";
     const theme = ALL_THEMES.find((t) => t.id === savedId) || ALL_THEMES[0];
     return { theme, mode: savedMode };
   } catch {

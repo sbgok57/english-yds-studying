@@ -12975,10 +12975,12 @@ export const BASE_INVENTORY_ITEMS: VocabularyInventoryItem[] = [
   }
 ];
 
+import { safeSetStorage, safeGetStorage } from "@/lib/storage-optimizer";
+
 export function loadUserInventoryCustomization(): UserInventoryCustomization {
   if (typeof window === "undefined") return defaultUserCustomization();
   try {
-    const raw = window.localStorage.getItem(INVENTORY_STORAGE_KEY);
+    const raw = safeGetStorage(INVENTORY_STORAGE_KEY, "");
     if (!raw) return defaultUserCustomization();
     const parsed = JSON.parse(raw);
     return {
@@ -12999,7 +13001,7 @@ export function loadUserInventoryCustomization(): UserInventoryCustomization {
 export function saveUserInventoryCustomization(cust: UserInventoryCustomization): void {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(INVENTORY_STORAGE_KEY, JSON.stringify(cust));
+    safeSetStorage(INVENTORY_STORAGE_KEY, JSON.stringify(cust));
   } catch {
     /* safety */
   }

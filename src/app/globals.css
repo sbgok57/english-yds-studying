@@ -82,6 +82,39 @@ body {
   color: transparent !important;
 }
 
+/* ---------- CANLI TEMA GEÇİRGENLİĞİ (Tüm Sayfalar ve Kartlar) ---------- */
+html:not(.light) .bg-slate-950,
+html:not(.light) .bg-slate-950\/95,
+html:not(.light) .bg-slate-950\/90,
+html:not(.light) .bg-slate-950\/85,
+html:not(.light) .bg-slate-950\/80,
+html:not(.light) .bg-[#0B0F19],
+html:not(.light) .bg-[#070b14],
+html:not(.light) .bg-[#030712],
+html:not(.light) .bg-black {
+  background-color: var(--theme-bg, #050814) !important;
+}
+
+html:not(.light) .bg-slate-900,
+html:not(.light) .bg-slate-900\/95,
+html:not(.light) .bg-slate-900\/90,
+html:not(.light) .bg-slate-900\/80,
+html:not(.light) .bg-slate-900\/70,
+html:not(.light) .bg-slate-900\/60,
+html:not(.light) .bg-slate-900\/50,
+html:not(.light) .bg-slate-900\/40,
+html:not(.light) .bg-[#0d1527],
+html:not(.light) .bg-[#0f172a] {
+  background-color: var(--theme-card, #0e172e) !important;
+}
+
+html:not(.light) .border-slate-800,
+html:not(.light) .border-slate-700,
+html:not(.light) .border-slate-700\/80,
+html:not(.light) .border-slate-700\/60 {
+  border-color: var(--theme-border, rgba(255, 255, 255, 0.12)) !important;
+}
+
 /* ---------- AYDINLIK MOD (Işıltılı, Canlı & Kristal Netlik) ---------- */
 html.light {
   color-scheme: light;

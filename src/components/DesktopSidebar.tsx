@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import MenuDrawer from "./MenuDrawer";
+import ThemeQuickModal from "./theme/ThemeQuickModal";
 import {
   BookOpen,
   GraduationCap,
@@ -64,6 +65,7 @@ export default function DesktopSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [themeModalOpen, setThemeModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -276,6 +278,18 @@ export default function DesktopSidebar() {
 
         {/* Alt Sabit Kısım: Tema Değiştirici & Tüm Çekmece */}
         <div className="p-2.5 border-t border-white/10 bg-slate-950/90 space-y-2 shrink-0">
+          {/* 500+ Canlı Tema Seçici Butonu */}
+          <button
+            onClick={() => setThemeModalOpen(true)}
+            className={`w-full py-2 rounded-xl bg-gradient-to-r from-pink-500/15 via-purple-500/15 to-cyan-500/15 hover:from-pink-500/25 hover:to-cyan-500/25 text-white/90 hover:text-white border border-cyan-400/40 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm cursor-pointer ${
+              collapsed ? "!px-0" : "px-3"
+            }`}
+            title="🎨 500+ Canlı Renk ve Tema Seçici"
+          >
+            <Palette className="w-4 h-4 text-cyan-300 shrink-0" />
+            {!collapsed && <span>500+ Tema (🎨)</span>}
+          </button>
+
           {/* Karanlık/Aydınlık Mod Butonu */}
           <div className="flex items-center justify-center">
             <ThemeToggle compact={collapsed} className={collapsed ? "!w-10 !h-10 !px-0 rounded-xl" : "w-full justify-center"} />
@@ -284,7 +298,7 @@ export default function DesktopSidebar() {
           {/* Tüm Menüyü Aç Butonu */}
           <button
             onClick={() => setDrawerOpen(true)}
-            className={`w-full py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+            className={`w-full py-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               collapsed ? "!px-0" : "px-3"
             }`}
             title="Tüm Sayfalar ve Bölümler Çekmecesi"
@@ -297,6 +311,9 @@ export default function DesktopSidebar() {
 
       {/* Yana Açılır Çekmece Modalı */}
       <MenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+      {/* 500+ Hızlı Tema Seçici Modalı */}
+      <ThemeQuickModal open={themeModalOpen} onClose={() => setThemeModalOpen(false)} />
     </>
   );
 }

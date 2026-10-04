@@ -42,10 +42,17 @@ export interface UserCertificate {
   skills: string[];
 }
 
+export type QuizSkillType = "grammar" | "reading" | "listening" | "speaking";
+
 export interface LevelUpQuizQuestion {
   id: string;
   stem: string;
   options: string[];
   answer: number;
   explanation: string;
+  skill?: QuizSkillType;
+  readingPassage?: string;
+  audioText?: string;
+  speakingPrompt?: string;
 }
+
