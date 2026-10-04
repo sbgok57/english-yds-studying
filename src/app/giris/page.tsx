@@ -99,7 +99,7 @@ function LoginForm() {
             Tekrar Hoş Geldin!
           </h1>
           <p className="text-sm text-white/50 mt-1">
-            YDS maratonuna kaldığın yerden devam et.
+            DİL MASTER (YDS · YDT · YÖKDİL) maratonuna kaldığın yerden devam et.
           </p>
         </div>
 
@@ -270,11 +270,11 @@ export default function GirisPage() {
 
           <div className="p-6 rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl">
             <h3 className="text-sm font-black uppercase tracking-wider text-cyan-400 mb-3">
-              YDS Master ile Neler Kazanırsın?
+              DİL MASTER ile Neler Kazanırsın?
             </h3>
             <ul className="space-y-2.5 text-xs text-white/70">
               <li className="flex items-center gap-2">
-                <span className="text-emerald-400">✓</span> 485+ kelimelik detaylı CEFR A1–C2 Kelime Envanteri
+                <span className="text-emerald-400">✓</span> 2.500+ kelimelik YDS, YDT ve YÖKDİL Akademik Kelime Envanteri
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-emerald-400">✓</span> 7–180 Günlük Kişiselleştirilmiş Çalışma Programları

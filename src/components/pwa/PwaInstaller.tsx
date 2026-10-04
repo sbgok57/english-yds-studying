@@ -134,10 +134,10 @@ export default function PwaInstaller() {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs sm:text-sm font-bold text-white truncate">
-                DİL MASTER • iOS & Android&apos;e İndir
+                DİL MASTER Uygulamasını Yükle
               </h4>
               <p className="text-[11px] text-white/60 truncate">
-                iPhone, iPad & Android için offline ve tam ekran
+                Hızlı açılış, tam ekran ve offline çalışma
               </p>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function PwaInstaller() {
               className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 text-slate-950 text-xs font-black shadow-md hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>iOS & Android&apos;e İndir</span>
+              <span>iOS ve Android&apos;e İndir</span>
             </button>
             <button
               onClick={handleDismiss}
@@ -245,7 +245,7 @@ export default function PwaInstaller() {
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   </p>
                   <p className="text-white/60">
-                    Sağ üstteki <strong>&quot;Ekle&quot;</strong> butonuna dokunun. YDS Master artık telefonunuzda tam ekran bir uygulama olarak çalışır!
+                    Sağ üstteki <strong>&quot;Ekle&quot;</strong> butonuna dokunun. DİL MASTER artık telefonunuzda tam ekran bir uygulama olarak çalışır!
                   </p>
                 </div>
               </div>

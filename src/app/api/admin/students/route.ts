@@ -96,120 +96,36 @@ function buildStudentActivitiesAndBreakdown(
     });
   }
 
-  // 2. Modüler 7 Beceri Çalışmaları (Kelime, Gramer, Reading, Writing, Speaking, Listening)
-  const now = new Date();
-  const mockStudySessions: {
-    type: StudentActivityItem["type"];
-    category: StudentActivityItem["category"];
-    title: string;
-    details: string;
-    minutes: number;
-    hoursAgo: number;
-  }[] = [
-    {
-      type: "vocabulary",
-      category: "YDS",
-      title: "3D Flashcards & SM-2 Aralıklı Bellek",
-      details: "45 Akademik Kelime Tekrar Edildi • 42/45 Doğru Hatırlandı (%93.3)",
-      minutes: 25,
-      hoursAgo: 2,
-    },
-    {
-      type: "grammar",
-      category: "YDS",
-      title: "Zamanlar (Tenses) & Zaman Uyumu Testi",
-      details: "20 Gramer Pekiştirme Sorusu Çözüldü • 18 Doğru, 2 Yanlış (Net: 17.5)",
-      minutes: 30,
-      hoursAgo: 5,
-    },
-    {
-      type: "reading",
-      category: "YÖKDİL",
-      title: "Lancet Tıp & Biyoloji Reading Lab",
-      details: "Akademik Paragraf Okundu, Tıkla-Sözlük ile 8 Kelime Not Alındı, 3 Soru Tamamlandı",
-      minutes: 20,
-      hoursAgo: 9,
-    },
-    {
-      type: "writing",
-      category: "YDS",
-      title: "Akademik Cümle Kurma & Paraphrase Lab",
-      details: "S+V+O+MPT Cümle Dizilimi & 5 Akademik Zıtlık Bağlacı Alıştırması",
-      minutes: 22,
-      hoursAgo: 22,
-    },
-    {
-      type: "speaking",
-      category: "YDT",
-      title: "AI Speaking Lab — İnteraktif Konuşma Koçu",
-      details: "Yapay zeka ile 12 Diyalog Tamamlandı • Akıcılık & Telaffuz: %88",
-      minutes: 18,
-      hoursAgo: 26,
-    },
-    {
-      type: "listening",
-      category: "YDT",
-      title: "Sesli Gramer & Çoklu Aksan Dinleme",
-      details: "ALi CÜMLEci vs DEDE İSİMci & Sebahattin-Sevim Stüdyo Kaydı Dinlendi",
-      minutes: 15,
-      hoursAgo: 32,
-    },
-    {
-      type: "vocabulary",
-      category: "YÖKDİL",
-      title: "Sağlık & Fen Bilimleri Alan Terimleri",
-      details: "30 Yüksek Frekanslı Alan Kelimesi İnfografik Modda Çalışıldı",
-      minutes: 20,
-      hoursAgo: 48,
-    },
-  ];
-
-  let vocabMin = 0;
-  let grammarMin = 0;
-  let readingMin = 0;
-  let listeningMin = 0;
-  let writingMin = 0;
-  let speakingMin = 0;
-
-  mockStudySessions.forEach((s, idx) => {
-    const sessionTime = new Date(now.getTime() - s.hoursAgo * 3600 * 1000);
-    const dateFormatted = sessionTime.toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit", year: "numeric" });
-    const timeFormatted = sessionTime.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
-    if (s.type === "vocabulary") vocabMin += s.minutes;
-    else if (s.type === "grammar") grammarMin += s.minutes;
-    else if (s.type === "reading") readingMin += s.minutes;
-    else if (s.type === "listening") listeningMin += s.minutes;
-    else if (s.type === "writing") writingMin += s.minutes;
-    else if (s.type === "speaking") speakingMin += s.minutes;
-
+  // 2. Gerçek Hesap Kayıt & Başlangıç Aktivitesi
+  if (baseDateStr) {
+    const regDate = new Date(baseDateStr);
     activities.push({
-      id: `act-session-${idx}`,
-      type: s.type,
-      category: s.category,
-      title: s.title,
-      details: s.details,
-      timeSpent: `${s.minutes} dakika`,
-      timeSpentMinutes: s.minutes,
-      scoreOrCount: `${s.minutes} dk`,
-      timestamp: sessionTime.toISOString(),
-      dateFormatted,
-      timeFormatted,
+      id: `act-reg-${username}`,
+      type: "vocabulary",
+      category: "Genel",
+      title: "DİL MASTER Hesabı Oluşturuldu",
+      details: `${username} sisteme gerçek öğrenci olarak kaydoldu (A1 Seviye Başlangıcı).`,
+      timeSpent: "İlk Katılım",
+      timeSpentMinutes: 5,
+      scoreOrCount: "Kayıt",
+      timestamp: baseDateStr,
+      dateFormatted: regDate.toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit", year: "numeric" }),
+      timeFormatted: regDate.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
     });
-  });
+  }
 
   // Kronolojik sırala (En son yapılan işlem en üstte)
   activities.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
   const skillBreakdown: SkillTimeBreakdown = {
     examMinutes: examMin,
-    vocabularyMinutes: vocabMin,
-    grammarMinutes: grammarMin,
-    readingMinutes: readingMin,
-    listeningMinutes: listeningMin,
-    writingMinutes: writingMin,
-    speakingMinutes: speakingMin,
-    totalStudyMinutes: examMin + vocabMin + grammarMin + readingMin + listeningMin + writingMin + speakingMin,
+    vocabularyMinutes: 0,
+    grammarMinutes: 0,
+    readingMinutes: 0,
+    listeningMinutes: 0,
+    writingMinutes: 0,
+    speakingMinutes: 0,
+    totalStudyMinutes: examMin,
   };
 
   return { activities, skillBreakdown };

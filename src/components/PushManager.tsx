@@ -376,7 +376,7 @@ export default function PushManager() {
             <div className="flex items-center gap-3">
               <span className="text-2xl">📱</span>
               <div>
-                <h4 className="text-xs font-bold text-white">YDS Master'ı Uygulama Olarak Yükleyin</h4>
+                <h4 className="text-xs font-bold text-white">DİL MASTER&apos;ı Uygulama Olarak Yükleyin</h4>
                 <p className="text-[11px] text-white/60">Tek dokunuşla ana ekrandan açın ve bildirimleri kaçırmayın.</p>
               </div>
             </div>
@@ -397,9 +397,9 @@ export default function PushManager() {
               <span>iPhone / iPad Kullanıcıları İçin Web Push Kurulumu:</span>
             </div>
             <ol className="text-[11px] text-white/70 list-decimal list-inside space-y-1">
-              <li>Safari'de alttaki <strong>Paylaş (📤)</strong> butonuna dokunun.</li>
-              <li>Açılan menüde <strong>"Ana Ekrana Ekle" (➕)</strong> seçeneğini seçin.</li>
-              <li>Ana ekrandaki YDS Master ikonundan uygulamayı açıp bu ekrandan bildirimleri etkinleştirin.</li>
+              <li>Safari&apos;de alttaki <strong>Paylaş (📤)</strong> butonuna dokunun.</li>
+              <li>Açılan menüde <strong>&quot;Ana Ekrana Ekle&quot; (➕)</strong> seçeneğini seçin.</li>
+              <li>Ana ekrandaki DİL MASTER ikonundan uygulamayı açıp bu ekrandan bildirimleri etkinleştirin.</li>
             </ol>
           </div>
         )}
@@ -411,7 +411,7 @@ export default function PushManager() {
               <span>⚡</span> Samsung Pil Kısıtlaması Uyarısı:
             </p>
             <p className="text-[11px] text-white/70">
-              Bildirimlerin zamanında iletilmesi için telefonunuzun <strong>Ayarlar &gt; Uygulamalar &gt; YDS Master &gt; Pil</strong> bölümünden <em>"Kısıtlanmamış"</em> seçeneğini işaretleyin.
+              Bildirimlerin zamanında iletilmesi için telefonunuzun <strong>Ayarlar &gt; Uygulamalar &gt; DİL MASTER &gt; Pil</strong> bölümünden <em>&quot;Kısıtlanmamış&quot;</em> seçeneğini işaretleyin.
             </p>
           </div>
         )}

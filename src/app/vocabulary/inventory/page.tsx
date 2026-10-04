@@ -83,16 +83,24 @@ function VocabularyInventoryContent() {
   // Note editing state for selected word
   const [currentNote, setCurrentNote] = useState("");
 
-  // Voice preferences & natural playback state
-  const [voicePrefs, setVoicePrefs] = useState<UserVoicePreferences>(() => clientAudio.getPreferences());
-  const [globalAccent, setGlobalAccent] = useState<AccentId>(() => getStoredAccent());
-  const [globalGender, setGlobalGender] = useState<Gender>(() => getStoredGender());
+  // Voice preferences & natural playback state (PERF & HYDRATION SAFETY)
+  const [voicePrefs, setVoicePrefs] = useState<UserVoicePreferences>({
+    preferredAccent: "en-US",
+    preferredVoiceGender: "female",
+    preferredVoiceId: "",
+    speakingRate: 1.0,
+  });
+  const [globalAccent, setGlobalAccent] = useState<AccentId>("us");
+  const [globalGender, setGlobalGender] = useState<Gender>("female");
   const [showVoicePicker, setShowVoicePicker] = useState(false);
   const [playingWord, setPlayingWord] = useState<string | null>(null);
 
   useEffect(() => {
     const data = loadInventoryUserData();
     setUserData(data);
+    setVoicePrefs(clientAudio.getPreferences());
+    setGlobalAccent(getStoredAccent());
+    setGlobalGender(getStoredGender());
 
     const handleVoiceChange = () => {
       setVoicePrefs(clientAudio.getPreferences());

@@ -1,4 +1,6 @@
 // System-wide Read-Only Vocabulary Inventory
+import { YDS_PUBLICATIONS_MASTER_CORPUS } from "./vocabulary/publications-master-corpus";
+import { MASTER_VOCABULARY } from "./vocabulary/master-vocab-database";
 
 export type CefrInventoryLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2" | "UNCLASSIFIED";
 
@@ -13077,7 +13079,97 @@ export function exportInventoryToCsv(items: VocabularyInventoryItem[]): string {
   return [headers.join(","), ...rows].join("\n");
 }
 
-export const INVENTORY_ITEMS = BASE_INVENTORY_ITEMS;
+// ------------------------------------------------------------
+// FULL CONSOLIDATED VOCABULARY INVENTORY (2.500+ KELİME)
+// YDS, YDT ve YÖKDİL Sınav Havuzlarının Konsolidasyonu
+// ------------------------------------------------------------
+function buildUnifiedInventory(): VocabularyInventoryItem[] {
+  const combined: VocabularyInventoryItem[] = [...BASE_INVENTORY_ITEMS];
+  const seen = new Set(BASE_INVENTORY_ITEMS.map((w) => w.word.toLowerCase()));
+
+  // 1. 2013-2026 Akademik Yayınlar (Modadil, Akın Dil, Remzi Hoca, vb.)
+  YDS_PUBLICATIONS_MASTER_CORPUS.forEach((p, idx) => {
+    const norm = p.term.toLowerCase();
+    if (seen.has(norm)) return;
+    seen.add(norm);
+
+    const level = (p.level === "YDS" ? "C1" : p.level) as CefrInventoryLevel;
+    const pos =
+      p.type === "fiil"
+        ? "verb"
+        : p.type === "isim"
+        ? "noun"
+        : p.type === "sıfat"
+        ? "adjective"
+        : p.type === "zarf"
+        ? "adverb"
+        : p.type === "phrasal verb"
+        ? "verb"
+        : "other";
+
+    combined.push({
+      id: `pub-${idx}-${norm}`,
+      word: p.term,
+      normalized: norm,
+      partOfSpeech: pos,
+      level,
+      turkishMeanings: p.meaningsTr,
+      englishDefinition: p.definitionEn,
+      example: p.exampleEn,
+      exampleTr: p.exampleTr,
+      sourceTags: ["exams", "reading"],
+      ydsPriority: "high",
+      academic: true,
+      phrasalVerb: p.type === "phrasal verb",
+      synonyms: p.synonyms,
+      collocations: p.collocations,
+      targetExams: ["YDS", "YDT", "YÖKDİL"],
+    });
+  });
+
+  // 2. 2.500 Master Veritabanı (A1-C2)
+  MASTER_VOCABULARY.forEach((m) => {
+    const norm = m.word.toLowerCase();
+    if (seen.has(norm)) return;
+    seen.add(norm);
+
+    const level = (m.level || "B2") as CefrInventoryLevel;
+    const isBeginner = level === "A1" || level === "A2";
+    const pos =
+      m.type === "fiil"
+        ? "verb"
+        : m.type === "isim"
+        ? "noun"
+        : m.type === "sıfat"
+        ? "adjective"
+        : m.type === "zarf"
+        ? "adverb"
+        : m.type === "phrasal verb"
+        ? "verb"
+        : "other";
+
+    combined.push({
+      id: `mv-${m.id}`,
+      word: m.word,
+      normalized: norm,
+      partOfSpeech: pos,
+      level,
+      turkishMeanings: [m.tr],
+      englishDefinition: m.hint || "Akademik sınav bağlamında yüksek frekanslı sözcük",
+      example: m.example,
+      exampleTr: m.exampleTr,
+      sourceTags: ["flashcards", "exams"],
+      academic: !isBeginner,
+      phrasalVerb: m.type === "phrasal verb",
+      synonyms: m.synonyms,
+      targetExams: isBeginner ? ["YDT"] : ["YDS", "YDT", "YÖKDİL"],
+    });
+  });
+
+  return combined;
+}
+
+export const INVENTORY_ITEMS: VocabularyInventoryItem[] = buildUnifiedInventory();
 export type InventoryItem = VocabularyInventoryItem;
 export type CefrLevel = CefrInventoryLevel;
 export type InventoryUserData = UserInventoryCustomization & {
@@ -13087,17 +13179,17 @@ export type InventoryUserData = UserInventoryCustomization & {
 };
 
 export const INVENTORY_METRICS = {
-  total: BASE_INVENTORY_ITEMS.length,
-  A1: BASE_INVENTORY_ITEMS.filter((i) => i.level === "A1").length,
-  A2: BASE_INVENTORY_ITEMS.filter((i) => i.level === "A2").length,
-  B1: BASE_INVENTORY_ITEMS.filter((i) => i.level === "B1").length,
-  B2: BASE_INVENTORY_ITEMS.filter((i) => i.level === "B2").length,
-  C1: BASE_INVENTORY_ITEMS.filter((i) => i.level === "C1").length,
-  C2: BASE_INVENTORY_ITEMS.filter((i) => i.level === "C2").length,
-  UNCLASSIFIED: BASE_INVENTORY_ITEMS.filter((i) => i.level === "UNCLASSIFIED").length,
-  YDS: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDS")).length,
-  YDT: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDT")).length,
-  YÖKDİL: BASE_INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YÖKDİL")).length,
+  total: INVENTORY_ITEMS.length,
+  A1: INVENTORY_ITEMS.filter((i) => i.level === "A1").length,
+  A2: INVENTORY_ITEMS.filter((i) => i.level === "A2").length,
+  B1: INVENTORY_ITEMS.filter((i) => i.level === "B1").length,
+  B2: INVENTORY_ITEMS.filter((i) => i.level === "B2").length,
+  C1: INVENTORY_ITEMS.filter((i) => i.level === "C1").length,
+  C2: INVENTORY_ITEMS.filter((i) => i.level === "C2").length,
+  UNCLASSIFIED: INVENTORY_ITEMS.filter((i) => i.level === "UNCLASSIFIED").length,
+  YDS: INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDS")).length,
+  YDT: INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YDT")).length,
+  YÖKDİL: INVENTORY_ITEMS.filter((i) => getWordExams(i).includes("YÖKDİL")).length,
 };
 
 export function loadInventoryUserData(): InventoryUserData {

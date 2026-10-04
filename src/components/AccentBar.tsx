@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import {
   ACCENTS,
   getStoredAccent,
@@ -14,9 +15,14 @@ import {
 
 /** 6 aksan × (Kadın/Erkek) = 12 doğal telaffuz seçeneği + Youglish linki. */
 export default function AccentBar({ text }: { text: string }) {
-  const [accent, setAccent] = useState<AccentId>(() => getStoredAccent());
-  const [gender, setGender] = useState<Gender>(() => getStoredGender());
+  const [accent, setAccent] = useState<AccentId>("us");
+  const [gender, setGender] = useState<Gender>("female");
   const [note, setNote] = useState("");
+
+  useEffect(() => {
+    setAccent(getStoredAccent());
+    setGender(getStoredGender());
+  }, []);
 
   const speak = (id: AccentId, g: Gender) => {
     setAccent(id);

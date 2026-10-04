@@ -36,7 +36,7 @@ self.addEventListener('fetch', (event) => {
     fetch(event.request).catch(async () => {
       const cached = await caches.match(event.request)
       if (cached) return cached
-      return new Response('YDS Master çevrimdışı mod', {
+      return new Response('DİL MASTER çevrimdışı mod', {
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
         status: 200,
       })
@@ -47,10 +47,10 @@ self.addEventListener('fetch', (event) => {
 // Sunucudan gelen push mesajını bildirime çevir
 self.addEventListener('push', (event) => {
   let payload = {
-    title: 'YDS Koçun',
+    title: 'DİL MASTER Koçun',
     body: 'Çalışma zamanı geldi! 📚',
     url: '/',
-    tag: 'yds-bildirim',
+    tag: 'dil-master-bildirim',
   }
 
   if (event.data) {

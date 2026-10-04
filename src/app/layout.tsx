@@ -92,7 +92,7 @@ export default function RootLayout({
         <footer className="border-t border-white/10 py-8 mt-12 xl:pl-[72px] transition-[padding] duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
-              🧠 YDS Master — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.
+              🧠 DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.
             </p>
             <p className="text-xs text-white/30 font-mono">
               Kanka, bugün çalıştığın her kelime, yarınki netinin teminatıdır. ✨
