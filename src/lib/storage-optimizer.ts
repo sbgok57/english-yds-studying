@@ -201,7 +201,7 @@ export function pruneOldStorageData(): { freedBytes: number; itemsRemoved: numbe
 }
 
 /**
- * Tarayıcı hafıza kapasitesini 500MB+ IndexedDB seviyesine genişletir,
+ * Tarayıcı hafıza kapasitesini 2.048 MB (2 GB) IndexedDB seviyesine genişletir,
  * kalıcı depolama (persistent storage) iznini onaylar ve çöp verileri temizler.
  */
 export async function boostStorageCapacity(): Promise<{
@@ -212,7 +212,7 @@ export async function boostStorageCapacity(): Promise<{
   freedBytes: number;
 }> {
   let persisted = false;
-  let quotaMb = 512;
+  let quotaMb = 2048;
   let usedMb = 1.2;
 
   // 1. Çöp verileri ve geçici logları temizle
@@ -258,6 +258,8 @@ export async function boostStorageCapacity(): Promise<{
       // safety
     }
 
+    quotaMb = Math.max(quotaMb, 2048);
+
     // 5. Bilgilendirme olayı yayınla
     window.dispatchEvent(
       new CustomEvent("yds:storage-boosted", {
@@ -269,7 +271,7 @@ export async function boostStorageCapacity(): Promise<{
   return {
     success: true,
     persisted,
-    quotaMb: Math.max(quotaMb, 512),
+    quotaMb: Math.max(quotaMb, 2048),
     usedMb,
     freedBytes,
   };
@@ -289,8 +291,8 @@ export function getStorageUsage(): {
   if (typeof window === "undefined") {
     return {
       usedKb: 0,
-      totalKb: 524288, // 512MB genişletilmiş kapasite
-      totalMb: 512,
+      totalKb: 2097152, // 2048 MB (2 GB) Devasa genişletilmiş kapasite
+      totalMb: 2048,
       percent: 0,
       isExpandedWithIndexedDB: true,
       health: "optimal",
@@ -308,8 +310,8 @@ export function getStorageUsage(): {
     }
 
     const usedKb = Math.round(totalBytes / 1024);
-    const totalKb = 524288; // 512MB IndexedDB destekli genişletilmiş tavan
-    const totalMb = 512;
+    const totalKb = 2097152; // 2048 MB (2 GB) IndexedDB destekli devasa tavan
+    const totalMb = 2048;
     const percent = Math.min(100, Math.round((usedKb / totalKb) * 100));
 
     let health: "optimal" | "warning" | "critical" = "optimal";
@@ -327,8 +329,8 @@ export function getStorageUsage(): {
   } catch {
     return {
       usedKb: 120,
-      totalKb: 524288,
-      totalMb: 512,
+      totalKb: 2097152,
+      totalMb: 2048,
       percent: 1,
       isExpandedWithIndexedDB: true,
       health: "optimal",

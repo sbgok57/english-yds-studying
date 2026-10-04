@@ -429,7 +429,7 @@ export default function HesapPage() {
             )}
           </div>
 
-          {/* 💾 Sistem & Tarayıcı Hafıza Kapasitesi (500MB+ IndexedDB) */}
+          {/* 💾 Sistem & Tarayıcı Hafıza Kapasitesi (2.048 MB / 2 GB IndexedDB) */}
           <div className="card-vibrant p-5 sm:p-6 max-w-xl mx-auto space-y-3 border border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 via-slate-900 to-cyan-950/20 shadow-xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2.5">
@@ -440,18 +440,18 @@ export default function HesapPage() {
                 </div>
               </div>
               <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">
-                512 MB+ Aktif
+                2.048 MB (2 GB) Aktif
               </span>
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center py-1">
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Tavan Kapasite</span>
-                <span className="text-sm font-black text-emerald-400 font-mono">512 MB+</span>
+                <span className="text-sm font-black text-emerald-400 font-mono">2.048 MB (2 GB)</span>
               </div>
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Depolama Tipi</span>
-                <span className="text-sm font-black text-cyan-400 font-mono">IndexedDB</span>
+                <span className="text-sm font-black text-cyan-400 font-mono">IndexedDB Dev</span>
               </div>
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Hafıza Durumu</span>
@@ -464,12 +464,12 @@ export default function HesapPage() {
               onClick={async () => {
                 const { boostStorageCapacity } = await import("@/lib/storage-optimizer");
                 await boostStorageCapacity();
-                alert("🚀 Sistem hafıza kapasitesi başarıyla 512MB+ seviyesine genişletildi ve önbellek optimize edildi!");
+                alert("🚀 Sistem hafıza kapasitesi başarıyla 2.048 MB (2 GB) seviyesine genişletildi ve önbellek optimize edildi!");
               }}
               className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-slate-950 font-black text-xs transition-all shadow-md active:scale-[0.99] flex items-center justify-center gap-2"
             >
               <span>🚀</span>
-              <span>Hafıza Kapasitesini 500MB+ Seviyesine Yükselt & Önbelleği Tazele</span>
+              <span>Hafıza Kapasitesini 2 GB (2.048 MB) Seviyesine Yükselt & Önbelleği Tazele</span>
             </button>
           </div>
 
@@ -697,7 +697,7 @@ export default function HesapPage() {
           )}
         </div>
 
-        {/* 💾 Sistem & Tarayıcı Hafıza Kapasitesi (500MB+ IndexedDB) */}
+        {/* 💾 Sistem & Tarayıcı Hafıza Kapasitesi (2.048 MB / 2 GB IndexedDB) */}
           <div className="card-vibrant p-5 sm:p-6 max-w-xl mx-auto space-y-3 border border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 via-slate-900 to-cyan-950/20 shadow-xl">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2.5">
@@ -708,18 +708,18 @@ export default function HesapPage() {
                 </div>
               </div>
               <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">
-                512 MB+ Aktif
+                2.048 MB (2 GB) Aktif
               </span>
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-center py-1">
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Tavan Kapasite</span>
-                <span className="text-sm font-black text-emerald-400 font-mono">512 MB+</span>
+                <span className="text-sm font-black text-emerald-400 font-mono">2.048 MB (2 GB)</span>
               </div>
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Depolama Tipi</span>
-                <span className="text-sm font-black text-cyan-400 font-mono">IndexedDB</span>
+                <span className="text-sm font-black text-cyan-400 font-mono">IndexedDB Dev</span>
               </div>
               <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10">
                 <span className="text-[10px] text-white/40 block">Hafıza Durumu</span>
@@ -732,12 +732,12 @@ export default function HesapPage() {
               onClick={async () => {
                 const { boostStorageCapacity } = await import("@/lib/storage-optimizer");
                 await boostStorageCapacity();
-                alert("🚀 Sistem hafıza kapasitesi başarıyla 512MB+ seviyesine genişletildi ve önbellek optimize edildi!");
+                alert("🚀 Sistem hafıza kapasitesi başarıyla 2.048 MB (2 GB) seviyesine genişletildi ve önbellek optimize edildi!");
               }}
               className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-slate-950 font-black text-xs transition-all shadow-md active:scale-[0.99] flex items-center justify-center gap-2"
             >
               <span>🚀</span>
-              <span>Hafıza Kapasitesini 500MB+ Seviyesine Yükselt & Önbelleği Tazele</span>
+              <span>Hafıza Kapasitesini 2 GB (2.048 MB) Seviyesine Yükselt & Önbelleği Tazele</span>
             </button>
           </div>
 

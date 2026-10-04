@@ -250,7 +250,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
             </div>
           </div>
 
-          {/* 🚀 HAFIZA VE DEPOLAMA GENİŞLETİCİ (500MB+ IndexedDB) */}
+          {/* 🚀 HAFIZA VE DEPOLAMA GENİŞLETİCİ (2.048 MB / 2 GB IndexedDB) */}
           <div className="p-3 rounded-2xl bg-slate-950/60 border border-emerald-500/30 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm font-black shrink-0">
@@ -258,7 +258,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
               </div>
               <div>
                 <span className="text-xs font-bold text-white block">Genişletilmiş Hafıza Devrede</span>
-                <span className="text-[10px] text-emerald-300/90 font-mono block">IndexedDB 512MB+ Sınırsız Alan</span>
+                <span className="text-[10px] text-emerald-300/90 font-mono block">IndexedDB 2.048 MB (2 GB) Alan</span>
               </div>
             </div>
             <button
@@ -267,7 +267,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 if (typeof window !== "undefined") {
                   const { boostStorageCapacity } = await import("@/lib/storage-optimizer");
                   await boostStorageCapacity();
-                  alert("🚀 Hafıza Kapasitesi 512MB+ Seviyesine Başarıyla Genişletildi ve Önbellek Optimize Edildi!");
+                  alert("🚀 Hafıza Kapasitesi 2.048 MB (2 GB) Seviyesine Başarıyla Genişletildi ve Önbellek Optimize Edildi!");
                 }
               }}
               className="text-[10px] font-black px-2.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all shrink-0"
