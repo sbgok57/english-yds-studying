@@ -1,4 +1,4 @@
-# Kural: Sıfır Hata ve Otomatik Doğrulama Protokolü
+# Kural: Sıfır Hata ve Otomatik Doğrulama Protokolü (Zero-Bugs Protocol)
 
 Yapay zeka ajanı olarak her komutumda veya kod üretimimde aşağıdaki döngüyü eksiksiz uygulamakla yükümlüsün:
 
@@ -6,4 +6,4 @@ Yapay zeka ajanı olarak her komutumda veya kod üretimimde aşağıdaki döngü
 2. **Kendi Kendini Test Et (Self-Correction):** Kodlama bittikten sonra terminali kullanarak ilgili testleri (`npm run auto-fix`, `npx tsc --noEmit`, `npm test` vb.) çalıştır veya kodu simüle et.
 3. **Hata Yakalama Döngüsü:** Eğer yazdığın kodda bir syntax hatası, tip uyuşmazlığı (type error) veya mantıksal açık çıkarsa, kullanıcıya bildirmeden ve manuel müdahaleye gerek bırakmadan **hatayı kendi kendine analiz et ve hemen düzelt**.
 4. **Doğrulama Raporu (Artifact):** Kodun tamamen hatasız çalıştığından emin olduktan sonra, yaptığın değişikliklerin özetini kısa bir Artifact olarak sun. Asla test edilmemiş veya hata potansiyeli olan kırık kod teslim etme.
-5. **Kesintisiz Yayına Alma:** Aynı site bağlantısına (`https://english-yds-studying.vercel.app`) otomatik deploy olacak şekilde doğrulanmış kodu `origin main` dalına aktar.
+5. **Aynı Link Kuralı:** Tüm güncellemeler daima aynı GitHub reposuna (`sbgok57/english-yds-studying`) ve aynı Vercel canlı linkine (`https://english-yds-studying.vercel.app`) aktarılır.

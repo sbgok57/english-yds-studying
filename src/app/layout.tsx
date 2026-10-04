@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
-import AmbientBackground from "@/components/AmbientBackground";
 import AiWidget from "@/components/AiWidget";
 import { BadgeQueueProvider } from "@/components/gamification/BadgeQueueProvider";
 import { CrashGuardianProvider } from "@/components/CrashGuardianProvider";
@@ -76,7 +75,6 @@ export default function RootLayout({
         <CrashGuardianProvider>
           <BadgeQueueProvider>
             <ThemeInitializer />
-            <AmbientBackground />
             <Header />
             <DesktopSidebar />
             <main className="min-h-[calc(100vh-4rem)] xl:pl-[72px] transition-[padding] duration-300">{children}</main>

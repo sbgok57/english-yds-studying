@@ -4,8 +4,8 @@ import ThemeStudio from "@/components/theme/ThemeStudio";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ayarlar, 2.000 Renk Teması & Bildirimler — YDS Master",
-  description: "YDS Master 2.000 renk teması, karanlık/aydınlık mod stüdyosu, akıllı telefon ve web push bildirim tercihleri.",
+  title: "Ayarlar, 2.000 Renk Teması & Bildirimler — DİL MASTER",
+  description: "DİL MASTER 2.000 renk teması, karanlık/aydınlık mod stüdyosu, akıllı telefon ve web push bildirim tercihleri.",
 };
 
 export default function AyarlarPage() {

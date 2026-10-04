@@ -77,7 +77,7 @@ export interface UsageData {
   avatar: number | null;
   customAvatar?: string | null;
   careerGoal?: CareerGoal;
-  ambient: boolean;
+  ambient?: boolean;
   sessions: number;
   lastVisit: number;
   bookmarks?: string[];
