@@ -183,6 +183,43 @@ export default function ThemeQuickModal({ open, onClose }: ThemeQuickModalProps)
             </button>
           </div>
 
+          {/* ⚡ HIZLI FİLTRE: 250+ DESENLİ & 750 DESENSİZ SEÇENEKLERİ (ÖNE ÇIKAN BÜYÜK BUTONLAR) */}
+          <div className="grid grid-cols-2 gap-2 pt-0.5">
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedCategory(selectedCategory === "patterned" ? "all" : "patterned");
+                setCurrentPage(1);
+              }}
+              className={`p-2.5 rounded-2xl border text-center transition-all flex items-center justify-center gap-2 font-black text-xs shadow-md ${
+                selectedCategory === "patterned"
+                  ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white border-pink-300 ring-2 ring-pink-400 scale-[1.02]"
+                  : "bg-purple-950/40 border-purple-500/30 text-purple-200 hover:bg-purple-900/50"
+              }`}
+            >
+              <span className="text-base">📐</span>
+              <span>Desenli (250 Tema)</span>
+              {selectedCategory === "patterned" && <Check className="w-3.5 h-3.5 ml-0.5" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedCategory(selectedCategory === "solid" ? "all" : "solid");
+                setCurrentPage(1);
+              }}
+              className={`p-2.5 rounded-2xl border text-center transition-all flex items-center justify-center gap-2 font-black text-xs shadow-md ${
+                selectedCategory === "solid"
+                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-cyan-300 ring-2 ring-cyan-400 scale-[1.02]"
+                  : "bg-cyan-950/40 border-cyan-500/30 text-cyan-200 hover:bg-cyan-900/50"
+              }`}
+            >
+              <span className="text-base">✨</span>
+              <span>Desensiz / Düz Renkli (750 Tema)</span>
+              {selectedCategory === "solid" && <Check className="w-3.5 h-3.5 ml-0.5" />}
+            </button>
+          </div>
+
           {/* Kategoriler Yatay Çubuk */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
             {THEME_CATEGORIES.map((cat) => (

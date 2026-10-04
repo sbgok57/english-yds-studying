@@ -128,8 +128,8 @@ export default function Header() {
               title="🎨 1.000+ Renk ve Tema Seçici"
             >
               <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
-              <span className="hidden sm:inline font-bold">Temalar</span>
-              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden lg:inline">1000+</span>
+              <span className="font-bold">Temalar</span>
+              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden md:inline">1000+</span>
             </button>
 
             {/* Karanlık/Aydınlık Mod Butonu */}

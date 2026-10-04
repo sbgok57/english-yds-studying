@@ -136,6 +136,147 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
 
         {/* Kaydırılabilir İçerik Alanı */}
         <div className="flex-1 px-5 py-4 space-y-6 overflow-y-auto">
+          {/* 🎨 TEMALAR — 1.000+ DESENLİ & DESENSİZ RENKLİ TEMA (EN ÜSTTE) */}
+          <div className="space-y-2">
+            <GroupTitle title="Temalar & Görünüm (1.000+ Desenli & Renkli)" emoji="🎨" />
+            <button
+              type="button"
+              onClick={() => {
+                setThemeModal(true);
+              }}
+              className="w-full p-4 rounded-2xl bg-gradient-to-r from-pink-500/25 via-purple-500/25 to-cyan-500/25 border-2 border-pink-400/60 hover:border-pink-300 flex items-center justify-between group transition-all text-left shadow-xl shadow-pink-950/40 cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 text-white flex items-center justify-center text-2xl font-black shadow-lg shrink-0 group-hover:scale-105 transition-transform">
+                  🎨
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-sm font-black text-white group-hover:text-pink-300 transition-colors">
+                      Temalar (Hızlı Seçici)
+                    </h4>
+                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-pink-400/30 text-pink-200 font-mono">
+                      1.000+ Tema
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-white/70 mt-0.5">
+                    250+ SVG Desenli & 750 Düz/Degrade Canlı Renk
+                  </p>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-pink-300 group-hover:translate-x-1 transition-transform shrink-0" />
+            </button>
+
+            <Link
+              href="/ayarlar"
+              onClick={handleSafeClose}
+              className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-base">⚙️</span>
+                <div>
+                  <h5 className="text-[11px] font-bold text-white group-hover:text-cyan-300">
+                    Detaylı Tema & Ayarlar Stüdyosu
+                  </h5>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* 📅 ÇALIŞMA PLANLARI (GÜN / AY / YIL TAKVİMİ) */}
+          <div className="space-y-2">
+            <GroupTitle title="Çalışma Planları (Gün · Ay · Yıl Takvimi)" emoji="📅" />
+            <Link
+              href="/study-plans"
+              onClick={handleSafeClose}
+              className="p-4 rounded-2xl bg-gradient-to-r from-cyan-500/25 via-blue-500/25 to-purple-500/25 border-2 border-cyan-400/60 hover:border-cyan-300 flex items-center justify-between group transition-all shadow-xl shadow-cyan-950/40"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-cyan-500/30 text-cyan-300 flex items-center justify-center text-2xl font-black shrink-0 group-hover:scale-105 transition-transform">
+                  📅
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
+                      Sınav Çalışma Planları
+                    </h4>
+                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-cyan-400/25 text-cyan-200 font-mono">
+                      Gün / Ay / Yıl
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-white/70 mt-0.5">
+                    YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) kişiselleştirilmiş takvim
+                  </p>
+                </div>
+              </div>
+              <ChevronRight className="w-5 h-5 text-cyan-300 group-hover:translate-x-1 transition-transform shrink-0" />
+            </Link>
+
+            {/* Hızlı Plan Başlatıcı / Sınav Seçenekleri */}
+            <div className="grid grid-cols-3 gap-1.5">
+              <Link
+                href="/study-plans"
+                onClick={handleSafeClose}
+                className="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-center transition-all group"
+              >
+                <span className="text-[10px] font-black text-emerald-300 group-hover:text-white block">
+                  📘 YDS
+                </span>
+                <span className="text-[9px] text-white/50 block">30–120 Gün</span>
+              </Link>
+
+              <Link
+                href="/study-plans"
+                onClick={handleSafeClose}
+                className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
+              >
+                <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
+                  🎯 YDT
+                </span>
+                <span className="text-[9px] text-white/50 block">Net Artırma</span>
+              </Link>
+
+              <Link
+                href="/study-plans"
+                onClick={handleSafeClose}
+                className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
+              >
+                <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
+                  🌐 YÖKDİL
+                </span>
+                <span className="text-[9px] text-white/50 block">3 Alan</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* 🚀 HAFIZA VE DEPOLAMA GENİŞLETİCİ (500MB+ IndexedDB) */}
+          <div className="p-3 rounded-2xl bg-slate-950/60 border border-emerald-500/30 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm font-black shrink-0">
+                💾
+              </div>
+              <div>
+                <span className="text-xs font-bold text-white block">Genişletilmiş Hafıza Devrede</span>
+                <span className="text-[10px] text-emerald-300/90 font-mono block">IndexedDB 512MB+ Sınırsız Alan</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={async () => {
+                if (typeof window !== "undefined") {
+                  const { boostStorageCapacity } = await import("@/lib/storage-optimizer");
+                  await boostStorageCapacity();
+                  alert("🚀 Hafıza Kapasitesi 512MB+ Seviyesine Başarıyla Genişletildi ve Önbellek Optimize Edildi!");
+                }
+              }}
+              className="text-[10px] font-black px-2.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all shrink-0"
+              title="Tarayıcı depolama sınırını kaldır ve önbelleği tazele"
+            >
+              Hafızayı Genişlet ⚡
+            </button>
+          </div>
+
           {/* 👑 YÖNETİCİ PANELİ & 👤 HESABIM KARTLARI */}
           <div className="space-y-1.5">
             <h3 className="text-[11px] font-black uppercase tracking-widest text-amber-300/90 flex items-center gap-1.5 mb-2 border-b border-white/10 pb-1">
@@ -214,124 +355,6 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 iOS ve Android&apos;e İndir
               </span>
             </button>
-          </div>
-
-          {/* 🎨 TEMALAR — 1.000+ DESENLİ & DESENSİZ RENKLİ TEMA */}
-          <div>
-            <GroupTitle title="Temalar & Görünüm (1.000+ Desenli & Renkli)" emoji="🎨" />
-            <div className="space-y-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setThemeModal(true);
-                }}
-                className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 border-2 border-pink-400/50 hover:border-pink-300 flex items-center justify-between group transition-all text-left shadow-lg shadow-pink-950/30 cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 text-white flex items-center justify-center text-xl font-black shadow-md shrink-0">
-                    🎨
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-xs font-black text-white group-hover:text-pink-300 transition-colors">
-                        Temalar (Hızlı Seçici)
-                      </h4>
-                      <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-pink-400/25 text-pink-200 font-mono">
-                        1.000+ Tema
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-white/60 mt-0.5">
-                      200+ SVG desenli, pastel, neon, koyu & degrade renk seçenekleri
-                    </p>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-pink-300 group-hover:translate-x-1 transition-transform shrink-0" />
-              </button>
-
-              <Link
-                href="/ayarlar"
-                onClick={handleSafeClose}
-                className="p-2.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-base">⚙️</span>
-                  <div>
-                    <h5 className="text-[11px] font-bold text-white group-hover:text-cyan-300">
-                      Detaylı Tema & Ayarlar Stüdyosu
-                    </h5>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-
-          {/* 📅 ÇALIŞMA PLANLARI (GÜN / AY / YIL TAKVİMİ) */}
-          <div>
-            <GroupTitle title="Çalışma Planları (Gün · Ay · Yıl Takvimi)" emoji="📅" />
-            <div className="space-y-2">
-              <Link
-                href="/study-plans"
-                onClick={handleSafeClose}
-                className="p-3.5 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 border-2 border-cyan-400/50 hover:border-cyan-300 flex items-center justify-between group transition-all shadow-lg shadow-cyan-950/30"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/25 text-cyan-300 flex items-center justify-center text-xl font-black shrink-0">
-                    📅
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
-                        Sınav Çalışma Planları
-                      </h4>
-                      <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono">
-                        Gün / Ay / Yıl
-                      </span>
-                    </div>
-                    <p className="text-[10px] text-white/60 mt-0.5">
-                      YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) hazır ve kişisel planlar
-                    </p>
-                  </div>
-                </div>
-                <ChevronRight className="w-5 h-5 text-cyan-300 group-hover:translate-x-1 transition-transform shrink-0" />
-              </Link>
-
-              {/* Hızlı Plan Başlatıcı / Sınav Seçenekleri */}
-              <div className="grid grid-cols-3 gap-1.5">
-                <Link
-                  href="/study-plans"
-                  onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-center transition-all group"
-                >
-                  <span className="text-[10px] font-black text-emerald-300 group-hover:text-white block">
-                    📘 YDS
-                  </span>
-                  <span className="text-[9px] text-white/50 block">30–120 Gün</span>
-                </Link>
-
-                <Link
-                  href="/study-plans"
-                  onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
-                >
-                  <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
-                    🎯 YDT
-                  </span>
-                  <span className="text-[9px] text-white/50 block">Net Artırma</span>
-                </Link>
-
-                <Link
-                  href="/study-plans"
-                  onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
-                >
-                  <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
-                    🌐 YÖKDİL
-                  </span>
-                  <span className="text-[9px] text-white/50 block">3 Alan</span>
-                </Link>
-              </div>
-            </div>
           </div>
 
           {/* 1. ÜÇ BÜYÜK SINAV MERKEZİ (YDS, YDT, YÖKDİL) */}
