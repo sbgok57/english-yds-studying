@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Celebration from "@/components/Celebration";
+import { logGameComplete } from "@/lib/activity-logger";
 
 interface TF {
   s: string;
@@ -57,8 +58,20 @@ export default function TrueFalse() {
 
   const next = () => {
     setPicked(null);
-    if (idx + 1 >= list.length) setDone(true);
-    else setIdx(idx + 1);
+    if (idx + 1 >= list.length) {
+      setDone(true);
+      void logGameComplete({
+        gameId: "true-false",
+        gameTitle: "Gramer Doğru / Yanlış",
+        score: score * 10,
+        streak,
+        timeSpentMinutes: 3,
+        wordsPlayed: list.length,
+        details: `${score}/${list.length} Gramer Kuralı Doğru Bilindi`,
+      });
+    } else {
+      setIdx(idx + 1);
+    }
   };
 
   if (done) {

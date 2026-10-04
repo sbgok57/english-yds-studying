@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BANK, type QType } from "@/lib/data-bank";
 import Celebration from "@/components/Celebration";
+import { logGameComplete } from "@/lib/activity-logger";
 
 const SEGMENTS: { label: string; color: string; types: QType[] }[] = [
   { label: "Kelime", color: "#ec4899", types: ["vocab"] },
@@ -123,6 +124,14 @@ export default function SpinWheel() {
     if (i === question.answer) {
       setMsg("Doğru bildin kral! 🎆");
       setCelebrate(true);
+      void logGameComplete({
+        gameId: "spin-wheel",
+        gameTitle: "Çarkıfelek",
+        score: 25,
+        streak: 1,
+        timeSpentMinutes: 2,
+        details: `Çarkıfelek Sorusu Doğru: "${question.stem.slice(0, 70)}..."`,
+      });
     }
   };
 

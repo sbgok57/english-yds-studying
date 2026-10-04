@@ -661,7 +661,7 @@ export default function AdminPage() {
                       🕒 Kronolojik Aktivite Akışı (Saat & Dakika Detaylı)
                     </span>
                     <div className="flex items-center gap-1 text-[11px] overflow-x-auto pb-1">
-                      {["all", "exam", "vocabulary", "grammar", "reading", "writing", "speaking"].map((t) => (
+                      {["all", "game", "exam", "vocabulary", "grammar", "reading", "writing", "speaking"].map((t) => (
                         <button
                           key={t}
                           onClick={() => setTimelineFilter(t)}
@@ -671,7 +671,7 @@ export default function AdminPage() {
                               : "bg-white/5 text-white/60 hover:text-white"
                           }`}
                         >
-                          {t === "all" ? "Tümü" : t.toUpperCase()}
+                          {t === "all" ? "Tümü" : t === "game" ? "🎮 OYUN" : t.toUpperCase()}
                         </button>
                       ))}
                     </div>
@@ -687,15 +687,20 @@ export default function AdminPage() {
                         .filter((act) => timelineFilter === "all" || act.type === timelineFilter)
                         .map((act) => {
                           const isExam = act.type === "exam";
+                          const isGame = act.type === "game";
                           const badgeColor =
-                            act.category === "YDS"
+                            isGame
+                              ? "bg-pink-500/20 text-pink-300 border-pink-400/30"
+                              : act.category === "YDS"
                               ? "bg-cyan-500/20 text-cyan-300 border-cyan-400/30"
                               : act.category === "YDT"
                               ? "bg-amber-500/20 text-amber-300 border-amber-400/30"
                               : "bg-purple-500/20 text-purple-300 border-purple-400/30";
 
                           const typeEmoji =
-                            act.type === "exam"
+                            act.type === "game"
+                              ? "🎮"
+                              : act.type === "exam"
                               ? "📝"
                               : act.type === "vocabulary"
                               ? "📚"

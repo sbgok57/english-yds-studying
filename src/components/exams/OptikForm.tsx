@@ -150,10 +150,15 @@ export default function OptikForm({
 
       // API'ye kaydet
       try {
+        let userEmail: string | null = null;
+        if (typeof window !== "undefined") {
+          userEmail = window.localStorage.getItem("yds-master-session");
+        }
         await fetch(`/api/exams/${examId}/submit`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ answers: currentAnswers, ...finalResult }),
+          body: JSON.stringify({ answers: currentAnswers, ...finalResult, userEmail }),
+          keepalive: true,
         });
       } catch (err) {
         console.warn("Sunucuya sınav sonucu iletilemedi, yerel veri korundu:", err);

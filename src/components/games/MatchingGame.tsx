@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { RotateCcw, Trophy, Sparkles } from "lucide-react";
+import { logGameComplete } from "@/lib/activity-logger";
 
 export interface Pair {
   id: string;
@@ -67,6 +68,15 @@ export default function MatchingGame({ pairs }: { pairs: Pair[] }) {
             const s = new Set(prev).add(a.pairId);
             if (s.size === Math.min(6, pairs.length)) {
               triggerConfetti({ particleCount: 250, spread: 110, origin: { y: 0.5 } });
+              void logGameComplete({
+                gameId: "matching-3d",
+                gameTitle: "3D Kart Eşleştirme",
+                score: 100,
+                streak: s.size,
+                timeSpentMinutes: 3,
+                wordsPlayed: s.size,
+                details: `${s.size}/${Math.min(6, pairs.length)} Çift ${moves + 1} Hamlede Eşleştirildi`,
+              });
             }
             return s;
           });

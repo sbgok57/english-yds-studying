@@ -292,6 +292,25 @@ export function recordExam(
     }
     return u;
   });
+
+  // PERF & SAFETY: Dynamically import and log activity to server database
+  if (typeof window !== "undefined") {
+    import("./activity-logger")
+      .then(({ logStudentActivity }) => {
+        void logStudentActivity({
+          type: "exam",
+          category: "Genel",
+          title: "Deneme Sınavı Çalışması",
+          details: `${correct} Doğru, ${wrong} Yanlış • Net: ${finalNet}`,
+          scoreOrCount: `${finalNet} Net`,
+          timeSpentMinutes: Math.max(5, Math.round(total * 1.5)),
+          points: Math.max(10, Math.round(finalNet * 10)),
+        });
+      })
+      .catch(() => {
+        /* safe degrade */
+      });
+  }
 }
 
 export function toggleBookmark(

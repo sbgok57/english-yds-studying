@@ -16,6 +16,7 @@ import {
 import Celebration from "@/components/Celebration";
 import RichText from "@/components/RichText";
 import { recordAnswer } from "@/lib/progress/tracker";
+import { logGrammarPracticeSession } from "@/lib/activity-logger";
 
 export default function TopicPracticeRunner({
   slug,
@@ -147,6 +148,19 @@ export default function TopicPracticeRunner({
   };
 
   const title = topic ? topic.title : slug.toUpperCase();
+
+  const handleFinishTest = () => {
+    setIsFinished(true);
+    const answeredCount = Object.keys(userAnswers).length;
+    if (answeredCount > 0) {
+      void logGrammarPracticeSession({
+        topicTitle: title,
+        correct: stats.correct,
+        total: totalQuestions,
+        timeSpentMinutes: Math.max(2, Math.round(answeredCount * 0.8)),
+      });
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -528,7 +542,7 @@ export default function TopicPracticeRunner({
                     </button>
                   ) : (
                     <button
-                      onClick={() => setIsFinished(true)}
+                      onClick={handleFinishTest}
                       className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
                     >
                       Testi Bitir 🏁
@@ -589,7 +603,7 @@ export default function TopicPracticeRunner({
               </div>
 
               <button
-                onClick={() => setIsFinished(true)}
+                onClick={handleFinishTest}
                 className="w-full py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-all"
               >
                 Testi Tamamla & Sonuclari Gor

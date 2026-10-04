@@ -24,11 +24,34 @@ export async function POST(
       }
     }
 
+    // Check body credentials
+    if (!targetUserId && (body.userEmail || body.username)) {
+      const reqEmail = (body.userEmail || "").toLowerCase().trim();
+      const reqUsername = (body.username || "").toLowerCase().trim();
+      try {
+        const found = await prisma.user.findFirst({
+          where: {
+            OR: [
+              ...(reqEmail ? [{ email: { equals: reqEmail } }] : []),
+              ...(reqUsername ? [{ username: { equals: reqUsername } }] : []),
+            ],
+          },
+        });
+        if (found) targetUserId = found.id;
+      } catch {
+        // Safe degrade
+      }
+    }
+
     if (!targetUserId) {
-      const firstUser = await prisma.user.findFirst({
+      const studentUser = await prisma.user.findFirst({
+        where: {
+          username: { not: "sbgok57" },
+          email: { not: "sinembuse724@gmail.com" },
+        },
         orderBy: { createdAt: "asc" },
       });
-      targetUserId = firstUser?.id || null;
+      targetUserId = studentUser?.id || null;
     }
 
     const attempt = await prisma.examAttempt.create({

@@ -3,6 +3,7 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
+import { logGameComplete } from "@/lib/activity-logger";
 
 const FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
@@ -83,11 +84,24 @@ export default function DiceGame() {
     setPicked(i);
     if (options[i] === word.tr) {
       const gain = face + 1;
-      setPoints((p) => p + gain);
-      setStreak((s) => s + 1);
+      const nextPoints = points + gain;
+      const nextStreak = streak + 1;
+      setPoints(nextPoints);
+      setStreak(nextStreak);
       setMsg(`Doğru kanka! +${gain} puan 🎆`);
       setSub(`${word.word} = ${word.tr}`);
       setCelebrate(true);
+
+      // Persist to database
+      void logGameComplete({
+        gameId: "dice-game",
+        gameTitle: "Zar At & Anlamı Bil",
+        score: nextPoints,
+        streak: nextStreak,
+        timeSpentMinutes: Math.max(1, Math.round(used.length * 0.5)),
+        wordsPlayed: used.length,
+        details: `${word.word} = ${word.tr} (+${gain} Puan)`,
+      });
     } else {
       setStreak(0);
       setMsg("Olmadı kanka! 💪");

@@ -5,6 +5,7 @@ import Celebration from "@/components/Celebration";
 import AccentBar from "@/components/AccentBar";
 import { getStoredAccent, speakWithAccent } from "@/lib/accents";
 import { clientAudio } from "@/lib/tts/audio-client";
+import { logGameComplete } from "@/lib/activity-logger";
 
 function shuffle<T>(a: T[]): T[] {
   const r = [...a];
@@ -80,6 +81,15 @@ export default function ListeningGame() {
   const next = () => {
     if (round + 1 >= TOTAL) {
       setDone(true);
+      void logGameComplete({
+        gameId: "listening-game",
+        gameTitle: "Dinle & Seç (Sesli Kelime)",
+        score: score * 10,
+        streak,
+        timeSpentMinutes: 4,
+        wordsPlayed: TOTAL,
+        details: `${score}/${TOTAL} Kelime Dinleyerek Doğru Bulundu`,
+      });
     } else {
       setRound(round + 1);
     }

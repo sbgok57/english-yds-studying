@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { RotateCcw, Check, Sparkles } from "lucide-react";
+import { logGameComplete } from "@/lib/activity-logger";
 
 interface AnagramItem {
   word: string;
@@ -43,7 +44,17 @@ export default function AnagramGame() {
 
     if (nextGuess.join("") === item.word) {
       setSolved(true);
-      setScore((s) => s + 20);
+      const nextScore = score + 20;
+      setScore(nextScore);
+      void logGameComplete({
+        gameId: "anagram-game",
+        gameTitle: "Anagram Harf Dizme",
+        score: nextScore,
+        streak: 1,
+        timeSpentMinutes: 2,
+        wordsPlayed: 1,
+        details: `Doğru harf dizilimi: ${item.word} = ${item.meaning}`,
+      });
       try {
         confetti({ particleCount: 80, spread: 70 });
       } catch (err) {

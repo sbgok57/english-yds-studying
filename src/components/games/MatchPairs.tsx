@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
 import { useUsage, recordWord } from "@/lib/store";
+import { logGameComplete } from "@/lib/activity-logger";
 
 interface Card {
   id: number;
@@ -68,7 +69,21 @@ export default function MatchPairs() {
       const [a, b] = nextOpen;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (cards[a].pair === cards[b].pair && cards[a].kind !== cards[b].kind) {
-        setMatched((prev) => new Set(prev).add(a).add(b));
+        setMatched((prev) => {
+          const nextSet = new Set(prev).add(a).add(b);
+          if (nextSet.size === 8) {
+            void logGameComplete({
+              gameId: "match-pairs",
+              gameTitle: "Eşleştirme (Kelime ↔ Anlam)",
+              score: 120,
+              streak: 8,
+              timeSpentMinutes: 3,
+              wordsPlayed: 8,
+              details: `8/8 Çift Eşleştirildi (${moves + 1} Hamle)`,
+            });
+          }
+          return nextSet;
+        });
         setOpen([]);
         const enWord = cards[a].kind === "en" ? cards[a].text : cards[b].text;
         recordWord(update, enWord, true);

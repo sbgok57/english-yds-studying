@@ -10,15 +10,23 @@ export async function GET() {
     const totalWords = await prisma.word.count();
     const totalExams = await prisma.exam.count();
 
-    // Sınav denemeleri (en son 20 adet)
+    // Sınav denemeleri (en son 20 adet) ve Çalışma aktiviteleri
     const attempts = await prisma.examAttempt.findMany({
       orderBy: { createdAt: "desc" },
       take: 20,
     });
 
-    // Gerçek aktivite günleri
-    const activityDates = attempts.map((a) => a.createdAt);
-    const streak = calcStreak(activityDates);
+    const progressList = await prisma.progress.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 30,
+    });
+
+    // Gerçek aktivite günleri (Sınavlar + Oyunlar + Kelime çalışmaları)
+    const activityDates = [
+      ...attempts.map((a) => a.createdAt),
+      ...progressList.map((p) => p.createdAt),
+    ];
+    const streak = Math.max(1, calcStreak(activityDates));
 
     const netHistory = attempts.reverse().map((a) => ({
       date: toLocalDay(a.createdAt).slice(5), // "09-13"

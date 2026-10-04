@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { WORDS } from "@/lib/data-vocabulary";
 import Celebration from "@/components/Celebration";
 import { useUsage, recordWord } from "@/lib/store";
+import { logGameComplete } from "@/lib/activity-logger";
 
 interface Mole {
   id: number;
@@ -23,6 +24,33 @@ export default function WhackMole() {
   const [feedback, setFeedback] = useState<string | null>(null);
   const [celebrate, setCelebrate] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const scoreRef = useRef(0);
+  const streakRef = useRef(0);
+
+  // Sync refs for cleanup logging
+  useEffect(() => {
+    scoreRef.current = score;
+    streakRef.current = streak;
+  }, [score, streak]);
+
+  // Log on unmount if score > 0
+  useEffect(() => {
+    return () => {
+      const finalScore = scoreRef.current;
+      const finalStreak = streakRef.current;
+      if (finalScore > 0) {
+        void logGameComplete({
+          gameId: "whack-mole",
+          gameTitle: "Köstebek Vur",
+          score: finalScore,
+          streak: finalStreak,
+          timeSpentMinutes: Math.max(1, Math.round(finalScore / 25)),
+          wordsPlayed: Math.round(finalScore / 10),
+          details: `Köstebek Vur tamamlandı: ${finalScore} Puan • ${finalStreak} Seri`,
+        });
+      }
+    };
+  }, []);
 
   const startNewRound = useCallback(() => {
     if (!WORDS.length) return;
@@ -75,6 +103,16 @@ export default function WhackMole() {
 
       if (nextStreak > 0 && nextStreak % 5 === 0) {
         setCelebrate(true);
+        // Persist milestone to database
+        void logGameComplete({
+          gameId: "whack-mole",
+          gameTitle: "Köstebek Vur",
+          score: nextScore,
+          streak: nextStreak,
+          timeSpentMinutes: Math.max(1, Math.round(nextScore / 20)),
+          wordsPlayed: Math.round(nextScore / 10),
+          details: `Köstebek Vur serisi: ${nextScore} Puan • ${nextStreak} Seri • "${targetWord.word}"`,
+        });
       }
     } else {
       setStreak(0);

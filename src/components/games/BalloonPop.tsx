@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Heart, Trophy, RotateCcw } from "lucide-react";
+import { logGameComplete } from "@/lib/activity-logger";
 
 export interface BalloonQuestion {
   prompt: string;          // "carry out = ?" veya "She ___ since 2015. (live)"
@@ -72,10 +73,28 @@ export default function BalloonPop({ questions }: { questions: BalloonQuestion[]
       setPopped(null);
       if (!correct && lives - 1 <= 0) {
         setGameOver(true);
+        void logGameComplete({
+          gameId: "balloon-pop",
+          gameTitle: "Balon Patlatma",
+          score,
+          streak: 0,
+          timeSpentMinutes: 3,
+          details: `Balon Patlatma tamamlandı: ${score} Puan`,
+        });
         return;
       }
       if (qi + 1 >= safeQuestions.length) {
         setGameOver(true);
+        const finalScore = score + (correct ? 10 : 0);
+        void logGameComplete({
+          gameId: "balloon-pop",
+          gameTitle: "Balon Patlatma",
+          score: finalScore,
+          streak: Math.round(finalScore / 10),
+          timeSpentMinutes: 3,
+          wordsPlayed: safeQuestions.length,
+          details: `Tüm Balonlar Tamamlandı: ${finalScore} Puan`,
+        });
         return;
       }
       setQi((n) => n + 1);

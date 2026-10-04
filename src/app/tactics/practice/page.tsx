@@ -16,6 +16,7 @@ import {
 } from "@/lib/store";
 import Celebration from "@/components/Celebration";
 import RichText from "@/components/RichText";
+import { logStudentActivity } from "@/lib/activity-logger";
 
 function PracticeInner() {
   const searchParams = useSearchParams();
@@ -139,6 +140,22 @@ function PracticeInner() {
     const firstWrongIdx = filteredQuestions.findIndex((q) => wrongIds.includes(q.id));
     if (firstWrongIdx !== -1) setCurrentIndex(firstWrongIdx);
     setIsFinished(false);
+  };
+
+  const handleFinishTest = () => {
+    setIsFinished(true);
+    const answeredCount = Object.keys(userAnswers).length;
+    if (answeredCount > 0) {
+      void logStudentActivity({
+        type: "grammar",
+        category: "Genel",
+        title: "🎯 Soru Çözüm Taktikleri Testi",
+        details: `${filteredQuestions.length} sorudan ${stats.correct} doğru yanıtlandı (${stats.net} Net).`,
+        scoreOrCount: `${stats.correct} Doğru`,
+        points: Math.max(10, stats.correct * 10),
+        timeSpentMinutes: Math.max(2, Math.round(answeredCount * 1)),
+      });
+    }
   };
 
   return (
@@ -534,7 +551,7 @@ function PracticeInner() {
                     </button>
                   ) : (
                     <button
-                      onClick={() => setIsFinished(true)}
+                      onClick={handleFinishTest}
                       className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 transition-all"
                     >
                       Testi Bitir 🏁
@@ -616,7 +633,7 @@ function PracticeInner() {
               </div>
 
               <button
-                onClick={() => setIsFinished(true)}
+                onClick={handleFinishTest}
                 className="w-full py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-all"
               >
                 Testi Tamamla & Sonuclari Gor

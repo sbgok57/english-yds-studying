@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, RotateCw, CheckCircle2 } from "lucide-react";
+import { logGameComplete } from "@/lib/activity-logger";
 
 interface WheelItem {
   word: string;
@@ -50,7 +51,18 @@ export default function SpinWheelGame({ items = DEFAULT_ITEMS }: { items?: Wheel
 
     spinTimerRef.current = setTimeout(() => {
       setSpinning(false);
-      setSelectedItem(items[randomIndex]);
+      const chosen = items[randomIndex];
+      setSelectedItem(chosen);
+      if (chosen) {
+        void logGameComplete({
+          gameId: "spin-wheel-3d",
+          gameTitle: "Çarkıfelek Kelime Çevirme",
+          score: 15,
+          streak: 1,
+          timeSpentMinutes: 1,
+          details: `Çarkta çıkan kelime: ${chosen.word} = ${chosen.meaning}`,
+        });
+      }
       try {
         confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
       } catch (err) {

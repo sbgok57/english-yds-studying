@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { WORDS } from "@/lib/data-vocabulary";
 import { MASTER_VOCABULARY } from "@/lib/vocabulary/master-vocab-database";
@@ -13,6 +13,7 @@ import SceneAnim from "@/components/SceneAnim";
 import AccentBar from "@/components/AccentBar";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { recordWord, useUsage, wordScore } from "@/lib/store";
+import { logVocabularySession } from "@/lib/activity-logger";
 import {
   Sparkles,
   FileUp,
@@ -313,9 +314,42 @@ export default function FlashcardsPage() {
     resetIdx();
   };
 
+  const sessionCountRef = useRef(0);
+  const sessionCorrectRef = useRef(0);
+
+  // SAFETY: Persist reviewed cards on unmount
+  useEffect(() => {
+    return () => {
+      const c = sessionCountRef.current;
+      const ok = sessionCorrectRef.current;
+      if (c > 0) {
+        void logVocabularySession({
+          cardsReviewed: c,
+          correctCount: ok,
+          examType: (selectedExam === "TÜMÜ" ? "Genel" : selectedExam) as any,
+          timeSpentMinutes: Math.max(1, Math.round(c * 0.4)),
+        });
+      }
+    };
+  }, [selectedExam]);
+
   const mark = (correct: boolean) => {
     if (!currentWord) return;
     recordWord(update, currentWord.id, correct);
+
+    sessionCountRef.current += 1;
+    if (correct) sessionCorrectRef.current += 1;
+
+    // Persist every 5 cards to server database
+    if (sessionCountRef.current % 5 === 0) {
+      void logVocabularySession({
+        cardsReviewed: sessionCountRef.current,
+        correctCount: sessionCorrectRef.current,
+        examType: (selectedExam === "TÜMÜ" ? "Genel" : selectedExam) as any,
+        timeSpentMinutes: Math.max(1, Math.round(sessionCountRef.current * 0.4)),
+      });
+    }
+
     if (correct) {
       const ns = streak + 1;
       setStreak(ns);

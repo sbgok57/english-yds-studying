@@ -35,7 +35,33 @@ export default function HesapPage() {
   const [demoCode, setDemoCode] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
   const [levelAssessment, setLevelAssessment] = useState<LevelAssessmentResult | null>(null);
+  const [activities, setActivities] = useState<any[]>([]);
+  const [loadingActivities, setLoadingActivities] = useState(false);
   const codeRef = useRef<HTMLInputElement>(null);
+
+  // Load user activities from server database
+  useEffect(() => {
+    if (!account) return;
+    let isCancelled = false;
+    setLoadingActivities(true);
+    fetch(`/api/activity?student=${encodeURIComponent(account.email)}&limit=8`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isCancelled && data.ok) {
+          setActivities(data.activities || []);
+        }
+      })
+      .catch(() => {
+        /* safe degrade */
+      })
+      .finally(() => {
+        if (!isCancelled) setLoadingActivities(false);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [account]);
 
   // Load level assessment if previously completed
   useEffect(() => {
@@ -347,6 +373,53 @@ export default function HesapPage() {
 
           {/* Badges Showcase Section */}
           <BadgeShowcase />
+
+          {/* Son Kaydedilen Aktiviteler & Oyunlar */}
+          <div className="card-vibrant p-6 sm:p-8 max-w-xl mx-auto space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">📊</span>
+                <div>
+                  <h3 className="text-sm font-black text-white">Hesaba Kaydedilen Son Çalışmalar</h3>
+                  <p className="text-[11px] text-white/50">Oyunlar, kelime tekrarları ve sınavlar kalıcı olarak hesabında</p>
+                </div>
+              </div>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                ✓ Canlı Eşitleme
+              </span>
+            </div>
+
+            {loadingActivities ? (
+              <div className="py-6 text-center text-xs text-white/40">Aktiviteler yükleniyor...</div>
+            ) : activities.length === 0 ? (
+              <div className="py-6 text-center text-xs text-white/40">
+                Henüz kayıtlı bir çalışma yok. Bir oyun oynadığında veya kelime çalıştığında burada anında görünecek! 🎮
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {activities.map((act) => (
+                  <div
+                    key={act.id}
+                    className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3 text-xs"
+                  >
+                    <div className="space-y-0.5">
+                      <div className="font-bold text-white flex items-center gap-1.5">
+                        <span>{act.type === "game" ? "🎮" : act.type === "exam" ? "📝" : "📚"}</span>
+                        <span>{act.title}</span>
+                      </div>
+                      <p className="text-[11px] text-white/60">{act.details}</p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <span className="font-mono text-cyan-300 font-bold block">{act.scoreOrCount}</span>
+                      <span className="text-[10px] text-white/40 font-mono">
+                        {new Date(act.createdAt).toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit" })}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* Push Bildirim ve Hatırlatıcı Ayarları */}
           <div className="max-w-xl mx-auto">
