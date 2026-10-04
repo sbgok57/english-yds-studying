@@ -1,17 +1,30 @@
 /* ============================================================
-   YDS EXAM – Push Bildirim Service Worker'ı
+   DİL MASTER (YDS · YDT · YÖKDİL) – Service Worker
    public/sw.js
-   Desteklenen tarayıcılar: Chrome (masaüstü + Android),
-   Samsung Internet, Edge, Safari (iOS 16.4+, PWA olarak).
+   Desteklenen platformlar: Masaüstü PWA, Android Chrome,
+   Samsung Internet, iOS Safari PWA (16.4+).
    ============================================================ */
 
-// Güncellemeler anında devreye girsin (özellikle Samsung Internet'te önemli)
-self.addEventListener('install', () => {
-  self.skipWaiting()
-})
+const SW_VERSION = 'dil-master-v2026.10.04-r2';
+
+// Güncellemeler anında devreye girsin (skipWaiting + clients.claim)
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
+
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim())
-})
+  event.waitUntil(
+    Promise.all([
+      self.clients.claim(),
+      // PERF: Eski cache sürümlerini temizle
+      caches.keys().then((keys) =>
+        Promise.all(
+          keys.filter((k) => k !== SW_VERSION).map((k) => caches.delete(k))
+        )
+      ),
+    ])
+  );
+});
 
 // PWA Uyumluluğu: Çevrimdışı önbellek ve ağ yönlendirmesi
 self.addEventListener('fetch', (event) => {

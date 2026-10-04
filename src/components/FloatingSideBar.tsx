@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import MenuDrawer from "./MenuDrawer";
 import { ArrowUp, Menu } from "lucide-react";
@@ -28,6 +29,26 @@ export default function FloatingSideBar() {
         aria-label="Hızlı Erişim ve Menü Çubuğu"
         className="fixed right-3 bottom-24 z-40 flex flex-col items-center gap-2 p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/50 anim-fade"
       >
+        {/* Yönetici Paneli Hızlı Kısayolu */}
+        <Link
+          href="/admin"
+          className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-500/20 border border-purple-400/40 text-purple-200 hover:text-white hover:border-purple-300 hover:scale-105 active:scale-95 transition-all shadow-md group"
+          title="👑 Yönetici Paneli"
+          aria-label="Yönetici Paneli"
+        >
+          <span className="text-sm group-hover:scale-110 transition-transform">👑</span>
+        </Link>
+
+        {/* Hesabım Hızlı Kısayolu */}
+        <Link
+          href="/hesap"
+          className="w-9 h-9 rounded-xl flex items-center justify-center bg-cyan-500/20 border border-cyan-400/40 text-cyan-200 hover:text-white hover:border-cyan-300 hover:scale-105 active:scale-95 transition-all shadow-md group"
+          title="👤 Hesabım"
+          aria-label="Hesabım"
+        >
+          <span className="text-sm group-hover:scale-110 transition-transform">👤</span>
+        </Link>
+
         {/* Karanlık / Aydınlık Mod Geçiş Butonu */}
         <ThemeToggle compact className="!w-9 !h-9 !px-0 rounded-xl" />
 

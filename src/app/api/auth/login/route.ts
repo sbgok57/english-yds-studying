@@ -75,18 +75,40 @@ export async function POST(req: NextRequest) {
 
     const res = NextResponse.json(responsePayload, { status: 200 });
 
-    const rememberMe = body.rememberMe !== false;
-    const cookieMaxAge = rememberMe ? 365 * 24 * 60 * 60 : 30 * 24 * 60 * 60; // 365 days for permanent account
+    const rememberMe = Boolean(body.rememberMe);
 
-    res.cookies.set({
-      name: SESSION_COOKIE_NAME,
-      value: token,
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      maxAge: cookieMaxAge,
-    });
+    if (rememberMe) {
+      // 🔒 Kalıcı Oturum: 365 gün boyunca açık kalır
+      res.cookies.set({
+        name: SESSION_COOKIE_NAME,
+        value: token,
+        httpOnly: true,
+        path: "/",
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 365 * 24 * 60 * 60,
+      });
+      res.cookies.set({
+        name: "yds_remember_choice",
+        value: "true",
+        path: "/",
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 365 * 24 * 60 * 60,
+      });
+    } else {
+      // ⏳ Geçici / Tek Seferlik Oturum (Session Cookie):
+      // maxAge verilmez -> Tarayıcı veya uygulama kapatıldığında oturum silinir!
+      res.cookies.set({
+        name: SESSION_COOKIE_NAME,
+        value: token,
+        httpOnly: true,
+        path: "/",
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+      });
+      res.cookies.delete("yds_remember_choice");
+    }
 
     console.info(`[AUTH_LOGIN_SUCCESS] ${requestId} - User ${safeUser.username} (${safeUser.email}) logged in successfully.`);
     return res;

@@ -87,8 +87,28 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Sağ Kontroller: Karanlık Mod, Seri & Menü Açıcı */}
+          {/* Sağ Kontroller: Admin, Hesabım, Karanlık Mod, Seri & Menü Açıcı */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* 👑 Yönetici Paneli */}
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/25 text-purple-200 text-xs font-black transition-all shadow-sm shrink-0 group"
+              title="👑 Yönetici Paneli (Öğrenci & Çalışma Takibi)"
+            >
+              <span className="text-sm group-hover:scale-110 transition-transform">👑</span>
+              <span className="hidden sm:inline font-bold">Admin</span>
+            </Link>
+
+            {/* 👤 Hesabım */}
+            <Link
+              href="/hesap"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-white/5 border border-white/15 hover:border-cyan-400 hover:bg-white/10 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
+              title="👤 Hesabım & Profil Bilgileri"
+            >
+              <span className="text-sm group-hover:scale-110 transition-transform">👤</span>
+              <span className="hidden sm:inline font-bold">Hesabım</span>
+            </Link>
+
             {/* Karanlık/Aydınlık Mod Butonu */}
             <ThemeToggle compact className="sm:!px-2.5" />
 

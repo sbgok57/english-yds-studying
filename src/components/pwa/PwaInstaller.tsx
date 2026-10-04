@@ -23,15 +23,15 @@ export default function PwaInstaller() {
 
     if (checkStandalone()) {
       setIsStandalone(true);
-      return;
     }
 
-    // 2. Service Worker Kaydı (Tüm sayfalarda küresel PWA desteği)
+    // 2. Service Worker Kaydı & Anında Otomatik Güncelleme (PWA & Tarayıcı)
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/sw.js")
-        .then(() => {
-          // Worker başarıyla bağlandı
+        .then((reg) => {
+          // PERF & RELIABILITY: Uygulama her açıldığında arka planda otomatik güncelleme denetimi yap
+          reg.update().catch(() => {});
         })
         .catch((err) => {
           console.warn("[PWA] ServiceWorker register notice:", err);

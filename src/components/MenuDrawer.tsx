@@ -126,6 +126,52 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
 
         {/* Kaydırılabilir İçerik Alanı */}
         <div className="flex-1 px-5 py-4 space-y-6 overflow-y-auto">
+          {/* 👑 YÖNETİCİ PANELİ & 👤 HESABIM KARTLARI */}
+          <div className="space-y-1.5">
+            <h3 className="text-[11px] font-black uppercase tracking-widest text-amber-300/90 flex items-center gap-1.5 mb-2 border-b border-white/10 pb-1">
+              <span>👑</span> Yönetim & Hesap Merkezi
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                href="/admin"
+                onClick={handleSafeClose}
+                className="p-3.5 rounded-2xl bg-gradient-to-br from-purple-950/70 via-slate-900 to-purple-950/40 border-2 border-purple-400/50 hover:border-purple-300 hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col justify-between group shadow-lg shadow-purple-950/40"
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">👑</span>
+                  <span className="text-[9px] font-black uppercase tracking-wider text-purple-200 bg-purple-500/25 px-2 py-0.5 rounded-full border border-purple-400/40">
+                    Admin
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs font-black text-white group-hover:text-purple-300 block">
+                    Yönetici Paneli
+                  </span>
+                  <span className="text-[10px] text-white/50 block">Öğrenci & çalışma takibi</span>
+                </div>
+              </Link>
+
+              <Link
+                href="/hesap"
+                onClick={handleSafeClose}
+                className="p-3.5 rounded-2xl bg-gradient-to-br from-cyan-950/70 via-slate-900 to-cyan-950/40 border-2 border-cyan-400/50 hover:border-cyan-300 hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col justify-between group shadow-lg shadow-cyan-950/40"
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">👤</span>
+                  <span className="text-[9px] font-black uppercase tracking-wider text-cyan-200 bg-cyan-500/25 px-2 py-0.5 rounded-full border border-cyan-400/40">
+                    Hesap
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs font-black text-white group-hover:text-cyan-300 block">
+                    Hesabım & Profil
+                  </span>
+                  <span className="text-[10px] text-white/50 block">Hedef, avatar & ayarlar</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+
           {/* Hızlı İlerleme & İndirme Kartları */}
           <div className="grid grid-cols-2 gap-2">
             <Link

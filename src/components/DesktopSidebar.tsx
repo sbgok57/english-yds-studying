@@ -49,6 +49,11 @@ const SKILL_ITEMS: NavItem[] = [
   { href: "/exams", label: "Denemeler & Çıkmışlar", shortLabel: "Deneme", emoji: "⏱️", badge: "80 Soru" },
 ];
 
+const MANAGEMENT_ITEMS: NavItem[] = [
+  { href: "/admin", label: "👑 Yönetici Paneli", shortLabel: "Admin", emoji: "👑", badge: "VIP" },
+  { href: "/hesap", label: "👤 Hesabım & Profil", shortLabel: "Hesap", emoji: "👤", badge: "Profil" },
+];
+
 const TOOL_ITEMS: NavItem[] = [
   { href: "/ilerleme", label: "İlerleme & Başarı", shortLabel: "İlerleme", emoji: "📈" },
   { href: "/kelime-ekle", label: "PDF Kelime Yükle", shortLabel: "PDF", emoji: "📤" },
@@ -199,7 +204,45 @@ export default function DesktopSidebar() {
             </div>
           </div>
 
-          {/* 3. Araçlar ve Kişiselleştirme */}
+          {/* 3. Yönetici Paneli & Hesabım */}
+          <div>
+            {!collapsed && (
+              <span className="text-[10px] font-black font-mono uppercase tracking-widest text-purple-400/90 px-2 block mb-1.5">
+                Yönetim & Hesap
+              </span>
+            )}
+            <div className="space-y-1">
+              {MANAGEMENT_ITEMS.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs font-bold transition-all group relative ${
+                      isActive
+                        ? "bg-gradient-to-r from-purple-500/25 to-pink-500/25 text-purple-200 border border-purple-400/40 shadow-sm"
+                        : "text-slate-300 hover:text-white hover:bg-white/5"
+                    }`}
+                    title={collapsed ? `${item.shortLabel} - ${item.label}` : undefined}
+                  >
+                    <span className="text-base shrink-0">{item.emoji}</span>
+                    {!collapsed && (
+                      <div className="flex items-center justify-between flex-1 min-w-0">
+                        <span className="truncate">{item.label}</span>
+                        {item.badge && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono shrink-0 border border-purple-400/30">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 4. Araçlar ve Kişiselleştirme */}
           <div>
             {!collapsed && (
               <span className="text-[10px] font-black font-mono uppercase tracking-widest text-amber-400/80 px-2 block mb-1.5">

@@ -14,18 +14,22 @@ function LoginForm() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorRequestId, setErrorRequestId] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // Prefill saved username/email
+  // Prefill saved username/email and rememberMe preference
   useEffect(() => {
     try {
       const saved = localStorage.getItem("yds_remembered_identifier");
       if (saved) {
         setIdentifier(saved);
+      }
+      const savedChoice = localStorage.getItem("yds_remember_me_choice");
+      if (savedChoice === "true") {
+        setRememberMe(true);
       }
     } catch (e) {
       console.warn("Could not read remembered identifier:", e);
@@ -57,12 +61,14 @@ function LoginForm() {
         return;
       }
 
-      // Save identifier if rememberMe is enabled
+      // Save identifier and preference if rememberMe is enabled
       try {
         if (rememberMe) {
           localStorage.setItem("yds_remembered_identifier", formId);
+          localStorage.setItem("yds_remember_me_choice", "true");
         } else {
           localStorage.removeItem("yds_remembered_identifier");
+          localStorage.removeItem("yds_remember_me_choice");
         }
       } catch (e) {
         console.warn("Could not save remembered identifier:", e);
@@ -118,8 +124,8 @@ function LoginForm() {
 
         <form onSubmit={handleSubmit} method="post" action="#" className="space-y-4">
           <div>
-            <label htmlFor="identifier" className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">
-              E-posta veya Kullanıcı Adı
+            <label htmlFor="identifier" className="block text-xs font-bold uppercase tracking-wider text-white/70 mb-1.5">
+              Kullanıcı Adı veya E-Posta
             </label>
             <input
               id="identifier"
@@ -128,7 +134,7 @@ function LoginForm() {
               autoComplete="username"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
-              placeholder="ornek@gmail.com veya kullanıcı adı"
+              placeholder="Kullanıcı adı veya e-posta (örn: yagoo_x veya sinembuse724@gmail.com)"
               required
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/15 focus:border-cyan-400 focus:outline-none text-white text-sm placeholder:text-white/30 transition-colors"
             />
@@ -136,7 +142,7 @@ function LoginForm() {
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-white/60">
+              <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-white/70">
                 Şifre
               </label>
               <Link
@@ -168,18 +174,38 @@ function LoginForm() {
             </div>
           </div>
 
-          {/* Beni Hatırla (365 Gün Kalıcı Oturum) */}
-          <div className="flex items-center justify-between py-1">
-            <label className="flex items-center gap-2 cursor-pointer select-none">
+          {/* 🔒 Oturumu Açık Bırak Kutucuğu */}
+          <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-cyan-400/40 transition-all select-none">
+            <label htmlFor="rememberMe" className="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
+                id="rememberMe"
+                name="rememberMe"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 rounded bg-white/5 border border-white/20 text-cyan-500 focus:ring-cyan-400 focus:ring-offset-slate-900 cursor-pointer"
+                className="w-5 h-5 rounded-lg bg-slate-900 border-2 border-white/30 text-cyan-400 focus:ring-cyan-400 focus:ring-offset-slate-950 cursor-pointer accent-cyan-400 shrink-0"
               />
-              <span className="text-xs text-slate-300 font-medium">Beni hatırla (Oturumum açık kalsın)</span>
+              <div className="flex-1 min-w-0">
+                <span className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                  <span>🔒</span>
+                  <span>Oturumu açık bırak</span>
+                </span>
+                <span className="text-[11px] text-white/50 block mt-0.5 leading-tight">
+                  {rememberMe
+                    ? "İşaretli: Uygulamayı veya tarayıcıyı kapatsan bile oturumun 365 gün korunur."
+                    : "İşaretsiz: Siteye her girdiğinde önce bu giriş ekranı karşına çıkar."}
+                </span>
+              </div>
+              <span
+                className={`text-[10px] font-mono font-bold px-2 py-1 rounded-md shrink-0 border transition-colors ${
+                  rememberMe
+                    ? "bg-cyan-500/20 border-cyan-400/50 text-cyan-200"
+                    : "bg-white/5 border-white/10 text-white/40"
+                }`}
+              >
+                {rememberMe ? "Kalıcı" : "Oturumluk"}
+              </span>
             </label>
-            <span className="text-[10px] text-cyan-400/80 font-mono">365 Gün Kalıcı</span>
           </div>
 
           <button
@@ -212,10 +238,11 @@ function LoginForm() {
             <button
               type="button"
               onClick={() => {
-                document.cookie = "yds_guest_access=true; path=/; max-age=86400";
+                // Session-only guest access cookie (no maxAge), so closing browser/app removes it
+                document.cookie = "yds_guest_access=true; path=/; SameSite=Lax";
                 window.location.href = returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/";
               }}
-              className="text-[11px] text-white/40 hover:text-white transition-colors underline"
+              className="text-[11px] text-white/50 hover:text-white transition-colors underline"
             >
               🚀 Giriş Yapmadan Misafir Olarak İncele &rarr;
             </button>

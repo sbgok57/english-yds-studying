@@ -58,22 +58,33 @@ export async function middleware(req: NextRequest) {
     return applySecurityHeaders(NextResponse.redirect(new URL("/", req.url)));
   }
 
-  // 4. If unauthenticated visitor lands on root "/" -> redirect to /giris so login screen appears first
+  // 4. Siteye her girildiğinde önce giriş ekranı çıkması kuralı:
+  // Eğer kullanıcı oturum açmamışsa ve mevcut oturumunda misafir geçişini seçmemişse
+  // doğrudan /giris ekranına yönlendirilir (returnTo ile kaldığı yeri korur).
   const isGuest = req.cookies.get("yds_guest_access")?.value === "true" || req.nextUrl.searchParams.get("guest") === "1";
-  if (pathname === "/" && !isAuthenticated && !isGuest) {
+  const isPublicAuthPage =
+    pathname === "/giris" ||
+    pathname === "/kayit" ||
+    pathname === "/sifremi-unuttum" ||
+    pathname === "/sifre-yenile" ||
+    pathname.startsWith("/api/");
+
+  if (!isAuthenticated && !isGuest && !isPublicAuthPage) {
     const loginUrl = new URL("/giris", req.url);
-    loginUrl.searchParams.set("returnTo", "/");
+    const fullPath = pathname + (search || "");
+    if (pathname !== "/") {
+      loginUrl.searchParams.set("returnTo", fullPath);
+    }
     return applySecurityHeaders(NextResponse.redirect(loginUrl));
   }
 
-  // 5. If unauthenticated user tries to access a strictly protected route -> redirect to /giris
-  const requiresAuth = STRICTLY_PROTECTED_PATHS.some(
+  // 5. Strictly protected routes: /admin and /hesap always require real authentication (no guest bypass)
+  const isStrictlyProtected = STRICTLY_PROTECTED_PATHS.some(
     (p) => pathname === p || pathname.startsWith(p + "/")
   );
 
-  if (!isAuthenticated && requiresAuth) {
+  if (!isAuthenticated && isStrictlyProtected) {
     const loginUrl = new URL("/giris", req.url);
-    // Safe returnTo parameter (never external URL)
     const fullPath = pathname + (search || "");
     loginUrl.searchParams.set("returnTo", fullPath);
     return applySecurityHeaders(NextResponse.redirect(loginUrl));
