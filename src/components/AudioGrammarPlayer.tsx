@@ -303,10 +303,15 @@ export default function AudioGrammarPlayer({
       {/* Üst Kart Bilgisi */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40">
               🎧 Sesli Gramer & Hafıza Kodu
             </span>
+            {track.examTarget && track.examTarget.map((ex) => (
+              <span key={ex} className="px-2 py-0.5 rounded text-[10px] font-black bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                {ex}
+              </span>
+            ))}
             {usingSpeechFallback && (
               <span className="px-2 py-0.5 rounded text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
                 Canlı Ses Motoru
@@ -501,9 +506,16 @@ export default function AudioGrammarPlayer({
                 }`}
               >
                 <div>
-                  <p className={`text-xs font-bold ${isCurrent ? "text-white" : "text-white/80"}`}>
-                    {index + 1}. {t.title}
-                  </p>
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <p className={`text-xs font-bold ${isCurrent ? "text-white" : "text-white/80"}`}>
+                      {index + 1}. {t.title}
+                    </p>
+                    {t.examTarget?.map((tag) => (
+                      <span key={tag} className="text-[9px] font-black px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <p className="text-[10px] text-white/50 mt-0.5 font-mono">{t.memoryCode}</p>
                 </div>
                 <div className="text-xs font-mono text-white/40">

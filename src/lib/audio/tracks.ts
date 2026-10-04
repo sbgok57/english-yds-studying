@@ -1,6 +1,6 @@
 // ============================================================
 // src/lib/audio/tracks.ts
-// YDS Sesli Gramer & Hafıza Kodları Parça Listesi ve Yardımcılar
+// YDS, YDT ve YÖKDİL Sesli Gramer & Hafıza Kodları Parça Listesi ve Yardımcılar
 // ============================================================
 
 export interface AudioTrack {
@@ -15,6 +15,7 @@ export interface AudioTrack {
   summary: string;
   keyPoints: string[];
   script: string;
+  examTarget?: string[];
 }
 
 export const AUDIO_TRACKS: AudioTrack[] = [
@@ -22,11 +23,12 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     id: "ali-cumleci-dede-isimci",
     slug: "conjunctions",
     title: "Zıtlık Bağlaçları: ALi CÜMLEci vs DEDE İSİMci",
-    subtitle: "YDS'nin En Çok Soru Çıkaran Bağlaç Formülü",
+    subtitle: "YDS / YÖKDİL / YDT En Çok Soru Çıkaran Bağlaç Formülü",
     category: "clauses",
     duration: 380,
     audioUrl: "/audio/grammar/ali-cumleci-dede-isimci.mp3",
     memoryCode: "ALi CÜMLEci (Although) vs DEDE İSİMci (Despite)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "Zıtlık bağlaçlarında boşluktan hemen sonra tam cümle mi (S+V+O) yoksa isim/isim öbeği mi geldiğine bakarak 5 saniyede şıkları eleme taktiği.",
     keyPoints: [
@@ -36,17 +38,18 @@ export const AUDIO_TRACKS: AudioTrack[] = [
       "While ve Whereas zıtlığında genellikle özne karşılaştırması aranır (While dogs are social, cats are independent).",
     ],
     script:
-      "Merhaba YDS yolcusu! Bugün sınavın en garanti 3 ila 4 sorusunu cebimize koyuyoruz: Zıtlık bağlaçları ve meşhur hafıza kodumuz: ALi CÜMLEci ve DEDE İSİMci! Sınavda bir bağlaç sorusu gördüğünde ve şıklarda Although, Despite, While gibi kelimeler olduğunda yapacağın İLK ŞEY Türkçeye çevirmek DEĞİLDİR! İlk bakacağın yer: Boşluktan hemen sonraki yapıdır. Kodumuzu hatırlayalım: Birinci karakterimiz: ALi CÜMLEci! Kimdir bu Ali? Although, Even though, Though, While, Whereas. Bunları gördüğün an arkasından mutlaka tam bir cümle (SVO) gelmelidir. İkinci karakterimiz: DEDE İSİMci! Despite, In spite of, Regardless of. Bunlar sadece isim veya V-ing alır!",
+      "Merhaba YDS, YDT ve YÖKDİL yolcusu! Bugün sınavın en garanti 3 ila 4 sorusunu cebimize koyuyoruz: Zıtlık bağlaçları ve meşhur hafıza kodumuz: ALi CÜMLEci ve DEDE İSİMci! Sınavda bir bağlaç sorusu gördüğünde ve şıklarda Although, Despite, While gibi kelimeler olduğunda yapacağın İLK ŞEY Türkçeye çevirmek DEĞİLDİR! İlk bakacağın yer: Boşluktan hemen sonraki yapıdır. Kodumuzu hatırlayalım: Birinci karakterimiz: ALi CÜMLEci! Kimdir bu Ali? Although, Even though, Though, While, Whereas. Bunları gördüğün an arkasından mutlaka tam bir cümle yani özne ve yüklem gelmelidir. İkinci karakterimiz: DEDE İSİMci! Despite, In spite of, Regardless of. Bunlar arkasından asla cümle almaz, sadece isim veya fiil-ing alır! İstisna şudur: Eğer Dede grubunun sonuna 'the fact that' gelirse, artık o da cümle alabilir.",
   },
   {
     id: "sebahattin-cumleci-sevim-isimci",
     slug: "adverbial-clauses",
     title: "Sebep Bağlaçları: SEBAHATTİN CÜMLEci vs SEVİM İSİMci",
-    subtitle: "Because vs Due to Ayrımı ve Sebep Yapıları",
+    subtitle: "Because vs Due to Ayrımı ve Neden-Sonuç Yapıları",
     category: "clauses",
     duration: 350,
     audioUrl: "/audio/grammar/sebahattin-cumleci-sevim-isimci.mp3",
     memoryCode: "SEBAHATTİN CÜMLEci (Because) vs SEVİM İSİMci (Due to)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "Sebep bildiren yapılarda tam cümle alanlar ile sadece isim/V-ing alanları ayırt ederek paragraf ve cümle tamamlama sorularını hızla çözme formülü.",
     keyPoints: [
@@ -67,6 +70,7 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     duration: 390,
     audioUrl: "/audio/grammar/by-the-time-tense-uyumu.mp3",
     memoryCode: "By the Time (Past ➔ Had V3 / Present ➔ Will Have V3)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "Zaman bağlaçlarının içinde Asla Will/Would gelmeme kuralı ve By the time gördüğünde doğrudan Perfect Tense'e gitme refleksleri.",
     keyPoints: [
@@ -87,6 +91,7 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     duration: 410,
     audioUrl: "/audio/grammar/if-clauses-devrik.mp3",
     memoryCode: "İF'siz Koşul: Should (Type 1), Were (Type 2), Had (Type 3)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "If cümleden atıldığında cümlenin başına geçen yardımcı fiiller ve YDS'nin bayıldığı tersyüz edilmiş (devrik) şart yapıları.",
     keyPoints: [
@@ -96,7 +101,7 @@ export const AUDIO_TRACKS: AudioTrack[] = [
       "Gizli Şart İfadeleri: Provided that, As long as, Unless (= If not), But for / Without (+ Noun).",
     ],
     script:
-      "Hoş geldin! YDS soru yazarlarının en çok sevdikleri tuzaklardan biri: Cümlede 'If' kelimesi YOKTUR ama soru aslında bal gibi bir IF koşul sorusudur! Peki If nereye kayboldu? Devrik yapıldı! 1. Type 1 Devriği: Cümlenin başında 'Should' görürsen ve soru işareti yoksa o bir If demektir. 2. Type 2 Devriği: Cümle 'Were' ile başlar. 3. Type 3 Devriği: Cümle 'Had' ile başlar, arkasından özne ve V3 gelir!",
+      "Hoş geldin! YDS ve YÖKDİL soru yazarlarının en çok sevdikleri tuzaklardan biri: Cümlede 'If' kelimesi YOKTUR ama soru aslında bal gibi bir IF koşul sorusudur! Peki If nereye kayboldu? Devrik yapıldı! 1. Type 1 Devriği: Cümlenin başında 'Should' görürsen ve soru işareti yoksa o bir If demektir. 2. Type 2 Devriği: Cümle 'Were' ile başlar. 3. Type 3 Devriği: Cümle 'Had' ile başlar, arkasından özne ve V3 gelir!",
   },
   {
     id: "relative-clause-kisaltmalari",
@@ -107,6 +112,7 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     duration: 370,
     audioUrl: "/audio/grammar/relative-clause-kisaltmalari.mp3",
     memoryCode: "Aktifse V-ing, Pasifse V3, Zaman Farkı Varsa Having V3",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "Which/Who/That atıldığında fiilin aldığı biçimler ve boşluk sonrasında nesne olup olmamasına göre anında doğru kısaltmayı seçme yöntemi.",
     keyPoints: [
@@ -127,6 +133,7 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     duration: 360,
     audioUrl: "/audio/grammar/perfect-modals-cikarmalar.mp3",
     memoryCode: "Must have (Kesin yapmış), Should have (Yapmalıydı yapmadı)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
     summary:
       "Modalların 'have + V3' ile geçmişe taşınması, mantıksal kesinlik ve YDS soru köklerindeki zaman ipuçlarıyla doğru modalı bulma sanatı.",
     keyPoints: [
@@ -138,6 +145,135 @@ export const AUDIO_TRACKS: AudioTrack[] = [
     ],
     script:
       "Modal konusu YDS'de ikiye ayrılır: Şimdiki zaman modalları ve geçmişe giden Perfect Modals! Anlamlarını hızlıca kodlayalım: 1. Must have V3: Sherlock Holmes yapısıdır, güçlü kanıt vardır ('Yer ıslak, yağmış olmalı'). 2. Should have V3: Ah vah yapısıdır ('Daha çok çalışmalıydın ama çalışmadın'). 3. Couldn't have V3: Mümkün değil yapısıdır ('O yapmış olamaz'). Soruda kanıt varsa Must have, hata varsa Should have!",
+  },
+  {
+    id: "noun-clauses-that-wh",
+    slug: "noun-clauses",
+    title: "Noun Clauses: That vs Whether/If vs Wh- Kelimeleri",
+    subtitle: "Fiilden ve Sıfattan Sonra Gelen Cümlecik Taktikleri",
+    category: "clauses",
+    duration: 340,
+    audioUrl: "/audio/grammar/noun-clauses-that-wh.mp3",
+    memoryCode: "Kesinse THAT, Belirsizse WHETHER / IF, Eksik Varsa WHAT / WHICH",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "İsim cümleciklerinde boşluğun solundaki fiile ve sağındaki cümlenin tamlığına göre doğru bağlacı bulma yöntemi.",
+    keyPoints: [
+      "Fiilden sonra gelen tam cümle ➔ THAT (Scientists believe that climate change is real).",
+      "Belirsizlik veya iki seçenek varsa (doubt, wonder, whether... or not) ➔ WHETHER veya IF.",
+      "Boşluktan sonraki cümlede özne veya nesne eksikse ➔ WHAT (Listen to what he says).",
+      "Preposition (edat) arkasından ASLA 'that' gelmez; 'the fact that' veya 'what/which' gelir.",
+    ],
+    script:
+      "Noun Clause sorularında altın anahtarımız: Sol tarafta bir FİİL veya SIFAT vardır. Boşluğun sağına bak: Eğer sağdaki cümle tam ve bir kesinlik bildiriyorsa cevabımız 'THAT'tir. Eğer soru kökünde doubt, wonder, not sure gibi bir şüphe ya da 'or not' varsa cevabımız 'WHETHER' veya 'IF'tir. Asla unutma: Edatlardan sonra doğrudan that gelmez!",
+  },
+  {
+    id: "gerund-infinitive-anlam-degisimi",
+    slug: "gerund-infinitive",
+    title: "Gerund & Infinitive: Anlam Değiştiren Kritik Fiiller",
+    subtitle: "Remember, Forget, Stop, Regret, Try Sınav Formülleri",
+    category: "structures",
+    duration: 355,
+    audioUrl: "/audio/grammar/gerund-infinitive-anlam-degisimi.mp3",
+    memoryCode: "Geçmiş / Deneyim ➔ V-ing; Amaç / Gelecek ➔ To V1",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "Hem to-V1 hem V-ing alan ancak anlamı 180 derece değişen 5 sihirli fiil ve sınav tuzakları.",
+    keyPoints: [
+      "Remember / Forget to V1: Bir şeyi yapmayı hatırlamak/unutmak (Görev).",
+      "Remember / Forget V-ing: Geçmişte yapılan bir anıyı hatırlamak/unutmak (Anı).",
+      "Stop to V1: Başka bir şey yapmak amacıyla durmak (Amaç).",
+      "Stop V-ing: Yapılan eylemi tamamen bırakmak, sonlandırmak.",
+      "Try to V1: Çabalamak, zorlanmak; Try V-ing: Bir yöntemi denemek.",
+    ],
+    script:
+      "Gerund ve Infinitive konusunda ÖSYM'nin en sevdiği tuzak anlam değiştiren fiillerdir! Mantık çok basittir: Eğer zihninde bir anı, geçmiş bir olay varsa fiil -ing alır. Örneğin: 'I remember locking the door' dediğinde kapıyı kilitlediğin anı hatırlıyorsun. Ama geleceğe dönük bir görev varsa 'to V1' kullanılır: 'Remember to lock the door'. Stop fiiline dikkat: 'Stop smoking' sigarayı bırakmaktır; 'Stop to smoke' sigara içmek için durmaktır!",
+  },
+  {
+    id: "passive-causative-taktikleri",
+    slug: "passive-voice",
+    title: "Passive Voice & Causative: Ettirgen Çatı Şifreleri",
+    subtitle: "Have/Get Something Done ve Akademik Edilgen Cümleler",
+    category: "structures",
+    duration: 375,
+    audioUrl: "/audio/grammar/passive-causative-taktikleri.mp3",
+    memoryCode: "Have/Get + Nesne + V3 (Yaptırtmak)",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "Akademik makalelerde faili gizleyen Passive yapılar ve işi başkasına yaptırma (Causative) kalıpları.",
+    keyPoints: [
+      "Temel Edilgen: be + V3. Zaman ne olursa olsun 'be' o zamana çekimlenir, ana fiil V3 kalır.",
+      "İki Nesneli Fiillerde: Genellikle insan özne yapılır (I was given an award).",
+      "Causative Kalıbı 1: Have someone do something (birine bir şey yaptırmak - çıplak fiil).",
+      "Causative Kalıbı 2: Get someone to do something (birini bir şeye ikna etmek - to V1).",
+      "Causative Ortak Kural: Have/Get something done (+ V3).",
+    ],
+    script:
+      "Akademik İngilizcenin omurgası Edilgen Çatı yani Passive Voice'tur. Akademik metinlerde araştırmacı 'ben yaptım' demez, 'araştırma yapıldı' der: 'The study was conducted'. Causative yani ettirgen yapılarda ise sihirli şifremiz nesnenin canlı mı cansız mı olduğudur. Eğer araya cansız bir nesne girerse: 'have your car repaired' yani fiil her zaman V3 olur!",
+  },
+  {
+    id: "parallel-structures-ikili-baglaclar",
+    slug: "parallelism",
+    title: "Paralel Yapılar: Either...or, Neither...nor, Not only...but also",
+    subtitle: "İkili Bağlaçlarda Dilbilgisel Simetri Kuralı",
+    category: "clauses",
+    duration: 330,
+    audioUrl: "/audio/grammar/parallel-structures-ikili-baglaclar.mp3",
+    memoryCode: "Birinci tarafta ne varsa, ikinci tarafta da o tür olmak zorundadır!",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "İkili bağlaç sorularında simetri taktiği: Sıfata sıfat, fiile fiil, cümleye cümle uyumu.",
+    keyPoints: [
+      "Not only... but also (Sadece ... değil, aynı zamanda ...)",
+      "Either... or (Ya ... ya da ...)",
+      "Neither... nor (Ne ... ne de ...)",
+      "Both... and (Hem ... hem de ...)",
+      "Altın Kural: 'Not only' sonrasında fiil gelirse, 'but also' sonrasında da fiil gelmelidir!",
+    ],
+    script:
+      "Soru çözerken çiftli bağlaç gördüğün an gülümse kanka, çünkü bunlar bedava puan demektir! Formülümüz: Terazi Kuralı! Terazi dengede olmalıdır. Not only'den sonra bir sıfat varsa, but also'dan sonra da mutlaka bir sıfat gelmelidir. Eğer Not only cümlenin en başına gelirse cümle DEVRİK olur: 'Not only did he pass the exam, but he also got the highest score!'",
+  },
+  {
+    id: "preposition-ve-collocations-sifreleri",
+    slug: "prepositions",
+    title: "ÖSYM'nin En Sevdiği Edatlar ve Kalıplaşmış Fiil Öbekleri",
+    subtitle: "Depend on, Contribute to, Suffer from, Prevent from",
+    category: "advanced",
+    duration: 385,
+    audioUrl: "/audio/grammar/preposition-ve-collocations-sifreleri.mp3",
+    memoryCode: "Fiil + Preposition Birlikteliği Sözlükten Ezberlenmez, Ritimle Öğrenilir",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "Sınavlarda her yıl istisnasız sorulan kritik edat çiftleri ve boşluktan sonraki kelimeye göre edat seçme teknikleri.",
+    keyPoints: [
+      "To Alanlar: Contribute to, lead to, attribute to, refer to, commit to.",
+      "From Alanlar: Prevent from, derive from, stem from, suffer from, refrain from.",
+      "In Alanlar: Result in, succeed in, specialize in, engage in, participate in.",
+      "On/Upon Alanlar: Rely on, depend on, base on, focus on, congratulate on.",
+    ],
+    script:
+      "Edat sorularında Türkçeye çeviri yaparsan yanılırsın dostum! 'Arabaya binmek' derken biz 'e' deriz ama İngilizcede 'get in the car' denir. O yüzden fiilleri edatlarıyla birlikte bir melodi gibi ezberlemeliyiz: Lead to, contribute to, result in, suffer from, prevent from! Sınavda boşluktan önce bu fiillerden birini gördüğün anda hiç düşünmeden eşleşen edatı yapıştır!",
+  },
+  {
+    id: "paragraf-ve-cumle-tamamlama-teknikleri",
+    slug: "paragraph-tactics",
+    title: "YDS / YÖKDİL / YDT Paragraf & Cümle Tamamlama Taktikleri",
+    subtitle: "Referans Kelimeler (This/These/Such) ve Zıtlık Sıçramaları",
+    category: "advanced",
+    duration: 420,
+    audioUrl: "/audio/grammar/paragraf-ve-cumle-tamamlama-teknikleri.mp3",
+    memoryCode: "Referans Takibi: This, These, Such, The, He/She/They İpuçları",
+    examTarget: ["YDS", "YDT", "YÖKDİL"],
+    summary:
+      "Cümle tamamlama ve paragraftan atma sorularında konunun yönünü belirleme ve referans zamirleriyle doğru seçeneğe kilitlenme stratejisi.",
+    keyPoints: [
+      "Kural 1: 'Such a method' diyorsa önceki cümlede mutlaka o 'method' açıklanmış olmalıdır.",
+      "Kural 2: Zıtlık bağlacı (However, On the other hand) varsa artıdan eksiye veya eksiden artıya geçiş aranır.",
+      "Kural 3: Cümlenin zamanı geçmişse (Past) ve bir anda Present'a dönüyorsa 'Today, Now, Recently' gibi bir köprü aranır.",
+      "Kural 4: Aşırı kesinlik bildiren (All, Always, Never, Solely) şıklar genellikle çeldiricidir.",
+    ],
+    script:
+      "Sınavın en yüksek puan getiren ama öğrencileri en çok yoran bölümü: Cümle tamamlama ve Paragraf soruları! İşte sana 3 altın taktik: Bir: Referans kelimeleri bir dedektif gibi takip et. Boşluktan sonra 'This phenomenon' diyorsa önceki cümlede bir doğa olayı veya olgu aranmalıdır. İki: Zıtlık bağlaçlarında duygu durumuna bak; bir taraf olumluysa diğer taraf olumsuz olmalıdır. Üç: Keskin ifadelerden kaçın, akademik dil ılımlıdır: Can, may, tends to gibi yumuşatılmış seçenekler her zaman bir adım öndedir!",
   },
 ];
 

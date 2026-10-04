@@ -134,6 +134,31 @@ export default function MenuDrawer({ open, onClose }: { open: boolean; onClose: 
             </div>
             <span className="text-xs font-bold text-amber-400 group-hover:translate-x-0.5 transition-transform">➔</span>
           </Link>
+
+          {/* Sistem Denetçisi & Sıfır Hata Onarıcı */}
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              if (typeof window !== "undefined") {
+                window.dispatchEvent(new CustomEvent("yds:open-debug"));
+              }
+            }}
+            className="w-full mt-2 p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 text-left flex items-center justify-between group transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm font-black shadow">
+                🛡️
+              </div>
+              <div>
+                <div className="text-xs font-black text-white group-hover:text-emerald-300 transition-colors">
+                  Sistem Denetçisi & Sıfır Hata (0 Hata)
+                </div>
+                <div className="text-[10px] text-white/50">Canlı tarama, otomatik onarım ve temizlik</div>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-emerald-400 group-hover:translate-x-0.5 transition-transform">➔</span>
+          </button>
         </div>
 
         <div className="px-5 pb-10">
