@@ -58,7 +58,7 @@ const MANAGEMENT_ITEMS: NavItem[] = [
 const TOOL_ITEMS: NavItem[] = [
   { href: "/ilerleme", label: "İlerleme & Başarı", shortLabel: "İlerleme", emoji: "📈" },
   { href: "/kelime-ekle", label: "PDF Kelime Yükle", shortLabel: "PDF", emoji: "📤" },
-  { href: "/ayarlar", label: "2.000 Tema Stüdyosu", shortLabel: "Temalar", emoji: "🎨" },
+  { href: "/ayarlar", label: "1.000 Tema Stüdyosu", shortLabel: "Temalar", emoji: "🎨" },
 ];
 
 export default function DesktopSidebar() {

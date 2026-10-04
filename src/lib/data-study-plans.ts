@@ -9,6 +9,7 @@ import { safeSetStorage, safeGetStorage } from "@/lib/storage-optimizer";
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 export type ExamType = "YDS" | "YDT" | "YOKDIL";
 export type YokdilField = "saglik" | "fen" | "sosyal";
+export type TargetLevelType = CefrLevel | "YDS" | "YDT" | "YOKDIL" | "YÖKDİL";
 
 export interface StudyTask {
   id: string;
@@ -52,7 +53,7 @@ export interface StudyPlan {
   examType: ExamType;
   yokdilField?: YokdilField;
   currentLevel: CefrLevel;
-  targetLevel: CefrLevel | "YDS" | "YDT" | "YÖKDİL" | "YOKDIL";
+  targetLevel: TargetLevelType;
   targetScore?: number;
   startDate: string;
   examDate?: string;
@@ -580,7 +581,7 @@ export interface PlanGeneratorInputs {
   examType?: ExamType;
   yokdilField?: YokdilField;
   currentLevel: CefrLevel;
-  targetLevel: CefrLevel | "YDS" | "YDT" | "YOKDIL" | "YÖKDİL";
+  targetLevel: TargetLevelType;
   targetScore: number;
   totalDays: number;
   dailyMinutes: number;

@@ -95,7 +95,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
 
       {/* Yan Çekmece (Sidebar) - Net, kristal kontrast ve aydınlık uyumu */}
       <aside className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-900/92 dark:bg-slate-950/92 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col transition-colors">
-        {/* Üst Sabit Çubuk: Başlık, 2000 Tema Butonu, Tema Değiştirici ve Kapatma Butonu */}
+        {/* Üst Sabit Çubuk: Başlık, 1000+ Tema Butonu, Tema Değiştirici ve Kapatma Butonu */}
         <div className="sticky top-0 z-20 bg-slate-900/90 dark:bg-slate-950/90 light:bg-white/95 backdrop-blur-2xl border-b border-white/15 light:border-slate-200 px-5 py-3.5 space-y-3 shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -115,10 +115,10 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
               <button
                 onClick={() => setThemeModal(true)}
                 className="h-9 px-2.5 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-pink-500/15 to-cyan-500/15 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-1 text-xs font-bold transition-all shadow-sm"
-                title="🎨 2.000+ Tema Stüdyosu"
+                title="🎨 1.000+ Tema Stüdyosu"
               >
                 <span>🎨</span>
-                <span className="text-[10px] font-mono hidden sm:inline">2000+</span>
+                <span className="text-[10px] font-mono hidden sm:inline">1000+</span>
               </button>
               <ThemeToggle compact className="!w-9 !h-9 !px-0 rounded-xl" />
               <button
@@ -554,7 +554,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
         </div>
       </aside>
 
-      {/* 2.000+ Tema Seçici Modal */}
+      {/* 1.000+ Tema Seçici Modal */}
       <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
     </div>
   );

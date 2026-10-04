@@ -111,15 +111,15 @@ export default function Header() {
               <span className="hidden sm:inline font-bold">Hesabım</span>
             </Link>
 
-            {/* 🎨 2.000+ Tema Seçici Butonu */}
+            {/* 🎨 1.000+ Tema Seçici Butonu */}
             <button
               onClick={() => setThemeModal(true)}
               className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-gradient-to-r from-pink-500/15 to-cyan-500/15 border border-cyan-400/40 hover:border-cyan-300 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="🎨 2.000+ Renk ve Tema Seçici"
+              title="🎨 1.000+ Renk ve Tema Seçici"
             >
               <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
               <span className="hidden md:inline font-bold">Temalar</span>
-              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden lg:inline">2000+</span>
+              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden lg:inline">1000+</span>
             </button>
 
             {/* Karanlık/Aydınlık Mod Butonu */}
@@ -157,7 +157,7 @@ export default function Header() {
       {/* Yana Açılır Kapsamlı Menü */}
       <MenuDrawer open={menu} onClose={() => setMenu(false)} />
 
-      {/* 2.000+ Hızlı Tema Seçici Modal */}
+      {/* 1.000+ Hızlı Tema Seçici Modal */}
       <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
     </>
   );

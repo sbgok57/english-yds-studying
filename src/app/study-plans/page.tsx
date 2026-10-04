@@ -13,6 +13,7 @@ import {
   CefrLevel,
   ExamType,
   YokdilField,
+  TargetLevelType,
   LevelStudyGuide,
 } from "@/lib/data-study-plans";
 import { useUsage } from "@/lib/store";
@@ -33,7 +34,7 @@ export default function StudyPlansPage() {
   const [genExamType, setGenExamType] = useState<ExamType>("YDS");
   const [genYokdilField, setGenYokdilField] = useState<YokdilField>("saglik");
   const [genCurrentLevel, setGenCurrentLevel] = useState<CefrLevel>("A2");
-  const [genTargetLevel, setGenTargetLevel] = useState<CefrLevel | "YDS" | "YDT" | "YOKDIL">("B2");
+  const [genTargetLevel, setGenTargetLevel] = useState<TargetLevelType>("B2");
   const [genTargetScore, setGenTargetScore] = useState<number>(75);
   const [genDays, setGenDays] = useState<number>(60);
   const [genMinutes, setGenMinutes] = useState<number>(60);
@@ -688,7 +689,26 @@ export default function StudyPlansPage() {
 
               <div>
                 <label className="block font-bold uppercase text-white/60 mb-1.5">
-                  {genExamType === "YDT" ? "Hedef Net (Maks. 80)" : "Hedef Puan (Maks. 100)"}
+                  Hedef Seviyen
+                </label>
+                <select
+                  value={genTargetLevel}
+                  onChange={(e) => setGenTargetLevel(e.target.value as TargetLevelType)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
+                >
+                  <option value="B1">B1 (Orta Düzey)</option>
+                  <option value="B2">B2 (Yetkin Düzey)</option>
+                  <option value="C1">C1 (İleri Akademik)</option>
+                  <option value="C2">C2 (Ustalık Düzeyi)</option>
+                  <option value={genExamType}>🎯 Tam Sınav Düzeyi ({genExamType})</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-bold uppercase text-white/60 mb-1.5">
+                  {genExamType === "YDT" ? "Hedef Net (Maks. 80)" : `Hedef ${genExamType} Puanı (50–100)`}
                 </label>
                 <input
                   type="number"
@@ -698,28 +718,6 @@ export default function StudyPlansPage() {
                   onChange={(e) => setGenTargetScore(Number(e.target.value))}
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
                 />
-              </div>
-            </div>
-
-            {/* Süre & Günlük Dakika */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block font-bold uppercase text-white/60 mb-1.5">
-                  Toplam Süre (Gün)
-                </label>
-                <select
-                  value={genDays}
-                  onChange={(e) => setGenDays(Number(e.target.value))}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
-                >
-                  <option value={7}>7 Gün (Acil Kamp)</option>
-                  <option value={14}>14 Gün (Sprint)</option>
-                  <option value={30}>30 Gün (1 Ay)</option>
-                  <option value={60}>60 Gün (2 Ay — Önerilen)</option>
-                  <option value={90}>90 Gün (3 Ay)</option>
-                  <option value={120}>120 Gün (4 Ay)</option>
-                  <option value={180}>180 Gün (6 Ay)</option>
-                </select>
               </div>
 
               <div>
@@ -736,6 +734,26 @@ export default function StudyPlansPage() {
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
                 />
               </div>
+            </div>
+
+            {/* Süre */}
+            <div>
+              <label className="block font-bold uppercase text-white/60 mb-1.5">
+                Toplam Süre (Gün)
+              </label>
+              <select
+                value={genDays}
+                onChange={(e) => setGenDays(Number(e.target.value))}
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-white/15 focus:border-cyan-400 text-white"
+              >
+                <option value={7}>7 Gün (Acil Kamp)</option>
+                <option value={14}>14 Gün (Sprint)</option>
+                <option value={30}>30 Gün (1 Ay)</option>
+                <option value={60}>60 Gün (2 Ay — Önerilen)</option>
+                <option value={90}>90 Gün (3 Ay)</option>
+                <option value={120}>120 Gün (4 Ay)</option>
+                <option value={180}>180 Gün (6 Ay)</option>
+              </select>
             </div>
 
             <button

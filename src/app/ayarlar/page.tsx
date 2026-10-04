@@ -4,8 +4,8 @@ import ThemeStudio from "@/components/theme/ThemeStudio";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ayarlar, 2.000 Renk Teması & Bildirimler — DİL MASTER",
-  description: "DİL MASTER 2.000 renk teması, karanlık/aydınlık mod stüdyosu, akıllı telefon ve web push bildirim tercihleri.",
+  title: "Ayarlar, 1.000+ Renk Teması & Bildirimler — DİL MASTER",
+  description: "DİL MASTER 1.000+ algoritmik renk teması, SVG arka plan desenleri, karanlık/aydınlık mod stüdyosu ve bildirim tercihleri.",
 };
 
 export default function AyarlarPage() {
@@ -20,7 +20,7 @@ export default function AyarlarPage() {
             </span>
           </h1>
           <p className="text-sm text-white/60 mt-1">
-            2.000 benzersiz tema ve renk paleti arasından tarzını seç, aydınlık/karanlık modunu ayarla ve bildirimlerini yönet.
+            1.000+ benzersiz algoritmik tema ve SVG arka plan desenleri arasından tarzını seç, aydınlık/karanlık modunu ayarla ve bildirimlerini yönet.
           </p>
         </div>
 
@@ -40,7 +40,7 @@ export default function AyarlarPage() {
         </div>
       </div>
 
-      {/* 2.000 Tema & Renk Kişiselleştirme Stüdyosu */}
+      {/* 1.000+ Tema & Renk Kişiselleştirme Stüdyosu */}
       <ThemeStudio />
 
       {/* Push Bildirim Yöneticisi */}
