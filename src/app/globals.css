@@ -70,7 +70,7 @@ body::before {
   z-index: 0;
   background-image: var(--theme-pattern, none);
   background-size: var(--theme-pattern-size, auto);
-  opacity: 0.65;
+  opacity: 1;
 }
 
 body > * {

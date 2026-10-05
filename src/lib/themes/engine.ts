@@ -66,11 +66,11 @@ function hslToHex(h: number, s: number, l: number): string {
 // ── SVG ARKA PLAN DESENLERİ ──────────────────────────────────
 export const SVG_PATTERNS: Record<PatternKey, string> = {
   none: "none",
-  dots: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px)",
-  grid: "linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
-  stripes: "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px)",
-  geometric: "linear-gradient(135deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), linear-gradient(225deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), linear-gradient(45deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%), linear-gradient(315deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%)",
-  mesh: "radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.08) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(255, 255, 255, 0.05) 0px, transparent 50%)",
+  dots: "radial-gradient(circle, var(--theme-pattern-fg, rgba(255, 255, 255, 0.22)) 1.8px, transparent 1.8px)",
+  grid: "linear-gradient(to right, var(--theme-pattern-fg, rgba(255, 255, 255, 0.14)) 1.2px, transparent 1.2px), linear-gradient(to bottom, var(--theme-pattern-fg, rgba(255, 255, 255, 0.14)) 1.2px, transparent 1.2px)",
+  stripes: "repeating-linear-gradient(45deg, transparent, transparent 12px, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 12px, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 24px)",
+  geometric: "linear-gradient(135deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(225deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(45deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(315deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%)",
+  mesh: "radial-gradient(at 10% 10%, var(--theme-primary-glow, rgba(217, 70, 239, 0.35)) 0px, transparent 55%), radial-gradient(at 90% 90%, var(--theme-secondary-glow, rgba(34, 211, 238, 0.30)) 0px, transparent 55%), radial-gradient(at 50% 50%, var(--theme-accent-glow, rgba(250, 204, 21, 0.25)) 0px, transparent 50%)",
 };
 
 export const SVG_PATTERN_SIZES: Record<PatternKey, string> = {
@@ -330,11 +330,13 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
       root.style.setProperty("--theme-card", targetTheme.lightCard);
       root.style.setProperty("--theme-text", targetTheme.lightText);
       root.style.setProperty("--theme-border", "#cbd5e1");
+      root.style.setProperty("--theme-pattern-fg", "rgba(15, 23, 42, 0.16)");
     } else {
       root.style.setProperty("--theme-bg", targetTheme.darkBg);
       root.style.setProperty("--theme-card", targetTheme.darkCard);
       root.style.setProperty("--theme-text", targetTheme.darkText);
       root.style.setProperty("--theme-border", "rgba(255, 255, 255, 0.12)");
+      root.style.setProperty("--theme-pattern-fg", "rgba(255, 255, 255, 0.22)");
     }
 
     // Doğrudan body stillerine anında enjekte et

@@ -31,13 +31,13 @@ export default function FloatingSideBar() {
         aria-label="Hızlı Erişim ve Menü Çubuğu"
         className="fixed right-3 bottom-24 z-40 flex flex-col items-center gap-2 p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-xl border border-white/20 shadow-2xl shadow-black/50 anim-fade"
       >
-        {/* 🎨 500+ Canlı Tema Seçici Hızlı Butonu */}
+        {/* 🎨 1.000+ Canlı & Desenli Tema Seçici Hızlı Butonu */}
         <button
           type="button"
           onClick={() => setThemeModalOpen(true)}
           className="w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-r from-pink-500/20 to-cyan-500/20 border border-pink-400/50 text-pink-200 hover:text-white hover:border-pink-300 hover:scale-105 active:scale-95 transition-all shadow-md group cursor-pointer"
-          title="🎨 500+ Canlı Renk ve Tema Seçici"
-          aria-label="500+ Tema Seçici"
+          title="🎨 1.000+ Renk ve Desenli Tema Seçici"
+          aria-label="1.000+ Tema Seçici"
         >
           <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
         </button>

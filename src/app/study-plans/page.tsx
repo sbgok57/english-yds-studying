@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   PRESET_STUDY_PLANS,
   LEVEL_STUDY_GUIDES,
@@ -9,6 +10,7 @@ import {
   loadSavedStudyPlans,
   saveStudyPlans,
   togglePlanTask,
+  formatTrDate,
   StudyPlan,
   CefrLevel,
   ExamType,
@@ -20,12 +22,16 @@ import { useUsage } from "@/lib/store";
 
 type ExamFilterType = "ALL" | "YDS" | "YDT" | "YOKDIL_SAGLIK" | "YOKDIL_FEN" | "YOKDIL_SOSYAL";
 
-export default function StudyPlansPage() {
+function StudyPlansContent() {
   const { addXp } = useUsage();
+  const searchParams = useSearchParams();
+  const examParam = searchParams?.get("exam");
+  const tabParam = searchParams?.get("tab");
 
   const [activeTab, setActiveTab] = useState<"MY_PLAN" | "PRESETS" | "GENERATOR" | "GUIDES">("MY_PLAN");
   const [plans, setPlans] = useState<StudyPlan[]>(() => PRESET_STUDY_PLANS || []);
   const [selectedExamFilter, setSelectedExamFilter] = useState<ExamFilterType>("ALL");
+  const [createdSuccess, setCreatedSuccess] = useState<string | null>(null);
 
   // Guide tab level
   const [selectedGuideLevel, setSelectedGuideLevel] = useState<CefrLevel>("B1");
@@ -40,6 +46,47 @@ export default function StudyPlansPage() {
   const [genMinutes, setGenMinutes] = useState<number>(60);
   const [genStartDate, setGenStartDate] = useState<string>(() => new Date().toISOString().split("T")[0]);
   const [genExamDate, setGenExamDate] = useState<string>("");
+
+  useEffect(() => {
+    if (tabParam === "generator" || tabParam === "custom") {
+      setActiveTab("GENERATOR");
+    } else if (tabParam === "presets") {
+      setActiveTab("PRESETS");
+    }
+
+    if (examParam) {
+      const lower = examParam.toLowerCase();
+      if (lower === "ydt") {
+        setSelectedExamFilter("YDT");
+        setGenExamType("YDT");
+        setGenTargetScore(65);
+        if (!tabParam) setActiveTab("PRESETS");
+      } else if (lower === "yokdil" || lower === "yokdil_saglik" || lower === "saglik") {
+        setSelectedExamFilter("YOKDIL_SAGLIK");
+        setGenExamType("YOKDIL");
+        setGenYokdilField("saglik");
+        setGenTargetScore(75);
+        if (!tabParam) setActiveTab("PRESETS");
+      } else if (lower === "yokdil_fen" || lower === "fen") {
+        setSelectedExamFilter("YOKDIL_FEN");
+        setGenExamType("YOKDIL");
+        setGenYokdilField("fen");
+        setGenTargetScore(75);
+        if (!tabParam) setActiveTab("PRESETS");
+      } else if (lower === "yokdil_sosyal" || lower === "sosyal") {
+        setSelectedExamFilter("YOKDIL_SOSYAL");
+        setGenExamType("YOKDIL");
+        setGenYokdilField("sosyal");
+        setGenTargetScore(75);
+        if (!tabParam) setActiveTab("PRESETS");
+      } else if (lower === "yds") {
+        setSelectedExamFilter("YDS");
+        setGenExamType("YDS");
+        setGenTargetScore(75);
+        if (!tabParam) setActiveTab("PRESETS");
+      }
+    }
+  }, [examParam, tabParam]);
 
   useEffect(() => {
     const saved = loadSavedStudyPlans();
@@ -112,7 +159,11 @@ export default function StudyPlansPage() {
     ];
     setPlans(updated);
     saveStudyPlans(updated);
+    setCreatedSuccess(`🎉 Harika! "${newPlan.title}" başarıyla oluşturuldu ve aktif programın yapıldı.`);
     setActiveTab("MY_PLAN");
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   // Filter presets by selected exam
@@ -224,8 +275,105 @@ export default function StudyPlansPage() {
           )}
         </div>
 
+        {/* 🚀 4 BÜYÜK SINAV ÇALIŞMA PROGRAMI KARTLARI (YDT, YÖKDİL, YDS, ÖZEL PLAN) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10">
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedExamFilter("YDT");
+              setGenExamType("YDT");
+              setGenTargetScore(65);
+              setActiveTab("PRESETS");
+            }}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              selectedExamFilter === "YDT" && activeTab === "PRESETS"
+                ? "bg-amber-500/25 border-amber-400 text-white shadow-xl shadow-amber-500/20 scale-[1.02]"
+                : "bg-white/5 border-white/10 hover:border-amber-400/50 hover:bg-amber-500/10 text-white/90"
+            }`}
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-2xl">🎯</span>
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-mono">
+                4 Program
+              </span>
+            </div>
+            <strong className="text-xs sm:text-sm font-black text-amber-300 block">YDT (YKS-Dil)</strong>
+            <span className="text-[10px] text-white/60 block mt-0.5">30–120 Günlük Net Kampı</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedExamFilter("YOKDIL_SAGLIK");
+              setGenExamType("YOKDIL");
+              setGenYokdilField("saglik");
+              setGenTargetScore(75);
+              setActiveTab("PRESETS");
+            }}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              selectedExamFilter.startsWith("YOKDIL") && activeTab === "PRESETS"
+                ? "bg-purple-500/25 border-purple-400 text-white shadow-xl shadow-purple-500/20 scale-[1.02]"
+                : "bg-white/5 border-white/10 hover:border-purple-400/50 hover:bg-purple-500/10 text-white/90"
+            }`}
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-2xl">🌐</span>
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-purple-400/20 text-purple-300 font-mono">
+                6 Program
+              </span>
+            </div>
+            <strong className="text-xs sm:text-sm font-black text-purple-300 block">YÖKDİL (3 Alan)</strong>
+            <span className="text-[10px] text-white/60 block mt-0.5">Sağlık · Fen · Sosyal</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setSelectedExamFilter("YDS");
+              setGenExamType("YDS");
+              setGenTargetScore(75);
+              setActiveTab("PRESETS");
+            }}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              selectedExamFilter === "YDS" && activeTab === "PRESETS"
+                ? "bg-emerald-500/25 border-emerald-400 text-white shadow-xl shadow-emerald-500/20 scale-[1.02]"
+                : "bg-white/5 border-white/10 hover:border-emerald-400/50 hover:bg-emerald-500/10 text-white/90"
+            }`}
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-2xl">📘</span>
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 font-mono">
+                4 Program
+              </span>
+            </div>
+            <strong className="text-xs sm:text-sm font-black text-emerald-300 block">YDS Akademik</strong>
+            <span className="text-[10px] text-white/60 block mt-0.5">30–120 Günlük Başarı</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab("GENERATOR");
+            }}
+            className={`p-3.5 rounded-2xl border text-left transition-all ${
+              activeTab === "GENERATOR"
+                ? "bg-gradient-to-r from-cyan-500/30 to-blue-500/30 border-cyan-400 text-white shadow-xl shadow-cyan-500/20 scale-[1.02]"
+                : "bg-white/5 border-white/10 hover:border-cyan-400/50 hover:bg-cyan-500/10 text-white/90"
+            }`}
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-2xl">✨</span>
+              <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-cyan-400/20 text-cyan-300 font-mono">
+                Kişiye Özel
+              </span>
+            </div>
+            <strong className="text-xs sm:text-sm font-black text-cyan-300 block">Özel Plan Oluştur</strong>
+            <span className="text-[10px] text-white/60 block mt-0.5">Gün · Ay · Yıl Takvimi</span>
+          </button>
+        </div>
+
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap items-center gap-2 mt-8 pt-6 border-t border-white/10">
+        <div className="flex flex-wrap items-center gap-2 mt-6 pt-6 border-t border-white/10">
           <button
             onClick={() => setActiveTab("MY_PLAN")}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
@@ -268,6 +416,22 @@ export default function StudyPlansPage() {
           </button>
         </div>
       </header>
+
+      {/* Başarı Bildirimi */}
+      {createdSuccess && (
+        <div className="p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-400/50 text-emerald-200 text-xs sm:text-sm font-bold flex items-center justify-between gap-3 shadow-xl shadow-emerald-950/40">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">🚀</span>
+            <span>{createdSuccess}</span>
+          </div>
+          <button
+            onClick={() => setCreatedSuccess(null)}
+            className="text-white/60 hover:text-white text-xs px-2.5 py-1 rounded-lg bg-white/10"
+          >
+            ✕ Kapat
+          </button>
+        </div>
+      )}
 
       {/* TAB 1: MY ACTIVE PLAN */}
       {activeTab === "MY_PLAN" && (
@@ -933,5 +1097,20 @@ export default function StudyPlansPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function StudyPlansPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-7xl mx-auto px-4 py-16 text-center text-white/50">
+          <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <span>Sınav Çalışma Programları Hazırlanıyor...</span>
+        </div>
+      }
+    >
+      <StudyPlansContent />
+    </Suspense>
   );
 }

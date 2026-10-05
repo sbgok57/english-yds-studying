@@ -121,16 +121,16 @@ export default function Header() {
               <span className="hidden sm:inline font-bold">Planlar</span>
             </Link>
 
-            {/* 🎨 1.000+ Tema Seçici Butonu */}
-            <button
-              onClick={() => setThemeModal(true)}
+            {/* 🎨 1.000+ Tema Stüdyosu Bölümü */}
+            <Link
+              href="/temalar"
               className="flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-gradient-to-r from-pink-500/15 to-cyan-500/15 border border-cyan-400/40 hover:border-cyan-300 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="🎨 1.000+ Renk ve Tema Seçici"
+              title="🎨 1.000+ Renk ve Desenli Tema Stüdyosu"
             >
               <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
               <span className="font-bold">Temalar</span>
               <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden md:inline">1000+</span>
-            </button>
+            </Link>
 
             {/* Karanlık/Aydınlık Mod Butonu */}
             <ThemeToggle compact className="sm:!px-2.5" />

@@ -96,25 +96,26 @@ export default function YdtHubPage() {
         {/* Hızlı Butonlar */}
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
-            href="/exams/ydt-2024"
+            href="/study-plans?exam=ydt"
             className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-pink-500 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all"
           >
-            <Clock className="w-4 h-4 text-slate-950" />
-            <span>Son Çıkmış YDT'yi Çöz (2024 • 120 dk)</span>
+            <span>📅</span>
+            <span>YDT Çalışma Programları (30–120 Gün & Özel Plan)</span>
+          </Link>
+
+          <Link
+            href="/exams/ydt-2024"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
+          >
+            <Clock className="w-4 h-4 text-amber-300" />
+            <span>Son Çıkmış YDT'yi Çöz (2024)</span>
           </Link>
 
           <Link
             href="/vocabulary/flashcards?exam=YDT"
-            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
-          >
-            <span>🃏 3D YDT Kelime Kartları</span>
-          </Link>
-
-          <Link
-            href="/vocabulary/inventory?exam=YDT"
             className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 font-bold text-xs sm:text-sm transition-all"
           >
-            <span>📖 YDT Kelime Envanteri</span>
+            <span>🃏 3D YDT Kelime Kartları</span>
           </Link>
         </div>
       </div>

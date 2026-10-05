@@ -5,7 +5,7 @@
    Samsung Internet, iOS Safari PWA (16.4+).
    ============================================================ */
 
-const SW_VERSION = 'dil-master-v2026.10.04-r5';
+const SW_VERSION = 'dil-master-v2026.10.05-r1';
 
 // Güncellemeler anında devreye girsin (skipWaiting + clients.claim)
 self.addEventListener('install', (event) => {

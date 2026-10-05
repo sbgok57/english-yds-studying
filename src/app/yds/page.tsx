@@ -98,25 +98,26 @@ export default function YdsHubPage() {
         {/* Hızlı Aksiyon Butonları */}
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
-            href="/exams/yds-2024-ilkbahar"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all"
+            href="/study-plans?exam=yds"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all"
           >
-            <Clock className="w-4 h-4 text-slate-950" />
+            <span>📅</span>
+            <span>YDS Çalışma Programları (30–120 Gün & Özel Plan)</span>
+          </Link>
+
+          <Link
+            href="/exams/yds-2024-ilkbahar"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
+          >
+            <Clock className="w-4 h-4 text-cyan-300" />
             <span>Son Çıkmış YDS'yi Başlat (2024)</span>
           </Link>
 
           <Link
             href="/vocabulary/flashcards?exam=YDS"
-            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
-          >
-            <span>🃏 3D YDS Kelime Kartları</span>
-          </Link>
-
-          <Link
-            href="/vocabulary/inventory?exam=YDS"
             className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 font-bold text-xs sm:text-sm transition-all"
           >
-            <span>📖 YDS Kelime Envanteri</span>
+            <span>🃏 3D YDS Kelime Kartları</span>
           </Link>
         </div>
       </div>

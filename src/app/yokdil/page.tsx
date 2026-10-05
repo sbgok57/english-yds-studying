@@ -136,25 +136,26 @@ export default function YokdilHubPage() {
         {/* Hızlı Butonlar */}
         <div className="flex flex-wrap gap-3 pt-2">
           <Link
-            href="/exams?category=YÖKDİL"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black text-xs sm:text-sm shadow-xl shadow-purple-500/20 hover:scale-105 active:scale-95 transition-all"
+            href="/study-plans?exam=yokdil"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 text-white font-black text-xs sm:text-sm shadow-xl shadow-purple-500/20 hover:scale-105 active:scale-95 transition-all"
           >
-            <Clock className="w-4 h-4 text-white" />
-            <span>YÖKDİL Alan Denemelerini Aç (72 Deneme)</span>
+            <span>📅</span>
+            <span>YÖKDİL Çalışma Programları (Sağlık · Fen · Sosyal)</span>
+          </Link>
+
+          <Link
+            href="/exams?category=YÖKDİL"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
+          >
+            <Clock className="w-4 h-4 text-purple-300" />
+            <span>Alan Denemeleri (72 Sınav)</span>
           </Link>
 
           <Link
             href="/vocabulary/flashcards?exam=YÖKDİL"
-            className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all"
-          >
-            <span>🃏 3D YÖKDİL Alan Kelimeleri</span>
-          </Link>
-
-          <Link
-            href="/vocabulary/inventory?exam=YÖKDİL"
             className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/40 text-purple-200 font-bold text-xs sm:text-sm transition-all"
           >
-            <span>📖 YÖKDİL Kelime Envanteri</span>
+            <span>🃏 3D YÖKDİL Alan Kelimeleri</span>
           </Link>
         </div>
       </div>

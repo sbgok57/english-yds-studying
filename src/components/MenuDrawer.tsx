@@ -168,19 +168,20 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
             </button>
 
             <Link
-              href="/ayarlar"
+              href="/temalar"
               onClick={handleSafeClose}
-              className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-cyan-400/40 flex items-center justify-between group transition-all"
+              className="p-2.5 rounded-xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 border border-pink-400/30 hover:border-pink-300 flex items-center justify-between group transition-all"
             >
               <div className="flex items-center gap-2">
-                <span className="text-base">⚙️</span>
+                <span className="text-base">🎨</span>
                 <div>
-                  <h5 className="text-[11px] font-bold text-white group-hover:text-cyan-300">
-                    Detaylı Tema & Ayarlar Stüdyosu
+                  <h5 className="text-[11px] font-bold text-white group-hover:text-pink-300">
+                    1.000+ Tema Stüdyosu Bölümü (Tam Sayfa)
                   </h5>
+                  <span className="text-[9px] text-white/50 block">250 Desenli & 750 Desensiz Tema Rehberi</span>
                 </div>
               </div>
-              <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="w-4 h-4 text-pink-300 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
@@ -216,7 +217,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
             {/* Hızlı Plan Başlatıcı / Sınav Seçenekleri */}
             <div className="grid grid-cols-3 gap-1.5">
               <Link
-                href="/study-plans"
+                href="/study-plans?exam=yds"
                 onClick={handleSafeClose}
                 className="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-center transition-all group"
               >
@@ -227,7 +228,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
               </Link>
 
               <Link
-                href="/study-plans"
+                href="/study-plans?exam=ydt"
                 onClick={handleSafeClose}
                 className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
               >
@@ -238,7 +239,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
               </Link>
 
               <Link
-                href="/study-plans"
+                href="/study-plans?exam=yokdil"
                 onClick={handleSafeClose}
                 className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
               >
@@ -248,6 +249,21 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 <span className="text-[9px] text-white/50 block">3 Alan</span>
               </Link>
             </div>
+
+            {/* Özel Plan Oluşturucu Kısayolu */}
+            <Link
+              href="/study-plans?tab=generator"
+              onClick={handleSafeClose}
+              className="w-full p-2.5 rounded-xl bg-gradient-to-r from-cyan-500/15 to-purple-500/15 border border-cyan-400/30 hover:border-cyan-300 flex items-center justify-between text-xs font-bold text-cyan-200 transition-all group"
+            >
+              <span className="flex items-center gap-1.5">
+                <span>✨</span>
+                <span>Kendi Özel Çalışma Planını Oluştur</span>
+              </span>
+              <span className="text-[10px] px-2 py-0.5 rounded-lg bg-cyan-400/20 text-cyan-300 font-mono">
+                Takvimli 🚀
+              </span>
+            </Link>
           </div>
 
           {/* 🚀 HAFIZA VE DEPOLAMA GENİŞLETİCİ (2.048 MB / 2 GB IndexedDB) */}
