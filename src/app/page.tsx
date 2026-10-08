@@ -5,6 +5,7 @@ import ProgressPanel from "@/components/ProgressPanel";
 import DailyTasksPanel from "@/components/DailyTasksPanel";
 import MotivationBox from "@/components/MotivationBox";
 import ExamModeSwitcher from "@/components/ExamModeSwitcher";
+import ExamProgramsSection from "@/components/ExamPrograms";
 
 const STATIONS = [
   {
@@ -18,9 +19,9 @@ const STATIONS = [
   {
     href: "/study-plans",
     emoji: "📅",
-    title: "YDS Çalışma Programları",
-    desc: "7–180 günlük hedefe özel çalışma planları, günlük görev takibi ve CEFR A1–C2 seviye rehberleri.",
-    cta: "Planları İncele",
+    title: "Sınav Çalışma Programları",
+    desc: "YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) için 7–180 günlük hedefe özel çalışma planları, günlük takvim ve CEFR A1–C2 seviye rehberleri.",
+    cta: "Programları İncele",
     color: "from-purple-500 to-indigo-600",
   },
   {
@@ -272,6 +273,11 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+
+      {/* 🚀 ENTERPRISE SINAV ÇALIŞMA PROGRAMLARI (YDS, YDT, YÖKDİL DİNAMİK VERİ MODELİ) */}
+      <Reveal delay={150}>
+        <ExamProgramsSection />
+      </Reveal>
 
       {/* STATS */}
       <section className="my-16">

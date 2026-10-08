@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import {
   PAGES,
   GRAMMAR_LINKS,
@@ -39,6 +40,7 @@ interface MenuDrawerProps {
 
 export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
   const [themeModal, setThemeModal] = useState(false);
+  const drawerRef = useRef<HTMLElement>(null);
   const { usage } = useUsage();
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
   const grammarCount = Object.keys(usage.grammar || {}).length;
@@ -51,6 +53,21 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
     questionsSolved: usage.exams?.totalQuestions || 0,
     examsTaken: usage.exams?.taken || 0,
   });
+
+  const handleSafeClose = () => {
+    try {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "auto";
+      }
+      onClose();
+    } catch (e) {
+      console.error("[MenuDrawer] Close error suppressed:", e);
+      onClose();
+    }
+  };
+
+  // 🛡️ useOnClickOutside: Dışarı tıklandığında menüyü hatasız ve bellek sızıntısız kapat
+  useOnClickOutside(drawerRef, handleSafeClose, open);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -72,11 +89,6 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
     };
   }, [open, onClose]);
 
-  const handleSafeClose = () => {
-    document.body.style.overflow = "auto";
-    onClose();
-  };
-
   if (!open) return null;
 
   const GroupTitle = ({ title, emoji }: { title: string; emoji: string }) => (
@@ -86,15 +98,25 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
   );
 
   return (
-    <div className="fixed inset-0 z-[100] transition-opacity duration-300">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Ana Navigasyon Menüsü"
+      className="fixed inset-0 z-[9999] transition-opacity duration-300 pointer-events-auto"
+    >
       {/* Şeffaf Temiz Arkaplan Katmanı (Karanlık çamurlu değil, net cam) */}
       <div
-        className="absolute inset-0 bg-slate-950/25 dark:bg-black/35 light:bg-slate-900/10 backdrop-blur-[2px] animate-in fade-in duration-200"
+        aria-hidden="true"
+        className="absolute inset-0 bg-slate-950/40 dark:bg-black/60 light:bg-slate-900/20 backdrop-blur-[4px] animate-in fade-in duration-200"
         onClick={handleSafeClose}
       />
 
-      {/* Yan Çekmece (Sidebar) - Net, kristal kontrast ve aydınlık uyumu */}
-      <aside className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-900/92 dark:bg-slate-950/92 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col transition-colors">
+      {/* Yan Çekmece (Sidebar) - z-[9999] zırhı ile korunmuş, ref kontrollü */}
+      <aside
+        ref={drawerRef}
+        tabIndex={-1}
+        className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-900/95 dark:bg-slate-950/95 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col transition-colors z-[10000]"
+      >
         {/* Üst Sabit Çubuk: Başlık, 1000+ Tema Butonu, Tema Değiştirici ve Kapatma Butonu */}
         <div className="sticky top-0 z-20 bg-slate-900/90 dark:bg-slate-950/90 light:bg-white/95 backdrop-blur-2xl border-b border-white/15 light:border-slate-200 px-5 py-3.5 space-y-3 shrink-0">
           <div className="flex items-center justify-between">
