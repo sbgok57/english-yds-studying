@@ -10,6 +10,7 @@ import {
   getSavedTheme,
 } from "@/lib/themes/engine";
 import { Sun, Moon, Sparkles, Check, Search, Palette, RotateCcw } from "lucide-react";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
 
 export default function ThemeStudio() {
   const [activeTheme, setActiveTheme] = useState<ThemePalette | null>(null);
@@ -18,6 +19,7 @@ export default function ThemeStudio() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [mounted, setMounted] = useState<boolean>(false);
+  const [showResetDialog, setShowResetDialog] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -162,8 +164,8 @@ export default function ThemeStudio() {
             </div>
 
             <button
-              onClick={handleReset}
-              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1 border border-slate-700 transition-colors"
+              onClick={() => setShowResetDialog(true)}
+              className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1 border border-slate-700 transition-colors cursor-pointer"
               title="Varsayılan temaya dön"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -377,6 +379,20 @@ export default function ThemeStudio() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={showResetDialog}
+        title="Temayı Sıfırla"
+        description="Varsayılan temaya (Tema #1 Koyu Mod) geri dönmek istediğine emin misin? Kişiselleştirilmiş renk seçimin sıfırlanacaktır."
+        confirmLabel="Evet, Sıfırla"
+        cancelLabel="Vazgeç"
+        destructive
+        onConfirm={() => {
+          handleReset();
+          setShowResetDialog(false);
+        }}
+        onCancel={() => setShowResetDialog(false)}
+      />
     </div>
   );
 }

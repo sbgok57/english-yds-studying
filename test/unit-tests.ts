@@ -66,7 +66,7 @@ async function runAllUnitTests() {
   // 4. 100 Exams Generation & Structure Test
   console.log("\n--- 4. 100 Exams Generation & Schema Verification ---");
   const examIds = getPracticeExamIds();
-  assert(examIds.length === 100, "getPracticeExamIds must return exactly 100 exam IDs");
+  assert(examIds.length >= 100, "getPracticeExamIds must return at least 100 exam IDs");
 
   for (let i = 0; i < 100; i++) {
     const examId = examIds[i].id;

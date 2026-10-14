@@ -640,8 +640,225 @@ section {
   .anim-float,
   .anim-pulse-glow,
   .animate-wiggle,
-  .animate-spin-slow {
+  .animate-spin-slow,
+  .yds-visual-memory-flipper {
     animation: none !important;
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   YDS ENTERPRISE DEFENSIVE COMPONENTS & ADDONS
+   ========================================================================== */
+
+/* Dialog & Modals */
+.yds-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.yds-confirm-dialog {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  max-width: 28rem;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  color: #f8fafc;
+}
+
+.yds-confirm-dialog h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.yds-confirm-dialog p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.yds-confirm-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Button variants */
+.yds-button {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  color: #020617;
+  border: none;
+}
+.yds-button:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.yds-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.yds-button-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.yds-button-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+.yds-button-danger {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* Whack-a-Mole Game */
+.yds-mole-game {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(2, 6, 23, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  color: #fff;
+}
+.yds-mole-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.yds-mole-progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.yds-mole-progressbar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.yds-mole-progressbar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to right, #ec4899, #06b6d4);
+  transition: width 0.3s ease;
+}
+.yds-mole-field {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+.yds-mole-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.yds-mole-choice:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(6, 182, 212, 0.4);
+  transform: translateY(-2px);
+}
+.yds-mole-choice.is-correct {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+.yds-mole-choice.is-wrong {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+.yds-mole-feedback {
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+.yds-mole-feedback.is-correct {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+.yds-mole-feedback.is-incorrect {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* 3D Visual Memory Card */
+.yds-visual-memory-card {
+  border-radius: 1.25rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem;
+}
+.yds-visual-memory-scene {
+  perspective: 1000px;
+  min-height: 240px;
+  display: flex;
+}
+.yds-visual-memory-flipper {
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+.yds-visual-memory-flipper[data-revealed="true"] {
+  transform: rotateY(180deg);
+}
+.yds-visual-memory-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.yds-visual-memory-front {
+  background: rgba(0, 0, 0, 0.4);
+}
+.yds-visual-memory-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.yds-visual-memory-back {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transform: rotateY(180deg);
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+

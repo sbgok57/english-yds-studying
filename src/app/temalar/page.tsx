@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ThemeStudio from "@/components/theme/ThemeStudio";
+import ThemeTabsView from "@/components/theme/ThemeTabsView";
 import Link from "next/link";
 import { Sparkles, Palette, Layers, CheckCircle2, ShieldCheck } from "lucide-react";
 
@@ -65,8 +65,8 @@ export default function TemalarPage() {
         </div>
       </header>
 
-      {/* Ana Tema Stüdyosu Bileşeni */}
-      <ThemeStudio />
+      {/* Ana Tema Stüdyosu Sekmeli Bileşeni */}
+      <ThemeTabsView />
 
       {/* Teknik Bilgilendirme ve Güvence */}
       <div className="rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl p-6 sm:p-8 space-y-4">
