@@ -54,7 +54,7 @@ const projectJsonPath = path.join(dotVercel, "project.json");
 if (!fs.existsSync(projectJsonPath)) {
   console.log("🔗 Vercel Proje Bağlantısı (english-yds-studying) yapılandırılıyor...");
   try {
-    execSync(`npx vercel link --yes --project ${PROJECT_NAME}`, { cwd: rootDir, stdio: "inherit" });
+    execSync(`npx --yes vercel link --yes --project ${PROJECT_NAME}`, { cwd: rootDir, stdio: "inherit" });
   } catch {
     console.log("ℹ️  Vercel link komutu yerel token gerektirebilir; git tabanlı otomatik dağıtım devrede.");
   }
@@ -64,7 +64,7 @@ if (!fs.existsSync(projectJsonPath)) {
 console.log("\n🌐 Vercel Domain Alias Tanımlaması Yapılıyor...");
 try {
   // vercel alias komutu ile mevcut prod linkine yeni alias bağlanır
-  const aliasCmd = `npx vercel alias set ${PRIMARY_CANONICAL_URL} ${DEFAULT_NEW_ALIAS}`;
+  const aliasCmd = `npx --yes vercel alias set ${PRIMARY_CANONICAL_URL} ${DEFAULT_NEW_ALIAS}`;
   run(aliasCmd, `Yeni Domain / Alias Tanımlanıyor (${DEFAULT_NEW_ALIAS})`);
 } catch (e) {
   console.warn("Domain atama bildirimi:", e.message);
