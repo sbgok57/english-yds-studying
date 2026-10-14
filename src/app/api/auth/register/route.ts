@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
     }
 
     const username =
-      rawUsername.replace(/[^a-zA-Z0-9_]/g, "").slice(0, 20) ||
+      rawUsername.trim().replace(/[^\p{L}\p{N}_.\-]/gu, "").slice(0, 30) ||
       `kullanici_${Date.now().toString().slice(-4)}`;
 
     if (username.length < 3) {

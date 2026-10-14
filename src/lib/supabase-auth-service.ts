@@ -240,6 +240,46 @@ export async function loginPermanentUser(
       if (profile && profile.email) {
         targetEmail = profile.email.toLowerCase();
         resolvedUsername = profile.full_name || identifier;
+      } else {
+        // Fallback A: Check local/sqlite user record for email associated with username
+        try {
+          const localMatch = await prisma.user.findFirst({
+            where: {
+              OR: [
+                { username: identifier },
+                { username: identifier.toLowerCase() },
+              ],
+            },
+            select: { email: true, username: true },
+          });
+          if (localMatch?.email) {
+            targetEmail = localMatch.email.toLowerCase();
+            resolvedUsername = localMatch.username || identifier;
+          }
+        } catch {
+          // Prisma fallback non-fatal
+        }
+
+        // Fallback B: If still not resolved, inspect Supabase Auth user metadata
+        if (!targetEmail) {
+          try {
+            const { data: usersData } = await adminClient.auth.admin.listUsers({ page: 1, perPage: 100 });
+            if (usersData?.users) {
+              const matchedUser = usersData.users.find(
+                (u) =>
+                  u.user_metadata?.username?.toLowerCase() === identifier.toLowerCase() ||
+                  u.user_metadata?.full_name?.toLowerCase() === identifier.toLowerCase() ||
+                  u.user_metadata?.name?.toLowerCase() === identifier.toLowerCase()
+              );
+              if (matchedUser?.email) {
+                targetEmail = matchedUser.email.toLowerCase();
+                resolvedUsername = matchedUser.user_metadata?.username || identifier;
+              }
+            }
+          } catch {
+            // Auth admin list non-fatal
+          }
+        }
       }
     } catch (err) {
       console.warn("[AUTH_PERMANENT] Username lookup in profiles notice:", err);

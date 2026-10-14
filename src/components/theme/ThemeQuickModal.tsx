@@ -87,7 +87,12 @@ export default function ThemeQuickModal({ open, onClose }: ThemeQuickModalProps)
   };
 
   return (
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="1.000+ Algoritmik Tema Motoru"
+      className="fixed inset-0 z-[10002] flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+    >
       {/* Şeffaf Temiz Arkaplan Katmanı (Karanlık çamurlu değil, net cam) */}
       <div
         className="absolute inset-0 bg-slate-900/30 dark:bg-black/40 backdrop-blur-sm"

@@ -15,7 +15,7 @@ import {
   LEVEL_TEST_RESULT_STORAGE_KEY,
 } from "@/lib/data-level-test";
 import PushManager from "@/components/PushManager";
-import ThemeStudio from "@/components/theme/ThemeStudio";
+import ThemeTabsView from "@/components/theme/ThemeTabsView";
 
 function hashStr(s: string): number {
   let h = 0;
@@ -487,7 +487,7 @@ export default function HesapPage() {
                 1000+ Tema
               </span>
             </div>
-            <ThemeStudio />
+            <ThemeTabsView />
           </div>
 
           {/* Push Bildirim ve Hatırlatıcı Ayarları */}
@@ -755,7 +755,7 @@ export default function HesapPage() {
                 1000+ Tema
               </span>
             </div>
-            <ThemeStudio />
+            <ThemeTabsView />
           </div>
         </div>
       )}
