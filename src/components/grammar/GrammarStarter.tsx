@@ -2,6 +2,12 @@
 
 import { useEffect, useId, useState, useRef } from "react";
 import { GRAMMAR_LESSONS, type GrammarLesson } from "./grammar-curriculum";
+import {
+  loadGrammarProgress,
+  saveGrammarProgress,
+  currentLessonIndex,
+  type GrammarProgress,
+} from "../../shared/grammar-progress";
 import { Sparkles, Volume2, VolumeX, CheckCircle2, XCircle, ArrowLeft, ArrowRight, RotateCcw, Award } from "lucide-react";
 
 export type GrammarVoiceProfile = {
@@ -74,6 +80,27 @@ export function GrammarStarter({
 
   const lesson = GRAMMAR_LESSONS[lessonIndex] ?? GRAMMAR_LESSONS[0]!;
   const progressPercent = Math.round((completed.size / GRAMMAR_LESSONS.length) * 100);
+
+  // Load progress from resilient storage on mount
+  useEffect(() => {
+    const loaded = loadGrammarProgress();
+    const idx = currentLessonIndex(loaded);
+    setLessonIndex(idx);
+    setCompleted(new Set(loaded.completedLessonIds));
+    setAnswerIndex(loaded.answerIndex);
+  }, []);
+
+  // Helper to persist current progress
+  const persistProgress = (nextLessonIndex: number, nextCompleted: Set<string>, nextAnswer: number | null) => {
+    const activeLesson = GRAMMAR_LESSONS[nextLessonIndex] ?? GRAMMAR_LESSONS[0];
+    saveGrammarProgress({
+      version: 1,
+      currentLessonId: activeLesson?.id ?? "",
+      completedLessonIds: Array.from(nextCompleted),
+      answerIndex: nextAnswer,
+      updatedAt: new Date().toISOString(),
+    });
+  };
 
   // PERF: Clean up speech audio on unmount
   useEffect(() => {
@@ -198,15 +225,19 @@ export function GrammarStarter({
     setLessonIndex(nextIndex);
     setAnswerIndex(null);
     setSpeechError("");
+    persistProgress(nextIndex, completed, null);
   }
 
   function answer(index: number) {
     if (answerIndex !== null) return;
     setAnswerIndex(index);
+    let nextCompleted = completed;
     if (index === lesson.quiz.answerIndex && !completed.has(lesson.id)) {
-      setCompleted((current) => new Set(current).add(lesson.id));
+      nextCompleted = new Set(completed).add(lesson.id);
+      setCompleted(nextCompleted);
       onLessonCompleted?.(lesson.id);
     }
+    persistProgress(lessonIndex, nextCompleted, index);
   }
 
   return (
