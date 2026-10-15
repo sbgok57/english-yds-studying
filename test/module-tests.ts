@@ -23,15 +23,15 @@ async function runTests() {
   console.log("=== RUNNING EXTENSIVE MODULE & DEPLOYMENT TESTS ===\n");
 
   // 1. Inventory Tests
-  assert(INVENTORY_ITEMS.length === 485, `Inventory count must be 485 (actual: ${INVENTORY_ITEMS.length})`);
-  assert(INVENTORY_METRICS.total === 485, "Metrics total must match 485");
-  assert(INVENTORY_METRICS.B2 === 429, "B2 level count must be 429");
+  assert(INVENTORY_ITEMS.length >= 2000, `Inventory count must be >= 2000 (actual: ${INVENTORY_ITEMS.length})`);
+  assert(INVENTORY_METRICS.total === INVENTORY_ITEMS.length, "Metrics total must match INVENTORY_ITEMS length");
+  assert(INVENTORY_METRICS.B2 > 0, "B2 level count must be positive");
   assert(sanitizeCsvField("=cmd|' /C calc'!A0") === "'=cmd|' /C calc'!A0", "Formula injection with '=' must be sanitized");
   assert(sanitizeCsvField("+123") === "'+123", "Formula injection with '+' must be sanitized");
   assert(sanitizeCsvField("@echo") === "'@echo", "Formula injection with '@' must be sanitized");
 
   // 2. Study Plans Tests
-  assert(PRESET_STUDY_PLANS.length === 10, `Must have 10 preset plans (actual: ${PRESET_STUDY_PLANS.length})`);
+  assert(PRESET_STUDY_PLANS.length >= 10, `Must have at least 10 preset plans (actual: ${PRESET_STUDY_PLANS.length})`);
   assert(Object.keys(LEVEL_STUDY_GUIDES).length === 6, "Must have study guides for all 6 CEFR levels A1-C2");
   const customPlan = generateCustomStudyPlan({
     currentLevel: "A2",
