@@ -675,20 +675,21 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
               </Link>
 
               <Link
-                href="/games"
+                href="/games#game-library"
                 onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-amber-400/30 flex items-center justify-between group transition-all"
+                className="p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-600/20 to-amber-500/20 border-2 border-amber-400/50 hover:border-amber-300 hover:scale-[1.01] flex items-center justify-between group transition-all shadow-lg"
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">🎮</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">🎮</span>
                   <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-amber-300">
-                      Eğitici Oyunlar (6 Oyun)
+                    <h5 className="text-xs font-black text-white group-hover:text-amber-300 flex items-center gap-1.5">
+                      <span>Oyun Kütüphanesi</span>
+                      <span className="px-2 py-0.2 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black">240+ Oyun</span>
                     </h5>
-                    <p className="text-[10px] text-white/50">Eşleştirme, Köstebek Vur, Zar, Çarkıfelek</p>
+                    <p className="text-[10px] text-white/60">10 özgün mekanik • 24 gramer konusu • %100 çevrimdışı</p>
                   </div>
                 </div>
-                <ChevronRight className="w-4 h-4 text-amber-300" />
+                <ChevronRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
