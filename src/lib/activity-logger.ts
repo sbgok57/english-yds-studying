@@ -32,17 +32,53 @@ const PENDING_QUEUE_KEY = "yds-master-pending-activities-v1";
 function getClientUserCredentials(): { userEmail?: string; username?: string } {
   if (typeof window === "undefined") return {};
   try {
-    const email = window.localStorage.getItem(SESSION_KEY);
+    // 1. Doğrudan saklanan oturum anahtarları
+    let email =
+      window.localStorage.getItem(SESSION_KEY) ||
+      window.localStorage.getItem("yds_email") ||
+      window.localStorage.getItem("email");
+    let username =
+      window.localStorage.getItem("yds_username") ||
+      window.localStorage.getItem("username");
+
+    // 2. Supabase auth oturumu (yds-auth)
+    if (!email) {
+      const sbAuthRaw = window.localStorage.getItem("yds-auth");
+      if (sbAuthRaw) {
+        try {
+          const sbAuth = JSON.parse(sbAuthRaw);
+          email = sbAuth?.user?.email || sbAuth?.currentSession?.user?.email;
+          username =
+            sbAuth?.user?.user_metadata?.username ||
+            sbAuth?.user?.user_metadata?.name ||
+            username;
+        } catch {
+          // ignore
+        }
+      }
+    }
+
+    // 3. Kayıtlı hesaplar kütüğü eşleşmesi
     if (email) {
       const rawAccounts = window.localStorage.getItem(ACCOUNTS_KEY);
       if (rawAccounts) {
-        const accounts = JSON.parse(rawAccounts);
-        const match = accounts.find((a: any) => a.email === email);
-        if (match) {
-          return { userEmail: match.email, username: match.name };
+        try {
+          const accounts = JSON.parse(rawAccounts);
+          const match = accounts.find(
+            (a: any) => a.email?.toLowerCase() === email?.toLowerCase()
+          );
+          if (match) {
+            return { userEmail: match.email, username: match.name || username };
+          }
+        } catch {
+          // ignore
         }
       }
-      return { userEmail: email };
+      return { userEmail: email, username: username || undefined };
+    }
+
+    if (username) {
+      return { username };
     }
   } catch {
     // Ignore storage read errors

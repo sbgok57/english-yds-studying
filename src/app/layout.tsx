@@ -11,8 +11,6 @@ import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import FloatingSideBar from "@/components/FloatingSideBar";
-import DesktopSidebar from "@/components/DesktopSidebar";
 
 export const metadata: Metadata = {
   title: "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık ve Sınav Akademisi",
@@ -78,9 +76,7 @@ export default function RootLayout({
             <ThemeProvider>
               <ThemeInitializer />
               <Header />
-              <DesktopSidebar />
-              <main className="min-h-[calc(100vh-4rem)] xl:pl-[72px] transition-[padding] duration-300">{children}</main>
-              <FloatingSideBar />
+              <main className="min-h-[calc(100vh-4rem)] transition-all duration-300">{children}</main>
               <AiWidget />
               <RecoveryBanner />
               <ErrorToast />
@@ -90,7 +86,7 @@ export default function RootLayout({
             </ThemeProvider>
           </BadgeQueueProvider>
         </CrashGuardianProvider>
-        <footer className="border-t border-white/10 py-8 mt-12 xl:pl-[72px] transition-[padding] duration-300">
+        <footer className="border-t border-white/10 py-8 mt-12 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
               🧠 DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.

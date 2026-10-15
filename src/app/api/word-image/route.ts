@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const TYPE_EMOJIS: Record<string, string> = {
@@ -12,10 +13,17 @@ const TYPE_EMOJIS: Record<string, string> = {
   genel: "💡",
 };
 
+// Generates high quality 3D isometric prompt for vocabulary visual memory
+function generate3dVisualPrompt(english: string, turkish: string, type: string): string {
+  const cleanEn = english.replace(/[^a-zA-Z\s-]/g, "").trim();
+  const cleanTr = turkish.replace(/["']/g, "").trim();
+  return `3D isometric digital render of ${cleanEn}, concept representing ${cleanTr}, cute blender 3d style, vibrant colors, soft studio lighting, high detail, clean composition, educational flashcard visual, octane render`;
+}
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const wordId = searchParams.get("id");
-  const english = searchParams.get("word");
+  const english = searchParams.get("word")?.trim();
 
   if (!wordId && !english) {
     return NextResponse.json(
@@ -27,66 +35,59 @@ export async function GET(req: NextRequest) {
   try {
     const word = wordId
       ? await prisma.word.findUnique({ where: { id: wordId } })
-      : await prisma.word.findFirst({ where: { english: english || "" } });
+      : await prisma.word.findFirst({
+          where: { english: english },
+        });
 
-    if (!word) {
-      return NextResponse.json({
-        emoji: "💡",
-        source: "fallback-notfound",
-      });
-    }
+    const targetEnglish = word?.english || english || "vocabulary";
+    const targetTurkish = word?.turkish || "kelime";
+    const targetType = word?.type || "genel";
 
-    // 1. Katman: DB'de kayıtlı görsel
-    if (word.imageUrl) {
+    // 1. Katman: DB'de kayıtlı doğrulanmış 3D görsel
+    if (word?.imageUrl && word.imageUrl.startsWith("http")) {
       return NextResponse.json({
         imageUrl: word.imageUrl,
         source: "db",
+        word: targetEnglish,
+        meaning: targetTurkish,
       });
     }
 
-    // 2. Katman: Unsplash API (Eğer Access Key tanımlıysa bir kere çek ve DB'ye kaydet)
-    if (process.env.UNSPLASH_ACCESS_KEY) {
-      try {
-        const unsplashRes = await fetch(
-          `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
-            word.english
-          )}&per_page=1&orientation=squarish`,
-          {
-            headers: {
-              Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`,
-            },
-          }
-        );
+    // 2. Katman: Yapay Zeka 3D Görsel Hafıza Motoru (Pollinations 3D Blender Sanatı)
+    const prompt = generate3dVisualPrompt(targetEnglish, targetTurkish, targetType);
+    const hash = Array.from(targetEnglish).reduce((acc, char) => acc + char.charCodeAt(0), 42);
+    const ai3dImageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
+      prompt
+    )}?width=512&height=512&nologo=true&seed=${hash}`;
 
-        if (unsplashRes.ok) {
-          const unsplashData = await unsplashRes.json();
-          const foundUrl = unsplashData.results?.[0]?.urls?.small;
-          if (foundUrl) {
-            await prisma.word.update({
-              where: { id: word.id },
-              data: { imageUrl: foundUrl },
-            });
-            return NextResponse.json({
-              imageUrl: foundUrl,
-              source: "unsplash",
-            });
-          }
-        }
-      } catch (apiErr) {
-        console.warn("Unsplash fetch skipped:", apiErr);
-      }
+    // PERF: Gelecek tıklamalarda sıfır gecikme için DB'ye arka planda kaydet
+    if (word?.id) {
+      prisma.word
+        .update({
+          where: { id: word.id },
+          data: { imageUrl: ai3dImageUrl },
+        })
+        .catch((updateErr) => {
+          console.warn("[WORD_IMAGE_CACHE_WARN] DB image cache skipped:", updateErr);
+        });
     }
 
-    // 3. Katman: Türe göre garantili emoji (asla boş kalmaz!)
-    const emoji = TYPE_EMOJIS[word.type.toLowerCase()] || "💡";
     return NextResponse.json({
-      emoji,
-      type: word.type,
-      source: "fallback-emoji",
+      imageUrl: ai3dImageUrl,
+      source: "ai-3d-render",
+      prompt,
+      word: targetEnglish,
+      meaning: targetTurkish,
+      emoji: TYPE_EMOJIS[targetType.toLowerCase()] || "💡",
     });
   } catch (error) {
-    console.error("Word image error:", error);
+    console.error("[WORD_IMAGE_ROUTE_ERROR]:", error);
+    // SAFETY: Never crash, return clean fallback
+    const targetEnglish = english || "vocabulary";
     return NextResponse.json({
+      imageUrl: `https://image.pollinations.ai/prompt/3D%20cute%20isometric%20book%20render%20for%20learning%20${encodeURIComponent(
+        targetEnglish
+      )}?width=512&height=512&nologo=true`,
       emoji: "💡",
       source: "error-fallback",
     });

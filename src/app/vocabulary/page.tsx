@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import TTSPlayer from "@/components/tts/TTSPlayer";
 import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
+import WordDetailModal, { WordDetailItem } from "@/components/vocabulary/WordDetailModal";
 import { cn } from "@/lib/utils";
 
 interface WordItem {
@@ -139,6 +140,7 @@ function VocabularyContent() {
   const [loading, setLoading] = useState(true);
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
   const [showVoicePicker, setShowVoicePicker] = useState(false);
+  const [modalWord, setModalWord] = useState<WordDetailItem | null>(null);
 
   const fetchWords = useCallback(async () => {
     setLoading(true);
@@ -416,7 +418,16 @@ function VocabularyContent() {
             return (
               <div
                 key={word.id}
-                className="card-vibrant p-6 space-y-4 flex flex-col justify-between group hover:border-yellow-400/40 transition-all hover:scale-[1.01]"
+                onClick={() => setModalWord(word)}
+                className="card-vibrant p-6 space-y-4 flex flex-col justify-between group hover:border-yellow-400/60 transition-all hover:scale-[1.02] cursor-pointer shadow-lg hover:shadow-yellow-500/10"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setModalWord(word);
+                  }
+                }}
               >
                 <div>
                   {/* Sınav Rozetleri, Seviye ve TTS Butonu */}
@@ -452,12 +463,17 @@ function VocabularyContent() {
                         </span>
                       )}
                     </div>
-                    <TTSPlayer text={word.english} size="sm" showControls={false} />
+                    <div onClick={(e) => e.stopPropagation()}>
+                      <TTSPlayer text={word.english} size="sm" showControls={false} />
+                    </div>
                   </div>
 
                   {/* Kelime ve Türkçe Anlam (Quizlet Display Contract) */}
-                  <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors">
-                    {word.english}
+                  <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors flex items-center justify-between">
+                    <span>{word.english}</span>
+                    <span className="text-xs font-normal text-yellow-400/80 group-hover:translate-x-1 transition-transform">
+                      3D İncele ➜
+                    </span>
                   </h3>
                   <p className="text-lg font-bold text-cyan-200 light:text-cyan-700 mt-1">
                     {word.turkish}
@@ -489,6 +505,13 @@ function VocabularyContent() {
           })}
         </div>
       )}
+
+      {/* 🖼️ 3D Görsel Hafıza & 14 Aksan Ses Modalı */}
+      <WordDetailModal
+        word={modalWord}
+        isOpen={Boolean(modalWord)}
+        onClose={() => setModalWord(null)}
+      />
     </div>
   );
 }

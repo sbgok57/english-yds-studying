@@ -326,44 +326,8 @@ export async function GET(req: NextRequest) {
             createdAt: att.createdAt.toISOString(),
           }));
 
-          // Baseline benchmark exams for registered student if zero exam attempts recorded yet
-          if (attempts.length === 0 && (username === "yagoo_x" || email.includes("yagiz"))) {
-            attempts = [
-              {
-                id: "yagiz-att-1",
-                examId: "yds-2024-ilkbahar",
-                score: 85,
-                net: 68.75,
-                correct: 71,
-                wrong: 9,
-                empty: 0,
-                timeSpent: 162,
-                createdAt: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
-              },
-              {
-                id: "yagiz-att-2",
-                examId: "ydt-2023",
-                score: 90,
-                net: 72.5,
-                correct: 74,
-                wrong: 6,
-                empty: 0,
-                timeSpent: 112,
-                createdAt: new Date(Date.now() - 28 * 3600 * 1000).toISOString(),
-              },
-              {
-                id: "yagiz-att-3",
-                examId: "yokdil-2023-sosyal-ilkbahar",
-                score: 82,
-                net: 65.0,
-                correct: 68,
-                wrong: 12,
-                empty: 0,
-                timeSpent: 158,
-                createdAt: new Date(Date.now() - 72 * 3600 * 1000).toISOString(),
-              },
-            ];
-          }
+          // Genuine exam attempts only (Zero mock bots/benchmarks)
+          // Real exam attempts are queried directly from prisma.examAttempt
 
           const totalExams = attempts.length;
           const avgNet = totalExams > 0
@@ -438,48 +402,14 @@ export async function GET(req: NextRequest) {
       console.warn("[ADMIN_STUDENTS_DB_WARN] Failed to query DB users:", dbErr);
     }
 
-    // Always ensure Yağız (yagoo_x) is present with his registered information
+    // Always ensure Yağız (yagoo_x) is present with his registered information (genuine data only)
     if (!studentsMap.has("yagiz.ilhan32@gmail.com")) {
-      const yagizAttempts: StudentExamAttemptSummary[] = [
-        {
-          id: "yagiz-att-1",
-          examId: "yds-2024-ilkbahar",
-          score: 85,
-          net: 68.75,
-          correct: 71,
-          wrong: 9,
-          empty: 0,
-          timeSpent: 162,
-          createdAt: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
-        },
-        {
-          id: "yagiz-att-2",
-          examId: "ydt-2023",
-          score: 90,
-          net: 72.5,
-          correct: 74,
-          wrong: 6,
-          empty: 0,
-          timeSpent: 112,
-          createdAt: new Date(Date.now() - 28 * 3600 * 1000).toISOString(),
-        },
-        {
-          id: "yagiz-att-3",
-          examId: "yokdil-2023-sosyal-ilkbahar",
-          score: 82,
-          net: 65.0,
-          correct: 68,
-          wrong: 12,
-          empty: 0,
-          timeSpent: 158,
-          createdAt: new Date(Date.now() - 72 * 3600 * 1000).toISOString(),
-        },
-      ];
+      const yagizAttempts: StudentExamAttemptSummary[] = [];
 
       const { activities, skillBreakdown } = buildStudentActivitiesAndBreakdown(
         yagizAttempts,
         "yagoo_x",
-        "2026-09-29T17:54:52.238Z"
+        "2026-09-30T10:57:05.666Z"
       );
 
       studentsMap.set("yagiz.ilhan32@gmail.com", {
@@ -487,15 +417,15 @@ export async function GET(req: NextRequest) {
         username: "yagoo_x",
         email: "yagiz.ilhan32@gmail.com",
         level: "A1",
-        streak: 4,
-        totalPoints: 340,
-        createdAt: "2026-09-29T17:54:52.238Z",
-        totalExams: yagizAttempts.length,
-        avgNet: 68.8,
-        bestScore: 90,
-        lastActive: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
+        streak: 2,
+        totalPoints: 120,
+        createdAt: "2026-09-30T10:57:05.666Z",
+        totalExams: 0,
+        avgNet: 0,
+        bestScore: 0,
+        lastActive: "2026-10-04T10:26:23.478Z",
         careerTarget: "YDS & YDT Akademik Dil Derecesi",
-        attempts: yagizAttempts,
+        attempts: [],
         activities,
         skillBreakdown,
       });

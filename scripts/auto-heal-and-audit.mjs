@@ -105,7 +105,7 @@ console.log("──────────────────────�
 if (totalIssuesFound === 0) {
   console.log("🎉 TEBRİKLER! 0 HATA (ZERO-ERROR) DOĞRULANDI.");
   console.log("🚀 Kod tabanı tertemiz, kararlı ve yayına hazır.");
-  console.log("🌐 Vercel Canlı Proje: https://english-yds-studying.vercel.app\n");
+  console.log("🌐 Vercel Canlı Proje: https://dil-master.vercel.app\n");
 } else {
   console.log(`⚠️ ${totalIssuesFound} hata tespit edildi, ${totalFixed} otomatik düzeltildi.\n`);
   process.exit(1);

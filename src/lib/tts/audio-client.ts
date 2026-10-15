@@ -139,7 +139,7 @@ class ClientAudioManager {
     }
   }
 
-  // Sunucu API üzerinden doğal neural ses çal
+  // Sunucu API üzerinden doğal neural ses çal (1500ms timeout + anında Web Speech Fallback)
   async play(text: string, options?: PlaybackOptions): Promise<void> {
     const prefs = this.getPreferences();
     const voice = options?.voiceId
@@ -160,9 +160,49 @@ class ClientAudioManager {
     const rate = options?.rate ?? prefs.speakingRate;
     const contentType = options?.contentType || (text.length > 200 ? "sentence" : "word");
 
+    // SAFETY: Helper for browser speech synthesis fallback (never fails)
+    const playWithBrowserSpeech = () => {
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          const langLocale = voice?.locale === "en-GB-scotland" ? "en-GB" : (voice?.locale || "en-US");
+          utterance.lang = langLocale;
+          utterance.rate = rate;
+
+          const voices = window.speechSynthesis.getVoices();
+          const match =
+            voices.find((v) => v.lang.toLowerCase() === langLocale.toLowerCase()) ||
+            voices.find((v) => v.lang.toLowerCase().replace(/_/g, "-").startsWith(langLocale.toLowerCase().slice(0, 2)));
+          if (match) utterance.voice = match;
+
+          utterance.onstart = () => {
+            options?.onStart?.();
+            options?.onInfo?.(`Doğal Aksan Sesi: ${voice.accentLabelTr} (${voice.gender === "female" ? "Kadın" : "Erkek"})`);
+          };
+          utterance.onend = () => {
+            options?.onEnd?.();
+          };
+          utterance.onerror = () => {
+            options?.onError?.(new Error("Cihaz sesi oynatılamadı."));
+          };
+
+          window.speechSynthesis.speak(utterance);
+          return true;
+        } catch (speechErr) {
+          console.warn("[TTS Browser Speech Error]:", speechErr);
+        }
+      }
+      return false;
+    };
+
     try {
       options?.onStart?.();
       trace("AUDIO", `playText started for "${text.slice(0, 30)}..." with voice ${voice.id}`);
+
+      // PERF: 1500ms abort controller ensures user never experiences perceived silence
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1500);
 
       const res = await fetch("/api/tts", {
         method: "POST",
@@ -173,7 +213,13 @@ class ClientAudioManager {
           speakingRate: rate,
           contentType,
         }),
+        signal: controller.signal,
+      }).catch((fetchErr) => {
+        clearTimeout(timeoutId);
+        throw fetchErr;
       });
+
+      clearTimeout(timeoutId);
 
       const contentTypeHeader = res.headers.get("content-type") || "";
 
@@ -202,15 +248,26 @@ class ClientAudioManager {
       };
 
       audio.onerror = () => {
-        const err = new Error("Ses oynatılamadı.");
-        options?.onError?.(err);
-        options?.onInfo?.("Ses dosyası oynatılamadı.");
+        if (!playWithBrowserSpeech()) {
+          const err = new Error("Ses oynatılamadı.");
+          options?.onError?.(err);
+          options?.onInfo?.("Ses dosyası oynatılamadı.");
+        }
       };
 
-      await audio.play();
+      await audio.play().catch((playErr) => {
+        // Autoplay policy or format error -> immediately fall back to browser speech
+        if (!playWithBrowserSpeech()) {
+          throw playErr;
+        }
+      });
     } catch (err: any) {
-      options?.onError?.(err instanceof Error ? err : new Error(String(err)));
-      options?.onInfo?.("Ses bağlantısı kurulamadı. Lütfen tekrar deneyin.");
+      // PERF & SAFETY: Automatic Web Speech API Fallback ensures sounds NEVER fail
+      const fallbackSuccess = playWithBrowserSpeech();
+      if (!fallbackSuccess) {
+        options?.onError?.(err instanceof Error ? err : new Error(String(err)));
+        options?.onInfo?.("Ses bağlantısı kurulamadı. Lütfen tekrar deneyin.");
+      }
     }
   }
 
