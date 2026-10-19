@@ -862,3 +862,34 @@ section {
   color: #fff;
 }
 
+/* ============================================================
+   MOBİL OKUNABİLİRLİK & BÜYÜK TİPOGRAFİ (GÖZ YORGUNLUĞUNU ÖNLEYİCİ)
+   ============================================================ */
+:root {
+  --base-font-size: 17px;
+  --passage-font-size: 1.15rem; /* ~20px */
+  --heading-scale: 1.25;
+  --line-height-relaxed: 1.75;
+}
+
+/* YDS / YÖKDİL Okuma Paragrafları ve Sorular */
+.reading-text, .passage, .soru-metni {
+  font-size: var(--passage-font-size) !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.015em;
+  margin-bottom: 1.25rem;
+}
+
+/* Kelime Kartları ve Şık Vurgular */
+.word-card, .vocabulary-item {
+  font-size: 1.2rem !important;
+  padding: 16px !important;
+}
+
+/* Mobil Giriş Alanları ve Dokunmatik Hedefler */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 1.05rem !important;
+    min-height: 48px;
+  }
+}
