@@ -1060,7 +1060,7 @@ article,
 /* ----------------------------------------------------------------------------
    3. "PLANLAR" KISMI VE YATAY KAYDIRMA (YARIM GÖRÜNME) TAMİRİ
    ---------------------------------------------------------------------------- */
-header nav,
+header nav:not(.toolbar-content),
 .overflow-x-auto,
 [class*="overflow-x-auto"] {
   display: flex !important;
@@ -1092,7 +1092,6 @@ header nav > *,
     gap: 16px !important;
   }
 
-  [href*="/study-plans"],
   .plan-card {
     min-width: 260px !important;
     width: 100% !important;

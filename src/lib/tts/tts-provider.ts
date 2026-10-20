@@ -106,9 +106,8 @@ export class EdgeTtsProvider implements TtsProvider {
     const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
 
     let lastError: Error | null = null;
-    // Transient ağ hataları için 2 deneme (1 yeniden deneme)
-    // SAFETY: Retries on transient socket reset with exponential backoff (max 3 attempts)
-    for (let attempt = 1; attempt <= 3; attempt++) {
+    // SAFETY: Try primary Edge Neural WebSocket first (up to 2 attempts unless 403)
+    for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         const audioBuffer = await this.synthesizeWithTimeout(
           MsEdgeTTS,
@@ -116,32 +115,116 @@ export class EdgeTtsProvider implements TtsProvider {
           voiceProfile.providerVoiceId,
           escapedText,
           rateOption,
-          this.defaultTimeoutMs
+          4000
         );
 
-        if (!audioBuffer || audioBuffer.length === 0) {
-          throw new Error("AUDIO_EMPTY: Sağlayıcı boş ses verisi döndürdü.");
+        if (audioBuffer && audioBuffer.length > 0) {
+          return {
+            ok: true,
+            audio: audioBuffer,
+            mimeType: "audio/mpeg",
+            durationMs: Date.now() - startTime,
+            provider: this.id,
+            voiceId: voiceProfile.id,
+            source: voiceProfile.source,
+          };
         }
-
-        return {
-          ok: true,
-          audio: audioBuffer,
-          mimeType: "audio/mpeg",
-          durationMs: Date.now() - startTime,
-          provider: this.id,
-          voiceId: voiceProfile.id,
-          source: voiceProfile.source,
-        };
       } catch (err: any) {
         lastError = err;
-        if (attempt < 3) {
-          // Exponential backoff: 300ms, 600ms
-          await new Promise((res) => setTimeout(res, attempt * 300));
+        // If Microsoft WebSocket returns 403, immediately switch to secondary HTTPS MP3 provider
+        if (String(err?.message || "").includes("403")) {
+          break;
+        }
+        if (attempt < 2) {
+          await new Promise((res) => setTimeout(res, 250));
         }
       }
     }
 
+    // Secondary server-side cloud MP3 provider fallback (chunked HTTPS audio/mpeg stream)
+    try {
+      const fallbackBuffer = await this.synthesizeViaCloudHttpMp3(
+        cleanText,
+        voiceProfile.locale,
+        request.speakingRate || 1.0
+      );
+
+      if (fallbackBuffer && fallbackBuffer.length > 0) {
+        return {
+          ok: true,
+          audio: fallbackBuffer,
+          mimeType: "audio/mpeg",
+          durationMs: Date.now() - startTime,
+          provider: "cloud-http-mp3",
+          voiceId: voiceProfile.id,
+          source: voiceProfile.source,
+        };
+      }
+    } catch (fallbackErr: any) {
+      lastError = fallbackErr;
+    }
+
     throw new Error(`SYNTHESIS_FAILED: ${lastError?.message || "Bilinmeyen TTS hatası"}`);
+  }
+
+  private splitTextIntoChunks(text: string, maxLen: number = 180): string[] {
+    if (text.length <= maxLen) return [text];
+    const words = text.split(/\s+/);
+    const chunks: string[] = [];
+    let current = "";
+    for (const word of words) {
+      if (!current) {
+        current = word.slice(0, maxLen);
+      } else if (current.length + 1 + word.length <= maxLen) {
+        current += " " + word;
+      } else {
+        chunks.push(current);
+        current = word.slice(0, maxLen);
+      }
+    }
+    if (current) chunks.push(current);
+    return chunks;
+  }
+
+  private async synthesizeViaCloudHttpMp3(
+    text: string,
+    locale: AccentCode,
+    speakingRate: number
+  ): Promise<Buffer> {
+    const tl = locale === "en-GB-scotland" ? "en-gb" : locale.toLowerCase();
+    const ttsSpeed = speakingRate < 0.85 ? "0.3" : "1";
+    const chunks = this.splitTextIntoChunks(text, 180);
+    const buffers: Buffer[] = [];
+
+    for (const chunk of chunks) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      try {
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+          chunk
+        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=tw-ob`;
+        const res = await fetch(url, {
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+          },
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          throw new Error(`HTTP MP3 stream status ${res.status}`);
+        }
+        const arrayBuf = await res.arrayBuffer();
+        const buf = Buffer.from(arrayBuf);
+        if (buf.length === 0) {
+          throw new Error("HTTP MP3 stream returned empty buffer");
+        }
+        buffers.push(buf);
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    return Buffer.concat(buffers);
   }
 
   private synthesizeWithTimeout(

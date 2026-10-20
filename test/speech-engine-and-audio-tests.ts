@@ -73,4 +73,36 @@ GRAMMAR_LESSONS.forEach((lesson) => {
 });
 console.log("  ✅ PASS: All GRAMMAR_LESSONS meet curriculum standards.\n");
 
-console.log("🎉 ALL SPEECH ENGINE & BACKGROUND AUDIO TESTS PASSED SUCCESSFULLY!\n");
+// 5. Browser Speech 7-Accent Honest Matcher & AudioResponse Contract Doğrulaması
+console.log("  5. Testing Browser Speech Honest Matcher & AudioResponse Contract...");
+import("../src/lib/tts/browser-speech").then(async ({ ACCENTS, chooseVoice }) => {
+  const { AudioRequestError, requestPronunciationAudio } = await import("../src/lib/tts/audio-response");
+  assert.strictEqual(ACCENTS.length, 7, "ACCENTS dizisi 7 aksan içermelidir.");
+  const genericUk = { lang: "en-GB", name: "Google UK English Female" } as SpeechSynthesisVoice;
+  assert.strictEqual(chooseVoice([genericUk], "en-GB-scotland") ?? null, null, "Standart İngiliz sesi İskoç olarak etiketlenmemelidir.");
+
+  const validBlob = await requestPronunciationAudio(
+    "resilient",
+    "en-GB",
+    undefined,
+    async () => new Response(new Uint8Array([73, 68, 51, 4]), { status: 200, headers: { "Content-Type": "audio/mpeg" } })
+  );
+  assert.ok(validBlob.size > 0, "Geçerli audio/mpeg yanıtı dolu Blob döndürmelidir.");
+
+  let rejectedJson200 = false;
+  try {
+    await requestPronunciationAudio(
+      "resilient",
+      "en-GB",
+      undefined,
+      async () => new Response(JSON.stringify({ ok: false }), { status: 200, headers: { "Content-Type": "application/json" } })
+    );
+  } catch (err) {
+    assert.ok(err instanceof AudioRequestError && err.code === "INVALID_RESPONSE");
+    rejectedJson200 = true;
+  }
+  assert.ok(rejectedJson200, "HTTP 200 JSON yanıtı INVALID_RESPONSE ile reddedilmelidir.");
+  console.log("  ✅ PASS: Browser Speech & AudioResponse contract verified.\n");
+  console.log("🎉 ALL SPEECH ENGINE & BACKGROUND AUDIO TESTS PASSED SUCCESSFULLY!\n");
+});
+

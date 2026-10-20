@@ -6,7 +6,7 @@
    - /api, auth, token, cookie ve kişisel veriler ASLA Cache Storage'a girmez.
    ============================================================ */
 
-const SW_VERSION = 'dil-master-offline-v2026.10.15';
+const SW_VERSION = 'dil-master-offline-v2026.10.20';
 const APP_SHELL_CACHE = `${SW_VERSION}-shell`;
 
 const PUBLIC_APP_SHELL = [
@@ -86,17 +86,25 @@ self.addEventListener('fetch', (event) => {
         const cached = await caches.match(event.request);
         if (cached) return cached;
 
-        // Sayfa navigasyonu ise ana sayfayı veya çevrimdışı bildirimini sun
+        // Sayfa navigasyonu ise ana sayfayı veya HTML çevrimdışı sayfasını sun (asla düz metin döndürme)
         if (event.request.mode === 'navigate') {
           const cachedHome = await caches.match('/');
           if (cachedHome) return cachedHome;
+
+          return new Response(
+            '<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DİL MASTER — Çevrimdışı Mod</title><style>body{font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#f8fafc;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px;text-align:center}.card{max-width:460px;background:#1e293b;border:1px solid #334155;border-radius:16px;padding:28px}h1{font-size:1.35rem;margin:0 0 12px;color:#38bdf8}p{font-size:0.95rem;line-height:1.6;color:#cbd5e1;margin:0 0 20px}a{display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:10px 20px;border-radius:10px;font-weight:600}</style></head><body><div class="card"><h1>DİL MASTER — Çevrimdışı Mod</h1><p>İnternet bağlantınız şu anda yok. Daha önce önbelleğe alınan kelime ve gramer modüllerine ana sayfadan ulaşabilirsiniz.</p><a href="/">Ana Sayfayı Dene</a></div></body></html>',
+            {
+              headers: { 'Content-Type': 'text/html; charset=utf-8' },
+              status: 503,
+            }
+          );
         }
 
         return new Response(
-          'DİL MASTER — Çevrimdışı moddasınız. Daha önce indirilen dersler ve oyunlar cihazınızda saklanmaktadır.',
+          JSON.stringify({ ok: false, offline: true, message: 'Offline resource unavailable' }),
           {
-            headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-            status: 200,
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            status: 503,
           }
         );
       })

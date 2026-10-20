@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Vercel otomatik deploy sırasında tip veya lint uyarılarının derlemeyi durdurmasını engeller
+  // Derleme sırasında gerçek tip ve lint doğrulamasını zorunlu kıl (hata gizleme kapalı)
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   images: {
     unoptimized: true,

@@ -44,6 +44,7 @@ export function VisualMemoryCard({
           onClick={() => setRevealed((current) => !current)}
         >
           <span className="yds-visual-memory-face yds-visual-memory-front" aria-hidden={revealed}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={imageUrl} alt={imageAlt} loading="lazy" decoding="async" />
             <span className="yds-visual-memory-overlay"><small>{sourceLabel}</small><strong>{prompt}</strong><span>Hatırla ve kartı çevir ↻</span></span>
           </span>

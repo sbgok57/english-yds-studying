@@ -192,7 +192,8 @@ export function CustomThemeStudio({ onSaveTheme }: { onSaveTheme?: ThemeSaveHand
       <div className="yds-theme-photo-row">
         <label className="yds-button yds-button-secondary" htmlFor={`${id}-photo`}>🖼️ Fotoğraf seç ve renkleri çıkar</label>
         <input id={`${id}-photo`} className="yds-visually-hidden" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void handlePhoto(event.target.files?.[0])} disabled={busy} />
-        {photoUrl && <img className="yds-theme-photo-thumb" src={photoUrl} alt="Tema için seçtiğin fotoğrafın yerel önizlemesi" />}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {photoUrl && <img className="yds-theme-photo-thumb" src={photoUrl} alt="Tema için seçtiğin fotoğrafın yerel önizlemesi" loading="lazy" decoding="async" />}
       </div>
 
       <div className="yds-theme-live-preview" aria-label="Tema renk önizlemesi">

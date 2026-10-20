@@ -8,6 +8,7 @@ import StreakBadge from "@/components/StreakBadge";
 import ThemeToggle from "@/components/ThemeToggle";
 import ExamModeSwitcher from "@/components/ExamModeSwitcher";
 import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
+import { ScrollableToolbar } from "@/components/navigation/ScrollableToolbar";
 
 const EXAM_HUBS = [
   { href: "/yds", label: "YDS", emoji: "🎯", color: "text-cyan-300 hover:text-cyan-200" },
@@ -23,6 +24,10 @@ const SKILL_LINKS = [
   { href: "/writing", label: "Writing", emoji: "✍️" },
   { href: "/speaking", label: "Speaking", emoji: "🎙️" },
   { href: "/exams", label: "Denemeler", emoji: "⏱️" },
+  { href: "/study-plans", label: "Planlar", emoji: "📅" },
+  { href: "/tactics", label: "Taktikler", emoji: "⚡" },
+  { href: "/games", label: "Oyunlar", emoji: "🎮" },
+  { href: "/temalar", label: "Temalar", emoji: "🎨" },
 ];
 
 export default function Header() {
@@ -147,6 +152,32 @@ export default function Header() {
               </svg>
             </button>
           </div>
+        </div>
+
+        {/* Yatay Kaydırılabilir Hızlı Navigasyon Barı (Mobil, Tablet & Masaüstü) */}
+        <div className="w-full px-2 sm:px-6 lg:px-8 py-1.5 border-t border-white/10 bg-slate-950/60">
+          <ScrollableToolbar label="Main navigation">
+            {EXAM_HUBS.map((hub) => (
+              <Link
+                key={hub.href}
+                href={hub.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-extrabold transition-colors shrink-0"
+              >
+                <span aria-hidden="true">{hub.emoji}</span>
+                <span className={hub.color}>{hub.label}</span>
+              </Link>
+            ))}
+            {SKILL_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-bold text-slate-100 transition-colors shrink-0"
+              >
+                <span aria-hidden="true">{item.emoji}</span>
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </ScrollableToolbar>
         </div>
       </header>
 

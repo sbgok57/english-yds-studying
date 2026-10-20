@@ -158,6 +158,7 @@ async function handleTtsRequest(
         "Content-Type": result.mimeType,
         "Content-Length": String(result.audio.length),
         "Cache-Control": "public, max-age=604800, immutable",
+        "X-TTS-Provider": result.provider,
         "X-TTS-Voice": targetVoice.id,
         "X-TTS-Locale": targetVoice.locale,
         "X-TTS-Gender": targetVoice.gender,
@@ -166,16 +167,17 @@ async function handleTtsRequest(
       },
     });
   } catch (err: any) {
-    console.error("[TTS API Synthesis Fallback]:", err?.message || err);
-    // // SAFETY: Vercel 502 basmak yerine istemciye yerel Web Speech API / CDN motoruna geçmesi için güvenli 200 dön
+    console.error("[TTS API Synthesis Error]:", err?.message || err);
+    // // SAFETY: Never return HTTP 200 JSON when callers expect audio/mpeg binary data.
     return NextResponse.json(
       {
         ok: false,
+        code: "PROVIDER_ERROR",
         fallbackToClient: true,
         message: "Bulut ses motoru geçici olarak meşgul, istemci yerel ses motoru devreye girdi.",
-        error: err?.message || "Synthesis fallback triggered",
+        error: err?.message || "Synthesis provider unavailable",
       },
-      { status: 200 }
+      { status: 503 }
     );
   }
 }
