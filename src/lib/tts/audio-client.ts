@@ -34,6 +34,10 @@ const STORAGE_KEYS = {
   RATE: "yds-preferred-rate",
 };
 
+// Neural TTS cold starts and provider retries can exceed 1.5 seconds.
+// Keep a bounded wait, but do not abort normal requests before audio can arrive.
+const TTS_REQUEST_TIMEOUT_MS = 8_000;
+
 class ClientAudioManager {
   private currentAudio: HTMLAudioElement | null = null;
   private currentBlobUrl: string | null = null;
@@ -139,7 +143,7 @@ class ClientAudioManager {
     }
   }
 
-  // Sunucu API üzerinden doğal neural ses çal (1500ms timeout + anında Web Speech Fallback)
+  // Sunucu API üzerinden doğal neural ses çal; gecikirse Web Speech API'ye güvenli geçiş yap.
   async play(text: string, options?: PlaybackOptions): Promise<void> {
     const prefs = this.getPreferences();
     const voice = options?.voiceId
@@ -197,12 +201,11 @@ class ClientAudioManager {
     };
 
     try {
-      options?.onStart?.();
       trace("AUDIO", `playText started for "${text.slice(0, 30)}..." with voice ${voice.id}`);
 
-      // PERF: 1500ms abort controller ensures user never experiences perceived silence
+      // Bound the network wait without aborting normal neural TTS cold starts.
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1500);
+      const timeoutId = setTimeout(() => controller.abort(), TTS_REQUEST_TIMEOUT_MS);
 
       const res = await fetch("/api/tts", {
         method: "POST",
@@ -223,11 +226,23 @@ class ClientAudioManager {
 
       const contentTypeHeader = res.headers.get("content-type") || "";
 
-      if (!res.ok || contentTypeHeader.includes("application/json")) {
-        throw new Error(`TTS API Hatası: ${res.status}`);
+      if (!res.ok) {
+        throw new Error(`TTS API Hatası: HTTP ${res.status}`);
+      }
+
+      // The API may return HTTP 200 with JSON when the cloud provider fails.
+      // Never pass that JSON (or an HTML error page) to the audio decoder.
+      if (!contentTypeHeader.toLowerCase().startsWith("audio/")) {
+        throw new Error(
+          `TTS API ses yerine "${contentTypeHeader || "bilinmeyen içerik"}" döndürdü.`
+        );
       }
 
       const audioBlob = await res.blob();
+      if (audioBlob.size === 0) {
+        throw new Error("TTS API boş ses verisi döndürdü.");
+      }
+
       const audioUrl = URL.createObjectURL(audioBlob);
       this.currentBlobUrl = audioUrl;
 
@@ -235,6 +250,7 @@ class ClientAudioManager {
       this.currentAudio = audio;
 
       audio.onplay = () => {
+        options?.onStart?.();
         options?.onInfo?.(`Doğal Neural Ses: ${voice.displayName} (${voice.accentLabelTr} · ${voice.gender === "female" ? "Kadın" : "Erkek"})`);
       };
 
@@ -248,6 +264,12 @@ class ClientAudioManager {
       };
 
       audio.onerror = () => {
+        if (this.currentBlobUrl) {
+          URL.revokeObjectURL(this.currentBlobUrl);
+          this.currentBlobUrl = null;
+        }
+        this.currentAudio = null;
+
         if (!playWithBrowserSpeech()) {
           const err = new Error("Ses oynatılamadı.");
           options?.onError?.(err);
