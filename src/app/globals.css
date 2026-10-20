@@ -862,255 +862,124 @@ section {
   color: #fff;
 }
 
-/* ============================================================
-   MOBİL OKUNABİLİRLİK & BÜYÜK TİPOGRAFİ (GÖZ YORGUNLUĞUNU ÖNLEYİCİ)
-   ============================================================ */
+/* --------------------------------------------------------------------------
+   TIPOGRAFI VE DOKUNMATIK ERISILEBILIRLIK
+   Varsayilan Tailwind olcegini koru; kucuk metinleri global olarak buyutme.
+   -------------------------------------------------------------------------- */
 :root {
-  --base-font-size: 18px;
-  --passage-font-size: 1.25rem; /* ~22.5px */
-  --heading-scale: 1.25;
-  --line-height-relaxed: 1.85;
+  --base-font-size: 16px;
+  --passage-font-size: 1rem;
+  --line-height-relaxed: 1.7;
 }
 
-/* 1. Temel Okuma ve Paragraf Ölçeği */
 html {
-  font-size: var(--base-font-size);
+  font-size: 16px;
   -webkit-text-size-adjust: 100%;
 }
 
-/* 2. YDS / YÖKDİL Okuma Paragrafları ve Sorular */
-p, article, .reading-text, .passage, .soru-metni, .passage-content {
-  font-size: var(--passage-font-size) !important;
-  line-height: var(--line-height-relaxed) !important;
-  letter-spacing: 0.012em;
-  margin-bottom: 1.5rem !important;
+body {
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-html.light p, html.light article, html.light .reading-text, html.light .passage, html.light .passage-content {
-  color: #0f172a !important;
+.reading-text,
+.passage,
+.soru-metni,
+.passage-content {
+  font-size: var(--passage-font-size);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: 0.005em;
 }
 
-html:not(.light) p, html:not(.light) article, html:not(.light) .reading-text, html:not(.light) .passage, html:not(.light) .passage-content {
-  color: #f1f5f9 !important;
+.word-card,
+.vocabulary-item {
+  font-size: 1rem;
 }
 
-/* 3. Kelime Kartları ve Şık Vurgular */
-.word-card, .vocabulary-item {
-  font-size: 1.2rem !important;
-  padding: 16px !important;
+input,
+select,
+textarea {
+  font-size: 16px;
+  min-height: 44px;
 }
 
-/* 4. Butonlar, Seçiciler ve Dokunmatik Hedefler (Rahat Dokunma ve Net Görünüm) */
-button, input, select, textarea {
-  min-height: 48px !important;
+button {
+  touch-action: manipulation;
 }
 
-@media (max-width: 768px) {
-  input, select, textarea {
-    font-size: 1.05rem !important;
-    min-height: 48px;
-  }
-}
-
-/* 5. Etiketler (Badge / Rozetler) */
-span[class*="rounded-full"] {
-  font-size: 0.9rem !important;
-  padding: 6px 14px !important;
-  font-weight: 600 !important;
-}
-
-
-/* ============================================================================
-   DİL MASTER PROFESSIONAL OVERHAUL CSS
-   1. Mikro Yazı İmha Edici (9px, 10px, 11px -> 17px-22px)
-   2. Planlar & Yatay Kaydırma (Overflow) Tamiri
-   3. WhatsApp / Telegram / Emoji / Kalp / Nokta Desenli Tema Katmanı
-   ============================================================================ */
-
+/* ==========================================================================
+   DIL MASTER: DUZENLI KAYDIRMA, TEMA DESENI VE DUYARLI NAVIGASYON
+   ========================================================================= */
 :root {
-  --base-scale: 20px;
+  --base-scale: 16px;
   --pattern-opacity: 0.22;
 }
 
+/* Sayfa kaydirma her cihazda html/body uzerinden calismaya devam eder. */
 html {
-  font-size: var(--base-scale) !important;
-  -webkit-text-size-adjust: 100% !important;
-  overflow-x: hidden !important;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
-  font-size: 1.05rem !important;
-  line-height: 1.8 !important;
-  overflow-x: hidden !important;
-  position: relative;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  touch-action: pan-y;
 }
 
-/* ----------------------------------------------------------------------------
-   1. DESENLİ TEMA MOTORU (ARKA PLANDA KESİN GÖRÜNÜR KATMAN)
-   ---------------------------------------------------------------------------- */
+/* Tema deseni icerikten bagimsiz kalir; gezinti katmanlarinin ustune cikmaz. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
   pointer-events: none;
   z-index: 0;
-  background-image: var(--theme-pattern, none) !important;
-  background-size: var(--theme-pattern-size, 80px 80px) !important;
-  background-repeat: repeat !important;
-  background-position: center center !important;
-  opacity: 1 !important;
+  background-image: var(--theme-pattern, none);
+  background-size: var(--theme-pattern-size, auto);
+  background-repeat: repeat;
+  background-position: center;
+  opacity: var(--pattern-opacity, 0.22);
 }
 
-/* İç kapsayıcıların deseni kapatmasını önlemek için yarı saydam cam efekti */
 main,
 #__next,
 body > div:first-of-type {
   position: relative;
   z-index: 1;
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
-.bg-slate-950,
-.bg-slate-900,
-.bg-zinc-950,
-.bg-gray-950 {
-  background-color: color-mix(in srgb, var(--theme-bg, #0f172a) 84%, transparent) !important;
-  backdrop-filter: blur(6px);
-}
-
-/* ----------------------------------------------------------------------------
-   2. MİKRO YAZILARI (9px, 10px, 11px, 12px) BÜYÜTME KALKANI
-   ---------------------------------------------------------------------------- */
-[class*="text-[8px]"],
-[class*="text-[9px]"],
-[class*="text-[10px]"],
-[class*="text-[11px]"],
-[class*="text-[12px]"],
-[class*="text-[0.6rem]"],
-[class*="text-[0.65rem]"],
-[class*="text-[0.7rem]"],
-.text-2xs,
-.text-xs {
-  font-size: 0.95rem !important; /* En küçük yazı bile ~19px olur */
-  line-height: 1.55 !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-}
-
-[style*="font-size: 8px"],
-[style*="font-size: 9px"],
-[style*="font-size: 10px"],
-[style*="font-size: 11px"],
-[style*="font-size: 12px"],
-[style*="font-size:8px"],
-[style*="font-size:9px"],
-[style*="font-size:10px"],
-[style*="font-size:11px"] {
-  font-size: 17px !important;
-  line-height: 1.5 !important;
-}
-
-.text-sm,
-[class*="text-sm"] {
-  font-size: 1.1rem !important; /* ~22px */
-  line-height: 1.65 !important;
-}
-
-.text-base,
-[class*="text-base"] {
-  font-size: 1.2rem !important; /* ~24px */
-  line-height: 1.75 !important;
-}
-
-.text-lg,
-[class*="text-lg"] {
-  font-size: 1.35rem !important; /* ~25.5px */
-  line-height: 1.8 !important;
-}
-
-/* Okuma Parçaları, Gramer Konuları, Soru Kökleri ve Şıklar */
-p,
-li,
-article,
-.reading-text,
-.passage,
-.question-stem,
-.option-text {
-  font-size: 1.25rem !important;
-  line-height: 1.85 !important;
-}
-
-/* Soluk Gri Yazıların Kontrastını Artırma (Göz Yorgunluğunu Bitirme) */
-.text-slate-400,
-.text-zinc-400,
-.text-gray-400,
-.text-slate-500,
-.text-zinc-500,
-.text-gray-500,
-.text-white\/40,
-.text-white\/50,
-.text-white\/60 {
-  color: var(--theme-text, #f1f5f9) !important;
-  opacity: 0.95 !important;
-}
-
-/* ----------------------------------------------------------------------------
-   3. "PLANLAR" KISMI VE YATAY KAYDIRMA (YARIM GÖRÜNME) TAMİRİ
-   ---------------------------------------------------------------------------- */
-header nav,
+/* Gercekten yatay kaydirilabilir olarak tanimlanan bolumler kaydirilabilir kalir.
+   header nav, grid veya menu ogelerine global flex/nowrap dayatilmaz. */
 .overflow-x-auto,
 [class*="overflow-x-auto"] {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  scroll-snap-type: x proximity;
-  padding-right: 32px !important;
-  padding-left: 8px !important;
-  padding-bottom: 6px !important;
-  gap: 10px !important;
-  max-width: 100vw !important;
-  box-sizing: border-box !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-primary, #38bdf8) rgba(255, 255, 255, 0.05);
 }
 
-header nav > *,
-.overflow-x-auto > *,
-[class*="overflow-x-auto"] > * {
-  flex-shrink: 0 !important;
-  scroll-snap-align: start;
-  white-space: nowrap !important;
+.overflow-x-auto::-webkit-scrollbar,
+[class*="overflow-x-auto"]::-webkit-scrollbar {
+  height: 5px;
 }
 
-@media (max-width: 640px) {
-  .grid-cols-2,
-  .grid-cols-3,
-  .grid-cols-4 {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-    gap: 16px !important;
-  }
-
-  [href*="/study-plans"],
-  .plan-card {
-    min-width: 260px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
+.overflow-x-auto::-webkit-scrollbar-track,
+[class*="overflow-x-auto"]::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
-.overflow-x-auto::-webkit-scrollbar {
-  height: 5px !important;
-  display: block !important;
-}
-
-.overflow-x-auto::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-radius: 8px !important;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb {
-  background: var(--theme-primary, #38bdf8) !important;
-  border-radius: 8px !important;
+.overflow-x-auto::-webkit-scrollbar-thumb,
+[class*="overflow-x-auto"]::-webkit-scrollbar-thumb {
+  background: var(--theme-primary, #38bdf8);
+  border-radius: 8px;
 }
