@@ -1,5 +1,5 @@
 {
-  "name": "yds-master",
+  "name": "dil-master",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "zero-error": "node scripts/zero-error-check.mjs",
     "auto-fix": "node scripts/auto-heal-and-audit.mjs",
     "deploy-and-rename": "node scripts/deploy-and-rename.mjs",
-    "vercel:link": "npx vercel link --yes --project english-yds-studying",
+    "vercel:link": "npx vercel link --yes --project dil-master",
     "test": "node prisma/prepare-db.js && prisma generate && npm run test:unit && npm run test:integration",
     "test:unit": "tsx test/master-test-runner.ts",
     "test:integration": "tsx test/tts-integration-tests.ts && tsx test/auth-integration-tests.ts && tsx test/module-tests.ts",

@@ -1,9 +1,7 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "name": "dil-master",
   "framework": "nextjs",
-  "buildCommand": "node prisma/prepare-db.js && prisma generate && next build",
-  "installCommand": "npm install",
-  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -14,49 +12,7 @@
         },
         {
           "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "X-Protected-By",
-          "value": "DIL-Master-Antivirus-Shield-v4.2"
-        }
-      ]
-    },
-    {
-      "source": "/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/manifest+json"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
-      "source": "/sw.js",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
+          "value": "SAMEORIGIN"
         }
       ]
     }

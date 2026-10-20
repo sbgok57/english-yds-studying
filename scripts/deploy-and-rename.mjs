@@ -2,7 +2,7 @@
 // ============================================================
 // DİL MASTER — Vercel Otomatik Dağıtım & İsim/Domain Atama Betiği
 // Vercel Dashboard'a girmeden terminal üzerinden tek tıkla:
-// 1. Projeyi 'english-yds-studying' ile senkronize tutar (yeni proje açmaz)
+// 1. Projeyi 'dil-master' ile senkronize tutar
 // 2. Canlı dağıtımı (production build) tetikler
 // 3. İstenen yeni domain/takma adı (alias) Vercel üzerinde tanımlar
 // ============================================================
@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
-const PROJECT_NAME = "english-yds-studying";
+const PROJECT_NAME = "dil-master";
 const DEFAULT_NEW_ALIAS = process.env.VERCEL_NEW_DOMAIN || process.argv[2] || "dil-master.vercel.app";
 const PRIMARY_CANONICAL_URL = "https://dil-master.vercel.app";
 
@@ -44,7 +44,7 @@ function run(cmd, desc) {
 // 1. Git durumunu doğrula & varsa bekleyen değişiklikleri pushla
 run("git status --short", "Yerel Git Durumu Denetleniyor");
 
-// 2. Vercel projesini mevcut english-yds-studying projesine bağla (link)
+// 2. Vercel projesini dil-master projesine bağla (link)
 const dotVercel = path.join(rootDir, ".vercel");
 if (!fs.existsSync(dotVercel)) {
   fs.mkdirSync(dotVercel, { recursive: true });
@@ -52,7 +52,7 @@ if (!fs.existsSync(dotVercel)) {
 
 const projectJsonPath = path.join(dotVercel, "project.json");
 if (!fs.existsSync(projectJsonPath)) {
-  console.log("🔗 Vercel Proje Bağlantısı (english-yds-studying) yapılandırılıyor...");
+  console.log("🔗 Vercel Proje Bağlantısı (dil-master) yapılandırılıyor...");
   try {
     execSync(`npx --yes vercel link --yes --project ${PROJECT_NAME}`, { cwd: rootDir, stdio: "inherit" });
   } catch {

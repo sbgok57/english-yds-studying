@@ -11,11 +11,16 @@ import DebugPanel from "@/components/DebugPanel";
 import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import DilMasterProSystem from "@/components/DilMasterProSystem";
 
 export const metadata: Metadata = {
-  title: "DİL MASTER — YDS · YDT · YÖKDİL Hazırlık ve Sınav Akademisi",
+  metadataBase: new URL("https://dil-master.vercel.app"),
+  title: "DİL MASTER | YDS · YDT · YÖKDİL Akademik Hazırlık Platformu",
   description:
-    "YDS, YDT (LYS-5) ve YÖKDİL için ayrılmış özel bölümler, 2010-2026 tüm yayınlar kelime havuzu, 3D flashcards, akıllı denemeler ve soru taktikleri platformu.",
+    "ÖSYM standartlarında YDS, YDT ve YÖKDİL kelime, gramer, okuma, dinleme ve deneme merkezi. Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.",
+  alternates: {
+    canonical: "https://dil-master.vercel.app",
+  },
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -27,6 +32,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/icon" },
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -34,6 +40,7 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.svg",
     apple: [
+      { url: "/apple-icon" },
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
@@ -96,6 +103,7 @@ export default function RootLayout({
             </p>
           </div>
         </footer>
+        <DilMasterProSystem />
       </body>
     </html>
   );
