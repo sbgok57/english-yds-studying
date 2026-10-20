@@ -1,22 +1,11 @@
 "use client";
 
-import { useEffect, useState, useId } from "react";
-import Image from "next/image";
-import {
-  X,
-  Volume2,
-  Sparkles,
-  ExternalLink,
-  BookOpen,
-  CheckCircle2,
-  Layers,
-  GraduationCap,
-  Play,
-  RotateCw,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { X, Volume2 } from "lucide-react";
 import { clientAudio } from "@/lib/tts/audio-client";
 import { ACCENT_METADATA_LIST, AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
 import { logStudentActivity } from "@/lib/activity-logger";
+import VocabularyVisual from "@/components/media/VocabularyVisual";
 import { cn } from "@/lib/utils";
 
 export interface WordDetailItem {
@@ -48,56 +37,16 @@ export default function WordDetailModal({
   const [activeGender, setActiveGender] = useState<VoiceGender>("female");
   const [isPlaying, setIsPlaying] = useState(false);
   const [playingVoiceId, setPlayingVoiceId] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [imgLoading, setImgLoading] = useState(true);
-  const [imgError, setImgError] = useState(false);
 
-  // Modal açıldığında görseli çek, aktivite kaydet ve ilk telaffuzu çal
   useEffect(() => {
     if (!isOpen || !word) return;
 
-    setImgLoading(true);
-    setImgError(false);
-
-    // 1. 3D Görseli API'den çek
-    const fetch3dImage = async () => {
-      try {
-        const res = await fetch(
-          `/api/word-image?id=${encodeURIComponent(word.id)}&word=${encodeURIComponent(
-            word.english
-          )}`
-        );
-        if (res.ok) {
-          const data = await res.json();
-          if (data.imageUrl) {
-            setImageUrl(data.imageUrl);
-          } else {
-            setImageUrl(
-              `https://image.pollinations.ai/prompt/3D%20isometric%20cute%20render%20of%20${encodeURIComponent(
-                word.english
-              )}%20concept%20education?width=512&height=512&nologo=true`
-            );
-          }
-        }
-      } catch {
-        setImageUrl(
-          `https://image.pollinations.ai/prompt/3D%20isometric%20cute%20render%20of%20${encodeURIComponent(
-            word.english
-          )}?width=512&height=512&nologo=true`
-        );
-      } finally {
-        setImgLoading(false);
-      }
-    };
-
-    fetch3dImage();
-
-    // 2. Öğrenci aktivite kaydı (Gerçek Öğrenci Takip Sistemi)
+    // 1. Öğrenci aktivite kaydı
     void logStudentActivity({
       type: "vocabulary",
       category: (word.targetExams?.[0] as any) || "Genel",
-      title: `🔍 3D Kelime İncelemesi: ${word.english}`,
-      details: `"${word.english}" (${word.turkish}) kelimesinin 3D görsel hafıza kartı ve telaffuzları incelendi.`,
+      title: `🔍 Görsel & 3D Kelime İncelemesi: ${word.english}`,
+      details: `"${word.english}" (${word.turkish}) kelimesinin görsel hafıza kartı ve telaffuzları incelendi.`,
       scoreOrCount: `${word.level} • ${word.type}`,
       points: 5,
       timeSpentMinutes: 1,
@@ -109,18 +58,10 @@ export default function WordDetailModal({
       },
     });
 
-    // 3. İlk açılışta anında kelimeyi telaffuz et
+    // 2. Tercih edilen aksan ve cinsiyeti yükle
     const prefs = clientAudio.getPreferences();
     setActiveAccent(prefs.preferredAccent);
     setActiveGender(prefs.preferredVoiceGender);
-
-    void clientAudio.play(word.english, {
-      accent: prefs.preferredAccent,
-      gender: prefs.preferredVoiceGender,
-      onStart: () => setIsPlaying(true),
-      onEnd: () => setIsPlaying(false),
-      onError: () => setIsPlaying(false),
-    });
 
     // ESC ile kapatma dinleyicisi
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -135,20 +76,20 @@ export default function WordDetailModal({
 
   if (!isOpen || !word) return null;
 
-  // Belirli bir aksan ve sesle anında telaffuz çal
-  const handlePlayVoice = (accent: AccentCode, gender: VoiceGender, voiceId: string) => {
+  const handlePlayVoice = (accent: AccentCode, gender: VoiceGender, voiceId?: string) => {
     setActiveAccent(accent);
     setActiveGender(gender);
-    setPlayingVoiceId(voiceId);
+    setPlayingVoiceId(voiceId || null);
     setIsPlaying(true);
 
     void clientAudio.play(word.english, {
       voiceId,
       accent,
       gender,
+      contentLanguage: "en",
+      contentType: "word",
       onStart: () => {
         setIsPlaying(true);
-        setPlayingVoiceId(voiceId);
       },
       onEnd: () => {
         setIsPlaying(false);
@@ -165,17 +106,20 @@ export default function WordDetailModal({
     <div
       role="dialog"
       aria-modal="true"
+      aria-label={`${word.english} kelime detay ve görsel inceleme penceresi`}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-slate-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 text-white space-y-6"
+        className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto bg-slate-900 border border-white/20 rounded-3xl shadow-2xl p-5 sm:p-7 text-white space-y-6"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Kapat Butonu */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-110 active:scale-95 z-10"
+          aria-label="Detay penceresini kapat"
+          className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all z-10"
           title="Kapat (ESC)"
         >
           <X className="w-5 h-5" />
@@ -204,45 +148,21 @@ export default function WordDetailModal({
           )}
         </div>
 
-        {/* Ana İçerik: Sol 3D Görsel, Sağ Kelime Bilgileri */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          {/* 3D Görsel Hafıza Fotoğrafı */}
-          <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-950 border border-white/15 shadow-inner flex items-center justify-center group">
-            {imgLoading && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-slate-950/70 z-10">
-                <RotateCw className="w-8 h-8 text-yellow-300 animate-spin" />
-                <span className="text-xs text-white/70 font-medium">3D Görsel Hazırlanıyor...</span>
-              </div>
-            )}
-
-            {imageUrl && !imgError ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imageUrl}
-                alt={`${word.english} - ${word.turkish} 3D görseli`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                onLoad={() => setImgLoading(false)}
-                onError={() => {
-                  setImgError(true);
-                  setImgLoading(false);
-                }}
-              />
-            ) : (
-              <div className="text-center p-6 space-y-2">
-                <span className="text-6xl">🎨</span>
-                <p className="text-sm font-bold text-white/80">3D Görsel Hafıza</p>
-                <p className="text-xs text-white/50">{word.english} · {word.turkish}</p>
-              </div>
-            )}
-
-            <div className="absolute bottom-2 left-2 right-2 px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between text-[11px] text-white/80">
-              <span>✨ 3D Görsel Hafıza Modu</span>
-              <span className="text-yellow-300 font-bold">{word.english}</span>
-            </div>
+        {/* Ana İçerik: Sol Çok Modlu Görsel (Fotoğraf / Animasyon / 3D / Anlam Kartı), Sağ Kelime Bilgileri */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="lg:col-span-7">
+            <VocabularyVisual
+              english={word.english}
+              turkish={word.turkish}
+              partOfSpeech={word.type}
+              level={word.level}
+              definitionEn={word.definitionEn}
+              example={word.examples?.[0]}
+            />
           </div>
 
           {/* Sağ Kolon: Kelime, Anlamı, Tanım ve Hızlı Dinle */}
-          <div className="space-y-4">
+          <div className="lg:col-span-5 space-y-4">
             <div>
               <h2 className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 tracking-tight">
                 {word.english}
@@ -254,19 +174,14 @@ export default function WordDetailModal({
 
             {word.definitionEn && (
               <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs sm:text-sm text-white/80 italic leading-relaxed">
-                &quot;{word.definitionEn}&quot;
+                &ldquo;{word.definitionEn}&rdquo;
               </div>
             )}
 
             {/* Hızlı Dinle Butonu */}
             <button
-              onClick={() =>
-                handlePlayVoice(
-                  activeAccent,
-                  activeGender,
-                  `${activeAccent}-${activeGender}`
-                )
-              }
+              type="button"
+              onClick={() => handlePlayVoice(activeAccent, activeGender)}
               className="w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white font-extrabold text-sm shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
             >
               <Volume2 className={cn("w-5 h-5", isPlaying && "animate-bounce text-yellow-300")} />
@@ -304,7 +219,6 @@ export default function WordDetailModal({
                   </div>
 
                   <div className="grid grid-cols-2 gap-1">
-                    {/* Kadın Sesi */}
                     <button
                       type="button"
                       onClick={() =>
@@ -322,7 +236,6 @@ export default function WordDetailModal({
                       <span className="text-[10px]">K</span>
                     </button>
 
-                    {/* Erkek Sesi */}
                     <button
                       type="button"
                       onClick={() =>

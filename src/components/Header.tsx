@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Menu, Palette, User, Shield, Calendar } from "lucide-react";
 import SearchBox from "@/components/SearchBox";
 import MenuDrawer from "@/components/MenuDrawer";
 import StreakBadge from "@/components/StreakBadge";
@@ -9,182 +11,184 @@ import ThemeToggle from "@/components/ThemeToggle";
 import ExamModeSwitcher from "@/components/ExamModeSwitcher";
 import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
 import { ScrollableToolbar } from "@/components/navigation/ScrollableToolbar";
+import { QUICK_TOOLBAR_ITEMS } from "@/components/navigation/navigation-config";
 
 const EXAM_HUBS = [
-  { href: "/yds", label: "YDS", emoji: "🎯", color: "text-cyan-300 hover:text-cyan-200" },
-  { href: "/ydt", label: "YDT", emoji: "🎓", color: "text-amber-300 hover:text-amber-200" },
-  { href: "/yokdil", label: "YÖKDİL", emoji: "🔬", color: "text-pink-300 hover:text-pink-200" },
-];
-
-const SKILL_LINKS = [
-  { href: "/vocabulary", label: "Kelimeler", emoji: "📚" },
-  { href: "/grammar", label: "Gramer", emoji: "📖" },
-  { href: "/reading", label: "Reading", emoji: "🔬" },
-  { href: "/listening", label: "Listening", emoji: "🎧" },
-  { href: "/writing", label: "Writing", emoji: "✍️" },
-  { href: "/speaking", label: "Speaking", emoji: "🎙️" },
-  { href: "/exams", label: "Denemeler", emoji: "⏱️" },
-  { href: "/study-plans", label: "Planlar", emoji: "📅" },
-  { href: "/tactics", label: "Taktikler", emoji: "⚡" },
-  { href: "/games", label: "Oyunlar", emoji: "🎮" },
-  { href: "/temalar", label: "Temalar", emoji: "🎨" },
+  { href: "/yds", label: "YDS", color: "text-cyan-300 hover:text-cyan-200" },
+  { href: "/ydt", label: "YDT", color: "text-amber-300 hover:text-amber-200" },
+  { href: "/yokdil", label: "YÖKDİL", color: "text-pink-300 hover:text-pink-200" },
 ];
 
 export default function Header() {
+  const pathname = usePathname() || "/";
   const [menu, setMenu] = useState(false);
   const [themeModal, setThemeModal] = useState(false);
+
+  // Mobil alt bar veya diğer bileşenlerden gelen menü açma isteğini dinle
+  useEffect(() => {
+    const handleOpenDrawer = () => setMenu(true);
+    window.addEventListener("yds:open-menu-drawer", handleOpenDrawer);
+    return () => window.removeEventListener("yds:open-menu-drawer", handleOpenDrawer);
+  }, []);
 
   return (
     <>
       <header
-        className="sticky top-0 z-50 w-full left-0 right-0 bg-slate-900/80 dark:bg-slate-950/80 light:bg-white/95 backdrop-blur-xl border-b border-white/15 light:border-slate-200 shadow-lg shadow-black/10 transition-colors"
+        className="sticky top-0 z-50 w-full left-0 right-0 bg-slate-900/90 dark:bg-slate-950/90 light:bg-white/95 backdrop-blur-xl border-b border-white/15 light:border-slate-200 shadow-lg shadow-black/10 transition-colors"
         style={{ width: "100%", maxWidth: "100vw" }}
       >
-        <div className="w-full px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-3">
-          {/* Logo & Platform İsmi */}
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-orange-500 via-yellow-400 to-cyan-400 flex items-center justify-center text-lg sm:text-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              🧠
+        <div className="w-full max-w-[1920px] mx-auto px-3 sm:px-5 lg:px-8 h-16 flex items-center justify-between gap-2 min-w-0">
+          {/* Sol: Marka & Logo (min-w-0 ile taşma korumalı) */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 group shrink-0 min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-xl"
+          >
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-amber-400 to-cyan-400 flex items-center justify-center text-slate-950 font-black text-sm sm:text-base shadow-md shrink-0 group-hover:scale-105 transition-transform">
+              DM
             </div>
-            <div>
-              <span className="text-lg sm:text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300 block leading-tight">
+            <div className="min-w-0">
+              <span className="text-base sm:text-lg font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300 block leading-tight truncate">
                 DİL MASTER
               </span>
-              <span className="block text-[9px] sm:text-[10px] font-mono tracking-wider text-cyan-300 uppercase font-bold">
+              <span className="block text-[10px] font-mono tracking-wider text-cyan-300 light:text-cyan-700 uppercase font-bold truncate">
                 YDS · YDT · YÖKDİL
               </span>
             </div>
           </Link>
 
-          {/* Sınav Modu Seçici (Hızlı Hap Bar) */}
-          <div className="hidden xl:flex shrink-0">
+          {/* Orta: Sınav Modu Seçici & Hızlı Arama (Geniş ekranlarda görünür, dar ekranlarda hamburger menüye alan açar) */}
+          <div className="hidden 2xl:flex items-center gap-3 min-w-0 shrink">
             <ExamModeSwitcher compact />
           </div>
 
-          {/* 3 Büyük Sınav Doğrudan Kısayolları (Masaüstü & Tablet) */}
-          <div className="hidden lg:flex items-center gap-1 shrink-0 bg-white/5 p-1 rounded-2xl border border-white/10">
+          <div className="hidden xl:flex items-center gap-1 shrink-0 bg-white/5 light:bg-slate-100 p-1 rounded-2xl border border-white/10 light:border-slate-200">
             {EXAM_HUBS.map((hub) => (
               <Link
                 key={hub.href}
                 href={hub.href}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-black transition-all hover:bg-white/10 text-white/90"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-black transition-all hover:bg-white/10 text-white/90 light:text-slate-800"
               >
-                <span>{hub.emoji}</span>
                 <span className={hub.color}>{hub.label}</span>
               </Link>
             ))}
           </div>
 
-          {/* Hızlı Arama */}
-          <div className="hidden 2xl:flex flex-1 max-w-xs justify-center">
+          <div className="hidden 2xl:flex flex-1 max-w-xs justify-center min-w-0">
             <SearchBox />
           </div>
 
-          {/* Sağ Kontroller: Admin, Hesabım, Karanlık Mod, Seri & HER ZAMAN GÖRÜNÜR Menü Butonu */}
+          {/* Sağ Kontroller ve HER EKRANDA (%80-%125 zoom, tam ekran, mobil, masaüstü) GÖRÜNÜR ÜÇ ÇİZGİLİ HAMBURGER DÜĞMESİ */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-auto">
-            {/* 👑 Yönetici Paneli */}
             <Link
               href="/admin"
-              className="hidden md:flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 hover:border-purple-400 hover:bg-purple-500/25 text-purple-200 text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="👑 Yönetici Paneli (Öğrenci & Çalışma Takibi)"
+              className="hidden lg:flex items-center gap-1.5 px-2.5 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 hover:border-purple-400 text-purple-200 light:text-purple-800 text-xs font-bold transition-all shrink-0"
+              title="Yönetici Paneli"
             >
-              <span className="text-sm group-hover:scale-110 transition-transform">👑</span>
-              <span className="hidden lg:inline font-bold">Admin</span>
+              <Shield className="w-3.5 h-3.5" aria-hidden="true" />
+              <span className="hidden xl:inline">Admin</span>
             </Link>
 
-            {/* 👤 Hesabım */}
             <Link
               href="/hesap"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-white/5 border border-white/15 hover:border-cyan-400 hover:bg-white/10 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="👤 Hesabım & Profil Bilgileri"
+              className="hidden md:flex items-center gap-1.5 px-2.5 h-10 rounded-xl bg-white/5 light:bg-slate-100 border border-white/15 light:border-slate-300 hover:border-cyan-400 text-white light:text-slate-800 text-xs font-bold transition-all shrink-0"
+              title="Hesabım & Profil"
             >
-              <span className="text-sm group-hover:scale-110 transition-transform">👤</span>
-              <span className="hidden lg:inline font-bold">Hesabım</span>
+              <User className="w-3.5 h-3.5" aria-hidden="true" />
+              <span className="hidden xl:inline">Hesabım</span>
             </Link>
 
-            {/* 📅 Çalışma Planları */}
             <Link
               href="/study-plans"
-              className="hidden lg:flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 hover:border-cyan-300 hover:bg-cyan-500/25 text-cyan-300 text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="📅 Sınav Çalışma Planları (Gün / Ay / Yıl Takvimi)"
+              className="hidden xl:flex items-center gap-1.5 px-2.5 h-10 rounded-xl bg-cyan-500/15 border border-cyan-400/30 hover:border-cyan-300 text-cyan-300 light:text-cyan-800 text-xs font-bold transition-all shrink-0"
+              title="Çalışma Planları"
             >
-              <span className="text-sm group-hover:scale-110 transition-transform">📅</span>
-              <span className="hidden xl:inline font-bold">Planlar</span>
+              <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Planlar</span>
             </Link>
 
-            {/* 🎨 1.000+ Tema Stüdyosu Bölümü */}
             <Link
               href="/temalar"
-              className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 h-10 rounded-xl bg-gradient-to-r from-pink-500/15 to-cyan-500/15 border border-cyan-400/40 hover:border-cyan-300 text-white text-xs font-black transition-all shadow-sm shrink-0 group"
-              title="🎨 1.000+ Renk ve Desenli Tema Stüdyosu"
+              className="hidden sm:flex items-center gap-1.5 px-2.5 h-10 rounded-xl bg-gradient-to-r from-pink-500/15 to-cyan-500/15 border border-cyan-400/40 hover:border-cyan-300 text-white light:text-slate-900 text-xs font-bold transition-all shrink-0"
+              title="Desenli Tema Galerisi"
             >
-              <span className="text-sm group-hover:scale-110 transition-transform">🎨</span>
-              <span className="font-bold">Temalar</span>
-              <span className="text-[9px] px-1 py-0.5 rounded bg-cyan-400/20 text-cyan-300 font-mono hidden md:inline">1000+</span>
+              <Palette className="w-3.5 h-3.5 text-cyan-300 light:text-cyan-700" aria-hidden="true" />
+              <span>Temalar</span>
             </Link>
 
-            {/* Karanlık/Aydınlık Mod Butonu */}
-            <ThemeToggle compact className="sm:!px-2" />
+            <ThemeToggle compact className="sm:!px-2 shrink-0" />
 
-            {/* Çalışma Serisi Rozeti */}
-            <StreakBadge />
+            <div className="hidden sm:block shrink-0">
+              <StreakBadge />
+            </div>
 
-            {/* HER EKRANDA VE TAM EKRANDA %100 KESİNTİSİZ GÖRÜNEN ☰ MENÜ BUTONU */}
+            {/* ZORUNLU ÜÇ ÇİZGİLİ HAMBURGER MENÜ DÜĞMESİ — HİÇBİR BREAKPOINT VEYA TAM EKRANDA GİZLENMEZ */}
             <button
+              type="button"
               id="global-menu-trigger"
-              onClick={() => setMenu(true)}
+              data-testid="global-menu-trigger"
+              onClick={() => setMenu((prev) => !prev)}
+              aria-label="Ana menüyü aç"
               aria-expanded={menu}
-              className="flex items-center gap-2 px-3.5 sm:px-4 h-10 sm:h-11 rounded-2xl border-2 border-cyan-400/80 bg-gradient-to-r from-pink-500/20 via-purple-600/20 to-cyan-500/20 hover:border-yellow-300 hover:scale-105 active:scale-95 transition-all text-white shadow-lg shadow-cyan-500/25 group cursor-pointer shrink-0 z-30"
-              aria-label="Tüm Bölümleri ve Menüyü Aç"
-              title="Tüm Bölümler, Sınavlar (YDS, YDT, YÖKDİL), Beceriler ve Ayarlar"
+              aria-controls="global-menu-drawer"
+              title="Ana menüyü aç (Tüm bölümler, kelimeler, gramer, reading ve ayarlar)"
+              className="inline-flex items-center justify-center gap-2 min-w-[44px] min-h-[44px] px-3 sm:px-3.5 h-11 rounded-2xl border-2 border-cyan-400 bg-slate-900/95 light:bg-slate-900 hover:bg-slate-800 hover:border-yellow-300 active:scale-95 transition-all text-white shadow-lg shadow-cyan-500/20 cursor-pointer shrink-0 z-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300"
             >
-              <span className="text-base text-yellow-300 group-hover:scale-110 transition-transform font-black">☰</span>
-              <span className="text-xs sm:text-sm font-black tracking-wide text-white">Menü</span>
-              <svg
-                className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-300 group-hover:text-yellow-300 transition-colors shrink-0"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="5" r="2.5" />
-                <circle cx="12" cy="12" r="2.5" />
-                <circle cx="12" cy="19" r="2.5" />
-              </svg>
+              <Menu className="w-5 h-5 text-cyan-300 shrink-0" aria-hidden="true" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-wide text-white">
+                Menü
+              </span>
             </button>
           </div>
         </div>
 
-        {/* Yatay Kaydırılabilir Hızlı Navigasyon Barı (Mobil, Tablet & Masaüstü) */}
-        <div className="w-full px-2 sm:px-6 lg:px-8 py-1.5 border-t border-white/10 bg-slate-950/60">
-          <ScrollableToolbar label="Main navigation">
-            {EXAM_HUBS.map((hub) => (
-              <Link
-                key={hub.href}
-                href={hub.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-extrabold transition-colors shrink-0"
-              >
-                <span aria-hidden="true">{hub.emoji}</span>
-                <span className={hub.color}>{hub.label}</span>
-              </Link>
-            ))}
-            {SKILL_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-xs font-bold text-slate-100 transition-colors shrink-0"
-              >
-                <span aria-hidden="true">{item.emoji}</span>
-                <span>{item.label}</span>
-              </Link>
-            ))}
+        {/* Yatay Kaydırılabilir Hızlı Navigasyon Şeridi (Tekil ScrollableToolbar) */}
+        <div className="w-full px-2 sm:px-5 lg:px-8 py-1.5 border-t border-white/10 light:border-slate-200 bg-slate-950/70 light:bg-slate-100/90">
+          <ScrollableToolbar label="Hızlı bölüm gezinme çubuğu">
+            {EXAM_HUBS.map((hub) => {
+              const isActive = pathname === hub.href || pathname.startsWith(`${hub.href}/`);
+              return (
+                <Link
+                  key={hub.href}
+                  href={hub.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-extrabold transition-colors shrink-0 ${
+                    isActive
+                      ? "bg-cyan-500/25 border-cyan-400 text-white light:bg-cyan-100 light:text-slate-950"
+                      : "bg-white/5 light:bg-white hover:bg-white/15 border-white/10 light:border-slate-300"
+                  }`}
+                >
+                  <span className={hub.color}>{hub.label}</span>
+                </Link>
+              );
+            })}
+            {QUICK_TOOLBAR_ITEMS.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-colors shrink-0 ${
+                    isActive
+                      ? "bg-cyan-500/25 border-cyan-400 text-white light:bg-cyan-100 light:text-slate-950"
+                      : "bg-white/5 light:bg-white hover:bg-white/15 border-white/10 light:border-slate-300 text-slate-100 light:text-slate-800"
+                  }`}
+                >
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
           </ScrollableToolbar>
         </div>
       </header>
 
-      {/* Yana Açılır Kapsamlı Menü */}
+      {/* Portal Tabanlı Ana Menü Çekmecesi */}
       <MenuDrawer open={menu} onClose={() => setMenu(false)} />
 
-      {/* 1.000+ Hızlı Tema Seçici Modal */}
+      {/* Hızlı Tema Seçici Modal */}
       <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
     </>
   );

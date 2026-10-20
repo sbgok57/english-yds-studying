@@ -22,6 +22,7 @@ import { clientAudio, UserVoicePreferences } from "@/lib/tts/audio-client";
 import { getVoiceProfile, ACCENT_METADATA_LIST } from "@/lib/tts/voice-registry";
 import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import WordPronunciationBar from "@/components/vocabulary/WordPronunciationBar";
+import VocabularyVisual from "@/components/media/VocabularyVisual";
 import AccentBar from "@/components/AccentBar";
 import {
   ACCENTS,
@@ -755,6 +756,16 @@ function VocabularyInventoryContent() {
 
             {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-6">
+              {/* Çok Modlu Görsel Anlatım (Fotoğraf / Animasyon Şema / 3D / Anlam Kartı) */}
+              <VocabularyVisual
+                english={selectedWord.word}
+                turkish={selectedWord.turkishMeanings?.join(", ") || ""}
+                partOfSpeech={selectedWord.partOfSpeech}
+                level={selectedWord.level}
+                definitionEn={selectedWord.englishDefinition}
+                example={selectedWord.example}
+              />
+
               {/* Natural Pronunciation & Multi-Accent Practice Bar */}
               <div className="rounded-2xl bg-white/[0.04] border border-cyan-400/20 p-4 shadow-inner space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-white/10">

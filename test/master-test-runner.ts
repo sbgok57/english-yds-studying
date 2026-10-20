@@ -174,6 +174,9 @@ const testSuites: string[] = [
   'offline-autosave-tests.ts',
   'mobile-apps-integrity-tests.ts',
   'speech-engine-and-audio-tests.ts',
+  'tts-voice-audit.test.ts',
+  'vocabulary-visuals.test.ts',
+  'theme-patterns.test.ts',
 ];
 
 interface TestResult {

@@ -1,16 +1,36 @@
 import {
   AccentCode,
+  VoiceLocale,
+  ContentLanguage,
   VoiceGender,
   VoiceProfile,
   getVoiceProfile,
   findVoice,
+  findTurkishNarratorVoice,
   STANDARD_PREVIEW_TEXT,
+  STANDARD_TURKISH_PREVIEW_TEXT,
 } from "./voice-registry";
 import { trace } from "@/lib/debug/tracer";
+
+export interface PlaybackMetadata {
+  provider: string;
+  providerVoiceId: string;
+  voiceId: string;
+  displayName: string;
+  locale: VoiceLocale;
+  contentLanguage: ContentLanguage;
+  gender: VoiceGender;
+  distinctSpeakerVerified: boolean;
+  usingBrowserFallback: boolean;
+  latencyMs: number;
+}
 
 export interface PlaybackOptions {
   voiceId?: string;
   accent?: AccentCode;
+  locale?: VoiceLocale;
+  contentLanguage?: ContentLanguage;
+  speaker?: "emel" | "ahmet";
   gender?: VoiceGender;
   rate?: number;
   contentType?: "word" | "sentence" | "long-form";
@@ -18,12 +38,14 @@ export interface PlaybackOptions {
   onEnd?: () => void;
   onError?: (err: any) => void;
   onInfo?: (msg: string) => void;
+  onMetadata?: (meta: PlaybackMetadata) => void;
 }
 
 export interface UserVoicePreferences {
   preferredAccent: AccentCode;
   preferredVoiceGender: VoiceGender;
   preferredVoiceId: string;
+  preferredTurkishNarratorId?: "tr-TR-female-emel" | "tr-TR-male-ahmet";
   speakingRate: number;
 }
 
@@ -31,6 +53,7 @@ const STORAGE_KEYS = {
   ACCENT: "yds-preferred-accent",
   GENDER: "yds-preferred-gender",
   VOICE_ID: "yds-preferred-voice-id",
+  TR_NARRATOR_ID: "yds-preferred-tr-narrator-id",
   RATE: "yds-preferred-rate",
 };
 
@@ -41,6 +64,19 @@ const TTS_REQUEST_TIMEOUT_MS = 8_000;
 class ClientAudioManager {
   private currentAudio: HTMLAudioElement | null = null;
   private currentBlobUrl: string | null = null;
+  private activeAbortController: AbortController | null = null;
+  private lastMetadata: PlaybackMetadata | null = null;
+
+  constructor() {
+    if (typeof window !== "undefined") {
+      // SAFETY: Stop playing audio on browser history navigation
+      window.addEventListener("popstate", () => this.stopAll());
+    }
+  }
+
+  getLastPlaybackMetadata(): PlaybackMetadata | null {
+    return this.lastMetadata;
+  }
 
   // Tercihleri yükle
   getPreferences(): UserVoicePreferences {
@@ -49,6 +85,7 @@ class ClientAudioManager {
         preferredAccent: "en-US",
         preferredVoiceGender: "female",
         preferredVoiceId: "en-US-female-jenny",
+        preferredTurkishNarratorId: "tr-TR-female-emel",
         speakingRate: 1.0,
       };
     }
@@ -57,6 +94,10 @@ class ClientAudioManager {
       const accent = (window.localStorage.getItem(STORAGE_KEYS.ACCENT) as AccentCode) || "en-US";
       const gender = (window.localStorage.getItem(STORAGE_KEYS.GENDER) as VoiceGender) || "female";
       const voiceId = window.localStorage.getItem(STORAGE_KEYS.VOICE_ID) || "en-US-female-jenny";
+      const trNarrator =
+        (window.localStorage.getItem(STORAGE_KEYS.TR_NARRATOR_ID) as
+          | "tr-TR-female-emel"
+          | "tr-TR-male-ahmet") || "tr-TR-female-emel";
       const rateStr = window.localStorage.getItem(STORAGE_KEYS.RATE);
       const rate = rateStr ? parseFloat(rateStr) || 1.0 : 1.0;
 
@@ -64,6 +105,7 @@ class ClientAudioManager {
         preferredAccent: accent,
         preferredVoiceGender: gender,
         preferredVoiceId: voiceId,
+        preferredTurkishNarratorId: trNarrator,
         speakingRate: Math.max(0.75, Math.min(1.25, rate)),
       };
     } catch {
@@ -71,6 +113,7 @@ class ClientAudioManager {
         preferredAccent: "en-US",
         preferredVoiceGender: "female",
         preferredVoiceId: "en-US-female-jenny",
+        preferredTurkishNarratorId: "tr-TR-female-emel",
         speakingRate: 1.0,
       };
     }
@@ -104,6 +147,9 @@ class ClientAudioManager {
       if (prefs.preferredVoiceId) {
         window.localStorage.setItem(STORAGE_KEYS.VOICE_ID, prefs.preferredVoiceId);
       }
+      if (prefs.preferredTurkishNarratorId) {
+        window.localStorage.setItem(STORAGE_KEYS.TR_NARRATOR_ID, prefs.preferredTurkishNarratorId);
+      }
       if (typeof prefs.speakingRate === "number") {
         window.localStorage.setItem(STORAGE_KEYS.RATE, prefs.speakingRate.toString());
       }
@@ -113,8 +159,17 @@ class ClientAudioManager {
     }
   }
 
-  // Çalmakta olan tüm sesleri anında durdur
+  // Çalmakta olan tüm sesleri ve bekleyen ağ isteklerini anında durdur
   stopAll(): void {
+    if (this.activeAbortController) {
+      try {
+        this.activeAbortController.abort();
+      } catch {
+        /* noop */
+      }
+      this.activeAbortController = null;
+    }
+
     if (this.currentAudio) {
       try {
         this.currentAudio.pause();
@@ -143,46 +198,130 @@ class ClientAudioManager {
     }
   }
 
+  private resolveTargetVoice(
+    prefs: UserVoicePreferences,
+    options?: PlaybackOptions
+  ): VoiceProfile | undefined {
+    if (options?.voiceId) {
+      return getVoiceProfile(options.voiceId);
+    }
+    if (options?.speaker) {
+      return findTurkishNarratorVoice(options.speaker === "ahmet" ? "male" : "female");
+    }
+    if (options?.contentLanguage === "tr" || options?.locale === "tr-TR") {
+      const g =
+        options?.gender ||
+        (prefs.preferredTurkishNarratorId?.includes("male") ? "male" : "female");
+      return findTurkishNarratorVoice(g);
+    }
+    if (options?.accent && options?.gender) {
+      return findVoice(options.accent, options.gender);
+    }
+    if (options?.accent) {
+      return findVoice(options.accent, prefs.preferredVoiceGender);
+    }
+    return (
+      getVoiceProfile(prefs.preferredVoiceId) ||
+      findVoice(prefs.preferredAccent, prefs.preferredVoiceGender)
+    );
+  }
+
   // Sunucu API üzerinden doğal neural ses çal; gecikirse Web Speech API'ye güvenli geçiş yap.
   async play(text: string, options?: PlaybackOptions): Promise<void> {
     const prefs = this.getPreferences();
-    const voice = options?.voiceId
-      ? getVoiceProfile(options.voiceId)
-      : options?.accent && options?.gender
-      ? findVoice(options.accent, options.gender)
-      : getVoiceProfile(prefs.preferredVoiceId) || findVoice(prefs.preferredAccent, prefs.preferredVoiceGender);
+    const voice = this.resolveTargetVoice(prefs, options);
 
     if (!voice) {
-      const err = new Error("Seçilen aksan için ses profili bulunamadı.");
+      const err = new Error("Seçilen dil veya aksan için ses profili bulunamadı.");
       options?.onError?.(err);
-      options?.onInfo?.("Aksan profili bulunamadı.");
+      options?.onInfo?.("Ses profili bulunamadı.");
       return;
     }
 
     this.stopAll();
 
     const rate = options?.rate ?? prefs.speakingRate;
-    const contentType = options?.contentType || (text.length > 200 ? "sentence" : "word");
+    const contentType =
+      options?.contentType ||
+      (text.length > 500 ? "long-form" : text.length > 140 ? "sentence" : "word");
+    const t0 = Date.now();
 
-    // SAFETY: Helper for browser speech synthesis fallback (never fails)
+    // SAFETY: Helper for browser speech synthesis fallback (never uses fake pitch shifting)
     const playWithBrowserSpeech = () => {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         try {
           window.speechSynthesis.cancel();
           const utterance = new SpeechSynthesisUtterance(text);
-          const langLocale = voice?.locale === "en-GB-scotland" ? "en-GB" : (voice?.locale || "en-US");
+          const langLocale =
+            voice.locale === "en-GB-scotland" ? "en-GB" : voice.locale || "en-US";
           utterance.lang = langLocale;
           utterance.rate = rate;
+          // YASAK KURALI: Yapay pitch (1.08 / 0.88) ile sahte konuşmacı türetilmez; doğal pitch=1.0 korunur
+          utterance.pitch = 1.0;
 
           const voices = window.speechSynthesis.getVoices();
-          const match =
-            voices.find((v) => v.lang.toLowerCase() === langLocale.toLowerCase()) ||
-            voices.find((v) => v.lang.toLowerCase().replace(/_/g, "-").startsWith(langLocale.toLowerCase().slice(0, 2)));
-          if (match) utterance.voice = match;
+          const localePrefix = langLocale.toLowerCase().slice(0, 2);
+          const matchingLangVoices = voices.filter((v) =>
+            v.lang.toLowerCase().replace(/_/g, "-").startsWith(localePrefix)
+          );
+
+          let selectedBrowserVoice =
+            matchingLangVoices.find(
+              (v) => v.lang.toLowerCase().replace(/_/g, "-") === langLocale.toLowerCase()
+            ) || matchingLangVoices[0];
+
+          let hasDistinctGenderVoices = false;
+          if (matchingLangVoices.length > 1) {
+            const fMatch = matchingLangVoices.find((v) =>
+              /female|emel|yelda|filiz|seda|sonia|jenny|clara|natasha|molly|neerja|samantha|victoria/i.test(
+                v.name
+              )
+            );
+            const mMatch = matchingLangVoices.find((v) =>
+              /male|ahmet|cem|tolga|ryan|guy|liam|william|mitchell|prabhat|daniel|alex/i.test(
+                v.name
+              )
+            );
+            if (fMatch && mMatch && fMatch.name !== mMatch.name) {
+              hasDistinctGenderVoices = true;
+              selectedBrowserVoice = voice.gender === "female" ? fMatch : mMatch;
+            }
+          }
+
+          if (selectedBrowserVoice) {
+            utterance.voice = selectedBrowserVoice;
+          }
+
+          const meta: PlaybackMetadata = {
+            provider: "browser-speech-fallback",
+            providerVoiceId: selectedBrowserVoice?.name || langLocale,
+            voiceId: voice.id,
+            displayName: voice.displayName,
+            locale: voice.locale,
+            contentLanguage: voice.contentLanguage,
+            gender: voice.gender,
+            distinctSpeakerVerified: hasDistinctGenderVoices,
+            usingBrowserFallback: true,
+            latencyMs: Date.now() - t0,
+          };
+          this.lastMetadata = meta;
+          options?.onMetadata?.(meta);
 
           utterance.onstart = () => {
             options?.onStart?.();
-            options?.onInfo?.(`Doğal Aksan Sesi: ${voice.accentLabelTr} (${voice.gender === "female" ? "Kadın" : "Erkek"})`);
+            if (voice.contentLanguage === "tr") {
+              options?.onInfo?.(
+                hasDistinctGenderVoices
+                  ? `Cihaz Yerel Türkçe Sesi: ${voice.displayName}`
+                  : "Cihaz yerel Türkçe sesi kullanılıyor (Tek yerel ses profili aktif)"
+              );
+            } else {
+              options?.onInfo?.(
+                `Cihaz Yerel Sesi: ${voice.accentLabelTr} (${
+                  voice.gender === "female" ? "Kadın" : "Erkek"
+                })`
+              );
+            }
           };
           utterance.onend = () => {
             options?.onEnd?.();
@@ -203,8 +342,8 @@ class ClientAudioManager {
     try {
       trace("AUDIO", `playText started for "${text.slice(0, 30)}..." with voice ${voice.id}`);
 
-      // Bound the network wait without aborting normal neural TTS cold starts.
       const controller = new AbortController();
+      this.activeAbortController = controller;
       const timeoutId = setTimeout(() => controller.abort(), TTS_REQUEST_TIMEOUT_MS);
 
       const res = await fetch("/api/tts", {
@@ -213,6 +352,9 @@ class ClientAudioManager {
         body: JSON.stringify({
           text,
           voiceId: voice.id,
+          locale: voice.locale,
+          contentLanguage: voice.contentLanguage,
+          gender: voice.gender,
           speakingRate: rate,
           contentType,
         }),
@@ -223,6 +365,7 @@ class ClientAudioManager {
       });
 
       clearTimeout(timeoutId);
+      this.activeAbortController = null;
 
       const contentTypeHeader = res.headers.get("content-type") || "";
 
@@ -230,8 +373,6 @@ class ClientAudioManager {
         throw new Error(`TTS API Hatası: HTTP ${res.status}`);
       }
 
-      // The API may return HTTP 200 with JSON when the cloud provider fails.
-      // Never pass that JSON (or an HTML error page) to the audio decoder.
       if (!contentTypeHeader.toLowerCase().startsWith("audio/")) {
         throw new Error(
           `TTS API ses yerine "${contentTypeHeader || "bilinmeyen içerik"}" döndürdü.`
@@ -243,15 +384,45 @@ class ClientAudioManager {
         throw new Error("TTS API boş ses verisi döndürdü.");
       }
 
+      const providerHeader = res.headers.get("x-tts-provider") || voice.provider;
+      const providerVoiceHeader = res.headers.get("x-tts-provider-voice") || voice.providerVoiceId;
+      const distinctHeader = res.headers.get("x-tts-distinct-speaker") === "true";
+
+      const meta: PlaybackMetadata = {
+        provider: providerHeader,
+        providerVoiceId: providerVoiceHeader,
+        voiceId: voice.id,
+        displayName: voice.displayName,
+        locale: voice.locale,
+        contentLanguage: voice.contentLanguage,
+        gender: voice.gender,
+        distinctSpeakerVerified: distinctHeader,
+        usingBrowserFallback: false,
+        latencyMs: Date.now() - t0,
+      };
+      this.lastMetadata = meta;
+      options?.onMetadata?.(meta);
+
       const audioUrl = URL.createObjectURL(audioBlob);
       this.currentBlobUrl = audioUrl;
 
       const audio = new Audio(audioUrl);
+      audio.playbackRate = 1.0; // Hız zaten sunucu tarafında prosody/stream ile uygulandı
       this.currentAudio = audio;
 
       audio.onplay = () => {
         options?.onStart?.();
-        options?.onInfo?.(`Doğal Neural Ses: ${voice.displayName} (${voice.accentLabelTr} · ${voice.gender === "female" ? "Kadın" : "Erkek"})`);
+        if (distinctHeader) {
+          options?.onInfo?.(
+            `Doğal Neural Ses: ${voice.displayName} (${voice.accentLabelTr} · ${
+              voice.gender === "female" ? "Kadın" : "Erkek"
+            })`
+          );
+        } else {
+          options?.onInfo?.(
+            `Bulut Ses Motoru (${voice.accentLabelTr}): Standart yedek ses aktif`
+          );
+        }
       };
 
       audio.onended = () => {
@@ -278,12 +449,15 @@ class ClientAudioManager {
       };
 
       await audio.play().catch((playErr) => {
-        // Autoplay policy or format error -> immediately fall back to browser speech
         if (!playWithBrowserSpeech()) {
           throw playErr;
         }
       });
     } catch (err: any) {
+      if (err?.name === "AbortError" && !this.activeAbortController) {
+        // Kullanıcı stopAll() çağırdıysa sessizce çık
+        return;
+      }
       // PERF & SAFETY: Automatic Web Speech API Fallback ensures sounds NEVER fail
       const fallbackSuccess = playWithBrowserSpeech();
       if (!fallbackSuccess) {
@@ -293,13 +467,19 @@ class ClientAudioManager {
     }
   }
 
-  // Standart Önizleme Cümlesini Çal
+  // Standart Önizleme Cümlesini Çal (Türkçe sesler Türkçe, İngilizce sesler İngilizce cümle okur)
   async playPreview(voiceId: string, options?: PlaybackOptions): Promise<void> {
-    return this.play(STANDARD_PREVIEW_TEXT, {
+    const profile = getVoiceProfile(voiceId);
+    const previewText =
+      profile?.contentLanguage === "tr"
+        ? STANDARD_TURKISH_PREVIEW_TEXT
+        : STANDARD_PREVIEW_TEXT;
+    return this.play(previewText, {
       ...options,
       voiceId,
+      contentLanguage: profile?.contentLanguage || "en",
       contentType: "sentence",
-      rate: 1.0,
+      rate: options?.rate ?? 1.0,
     });
   }
 }

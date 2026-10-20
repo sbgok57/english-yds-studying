@@ -42,14 +42,15 @@ export default function AccentVoicePicker({
   }, []);
 
   const handleSelectVoice = (voice: VoiceProfile) => {
+    const englishAccent = (voice.locale === "tr-TR" ? "en-US" : voice.locale) as AccentCode;
     clientAudio.savePreferences({
-      preferredAccent: voice.locale,
+      preferredAccent: englishAccent,
       preferredVoiceGender: voice.gender,
       preferredVoiceId: voice.id,
     });
     setPrefs((prev) => ({
       ...prev,
-      preferredAccent: voice.locale,
+      preferredAccent: englishAccent,
       preferredVoiceGender: voice.gender,
       preferredVoiceId: voice.id,
     }));
