@@ -138,7 +138,7 @@ self.addEventListener('push', (event) => {
 // 5. Bildirim Tıklaması
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const targetUrl = (event.notification.data && event.notification.data.url) || '/';
+  const targetUrl = (event.notification.data && event.notification.data.url) || '/grammar';
 
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
@@ -152,3 +152,18 @@ self.addEventListener('notificationclick', (event) => {
     })
   );
 });
+
+// 6. İstemciden Gelen Akıllı Bildirim İstekleri (TRIGGER_NOTIFICATION)
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'TRIGGER_NOTIFICATION') {
+    const payload = event.data.payload || {};
+    self.registration.showNotification(payload.title || '🚀 DİL MASTER', {
+      body: payload.body || 'Günün YDS hap bilgisi ve kelimeleri seni bekliyor!',
+      icon: payload.icon || '/favicon.ico',
+      badge: '/favicon.ico',
+      vibrate: [100, 50, 100],
+      data: { url: payload.url || '/grammar' },
+    });
+  }
+});
+

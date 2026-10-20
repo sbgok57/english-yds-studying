@@ -66,6 +66,31 @@ const browserPolyfills: Record<string, any> = {
     hardwareConcurrency: 8,
     language: 'tr-TR',
     languages: ['tr-TR', 'tr', 'en-US', 'en'],
+    mediaSession: {
+      metadata: null,
+      playbackState: 'none',
+      setActionHandler: () => {},
+    },
+  },
+  Audio: class {
+    src: string = '';
+    playbackRate: number = 1.0;
+    currentTime: number = 0;
+    duration: number = 100;
+    paused: boolean = true;
+    preload: string = 'auto';
+    onended: (() => void) | null = null;
+    onerror: ((err: any) => void) | null = null;
+    constructor(src?: string) { if (src) this.src = src; }
+    play() { this.paused = false; return Promise.resolve(); }
+    pause() { this.paused = true; }
+  },
+  MediaMetadata: class {
+    title: string = '';
+    artist: string = '';
+    album: string = '';
+    artwork: any[] = [];
+    constructor(init?: any) { Object.assign(this, init); }
   },
   localStorage: mockStorage,
   sessionStorage: mockStorage,
@@ -128,7 +153,7 @@ for (const [key, val] of Object.entries(browserPolyfills)) {
 }
 
 // ============================================================================
-// 2. 16 TEST DOSYASININ SIRALI VE GÜVENLİ ÇALIŞTIRILMASI
+// 2. 17 TEST DOSYASININ SIRALI VE GÜVENLİ ÇALIŞTIRILMASI
 // ============================================================================
 
 const testSuites: string[] = [
@@ -148,6 +173,7 @@ const testSuites: string[] = [
   'games-curriculum-tests.ts',
   'offline-autosave-tests.ts',
   'mobile-apps-integrity-tests.ts',
+  'speech-engine-and-audio-tests.ts',
 ];
 
 interface TestResult {

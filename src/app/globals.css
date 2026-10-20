@@ -866,30 +866,55 @@ section {
    MOBİL OKUNABİLİRLİK & BÜYÜK TİPOGRAFİ (GÖZ YORGUNLUĞUNU ÖNLEYİCİ)
    ============================================================ */
 :root {
-  --base-font-size: 17px;
-  --passage-font-size: 1.15rem; /* ~20px */
+  --base-font-size: 18px;
+  --passage-font-size: 1.25rem; /* ~22.5px */
   --heading-scale: 1.25;
-  --line-height-relaxed: 1.75;
+  --line-height-relaxed: 1.85;
 }
 
-/* YDS / YÖKDİL Okuma Paragrafları ve Sorular */
-.reading-text, .passage, .soru-metni {
+/* 1. Temel Okuma ve Paragraf Ölçeği */
+html {
+  font-size: var(--base-font-size);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 2. YDS / YÖKDİL Okuma Paragrafları ve Sorular */
+p, article, .reading-text, .passage, .soru-metni, .passage-content {
   font-size: var(--passage-font-size) !important;
-  line-height: 1.8 !important;
-  letter-spacing: 0.015em;
-  margin-bottom: 1.25rem;
+  line-height: var(--line-height-relaxed) !important;
+  letter-spacing: 0.012em;
+  margin-bottom: 1.5rem !important;
 }
 
-/* Kelime Kartları ve Şık Vurgular */
+html.light p, html.light article, html.light .reading-text, html.light .passage, html.light .passage-content {
+  color: #0f172a !important;
+}
+
+html:not(.light) p, html:not(.light) article, html:not(.light) .reading-text, html:not(.light) .passage, html:not(.light) .passage-content {
+  color: #f1f5f9 !important;
+}
+
+/* 3. Kelime Kartları ve Şık Vurgular */
 .word-card, .vocabulary-item {
   font-size: 1.2rem !important;
   padding: 16px !important;
 }
 
-/* Mobil Giriş Alanları ve Dokunmatik Hedefler */
+/* 4. Butonlar, Seçiciler ve Dokunmatik Hedefler (Rahat Dokunma ve Net Görünüm) */
+button, input, select, textarea {
+  min-height: 48px !important;
+}
+
 @media (max-width: 768px) {
   input, select, textarea {
     font-size: 1.05rem !important;
     min-height: 48px;
   }
+}
+
+/* 5. Etiketler (Badge / Rozetler) */
+span[class*="rounded-full"] {
+  font-size: 0.9rem !important;
+  padding: 6px 14px !important;
+  font-weight: 600 !important;
 }

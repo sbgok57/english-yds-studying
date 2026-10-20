@@ -166,13 +166,16 @@ async function handleTtsRequest(
       },
     });
   } catch (err: any) {
-    console.error("[TTS API Synthesis Error]:", err?.message || err);
+    console.error("[TTS API Synthesis Fallback]:", err?.message || err);
+    // // SAFETY: Vercel 502 basmak yerine istemciye yerel Web Speech API / CDN motoruna geçmesi için güvenli 200 dön
     return NextResponse.json(
       {
         ok: false,
-        error: "Ses sentezlenemedi. Lütfen tekrar deneyin.",
+        fallbackToClient: true,
+        message: "Bulut ses motoru geçici olarak meşgul, istemci yerel ses motoru devreye girdi.",
+        error: err?.message || "Synthesis fallback triggered",
       },
-      { status: 502 }
+      { status: 200 }
     );
   }
 }
