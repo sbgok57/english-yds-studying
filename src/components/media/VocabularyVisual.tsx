@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import {
   resolveWordVisualManifest,
   VisualMode,
@@ -39,29 +40,33 @@ const MODE_LABELS: Record<VisualMode, { labelTr: string; icon: React.ComponentTy
 
 function SemanticAnimatedSvg({
   motionType,
+  visualKey,
   english,
   turkish,
   paused,
 }: {
   motionType: MotionDiagramType;
+  visualKey: string;
   english: string;
   turkish: string;
   paused: boolean;
 }) {
+  const gradientId = `semantic-bg-${visualKey}`;
   return (
     <svg
       viewBox="0 0 400 220"
       className="w-full h-full select-none"
       role="img"
       aria-label={`${english} (${turkish}) semantik hareket şeması`}
+      data-visual-key={visualKey}
     >
       <defs>
-        <linearGradient id={`grad-${motionType}`} x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#0f172a" />
           <stop offset="100%" stopColor="#1e1b4b" />
         </linearGradient>
       </defs>
-      <rect width="400" height="220" rx="16" fill={`url(#grad-${motionType})`} />
+      <rect width="400" height="220" rx="16" fill={`url(#${gradientId})`} />
 
       {/* Background Subtle Grid */}
       <g stroke="#334155" strokeOpacity="0.45" strokeWidth="1">
@@ -238,6 +243,77 @@ function SemanticAnimatedSvg({
         </g>
       )}
 
+      {motionType === "causal" && (
+        <g>
+          <rect x="42" y="82" width="88" height="56" rx="12" fill="#7c2d12" stroke="#fb923c" strokeWidth="2" />
+          <rect x="156" y="82" width="88" height="56" rx="12" fill="#1e3a8a" stroke="#60a5fa" strokeWidth="2" />
+          <rect x="270" y="82" width="88" height="56" rx="12" fill="#064e3b" stroke="#34d399" strokeWidth="2" />
+          <text x="86" y="115" textAnchor="middle" fill="#ffedd5" fontSize="11">NEDEN</text>
+          <text x="200" y="115" textAnchor="middle" fill="#dbeafe" fontSize="11">ETKİ</text>
+          <text x="314" y="115" textAnchor="middle" fill="#d1fae5" fontSize="11">SONUÇ</text>
+          <path d="M130 110h24m0 0-8-7m8 7-8 7M244 110h24m0 0-8-7m8 7-8 7" fill="none" stroke="#cbd5e1" strokeWidth="3" />
+          <circle cx="200" cy="58" r="7" fill="#60a5fa" className={paused ? "" : "animate-pulse"} />
+        </g>
+      )}
+
+      {motionType === "cycle" && (
+        <g>
+          <path d="M145 70a70 48 0 0 1 112 19M260 91l-3-17 17 6M255 150a70 48 0 0 1-112-19M140 129l3 17-17-6" fill="none" stroke="#a78bfa" strokeWidth="4" strokeLinecap="round" />
+          <circle cx="145" cy="70" r="17" fill="#0891b2" />
+          <circle cx="255" cy="150" r="17" fill="#7c3aed" className={paused ? "" : "animate-pulse"} />
+          <circle cx="200" cy="110" r="26" fill="#312e81" stroke="#818cf8" strokeWidth="2" />
+          <text x="200" y="114" textAnchor="middle" fill="#e0e7ff" fontSize="10">TEKRAR</text>
+        </g>
+      )}
+
+      {motionType === "compare" && (
+        <g>
+          <line x1="200" y1="55" x2="200" y2="169" stroke="#94a3b8" strokeWidth="2" />
+          <rect x="72" y="83" width="82" height="62" rx="12" fill="#0e7490" stroke="#67e8f9" strokeWidth="2" />
+          <rect x="246" y="83" width="82" height="62" rx="12" fill="#7c2d12" stroke="#fdba74" strokeWidth="2" />
+          <text x="113" y="111" textAnchor="middle" fill="#ecfeff" fontSize="11">A</text>
+          <text x="113" y="129" textAnchor="middle" fill="#a5f3fc" fontSize="9">ÖZELLİK</text>
+          <text x="287" y="111" textAnchor="middle" fill="#fff7ed" fontSize="11">B</text>
+          <text x="287" y="129" textAnchor="middle" fill="#fed7aa" fontSize="9">ÖZELLİK</text>
+          <path d="M164 111h28m0 0-7-6m7 6-7 6M236 129h-28m0 0 7-6m-7 6 7 6" fill="none" stroke="#e2e8f0" strokeWidth="2" />
+        </g>
+      )}
+
+      {motionType === "distribution" && (
+        <g>
+          <circle cx="200" cy="110" r="23" fill="#7c3aed" stroke="#c4b5fd" strokeWidth="2" />
+          <g stroke="#38bdf8" strokeOpacity="0.55" strokeWidth="2">
+            <line x1="200" y1="110" x2="76" y2="66"/><line x1="200" y1="110" x2="322" y2="61"/>
+            <line x1="200" y1="110" x2="65" y2="158"/><line x1="200" y1="110" x2="330" y2="161"/>
+            <line x1="200" y1="110" x2="200" y2="43"/><line x1="200" y1="110" x2="200" y2="177"/>
+          </g>
+          <g fill="#22d3ee">
+            <circle cx="76" cy="66" r="8"/><circle cx="322" cy="61" r="8"/><circle cx="65" cy="158" r="8"/>
+            <circle cx="330" cy="161" r="8"/><circle cx="200" cy="43" r="8"/><circle cx="200" cy="177" r="8" className={paused ? "" : "animate-pulse"}/>
+          </g>
+        </g>
+      )}
+
+      {motionType === "containment" && (
+        <g>
+          <rect x="72" y="53" width="256" height="116" rx="26" fill="#172554" stroke="#60a5fa" strokeWidth="3" />
+          <rect x="122" y="76" width="156" height="70" rx="20" fill="#312e81" stroke="#a78bfa" strokeWidth="3" />
+          <circle cx="200" cy="111" r="23" fill="#0e7490" stroke="#67e8f9" strokeWidth="3" className={paused ? "" : "animate-pulse"} />
+          <text x="200" y="201" textAnchor="middle" fill="#cbd5e1" fontSize="10">İÇİNDE · KAPSAMINDA · KUŞATILMIŞ</text>
+        </g>
+      )}
+
+      {motionType === "growth" && (
+        <g>
+          <line x1="58" y1="169" x2="348" y2="169" stroke="#64748b" strokeWidth="2" />
+          <rect x="78" y="130" width="42" height="39" rx="5" fill="#0e7490" />
+          <rect x="147" y="108" width="42" height="61" rx="5" fill="#0891b2" />
+          <rect x="216" y="80" width="42" height="89" rx="5" fill="#14b8a6" />
+          <rect x="285" y="50" width="42" height="119" rx="5" fill="#34d399" className={paused ? "" : "animate-pulse"} />
+          <path d="M77 118 153 93l68-28 94-34m0 0-3 17m3-17-18 2" fill="none" stroke="#fbbf24" strokeWidth="3" />
+        </g>
+      )}
+
       {motionType === "flow" && (
         <g>
           <rect x="44" y="80" width="84" height="58" rx="10" fill="#1e293b" stroke="#475569" strokeWidth="2" />
@@ -289,12 +365,10 @@ export default function VocabularyVisual({
   initialMode,
   className = "",
 }: VocabularyVisualProps) {
-  const manifest = resolveWordVisualManifest({
-    english,
-    turkish,
-    partOfSpeech,
-    level,
-  });
+  const manifest = useMemo(
+    () => resolveWordVisualManifest({ english, turkish, partOfSpeech, level, definitionEn, example }),
+    [english, turkish, partOfSpeech, level, definitionEn, example]
+  );
 
   const [activeMode, setActiveMode] = useState<VisualMode>(() => {
     if (initialMode && manifest.availableModes.includes(initialMode)) {
@@ -304,11 +378,13 @@ export default function VocabularyVisual({
   });
 
   const [photoError, setPhotoError] = useState(false);
+  const [localAnimationError, setLocalAnimationError] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
     setPhotoError(false);
+    setLocalAnimationError(false);
     const nextDefault =
       initialMode && manifest.availableModes.includes(initialMode)
         ? initialMode
@@ -328,6 +404,8 @@ export default function VocabularyVisual({
     return (
       <div
         data-testid={`vocab-visual-compact-${manifest.wordSlug}`}
+        data-visual-key={manifest.visualKey || manifest.wordSlug}
+        data-motion-type={manifest.animation.motionType}
         className={`relative w-full h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-950 ${className}`}
       >
         {manifest.hasVerifiedPhoto && manifest.photo && !photoError ? (
@@ -351,6 +429,7 @@ export default function VocabularyVisual({
           <div className="w-full h-full">
             <SemanticAnimatedSvg
               motionType={manifest.animation.motionType}
+              visualKey={manifest.visualKey || manifest.wordSlug}
               english={english}
               turkish={turkish}
               paused={true}
@@ -376,6 +455,8 @@ export default function VocabularyVisual({
     <div
       data-testid="vocabulary-visual-container"
       data-word-slug={manifest.wordSlug}
+      data-visual-key={manifest.visualKey || manifest.wordSlug}
+      data-motion-type={manifest.animation.motionType}
       data-active-mode={currentMode}
       className={`space-y-3 ${className}`}
     >
@@ -465,12 +546,26 @@ export default function VocabularyVisual({
         {currentMode === "animation" && (
           <div className="w-full h-full flex flex-col justify-between bg-slate-950">
             <div className="flex-1 min-h-0">
-              <SemanticAnimatedSvg
-                motionType={manifest.animation.motionType}
-                english={english}
-                turkish={turkish}
-                paused={isPaused}
-              />
+              {manifest.animation.localSvgUrl && !localAnimationError && !isPaused ? (
+                <Image
+                  src={manifest.animation.localSvgUrl}
+                  alt={`${english} (${turkish}) kelimesine özgü animasyonlu semantik şema`}
+                  width={400}
+                  height={260}
+                  unoptimized
+                  onError={() => setLocalAnimationError(true)}
+                  data-testid={`vocabulary-local-animation-${manifest.wordSlug}`}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <SemanticAnimatedSvg
+                  motionType={manifest.animation.motionType}
+                  visualKey={manifest.visualKey || manifest.wordSlug}
+                  english={english}
+                  turkish={turkish}
+                  paused={isPaused}
+                />
+              )}
             </div>
             <div className="px-3.5 py-2 bg-slate-900/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300">
               <span>{manifest.animation.captionTr}</span>
@@ -483,7 +578,12 @@ export default function VocabularyVisual({
 
         {currentMode === "3d" && (
           <div className="w-full h-full flex items-center justify-center bg-slate-950">
-            <LazyWord3DScene english={english} turkish={turkish} />
+            <LazyWord3DScene
+              english={english}
+              turkish={turkish}
+              motionType={manifest.animation.motionType}
+              visualKey={manifest.visualKey || manifest.wordSlug}
+            />
           </div>
         )}
 

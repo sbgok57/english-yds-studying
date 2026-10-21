@@ -8,7 +8,13 @@ export type MotionDiagramType =
   | "examine"
   | "balance"
   | "scale"
-  | "barrier";
+  | "barrier"
+  | "causal"
+  | "cycle"
+  | "compare"
+  | "distribution"
+  | "containment"
+  | "growth";
 
 export interface PhotoAssetMeta {
   url: string;
@@ -31,6 +37,8 @@ export interface AnimationAssetMeta {
 }
 
 export interface WordVisualManifest {
+  /** Stable, word-specific identity used for SVG IDs, React keys, and 3D seeds. */
+  visualKey?: string;
   wordSlug: string;
   english: string;
   turkish: string;
@@ -375,16 +383,54 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
 /**
  * Kelime türüne ve anlamına göre en uygun semantik hareket şemasını seçer.
  */
-function inferMotionType(english: string, turkish: string, pos: string): MotionDiagramType {
-  const combined = `${english} ${turkish} ${pos}`.toLowerCase();
-  if (/azalt|hafiflet|mitigat|alleviat|reduce|lessen|curb/.test(combined)) return "mitigate";
-  if (/kötüle|bozul|deteriorat|decay|decline|worsen|collapse|erode/.test(combined)) return "decay";
-  if (/incele|araştır|scrutin|inspect|analy|examin|observ|detect/.test(combined)) return "examine";
-  if (/yaygın|her yerde|ubiquit|prevalen|widespread|pervasive|global/.test(combined)) return "network";
-  if (/uzlaş|denge|cope|reconcil|balanc|harmon|adapt|sustain/.test(combined)) return "balance";
-  if (/art|köklü|drastic|escalat|surge|expand|amplif|magnif/.test(combined)) return "scale";
-  if (/isteksiz|engel|reluctan|hinder|imped|obstruct|inhibit|restrain/.test(combined)) return "barrier";
-  return "flow";
+function hashWord(value: string): number {
+  let hash = 2166136261;
+  for (const character of value) {
+    hash ^= character.codePointAt(0) || 0;
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function inferMotionType(
+  english: string,
+  turkish: string,
+  pos: string,
+  definitionEn = "",
+  example = "",
+): MotionDiagramType {
+  const word = normalizeWordSlug(english);
+  const combined = `${english} ${turkish} ${pos} ${definitionEn} ${example}`
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  // Sense-aware phrases precede broad matches so a polysemous word does not
+  // get classified only from its spelling.
+  if (/\bbank\b/.test(combined) && /river|shore|riverbank|kiyi|nehir/.test(combined)) return "flow";
+  if (/\bbank\b/.test(combined) && /finance|money|loan|banka|para|kredi/.test(combined)) return "balance";
+  if (/karşılaştır|karsilastir|compare|contrast|whereas|unlike|versus/.test(combined)) return "compare";
+  if (/neden|sonuç|sebep|cause|effect|consequen|lead to|result in/.test(combined)) return "causal";
+  if (/döngü|dongu|cycle|cyclic|repeat|recur|periodic/.test(combined)) return "cycle";
+  if (/dağılım|dagilim|distribut|spread|scatter|prevalen|widespread|ubiquit|her yerde/.test(combined)) return "distribution";
+  if (/içer|icer|contain|enclos|surround|within|inside|kapsa/.test(combined)) return "containment";
+  if (/büyü|buyu|grow|increase|expand|rise|develop|escalat|surge|amplif|magnif/.test(combined)) return "growth";
+  if (/azal|hafiflet|yatış|yatist|mitigat|alleviat|reduce|lessen|curb|abate|diminish/.test(combined)) return "mitigate";
+  if (/kötüle|kotule|bozul|aşın|asin|deteriorat|decay|decline|worsen|collapse|erode/.test(combined)) return "decay";
+  if (/incele|araştır|arastir|scrutin|inspect|analy|examin|observ|detect/.test(combined)) return "examine";
+  if (/uzlaş|uzlas|denge|cope|reconcil|balanc|harmon|adapt|sustain/.test(combined)) return "balance";
+  if (/isteksiz|engel|reluctan|hinder|imped|obstruct|inhibit|restrain|prevent|prohibit/.test(combined)) return "barrier";
+  if (/drastic|sharp|sudden|radical|köklü|koklu/.test(combined)) return "scale";
+  if (/carry out|conduct|perform|execute|implement|yürüt|yurut|gerçekleştir|gerceklestir|uygula/.test(combined)) return "flow";
+
+  // Unknown terms still receive a stable, varied topology instead of all
+  // falling into the same generic flow diagram. This is a visual fallback,
+  // not a claim that the inferred shape is a dictionary definition.
+  const fallbackTypes: MotionDiagramType[] = [
+    "causal", "cycle", "compare", "distribution", "containment", "growth",
+    "examine", "balance", "barrier", "scale", "network", "flow",
+  ];
+  return fallbackTypes[hashWord(word) % fallbackTypes.length];
 }
 
 /**
@@ -397,18 +443,27 @@ export function resolveWordVisualManifest(params: {
   turkish: string;
   partOfSpeech?: string;
   level?: string;
+  definitionEn?: string;
+  example?: string;
 }): WordVisualManifest {
   const slug = normalizeWordSlug(params.english);
   const existing = VISUAL_ASSET_REGISTRY[slug];
   if (existing) {
-    return existing;
+    return { ...existing, visualKey: slug };
   }
 
   const pos = params.partOfSpeech || "academic";
   const level = params.level || "B2";
-  const motionType = inferMotionType(params.english, params.turkish, pos);
+  const motionType = inferMotionType(
+    params.english,
+    params.turkish,
+    pos,
+    params.definitionEn,
+    params.example,
+  );
 
   return {
+    visualKey: slug,
     wordSlug: slug,
     english: params.english,
     turkish: params.turkish,
