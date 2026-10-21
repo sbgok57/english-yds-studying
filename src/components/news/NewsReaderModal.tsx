@@ -394,7 +394,7 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
 
         {/* Modal Footer */}
         <div className="p-4 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 shrink-0">
-          <span>YDS Master Gündem Haberleri Arşivi &bull; {article.sourceName}</span>
+          <span>DİL MASTER Gündem Haberleri Arşivi &bull; {article.sourceName}</span>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl transition-colors font-semibold"

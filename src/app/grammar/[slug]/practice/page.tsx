@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
   return {
-    title: topic ? `${topic.title} 100 Soru Testi — YDS Master` : "Gramer Konu Testi — YDS Master",
+    title: topic ? `${topic.title} 100 Soru Testi — DİL MASTER` : "Gramer Konu Testi — DİL MASTER",
   };
 }
 

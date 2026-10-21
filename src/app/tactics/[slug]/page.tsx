@@ -13,7 +13,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const tactic = TACTICS.find((t) => t.slug === params.slug);
   return {
-    title: tactic ? `${tactic.title} — YDS Master Taktikleri` : "Taktikler — YDS Master",
+    title: tactic ? `${tactic.title} — DİL MASTER Taktikleri` : "Taktikler — DİL MASTER",
   };
 }
 

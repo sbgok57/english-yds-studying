@@ -1,3 +1,5 @@
+import dns from "dns";
+import https from "https";
 import {
   VoiceProfile,
   getVoiceProfile,
@@ -7,6 +9,15 @@ import {
   VoiceSource,
 } from "./voice-registry";
 import { isValidAudioBuffer } from "./audio-cache";
+
+// PERF & SAFETY: Prevent Node.js undici/WebSocket IPv6 blackhole 8s timeouts on dual-stack networks
+try {
+  if (typeof dns.setDefaultResultOrder === "function") {
+    dns.setDefaultResultOrder("ipv4first");
+  }
+} catch {
+  /* ignore if unsupported */
+}
 
 export type TtsErrorCode =
   | "VOICE_NOT_AVAILABLE"
@@ -322,6 +333,43 @@ export class EdgeTtsProvider implements TtsProvider {
     }
   }
 
+  private fetchMp3Ipv4(urlStr: string, timeoutMs: number = 6000): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+      const req = https.get(
+        urlStr,
+        {
+          family: 4,
+          timeout: timeoutMs,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+            Accept: "audio/mpeg,audio/*;q=0.9,*/*;q=0.8",
+          },
+        },
+        (res) => {
+          if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+            res.resume();
+            this.fetchMp3Ipv4(res.headers.location, timeoutMs).then(resolve).catch(reject);
+            return;
+          }
+          if (res.statusCode !== 200) {
+            res.resume();
+            reject(new Error(`HTTP MP3 stream status ${res.statusCode}`));
+            return;
+          }
+          const chunks: Buffer[] = [];
+          res.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
+          res.on("end", () => resolve(Buffer.concat(chunks)));
+          res.on("error", reject);
+        }
+      );
+      req.on("timeout", () => {
+        req.destroy(new Error(`HTTP MP3 stream timeout (${timeoutMs}ms)`));
+      });
+      req.on("error", reject);
+    });
+  }
+
   private async synthesizeViaCloudHttpMp3(
     text: string,
     locale: VoiceLocale,
@@ -351,22 +399,8 @@ export class EdgeTtsProvider implements TtsProvider {
       let lastChunkErr: Error | null = null;
 
       for (let i = 0; i < endpoints.length; i++) {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 8000);
         try {
-          const res = await fetch(endpoints[i], {
-            cache: "no-store",
-            headers: {
-              "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            },
-            signal: controller.signal,
-          });
-          if (!res.ok) {
-            throw new Error(`HTTP MP3 stream status ${res.status}`);
-          }
-          const arrayBuf = await res.arrayBuffer();
-          const buf = Buffer.from(arrayBuf);
+          const buf = await this.fetchMp3Ipv4(endpoints[i], 6000);
           if (!isValidAudioBuffer(buf, "audio/mpeg")) {
             throw new Error("HTTP MP3 stream returned invalid or empty audio buffer");
           }
@@ -375,10 +409,8 @@ export class EdgeTtsProvider implements TtsProvider {
         } catch (err: any) {
           lastChunkErr = err;
           if (i < endpoints.length - 1) {
-            await new Promise((r) => setTimeout(r, 200));
+            await new Promise((r) => setTimeout(r, 150));
           }
-        } finally {
-          clearTimeout(timer);
         }
       }
 

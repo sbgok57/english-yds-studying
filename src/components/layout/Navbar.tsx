@@ -124,7 +124,7 @@ export default function Navbar() {
           </div>
           <div className="hidden sm:block">
             <span className="text-lg font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
-              YDS Master
+              DİL MASTER
             </span>
             <span className="block text-[9px] font-mono tracking-widest text-cyan-300 uppercase -mt-1">
               Görsel Hafıza

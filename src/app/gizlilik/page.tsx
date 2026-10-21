@@ -15,7 +15,7 @@ export default function GizlilikPage() {
             Gizlilik Politikası 🛡️
           </h1>
           <p className="text-sm text-white/50 mt-2">
-            Son Güncelleme: 18 Eylül 2026 &bull; YDS Master Güvenlik & Gizlilik İlkeleri
+            Son Güncelleme: 18 Eylül 2026 &bull; DİL MASTER Güvenlik & Gizlilik İlkeleri
           </p>
         </header>
 
@@ -24,7 +24,7 @@ export default function GizlilikPage() {
             <span>1.</span> Veri Sorumlusu ve Temel İlke
           </h2>
           <p>
-            YDS Master olarak, kullanıcılarımızın kişisel verilerinin ve sınav hazırlık süreçlerindeki gizliliğinin korunmasına azami özen gösteriyoruz. Platformumuz, kullanıcı deneyimini iyileştirmek ve çalışma ilerlemenizi takip edebilmeniz dışında hiçbir ticari veri toplama faaliyeti yürütmez.
+            DİL MASTER olarak, kullanıcılarımızın kişisel verilerinin ve sınav hazırlık süreçlerindeki gizliliğinin korunmasına azami özen gösteriyoruz. Platformumuz, kullanıcı deneyimini iyileştirmek ve çalışma ilerlemenizi takip edebilmeniz dışında hiçbir ticari veri toplama faaliyeti yürütmez.
           </p>
         </section>
 

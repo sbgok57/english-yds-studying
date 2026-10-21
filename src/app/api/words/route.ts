@@ -1,9 +1,60 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { MASTER_VOCABULARY } from "@/lib/vocabulary/master-vocab-database";
-import { YDS_PUBLICATIONS_MASTER_CORPUS } from "@/lib/vocabulary/publications-master-corpus";
+import { INVENTORY_ITEMS, getWordExams } from "@/lib/data-inventory";
 
 export const dynamic = "force-dynamic";
+
+interface CanonicalWordDto {
+  id: string;
+  english: string;
+  turkish: string;
+  definitionEn: string;
+  examples: string[];
+  synonyms: string[];
+  level: string;
+  type: string;
+  imageUrl: string | null;
+  targetExams: ("YDS" | "YDT" | "YÖKDİL")[];
+  sourceCategory: string;
+}
+
+function mapPosToTr(pos?: string, phrasal?: boolean): string {
+  if (phrasal) return "phrasal verb";
+  switch ((pos || "").toLowerCase()) {
+    case "verb":
+    case "fiil":
+      return "fiil";
+    case "noun":
+    case "isim":
+      return "isim";
+    case "adjective":
+    case "sıfat":
+      return "sıfat";
+    case "adverb":
+    case "zarf":
+      return "zarf";
+    default:
+      return pos || "genel";
+  }
+}
+
+function buildCanonicalPool(): CanonicalWordDto[] {
+  return INVENTORY_ITEMS.map((item) => ({
+    id: item.id,
+    english: item.word,
+    turkish: item.turkishMeanings.join(", "),
+    definitionEn: item.englishDefinition || "",
+    examples: item.example ? [item.example, item.exampleTr || ""] : [],
+    synonyms: item.synonyms || [],
+    level: item.level === "UNCLASSIFIED" ? "B2" : item.level,
+    type: mapPosToTr(item.partOfSpeech, item.phrasalVerb),
+    imageUrl: null,
+    targetExams: getWordExams(item),
+    sourceCategory: item.sourceTags?.includes("reading")
+      ? "Modadil / Akın Dil / Akademik Yayınlar"
+      : "DİL MASTER Konsolide Envanter",
+  }));
+}
 
 export async function GET(req: NextRequest) {
   try {
@@ -17,110 +68,90 @@ export async function GET(req: NextRequest) {
     const limit = Math.min(100, Math.max(10, parseInt(searchParams.get("limit") || "50", 10)));
     const skip = (page - 1) * limit;
 
-    const whereClause: any = {};
+    let formatted: CanonicalWordDto[] = [];
+    let total = 0;
 
-    if (q) {
-      whereClause.OR = [
-        { english: { contains: q } },
-        { turkish: { contains: q } },
-        { definitionEn: { contains: q } },
-      ];
+    // SAFETY: Isolate Prisma DB query so serverless DB errors fall back to canonical 2,544 inventory
+    try {
+      const whereClause: Record<string, unknown> = {};
+
+      if (q) {
+        whereClause.OR = [
+          { english: { contains: q } },
+          { turkish: { contains: q } },
+          { definitionEn: { contains: q } },
+        ];
+      }
+
+      if (type && type !== "Hepsi") {
+        whereClause.type = type;
+      }
+
+      if (level && level !== "Hepsi") {
+        whereClause.level = { contains: level };
+      }
+
+      if (source && source !== "Hepsi") {
+        whereClause.source = source;
+      }
+
+      const [words, dbTotal] = await Promise.all([
+        prisma.word.findMany({
+          where: whereClause,
+          orderBy: { english: "asc" },
+          skip,
+          take: limit,
+        }),
+        prisma.word.count({ where: whereClause }),
+      ]);
+
+      total = dbTotal;
+      formatted = words.map((w) => {
+        const exams: ("YDS" | "YDT" | "YÖKDİL")[] = [];
+        const lvl = (w.level || "B2").toUpperCase();
+        const tp = (w.type || "").toLowerCase();
+        if (lvl === "A1" || lvl === "A2" || lvl === "B1" || lvl === "B2" || tp.includes("phrasal")) exams.push("YDT");
+        if (lvl === "B2" || lvl === "C1" || lvl === "C2" || lvl.includes("YDS")) exams.push("YDS");
+        if (lvl === "B1" || lvl === "B2" || lvl === "C1") exams.push("YÖKDİL");
+        if (exams.length === 0) exams.push("YDS", "YDT", "YÖKDİL");
+
+        return {
+          id: w.id,
+          english: w.english,
+          turkish: w.turkish,
+          definitionEn: w.definitionEn,
+          examples: (() => {
+            try {
+              return JSON.parse(w.examples || "[]");
+            } catch {
+              return [];
+            }
+          })(),
+          synonyms: (() => {
+            try {
+              return JSON.parse(w.synonyms || "[]");
+            } catch {
+              return [];
+            }
+          })(),
+          level: w.level,
+          type: w.type,
+          imageUrl: w.imageUrl,
+          targetExams: exams,
+          sourceCategory: w.source || "ÖSYM / Akademik Yayınlar",
+        };
+      });
+    } catch {
+      total = 0;
+      formatted = [];
     }
 
-    if (type && type !== "Hepsi") {
-      whereClause.type = type;
-    }
-
-    if (level && level !== "Hepsi") {
-      whereClause.level = { contains: level };
-    }
-
-    if (source && source !== "Hepsi") {
-      whereClause.source = source;
-    }
-
-    const [words, total] = await Promise.all([
-      prisma.word.findMany({
-        where: whereClause,
-        orderBy: { english: "asc" },
-        skip,
-        take: limit,
-      }),
-      prisma.word.count({ where: whereClause }),
-    ]);
-
-    const formatted = words.map((w) => {
-      const exams: ("YDS" | "YDT" | "YÖKDİL")[] = [];
-      const lvl = (w.level || "B2").toUpperCase();
-      const tp = (w.type || "").toLowerCase();
-      if (lvl === "A1" || lvl === "A2" || lvl === "B1" || lvl === "B2" || tp.includes("phrasal")) exams.push("YDT");
-      if (lvl === "B2" || lvl === "C1" || lvl === "C2" || lvl.includes("YDS")) exams.push("YDS");
-      if (lvl === "B1" || lvl === "B2" || lvl === "C1") exams.push("YÖKDİL");
-      if (exams.length === 0) exams.push("YDS", "YDT", "YÖKDİL");
-
-      return {
-        id: w.id,
-        english: w.english,
-        turkish: w.turkish,
-        definitionEn: w.definitionEn,
-        examples: (() => {
-          try {
-            return JSON.parse(w.examples || "[]");
-          } catch {
-            return [];
-          }
-        })(),
-        synonyms: (() => {
-          try {
-            return JSON.parse(w.synonyms || "[]");
-          } catch {
-            return [];
-          }
-        })(),
-        level: w.level,
-        type: w.type,
-        imageUrl: w.imageUrl,
-        targetExams: exams,
-        sourceCategory: w.source || "ÖSYM / Akademik Yayınlar",
-      };
-    });
-
-    // PERF & RELIABILITY: Eğer veritabanında henüz kelime yoksa master korpustan sun
+    // PERF & RELIABILITY: Eğer veritabanında henüz kelime yoksa veya erişilemiyorsa 2.544 kanonik korpustan sun
     let finalWords = formatted;
     let finalTotal = total;
 
     if (finalTotal === 0) {
-      const combinedPool = [
-        ...YDS_PUBLICATIONS_MASTER_CORPUS.map((p, idx) => ({
-          id: `pub-${idx + 1}`,
-          english: p.term,
-          turkish: p.meaningsTr.join(", "),
-          definitionEn: p.definitionEn,
-          examples: [p.exampleEn, p.exampleTr],
-          synonyms: p.synonyms,
-          level: p.level,
-          type: p.type,
-          imageUrl: null,
-          targetExams: ["YDS", "YDT", "YÖKDİL"] as ("YDS" | "YDT" | "YÖKDİL")[],
-          sourceCategory: p.sourceCategory || "Modadil / Akın Dil / YDS Pub",
-        })),
-        ...MASTER_VOCABULARY.map((m) => {
-          const isBeginner = m.level === "A1" || m.level === "A2";
-          return {
-            id: String(m.id),
-            english: m.word,
-            turkish: m.tr,
-            definitionEn: m.hint || "",
-            examples: m.example ? [m.example, m.exampleTr || ""] : [],
-            synonyms: m.synonyms || [],
-            level: m.level,
-            type: m.type,
-            imageUrl: null,
-            targetExams: (isBeginner ? ["YDT"] : ["YDS", "YDT", "YÖKDİL"]) as ("YDS" | "YDT" | "YÖKDİL")[],
-            sourceCategory: `Master Veritabanı (${m.level})`,
-          };
-        }),
-      ];
+      const combinedPool = buildCanonicalPool();
 
       const filtered = combinedPool.filter((w) => {
         if (q) {
@@ -138,7 +169,7 @@ export async function GET(req: NextRequest) {
         }
         if (exam && exam !== "Hepsi" && exam !== "ALL") {
           const normExam = exam === "YOKDIL" ? "YÖKDİL" : exam;
-          if (!w.targetExams.includes(normExam as any)) {
+          if (!w.targetExams.includes(normExam as "YDS" | "YDT" | "YÖKDİL")) {
             return false;
           }
         }
@@ -149,7 +180,6 @@ export async function GET(req: NextRequest) {
       finalWords = filtered.slice(skip, skip + limit);
     }
 
-    // Hem dizi hem sayfalama uyumluluğu için JSON dön
     return NextResponse.json({
       words: finalWords,
       total: finalTotal,
@@ -159,13 +189,13 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("Words fetch error:", error);
+    const fallbackPool = buildCanonicalPool();
     return NextResponse.json({
-      words: [],
-      total: 0,
+      words: fallbackPool.slice(0, 50),
+      total: fallbackPool.length,
       page: 1,
       limit: 50,
-      totalPages: 1,
-      error: "Kelimeler yüklenemedi",
+      totalPages: Math.ceil(fallbackPool.length / 50) || 1,
     });
   }
 }

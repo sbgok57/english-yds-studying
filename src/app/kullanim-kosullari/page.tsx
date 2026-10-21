@@ -15,7 +15,7 @@ export default function KullanimKosullariPage() {
             Kullanım Koşulları 📜
           </h1>
           <p className="text-sm text-white/50 mt-2">
-            Son Güncelleme: 18 Eylül 2026 &bull; YDS Master Hizmet Şartları
+            Son Güncelleme: 18 Eylül 2026 &bull; DİL MASTER Hizmet Şartları
           </p>
         </header>
 

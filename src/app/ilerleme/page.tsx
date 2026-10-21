@@ -5,7 +5,7 @@ import ProgressDashboard from '@/components/ProgressDashboard';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'İlerlemem — YDS Master',
+  title: 'İlerlemem — DİL MASTER',
   description: 'Kişisel YDS çalışma ilerlemesi, konu bazlı başarı oranları, çalışma serisi ve aktiviteler.',
 };
 

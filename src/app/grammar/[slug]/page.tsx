@@ -15,7 +15,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
   return {
-    title: topic ? `${topic.title} — YDS Master Gramer` : "Gramer — YDS Master",
+    title: topic ? `${topic.title} — DİL MASTER Gramer` : "Gramer — DİL MASTER",
   };
 }
 

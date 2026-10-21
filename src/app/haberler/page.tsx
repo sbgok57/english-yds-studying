@@ -61,7 +61,7 @@ export default function NewsHubPage() {
               <span>📰</span> {TOTAL_NEWS_COUNT}+ Kategorize Edilmiş Güncel & Akademik Haber
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight font-serif">
-              YDS Master İngilizce Haber & Basın Arşivi
+              DİL MASTER İngilizce Haber & Basın Arşivi
             </h1>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
               Dünya basınından derlenen güncel haberleri gazete küpürleri eşliğinde oku; İngiliz, Amerikan, Avustralya, Kanada, Yeni Zelanda, İskoçya ve Hint aksanlarıyla sesli dinle,

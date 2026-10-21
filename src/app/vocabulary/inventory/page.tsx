@@ -367,7 +367,7 @@ function VocabularyInventoryContent() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[
               { id: "ALL", label: "Tüm Sınavlar", count: INVENTORY_METRICS.total, emoji: "🌐", color: "from-slate-700 to-slate-900 border-white/30" },
-              { id: "YDS", label: "🎯 YDS Master", count: INVENTORY_METRICS.YDS, emoji: "🎯", color: "from-cyan-950/80 to-blue-950/80 border-cyan-400" },
+              { id: "YDS", label: "🎯 YDS Akademisi", count: INVENTORY_METRICS.YDS, emoji: "🎯", color: "from-cyan-950/80 to-blue-950/80 border-cyan-400" },
               { id: "YDT", label: "🎓 YDT (YKS-Dil)", count: INVENTORY_METRICS.YDT, emoji: "🎓", color: "from-amber-950/80 to-orange-950/80 border-amber-400" },
               { id: "YÖKDİL", label: "🔬 YÖKDİL (3 Alan)", count: INVENTORY_METRICS.YÖKDİL, emoji: "🔬", color: "from-pink-950/80 to-purple-950/80 border-pink-400" },
             ].map((btn) => {
@@ -907,7 +907,7 @@ export default function VocabularyInventoryPage() {
       fallback={
         <div className="min-h-[70vh] flex flex-col items-center justify-center gap-3 text-white/50">
           <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm font-medium">Kelime Envanteri Yükleniyor...</p>
+          <p className="text-sm font-medium">2544 Akademik Kelime Envanteri Yükleniyor...</p>
         </div>
       }
     >
