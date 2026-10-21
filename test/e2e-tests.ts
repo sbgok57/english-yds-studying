@@ -405,8 +405,14 @@ async function runAllE2ETests() {
   }
 
   try {
-    // 1. Chromium
+    // 1. Chromium (21 E2E Flows)
     await testBrowser(chromium, "chromium");
+
+    // 1b. 11-Viewport Responsive & TTS Smoke Spec (320, 375, 390, 430, 768, 1024x540, 1024x768, 1280, 1366, 1440, 1920)
+    console.log("📐 Running 11-Viewport Responsive Navigation, Portal & TTS Smoke Spec...");
+    const { runProductionSmokeSpec } = await import("../tests/e2e/production-smoke.spec");
+    await runProductionSmokeSpec(BASE_URL);
+    console.log("✅ 11-Viewport Responsive Navigation, Portal & TTS Smoke Spec PASSED!");
 
     // 2. Firefox (if launchable in current environment/sandbox)
     try {

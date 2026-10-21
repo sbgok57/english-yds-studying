@@ -158,8 +158,8 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
     }
   }, [onClose, restoreBodyAndFocus]);
 
-  // 🛡️ useOnClickOutside: Dışarı tıklandığında menüyü hatasız ve bellek sızıntısız kapat
-  useOnClickOutside(drawerRef, handleSafeClose, open);
+  // 🛡️ useOnClickOutside: Dışarı tıklandığında menüyü hatasız ve bellek sızıntısız kapat (alt modal açıkken devre dışı)
+  useOnClickOutside(drawerRef, handleSafeClose, open && !themeModal);
 
   useEffect(() => {
     if (!open || typeof document === "undefined") return;
@@ -175,12 +175,16 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
         e.preventDefault();
+        if (themeModal) {
+          setThemeModal(false);
+          return;
+        }
         handleSafeClose();
         return;
       }
 
       // Focus trap (Tab / Shift+Tab)
-      if (e.key === "Tab" && drawerRef.current) {
+      if (e.key === "Tab" && drawerRef.current && !themeModal) {
         const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
         );
@@ -205,7 +209,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflowRef.current || "";
     };
-  }, [open, handleSafeClose]);
+  }, [open, themeModal, handleSafeClose]);
 
   if (!open) return null;
 

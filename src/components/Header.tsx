@@ -31,6 +31,12 @@ export default function Header() {
     return () => window.removeEventListener("yds:open-menu-drawer", handleOpenDrawer);
   }, []);
 
+  // SAFETY: Rota değiştiğinde (SearchBox, geri/ileri tuşu vb.) açık çekmece veya modalı otomatik kapat
+  useEffect(() => {
+    setMenu(false);
+    setThemeModal(false);
+  }, [pathname]);
+
   return (
     <>
       <header

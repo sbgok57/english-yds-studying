@@ -3,10 +3,11 @@ import { chromium } from "playwright";
 
 export const REQUIRED_VIEWPORTS = [
   { width: 320, height: 720, label: "Mobile Small (320×720)" },
-  { width: 360, height: 800, label: "Android Standard (360×800)" },
+  { width: 375, height: 667, label: "Mobile Standard (375×667)" },
   { width: 390, height: 844, label: "iPhone 13/14 (390×844)" },
   { width: 430, height: 932, label: "iPhone Pro Max (430×932)" },
   { width: 768, height: 1024, label: "Tablet Portrait (768×1024)" },
+  { width: 1024, height: 540, label: "Short Height Landscape (1024×540)" },
   { width: 1024, height: 768, label: "Tablet Landscape (1024×768)" },
   { width: 1280, height: 800, label: "Laptop (1280×800)" },
   { width: 1366, height: 768, label: "HD Laptop (1366×768)" },
@@ -40,7 +41,25 @@ export async function runProductionSmokeSpec(
         `Yatay taşma tespit edildi: ${vp.label}`
       );
 
-      // 2. Hamburger menü düğmesi (#global-menu-trigger) her çözünürlükte görünür ve >=44x44px olmalı
+      // 2. Mobil alt gezinme çubuğu (<768px görünür, >=768px gizli)
+      const bottomNavVisible = await page
+        .locator('nav[aria-label="Mobil alt hızlı gezinme çubuğu"]')
+        .isVisible();
+      if (vp.width < 768) {
+        assert.strictEqual(
+          bottomNavVisible,
+          true,
+          `Mobil alt bar görünür olmalı (${vp.label})`
+        );
+      } else {
+        assert.strictEqual(
+          bottomNavVisible,
+          false,
+          `Masaüstü/tablette mobil alt bar gizli olmalı (${vp.label})`
+        );
+      }
+
+      // 3. Hamburger menü düğmesi (#global-menu-trigger) her çözünürlükte görünür ve >=44x44px olmalı
       const trigger = page.locator("#global-menu-trigger");
       await trigger.waitFor({ state: "visible", timeout: 10000 });
       const box = await trigger.boundingBox();
@@ -49,21 +68,45 @@ export async function runProductionSmokeSpec(
         box.width >= 44 && box.height >= 44,
         `#global-menu-trigger dokunma alanı 44x44px altında: ${box.width}x${box.height} (${vp.label})`
       );
+      assert.strictEqual(
+        await trigger.getAttribute("aria-expanded"),
+        "false",
+        `Başlangıçta aria-expanded="false" olmalı (${vp.label})`
+      );
 
-      // 3. Hamburger menüye tıklayınca Portal MenuDrawer (#global-menu-drawer) açılmalı
+      // 4. Hamburger menüye tıklayınca Portal MenuDrawer (#global-menu-drawer) document.body altında açılmalı
       await trigger.click();
       const drawer = page.locator("#global-menu-drawer");
       await drawer.waitFor({ state: "visible", timeout: 5000 });
+      assert.strictEqual(
+        await trigger.getAttribute("aria-expanded"),
+        "true",
+        `Açıkken aria-expanded="true" olmalı (${vp.label})`
+      );
+      const isDirectBodyChild = await page.evaluate(() => {
+        const el = document.getElementById("global-menu-drawer");
+        return Boolean(el && el.parentElement === document.body);
+      });
+      assert.strictEqual(
+        isDirectBodyChild,
+        true,
+        `#global-menu-drawer document.body doğrudan çocuğu (Portal) olmalı (${vp.label})`
+      );
 
-      // 4. Menü içi arama (#menu-section-search) çalışmalı
+      // 5. Menü içi arama (#menu-section-search) çalışmalı
       const searchInput = page.locator("#menu-section-search");
       await searchInput.fill("gramer");
       const visibleLinks = await drawer.locator("a").count();
       assert.ok(visibleLinks >= 1, `Menü araması sonuç döndürmedi (${vp.label})`);
 
-      // 5. Escape tuşu ile çekmece kapanmalı
+      // 6. Escape tuşu ile çekmece kapanmalı ve aria-expanded="false" olmalı
       await page.keyboard.press("Escape");
       await drawer.waitFor({ state: "hidden", timeout: 5000 });
+      assert.strictEqual(
+        await trigger.getAttribute("aria-expanded"),
+        "false",
+        `Escape sonrası aria-expanded="false" olmalı (${vp.label})`
+      );
 
       await context.close();
     }
