@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import AiWidget from "@/components/AiWidget";
@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     canonical: "https://dil-master.vercel.app",
   },
   manifest: "/manifest.json",
-  themeColor: "#07152d",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -45,6 +44,10 @@ export const metadata: Metadata = {
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#07152d",
 };
 
 export default function RootLayout({
