@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { WORDS } from "@/lib/data-vocabulary";
+import { BASE_INVENTORY_ITEMS, getWordExams } from "@/lib/data-inventory";
 import { MASTER_VOCABULARY } from "@/lib/vocabulary/master-vocab-database";
 import { YDS_PUBLICATIONS_MASTER_CORPUS } from "@/lib/vocabulary/publications-master-corpus";
 import Cube from "@/components/Cube";
@@ -11,6 +12,7 @@ import Tip from "@/components/Tip";
 import VideoModal, { type VideoOption } from "@/components/VideoModal";
 import SceneAnim from "@/components/SceneAnim";
 import AccentBar from "@/components/AccentBar";
+import VocabularyVisual from "@/components/media/VocabularyVisual";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { recordWord, useUsage, wordScore } from "@/lib/store";
 import { logVocabularySession } from "@/lib/activity-logger";
@@ -104,12 +106,16 @@ export default function FlashcardsPage() {
   const [video, setVideo] = useState<VideoOption | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
 
-  // 1. Tüm veri kaynaklarını konsolide et (PERF: Tek seferlik pure memoize)
+  // 1. Tüm veri kaynaklarını konsolide et (PERF: Tek seferlik pure memoize — 2.544 kelime tam eşitlik)
   const consolidatedPool = useMemo<UnifiedFlashcardWord[]>(() => {
     const list: UnifiedFlashcardWord[] = [];
+    const seen = new Set<string>();
 
     // A. 2013-2026 Akademik Yayınlar Master Korpusu (Modadil, Akın Dil, Remzi Hoca, vb.)
     YDS_PUBLICATIONS_MASTER_CORPUS.forEach((p, i) => {
+      const norm = p.term.toLowerCase();
+      if (seen.has(norm)) return;
+      seen.add(norm);
       list.push({
         id: `pub-${p.term}-${i}`,
         word: p.term,
@@ -140,8 +146,9 @@ export default function FlashcardsPage() {
 
     // B. 2.500 Master Veritabanı (A1-C2)
     MASTER_VOCABULARY.forEach((m) => {
-      // Çift kelime eklemeyi önle
-      if (list.some((existing) => existing.word.toLowerCase() === m.word.toLowerCase())) return;
+      const norm = m.word.toLowerCase();
+      if (seen.has(norm)) return;
+      seen.add(norm);
 
       const isBeginner = m.level === "A1" || m.level === "A2";
       list.push({
@@ -164,7 +171,9 @@ export default function FlashcardsPage() {
 
     // C. Orijinal WORDS (50 Temel Kelime)
     WORDS.forEach((w) => {
-      if (list.some((existing) => existing.word.toLowerCase() === w.word.toLowerCase())) return;
+      const norm = w.word.toLowerCase();
+      if (seen.has(norm)) return;
+      seen.add(norm);
       list.push({
         id: `w-${w.id}`,
         word: w.word,
@@ -178,6 +187,41 @@ export default function FlashcardsPage() {
         example: w.example,
         exampleTr: w.exampleTr,
         sourceCategory: "Temel Sınav Hazırlık",
+        poolSource: "temel",
+      });
+    });
+
+    // D. BASE_INVENTORY_ITEMS (Kanonik 2.544 Envanter Tamamlaması)
+    BASE_INVENTORY_ITEMS.forEach((b) => {
+      const norm = b.word.toLowerCase();
+      if (seen.has(norm)) return;
+      seen.add(norm);
+      const posTr =
+        b.phrasalVerb
+          ? "phrasal verb"
+          : b.partOfSpeech === "verb"
+          ? "fiil"
+          : b.partOfSpeech === "noun"
+          ? "isim"
+          : b.partOfSpeech === "adjective"
+          ? "sıfat"
+          : b.partOfSpeech === "adverb"
+          ? "zarf"
+          : "isim";
+      list.push({
+        id: b.id,
+        word: b.word,
+        tr: b.turkishMeanings.join(", "),
+        type: posTr,
+        level: b.level === "UNCLASSIFIED" ? "B2" : b.level,
+        category: "Envanter Çekirdek",
+        exams: getWordExams(b),
+        emoji: "📚",
+        hint: b.englishDefinition || "Akademik sınav kelimesi",
+        example: b.example || "",
+        exampleTr: b.exampleTr || "",
+        synonyms: b.synonyms,
+        sourceCategory: "DİL MASTER Konsolide Envanter",
         poolSource: "temel",
       });
     });
@@ -927,9 +971,11 @@ export default function FlashcardsPage() {
                     href={`https://giphy.com/search/${encodeURIComponent(currentWord.word)}`}
                     target="_blank"
                     rel="noreferrer"
+                    data-testid="giphy-external-search-link"
+                    title="Giphy üzerinde harici arama sayfası açar (gömülü GIF değildir)"
                     className="text-[11px] font-bold px-3 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 hover:text-white hover:border-pink-400/50 transition-all flex items-center gap-1"
                   >
-                    <span>🎬 GIF Ara</span>
+                    <span>Giphy&apos;de Dış Arama (Harici Bağlantı)</span>
                     <ExternalLink className="w-3 h-3 text-pink-400" />
                   </a>
                 </div>
@@ -966,9 +1012,20 @@ export default function FlashcardsPage() {
                         ))}
                       </div>
 
-                      {/* Kelime ve Emoji */}
-                      <div className="my-auto py-4 space-y-2">
-                        <div className="text-5xl">{currentWord.emoji}</div>
+                      {/* Kelime ve Görsel Hafıza Modülü */}
+                      <div className="my-auto py-3 space-y-2 w-full">
+                        <div
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-full max-w-xs mx-auto mb-1"
+                        >
+                          <VocabularyVisual
+                            english={currentWord.word}
+                            turkish={currentWord.tr}
+                            partOfSpeech={currentWord.type}
+                            level={currentWord.level}
+                            compact
+                          />
+                        </div>
                         <h2 className="text-3xl sm:text-4xl font-black gradient-text tracking-wide">
                           {currentWord.word}
                         </h2>

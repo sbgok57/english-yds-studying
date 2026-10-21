@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import MixedGrammarRunner from "@/components/MixedGrammarRunner";
 
 export const metadata = {
-  title: "Gramer Pratik & Karışık Testler — YDS Master",
+  title: "Gramer Pratik & Karışık Testler — DİL MASTER",
   description: "Tüm konulardan çoklu kural içeren 500 karışık soru, zayıf konu tespiti ve detaylı çözüm analizleri.",
 };
 

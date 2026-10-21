@@ -69,7 +69,26 @@ for (const relPath of requiredLocalAssets) {
 }
 
 // 5. Tüm Kayıtlı Varlıklarda Lisans, Attribution ve Reduced-Motion Alanları
-for (const [slug, item] of Object.entries(VISUAL_ASSET_REGISTRY)) {
+const registryEntries = Object.entries(VISUAL_ASSET_REGISTRY);
+assert.strictEqual(registryEntries.length, 12, "VISUAL_ASSET_REGISTRY 12 küratörlü kayıt içermelidir.");
+
+const verifiedPhotoSlugs = registryEntries
+  .filter(([, item]) => item.hasVerifiedPhoto)
+  .map(([slug]) => slug)
+  .sort();
+
+assert.deepStrictEqual(
+  verifiedPhotoSlugs,
+  ["deteriorate", "pioneer", "scrutinize"],
+  "Yalnızca HTTP-200 doğrulamalı 3 gerçek fotoğraf (deteriorate, pioneer, scrutinize) hasVerifiedPhoto=true olmalıdır."
+);
+assert.strictEqual(
+  VISUAL_ASSET_REGISTRY["carry-out"].hasVerifiedPhoto,
+  false,
+  "carry-out kırık fotoğraf URL'si içermemeli ve hasVerifiedPhoto=false olmalıdır."
+);
+
+for (const [slug, item] of registryEntries) {
   assert.ok(item.animation.license, `${slug} animasyon lisansı eksik`);
   assert.ok(item.animation.attribution, `${slug} animasyon attribution eksik`);
   assert.ok(item.animation.reducedMotionFallbackTextTr, `${slug} reduced-motion açıklaması eksik`);

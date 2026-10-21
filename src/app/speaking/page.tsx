@@ -24,7 +24,7 @@ export default function SpeakingPage() {
               <span>🎙️</span> Canlı Ses & Yazı Destekli Konuşma Koçu
             </div>
             <h1 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
-              YDS Master AI Speaking Lab
+              DİL MASTER AI Speaking Lab
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
               Hem mikrofona konuşarak hem de yazarak pratik yap. Cümlelerin üzerine tıkladığında doğal Türkçe çevirisini ve akademik kullanım ipuçlarını anında öğren!

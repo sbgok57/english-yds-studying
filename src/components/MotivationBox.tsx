@@ -209,7 +209,7 @@ export default function MotivationBox({
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h4 className="text-sm sm:text-base font-bold text-white truncate">
-                      YDS Master İlham Molası
+                      DİL MASTER İlham Molası
                     </h4>
                     <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
                       {MOTIVATION_VIDEOS_COUNT} Klip Kütüphanesi

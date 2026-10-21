@@ -3,7 +3,7 @@ import Link from "next/link";
 import AudioGrammarPlayer from "@/components/AudioGrammarPlayer";
 
 export const metadata: Metadata = {
-  title: "Sesli Gramer & Hafıza Kodları — YDS Master",
+  title: "Sesli Gramer & Hafıza Kodları — DİL MASTER",
   description:
     "YDS zıtlık ve sebep bağlaçları, ALi CÜMLEci, DEDE İSİMci şifreleri, by the time kuralları ve kilit ekranında dinlenebilir sesli anlatımlar.",
 };

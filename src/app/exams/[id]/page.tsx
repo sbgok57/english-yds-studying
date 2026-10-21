@@ -6,7 +6,7 @@ export function generateMetadata({ params }: { params: { id: string } }) {
   const id = params?.id || "yds-2024-ilkbahar";
   const meta = getExamMeta(id);
   return {
-    title: `${meta.title} — YDS Master Optik Sınav`,
+    title: `${meta.title} — DİL MASTER Optik Sınav`,
     description: `${meta.title}: ${meta.questionCount} soru, ${meta.durationMin} dakikalık online optik form.`,
   };
 }

@@ -75,7 +75,11 @@ export async function runProductionSmokeSpec(
       );
 
       // 4. Hamburger menüye tıklayınca Portal MenuDrawer (#global-menu-drawer) document.body altında açılmalı
-      await trigger.click();
+      for (let attempt = 0; attempt < 4; attempt++) {
+        await trigger.click();
+        if ((await trigger.getAttribute("aria-expanded")) === "true") break;
+        await page.waitForTimeout(250);
+      }
       const drawer = page.locator("#global-menu-drawer");
       await drawer.waitFor({ state: "visible", timeout: 5000 });
       assert.strictEqual(
@@ -111,11 +115,123 @@ export async function runProductionSmokeSpec(
       await context.close();
     }
 
-    // 6. /api/tts İngilizce ve Türkçe (Emel & Ahmet) uç noktası kontrolü
+    // 7. Oturumsuz (Unauthenticated) korumalı rota kontrolü: 404 değil /giris yönlendirmesi olmalı
+    const unauthContext = await browser.newContext();
+    const unauthPage = await unauthContext.newPage();
+    const unauthRes = await unauthPage.goto(`${baseUrl}/vocabulary`, {
+      waitUntil: "domcontentloaded",
+      timeout: 25000,
+    });
+    assert.ok(unauthRes && unauthRes.status() === 200, "Unauthenticated /vocabulary redirect hedefi HTTP 200 dönmeli");
+    assert.ok(
+      unauthPage.url().includes("/giris"),
+      `Unauthenticated /vocabulary /giris sayfasına yönlendirmeli, mevcut URL: ${unauthPage.url()}`
+    );
+    await unauthContext.close();
+
+    // 8. Misafir Modu (yds_guest_access=true) ile Canlı Rota, Marka, 2.544 Kelime Eşitliği ve Görsel Denetimi
+    const parsedUrl = new URL(baseUrl);
+    const guestContext = await browser.newContext({
+      viewport: { width: 1280, height: 800 },
+    });
+    await guestContext.addCookies([
+      {
+        name: "yds_guest_access",
+        value: "true",
+        domain: parsedUrl.hostname,
+        path: "/",
+      },
+    ]);
+    const guestPage = await guestContext.newPage();
+
+    // 8a. /grammar/audio — Başlıkta "DİL MASTER" olmalı, "YDS Master" olmamalı
+    const audioRes = await guestPage.goto(`${baseUrl}/grammar/audio`, {
+      waitUntil: "domcontentloaded",
+      timeout: 25000,
+    });
+    assert.strictEqual(audioRes?.status(), 200, "/grammar/audio HTTP 200 dönmeli");
+    const audioTitle = await guestPage.title();
+    assert.ok(
+      audioTitle.includes("DİL MASTER") && !audioTitle.includes("YDS Master"),
+      `/grammar/audio document.title 'DİL MASTER' içermeli ve 'YDS Master' içermemeli. Mevcut: "${audioTitle}"`
+    );
+    const audioBody = await guestPage.locator("body").innerText();
+    assert.ok(!audioBody.includes("This page doesn't exist"), "/grammar/audio 404 metni içermemeli");
+
+    // 8b. /vocabulary — 0/0 değil 2544 / 2544 Kelime ve VocabularyVisual bileşeni
+    const vocabRes = await guestPage.goto(`${baseUrl}/vocabulary`, {
+      waitUntil: "domcontentloaded",
+      timeout: 25000,
+    });
+    assert.strictEqual(vocabRes?.status(), 200, "/vocabulary HTTP 200 dönmeli");
+    await guestPage.waitForSelector('[data-testid^="vocab-visual-compact-"]', { timeout: 15000 });
+    const vocabBody = await guestPage.locator("body").innerText();
+    assert.ok(
+      vocabBody.includes("2544 / 2544 Kelime"),
+      `/vocabulary sayfasında '2544 / 2544 Kelime' görünmeli (0 / 0 olmamalı)`
+    );
+
+    // 8c. /vocabulary/inventory — 2544 kelime
+    const invRes = await guestPage.goto(`${baseUrl}/vocabulary/inventory`, {
+      waitUntil: "domcontentloaded",
+      timeout: 25000,
+    });
+    assert.strictEqual(invRes?.status(), 200, "/vocabulary/inventory HTTP 200 dönmeli");
+    await guestPage.waitForSelector('h1:has-text("Kelime")', { timeout: 15000 });
+    const invBody = await guestPage.locator("body").innerText();
+    assert.ok(invBody.includes("2544"), "/vocabulary/inventory 2544 kelime göstermeli");
+
+    // 8d. /vocabulary/flashcards — 2544 kart, dürüst Giphy dış arama etiketi ve VocabularyVisual
+    const flashRes = await guestPage.goto(`${baseUrl}/vocabulary/flashcards`, {
+      waitUntil: "domcontentloaded",
+      timeout: 25000,
+    });
+    assert.strictEqual(flashRes?.status(), 200, "/vocabulary/flashcards HTTP 200 dönmeli");
+    await guestPage.waitForSelector('[data-testid="giphy-external-search-link"]', { timeout: 15000 });
+    const giphyLabel = await guestPage.locator('[data-testid="giphy-external-search-link"]').innerText();
+    assert.ok(
+      giphyLabel.includes("Giphy'de Dış Arama"),
+      `Flashcards Giphy bağlantısı dürüstçe 'Giphy'de Dış Arama' olarak etiketlenmeli, mevcut: "${giphyLabel}"`
+    );
+    const flashVisualCount = await guestPage.locator('[data-testid^="vocab-visual-compact-"]').count();
+    assert.ok(flashVisualCount >= 1, "Flashcards ön yüzünde VocabularyVisual bileşeni bulunmalı");
+    const flashBody = await guestPage.locator("body").innerText();
+    assert.ok(
+      flashBody.includes("2544"),
+      "/vocabulary/flashcards 2544 kart havuzunu göstermeli (2530 değil)"
+    );
+
+    // 8e. /reading ve /temalar ve /manifest.json kontrolü
+    for (const route of ["/reading", "/temalar", "/speaking"]) {
+      const res = await guestPage.goto(`${baseUrl}${route}`, {
+        waitUntil: "domcontentloaded",
+        timeout: 25000,
+      });
+      assert.strictEqual(res?.status(), 200, `${route} HTTP 200 dönmeli`);
+      const text = await guestPage.locator("body").innerText();
+      assert.ok(!text.includes("This page doesn't exist"), `${route} 404 içermemeli`);
+    }
+
+    const manifestRes = await guestPage.request.get(`${baseUrl}/manifest.json`);
+    assert.strictEqual(manifestRes.status(), 200, "/manifest.json HTTP 200 dönmeli");
+    const manifestJson = await manifestRes.json();
+    assert.ok(
+      String(manifestJson.name || "").includes("DİL MASTER"),
+      `/manifest.json name alanı DİL MASTER içermeli, mevcut: ${manifestJson.name}`
+    );
+
+    await guestContext.close();
+
+    // 9. /api/tts İngilizce (Sonia & Ryan) ve Türkçe (Emel & Ahmet) uç noktası kontrolü
     const apiContext = await browser.newContext();
     const apiPage = await apiContext.newPage();
 
-    for (const voiceId of ["en-GB-female-sonia", "tr-TR-female-emel", "tr-TR-male-ahmet"]) {
+    for (const voiceId of [
+      "en-GB-female-sonia",
+      "en-GB-male-ryan",
+      "tr-TR-female-emel",
+      "tr-TR-male-ahmet",
+    ]) {
       const ttsResponse = await apiPage.request.post(`${baseUrl}/api/tts`, {
         data: {
           text: voiceId.startsWith("tr")

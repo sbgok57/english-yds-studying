@@ -19,6 +19,7 @@ import TTSPlayer from "@/components/tts/TTSPlayer";
 import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import WordDetailModal, { WordDetailItem } from "@/components/vocabulary/WordDetailModal";
 import VocabularyVisual from "@/components/media/VocabularyVisual";
+import { INVENTORY_ITEMS, getWordExams } from "@/lib/data-inventory";
 import { cn } from "@/lib/utils";
 
 interface WordItem {
@@ -35,7 +36,7 @@ interface WordItem {
   sourceCategory?: string;
 }
 
-const LEVELS = ["Hepsi", "A1", "A2", "B1", "B2", "C1", "YDS"];
+const LEVELS = ["Hepsi", "A1", "A2", "B1", "B2", "C1", "C2", "YDS"];
 const TYPES = ["Hepsi", "genel", "isim", "fiil", "sıfat", "zarf", "phrasal verb"];
 
 const EXAM_CARDS = [
@@ -49,7 +50,7 @@ const EXAM_CARDS = [
   },
   {
     id: "YDS",
-    label: "YDS Master",
+    label: "YDS Akademisi",
     sub: "Akademik Çekirdek & B2-C2",
     emoji: "🎯",
     color: "from-cyan-950/80 to-blue-950/90 border-cyan-400 text-cyan-200",
@@ -73,20 +74,45 @@ const EXAM_CARDS = [
   },
 ];
 
-const FALLBACK_WORDS: WordItem[] = [
-  { id: "fb-1", english: "mitigate", turkish: "hafifletmek, azaltmak, yatıştırmak", definitionEn: "To make something less severe or harmful", examples: ["Governments must take immediate action to mitigate climate risks."], synonyms: ["alleviate", "lessen", "reduce"], level: "B2", type: "fiil", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Modadil / Akın Dil / YDS Pub" },
-  { id: "fb-2", english: "inevitable", turkish: "kaçınılmaz, çaresiz", definitionEn: "Certain to happen and unable to be avoided", examples: ["Digital transformation has become inevitable for modern education."], synonyms: ["unavoidable", "inescapable"], level: "B2", type: "sıfat", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Oxford 3000 / Cambridge" },
-  { id: "fb-3", english: "pioneer", turkish: "öncü, yol açan kimse", definitionEn: "A person who is among the first to explore a new country or area", examples: ["Marie Curie was a pioneer in radiological research."], synonyms: ["trailblazer", "innovator"], level: "B2", type: "isim", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Pelikan / Yediiklim" },
-  { id: "fb-4", english: "deteriorate", turkish: "kötüleşmek, bozulmak", definitionEn: "To become progressively worse", examples: ["Without maintenance, the ancient stone monuments will deteriorate."], synonyms: ["worsen", "decline", "decay"], level: "B2", type: "fiil", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Remzi Hoca / ODTÜ GV" },
-  { id: "fb-5", english: "drastically", turkish: "ciddi ve köklü biçimde", definitionEn: "In a way that is likely to have a strong or far-reaching effect", examples: ["Costs have fallen drastically over the past three decades."], synonyms: ["radically", "substantially"], level: "B2", type: "zarf", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Benim Hocam / YDS Pub" },
-  { id: "fb-6", english: "carry out", turkish: "yürütmek, uygulamak", definitionEn: "To perform or complete a task", examples: ["Scientists will carry out a clinical trial next spring."], synonyms: ["conduct", "execute", "implement"], level: "B2", type: "phrasal verb", targetExams: ["YDT", "YDS", "YÖKDİL"], sourceCategory: "Akın Dil / Modadil" },
-  { id: "fb-7", english: "cope with", turkish: "üstesinden gelmek, başa çıkmak", definitionEn: "To deal effectively with something difficult", examples: ["Many species struggle to cope with habitat loss."], synonyms: ["handle", "manage", "tackle"], level: "B2", type: "phrasal verb", targetExams: ["YDT", "YDS", "YÖKDİL"], sourceCategory: "Dilko / ELS YDT" },
-  { id: "fb-8", english: "ubiquitous", turkish: "her yerde bulunan, yaygın", definitionEn: "Present, appearing, or found everywhere", examples: ["Mobile devices have become ubiquitous in daily modern life."], synonyms: ["omnipresent", "pervasive"], level: "C1", type: "sıfat", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Cambridge Academic / Modadil" },
-  { id: "fb-9", english: "scrutinize", turkish: "dikkatle incelemek", definitionEn: "To examine or inspect closely and thoroughly", examples: ["Inspectors will scrutinize all official financial records."], synonyms: ["inspect", "examine", "analyze"], level: "C1", type: "fiil", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Akın Dil / Remzi Hoca" },
-  { id: "fb-10", english: "prevalent", turkish: "yaygın, hâkim", definitionEn: "Widespread in a particular area or at a particular time", examples: ["The belief was prevalent throughout ancient Mediterranean civilisations."], synonyms: ["widespread", "common"], level: "B2", type: "sıfat", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Yargı / Yediiklim" },
-  { id: "fb-11", english: "reconcile", turkish: "uzlaştırmak, arayı bulmak", definitionEn: "To restore friendly relations between", examples: ["It is difficult to reconcile these two opposing theories."], synonyms: ["harmonize", "settle"], level: "B2", type: "fiil", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Pegem / Kritik Dil" },
-  { id: "fb-12", english: "reluctance", turkish: "isteksizlik, gönülsüzlük", definitionEn: "Unwillingness or disinclination to do something", examples: ["He showed great reluctance to accept the new assignment."], synonyms: ["hesitation", "unwillingness"], level: "B2", type: "isim", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Oxford / Benim Hocam" },
-];
+function mapPosToTr(pos?: string, phrasal?: boolean): string {
+  if (phrasal) return "phrasal verb";
+  switch ((pos || "").toLowerCase()) {
+    case "verb":
+    case "fiil":
+      return "fiil";
+    case "noun":
+    case "isim":
+      return "isim";
+    case "adjective":
+    case "sıfat":
+      return "sıfat";
+    case "adverb":
+    case "zarf":
+      return "zarf";
+    default:
+      return pos || "genel";
+  }
+}
+
+// PERF & DATA PARITY: 2.544 kelimelik kanonik envanter havuzu (/vocabulary, /vocabulary/inventory ve /vocabulary/flashcards arasında tam eşitlik)
+const CANONICAL_INVENTORY_WORDS: WordItem[] = INVENTORY_ITEMS.map((item) => ({
+  id: item.id,
+  english: item.word,
+  turkish: item.turkishMeanings.join(", "),
+  definitionEn: item.englishDefinition || "",
+  examples: item.example
+    ? item.exampleTr
+      ? [`${item.example} (${item.exampleTr})`]
+      : [item.example]
+    : [],
+  synonyms: item.synonyms || [],
+  level: item.level === "UNCLASSIFIED" ? "B2" : item.level,
+  type: mapPosToTr(item.partOfSpeech, item.phrasalVerb),
+  targetExams: getWordExams(item),
+  sourceCategory: item.sourceTags?.includes("reading")
+    ? "Modadil / Akın Dil / Akademik Yayınlar"
+    : "DİL MASTER Konsolide Envanter",
+}));
 
 function computeWordExams(w: WordItem): ("YDS" | "YDT" | "YÖKDİL")[] {
   if (w.targetExams && w.targetExams.length > 0) return w.targetExams;
@@ -112,6 +138,8 @@ function computeWordExams(w: WordItem): ("YDS" | "YDT" | "YÖKDİL")[] {
   return exams;
 }
 
+const PAGE_STEP = 60;
+
 function VocabularyContent() {
   const searchParams = useSearchParams();
   const rawExamParam = searchParams.get("exam")?.toUpperCase();
@@ -124,12 +152,13 @@ function VocabularyContent() {
       ? "YÖKDİL"
       : "Hepsi";
 
-  const [words, setWords] = useState<WordItem[]>([]);
+  const [words, setWords] = useState<WordItem[]>(CANONICAL_INVENTORY_WORDS);
   const [search, setSearch] = useState("");
   const [selectedExam, setSelectedExam] = useState<string>(initialExam);
   const [selectedLevel, setSelectedLevel] = useState<string>("Hepsi");
   const [selectedType, setSelectedType] = useState<string>("Hepsi");
-  const [loading, setLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState<number>(PAGE_STEP);
+  const [loading, setLoading] = useState(false);
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
   const [showVoicePicker, setShowVoicePicker] = useState(false);
   const [modalWord, setModalWord] = useState<WordDetailItem | null>(null);
@@ -138,33 +167,41 @@ function VocabularyContent() {
     setLoading(true);
     setErrorNotice(null);
     try {
-      const url =
-        selectedExam && selectedExam !== "Hepsi"
-          ? `/api/words?limit=100&exam=${encodeURIComponent(selectedExam)}`
-          : `/api/words?limit=100`;
-      const res = await fetch(url);
+      const res = await fetch("/api/words?limit=100");
       if (!res.ok) throw new Error("API yanıt vermedi");
       const data = await res.json();
-      const list: WordItem[] = Array.isArray(data) ? data : Array.isArray(data?.words) ? data.words : [];
-      if (list.length > 0) {
-        setWords(list);
-      } else {
-        setWords(FALLBACK_WORDS);
-        setErrorNotice(
-          "Veritabanında henüz kelime bulunamadı. Örnek kelimeler gösteriliyor. Admin panelinden seed veya Quizlet import çalıştırabilirsiniz."
+      const dbList: WordItem[] = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.words)
+        ? data.words
+        : [];
+      if (dbList.length > 0) {
+        const seen = new Set(CANONICAL_INVENTORY_WORDS.map((w) => w.english.toLowerCase()));
+        const extraDbWords = dbList.filter(
+          (w) => w.english && !seen.has(w.english.toLowerCase())
         );
+        setWords(
+          extraDbWords.length > 0
+            ? [...extraDbWords, ...CANONICAL_INVENTORY_WORDS]
+            : CANONICAL_INVENTORY_WORDS
+        );
+      } else {
+        setWords(CANONICAL_INVENTORY_WORDS);
       }
     } catch {
-      setWords(FALLBACK_WORDS);
-      setErrorNotice("Sunucu bağlantısı kurulamadı. Çevrimdışı örnek kelimeler gösteriliyor.");
+      setWords(CANONICAL_INVENTORY_WORDS);
     } finally {
       setLoading(false);
     }
-  }, [selectedExam]);
+  }, []);
 
   useEffect(() => {
     fetchWords();
   }, [fetchWords]);
+
+  useEffect(() => {
+    setVisibleCount(PAGE_STEP);
+  }, [search, selectedExam, selectedLevel, selectedType]);
 
   const filteredWords = useMemo(() => {
     return words.filter((w) => {
@@ -190,6 +227,11 @@ function VocabularyContent() {
       return matchesSearch && matchesLevel && matchesType && matchesExam;
     });
   }, [words, search, selectedLevel, selectedType, selectedExam]);
+
+  const visibleWords = useMemo(
+    () => filteredWords.slice(0, visibleCount),
+    [filteredWords, visibleCount]
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -403,101 +445,118 @@ function VocabularyContent() {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredWords.map((word) => {
-            const itemExams = computeWordExams(word);
-            return (
-              <div
-                key={word.id}
-                onClick={() => setModalWord(word)}
-                className="card-vibrant p-6 space-y-4 flex flex-col justify-between group hover:border-yellow-400/60 transition-all hover:scale-[1.02] cursor-pointer shadow-lg hover:shadow-yellow-500/10"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setModalWord(word);
-                  }
-                }}
-              >
-                <div>
-                  {/* Doğrulanmış Fotoğraf veya Semantik Şema Önizlemesi (Tekil Emoji Yasağı) */}
-                  <VocabularyVisual
-                    english={word.english}
-                    turkish={word.turkish}
-                    partOfSpeech={word.type}
-                    level={word.level}
-                    compact
-                    className="mb-3"
-                  />
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {visibleWords.map((word) => {
+              const itemExams = computeWordExams(word);
+              return (
+                <div
+                  key={word.id}
+                  onClick={() => setModalWord(word)}
+                  className="card-vibrant p-6 space-y-4 flex flex-col justify-between group hover:border-yellow-400/60 transition-all hover:scale-[1.02] cursor-pointer shadow-lg hover:shadow-yellow-500/10"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setModalWord(word);
+                    }
+                  }}
+                >
+                  <div>
+                    {/* Doğrulanmış Fotoğraf veya Semantik Şema Önizlemesi (Tekil Emoji Yasağı) */}
+                    <VocabularyVisual
+                      english={word.english}
+                      turkish={word.turkish}
+                      partOfSpeech={word.type}
+                      level={word.level}
+                      compact
+                      className="mb-3"
+                    />
 
-                  {/* Sınav Rozetleri, Seviye ve TTS Butonu */}
-                  <div className="flex items-center justify-between mb-3 gap-2">
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="glass-pill text-[10px] font-bold text-yellow-300">
-                        {word.level}
-                      </span>
-                      <span className="glass-pill text-[10px] text-cyan-300 uppercase">
-                        {word.type}
-                      </span>
+                    {/* Sınav Rozetleri, Seviye ve TTS Butonu */}
+                    <div className="flex items-center justify-between mb-3 gap-2">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="glass-pill text-[10px] font-bold text-yellow-300">
+                          {word.level}
+                        </span>
+                        <span className="glass-pill text-[10px] text-cyan-300 uppercase">
+                          {word.type}
+                        </span>
 
-                      {/* Sınav Rozetleri */}
-                      {itemExams.includes("YDS") && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
-                          🎯 YDS
-                        </span>
-                      )}
-                      {itemExams.includes("YDT") && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                          🎓 YDT
-                        </span>
-                      )}
-                      {itemExams.includes("YÖKDİL") && (
-                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-400/30">
-                          🔬 YÖKDİL
-                        </span>
-                      )}
+                        {/* Sınav Rozetleri */}
+                        {itemExams.includes("YDS") && (
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                            🎯 YDS
+                          </span>
+                        )}
+                        {itemExams.includes("YDT") && (
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-400/30">
+                            🎓 YDT
+                          </span>
+                        )}
+                        {itemExams.includes("YÖKDİL") && (
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-pink-500/20 text-pink-300 border border-pink-400/30">
+                            🔬 YÖKDİL
+                          </span>
+                        )}
+                      </div>
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <TTSPlayer text={word.english} size="sm" showControls={false} />
+                      </div>
                     </div>
-                    <div onClick={(e) => e.stopPropagation()}>
-                      <TTSPlayer text={word.english} size="sm" showControls={false} />
-                    </div>
+
+                    {/* Kelime ve Türkçe Anlam (Quizlet Display Contract) */}
+                    <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors flex items-center justify-between">
+                      <span>{word.english}</span>
+                      <span className="text-xs font-normal text-yellow-400/80 group-hover:translate-x-1 transition-transform">
+                        Görsel & 3D ➜
+                      </span>
+                    </h3>
+                    <p className="text-lg font-bold text-cyan-200 light:text-cyan-700 mt-1">
+                      {word.turkish}
+                    </p>
+
+                    {word.definitionEn && (
+                      <p className="text-xs text-white/70 light:text-slate-600 italic mt-2 line-clamp-2">
+                        &quot;{word.definitionEn}&quot;
+                      </p>
+                    )}
+
+                    {word.sourceCategory && (
+                      <span className="inline-block mt-2 text-[10px] text-white/40 light:text-slate-400 font-mono">
+                        📚 {word.sourceCategory}
+                      </span>
+                    )}
                   </div>
 
-                  {/* Kelime ve Türkçe Anlam (Quizlet Display Contract) */}
-                  <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors flex items-center justify-between">
-                    <span>{word.english}</span>
-                    <span className="text-xs font-normal text-yellow-400/80 group-hover:translate-x-1 transition-transform">
-                      Görsel & 3D ➜
-                    </span>
-                  </h3>
-                  <p className="text-lg font-bold text-cyan-200 light:text-cyan-700 mt-1">
-                    {word.turkish}
-                  </p>
-
-                  {word.definitionEn && (
-                    <p className="text-xs text-white/70 light:text-slate-600 italic mt-2 line-clamp-2">
-                      &quot;{word.definitionEn}&quot;
-                    </p>
-                  )}
-
-                  {word.sourceCategory && (
-                    <span className="inline-block mt-2 text-[10px] text-white/40 light:text-slate-400 font-mono">
-                      📚 {word.sourceCategory}
-                    </span>
+                  {word.examples && word.examples.length > 0 && (
+                    <div className="bg-black/30 light:bg-slate-100 rounded-2xl p-3 border border-white/10 light:border-slate-200 text-xs text-white/80 light:text-slate-800 mt-4">
+                      <span className="text-[10px] font-mono text-pink-300 light:text-pink-600 uppercase block font-bold mb-1">
+                        Örnek Cümle:
+                      </span>
+                      <p className="italic leading-relaxed">{word.examples[0]}</p>
+                    </div>
                   )}
                 </div>
+              );
+            })}
+          </div>
 
-                {word.examples && word.examples.length > 0 && (
-                  <div className="bg-black/30 light:bg-slate-100 rounded-2xl p-3 border border-white/10 light:border-slate-200 text-xs text-white/80 light:text-slate-800 mt-4">
-                    <span className="text-[10px] font-mono text-pink-300 light:text-pink-600 uppercase block font-bold mb-1">
-                      Örnek Cümle:
-                    </span>
-                    <p className="italic leading-relaxed">{word.examples[0]}</p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          {filteredWords.length > visibleCount && (
+            <div className="flex flex-col items-center gap-2 pt-2">
+              <p className="text-xs text-white/60 font-mono">
+                {visibleWords.length} / {filteredWords.length} kelime gösteriliyor
+              </p>
+              <button
+                type="button"
+                onClick={() => setVisibleCount((prev) => prev + PAGE_STEP)}
+                className="px-6 py-3 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 font-extrabold text-xs sm:text-sm transition-all"
+              >
+                Daha Fazla Kelime Göster (+{PAGE_STEP})
+              </button>
+            </div>
+          )}
         </div>
       )}
 

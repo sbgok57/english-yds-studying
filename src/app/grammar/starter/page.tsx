@@ -28,7 +28,7 @@ export default function GrammarStarterPage() {
 
       {/* Alt Bilgi */}
       <div className="text-center text-xs text-white/40 space-y-1">
-        <p>🧠 YDS Master Sıfırdan Gramer Kılavuzu — Cümle yapısından stative verb ve zamanlara adım adım.</p>
+        <p>🧠 DİL MASTER Sıfırdan Gramer Kılavuzu — Cümle yapısından stative verb ve zamanlara adım adım.</p>
         <p>Aksan tercihinizi üstteki açılır menüden değiştirebilir, her cümlenin doğal telaffuzunu dinleyebilirsiniz.</p>
       </div>
     </div>

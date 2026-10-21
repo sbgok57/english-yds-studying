@@ -108,7 +108,7 @@ export default function CertificatesPage() {
             <div>
               <h2 className="text-base sm:text-lg font-bold text-white">Sertifika Doğrulama Sistemi</h2>
               <p className="text-xs text-slate-400">
-                Herhangi bir YDS Master sertifikasının geçerliliğini ve kime ait olduğunu sorgulayın.
+                Herhangi bir DİL MASTER sertifikasının geçerliliğini ve kime ait olduğunu sorgulayın.
               </p>
             </div>
           </div>
