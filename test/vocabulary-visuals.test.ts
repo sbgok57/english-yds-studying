@@ -51,6 +51,57 @@ assert.strictEqual(dynamicAcademicWord.hasVerifiedPhoto, false);
 assert.strictEqual(dynamicAcademicWord.availableModes.includes("photo"), false);
 assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["animation", "3d", "card"]);
 assert.ok(dynamicAcademicWord.animation.reducedMotionFallbackTextTr.length > 10);
+assert.strictEqual(dynamicAcademicWord.visualKey, "unprecedented");
+
+// 3b. Sense-aware semantic topologies must not collapse to one generic diagram
+const conceptSamples = [
+  resolveWordVisualManifest({ english: "abate", turkish: "azalmak, yatışmak", partOfSpeech: "verb" }),
+  resolveWordVisualManifest({ english: "mitigate", turkish: "hafifletmek, azaltmak", partOfSpeech: "verb" }),
+  resolveWordVisualManifest({ english: "ubiquitous", turkish: "her yerde bulunan", partOfSpeech: "adjective" }),
+  resolveWordVisualManifest({ english: "carry out", turkish: "yürütmek, uygulamak", partOfSpeech: "phrasal verb" }),
+  resolveWordVisualManifest({ english: "deteriorate", turkish: "kötüleşmek, bozulmak", partOfSpeech: "verb" }),
+  resolveWordVisualManifest({ english: "scrutinize", turkish: "dikkatle incelemek", partOfSpeech: "verb" }),
+];
+assert.strictEqual(
+  new Set(conceptSamples.filter((item) => item.english !== "mitigate").map((item) => item.animation.motionType)).size,
+  5,
+  "Anlamca farklı örnek kelimeler aynı generic semantik diyagrama düşmemelidir."
+);
+assert.strictEqual(
+  new Set(conceptSamples.map((item) => item.visualKey)).size,
+  conceptSamples.length,
+  "Her kelimenin semantik görsel anahtarı benzersiz olmalıdır."
+);
+
+const riverBank = resolveWordVisualManifest({
+  english: "bank",
+  turkish: "nehir kıyısı",
+  definitionEn: "the land beside a river",
+});
+const financeBank = resolveWordVisualManifest({
+  english: "bank",
+  turkish: "banka, finans kurumu",
+  definitionEn: "a financial institution that lends money",
+});
+assert.notStrictEqual(
+  riverBank.animation.motionType,
+  financeBank.animation.motionType,
+  "Çok anlamlı kelimelerin farklı sense'leri farklı semantik şema seçmelidir."
+);
+
+const unknownSamples = ["aberrant", "candid", "deem", "elusive", "foster", "grievous", "hence", "impose"];
+const unknownTypes = unknownSamples.map((english) =>
+  resolveWordVisualManifest({ english, turkish: "akademik anlam", partOfSpeech: "adjective" }).animation.motionType
+);
+assert.ok(
+  new Set(unknownTypes).size > 1,
+  "Katalog dışı kelimeler rastgele olmayan ama tek tip olmayan fallback şemaları almalıdır."
+);
+assert.strictEqual(
+  resolveWordVisualManifest({ english: "aberrant", turkish: "akademik anlam" }).animation.motionType,
+  unknownTypes[0],
+  "Aynı kelimenin fallback şeması her yüklemede deterministik kalmalıdır."
+);
 
 // 4. Yerel SVG Varlıklarının Disk Üzerinde Mevcudiyeti
 const requiredLocalAssets = [

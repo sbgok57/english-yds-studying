@@ -170,6 +170,24 @@ export async function runProductionSmokeSpec(
       vocabBody.includes("2544 / 2544 Kelime"),
       `/vocabulary sayfasında '2544 / 2544 Kelime' görünmeli (0 / 0 olmamalı)`
     );
+    const visibleVisuals = await guestPage.locator('[data-testid^="vocab-visual-compact-"]').evaluateAll((nodes) =>
+      nodes.slice(0, 12).map((node) => ({
+        visualKey: node.getAttribute("data-visual-key"),
+        motionType: node.getAttribute("data-motion-type"),
+      }))
+    );
+    assert.ok(
+      visibleVisuals.every((item) => item.visualKey),
+      "Her görünen kelime görseli benzersiz, boş olmayan bir visual key taşımalı"
+    );
+    assert.ok(
+      new Set(visibleVisuals.map((item) => item.visualKey)).size >= Math.min(8, visibleVisuals.length),
+      "Kelime görselleri kelimeye özgü görsel anahtarlara sahip olmalı"
+    );
+    assert.ok(
+      new Set(visibleVisuals.map((item) => item.motionType)).size >= 3,
+      "İlk 12 kelime önizlemesinde en az üç farklı semantik çizim türü görünmeli"
+    );
 
     // 8c. /vocabulary/inventory — 2544 kelime
     const invRes = await guestPage.goto(`${baseUrl}/vocabulary/inventory`, {
