@@ -864,16 +864,16 @@ section {
 
 /* --------------------------------------------------------------------------
    TIPOGRAFI VE DOKUNMATIK ERISILEBILIRLIK
-   Varsayilan Tailwind olcegini koru; kucuk metinleri global olarak buyutme.
+   Okunabilirlik icin varsayilan metin olcegini hafifce buyut.
    -------------------------------------------------------------------------- */
 :root {
-  --base-font-size: 16px;
+  --base-font-size: 17px;
   --passage-font-size: 1rem;
   --line-height-relaxed: 1.7;
 }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -895,7 +895,7 @@ body {
 input,
 select,
 textarea {
-  font-size: 16px;
+  font-size: 17px;
   min-height: 44px;
 }
 
@@ -907,13 +907,13 @@ button {
    DIL MASTER: DUZENLI KAYDIRMA, TEMA DESENI VE DUYARLI NAVIGASYON
    ========================================================================= */
 :root {
-  --base-scale: 16px;
+  --base-scale: 17px;
   --pattern-opacity: 0.22;
 }
 
 /* Sayfa kaydirma her cihazda html/body uzerinden calismaya devam eder. */
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -929,6 +929,13 @@ body {
   min-height: 100dvh;
   position: relative;
   touch-action: pan-y;
+}
+
+/* Fixed, full-viewport backgrounds are costly while scrolling on mobile browsers. */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 /* Tema deseni icerikten bagimsiz kalir; gezinti katmanlarinin ustune cikmaz. */

@@ -115,8 +115,8 @@ function WordCube({ english, turkish, motionType, visualKey }: { english: string
       <group ref={groupRef}>
         <ConceptGeometry type={motionType} color={color} />
       </group>
-      <Sparkles count={35} scale={5} size={3} speed={0.5} color="#f43f5e" />
-      <Sparkles count={20} scale={4} size={3} speed={0.8} color="#38bdf8" />
+      <Sparkles count={8} scale={5} size={2} speed={0.35} color="#f43f5e" />
+      <Sparkles count={6} scale={4} size={2} speed={0.45} color="#38bdf8" />
       <Text position={[0, -2.15, 0]} fontSize={0.2} color="#ffffff" anchorX="center" anchorY="middle" maxWidth={4.8}>{english}</Text>
       <Text position={[0, -2.45, 0]} fontSize={0.14} color="#a5f3fc" anchorX="center" anchorY="middle" maxWidth={5}>{turkish}</Text>
     </Float>
@@ -179,7 +179,8 @@ export default function Word3DScene({ english, turkish, motionType = "flow", vis
     return <Css3DCubeFallback english={english} turkish={turkish} />;
   }
 
-  const dpr = Math.min(1.5, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1);
+  // Keep the canvas framebuffer bounded: pixel cost grows quadratically with DPR.
+  const dpr = Math.min(1.25, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1);
 
   return (
     <CanvasErrorBoundary fallback={<Css3DCubeFallback english={english} turkish={turkish} />}>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
 import { PAGES } from "@/lib/site-index";
@@ -246,9 +247,14 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
           <div className="sticky top-0 z-20 bg-slate-900/95 dark:bg-slate-950/95 light:bg-white/95 backdrop-blur-xl border-b border-white/15 light:border-slate-200 px-4 sm:px-5 py-3.5 space-y-3 shrink-0">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center font-black text-sm shadow-md shrink-0">
-                  DM
-                </span>
+                <Image
+                  src="/icons/icon-192.png"
+                  alt="DİL MASTER logosu"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 shrink-0 rounded-xl object-contain"
+                  priority
+                />
                 <div className="min-w-0">
                   <span className="font-black text-base text-white light:text-slate-900 block leading-tight truncate">
                     Menü · DİL MASTER
