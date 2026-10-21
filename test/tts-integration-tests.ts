@@ -1,10 +1,35 @@
 import assert from "assert";
 import { VOICE_REGISTRY } from "../src/lib/tts/voice-registry";
-import { defaultTtsProvider } from "../src/lib/tts/tts-provider";
+import {
+  defaultTtsProvider,
+  getDedicatedTurkishElevenLabsVoiceId,
+} from "../src/lib/tts/tts-provider";
 
 console.log("▶ Starting TTS Server-Side Synthesis & Integration Tests...\n");
 
 async function runIntegrationTests() {
+  // 0. Emel/Ahmet must never inherit one shared generic voice ID.
+  assert.strictEqual(
+    getDedicatedTurkishElevenLabsVoiceId("tr-TR-female-emel", {
+      ELEVENLABS_VOICE_ID: "shared-voice",
+    }),
+    undefined
+  );
+  assert.strictEqual(
+    getDedicatedTurkishElevenLabsVoiceId("tr-TR-female-emel", {
+      ELEVENLABS_TR_EMEL_VOICE_ID: "emel-voice",
+      ELEVENLABS_TR_AHMET_VOICE_ID: "ahmet-voice",
+    }),
+    "emel-voice"
+  );
+  assert.strictEqual(
+    getDedicatedTurkishElevenLabsVoiceId("tr-TR-male-ahmet", {
+      ELEVENLABS_TR_EMEL_VOICE_ID: "emel-voice",
+      ELEVENLABS_TR_AHMET_VOICE_ID: "ahmet-voice",
+    }),
+    "ahmet-voice"
+  );
+
   // 1. Sağlayıcı Sağlık Kontrolü
   console.log("  1. Testing Default TTS Provider Health...");
   let health = await defaultTtsProvider.healthCheck();
