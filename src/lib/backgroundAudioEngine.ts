@@ -82,7 +82,7 @@ export class BackgroundAudioEngine {
         artist: track.speaker === 'ahmet' ? 'DİL MASTER (Ahmet — Erkek Hoca)' : 'DİL MASTER (Emel — Kadın Hoca)',
         album: `${track.level} Gramer Akademisi`,
         artwork: [
-          { src: '/favicon.ico', sizes: '192x192', type: 'image/png' }
+          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }
         ]
       });
       navigator.mediaSession.playbackState = 'playing';

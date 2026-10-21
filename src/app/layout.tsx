@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     canonical: "https://dil-master.vercel.app",
   },
   manifest: "/manifest.json",
+  themeColor: "#07152d",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

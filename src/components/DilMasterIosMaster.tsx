@@ -135,7 +135,7 @@ export const DilMasterIosMaster: React.FC = () => {
         artist: 'DİL MASTER (Tane Tane İnsan Anlatımı)',
         album: `${lessonToPlay.level} Gramer Laboratuvarı`,
         artwork: [
-          { src: '/favicon.ico', sizes: '192x192', type: 'image/png' }
+          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }
         ]
       });
       navigator.mediaSession.playbackState = 'playing';
@@ -185,7 +185,7 @@ export const DilMasterIosMaster: React.FC = () => {
       try {
         new Notification('🚀 DİL MASTER Bildirimleri Aktif!', {
           body: 'Gramer tüyoları ve YDS kelimeleri gün içinde telefonunuza gelecek.',
-          icon: '/favicon.ico',
+          icon: '/icons/icon-192.png',
         });
       } catch {
         // Tarayıcı kısıtı
@@ -205,7 +205,7 @@ export const DilMasterIosMaster: React.FC = () => {
         ];
         const randomTip = tips[Math.floor(Math.random() * tips.length)];
         try {
-          new Notification('DİL MASTER Hatırlatıcı', { body: randomTip, icon: '/favicon.ico' });
+          new Notification('DİL MASTER Hatırlatıcı', { body: randomTip, icon: '/icons/icon-192.png' });
         } catch {
           // Tarayıcı kısıtı
         }

@@ -6,7 +6,7 @@
    - /api, auth, token, cookie ve kişisel veriler ASLA Cache Storage'a girmez.
    ============================================================ */
 
-const SW_VERSION = 'dil-master-offline-v2026.10.20';
+const SW_VERSION = 'dil-master-offline-v2026.10.21-brand-audio-v1';
 const APP_SHELL_CACHE = `${SW_VERSION}-shell`;
 
 const PUBLIC_APP_SHELL = [
@@ -16,6 +16,7 @@ const PUBLIC_APP_SHELL = [
   '/favicon.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
+  '/apple-touch-icon.png',
 ];
 
 // 1. Kurulum (Install): Statik Public App Shell'i önbelleğe al
@@ -167,8 +168,8 @@ self.addEventListener('message', (event) => {
     const payload = event.data.payload || {};
     self.registration.showNotification(payload.title || '🚀 DİL MASTER', {
       body: payload.body || 'Günün YDS hap bilgisi ve kelimeleri seni bekliyor!',
-      icon: payload.icon || '/favicon.ico',
-      badge: '/favicon.ico',
+      icon: payload.icon || '/icons/icon-192.png',
+      badge: '/icons/icon-192.png',
       vibrate: [100, 50, 100],
       data: { url: payload.url || '/grammar' },
     });
