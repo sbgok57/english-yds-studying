@@ -94,6 +94,23 @@ export function formatSpeakingRate(rate: number = 1.0): string {
 }
 
 /**
+ * Returns a dedicated ElevenLabs narrator only when a speaker-specific voice ID
+ * is configured. A shared ELEVENLABS_VOICE_ID cannot distinguish Emel from Ahmet.
+ */
+export function getDedicatedTurkishElevenLabsVoiceId(
+  voiceId: string,
+  env: Record<string, string | undefined> = process.env
+): string | undefined {
+  if (voiceId === "tr-TR-female-emel") {
+    return env.ELEVENLABS_TR_EMEL_VOICE_ID?.trim() || undefined;
+  }
+  if (voiceId === "tr-TR-male-ahmet") {
+    return env.ELEVENLABS_TR_AHMET_VOICE_ID?.trim() || undefined;
+  }
+  return undefined;
+}
+
+/**
  * Uzun metinleri önce cümle ve anlamlı noktalama sınırlarından,
  * gerekiyorsa kelime sınırlarından böler. Asla bir kelimenin ortasından kesmez.
  */
@@ -156,9 +173,10 @@ export function splitTextIntoChunks(text: string, maxLen: number = 180): string[
 
 /**
  * Çok Katmanlı Neural TTS Sağlayıcısı:
- * 1. Azure Cognitive Services Speech REST API (AZURE_SPEECH_KEY + AZURE_SPEECH_REGION mevcutsa)
- * 2. Microsoft Edge Neural TTS WebSocket (msedge-tts)
- * 3. Cloud HTTP MP3 Fallback (Cümle sınırlı chunking + MP3 imza doğrulaması)
+ * 1. Azure Cognitive Services Speech REST API (if configured)
+ * 2. Dedicated ElevenLabs Turkish narrator (if its speaker-specific voice ID is configured)
+ * 3. Microsoft Edge Neural TTS WebSocket (msedge-tts)
+ * 4. Locale-only HTTP fallback for English. Turkish never uses this shared-voice fallback.
  */
 export class EdgeTtsProvider implements TtsProvider {
   public readonly id = "msedge-neural";
@@ -222,6 +240,44 @@ export class EdgeTtsProvider implements TtsProvider {
       }
     }
 
+    // A single shared ElevenLabs voice ID cannot satisfy the Emel/Ahmet
+    // distinction. Only use explicitly configured IDs for each narrator.
+    const elevenLabsVoiceId = getDedicatedTurkishElevenLabsVoiceId(voiceProfile.id);
+    const elevenLabsKey = process.env.ELEVENLABS_API_KEY;
+    if (voiceProfile.locale === "tr-TR" && elevenLabsKey && elevenLabsVoiceId) {
+      try {
+        const elevenLabsBuffer = await this.synthesizeViaElevenLabs(
+          elevenLabsKey,
+          elevenLabsVoiceId,
+          cleanText,
+          request.speakingRate || 1.0
+        );
+        if (elevenLabsBuffer && isValidAudioBuffer(elevenLabsBuffer, "audio/mpeg")) {
+          const bothNarratorsConfigured = Boolean(
+            process.env.ELEVENLABS_TR_EMEL_VOICE_ID?.trim() &&
+              process.env.ELEVENLABS_TR_AHMET_VOICE_ID?.trim() &&
+              process.env.ELEVENLABS_TR_EMEL_VOICE_ID.trim() !==
+                process.env.ELEVENLABS_TR_AHMET_VOICE_ID.trim()
+          );
+          return {
+            ok: true,
+            audio: elevenLabsBuffer,
+            mimeType: "audio/mpeg",
+            durationMs: Date.now() - startTime,
+            provider: "elevenlabs",
+            voiceId: voiceProfile.id,
+            providerVoiceId: elevenLabsVoiceId,
+            locale: voiceProfile.locale,
+            contentLanguage: voiceProfile.contentLanguage,
+            distinctSpeakerVerified: bothNarratorsConfigured,
+            source: voiceProfile.source,
+          };
+        }
+      } catch (elevenLabsErr: any) {
+        lastError = elevenLabsErr;
+      }
+    }
+
     // KATMAN 2: Microsoft Edge Neural WebSocket
     try {
       const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
@@ -265,7 +321,16 @@ export class EdgeTtsProvider implements TtsProvider {
       lastError = importErr;
     }
 
-    // KATMAN 3: Sunucu tarafı Cloud HTTP MP3 Yedek Sağlayıcı
+    // Translation TTS accepts only a locale, not a speaker/voice ID. For Turkish
+    // narration, returning it made Emel and Ahmet sound identical. Fail over to
+    // the client's real device voices instead of returning mislabeled audio.
+    if (voiceProfile.locale === "tr-TR") {
+      throw new Error(
+        `VOICE_NOT_AVAILABLE: Farklı Türkçe anlatıcı sesi yapılandırılmamış veya erişilemiyor (${lastError?.message || "sağlayıcı yanıt vermedi"}).`
+      );
+    }
+
+    // KATMAN 4: English locale-only HTTP MP3 fallback
     try {
       const fallbackBuffer = await this.synthesizeViaCloudHttpMp3(
         cleanText,
@@ -328,6 +393,43 @@ export class EdgeTtsProvider implements TtsProvider {
       }
       const arrayBuf = await res.arrayBuffer();
       return Buffer.from(arrayBuf);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  private async synthesizeViaElevenLabs(
+    apiKey: string,
+    providerVoiceId: string,
+    text: string,
+    speakingRate: number
+  ): Promise<Buffer> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12000);
+    try {
+      const speed = Math.max(0.7, Math.min(1.2, speakingRate));
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(providerVoiceId)}?output_format=mp3_44100_128`,
+        {
+          method: "POST",
+          cache: "no-store",
+          headers: {
+            "xi-api-key": apiKey,
+            "Content-Type": "application/json",
+            Accept: "audio/mpeg",
+          },
+          body: JSON.stringify({
+            text,
+            model_id: "eleven_multilingual_v2",
+            voice_settings: { stability: 0.5, similarity_boost: 0.75, speed },
+          }),
+          signal: controller.signal,
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`ElevenLabs TTS HTTP ${response.status}`);
+      }
+      return Buffer.from(await response.arrayBuffer());
     } finally {
       clearTimeout(timer);
     }
