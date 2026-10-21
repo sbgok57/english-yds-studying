@@ -12,7 +12,6 @@ import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import DilMasterProSystem from "@/components/DilMasterProSystem";
-import BottomNavigation from "@/components/navigation/BottomNavigation";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dil-master.vercel.app"),
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.svg",
     apple: [
-      { url: "/apple-icon" },
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
@@ -84,8 +83,7 @@ export default function RootLayout({
             <ThemeProvider>
               <ThemeInitializer />
               <Header />
-              <main className="min-h-[calc(100vh-4rem)] pb-24 md:pb-8 transition-all duration-300">{children}</main>
-              <BottomNavigation />
+              <main className="min-h-[calc(100vh-3.5rem)] pb-6 transition-all duration-300">{children}</main>
               <AiWidget />
               <RecoveryBanner />
               <ErrorToast />
@@ -95,7 +93,7 @@ export default function RootLayout({
             </ThemeProvider>
           </BadgeQueueProvider>
         </CrashGuardianProvider>
-        <footer className="border-t border-white/10 py-8 pb-24 md:pb-8 mt-12 transition-all duration-300">
+        <footer className="border-t border-white/10 py-8 mt-12 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
               🧠 DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.

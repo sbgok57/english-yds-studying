@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
+import { clientAudio } from '@/lib/tts/audio-client';
 
 // ============================================================================
 // 1. HAZIR DOĞAL GRAMER DERSLERİ (TANE TANE ANLATIM SCRIPT'LERİ)
@@ -47,10 +48,8 @@ export const DilMasterIosMaster: React.FC = () => {
   const [showIosBanner, setShowIosBanner] = useState<boolean>(false);
   const [activeLesson, setActiveLesson] = useState<GrammarLesson>(GRAMMAR_LESSONS[0]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [audioProgress, setAudioProgress] = useState<number>(0);
   const [notificationStatus, setNotificationStatus] = useState<string>('default');
 
-  const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const notificationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // --------------------------------------------------------------------------
@@ -101,41 +100,10 @@ export const DilMasterIosMaster: React.FC = () => {
       document.head.appendChild(style);
     }
 
-    // 5. Ses Öğesini Başlat
-    const audio = new Audio();
-    (audio as any).playsInline = true; // iOS Safari tam ekrana geçmeden çalsın
-    audio.preload = 'auto';
-
-    audio.ontimeupdate = () => {
-      if (audio.duration) {
-        setAudioProgress((audio.currentTime / audio.duration) * 100);
-      }
-    };
-
-    audio.onended = () => {
-      setIsPlaying(false);
-      setAudioProgress(0);
-    };
-
-    audioElementRef.current = audio;
-
     // 6. MediaSession API (Kilit Ekranı Kumanda Paneli)
     if ('mediaSession' in navigator) {
       navigator.mediaSession.setActionHandler('play', () => handlePlayRef.current?.());
       navigator.mediaSession.setActionHandler('pause', () => handlePauseRef.current?.());
-      navigator.mediaSession.setActionHandler('seekbackward', () => {
-        if (audioElementRef.current) {
-          audioElementRef.current.currentTime = Math.max(audioElementRef.current.currentTime - 10, 0);
-        }
-      });
-      navigator.mediaSession.setActionHandler('seekforward', () => {
-        if (audioElementRef.current) {
-          audioElementRef.current.currentTime = Math.min(
-            audioElementRef.current.currentTime + 10,
-            audioElementRef.current.duration || 0
-          );
-        }
-      });
     }
 
     // 7. Akıllı Bildirim Kontrolü
@@ -145,10 +113,7 @@ export const DilMasterIosMaster: React.FC = () => {
 
     return () => {
       // PERF & SAFETY: Ses ve kaynak temizliği
-      if (audio) {
-        audio.pause();
-        audio.src = '';
-      }
+      clientAudio.stopAll();
       if (notificationIntervalRef.current) {
         clearInterval(notificationIntervalRef.current);
         notificationIntervalRef.current = null;
@@ -160,12 +125,9 @@ export const DilMasterIosMaster: React.FC = () => {
   const handlePauseRef = useRef<(() => void) | null>(null);
 
   // --------------------------------------------------------------------------
-  // B. KİLİTLİ EKRANDA ÇALMA GARANTİLİ SES FONKSİYONLARI
+  // B. Cihazın desteklediği medya kontrolleriyle ses oynatımı
   // --------------------------------------------------------------------------
   const handlePlay = async (lessonToPlay = activeLesson) => {
-    const audio = audioElementRef.current;
-    if (!audio) return;
-
     // Kilit ekranına ders adını ve rozetini bas
     if ('mediaSession' in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -179,38 +141,31 @@ export const DilMasterIosMaster: React.FC = () => {
       navigator.mediaSession.playbackState = 'playing';
     }
 
-    // Tane Tane Doğal Anlatım Akışı (/api/tts Neural Ses Motoru Üzerinden)
-    const encoded = encodeURIComponent(lessonToPlay.script);
-    const audioSrc = `/api/tts?text=${encoded}&voiceId=tr-TR-female-emel&rate=0.94&pitch=0`;
-
-    if (audio.src !== audioSrc) {
-      audio.src = audioSrc;
-    }
-
-    audio.playbackRate = 1.0;
-
-    try {
-      await audio.play();
-      setIsPlaying(true);
-    } catch {
-      // iOS Safari ilk dokunuşta ses kilitlerse kullanıcı etkileşimiyle aç
-      const unlockAndPlay = () => {
-        audio.play().catch(() => {});
+    setIsPlaying(false);
+    await clientAudio.play(lessonToPlay.script, {
+      voiceId: 'tr-TR-female-emel',
+      contentLanguage: 'tr',
+      locale: 'tr-TR',
+      gender: 'female',
+      rate: 0.94,
+      contentType: 'long-form',
+      onStart: () => {
         setIsPlaying(true);
-        window.removeEventListener('click', unlockAndPlay);
-      };
-      window.addEventListener('click', unlockAndPlay, { once: true });
-    }
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+      },
+      onEnd: () => {
+        setIsPlaying(false);
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
+      },
+      onError: () => setIsPlaying(false),
+    });
   };
 
   const handlePause = () => {
-    const audio = audioElementRef.current;
-    if (audio) {
-      audio.pause();
-      setIsPlaying(false);
-      if ('mediaSession' in navigator) {
-        navigator.mediaSession.playbackState = 'paused';
-      }
+    clientAudio.stopAll();
+    setIsPlaying(false);
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.playbackState = 'paused';
     }
   };
 
@@ -343,13 +298,9 @@ export const DilMasterIosMaster: React.FC = () => {
             "{activeLesson.script}"
           </p>
 
-          {/* İlerleme Çubuğu */}
-          <div className="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full mb-6 overflow-hidden">
-            <div
-              className="bg-sky-600 h-full transition-all duration-300"
-              style={{ width: `${audioProgress}%` }}
-            ></div>
-          </div>
+          <p className="mb-6 text-xs text-slate-500 dark:text-slate-400" aria-live="polite">
+            {isPlaying ? 'Cihazınızın Türkçe konuşma sesi kullanılıyor; ekran kilidi desteği cihaza göre değişebilir.' : 'Ses, cihazınızdaki Türkçe konuşma profillerine göre oynatılır.'}
+          </p>
 
           {/* Oynat / Durdur Butonu */}
           <div className="flex items-center justify-center gap-4">
@@ -361,8 +312,8 @@ export const DilMasterIosMaster: React.FC = () => {
                   : 'bg-sky-600 hover:bg-sky-700 text-white shadow-xl'
               }`}
             >
-              <span className="text-2xl">{isPlaying ? '⏸' : '🎧'}</span>
-              <span>{isPlaying ? 'Dersi Duraklat' : 'Tane Tane Dinle (Kilit Ekranda Çal)'}</span>
+              <span className="text-2xl">{isPlaying ? '⏹' : '🎧'}</span>
+              <span>{isPlaying ? 'Dersi Durdur' : 'Tane Tane Dinle'}</span>
             </button>
           </div>
         </div>

@@ -183,5 +183,12 @@ export function runWhenIdle(callback: () => void, timeoutMs = 2000): void {
  */
 export function shouldThrottleGraphics(): boolean {
   const profile = getHardwareProfile();
-  return profile.tier === "low" || profile.prefersReducedMotion || profile.saveData;
+  // WebGL contexts and high-DPR framebuffers add substantial memory overhead
+  // in mobile browsers and WebViews, even on devices that report four GB RAM.
+  return (
+    profile.tier === "low" ||
+    profile.prefersReducedMotion ||
+    profile.saveData ||
+    (profile.isMobile && profile.deviceMemoryGb <= 4)
+  );
 }

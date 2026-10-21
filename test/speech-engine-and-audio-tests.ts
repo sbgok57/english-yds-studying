@@ -51,18 +51,17 @@ const testTrack: LessonTrack = {
   textScript: "Since bağlacı arkasından past alır, ana cümlede present perfect gelir.",
 };
 
-const emelStreamUrl = backgroundAudio.buildLessonStreamUrl({ ...testTrack, speaker: "emel" });
-const ahmetStreamUrl = backgroundAudio.buildLessonStreamUrl({ ...testTrack, speaker: "ahmet" });
-assert.ok(emelStreamUrl.startsWith("/api/tts?"), "BackgroundAudioEngine merkezi /api/tts rotasını kullanmalıdır.");
-assert.ok(emelStreamUrl.includes("voiceId=tr-TR-female-emel"), "Emel stream URL'i tr-TR-female-emel içermelidir.");
-assert.ok(ahmetStreamUrl.includes("voiceId=tr-TR-male-ahmet"), "Ahmet stream URL'i tr-TR-male-ahmet içermelidir.");
-assert.notStrictEqual(emelStreamUrl, ahmetStreamUrl, "Emel ve Ahmet stream URL'leri birbirinden farklı olmalıdır.");
+const emelPlayback = backgroundAudio.buildLessonPlaybackOptions({ ...testTrack, speaker: "emel" });
+const ahmetPlayback = backgroundAudio.buildLessonPlaybackOptions({ ...testTrack, speaker: "ahmet" });
+assert.strictEqual(emelPlayback.voiceId, "tr-TR-female-emel", "Emel istemci ses profili doğru olmalıdır.");
+assert.strictEqual(ahmetPlayback.voiceId, "tr-TR-male-ahmet", "Ahmet istemci ses profili doğru olmalıdır.");
+assert.notStrictEqual(emelPlayback.voiceId, ahmetPlayback.voiceId, "Emel ve Ahmet ses profilleri birbirinden farklı olmalıdır.");
 
 backgroundAudio.play();
 backgroundAudio.pause();
 backgroundAudio.stop();
 assert.strictEqual(backgroundAudio.getCurrentTrack(), null, "Başlangıçta track null olmalıdır.");
-console.log("  ✅ PASS: BackgroundAudioEngine controls & Emel/Ahmet /api/tts stream URLs work seamlessly.\n");
+console.log("  ✅ PASS: BackgroundAudioEngine resolves separate Emel/Ahmet client voice profiles.\n");
 
 // 3. SmartNotificationManager ve Hap Bilgiler Doğrulaması
 console.log("  3. Testing SmartNotificationManager & Smart Tips...");

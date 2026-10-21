@@ -1,6 +1,8 @@
+import { clientAudio } from "./tts/audio-client";
+
 /**
- * DİL MASTER - ARKA PLAN & KİLİT EKRANI DESTEKLİ DOĞAL SES MOTORU
- * Ekran kapandığında dahi çalmaya devam eder ve kilit ekranına kumanda paneli ekler.
+ * DİL MASTER - Ders sesi oynatımı ve cihazın desteklediği medya kontrolleri.
+ * Gerçek arka plan/ekran kilidi oynatımı ses kaynağına ve işletim sistemine bağlıdır.
  */
 
 export interface LessonTrack {
@@ -11,6 +13,16 @@ export interface LessonTrack {
   audioUrl?: string;
   textScript: string;
   speaker?: 'emel' | 'ahmet';
+}
+
+export interface NarrationPlaybackOptions {
+  voiceId: string;
+  locale: "tr-TR";
+  contentLanguage: "tr";
+  gender: "female" | "male";
+  speaker: "emel" | "ahmet";
+  rate: number;
+  contentType: "long-form";
 }
 
 export class BackgroundAudioEngine {
@@ -49,14 +61,11 @@ export class BackgroundAudioEngine {
     this.isInitialized = true;
   }
 
-  public buildLessonStreamUrl(track: LessonTrack): string {
-    if (track.audioUrl) return track.audioUrl;
+  public buildLessonPlaybackOptions(track: LessonTrack): NarrationPlaybackOptions {
     const speaker = track.speaker === 'ahmet' ? 'ahmet' : 'emel';
     const gender = speaker === 'ahmet' ? 'male' : 'female';
     const voiceId = speaker === 'ahmet' ? 'tr-TR-male-ahmet' : 'tr-TR-female-emel';
-    return `/api/tts?text=${encodeURIComponent(
-      track.textScript
-    )}&voiceId=${voiceId}&locale=tr-TR&contentLanguage=tr&speaker=${speaker}&gender=${gender}&rate=0.95&contentType=long-form`;
+    return { voiceId, locale: "tr-TR", contentLanguage: "tr", gender, speaker, rate: 0.95, contentType: "long-form" };
   }
 
   // Tane Tane, Doğal İnsan Sesiyle Gramer Çalma Fonksiyonu
@@ -79,14 +88,21 @@ export class BackgroundAudioEngine {
       navigator.mediaSession.playbackState = 'playing';
     }
 
-    // Merkezi /api/tts Doğal İnsan Sesi Stream Kaynağı (Emel / Ahmet)
-    const sourceUrl = this.buildLessonStreamUrl(track);
-
-    this.audioElement.src = sourceUrl;
-    this.audioElement.playbackRate = 0.95; // Tane tane ve sindirerek anlatım
-
     try {
-      await this.audioElement.play();
+      clientAudio.stopAll();
+      if (track.audioUrl) {
+        this.audioElement.src = track.audioUrl;
+        this.audioElement.playbackRate = 0.95;
+        await this.audioElement.play();
+      } else {
+        await clientAudio.play(track.textScript, {
+          ...this.buildLessonPlaybackOptions(track),
+          contentType: "long-form",
+          onEnd: () => {
+            if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
+          },
+        });
+      }
     } catch {
       // Mobil cihaz kilitliyse kullanıcı dokunuşuyla başlatılması gerekir
       if (typeof document !== 'undefined') {
@@ -96,6 +112,10 @@ export class BackgroundAudioEngine {
   }
 
   public play() {
+    if (this.currentTrack && !this.currentTrack.audioUrl) {
+      void this.playGrammarLesson(this.currentTrack);
+      return;
+    }
     if (this.audioElement && this.audioElement.paused) {
       this.audioElement.play().catch(() => {});
       if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
@@ -111,9 +131,11 @@ export class BackgroundAudioEngine {
         navigator.mediaSession.playbackState = 'paused';
       }
     }
+    clientAudio.stopAll();
   }
 
   public stop() {
+    clientAudio.stopAll();
     if (this.audioElement) {
       this.audioElement.pause();
       this.audioElement.currentTime = 0;
