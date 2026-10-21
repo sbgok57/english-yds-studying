@@ -10,6 +10,8 @@ import {
   nativeVoiceUriFromOption,
   type SpeechVoiceProfile,
 } from "../shared/speech-voices";
+import { clientAudio } from "@/lib/tts/audio-client";
+import type { AccentCode } from "@/lib/tts/voice-registry";
 import { Volume2, Loader2, AlertCircle } from "lucide-react";
 
 type Props = {
@@ -58,6 +60,7 @@ export function PronunciationButton({
     return () => {
       window.clearTimeout(timeout);
       synth.removeEventListener("voiceschanged", update);
+      clientAudio.stopAll();
     };
   }, []);
 
@@ -121,6 +124,17 @@ export function PronunciationButton({
     try {
       if (onSpeak && selectedId && !selectedId.startsWith("native:")) {
         await onSpeak(text, selectedId, language);
+        setStatus("Telaffuz tamamlandı.");
+      } else if (!selectedId.startsWith("native:")) {
+        await clientAudio.play(text, {
+          voiceId: selectedId || undefined,
+          accent: (language.startsWith("tr") ? undefined : (language as AccentCode)) || "en-GB",
+          locale: (language.startsWith("tr") ? "tr-TR" : (language as AccentCode)) || "en-GB",
+          contentLanguage: language.startsWith("tr") ? "tr" : "en",
+          gender: selectedId.toLowerCase().includes("male") || selectedId.toLowerCase().includes("ahmet") ? "male" : "female",
+          rate: 0.93,
+          contentType: text.includes(" ") ? "sentence" : "word",
+        });
         setStatus("Telaffuz tamamlandı.");
       } else {
         await speakLocally(selectedId);

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { pickMotivation, MotivationContext, DEFAULT_MOTIVATION } from "@/lib/motivation-rotator";
 import { MotivationItem } from "@/lib/data-motivations";
+import { clientAudio } from "@/lib/tts/audio-client";
 import {
   MOTIVATION_VIDEOS,
   MOTIVATION_VIDEOS_COUNT,
@@ -33,6 +34,9 @@ export default function MotivationBox({
   useEffect(() => {
     setMounted(true);
     setMotivation(pickMotivation(context));
+    return () => {
+      clientAudio.stopAll();
+    };
   }, [context]);
 
   // Handle ESC key to safely close video modal
@@ -41,9 +45,7 @@ export default function MotivationBox({
     if (!videoOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (typeof window !== "undefined" && "speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-        }
+        clientAudio.stopAll();
         setIsSpeaking(false);
         setVideoOpen(false);
       }
@@ -51,27 +53,30 @@ export default function MotivationBox({
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
     };
   }, [videoOpen]);
 
   const handleSpeakQuote = useCallback((text: string) => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
+    clientAudio.stopAll();
     if (isSpeaking) {
       setIsSpeaking(false);
       return;
     }
     const cleanText = text.replace(/^[“"']+|[”"']+$/g, "").trim();
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = "tr-TR";
-    utterance.rate = 0.95;
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
+    if (!cleanText) return;
     setIsSpeaking(true);
-    window.speechSynthesis.speak(utterance);
+    void clientAudio.play(cleanText, {
+      voiceId: "tr-TR-female-emel",
+      locale: "tr-TR",
+      contentLanguage: "tr",
+      speaker: "emel",
+      gender: "female",
+      rate: 0.95,
+      contentType: "sentence",
+      onEnd: () => setIsSpeaking(false),
+      onError: () => setIsSpeaking(false),
+    });
   }, [isSpeaking]);
 
   const refresh = () => {
