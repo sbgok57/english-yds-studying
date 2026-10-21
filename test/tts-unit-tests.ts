@@ -111,7 +111,7 @@ console.log("  ✅ PASS: XML escape and speaking rates conform to SSML spec.\n")
 
 // 6. Standart Önizleme Cümlesi
 console.log("  6. Testing Standard Neutral Preview Sentence...");
-assert.ok(STANDARD_PREVIEW_TEXT.includes("Welcome to YDS Master"));
+assert.ok(STANDARD_PREVIEW_TEXT.includes("Welcome to Dil Master"));
 assert.ok(STANDARD_PREVIEW_TEXT.length >= 50 && STANDARD_PREVIEW_TEXT.length <= 150);
 console.log("  ✅ PASS: Neutral standard preview sentence is standardized.\n");
 

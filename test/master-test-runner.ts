@@ -222,6 +222,10 @@ async function runAllTests(): Promise<void> {
     try {
       // Test dosyasını dinamik olarak izole ortamda yükle ve çalıştır
       await import(testPath);
+      await new Promise((resolve) => setTimeout(resolve, 25));
+      if (exitCodeCalled !== null && exitCodeCalled !== 0) {
+        throw new Error(`Test süiti exit(${exitCodeCalled}) ile sonlandı`);
+      }
       const durationMs = Math.round(performance.now() - start);
       console.log(`\x1b[32m✔ BAŞARILI\x1b[0m (${durationMs}ms)`);
       results.push({ file: testFile, passed: true, durationMs });
@@ -249,9 +253,8 @@ async function runAllTests(): Promise<void> {
   console.log(`Toplam Geçen Süre   : ${totalDuration} saniye\n`);
 
   if (failedCount > 0) {
-    console.log('⚠ DİKKAT: Bazı testlerde mantıksal hatalar yakalandı ancak zincirleme çökme engellendi.');
-    // Antigravity ve CI süreçlerinin kilitlenmemesi için 0 ile güvenli tamamla
-    realExit(0);
+    console.error(`✖ HATA: ${failedCount} test paketi başarısız oldu.`);
+    realExit(1);
   } else {
     console.log('🎉 TEBRİKLER! Tüm Dil Master testleri sıfır hata ile tamamlandı.');
     realExit(0);

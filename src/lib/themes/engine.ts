@@ -322,6 +322,7 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
     root.style.setProperty("--theme-accent-glow", `${targetTheme.accent}20`);
     root.style.setProperty("--theme-pattern", targetTheme.patternCss);
     root.style.setProperty("--theme-pattern-size", SVG_PATTERN_SIZES[targetTheme.patternType] || "auto");
+    root.style.setProperty("--pattern-opacity", "1");
     root.style.setProperty("--theme-button-bg", targetTheme.buttonBg);
     root.style.setProperty("--theme-button-text", targetTheme.buttonText);
 

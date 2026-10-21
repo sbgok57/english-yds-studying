@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { NewsArticle } from "@/lib/news/types";
 import { ACCENT_OPTIONS, type AccentCode } from "@/components/tts/TTSPlayer";
+import { clientAudio } from "@/lib/tts/audio-client";
 
 interface NewsReaderModalProps {
   article: NewsArticle | null;
@@ -47,8 +48,6 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
     return "female";
   });
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -56,29 +55,24 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
     if (isOpen) {
       window.addEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "hidden";
+    } else {
+      clientAudio.stopAll();
+      setIsPlaying(false);
+      setActiveWordPlaying(null);
     }
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
     };
   }, [isOpen, onClose]);
 
   // Reset audio on article change
   useEffect(() => {
     setIsPlaying(false);
+    setActiveWordPlaying(null);
     setShowFullTurkish(false);
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
+    clientAudio.stopAll();
   }, [article]);
 
   if (!isOpen || !article) return null;
@@ -89,65 +83,21 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
   const fullArticleText = `${article.titleEn}. ${article.paragraphs.map((p) => p.en).join(" ")}`;
 
   const startPlayback = (accent: AccentCode, gender: "female" | "male", rate: number) => {
-    // Play full article via TTS audio route with chosen accent and gender
-    const audioUrl = `/api/tts?text=${encodeURIComponent(
-      fullArticleText.slice(0, 1000)
-    )}&accent=${encodeURIComponent(accent)}&gender=${gender}&rate=${rate}&contentType=long-form`;
-    const audio = new Audio(audioUrl);
-    audioRef.current = audio;
-    audio.playbackRate = rate;
-
-    audio
-      .play()
-      .then(() => {
-        setIsPlaying(true);
-      })
-      .catch(() => {
-        // SAFETY: Fallback to browser SpeechSynthesis with accent mapping
-        if (typeof window !== "undefined" && "speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-          const utter = new SpeechSynthesisUtterance(fullArticleText);
-          utter.lang = accent === "en-GB-scotland" ? "en-GB" : accent;
-          utter.rate = rate;
-
-          const voices = window.speechSynthesis.getVoices();
-          if (accent === "en-GB-scotland") {
-            const scotVoice = voices.find(
-              (v) =>
-                v.name.toLowerCase().includes("scot") ||
-                v.name.toLowerCase().includes("fiona") ||
-                (v.lang.startsWith("en-GB") &&
-                  (gender === "male"
-                    ? v.name.toLowerCase().includes("male") || v.name.toLowerCase().includes("george")
-                    : v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("maisie") || v.name.toLowerCase().includes("hazel")))
-            );
-            if (scotVoice) utter.voice = scotVoice;
-          } else {
-            const targetVoice = voices.find((v) =>
-              v.lang.toLowerCase().replace("_", "-").startsWith(accent.toLowerCase())
-            );
-            if (targetVoice) utter.voice = targetVoice;
-          }
-
-          utter.onend = () => setIsPlaying(false);
-          utter.onerror = () => setIsPlaying(false);
-          window.speechSynthesis.speak(utter);
-          setIsPlaying(true);
-        }
-      });
-
-    audio.onended = () => setIsPlaying(false);
-    audio.onerror = () => {
-      setIsPlaying(false);
-    };
+    setIsPlaying(true);
+    void clientAudio.play(fullArticleText.slice(0, 1000), {
+      accent,
+      gender,
+      rate,
+      contentType: "long-form",
+      onStart: () => setIsPlaying(true),
+      onEnd: () => setIsPlaying(false),
+      onError: () => setIsPlaying(false),
+    });
   };
 
   const handleTogglePlay = () => {
     if (isPlaying) {
-      if (audioRef.current) audioRef.current.pause();
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
       setIsPlaying(false);
     } else {
       startPlayback(selectedAccent, selectedGender, playbackRate);
@@ -164,10 +114,7 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
     }
 
     if (isPlaying) {
-      if (audioRef.current) audioRef.current.pause();
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
       setIsPlaying(false);
       setTimeout(() => {
         startPlayback(accentCode, selectedGender, playbackRate);
@@ -185,10 +132,7 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
     }
 
     if (isPlaying) {
-      if (audioRef.current) audioRef.current.pause();
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
       setIsPlaying(false);
       setTimeout(() => {
         startPlayback(selectedAccent, gender, playbackRate);
@@ -198,29 +142,14 @@ export function NewsReaderModal({ article, isOpen, onClose }: NewsReaderModalPro
 
   const playSingleWord = (word: string) => {
     setActiveWordPlaying(word);
-    const audio = new Audio(
-      `/api/tts?text=${encodeURIComponent(
-        word
-      )}&accent=${encodeURIComponent(selectedAccent)}&gender=${selectedGender}&contentType=word`
-    );
-    audio
-      .play()
-      .then(() => {})
-      .catch(() => {
-        if (typeof window !== "undefined" && "speechSynthesis" in window) {
-          const utter = new SpeechSynthesisUtterance(word);
-          utter.lang = selectedAccent === "en-GB-scotland" ? "en-GB" : selectedAccent;
-          utter.onend = () => setActiveWordPlaying(null);
-          utter.onerror = () => setActiveWordPlaying(null);
-          window.speechSynthesis.speak(utter);
-        } else {
-          setActiveWordPlaying(null);
-        }
-      });
-    audio.onended = () => setActiveWordPlaying(null);
-    audio.onerror = () => {
-      setActiveWordPlaying(null);
-    };
+    void clientAudio.play(word, {
+      accent: selectedAccent,
+      gender: selectedGender,
+      rate: 1.0,
+      contentType: "word",
+      onEnd: () => setActiveWordPlaying(null),
+      onError: () => setActiveWordPlaying(null),
+    });
   };
 
   const activeAccentOpt =

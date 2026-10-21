@@ -58,7 +58,7 @@ export default function ListeningPage() {
           {/* Aksan Seçimi */}
           <div>
             <label className="text-xs font-mono text-cyan-300 uppercase tracking-widest block font-bold mb-2">
-              Aksan Seçimi (6 Aksan)
+              Aksan Seçimi (7 Aksan • 14 Ses)
             </label>
             <div className="flex gap-1.5 flex-wrap">
               {ACCENT_OPTIONS.map((a) => (

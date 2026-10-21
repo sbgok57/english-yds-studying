@@ -227,7 +227,14 @@ function VocabularyInventoryContent() {
     setCurrentPage(1);
   }, [activeTab, examFilter, posFilter, statusFilter, searchQuery, pageSize]);
 
-  // Audio pronunciation with natural 12-voice multi-accent TTS
+  // SAFETY: Stop active audio when leaving inventory page
+  useEffect(() => {
+    return () => {
+      clientAudio.stopAll();
+    };
+  }, []);
+
+  // Audio pronunciation with natural 14-voice (7-accent) multi-accent TTS
   const speakTerm = (word: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (playingWord === word) {
@@ -258,7 +265,7 @@ function VocabularyInventoryContent() {
               Kelime <span className="gradient-text">Envanteri</span> 📦
             </h1>
             <p className="text-sm sm:text-base text-white/60 mt-2 max-w-2xl">
-              YDS, YÖKDİL ve YDT için filtrelenebilir, seviyeli, Türkçe açıklamalı ve telaffuzlu 485 akademik kelime envanteri. Kişisel notlarını ekle ve öğrendiklerini işaretle!
+              YDS, YÖKDİL ve YDT için filtrelenebilir, seviyeli, Türkçe açıklamalı ve telaffuzlu {INVENTORY_METRICS.total} akademik kelime envanteri. Kişisel notlarını ekle ve öğrendiklerini işaretle!
             </p>
           </div>
 
@@ -266,7 +273,7 @@ function VocabularyInventoryContent() {
             <button
               onClick={() => setShowVoicePicker(!showVoicePicker)}
               className="px-4 py-2.5 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 transition-all flex items-center gap-2 shadow-sm"
-              title="Doğal Çoklu Aksan Ses Motoru (6 Aksan, 12 Doğal Konuşmacı)"
+              title="Doğal Çoklu Aksan Ses Motoru (7 Aksan, 14 Doğal Konuşmacı)"
             >
               <span className="text-base">{activeAccentObj.flag}</span>
               <span>{activeAccentObj.label} Aksanı</span>
@@ -300,10 +307,10 @@ function VocabularyInventoryContent() {
                 <span className="text-xl">🎙️</span>
                 <div>
                   <h3 className="text-sm font-black text-white">
-                    Doğal Çoklu Aksan Ses Sistemi (12 Konuşmacı)
+                    Doğal Çoklu Aksan Ses Sistemi (7 Aksan • 14 Konuşmacı)
                   </h3>
                   <p className="text-xs text-white/50">
-                    Amerikan, İngiliz, Kanada, Avustralya, Yeni Zelanda ve Hint aksanlarında kadın & erkek sesleri seç
+                    İngiliz, Amerikan, Kanada, Avustralya, Yeni Zelanda, İskoçya ve Hint aksanlarında kadın & erkek sesleri seç
                   </p>
                 </div>
               </div>

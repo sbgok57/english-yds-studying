@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { SpeakingTopic, SpeakingSentence, SPEAKING_TOPICS } from "@/lib/speaking/topics";
+import { clientAudio } from "@/lib/tts/audio-client";
 
 interface ChatMessage {
   id: string;
@@ -82,6 +83,7 @@ export function SpeakingLab() {
     }
 
     return () => {
+      clientAudio.stopAll();
       if (recognitionRef.current) {
         try {
           recognitionRef.current.abort();
@@ -162,24 +164,14 @@ export function SpeakingLab() {
 
   const playSentenceAudio = (sentenceEn: string, id: string) => {
     setAudioPlayingId(id);
-
-    // Prefer high-quality TTS audio API with fallback to Web Speech
-    const audio = new Audio(`/api/tts?text=${encodeURIComponent(sentenceEn)}&accent=en-US`);
-    audio.play().catch(() => {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(sentenceEn);
-        utter.lang = "en-US";
-        utter.onend = () => setAudioPlayingId(null);
-        utter.onerror = () => setAudioPlayingId(null);
-        window.speechSynthesis.speak(utter);
-      } else {
-        setAudioPlayingId(null);
-      }
+    void clientAudio.play(sentenceEn, {
+      accent: "en-US",
+      gender: "female",
+      rate: 1.0,
+      contentType: "sentence",
+      onEnd: () => setAudioPlayingId(null),
+      onError: () => setAudioPlayingId(null),
     });
-
-    audio.onended = () => setAudioPlayingId(null);
-    audio.onerror = () => setAudioPlayingId(null);
   };
 
   return (
