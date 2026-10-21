@@ -29,6 +29,20 @@ async function runIntegrationTests() {
     }),
     "ahmet-voice"
   );
+  assert.strictEqual(
+    getDedicatedTurkishElevenLabsVoiceId("tr-TR-female-emel", {
+      ELEVENLABS_TR_EMEL_VOICE_ID: "shared-voice",
+      ELEVENLABS_TR_AHMET_VOICE_ID: "shared-voice",
+    }),
+    undefined
+  );
+  assert.strictEqual(
+    getDedicatedTurkishElevenLabsVoiceId("tr-TR-male-ahmet", {
+      ELEVENLABS_TR_EMEL_VOICE_ID: "shared-voice",
+      ELEVENLABS_TR_AHMET_VOICE_ID: "shared-voice",
+    }),
+    undefined
+  );
 
   // 1. Sağlayıcı Sağlık Kontrolü
   console.log("  1. Testing Default TTS Provider Health...");

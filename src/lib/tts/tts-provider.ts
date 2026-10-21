@@ -101,11 +101,18 @@ export function getDedicatedTurkishElevenLabsVoiceId(
   voiceId: string,
   env: Record<string, string | undefined> = process.env
 ): string | undefined {
+  const emelVoiceId = env.ELEVENLABS_TR_EMEL_VOICE_ID?.trim();
+  const ahmetVoiceId = env.ELEVENLABS_TR_AHMET_VOICE_ID?.trim();
+
+  if (emelVoiceId && ahmetVoiceId && emelVoiceId === ahmetVoiceId) {
+    return undefined;
+  }
+
   if (voiceId === "tr-TR-female-emel") {
-    return env.ELEVENLABS_TR_EMEL_VOICE_ID?.trim() || undefined;
+    return emelVoiceId || undefined;
   }
   if (voiceId === "tr-TR-male-ahmet") {
-    return env.ELEVENLABS_TR_AHMET_VOICE_ID?.trim() || undefined;
+    return ahmetVoiceId || undefined;
   }
   return undefined;
 }
