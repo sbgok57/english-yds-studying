@@ -231,7 +231,7 @@ export const DilMasterProSystem: React.FC = () => {
   const [panelOpen, setPanelOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"themes" | "synonyms" | "pomodoro">("themes");
   const [selectedPattern, setSelectedPattern] = useState<string>("whatsapp-doodle");
-  const [fontSizePx, setFontSizePx] = useState<number>(20);
+  const [fontSizePx, setFontSizePx] = useState<number>(16);
   const [synonymIndex, setSynonymIndex] = useState<number>(0);
   const [pomodoroSeconds, setPomodoroSeconds] = useState<number>(25 * 60);
   const [pomodoroRunning, setPomodoroRunning] = useState<boolean>(false);
@@ -259,7 +259,7 @@ export const DilMasterProSystem: React.FC = () => {
   }, []);
 
   const applyFontSize = useCallback((size: number) => {
-    const validSize = Math.max(16, Math.min(25, size));
+    const validSize = Math.max(14, Math.min(20, size));
     setFontSizePx(validSize);
     if (typeof window !== "undefined") {
       localStorage.setItem("dm_pro_fontsize", String(validSize));
@@ -288,58 +288,16 @@ export const DilMasterProSystem: React.FC = () => {
       }).catch(() => {});
     }
 
-    // 3. Canlı DOM Temizleyici
-    const sanitizeDom = () => {
-      const inputs = document.querySelectorAll("input");
-      inputs.forEach((input) => {
-        if (input.placeholder && (input.placeholder.includes("yagoo_x") || input.placeholder.includes("sinembi"))) {
-          input.placeholder = "E-posta adresiniz veya kullanıcı adınız";
-        }
-      });
+    // 3. Kayıtlı tema ve yazı boyutunu yükle (varsayılan 16px)
+    const savedTheme = localStorage.getItem("dm_pro_pattern") || localStorage.getItem("dilmaster_active_pattern");
+    const savedFontRaw = Number(localStorage.getItem("dm_pro_fontsize") || localStorage.getItem("dilmaster_font_scale"));
+    const savedFont = savedFontRaw >= 14 && savedFontRaw <= 19 ? savedFontRaw : 16;
 
-      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-      let node: Node | null;
-      while ((node = walker.nextNode())) {
-        if (!node.nodeValue) continue;
-        let text = node.nodeValue;
-        let changed = false;
-
-        if (text.includes("DENSENİ")) {
-          text = text.replace(/DENSENİ/g, "DENEYİMİ");
-          changed = true;
-        }
-        if (/\(Kayıt #\d+\)/.test(text)) {
-          text = text.replace(/\s*\(Kayıt #\d+\)/g, "");
-          changed = true;
-        }
-        if (text.includes("IndexedDB 2.048 MB")) {
-          text = text.replace(/Genişletilmiş Hafıza Devrede \(IndexedDB[^)]+\)/g, "Akıllı Çevrimdışı Senkronizasyon Aktif");
-          changed = true;
-        }
-        if (text.includes("İşaretsiz: Siteye her girdiğinde")) {
-          text = "Oturumumu bu cihazda açık tut";
-          changed = true;
-        }
-
-        if (changed) {
-          node.nodeValue = text;
-        }
-      }
-    };
-
-    sanitizeDom();
-    const observer = new MutationObserver(() => sanitizeDom());
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Kayıtlı tema ve yazı boyutunu yükle
-    const savedTheme = localStorage.getItem("dm_pro_pattern") || localStorage.getItem("dilmaster_active_pattern") || "whatsapp-doodle";
-    const savedFont = Number(localStorage.getItem("dm_pro_fontsize") || localStorage.getItem("dilmaster_font_scale")) || 20;
-
-    const preset = PRO_PATTERNS.find((p) => p.id === savedTheme) || PRO_PATTERNS[0];
-    applyPattern(preset);
+    if (savedTheme) {
+      const preset = PRO_PATTERNS.find((p) => p.id === savedTheme);
+      if (preset) applyPattern(preset);
+    }
     applyFontSize(savedFont);
-
-    return () => observer.disconnect();
   }, [applyPattern, applyFontSize]);
 
   // Pomodoro Sayacı
@@ -351,14 +309,13 @@ export const DilMasterProSystem: React.FC = () => {
     return () => clearInterval(timer);
   }, [pomodoroRunning]);
 
-  const speakWord = (text: string) => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = "en-GB";
-      utter.rate = 0.92;
-      window.speechSynthesis.speak(utter);
-    }
+  const speakWord = async (text: string) => {
+    const { clientAudio } = await import("@/lib/tts/audio-client");
+    await clientAudio.play(text, {
+      accent: "en-GB",
+      rate: 0.95,
+      contentType: "sentence",
+    });
   };
 
   const formatTime = (sec: number) => {
@@ -370,10 +327,10 @@ export const DilMasterProSystem: React.FC = () => {
   const currentCard = OSYM_SYNONYM_PACK[synonymIndex];
 
   return (
-    <div className="fixed bottom-4 left-4 z-[9990] font-sans">
+    <div className="fixed bottom-20 md:bottom-4 left-4 z-30 font-sans">
       {panelOpen && (
         <div
-          className="w-[350px] sm:w-[420px] max-h-[85vh] overflow-y-auto rounded-3xl p-5 mb-3 shadow-2xl border border-white/20 text-white"
+          className="w-[340px] sm:w-[400px] max-h-[75vh] overflow-y-auto rounded-3xl p-5 mb-3 shadow-2xl border border-white/20 text-white"
           style={{ backgroundColor: "#0f172a" }}
         >
           {/* Üst Başlık */}

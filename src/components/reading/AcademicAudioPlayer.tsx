@@ -160,7 +160,7 @@ export default function AcademicAudioPlayer({
             </button>
           </div>
 
-          {/* 6 Aksan */}
+          {/* 7 Aksan */}
           <div className="flex gap-1 bg-black/40 border border-white/10 rounded-xl p-1">
             {ACCENT_OPTIONS.map((a) => (
               <button

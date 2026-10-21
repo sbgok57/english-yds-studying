@@ -18,6 +18,7 @@ import {
 import TTSPlayer from "@/components/tts/TTSPlayer";
 import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import WordDetailModal, { WordDetailItem } from "@/components/vocabulary/WordDetailModal";
+import VocabularyVisual from "@/components/media/VocabularyVisual";
 import { cn } from "@/lib/utils";
 
 interface WordItem {
@@ -86,15 +87,6 @@ const FALLBACK_WORDS: WordItem[] = [
   { id: "fb-11", english: "reconcile", turkish: "uzlaştırmak, arayı bulmak", definitionEn: "To restore friendly relations between", examples: ["It is difficult to reconcile these two opposing theories."], synonyms: ["harmonize", "settle"], level: "B2", type: "fiil", targetExams: ["YDS", "YÖKDİL"], sourceCategory: "Pegem / Kritik Dil" },
   { id: "fb-12", english: "reluctance", turkish: "isteksizlik, gönülsüzlük", definitionEn: "Unwillingness or disinclination to do something", examples: ["He showed great reluctance to accept the new assignment."], synonyms: ["hesitation", "unwillingness"], level: "B2", type: "isim", targetExams: ["YDS", "YDT", "YÖKDİL"], sourceCategory: "Oxford / Benim Hocam" },
 ];
-
-const EMOJI_BY_TYPE: Record<string, string> = {
-  fiil: "⚡",
-  isim: "📦",
-  sıfat: "🎨",
-  zarf: "🚀",
-  "phrasal verb": "🔗",
-  genel: "💡",
-};
 
 function computeWordExams(w: WordItem): ("YDS" | "YDT" | "YÖKDİL")[] {
   if (w.targetExams && w.targetExams.length > 0) return w.targetExams;
@@ -413,7 +405,6 @@ function VocabularyContent() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredWords.map((word) => {
-            const typeEmoji = EMOJI_BY_TYPE[word.type.toLowerCase()] || "💡";
             const itemExams = computeWordExams(word);
             return (
               <div
@@ -430,15 +421,19 @@ function VocabularyContent() {
                 }}
               >
                 <div>
+                  {/* Doğrulanmış Fotoğraf veya Semantik Şema Önizlemesi (Tekil Emoji Yasağı) */}
+                  <VocabularyVisual
+                    english={word.english}
+                    turkish={word.turkish}
+                    partOfSpeech={word.type}
+                    level={word.level}
+                    compact
+                    className="mb-3"
+                  />
+
                   {/* Sınav Rozetleri, Seviye ve TTS Butonu */}
                   <div className="flex items-center justify-between mb-3 gap-2">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span
-                        className="w-6 h-6 rounded-full bg-white/10 light:bg-slate-100 flex items-center justify-center text-xs"
-                        title={`Tür: ${word.type}`}
-                      >
-                        {typeEmoji}
-                      </span>
                       <span className="glass-pill text-[10px] font-bold text-yellow-300">
                         {word.level}
                       </span>
@@ -472,7 +467,7 @@ function VocabularyContent() {
                   <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors flex items-center justify-between">
                     <span>{word.english}</span>
                     <span className="text-xs font-normal text-yellow-400/80 group-hover:translate-x-1 transition-transform">
-                      3D İncele ➜
+                      Görsel & 3D ➜
                     </span>
                   </h3>
                   <p className="text-lg font-bold text-cyan-200 light:text-cyan-700 mt-1">

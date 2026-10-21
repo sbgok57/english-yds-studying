@@ -3,6 +3,8 @@
  * Vercel 502 hatası verse dahi tarayıcı motoruyla sesi %100 kesinlikle çıkarır.
  */
 
+import { findVoice } from './tts/voice-registry';
+
 export type EnglishAccent = 'en-GB' | 'en-US' | 'en-AU' | 'en-CA' | 'en-NZ' | 'en-IN' | 'en-GB-scotland';
 
 export interface PlaySpeechOptions {
@@ -45,6 +47,28 @@ export class SpeechEngineService {
     }
   }
 
+  // Kanonik /api/tts istek gövdesi oluşturucu
+  public buildApiRequestPayload(options: PlaySpeechOptions) {
+    const accent = options.accent || 'en-GB';
+    const gender = options.gender || 'female';
+    const rate = options.speakingRate ?? 1.0;
+    const voice = findVoice(accent, gender);
+    const trimmed = (options.text || '').trim();
+    const contentType =
+      trimmed.length > 120 ? 'long-form' : trimmed.includes(' ') ? 'sentence' : 'word';
+
+    return {
+      text: trimmed,
+      voiceId: voice?.id || `en-GB-female-sonia`,
+      accent,
+      locale: accent,
+      contentLanguage: 'en' as const,
+      gender,
+      rate,
+      contentType,
+    };
+  }
+
   // Ana Ses Çalma Fonksiyonu
   public async playSpeech(options: PlaySpeechOptions): Promise<void> {
     const {
@@ -63,48 +87,52 @@ export class SpeechEngineService {
     this.unlockAudio();
     onStart?.();
 
-    // 1. AŞAMA: Vercel /api/tts Endpoint'ini Dene
+    const payload = this.buildApiRequestPayload({ text, accent, speakingRate, gender });
+
+    // 1. AŞAMA: Merkezi /api/tts Endpoint'ini Dene (Kanonik voiceId ve AbortController ile)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 9000);
     try {
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text,
-          voiceId: `${accent}-${gender}`,
-          speakingRate,
-          contentType: text.length > 120 ? 'long-form' : 'short',
-        }),
+        body: JSON.stringify(payload),
+        signal: controller.signal,
       });
 
       if (response.ok) {
         const contentType = response.headers.get('content-type') || '';
         if (contentType.includes('audio/')) {
           const blob = await response.blob();
-          const blobUrl = URL.createObjectURL(blob);
-          this.playAudioElement(blobUrl, () => {
-            URL.revokeObjectURL(blobUrl);
-            onEnd?.();
-          }, onError);
-          return;
-        }
-
-        const data = await response.json();
-        if (data.ok !== false && (data.audioUrl || data.audioBase64)) {
-          const src = data.audioUrl || `data:audio/mp3;base64,${data.audioBase64}`;
-          this.playAudioElement(src, onEnd, onError);
-          return;
+          if (blob.size >= 128) {
+            const blobUrl = URL.createObjectURL(blob);
+            this.playAudioElement(
+              blobUrl,
+              text,
+              accent,
+              speakingRate,
+              () => {
+                URL.revokeObjectURL(blobUrl);
+                onEnd?.();
+              },
+              onError
+            );
+            return;
+          }
         }
       }
     } catch {
-      // Ağ hatası veya 502 durumunda doğrudan 2. Aşamaya geç
+      // Ağ hatası veya zaman aşımı durumunda doğrudan 2. Aşamaya geç
+    } finally {
+      clearTimeout(timeoutId);
     }
 
     // 2. AŞAMA: Yerel Tarayıcı Web Speech API (Kesin Çalışan Yedek)
     try {
       this.playLocalWebSpeech(text, accent, speakingRate, onEnd, onError);
     } catch {
-      // 3. AŞAMA: Doğrudan CDN Akış Yedeği
-      this.playCdnFallback(text, accent, onEnd, onError);
+      // 3. AŞAMA: GET /api/tts Akış Yedeği
+      this.playServerGetFallback(payload, text, accent, speakingRate, onEnd, onError);
     }
   }
 
@@ -132,9 +160,9 @@ export class SpeechEngineService {
     }
 
     const targetLangPrefix = accent.slice(0, 5); // 'en-GB', 'en-US' vb.
-    const matchedVoice = this.cachedVoices.find(
-      (v) => v.lang.replace('_', '-').startsWith(targetLangPrefix)
-    ) || this.cachedVoices.find((v) => v.lang.startsWith('en'));
+    const matchedVoice =
+      this.cachedVoices.find((v) => v.lang.replace('_', '-').startsWith(targetLangPrefix)) ||
+      this.cachedVoices.find((v) => v.lang.startsWith('en'));
 
     if (matchedVoice) {
       utterance.voice = matchedVoice;
@@ -151,23 +179,39 @@ export class SpeechEngineService {
     window.speechSynthesis.speak(utterance);
   }
 
-  // CDN Yedeği
-  private playCdnFallback(text: string, accent: EnglishAccent, onEnd?: () => void, onError?: (err: any) => void) {
-    const langCode = accent === 'en-GB-scotland' ? 'en-gb' : accent.toLowerCase();
-    const encodedText = encodeURIComponent(text.slice(0, 200));
-    const cdnUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=${langCode}&client=tw-ob`;
-    this.playAudioElement(cdnUrl, onEnd, onError);
+  // Sunucu GET /api/tts Akış Yedeği
+  private playServerGetFallback(
+    payload: ReturnType<SpeechEngineService['buildApiRequestPayload']>,
+    fallbackText: string,
+    accent: EnglishAccent,
+    speakingRate: number,
+    onEnd?: () => void,
+    onError?: (err: any) => void
+  ) {
+    const url = `/api/tts?text=${encodeURIComponent(payload.text)}&voiceId=${encodeURIComponent(
+      payload.voiceId
+    )}&accent=${encodeURIComponent(payload.accent)}&gender=${encodeURIComponent(
+      payload.gender
+    )}&rate=${payload.rate}&contentType=${payload.contentType}`;
+    this.playAudioElement(url, fallbackText, accent, speakingRate, onEnd, onError);
   }
 
-  private playAudioElement(src: string, onEnd?: () => void, onError?: (err: any) => void) {
+  private playAudioElement(
+    src: string,
+    fallbackText: string,
+    accent: EnglishAccent,
+    speakingRate: number,
+    onEnd?: () => void,
+    onError?: (err: any) => void
+  ) {
     if (typeof window === 'undefined' || typeof Audio === 'undefined') return;
     this.currentAudio = new Audio(src);
     this.currentAudio.onended = () => onEnd?.();
     this.currentAudio.onerror = (e) => onError?.(e);
     this.currentAudio.play().catch(() => {
-      // Autoplay kısıtı varsa yerel API'ye devret
+      // SAFETY: Pass actual fallbackText (never the blob:/data: src URL!) to local speech synthesis
       try {
-        this.playLocalWebSpeech(src, 'en-GB', 1.0, onEnd, onError);
+        this.playLocalWebSpeech(fallbackText, accent, speakingRate, onEnd, onError);
       } catch {
         // Sessizce başarısız ol
       }

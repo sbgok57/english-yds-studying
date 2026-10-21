@@ -14,6 +14,7 @@ import AccentBar from "@/components/AccentBar";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { recordWord, useUsage, wordScore } from "@/lib/store";
 import { logVocabularySession } from "@/lib/activity-logger";
+import { clientAudio } from "@/lib/tts/audio-client";
 import {
   Sparkles,
   FileUp,
@@ -270,16 +271,22 @@ export default function FlashcardsPage() {
     return sortedWords.slice(start, start + TABLE_PAGE_SIZE);
   }, [sortedWords, tablePage]);
 
-  // Sesli Telaffuz (Web Speech API ile hafif ve yerel)
+  // SAFETY: Stop active audio when leaving flashcards page
+  useEffect(() => {
+    return () => {
+      clientAudio.stopAll();
+    };
+  }, []);
+
+  // Sesli Telaffuz (Merkezi clientAudio motoru ile)
   const speakWord = (text: string, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = "en-US";
-      utter.rate = 0.9;
-      window.speechSynthesis.speak(utter);
-    }
+    void clientAudio.play(text, {
+      accent: "en-US",
+      gender: "female",
+      rate: 0.9,
+      contentType: text.includes(" ") ? "sentence" : "word",
+    });
   };
 
   const openIn3DCard = (targetWord: UnifiedFlashcardWord) => {

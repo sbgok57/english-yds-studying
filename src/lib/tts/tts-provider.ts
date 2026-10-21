@@ -1,4 +1,12 @@
-import { VoiceProfile, getVoiceProfile, AccentCode, VoiceSource } from "./voice-registry";
+import {
+  VoiceProfile,
+  getVoiceProfile,
+  VoiceLocale,
+  ContentLanguage,
+  VoiceGender,
+  VoiceSource,
+} from "./voice-registry";
+import { isValidAudioBuffer } from "./audio-cache";
 
 export type TtsErrorCode =
   | "VOICE_NOT_AVAILABLE"
@@ -13,7 +21,9 @@ export type TtsErrorCode =
 export interface TtsRequest {
   text: string;
   voiceId: string;
-  locale?: AccentCode;
+  locale?: VoiceLocale;
+  contentLanguage?: ContentLanguage;
+  gender?: VoiceGender;
   speakingRate?: number; // 0.75 - 1.25 (default 1.0)
   contentType?: "word" | "sentence" | "long-form";
   requestId?: string;
@@ -26,6 +36,10 @@ export interface TtsResult {
   durationMs?: number;
   provider: string;
   voiceId: string;
+  providerVoiceId: string;
+  locale: VoiceLocale;
+  contentLanguage: ContentLanguage;
+  distinctSpeakerVerified: boolean;
   source: VoiceSource;
 }
 
@@ -69,12 +83,74 @@ export function formatSpeakingRate(rate: number = 1.0): string {
 }
 
 /**
- * Microsoft Edge Neural TTS Sağlayıcısı
- * Yüksek kaliteli (24kHz / 96kbps Mono MP3) stüdyo sesi üretir.
+ * Uzun metinleri önce cümle ve anlamlı noktalama sınırlarından,
+ * gerekiyorsa kelime sınırlarından böler. Asla bir kelimenin ortasından kesmez.
+ */
+export function splitTextIntoChunks(text: string, maxLen: number = 180): string[] {
+  const cleaned = text.replace(/\s+/g, " ").trim();
+  if (!cleaned) return [];
+  if (cleaned.length <= maxLen) return [cleaned];
+
+  // Önce cümle sonlarından (. ! ? ; :) böl
+  const sentences = cleaned.split(/(?<=[.!?;:])\s+/);
+  const chunks: string[] = [];
+  let current = "";
+
+  const pushWords = (segment: string) => {
+    const words = segment.split(/\s+/).filter(Boolean);
+    for (const word of words) {
+      if (!current) {
+        current = word.slice(0, maxLen);
+      } else if (current.length + 1 + word.length <= maxLen) {
+        current += " " + word;
+      } else {
+        chunks.push(current);
+        current = word.slice(0, maxLen);
+      }
+    }
+  };
+
+  for (const sentence of sentences) {
+    if (!sentence) continue;
+    if (sentence.length > maxLen) {
+      // Cümle tek başına sınırı aşıyorsa virgül/kelime sınırlarından böl
+      const clauses = sentence.split(/(?<=[,])\s+/);
+      for (const clause of clauses) {
+        if (clause.length > maxLen) {
+          pushWords(clause);
+        } else if (!current) {
+          current = clause;
+        } else if (current.length + 1 + clause.length <= maxLen) {
+          current += " " + clause;
+        } else {
+          chunks.push(current);
+          current = clause;
+        }
+      }
+    } else if (!current) {
+      current = sentence;
+    } else if (current.length + 1 + sentence.length <= maxLen) {
+      current += " " + sentence;
+    } else {
+      chunks.push(current);
+      current = sentence;
+    }
+  }
+
+  if (current) {
+    chunks.push(current);
+  }
+  return chunks;
+}
+
+/**
+ * Çok Katmanlı Neural TTS Sağlayıcısı:
+ * 1. Azure Cognitive Services Speech REST API (AZURE_SPEECH_KEY + AZURE_SPEECH_REGION mevcutsa)
+ * 2. Microsoft Edge Neural TTS WebSocket (msedge-tts)
+ * 3. Cloud HTTP MP3 Fallback (Cümle sınırlı chunking + MP3 imza doğrulaması)
  */
 export class EdgeTtsProvider implements TtsProvider {
   public readonly id = "msedge-neural";
-  private readonly defaultTimeoutMs = 20000; // 20 sn (cold start resilience)
 
   supportsVoice(voice: VoiceProfile): boolean {
     return voice.provider === this.id && voice.enabled;
@@ -86,7 +162,7 @@ export class EdgeTtsProvider implements TtsProvider {
       throw new Error(`VOICE_NOT_AVAILABLE: ${request.voiceId}`);
     }
 
-    const cleanText = request.text.trim();
+    const cleanText = request.text.replace(/\s+/g, " ").trim();
     if (!cleanText) {
       throw new Error("INVALID_TEXT: Metin boş olamaz.");
     }
@@ -99,49 +175,86 @@ export class EdgeTtsProvider implements TtsProvider {
 
     const escapedText = escapeXml(cleanText);
     const rateOption = formatSpeakingRate(request.speakingRate || 1.0);
-
     const startTime = Date.now();
-
-    // Dinamik import ile cold start ve bundle optimizasyonu
-    const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
-
     let lastError: Error | null = null;
-    // SAFETY: Try primary Edge Neural WebSocket first (up to 2 attempts unless 403)
-    for (let attempt = 1; attempt <= 2; attempt++) {
+
+    // KATMAN 1: Resmi Azure Speech REST API (Sunucu ortamında anahtar tanımlıysa gerçek EmelNeural/AhmetNeural/14 Aksan)
+    const azureKey = process.env.AZURE_SPEECH_KEY;
+    const azureRegion = process.env.AZURE_SPEECH_REGION || "westeurope";
+    if (azureKey) {
       try {
-        const audioBuffer = await this.synthesizeWithTimeout(
-          MsEdgeTTS,
-          OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3,
+        const azureBuffer = await this.synthesizeViaAzureRest(
+          azureKey,
+          azureRegion,
+          voiceProfile.locale === "en-GB-scotland" ? "en-GB" : voiceProfile.locale,
           voiceProfile.providerVoiceId,
           escapedText,
-          rateOption,
-          4000
+          rateOption
         );
-
-        if (audioBuffer && audioBuffer.length > 0) {
+        if (azureBuffer && isValidAudioBuffer(azureBuffer, "audio/mpeg")) {
           return {
             ok: true,
-            audio: audioBuffer,
+            audio: azureBuffer,
             mimeType: "audio/mpeg",
             durationMs: Date.now() - startTime,
-            provider: this.id,
+            provider: "azure-neural",
             voiceId: voiceProfile.id,
+            providerVoiceId: voiceProfile.providerVoiceId,
+            locale: voiceProfile.locale,
+            contentLanguage: voiceProfile.contentLanguage,
+            distinctSpeakerVerified: true,
             source: voiceProfile.source,
           };
         }
-      } catch (err: any) {
-        lastError = err;
-        // If Microsoft WebSocket returns 403, immediately switch to secondary HTTPS MP3 provider
-        if (String(err?.message || "").includes("403")) {
-          break;
-        }
-        if (attempt < 2) {
-          await new Promise((res) => setTimeout(res, 250));
-        }
+      } catch (azureErr: any) {
+        lastError = azureErr;
       }
     }
 
-    // Secondary server-side cloud MP3 provider fallback (chunked HTTPS audio/mpeg stream)
+    // KATMAN 2: Microsoft Edge Neural WebSocket
+    try {
+      const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+          const audioBuffer = await this.synthesizeWithTimeout(
+            MsEdgeTTS,
+            OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3,
+            voiceProfile.providerVoiceId,
+            escapedText,
+            rateOption,
+            3500
+          );
+
+          if (audioBuffer && isValidAudioBuffer(audioBuffer, "audio/mpeg")) {
+            return {
+              ok: true,
+              audio: audioBuffer,
+              mimeType: "audio/mpeg",
+              durationMs: Date.now() - startTime,
+              provider: this.id,
+              voiceId: voiceProfile.id,
+              providerVoiceId: voiceProfile.providerVoiceId,
+              locale: voiceProfile.locale,
+              contentLanguage: voiceProfile.contentLanguage,
+              distinctSpeakerVerified: true,
+              source: voiceProfile.source,
+            };
+          }
+        } catch (err: any) {
+          lastError = err;
+          if (String(err?.message || "").includes("403")) {
+            break;
+          }
+          if (attempt < 2) {
+            await new Promise((res) => setTimeout(res, 200));
+          }
+        }
+      }
+    } catch (importErr: any) {
+      lastError = importErr;
+    }
+
+    // KATMAN 3: Sunucu tarafı Cloud HTTP MP3 Yedek Sağlayıcı
     try {
       const fallbackBuffer = await this.synthesizeViaCloudHttpMp3(
         cleanText,
@@ -149,7 +262,7 @@ export class EdgeTtsProvider implements TtsProvider {
         request.speakingRate || 1.0
       );
 
-      if (fallbackBuffer && fallbackBuffer.length > 0) {
+      if (fallbackBuffer && isValidAudioBuffer(fallbackBuffer, "audio/mpeg")) {
         return {
           ok: true,
           audio: fallbackBuffer,
@@ -157,6 +270,11 @@ export class EdgeTtsProvider implements TtsProvider {
           durationMs: Date.now() - startTime,
           provider: "cloud-http-mp3",
           voiceId: voiceProfile.id,
+          providerVoiceId: voiceProfile.providerVoiceId,
+          locale: voiceProfile.locale,
+          contentLanguage: voiceProfile.contentLanguage,
+          // SAFETY: Cloud HTTP fallback tek konuşmacı motoru kullandığından dürüstçe false döner
+          distinctSpeakerVerified: false,
           source: voiceProfile.source,
         };
       }
@@ -167,61 +285,107 @@ export class EdgeTtsProvider implements TtsProvider {
     throw new Error(`SYNTHESIS_FAILED: ${lastError?.message || "Bilinmeyen TTS hatası"}`);
   }
 
-  private splitTextIntoChunks(text: string, maxLen: number = 180): string[] {
-    if (text.length <= maxLen) return [text];
-    const words = text.split(/\s+/);
-    const chunks: string[] = [];
-    let current = "";
-    for (const word of words) {
-      if (!current) {
-        current = word.slice(0, maxLen);
-      } else if (current.length + 1 + word.length <= maxLen) {
-        current += " " + word;
-      } else {
-        chunks.push(current);
-        current = word.slice(0, maxLen);
+  private async synthesizeViaAzureRest(
+    apiKey: string,
+    region: string,
+    xmlLang: string,
+    providerVoiceId: string,
+    escapedText: string,
+    rateOption: string
+  ): Promise<Buffer> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const ssml = `<speak version="1.0" xml:lang="${xmlLang}"><voice xml:lang="${xmlLang}" name="${providerVoiceId}"><prosody rate="${rateOption}">${escapedText}</prosody></voice></speak>`;
+      const res = await fetch(
+        `https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`,
+        {
+          method: "POST",
+          cache: "no-store",
+          headers: {
+            "Ocp-Apim-Subscription-Key": apiKey,
+            "Content-Type": "application/ssml+xml",
+            "X-Microsoft-OutputFormat": "audio-24khz-96kbitrate-mono-mp3",
+            "User-Agent": "DilMaster-TTS/1.0",
+          },
+          body: ssml,
+          signal: controller.signal,
+        }
+      );
+      if (!res.ok) {
+        throw new Error(`Azure TTS HTTP ${res.status}`);
       }
+      const arrayBuf = await res.arrayBuffer();
+      return Buffer.from(arrayBuf);
+    } finally {
+      clearTimeout(timer);
     }
-    if (current) chunks.push(current);
-    return chunks;
   }
 
   private async synthesizeViaCloudHttpMp3(
     text: string,
-    locale: AccentCode,
+    locale: VoiceLocale,
     speakingRate: number
   ): Promise<Buffer> {
-    const tl = locale === "en-GB-scotland" ? "en-gb" : locale.toLowerCase();
+    const tl =
+      locale === "tr-TR"
+        ? "tr"
+        : locale === "en-GB-scotland"
+        ? "en-gb"
+        : locale.toLowerCase();
     const ttsSpeed = speakingRate < 0.85 ? "0.3" : "1";
-    const chunks = this.splitTextIntoChunks(text, 180);
+    const chunks = splitTextIntoChunks(text, 180);
     const buffers: Buffer[] = [];
 
     for (const chunk of chunks) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 8000);
-      try {
-        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+      const endpoints = [
+        `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
           chunk
-        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=tw-ob`;
-        const res = await fetch(url, {
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-          },
-          signal: controller.signal,
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP MP3 stream status ${res.status}`);
+        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=tw-ob`,
+        `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
+          chunk
+        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=gtx`,
+      ];
+
+      let chunkBuf: Buffer | null = null;
+      let lastChunkErr: Error | null = null;
+
+      for (let i = 0; i < endpoints.length; i++) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
+        try {
+          const res = await fetch(endpoints[i], {
+            cache: "no-store",
+            headers: {
+              "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+            },
+            signal: controller.signal,
+          });
+          if (!res.ok) {
+            throw new Error(`HTTP MP3 stream status ${res.status}`);
+          }
+          const arrayBuf = await res.arrayBuffer();
+          const buf = Buffer.from(arrayBuf);
+          if (!isValidAudioBuffer(buf, "audio/mpeg")) {
+            throw new Error("HTTP MP3 stream returned invalid or empty audio buffer");
+          }
+          chunkBuf = buf;
+          break;
+        } catch (err: any) {
+          lastChunkErr = err;
+          if (i < endpoints.length - 1) {
+            await new Promise((r) => setTimeout(r, 200));
+          }
+        } finally {
+          clearTimeout(timer);
         }
-        const arrayBuf = await res.arrayBuffer();
-        const buf = Buffer.from(arrayBuf);
-        if (buf.length === 0) {
-          throw new Error("HTTP MP3 stream returned empty buffer");
-        }
-        buffers.push(buf);
-      } finally {
-        clearTimeout(timer);
       }
+
+      if (!chunkBuf) {
+        throw lastChunkErr || new Error("Cloud HTTP MP3 synthesis failed");
+      }
+      buffers.push(chunkBuf);
     }
 
     return Buffer.concat(buffers);

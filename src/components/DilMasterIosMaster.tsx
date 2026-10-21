@@ -51,9 +51,10 @@ export const DilMasterIosMaster: React.FC = () => {
   const [notificationStatus, setNotificationStatus] = useState<string>('default');
 
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const notificationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // --------------------------------------------------------------------------
-  // A. iOS TESPİTİ, META ETİKETLERİ VE GÖZ YORMAYAN BÜYÜK YAZI ENJEKSİYONU
+  // A. iOS TESPİTİ, META ETİKETLERİ VE GÜVENLİ MOBİL GÖRÜNÜM
   // --------------------------------------------------------------------------
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -87,28 +88,15 @@ export const DilMasterIosMaster: React.FC = () => {
     injectMeta('apple-mobile-web-app-capable', 'yes');
     injectMeta('apple-mobile-web-app-status-bar-style', 'black-translucent');
     injectMeta('apple-mobile-web-app-title', 'DİL MASTER');
-    injectMeta('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+    injectMeta('viewport', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
 
-    // 4. Göz Yormayan Yüksek Kontrastlı Büyük Tipografi & iOS Zoom Önleyici CSS
+    // 4. iOS Safari Giriş Alanlarında İstenmeyen Otomatik Yakınlaştırmayı Önleme (16px Base Korunur)
     const styleId = 'dilmaster-ios-typography-shield';
     if (!document.getElementById(styleId)) {
       const style = document.createElement('style');
       style.id = styleId;
       style.innerHTML = `
-        /* iOS Safari Giriş Alanlarında İstenmeyen Otomatik Yakınlaştırmayı Önleme */
-        input, select, textarea { font-size: 16px !important; }
-        
-        /* Büyük ve Dinlendirici Tipografi */
-        html { font-size: 18px !important; }
-        body { 
-          color: #0f172a !important; 
-          line-height: 1.8 !important; 
-          padding-top: env(safe-area-inset-top);
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-        p, .passage, .reading-text { font-size: 1.25rem !important; line-height: 1.85 !important; }
-        .text-xs, .text-sm { font-size: 1rem !important; }
-        .text-slate-400, .text-zinc-400 { color: #334155 !important; }
+        input, select, textarea { font-size: 16px; }
       `;
       document.head.appendChild(style);
     }
@@ -161,6 +149,10 @@ export const DilMasterIosMaster: React.FC = () => {
         audio.pause();
         audio.src = '';
       }
+      if (notificationIntervalRef.current) {
+        clearInterval(notificationIntervalRef.current);
+        notificationIntervalRef.current = null;
+      }
     };
   }, []);
 
@@ -187,15 +179,15 @@ export const DilMasterIosMaster: React.FC = () => {
       navigator.mediaSession.playbackState = 'playing';
     }
 
-    // Tane Tane Doğal Anlatım Akışı (Google Neural Ses Motoru Üzerinden)
+    // Tane Tane Doğal Anlatım Akışı (/api/tts Neural Ses Motoru Üzerinden)
     const encoded = encodeURIComponent(lessonToPlay.script);
-    const audioSrc = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=tr&client=tw-ob`;
+    const audioSrc = `/api/tts?text=${encoded}&voiceId=tr-TR-female-emel&rate=0.94&pitch=0`;
 
     if (audio.src !== audioSrc) {
       audio.src = audioSrc;
     }
 
-    audio.playbackRate = 0.94; // Tane tane ve anlaşılır tempo
+    audio.playbackRate = 1.0;
 
     try {
       await audio.play();
@@ -244,8 +236,13 @@ export const DilMasterIosMaster: React.FC = () => {
         // Tarayıcı kısıtı
       }
 
+      // PERF: Clear any existing interval before starting a new 2-hour loop
+      if (notificationIntervalRef.current) {
+        clearInterval(notificationIntervalRef.current);
+      }
+
       // 2 saatte bir otomatik hap bilgi döngüsü
-      setInterval(() => {
+      notificationIntervalRef.current = setInterval(() => {
         const tips = [
           '🎯 YDS Tüyosu: "No sooner ... than" kalıbı devrik cümle yapar!',
           '⚡ Kelime: Reluctant = Unwilling (İsteksiz). YÖKDİL Sağlıkta sık çıkar.',

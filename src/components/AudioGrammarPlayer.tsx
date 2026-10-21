@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { AudioTrack, AUDIO_TRACKS, saveTrackProgress, getTrackProgress } from "@/lib/audio/tracks";
 import { trackEvent, POINTS } from "@/lib/progress/tracker";
 import { createClient } from "@/lib/supabase/client";
+import { clientAudio, PlaybackMetadata } from "@/lib/tts/audio-client";
 
 interface AudioGrammarPlayerProps {
   initialTrackId?: string;
@@ -22,20 +23,42 @@ export default function AudioGrammarPlayer({
 
   const track = AUDIO_TRACKS[currentTrackIndex] || AUDIO_TRACKS[0];
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isLoadingAudio, setIsLoadingAudio] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(track.duration || 300);
-  const [playbackRate, setPlaybackRate] = useState<number>(1);
+  const [duration, setDuration] = useState<number>(track.duration || 180);
+  const [playbackRate, setPlaybackRate] = useState<number>(1.0);
   const [showTranscript, setShowTranscript] = useState<boolean>(false);
-  const [usingSpeechFallback, setUsingSpeechFallback] = useState<boolean>(false);
   const [voiceGender, setVoiceGender] = useState<"female" | "male">("female");
+  const [speakerStatusMessage, setSpeakerStatusMessage] = useState<string | null>(null);
+  const [playbackMeta, setPlaybackMeta] = useState<PlaybackMetadata | null>(null);
   const [sleepTimerMinutes, setSleepTimerMinutes] = useState<number | null>(null);
-  const sleepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const sleepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const lastSyncedSecondRef = useRef<number>(0);
 
-  // 1. Dinleme İlerlemesini Sunucuya Senkronla (Modül 5)
+  // Tercih edilen Türkçe eğitmen sesini yükle
+  useEffect(() => {
+    const prefs = clientAudio.getPreferences();
+    if (prefs.preferredTurkishNarratorId === "tr-TR-male-ahmet") {
+      setVoiceGender("male");
+    } else {
+      setVoiceGender("female");
+    }
+  }, []);
+
+  // Bileşen unmount olduğunda aktif sesi ve zamanlayıcıları temizle
+  useEffect(() => {
+    return () => {
+      // SAFETY: Unmount cleanup
+      clientAudio.stopAll();
+      if (progressTimerRef.current) clearInterval(progressTimerRef.current);
+      if (sleepTimeoutRef.current) clearTimeout(sleepTimeoutRef.current);
+    };
+  }, []);
+
+  // 1. Dinleme İlerlemesini Sunucuya Senkronla
   const syncListeningProgress = useCallback(
     async (seconds: number, completed: boolean) => {
       try {
@@ -56,7 +79,6 @@ export default function AudioGrammarPlayer({
           { onConflict: "user_id,topic_slug" }
         );
 
-        // Dinlenen her 60 saniyede bir puan ver
         if (Math.floor(seconds) - lastSyncedSecondRef.current >= 60 || completed) {
           const elapsed = Math.floor(seconds) - lastSyncedSecondRef.current;
           lastSyncedSecondRef.current = Math.floor(seconds);
@@ -67,7 +89,7 @@ export default function AudioGrammarPlayer({
           });
         }
       } catch {
-        // // SAFETY: Offline failover
+        // SAFETY: Offline failover
       }
     },
     [track.slug]
@@ -77,96 +99,126 @@ export default function AudioGrammarPlayer({
   useEffect(() => {
     onTrackChange?.(track);
     lastSyncedSecondRef.current = 0;
+    setDuration(track.duration || 180);
     const saved = getTrackProgress(track.id);
     if (saved?.currentSeconds && saved.currentSeconds > 5 && !saved.completed) {
       setCurrentTime(saved.currentSeconds);
-      if (audioRef.current) {
-        audioRef.current.currentTime = saved.currentSeconds;
-      }
     } else {
       setCurrentTime(0);
     }
   }, [track, onTrackChange]);
 
-  // 2. Oynat / Durdur / Fallback İşleyicileri
-  const handlePause = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause();
+  // İlerleme sayacı (Oynatma sırasında saniye güncellemesi)
+  useEffect(() => {
+    if (progressTimerRef.current) {
+      clearInterval(progressTimerRef.current);
+      progressTimerRef.current = null;
     }
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-    setIsPlaying(false);
-  }, []);
 
-  const handlePlay = useCallback(() => {
-    const speakWithVoice = () => {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(track.script);
-        utterance.lang = "tr-TR";
-        utterance.rate = playbackRate;
-        utterance.pitch = voiceGender === "female" ? 1.08 : 0.88;
-
-        const voices = window.speechSynthesis.getVoices().filter((v) => v.lang.startsWith("tr"));
-        if (voices.length > 0) {
-          if (voiceGender === "female") {
-            const fVoice = voices.find((v) => /female|yelda|filiz|seda|emel|woman/i.test(v.name)) || voices[0];
-            utterance.voice = fVoice;
-          } else {
-            const mVoice = voices.find((v) => /male|ahmet|cem|tolga|man/i.test(v.name)) || voices[voices.length > 1 ? 1 : 0];
-            utterance.voice = mVoice;
+    if (isPlaying) {
+      progressTimerRef.current = setInterval(() => {
+        setCurrentTime((prev) => {
+          const next = Math.min(prev + playbackRate, duration);
+          if (Math.floor(next) % 5 === 0) {
+            saveTrackProgress(track.id, next, false);
+            syncListeningProgress(next, false);
           }
-        }
+          return next;
+        });
+      }, 1000);
+    }
 
-        utterance.onend = () => {
-          setIsPlaying(false);
-          saveTrackProgress(track.id, duration, true);
-        };
-        window.speechSynthesis.speak(utterance);
-        setIsPlaying(true);
+    return () => {
+      if (progressTimerRef.current) {
+        clearInterval(progressTimerRef.current);
+        progressTimerRef.current = null;
       }
     };
+  }, [isPlaying, playbackRate, duration, track.id, syncListeningProgress]);
 
-    if (usingSpeechFallback) {
-      speakWithVoice();
-      return;
-    }
+  const handlePause = useCallback(() => {
+    clientAudio.stopAll();
+    setIsPlaying(false);
+    setIsLoadingAudio(false);
+  }, []);
 
-    if (audioRef.current) {
-      audioRef.current.playbackRate = playbackRate;
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {
-            // SAFETY: Ses dosyası yoksa Web Speech API ile devam et
-            setUsingSpeechFallback(true);
-            speakWithVoice();
-          });
-      }
-    }
-  }, [usingSpeechFallback, track, playbackRate, duration, voiceGender]);
+  const startPlaybackWithGender = useCallback(
+    async (targetGender: "female" | "male", targetRate: number = playbackRate) => {
+      const targetVoiceId =
+        targetGender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet";
+      const speakerCode = targetGender === "female" ? "emel" : "ahmet";
+
+      setIsLoadingAudio(true);
+      setSpeakerStatusMessage(
+        `${targetGender === "female" ? "Emel" : "Ahmet"} (${targetVoiceId}) sesi hazırlanıyor...`
+      );
+
+      await clientAudio.play(track.script, {
+        voiceId: targetVoiceId,
+        speaker: speakerCode,
+        locale: "tr-TR",
+        contentLanguage: "tr",
+        gender: targetGender,
+        rate: targetRate,
+        contentType: "long-form",
+        onMetadata: (meta) => {
+          setPlaybackMeta(meta);
+        },
+        onStart: () => {
+          setIsLoadingAudio(false);
+          setIsPlaying(true);
+        },
+        onInfo: (msg) => {
+          setSpeakerStatusMessage(msg);
+        },
+        onEnd: () => {
+          setIsPlaying(false);
+          setIsLoadingAudio(false);
+          saveTrackProgress(track.id, duration, true);
+          syncListeningProgress(duration, true);
+        },
+        onError: () => {
+          setIsPlaying(false);
+          setIsLoadingAudio(false);
+          setSpeakerStatusMessage("Ses oynatılamadı. Lütfen tekrar deneyin.");
+        },
+      });
+    },
+    [track.script, track.id, playbackRate, duration, syncListeningProgress]
+  );
+
+  const handlePlay = useCallback(() => {
+    void startPlaybackWithGender(voiceGender, playbackRate);
+  }, [startPlaybackWithGender, voiceGender, playbackRate]);
 
   const handleNext = useCallback(() => {
     handlePause();
-    setUsingSpeechFallback(false);
     setCurrentTrackIndex((prev) => (prev + 1) % AUDIO_TRACKS.length);
   }, [handlePause]);
 
   const handlePrev = useCallback(() => {
     handlePause();
-    setUsingSpeechFallback(false);
     setCurrentTrackIndex((prev) => (prev - 1 + AUDIO_TRACKS.length) % AUDIO_TRACKS.length);
   }, [handlePause]);
 
   const togglePlay = () => {
-    if (isPlaying) {
+    if (isPlaying || isLoadingAudio) {
       handlePause();
     } else {
       handlePlay();
+    }
+  };
+
+  const handleSelectNarrator = (gender: "female" | "male") => {
+    const wasPlaying = isPlaying;
+    handlePause();
+    setVoiceGender(gender);
+    clientAudio.savePreferences({
+      preferredTurkishNarratorId:
+        gender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet",
+    });
+    if (wasPlaying) {
+      void startPlaybackWithGender(gender, playbackRate);
     }
   };
 
@@ -176,7 +228,7 @@ export default function AudioGrammarPlayer({
 
     navigator.mediaSession.metadata = new MediaMetadata({
       title: track.title,
-      artist: "YDS Master — Hafıza Kodları",
+      artist: `DİL MASTER — ${voiceGender === "female" ? "Emel (Kadın Eğitmen)" : "Ahmet (Erkek Eğitmen)"}`,
       album: "Sesli Gramer Serisi",
       artwork: [
         { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -184,41 +236,12 @@ export default function AudioGrammarPlayer({
       ],
     });
 
-    navigator.mediaSession.setActionHandler("play", () => {
-      handlePlay();
-    });
-
-    navigator.mediaSession.setActionHandler("pause", () => {
-      handlePause();
-    });
-
-    navigator.mediaSession.setActionHandler("previoustrack", () => {
-      handlePrev();
-    });
-
-    navigator.mediaSession.setActionHandler("nexttrack", () => {
-      handleNext();
-    });
-
-    navigator.mediaSession.setActionHandler("seekbackward", (details) => {
-      const skip = details.seekOffset || 10;
-      if (audioRef.current) {
-        audioRef.current.currentTime = Math.max(audioRef.current.currentTime - skip, 0);
-      }
-    });
-
-    navigator.mediaSession.setActionHandler("seekforward", (details) => {
-      const skip = details.seekOffset || 10;
-      if (audioRef.current) {
-        audioRef.current.currentTime = Math.min(
-          audioRef.current.currentTime + skip,
-          audioRef.current.duration || duration
-        );
-      }
-    });
+    navigator.mediaSession.setActionHandler("play", () => handlePlay());
+    navigator.mediaSession.setActionHandler("pause", () => handlePause());
+    navigator.mediaSession.setActionHandler("previoustrack", () => handlePrev());
+    navigator.mediaSession.setActionHandler("nexttrack", () => handleNext());
 
     return () => {
-      // SAFETY: Temizleme
       if ("mediaSession" in navigator) {
         navigator.mediaSession.setActionHandler("play", null);
         navigator.mediaSession.setActionHandler("pause", null);
@@ -226,7 +249,7 @@ export default function AudioGrammarPlayer({
         navigator.mediaSession.setActionHandler("nexttrack", null);
       }
     };
-  }, [track, duration, handlePlay, handlePause, handlePrev, handleNext]);
+  }, [track, voiceGender, handlePlay, handlePause, handlePrev, handleNext]);
 
   // 4. Uyku Zamanlayıcısı (Sleep Timer)
   useEffect(() => {
@@ -250,16 +273,14 @@ export default function AudioGrammarPlayer({
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseFloat(e.target.value);
     setCurrentTime(val);
-    if (audioRef.current) {
-      audioRef.current.currentTime = val;
-    }
     saveTrackProgress(track.id, val, false);
   };
 
   const handleSpeedChange = (speed: number) => {
-    setPlaybackRate(speed);
-    if (audioRef.current) {
-      audioRef.current.playbackRate = speed;
+    const safeSpeed = Math.max(0.75, Math.min(1.25, speed));
+    setPlaybackRate(safeSpeed);
+    if (isPlaying) {
+      void startPlaybackWithGender(voiceGender, safeSpeed);
     }
   };
 
@@ -270,36 +291,13 @@ export default function AudioGrammarPlayer({
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
+  const selectedVoiceProfileId =
+    voiceGender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet";
+  const selectedProviderVoiceId =
+    voiceGender === "female" ? "tr-TR-EmelNeural" : "tr-TR-AhmetNeural";
+
   return (
     <div className="rounded-3xl border border-purple-500/30 bg-gradient-to-b from-purple-950/60 via-slate-950/90 to-slate-950 p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-2xl">
-      {/* Gizli HTML5 Audio */}
-      <audio
-        ref={audioRef}
-        src={track.audioUrl}
-        preload="none"
-        onTimeUpdate={() => {
-          if (audioRef.current) {
-            const cur = audioRef.current.currentTime;
-            setCurrentTime(cur);
-            if (Math.floor(cur) % 5 === 0) {
-              saveTrackProgress(track.id, cur, false);
-              syncListeningProgress(cur, false);
-            }
-          }
-        }}
-        onLoadedMetadata={() => {
-          if (audioRef.current && !isNaN(audioRef.current.duration)) {
-            setDuration(audioRef.current.duration);
-          }
-        }}
-        onEnded={() => {
-          setIsPlaying(false);
-          saveTrackProgress(track.id, duration, true);
-          syncListeningProgress(duration, true);
-          handleNext();
-        }}
-      />
-
       {/* Üst Kart Bilgisi */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
@@ -307,16 +305,21 @@ export default function AudioGrammarPlayer({
             <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-purple-500/20 text-purple-300 border border-purple-500/40">
               🎧 Sesli Gramer & Hafıza Kodu
             </span>
-            {track.examTarget && track.examTarget.map((ex) => (
-              <span key={ex} className="px-2 py-0.5 rounded text-[10px] font-black bg-pink-500/20 text-pink-300 border border-pink-500/30">
-                {ex}
-              </span>
-            ))}
-            {usingSpeechFallback && (
-              <span className="px-2 py-0.5 rounded text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                Canlı Ses Motoru
-              </span>
-            )}
+            {track.examTarget &&
+              track.examTarget.map((ex) => (
+                <span
+                  key={ex}
+                  className="px-2 py-0.5 rounded text-[10px] font-black bg-pink-500/20 text-pink-300 border border-pink-500/30"
+                >
+                  {ex}
+                </span>
+              ))}
+            <span
+              data-testid="grammar-active-speaker-badge"
+              className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+            >
+              Anlatıcı: {voiceGender === "female" ? "Emel" : "Ahmet"} ({selectedProviderVoiceId})
+            </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-white mt-2">{track.title}</h2>
           <p className="text-xs text-purple-200/80 mt-1 font-mono">{track.subtitle}</p>
@@ -324,19 +327,42 @@ export default function AudioGrammarPlayer({
 
         {/* Hafıza Kodu Rozeti */}
         <div className="rounded-2xl border border-amber-400/40 bg-amber-400/10 px-4 py-2.5 text-center shrink-0">
-          <p className="text-[10px] uppercase tracking-wider font-bold text-amber-300">Hafıza Şifresi</p>
+          <p className="text-[10px] uppercase tracking-wider font-bold text-amber-300">
+            Hafıza Şifresi
+          </p>
           <p className="text-xs font-black text-amber-100 mt-0.5">{track.memoryCode}</p>
         </div>
       </div>
+
+      {/* Dürüst Ses Motoru / Konuşmacı Durum Bandı */}
+      {speakerStatusMessage && (
+        <div
+          data-testid="grammar-speaker-status"
+          role="status"
+          aria-live="polite"
+          className="rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-200"
+        >
+          <span>{speakerStatusMessage}</span>
+          {playbackMeta && (
+            <span className="text-[11px] font-mono text-slate-400">
+              Sağlayıcı: {playbackMeta.provider} · Ses ID: {playbackMeta.voiceId} ·{" "}
+              {playbackMeta.distinctSpeakerVerified
+                ? "Ayrık Neural Konuşmacı Doğrulandı"
+                : "Tekil Yedek Konuşmacı Modu"}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* İlerleme Çubuğu (Scrubber) */}
       <div className="space-y-1.5">
         <input
           type="range"
           min={0}
-          max={duration || 300}
+          max={duration || 180}
           value={currentTime}
           onChange={handleSeek}
+          aria-label="Ses ilerleme çubuğu"
           className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-purple-400"
         />
         <div className="flex justify-between text-[11px] font-mono text-white/50">
@@ -349,10 +375,15 @@ export default function AudioGrammarPlayer({
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
         {/* Hız Seçimi & Eğitmen Ses Seçimi */}
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
-            {[0.75, 1, 1.25, 1.5].map((speed) => (
+          <div
+            className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10"
+            role="group"
+            aria-label="Okuma hızı seçimi"
+          >
+            {[0.75, 0.9, 1, 1.15, 1.25].map((speed) => (
               <button
                 key={speed}
+                type="button"
                 onClick={() => handleSpeedChange(speed)}
                 className={`px-2 py-1 rounded-lg text-xs font-bold transition-all ${
                   playbackRate === speed
@@ -365,35 +396,41 @@ export default function AudioGrammarPlayer({
             ))}
           </div>
 
-          {/* Eğitmen Ses Seçimi (Kadın / Erkek) */}
-          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+          {/* Eğitmen Ses Seçimi (Kadın: Emel / Erkek: Ahmet) */}
+          <div
+            className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10"
+            role="group"
+            aria-label="Türkçe anlatıcı seçimi"
+          >
             <button
-              onClick={() => {
-                setVoiceGender("female");
-                if (isPlaying) handlePause();
-              }}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+              type="button"
+              data-testid="narrator-btn-emel"
+              data-voice-id="tr-TR-female-emel"
+              aria-pressed={voiceGender === "female"}
+              onClick={() => handleSelectNarrator("female")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                 voiceGender === "female"
                   ? "bg-pink-500/80 text-white shadow"
                   : "text-white/60 hover:text-white"
               }`}
-              title="Kadın Eğitmen Sesi (Emel)"
+              title="Kadın Eğitmen Sesi (Emel — tr-TR-EmelNeural)"
             >
-              <span>👩</span> Emel
+              <span>👩</span> Emel (Kadın)
             </button>
             <button
-              onClick={() => {
-                setVoiceGender("male");
-                if (isPlaying) handlePause();
-              }}
-              className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+              type="button"
+              data-testid="narrator-btn-ahmet"
+              data-voice-id="tr-TR-male-ahmet"
+              aria-pressed={voiceGender === "male"}
+              onClick={() => handleSelectNarrator("male")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                 voiceGender === "male"
                   ? "bg-cyan-600/80 text-white shadow"
                   : "text-white/60 hover:text-white"
               }`}
-              title="Erkek Eğitmen Sesi (Ahmet)"
+              title="Erkek Eğitmen Sesi (Ahmet — tr-TR-AhmetNeural)"
             >
-              <span>👨</span> Ahmet
+              <span>👨</span> Ahmet (Erkek)
             </button>
           </div>
         </div>
@@ -401,24 +438,29 @@ export default function AudioGrammarPlayer({
         {/* Oynatıcı Butonları */}
         <div className="flex items-center gap-3">
           <button
+            type="button"
             onClick={handlePrev}
-            className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-sm"
+            className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-sm"
             aria-label="Önceki Konu"
           >
             ⏮️
           </button>
 
           <button
+            type="button"
+            data-testid="grammar-audio-play-toggle"
+            data-active-voice={selectedVoiceProfileId}
             onClick={togglePlay}
             className="w-14 h-14 rounded-full bg-gradient-to-tr from-purple-500 via-indigo-500 to-cyan-400 text-white text-xl flex items-center justify-center shadow-lg shadow-purple-500/40 hover:scale-105 active:scale-95 transition-all"
-            aria-label={isPlaying ? "Durdur" : "Oynat"}
+            aria-label={isPlaying || isLoadingAudio ? "Durdur" : "Oynat"}
           >
-            {isPlaying ? "⏸️" : "▶️"}
+            {isLoadingAudio ? "⏳" : isPlaying ? "⏸️" : "▶️"}
           </button>
 
           <button
+            type="button"
             onClick={handleNext}
-            className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-sm"
+            className="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all text-sm"
             aria-label="Sonraki Konu"
           >
             ⏭️
@@ -427,22 +469,32 @@ export default function AudioGrammarPlayer({
 
         {/* Uyku Zamanlayıcısı & Metin Butonu */}
         <div className="flex items-center gap-2">
-          {/* Uyku Menüsü */}
           <select
+            aria-label="Uyku zamanlayıcısı"
             value={sleepTimerMinutes || ""}
-            onChange={(e) => setSleepTimerMinutes(e.target.value ? parseInt(e.target.value, 10) : null)}
-            className="bg-white/5 border border-white/10 text-white text-xs rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-purple-400 font-medium"
+            onChange={(e) =>
+              setSleepTimerMinutes(e.target.value ? parseInt(e.target.value, 10) : null)
+            }
+            className="bg-white/5 border border-white/10 text-white text-xs rounded-xl px-2.5 py-2 focus:outline-none focus:border-purple-400 font-medium"
           >
-            <option value="" className="bg-slate-900">⏰ Uyku Zamanlayıcı</option>
-            <option value="5" className="bg-slate-900">5 Dakika</option>
-            <option value="15" className="bg-slate-900">15 Dakika</option>
-            <option value="30" className="bg-slate-900">30 Dakika</option>
+            <option value="" className="bg-slate-900">
+              ⏰ Uyku Zamanlayıcı
+            </option>
+            <option value="5" className="bg-slate-900">
+              5 Dakika
+            </option>
+            <option value="15" className="bg-slate-900">
+              15 Dakika
+            </option>
+            <option value="30" className="bg-slate-900">
+              30 Dakika
+            </option>
           </select>
 
-          {/* Transkript Göster/Gizle */}
           <button
+            type="button"
             onClick={() => setShowTranscript(!showTranscript)}
-            className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all ${
+            className={`px-3 py-2 rounded-xl border text-xs font-bold transition-all ${
               showTranscript
                 ? "bg-purple-500/20 text-purple-300 border-purple-500/40"
                 : "border-white/15 bg-white/5 text-white/70 hover:bg-white/10"
@@ -494,9 +546,9 @@ export default function AudioGrammarPlayer({
             return (
               <button
                 key={t.id}
+                type="button"
                 onClick={() => {
                   handlePause();
-                  setUsingSpeechFallback(false);
                   setCurrentTrackIndex(index);
                 }}
                 className={`p-3 rounded-2xl text-left border transition-all flex items-center justify-between ${
@@ -511,7 +563,10 @@ export default function AudioGrammarPlayer({
                       {index + 1}. {t.title}
                     </p>
                     {t.examTarget?.map((tag) => (
-                      <span key={tag} className="text-[9px] font-black px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300">
+                      <span
+                        key={tag}
+                        className="text-[9px] font-black px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300"
+                      >
                         {tag}
                       </span>
                     ))}

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { launchFireworks } from "@/lib/fireworks";
+import { clientAudio } from "@/lib/tts/audio-client";
 
 interface PronunciationCoachModalProps {
   isOpen: boolean;
@@ -147,15 +148,21 @@ export function PronunciationCoachModal({
     }
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      clientAudio.stopAll();
+    }
+    return () => {
+      clientAudio.stopAll();
+    };
+  }, [isOpen]);
+
   const playWordAudio = (word: string) => {
-    // Play pronunciation of specific word
-    const audio = new Audio(`/api/tts?text=${encodeURIComponent(word)}&accent=en-US`);
-    audio.play().catch(() => {
-      if ("speechSynthesis" in window) {
-        const utter = new SpeechSynthesisUtterance(word);
-        utter.lang = "en-US";
-        window.speechSynthesis.speak(utter);
-      }
+    void clientAudio.play(word, {
+      accent: "en-US",
+      gender: "female",
+      rate: 1.0,
+      contentType: word.includes(" ") ? "sentence" : "word",
     });
   };
 

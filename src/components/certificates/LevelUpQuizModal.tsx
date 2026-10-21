@@ -5,6 +5,7 @@ import { CertificateLevel, UserCertificate } from "@/lib/certificates/types";
 import { LEVEL_UP_QUIZZES, CERTIFICATE_DEFINITIONS } from "@/lib/certificates/data";
 import { awardCertificate } from "@/lib/certificates/engine";
 import { launchFireworks } from "@/lib/fireworks";
+import { clientAudio } from "@/lib/tts/audio-client";
 
 interface LevelUpQuizModalProps {
   level: CertificateLevel;
@@ -38,10 +39,8 @@ export function LevelUpQuizModal({
 
   // // SAFETY: Stop speech audio on question change or modal close
   const stopAudio = useCallback(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-      setIsPlayingAudio(false);
-    }
+    clientAudio.stopAll();
+    setIsPlayingAudio(false);
   }, []);
 
   useEffect(() => {
@@ -76,11 +75,6 @@ export function LevelUpQuizModal({
   };
 
   const handlePlayAudio = () => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-      alert("Tarayıcınız ses sentezini (Web Speech API) desteklemiyor.");
-      return;
-    }
-
     if (isPlayingAudio) {
       stopAudio();
       return;
@@ -89,17 +83,15 @@ export function LevelUpQuizModal({
     const textToSpeak = currentQ?.audioText || currentQ?.stem || "";
     if (!textToSpeak) return;
 
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = "en-US";
-    utterance.rate = speechRate;
-    utterance.pitch = 1.0;
-
-    utterance.onend = () => setIsPlayingAudio(false);
-    utterance.onerror = () => setIsPlayingAudio(false);
-
     setIsPlayingAudio(true);
-    window.speechSynthesis.speak(utterance);
+    void clientAudio.play(textToSpeak, {
+      accent: "en-US",
+      gender: "female",
+      rate: speechRate,
+      contentType: "sentence",
+      onEnd: () => setIsPlayingAudio(false),
+      onError: () => setIsPlayingAudio(false),
+    });
   };
 
   const finishQuiz = () => {

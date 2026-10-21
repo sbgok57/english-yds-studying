@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState, useRef } from "react";
+import { useEffect, useId, useState } from "react";
 import { GRAMMAR_LESSONS, type GrammarLesson } from "./grammar-curriculum";
 import {
   loadGrammarProgress,
@@ -8,6 +8,8 @@ import {
   currentLessonIndex,
   type GrammarProgress,
 } from "../../shared/grammar-progress";
+import { clientAudio } from "@/lib/tts/audio-client";
+import type { AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
 import { Sparkles, Volume2, VolumeX, CheckCircle2, XCircle, ArrowLeft, ArrowRight, RotateCcw, Award } from "lucide-react";
 
 export type GrammarVoiceProfile = {
@@ -19,19 +21,23 @@ export type GrammarVoiceProfile = {
   voiceURI?: string;
   /** Optional flag emoji */
   flag?: string;
+  gender?: VoiceGender;
 };
 
 export type LanguageKey = "en" | "tr";
 
 const DEFAULT_ENGLISH_PROFILES: readonly GrammarVoiceProfile[] = [
-  { id: "en-gb-female", label: "İngiliz Aksanı (British 🇬🇧 - Rachel)", language: "en-GB", flag: "🇬🇧" },
-  { id: "en-us-female", label: "Amerikan Aksanı (American 🇺🇸 - Sarah)", language: "en-US", flag: "🇺🇸" },
-  { id: "en-au-female", label: "Avustralya Aksanı (Australian 🇦🇺 - Chloe)", language: "en-AU", flag: "🇦🇺" },
-  { id: "en-ca-female", label: "Kanada Aksanı (Canadian 🇨🇦 - Clara)", language: "en-CA", flag: "🇨🇦" },
+  { id: "en-GB-female-sonia", label: "İngiliz Aksanı (British 🇬🇧 - Sonia)", language: "en-GB", flag: "🇬🇧", gender: "female" },
+  { id: "en-GB-male-ryan", label: "İngiliz Aksanı (British 🇬🇧 - Ryan)", language: "en-GB", flag: "🇬🇧", gender: "male" },
+  { id: "en-US-female-jenny", label: "Amerikan Aksanı (American 🇺🇸 - Jenny)", language: "en-US", flag: "🇺🇸", gender: "female" },
+  { id: "en-US-male-guy", label: "Amerikan Aksanı (American 🇺🇸 - Guy)", language: "en-US", flag: "🇺🇸", gender: "male" },
+  { id: "en-AU-female-natasha", label: "Avustralya Aksanı (Australian 🇦🇺 - Natasha)", language: "en-AU", flag: "🇦🇺", gender: "female" },
+  { id: "en-CA-female-clara", label: "Kanada Aksanı (Canadian 🇨🇦 - Clara)", language: "en-CA", flag: "🇨🇦", gender: "female" },
 ];
 
 const DEFAULT_TURKISH_PROFILES: readonly GrammarVoiceProfile[] = [
-  { id: "tr-tr-female", label: "Türkçe Doğal Anlatım (Filiz 🇹🇷)", language: "tr-TR", flag: "🇹🇷" },
+  { id: "tr-TR-female-emel", label: "Emel — Kadın Hoca (Türkçe 🇹🇷)", language: "tr-TR", flag: "🇹🇷", gender: "female" },
+  { id: "tr-TR-male-ahmet", label: "Ahmet — Erkek Hoca (Türkçe 🇹🇷)", language: "tr-TR", flag: "🇹🇷", gender: "male" },
 ];
 
 type Props = {
@@ -64,19 +70,17 @@ export function GrammarStarter({
   const [speakingText, setSpeakingText] = useState("");
   const [speechError, setSpeechError] = useState("");
   const [localVoiceIds, setLocalVoiceIds] = useState<Partial<Record<LanguageKey, string>>>({
-    en: "en-gb-female",
-    tr: "tr-tr-female",
+    en: "en-GB-female-sonia",
+    tr: "tr-TR-female-emel",
   });
-
-  const activeAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const englishProfiles = voiceProfiles.filter((profile) => languageMatches(profile, "en"));
   const turkishProfiles = voiceProfiles.filter((profile) => languageMatches(profile, "tr"));
 
   const englishVoiceId =
-    selectedVoiceProfileIds?.en ?? localVoiceIds.en ?? englishProfiles[0]?.id ?? "en-gb-female";
+    selectedVoiceProfileIds?.en ?? localVoiceIds.en ?? englishProfiles[0]?.id ?? "en-GB-female-sonia";
   const turkishVoiceId =
-    selectedVoiceProfileIds?.tr ?? localVoiceIds.tr ?? turkishProfiles[0]?.id ?? "tr-tr-female";
+    selectedVoiceProfileIds?.tr ?? localVoiceIds.tr ?? turkishProfiles[0]?.id ?? "tr-TR-female-emel";
 
   const lesson = GRAMMAR_LESSONS[lessonIndex] ?? GRAMMAR_LESSONS[0]!;
   const progressPercent = Math.round((completed.size / GRAMMAR_LESSONS.length) * 100);
@@ -105,13 +109,7 @@ export function GrammarStarter({
   // PERF: Clean up speech audio on unmount
   useEffect(() => {
     return () => {
-      if (activeAudioRef.current) {
-        activeAudioRef.current.pause();
-        activeAudioRef.current = null;
-      }
-      if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
+      clientAudio.stopAll();
     };
   }, []);
 
@@ -121,13 +119,7 @@ export function GrammarStarter({
   }
 
   function stopSpeaking() {
-    if (activeAudioRef.current) {
-      activeAudioRef.current.pause();
-      activeAudioRef.current = null;
-    }
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
+    clientAudio.stopAll();
     setSpeaking(false);
     setSpeakingText("");
   }
@@ -149,74 +141,35 @@ export function GrammarStarter({
         setSpeakingText("");
         return;
       } catch (err) {
-        console.warn("[TTS] onSpeak error, falling back to server TTS:", err);
+        console.warn("[TTS] onSpeak error, falling back to centralized clientAudio:", err);
       }
     }
 
-    // 2. Try server TTS API endpoint /api/tts
-    try {
-      const selectedProfile = voiceProfiles.find((p) => p.id === profileId);
-      const accent = selectedProfile?.language || (language === "en" ? "en-GB" : "tr-TR");
-      const url = `/api/tts?text=${encodeURIComponent(text)}&accent=${encodeURIComponent(accent)}&contentType=sentence`;
+    const selectedProfile = voiceProfiles.find((p) => p.id === profileId);
+    const locale = (selectedProfile?.language || (language === "en" ? "en-GB" : "tr-TR")) as AccentCode | "tr-TR";
+    const gender: VoiceGender =
+      selectedProfile?.gender ||
+      (profileId.toLowerCase().includes("male") || profileId.toLowerCase().includes("ahmet") ? "male" : "female");
 
-      const audio = new Audio(url);
-      activeAudioRef.current = audio;
-
-      const playPromise = new Promise<void>((resolve, reject) => {
-        audio.onended = () => {
-          setSpeaking(false);
-          setSpeakingText("");
-          resolve();
-        };
-        audio.onerror = () => reject(new Error("Server TTS audio error"));
-      });
-
-      await audio.play();
-      await playPromise;
-      return;
-    } catch {
-      // Fallback to browser SpeechSynthesis API
-    }
-
-    // 3. Fallback: Browser Web Speech API
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-      setSpeaking(false);
-      setSpeakingText("");
-      setSpeechError("Bu tarayıcıda sesli okuma desteklenmiyor.");
-      return;
-    }
-
-    try {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
-      const profile = voiceProfiles.find((item) => item.id === profileId);
-      utterance.lang = profile?.language ?? (language === "en" ? "en-GB" : "tr-TR");
-      utterance.rate = 0.95;
-
-      const availableVoices = synth.getVoices();
-      const localVoice =
-        availableVoices.find((voice) => profile?.voiceURI && voice.voiceURI === profile.voiceURI) ??
-        availableVoices.find((voice) => voice.lang.toLowerCase() === utterance.lang.toLowerCase()) ??
-        availableVoices.find((voice) => voice.lang.toLowerCase().startsWith(`${language}-`));
-
-      if (localVoice) utterance.voice = localVoice;
-
-      utterance.onend = () => {
+    await clientAudio.play(text, {
+      voiceId: profileId,
+      accent: language === "en" ? (locale as AccentCode) : undefined,
+      locale,
+      contentLanguage: language,
+      speaker: language === "tr" ? (gender === "male" ? "ahmet" : "emel") : undefined,
+      gender,
+      rate: 0.95,
+      contentType: "sentence",
+      onEnd: () => {
         setSpeaking(false);
         setSpeakingText("");
-      };
-      utterance.onerror = () => {
+      },
+      onError: (msg) => {
         setSpeaking(false);
         setSpeakingText("");
-        setSpeechError("Cihazın seslendirme motoru konuşmayı başlatamadı.");
-      };
-
-      synth.speak(utterance);
-    } catch (e) {
-      setSpeaking(false);
-      setSpeakingText("");
-      setSpeechError("Seslendirme sırasında bir hata oluştu.");
-    }
+        setSpeechError(msg || "Seslendirme sırasında bir hata oluştu.");
+      },
+    });
   }
 
   function moveTo(index: number) {

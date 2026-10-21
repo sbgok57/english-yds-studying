@@ -12,6 +12,7 @@ import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import DilMasterProSystem from "@/components/DilMasterProSystem";
+import BottomNavigation from "@/components/navigation/BottomNavigation";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dil-master.vercel.app"),
@@ -83,7 +84,8 @@ export default function RootLayout({
             <ThemeProvider>
               <ThemeInitializer />
               <Header />
-              <main className="min-h-[calc(100vh-4rem)] transition-all duration-300">{children}</main>
+              <main className="min-h-[calc(100vh-4rem)] pb-24 md:pb-8 transition-all duration-300">{children}</main>
+              <BottomNavigation />
               <AiWidget />
               <RecoveryBanner />
               <ErrorToast />
@@ -93,7 +95,7 @@ export default function RootLayout({
             </ThemeProvider>
           </BadgeQueueProvider>
         </CrashGuardianProvider>
-        <footer className="border-t border-white/10 py-8 mt-12 transition-all duration-300">
+        <footer className="border-t border-white/10 py-8 pb-24 md:pb-8 mt-12 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
               🧠 DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.

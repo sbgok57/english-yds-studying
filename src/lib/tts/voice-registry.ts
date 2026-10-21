@@ -1,14 +1,12 @@
 /**
- * YDS Master - Merkezî Ses Kayıt Kütüğü (Central Voice Registry)
- * 
- * Tam 6 İngilizce aksanı × 2 cinsiyet = 12 doğrulanmış Neural Konuşmacı.
- * Aksanlar:
- * 1. İngiliz (en-GB)
- * 2. Amerikan (en-US)
- * 3. Kanada (en-CA)
- * 4. Avustralya (en-AU)
- * 5. Yeni Zelanda (en-NZ)
- * 6. Hint İngilizcesi (en-IN)
+ * DİL MASTER — Merkezî Ses Kayıt Kütüğü (Central Voice Registry)
+ *
+ * - İngilizce Öğrenme Sesleri (contentLanguage: "en"):
+ *   7 İngilizce aksanı × 2 cinsiyet = 14 Neural Konuşmacı Profili
+ *   (en-GB, en-US, en-CA, en-AU, en-NZ, en-GB-scotland, en-IN)
+ * - Türkçe Anlatım Sesleri (contentLanguage: "tr"):
+ *   Sesli Gramer ve Türkçe açıklamalar için 2 ayrı konuşmacı profili:
+ *   Emel (tr-TR-EmelNeural) ve Ahmet (tr-TR-AhmetNeural)
  */
 
 export type AccentCode =
@@ -19,6 +17,10 @@ export type AccentCode =
   | "en-NZ"
   | "en-GB-scotland"
   | "en-IN";
+
+export type VoiceLocale = AccentCode | "tr-TR";
+
+export type ContentLanguage = "en" | "tr";
 
 export type VoiceGender = "female" | "male";
 
@@ -35,7 +37,8 @@ export interface VoiceProfile {
   provider: string;
   providerVoiceId: string;
   displayName: string;
-  locale: AccentCode;
+  locale: VoiceLocale;
+  contentLanguage: ContentLanguage;
   accentLabelTr: string;
   accentLabelEn: string;
   flag: string;
@@ -66,13 +69,19 @@ export interface AccentMetadata {
 }
 
 /**
- * Standart Nötr Ses Önizleme Metni (6-8 saniyelik karşılaştırma cümlesi)
+ * Standart İngilizce Önizleme Metni
  */
 export const STANDARD_PREVIEW_TEXT =
-  "Welcome to YDS Master. Listen carefully, notice the rhythm, and repeat the sentence naturally.";
+  "Welcome to Dil Master. Listen carefully, notice the rhythm, and repeat the sentence naturally.";
 
 /**
- * 6 Aksan Meta Verisi
+ * Standart Türkçe Eğitmen Önizleme Metni (Emel & Ahmet)
+ */
+export const STANDARD_TURKISH_PREVIEW_TEXT =
+  "Merhaba, ben Dil Master gramer eğitmeniniz. Bağlaç sorularında boşluktan sonraki yapıya dikkat edin.";
+
+/**
+ * 7 İngilizce Aksan Meta Verisi
  */
 export const ACCENT_METADATA_LIST: AccentMetadata[] = [
   {
@@ -155,7 +164,59 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
 ];
 
 /**
- * 12 Doğrulanmış Neural Konuşmacı Profili
+ * Türkçe Anlatım (Sesli Gramer) Konuşmacı Profilleri — Emel & Ahmet
+ */
+export const TURKISH_NARRATOR_VOICES: VoiceProfile[] = [
+  {
+    id: "tr-TR-female-emel",
+    provider: "msedge-neural",
+    providerVoiceId: "tr-TR-EmelNeural",
+    displayName: "Emel",
+    locale: "tr-TR",
+    contentLanguage: "tr",
+    accentLabelTr: "Türkçe (Kadın Eğitmen)",
+    accentLabelEn: "Turkish (Female Narrator)",
+    flag: "🇹🇷",
+    gender: "female",
+    source: "premium-neural",
+    naturalnessTier: "premium",
+    sampleRateHz: 24000,
+    outputFormat: "mp3",
+    enabled: true,
+    supportsWords: true,
+    supportsSentences: true,
+    supportsLongForm: true,
+    maxCharacters: 3000,
+    license: "Microsoft Neural Speech Engine (Service Authorization)",
+    description: "Sesli Gramer ve hafıza kodları için Türkçe kadın eğitmen sesi (tr-TR-EmelNeural)",
+  },
+  {
+    id: "tr-TR-male-ahmet",
+    provider: "msedge-neural",
+    providerVoiceId: "tr-TR-AhmetNeural",
+    displayName: "Ahmet",
+    locale: "tr-TR",
+    contentLanguage: "tr",
+    accentLabelTr: "Türkçe (Erkek Eğitmen)",
+    accentLabelEn: "Turkish (Male Narrator)",
+    flag: "🇹🇷",
+    gender: "male",
+    source: "premium-neural",
+    naturalnessTier: "premium",
+    sampleRateHz: 24000,
+    outputFormat: "mp3",
+    enabled: true,
+    supportsWords: true,
+    supportsSentences: true,
+    supportsLongForm: true,
+    maxCharacters: 3000,
+    license: "Microsoft Neural Speech Engine (Service Authorization)",
+    description: "Sesli Gramer ve hafıza kodları için Türkçe erkek eğitmen sesi (tr-TR-AhmetNeural)",
+  },
+];
+
+/**
+ * 14 İngilizce Neural Konuşmacı Profili + 2 Türkçe Eğitmen Profili = 16 Kayıtlı Ses
  */
 export const VOICE_REGISTRY: VoiceProfile[] = [
   // 1. İngiliz (en-GB)
@@ -165,6 +226,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-GB-SoniaNeural",
     displayName: "Sonia",
     locale: "en-GB",
+    contentLanguage: "en",
     accentLabelTr: "İngiliz",
     accentLabelEn: "British",
     flag: "🇬🇧",
@@ -187,6 +249,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-GB-RyanNeural",
     displayName: "Ryan",
     locale: "en-GB",
+    contentLanguage: "en",
     accentLabelTr: "İngiliz",
     accentLabelEn: "British",
     flag: "🇬🇧",
@@ -211,6 +274,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-US-JennyNeural",
     displayName: "Jenny",
     locale: "en-US",
+    contentLanguage: "en",
     accentLabelTr: "Amerikan",
     accentLabelEn: "American",
     flag: "🇺🇸",
@@ -233,6 +297,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-US-GuyNeural",
     displayName: "Guy",
     locale: "en-US",
+    contentLanguage: "en",
     accentLabelTr: "Amerikan",
     accentLabelEn: "American",
     flag: "🇺🇸",
@@ -257,6 +322,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-CA-ClaraNeural",
     displayName: "Clara",
     locale: "en-CA",
+    contentLanguage: "en",
     accentLabelTr: "Kanada",
     accentLabelEn: "Canadian",
     flag: "🇨🇦",
@@ -279,6 +345,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-CA-LiamNeural",
     displayName: "Liam",
     locale: "en-CA",
+    contentLanguage: "en",
     accentLabelTr: "Kanada",
     accentLabelEn: "Canadian",
     flag: "🇨🇦",
@@ -303,6 +370,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-AU-NatashaNeural",
     displayName: "Natasha",
     locale: "en-AU",
+    contentLanguage: "en",
     accentLabelTr: "Avustralya",
     accentLabelEn: "Australian",
     flag: "🇦🇺",
@@ -325,6 +393,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-AU-WilliamMultilingualNeural",
     displayName: "William",
     locale: "en-AU",
+    contentLanguage: "en",
     accentLabelTr: "Avustralya",
     accentLabelEn: "Australian",
     flag: "🇦🇺",
@@ -349,6 +418,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-NZ-MollyNeural",
     displayName: "Molly",
     locale: "en-NZ",
+    contentLanguage: "en",
     accentLabelTr: "Yeni Zelanda",
     accentLabelEn: "New Zealand",
     flag: "🇳🇿",
@@ -371,6 +441,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-NZ-MitchellNeural",
     displayName: "Mitchell",
     locale: "en-NZ",
+    contentLanguage: "en",
     accentLabelTr: "Yeni Zelanda",
     accentLabelEn: "New Zealand",
     flag: "🇳🇿",
@@ -395,6 +466,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-IN-NeerjaNeural",
     displayName: "Neerja",
     locale: "en-IN",
+    contentLanguage: "en",
     accentLabelTr: "Hint",
     accentLabelEn: "Indian",
     flag: "🇮🇳",
@@ -417,6 +489,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-IN-PrabhatNeural",
     displayName: "Prabhat",
     locale: "en-IN",
+    contentLanguage: "en",
     accentLabelTr: "Hint",
     accentLabelEn: "Indian",
     flag: "🇮🇳",
@@ -441,6 +514,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-GB-MaisieNeural",
     displayName: "Maisie",
     locale: "en-GB-scotland",
+    contentLanguage: "en",
     accentLabelTr: "İskoçya",
     accentLabelEn: "Scottish",
     flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
@@ -463,6 +537,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     providerVoiceId: "en-GB-ThomasNeural",
     displayName: "Thomas",
     locale: "en-GB-scotland",
+    contentLanguage: "en",
     accentLabelTr: "İskoçya",
     accentLabelEn: "Scottish",
     flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
@@ -481,13 +556,21 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
   },
 ];
 
-// Map for ultra-fast O(1) lookup
+/**
+ * 16 Doğrulanmış Ses Profilinin Tamamı (14 İngilizce Öğrenme + 2 Türkçe Anlatıcı: Emel & Ahmet)
+ */
+export const ALL_VOICE_REGISTRY: VoiceProfile[] = [
+  ...VOICE_REGISTRY,
+  ...TURKISH_NARRATOR_VOICES,
+];
+
+// Map for ultra-fast O(1) lookup across all 16 voices
 const VOICE_MAP_BY_ID = new Map<string, VoiceProfile>(
-  VOICE_REGISTRY.map((v) => [v.id, v])
+  ALL_VOICE_REGISTRY.map((v) => [v.id, v])
 );
 
 const VOICE_MAP_BY_PROVIDER_ID = new Map<string, VoiceProfile>(
-  VOICE_REGISTRY.map((v) => [v.providerVoiceId, v])
+  ALL_VOICE_REGISTRY.map((v) => [v.providerVoiceId, v])
 );
 
 /**
@@ -501,16 +584,16 @@ export function getVoiceProfile(idOrProviderId: string): VoiceProfile | undefine
 }
 
 /**
- * Belirli bir aksan ve cinsiyet için profil getir
+ * Belirli bir locale (en-* veya tr-TR) ve cinsiyet için profil getir
  */
-export function findVoice(locale: AccentCode, gender: VoiceGender): VoiceProfile {
-  const found = VOICE_REGISTRY.find(
+export function findVoice(locale: VoiceLocale, gender: VoiceGender): VoiceProfile {
+  const found = ALL_VOICE_REGISTRY.find(
     (v) => v.locale === locale && v.gender === gender && v.enabled
   );
   if (found) return found;
 
   // Fallback: Same locale other gender
-  const sameLocale = VOICE_REGISTRY.find(
+  const sameLocale = ALL_VOICE_REGISTRY.find(
     (v) => v.locale === locale && v.enabled
   );
   if (sameLocale) return sameLocale;
@@ -520,18 +603,30 @@ export function findVoice(locale: AccentCode, gender: VoiceGender): VoiceProfile
 }
 
 /**
- * Belirli bir aksana ait tüm sesleri getir (kadın ve erkek)
+ * Türkçe anlatım (Emel veya Ahmet) profilini getir
  */
-export function getVoicesForAccent(locale: AccentCode): VoiceProfile[] {
-  return VOICE_REGISTRY.filter((v) => v.locale === locale && v.enabled);
+export function findTurkishNarratorVoice(
+  speakerOrGender: "emel" | "ahmet" | VoiceGender
+): VoiceProfile {
+  if (speakerOrGender === "ahmet" || speakerOrGender === "male") {
+    return getVoiceProfile("tr-TR-male-ahmet")!;
+  }
+  return getVoiceProfile("tr-TR-female-emel")!;
 }
 
 /**
- * Doğrulama: Tüm 7 aksanda kadın ve erkek olmak üzere tam 14 sesin varlığını test eder.
+ * Belirli bir aksana ait tüm sesleri getir (kadın ve erkek)
+ */
+export function getVoicesForAccent(locale: VoiceLocale): VoiceProfile[] {
+  return ALL_VOICE_REGISTRY.filter((v) => v.locale === locale && v.enabled);
+}
+
+/**
+ * Doğrulama: Tüm 7 İngilizce aksanda + Türkçe (tr-TR) anlatımda kadın ve erkek seslerin varlığını test eder.
  */
 export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
-  const requiredLocales: AccentCode[] = [
+  const requiredLocales: VoiceLocale[] = [
     "en-GB",
     "en-US",
     "en-CA",
@@ -539,12 +634,13 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
     "en-NZ",
     "en-GB-scotland",
     "en-IN",
+    "tr-TR",
   ];
 
   const seenIds = new Set<string>();
   const seenProviderIds = new Set<string>();
 
-  for (const v of VOICE_REGISTRY) {
+  for (const v of ALL_VOICE_REGISTRY) {
     if (seenIds.has(v.id)) errors.push(`Mükerrer voice id: ${v.id}`);
     if (seenProviderIds.has(v.providerVoiceId))
       errors.push(`Mükerrer providerVoiceId: ${v.providerVoiceId}`);
@@ -553,8 +649,8 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   }
 
   for (const loc of requiredLocales) {
-    const female = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female");
-    const male = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male");
+    const female = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female");
+    const male = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male");
     if (!female) errors.push(`${loc} için kadın ses eksik.`);
     if (!male) errors.push(`${loc} için erkek ses eksik.`);
   }

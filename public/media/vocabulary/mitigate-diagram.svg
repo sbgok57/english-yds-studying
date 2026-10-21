@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="bg-mitigate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" rx="20" fill="url(#bg-mitigate)"/>
+  <g stroke="#334155" stroke-width="1">
+    <line x1="40" y1="50" x2="360" y2="50"/>
+    <line x1="40" y1="110" x2="360" y2="110"/>
+    <line x1="40" y1="170" x2="360" y2="170"/>
+    <line x1="40" y1="210" x2="360" y2="210"/>
+  </g>
+  <!-- High Risk Curve (Red dashed) -->
+  <path d="M 50 190 Q 150 40 350 45" fill="none" stroke="#f43f5e" stroke-width="3" stroke-dasharray="6 4"/>
+  <!-- Mitigated Risk Curve (Emerald animated) -->
+  <path d="M 50 190 Q 160 110 350 165" fill="none" stroke="#10b981" stroke-width="4" stroke-linecap="round">
+    <animate attributeName="stroke-dashoffset" from="400" to="0" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <!-- Shield Icon -->
+  <path d="M 200 85 L 228 97 L 228 125 C 228 145 200 158 200 158 C 200 158 172 145 172 125 L 172 97 Z" fill="#06b6d4" fill-opacity="0.25" stroke="#22d3ee" stroke-width="2.5"/>
+  <text x="52" y="34" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="bold">SEMANTIC PROCESS DIAGRAM · MITIGATE (HAFİFLETMEK)</text>
+  <text x="255" y="68" fill="#fb7185" font-family="sans-serif" font-size="11">Unchecked Impact</text>
+  <text x="250" y="155" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="bold">Mitigated Risk ↓</text>
+</svg>

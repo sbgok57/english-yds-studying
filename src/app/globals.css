@@ -70,7 +70,7 @@ body::before {
   z-index: 0;
   background-image: var(--theme-pattern, none);
   background-size: var(--theme-pattern-size, auto);
-  opacity: 1;
+  opacity: var(--pattern-opacity, 1);
 }
 
 body > * {
@@ -882,17 +882,13 @@ body {
   line-height: 1.6;
 }
 
-.reading-text,
-.passage,
-.soru-metni,
-.passage-content {
+.reading-text, .passage, .soru-metni, .passage-content {
   font-size: var(--passage-font-size);
   line-height: var(--line-height-relaxed);
   letter-spacing: 0.005em;
 }
 
-.word-card,
-.vocabulary-item {
+.word-card, .vocabulary-item {
   font-size: 1rem;
 }
 

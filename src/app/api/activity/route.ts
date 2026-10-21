@@ -43,15 +43,20 @@ export async function POST(req: NextRequest) {
     let targetUserEmail: string | null = null;
     let targetUsername: string | null = null;
 
-    // A. Check verified session cookie first
+    // A. Check verified session cookie first and confirm user exists in DB
     const sessionCookie = req.cookies.get(SESSION_COOKIE_NAME)?.value;
     if (sessionCookie) {
       try {
         const payload = await verifySessionToken(sessionCookie);
         if (payload?.userId) {
-          targetUserId = payload.userId;
-          targetUserEmail = payload.email || null;
-          targetUsername = payload.username || null;
+          const existingUser = await prisma.user.findUnique({
+            where: { id: payload.userId },
+          });
+          if (existingUser) {
+            targetUserId = existingUser.id;
+            targetUserEmail = existingUser.email;
+            targetUsername = existingUser.username;
+          }
         }
       } catch {
         // Fallback to body identifiers

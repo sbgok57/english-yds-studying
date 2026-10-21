@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   getVoiceProfile,
   findVoice,
+  findTurkishNarratorVoice,
   AccentCode,
+  VoiceLocale,
+  ContentLanguage,
   VoiceGender,
   VoiceProfile,
 } from "@/lib/tts/voice-registry";
@@ -12,10 +15,12 @@ import { audioCache } from "@/lib/tts/audio-cache";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// Normalizasyon: Kısa aksan kodlarını standart AccentCode formatına çevir
-function normalizeLocale(code?: string | null): AccentCode {
+// Normalizasyon: Kısa aksan/dil kodlarını standart VoiceLocale formatına çevir
+function normalizeLocale(code?: string | null, contentLanguage?: string | null): VoiceLocale {
+  if (contentLanguage?.toLowerCase() === "tr") return "tr-TR";
   if (!code) return "en-US";
   const c = code.toLowerCase().trim();
+  if (c === "tr" || c === "tr-tr" || c === "tr_tr" || c === "turkish") return "tr-TR";
   if (c === "uk" || c === "en-gb" || c === "en_gb") return "en-GB";
   if (c === "us" || c === "en-us" || c === "en_us") return "en-US";
   if (c === "ca" || c === "en-ca" || c === "en_ca") return "en-CA";
@@ -35,33 +40,44 @@ function normalizeLocale(code?: string | null): AccentCode {
   return "en-US";
 }
 
-// Normalizasyon: Cinsiyet
-function normalizeGender(gender?: string | null): VoiceGender {
+// Normalizasyon: Cinsiyet veya konuşmacı adı (emel / ahmet)
+function normalizeGender(gender?: string | null, speaker?: string | null): VoiceGender {
+  const s = speaker?.toLowerCase().trim();
+  if (s === "ahmet" || s === "male") return "male";
+  if (s === "emel" || s === "female") return "female";
   return gender?.toLowerCase() === "male" ? "male" : "female";
 }
 
 // Güvenli metin temizleme
 function sanitizeText(raw: string): string {
   if (!raw) return "";
-  // Güvenlik: şifre, token veya JSON yapılarının yanlışlıkla gönderilmesini engelle
-  let cleaned = raw.replace(/[\r\n\t]+/g, " ").trim();
-  return cleaned;
+  return raw.replace(/[\r\n\t]+/g, " ").trim();
 }
 
 // İstek parametrelerinden uygun ses profilini çözümler
 function resolveVoice(
   voiceParam?: string | null,
   accentParam?: string | null,
-  genderParam?: string | null
-): VoiceProfile {
+  genderParam?: string | null,
+  contentLanguageParam?: string | null,
+  speakerParam?: string | null
+): VoiceProfile | null {
   if (voiceParam) {
     const profile = getVoiceProfile(voiceParam);
-    if (profile && profile.enabled) return profile;
+    if (!profile || !profile.enabled) {
+      return null;
+    }
+    return profile;
   }
 
-  const locale = normalizeLocale(accentParam);
-  const gender = normalizeGender(genderParam);
-  return findVoice(locale, gender);
+  const locale = normalizeLocale(accentParam, contentLanguageParam);
+  const gender = normalizeGender(genderParam, speakerParam);
+
+  if (locale === "tr-TR" || contentLanguageParam?.toLowerCase() === "tr" || speakerParam) {
+    return findTurkishNarratorVoice(gender);
+  }
+
+  return findVoice(locale as AccentCode, gender);
 }
 
 // Ortak Sentezleme Mantığı
@@ -71,26 +87,46 @@ async function handleTtsRequest(
   accentParam?: string | null,
   genderParam?: string | null,
   rateParam?: number | string | null,
-  contentTypeParam?: string | null
+  contentTypeParam?: string | null,
+  contentLanguageParam?: string | null,
+  speakerParam?: string | null
 ): Promise<Response> {
   const cleanText = sanitizeText(text);
 
   if (!cleanText) {
     return NextResponse.json(
-      { ok: false, error: "Metin boş olamaz." },
+      { ok: false, code: "INVALID_TEXT", error: "Metin boş olamaz." },
       { status: 400 }
     );
   }
 
-  const targetVoice = resolveVoice(voiceParam, accentParam, genderParam);
+  const targetVoice = resolveVoice(
+    voiceParam,
+    accentParam,
+    genderParam,
+    contentLanguageParam,
+    speakerParam
+  );
+
+  if (!targetVoice) {
+    return NextResponse.json(
+      {
+        ok: false,
+        code: "VOICE_NOT_AVAILABLE",
+        error: `Belirtilen ses profili bulunamadı veya devre dışı: ${voiceParam}`,
+      },
+      { status: 400 }
+    );
+  }
 
   const contentType = (contentTypeParam || "word") as "word" | "sentence" | "long-form";
-  const maxLen = contentType === "long-form" ? 2000 : contentType === "sentence" ? 600 : 150;
+  const maxLen = contentType === "long-form" ? 2500 : contentType === "sentence" ? 600 : 150;
 
   if (cleanText.length > maxLen) {
     return NextResponse.json(
       {
         ok: false,
+        code: "TEXT_TOO_LONG",
         error: `Metin azami ${maxLen} karakter sınırını aşıyor.`,
       },
       { status: 400 }
@@ -105,14 +141,16 @@ async function handleTtsRequest(
       : 1.0;
   const safeRate = Math.max(0.75, Math.min(1.25, numericRate));
 
-  // 1. Önbellek Kontrolü (Cache Hit)
+  // 1. Önbellek Kontrolü (Cache Hit — providerVoiceId dahil izole anahtar)
   const cacheKey = audioCache.generateKey(
     targetVoice.provider,
     targetVoice.id,
     targetVoice.locale,
     safeRate,
     contentType,
-    cleanText
+    cleanText,
+    targetVoice.providerVoiceId,
+    "mp3-24khz-96k"
   );
 
   const cached = audioCache.get(cacheKey);
@@ -123,9 +161,13 @@ async function handleTtsRequest(
         "Content-Type": cached.mimeType,
         "Content-Length": String(cached.sizeBytes),
         "Cache-Control": "public, max-age=604800, immutable",
+        "X-TTS-Provider": cached.provider,
+        "X-TTS-Provider-Voice": cached.providerVoiceId,
         "X-TTS-Voice": targetVoice.id,
         "X-TTS-Locale": targetVoice.locale,
+        "X-TTS-Language": targetVoice.contentLanguage,
         "X-TTS-Gender": targetVoice.gender,
+        "X-TTS-Distinct-Speaker": String(cached.distinctSpeakerVerified),
         "X-TTS-Source": targetVoice.source,
         "X-TTS-Cache": "HIT",
       },
@@ -138,6 +180,8 @@ async function handleTtsRequest(
       text: cleanText,
       voiceId: targetVoice.id,
       locale: targetVoice.locale,
+      contentLanguage: targetVoice.contentLanguage as ContentLanguage,
+      gender: targetVoice.gender,
       speakingRate: safeRate,
       contentType,
     });
@@ -147,7 +191,10 @@ async function handleTtsRequest(
       buffer: result.audio,
       mimeType: result.mimeType,
       voiceId: targetVoice.id,
+      providerVoiceId: result.providerVoiceId,
+      provider: result.provider,
       locale: targetVoice.locale,
+      distinctSpeakerVerified: result.distinctSpeakerVerified,
       createdAt: Date.now(),
       sizeBytes: result.audio.length,
     });
@@ -159,9 +206,12 @@ async function handleTtsRequest(
         "Content-Length": String(result.audio.length),
         "Cache-Control": "public, max-age=604800, immutable",
         "X-TTS-Provider": result.provider,
+        "X-TTS-Provider-Voice": result.providerVoiceId,
         "X-TTS-Voice": targetVoice.id,
         "X-TTS-Locale": targetVoice.locale,
+        "X-TTS-Language": targetVoice.contentLanguage,
         "X-TTS-Gender": targetVoice.gender,
+        "X-TTS-Distinct-Speaker": String(result.distinctSpeakerVerified),
         "X-TTS-Source": targetVoice.source,
         "X-TTS-Cache": "MISS",
       },
@@ -189,13 +239,24 @@ async function handleTtsRequest(
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const text = searchParams.get("text") || "";
-  const voice = searchParams.get("voice");
-  const accent = searchParams.get("accent");
+  const voice = searchParams.get("voice") || searchParams.get("voiceId");
+  const accent = searchParams.get("accent") || searchParams.get("locale");
   const gender = searchParams.get("gender");
   const rate = searchParams.get("rate") || searchParams.get("speakingRate");
   const contentType = searchParams.get("contentType");
+  const contentLanguage = searchParams.get("contentLanguage") || searchParams.get("lang");
+  const speaker = searchParams.get("speaker");
 
-  return handleTtsRequest(text, voice, accent, gender, rate, contentType);
+  return handleTtsRequest(
+    text,
+    voice,
+    accent,
+    gender,
+    rate,
+    contentType,
+    contentLanguage,
+    speaker
+  );
 }
 
 /**
@@ -211,11 +272,22 @@ export async function POST(req: NextRequest) {
     const gender = body?.gender;
     const rate = body?.speakingRate ?? body?.rate;
     const contentType = body?.contentType;
+    const contentLanguage = body?.contentLanguage || body?.lang;
+    const speaker = body?.speaker;
 
-    return handleTtsRequest(text, voice, accent, gender, rate, contentType);
+    return handleTtsRequest(
+      text,
+      voice,
+      accent,
+      gender,
+      rate,
+      contentType,
+      contentLanguage,
+      speaker
+    );
   } catch {
     return NextResponse.json(
-      { ok: false, error: "Geçersiz JSON gövdesi." },
+      { ok: false, code: "INVALID_JSON", error: "Geçersiz JSON gövdesi." },
       { status: 400 }
     );
   }

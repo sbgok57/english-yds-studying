@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import PushManager from "@/components/PushManager";
 import ThemeStudio from "@/components/theme/ThemeStudio";
+import VoiceQaPanel from "@/components/tts/VoiceQaPanel";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Ayarlar, 1.000+ Renk Teması & Bildirimler — DİL MASTER",
-  description: "DİL MASTER 1.000+ algoritmik renk teması, SVG arka plan desenleri, karanlık/aydınlık mod stüdyosu ve bildirim tercihleri.",
+  title: "Ayarlar, Ses QA Denetimi, Renk Teması & Bildirimler — DİL MASTER",
+  description:
+    "DİL MASTER renk teması, 36 özgün SVG arka plan deseni, 16 ses profili (Emel/Ahmet ve 7 İngilizce aksan) QA denetim masası ve bildirim tercihleri.",
 };
 
 export default function AyarlarPage() {
@@ -16,11 +18,11 @@ export default function AyarlarPage() {
           <h1 className="text-3xl font-black text-white flex items-center gap-3">
             <span>⚙️</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-pink-400 to-cyan-300">
-              Ayarlar & Tema Stüdyosu
+              Ayarlar, Ses QA & Tema Stüdyosu
             </span>
           </h1>
           <p className="text-sm text-white/60 mt-1">
-            1.000+ benzersiz algoritmik tema ve SVG arka plan desenleri arasından tarzını seç, aydınlık/karanlık modunu ayarla ve bildirimlerini yönet.
+            Renk paletlerini ve 36 özgün SVG arka plan desenini özelleştirin, 16 ses profilini (Emel, Ahmet ve 7 İngilizce aksan) test edin ve bildirimlerinizi yönetin.
           </p>
         </div>
 
@@ -40,7 +42,10 @@ export default function AyarlarPage() {
         </div>
       </div>
 
-      {/* 1.000+ Tema & Renk Kişiselleştirme Stüdyosu */}
+      {/* Merkezi Ses Motoru & 16 Konuşmacı QA Denetim Masası */}
+      <VoiceQaPanel />
+
+      {/* Tema & Renk Kişiselleştirme Stüdyosu */}
       <ThemeStudio />
 
       {/* Push Bildirim Yöneticisi */}
@@ -52,7 +57,7 @@ export default function AyarlarPage() {
           <span>🔒</span> Gizlilik & Güvenlik
         </h4>
         <p>
-          Push bildirimleri Web Push VAPID standardı ile uçtan uca şifrelenir. Cihaz token'ınız yalnızca çalışma hatırlatmaları ve sınav bildirimleri göndermek amacıyla güvenle saklanır, üçüncü taraflarla paylaşılmaz.
+          Push bildirimleri Web Push VAPID standardı ile uçtan uca şifrelenir. Cihaz token&apos;ınız yalnızca çalışma hatırlatmaları ve sınav bildirimleri göndermek amacıyla güvenle saklanır, üçüncü taraflarla paylaşılmaz.
         </p>
       </div>
     </div>

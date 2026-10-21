@@ -1,23 +1,24 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useOnClickOutside } from "@/hooks/useOnClickOutside";
-import {
-  PAGES,
-  GRAMMAR_LINKS,
-  TACTICS_LINKS,
-  GAME_LINKS,
-  REAL_EXAMS,
-  DENEME_COUNT,
-} from "@/lib/site-index";
+import { PAGES } from "@/lib/site-index";
 import SearchBox from "@/components/SearchBox";
 import ThemeToggle from "@/components/ThemeToggle";
 import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
+import MenuPortal from "@/components/navigation/MenuPortal";
+import {
+  getFilteredNavigationGroups,
+  type NavigationIconId,
+} from "@/components/navigation/navigation-config";
 import { useUsage } from "@/lib/store";
 import { calculateStudentProgress } from "@/lib/progress/calculator";
 import {
   X,
+  Home,
+  LayoutDashboard,
   Compass,
   GraduationCap,
   Microscope,
@@ -31,6 +32,19 @@ import {
   Shield,
   Layers,
   ChevronRight,
+  Search,
+  Box,
+  Target,
+  Zap,
+  Gamepad2,
+  TrendingUp,
+  Calendar,
+  Award,
+  Palette,
+  Volume2,
+  User,
+  Settings,
+  HelpCircle,
 } from "lucide-react";
 
 interface MenuDrawerProps {
@@ -38,9 +52,74 @@ interface MenuDrawerProps {
   onClose: () => void;
 }
 
+function renderCategoryItemIcon(icon: NavigationIconId) {
+  const cls = "w-4 h-4 text-cyan-300 light:text-cyan-700 shrink-0";
+  switch (icon) {
+    case "home":
+      return <Home className={cls} aria-hidden="true" />;
+    case "dashboard":
+      return <LayoutDashboard className={cls} aria-hidden="true" />;
+    case "compass":
+      return <Compass className={cls} aria-hidden="true" />;
+    case "book-open":
+      return <BookOpen className={cls} aria-hidden="true" />;
+    case "layers":
+      return <Layers className={cls} aria-hidden="true" />;
+    case "box":
+      return <Box className={cls} aria-hidden="true" />;
+    case "sparkles":
+      return <Sparkles className={cls} aria-hidden="true" />;
+    case "file-up":
+      return <FileUp className={cls} aria-hidden="true" />;
+    case "graduation-cap":
+      return <GraduationCap className={cls} aria-hidden="true" />;
+    case "headphones":
+      return <Headphones className={cls} aria-hidden="true" />;
+    case "microscope":
+      return <Microscope className={cls} aria-hidden="true" />;
+    case "pen-tool":
+      return <PenTool className={cls} aria-hidden="true" />;
+    case "mic":
+      return <Mic className={cls} aria-hidden="true" />;
+    case "target":
+      return <Target className={cls} aria-hidden="true" />;
+    case "clock":
+      return <Clock className={cls} aria-hidden="true" />;
+    case "zap":
+      return <Zap className={cls} aria-hidden="true" />;
+    case "gamepad":
+      return <Gamepad2 className={cls} aria-hidden="true" />;
+    case "trending-up":
+      return <TrendingUp className={cls} aria-hidden="true" />;
+    case "calendar":
+      return <Calendar className={cls} aria-hidden="true" />;
+    case "award":
+      return <Award className={cls} aria-hidden="true" />;
+    case "palette":
+      return <Palette className={cls} aria-hidden="true" />;
+    case "volume-2":
+      return <Volume2 className={cls} aria-hidden="true" />;
+    case "user":
+      return <User className={cls} aria-hidden="true" />;
+    case "settings":
+      return <Settings className={cls} aria-hidden="true" />;
+    case "shield":
+      return <Shield className={cls} aria-hidden="true" />;
+    case "help-circle":
+      return <HelpCircle className={cls} aria-hidden="true" />;
+    default:
+      return <Compass className={cls} aria-hidden="true" />;
+  }
+}
+
 export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
+  const pathname = usePathname() || "/";
   const [themeModal, setThemeModal] = useState(false);
+  const [menuQuery, setMenuQuery] = useState("");
   const drawerRef = useRef<HTMLElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const previousOverflowRef = useRef<string>("");
+
   const { usage } = useUsage();
   const wordsLearned = Object.values(usage.words || {}).filter((w) => w.c > w.w).length;
   const grammarCount = Object.keys(usage.grammar || {}).length;
@@ -54,688 +133,356 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
     examsTaken: usage.exams?.taken || 0,
   });
 
-  const handleSafeClose = () => {
-    try {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "auto";
+  const filteredGroups = useMemo(
+    () => getFilteredNavigationGroups(menuQuery),
+    [menuQuery]
+  );
+
+  const restoreBodyAndFocus = useCallback(() => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = previousOverflowRef.current || "";
+      const trigger = document.getElementById("global-menu-trigger");
+      if (trigger instanceof HTMLElement) {
+        trigger.focus({ preventScroll: true });
       }
+    }
+  }, []);
+
+  const handleSafeClose = useCallback(() => {
+    try {
+      restoreBodyAndFocus();
       onClose();
     } catch (e) {
       console.error("[MenuDrawer] Close error suppressed:", e);
       onClose();
     }
-  };
+  }, [onClose, restoreBodyAndFocus]);
 
-  // 🛡️ useOnClickOutside: Dışarı tıklandığında menüyü hatasız ve bellek sızıntısız kapat
-  useOnClickOutside(drawerRef, handleSafeClose, open);
+  // 🛡️ useOnClickOutside: Dışarı tıklandığında menüyü hatasız ve bellek sızıntısız kapat (alt modal açıkken devre dışı)
+  useOnClickOutside(drawerRef, handleSafeClose, open && !themeModal);
 
   useEffect(() => {
-    function onKey(e: KeyboardEvent) {
+    if (!open || typeof document === "undefined") return;
+
+    previousOverflowRef.current = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    // Menü açıldığında arama kutusuna odaklan
+    const focusTimer = setTimeout(() => {
+      searchInputRef.current?.focus({ preventScroll: true });
+    }, 30);
+
+    function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        document.body.style.overflow = "auto";
-        onClose();
+        e.preventDefault();
+        if (themeModal) {
+          setThemeModal(false);
+          return;
+        }
+        handleSafeClose();
+        return;
+      }
+
+      // Focus trap (Tab / Shift+Tab)
+      if (e.key === "Tab" && drawerRef.current && !themeModal) {
+        const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
       }
     }
 
-    if (open) {
-      document.addEventListener("keydown", onKey);
-      document.body.style.overflow = "hidden";
-    }
+    document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", onKey);
-      // // SAFETY: Her zaman gövde kaydırmasını yeniden aktif et
-      document.body.style.overflow = "auto";
+      clearTimeout(focusTimer);
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflowRef.current || "";
     };
-  }, [open, onClose]);
+  }, [open, themeModal, handleSafeClose]);
 
   if (!open) return null;
 
-  const GroupTitle = ({ title, emoji }: { title: string; emoji: string }) => (
-    <h3 className="text-[11px] font-black uppercase tracking-widest text-cyan-300/80 flex items-center gap-1.5 mt-6 mb-2.5 first:mt-0 border-b border-white/10 pb-1">
-      <span>{emoji}</span> {title}
-    </h3>
-  );
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Ana Navigasyon Menüsü"
-      className="fixed inset-0 z-[9999] transition-opacity duration-300 pointer-events-auto"
-    >
-      {/* Şeffaf Temiz Arkaplan Katmanı (Karanlık çamurlu değil, net cam) */}
+    <MenuPortal>
       <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-slate-950/40 dark:bg-black/60 light:bg-slate-900/20 backdrop-blur-[4px] animate-in fade-in duration-200"
-        onClick={handleSafeClose}
-      />
-
-      {/* Yan Çekmece (Sidebar) - z-[9999] zırhı ile korunmuş, ref kontrollü */}
-      <aside
-        ref={drawerRef}
-        tabIndex={-1}
-        className="absolute right-0 top-0 h-full w-full sm:w-[440px] bg-slate-900/95 dark:bg-slate-950/95 light:bg-white/95 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 overflow-y-auto shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col transition-colors z-[10000]"
+        id="global-menu-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Ana Navigasyon Menüsü"
+        className="fixed inset-0 z-[9999] transition-opacity duration-200 pointer-events-auto"
       >
-        {/* Üst Sabit Çubuk: Başlık, 1000+ Tema Butonu, Tema Değiştirici ve Kapatma Butonu */}
-        <div className="sticky top-0 z-20 bg-slate-900/90 dark:bg-slate-950/90 light:bg-white/95 backdrop-blur-2xl border-b border-white/15 light:border-slate-200 px-5 py-3.5 space-y-3 shrink-0">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🧭</span>
-              <div>
-                <span className="font-black text-base text-white light:text-slate-900 block leading-tight">
-                  DİL MASTER Navigasyon
+        {/* Backdrop */}
+        <div
+          aria-hidden="true"
+          data-testid="menu-drawer-backdrop"
+          className="absolute inset-0 bg-slate-950/60 light:bg-slate-900/30 backdrop-blur-sm"
+          onClick={handleSafeClose}
+        />
+
+        {/* Yan Menü Kutusu (Drawer) — 100dvh, safe-area ve bağımsız dikey kaydırma */}
+        <aside
+          ref={drawerRef}
+          tabIndex={-1}
+          style={{
+            height: "100dvh",
+            maxHeight: "100dvh",
+            paddingTop: "env(safe-area-inset-top, 0px)",
+            paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          }}
+          className="absolute right-0 top-0 w-full sm:w-[460px] max-w-full bg-slate-900/98 dark:bg-slate-950/98 light:bg-white/98 light:text-slate-900 backdrop-blur-2xl border-l border-white/20 light:border-slate-300 shadow-2xl flex flex-col overflow-hidden z-[10000]"
+        >
+          {/* Üst Sabit Çubuk: Başlık, Tema Kısayolu, Koyu/Açık Mod ve Kapatma Düğmesi */}
+          <div className="sticky top-0 z-20 bg-slate-900/95 dark:bg-slate-950/95 light:bg-white/95 backdrop-blur-xl border-b border-white/15 light:border-slate-200 px-4 sm:px-5 py-3.5 space-y-3 shrink-0">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center font-black text-sm shadow-md shrink-0">
+                  DM
                 </span>
-                <span className="text-[10px] text-cyan-300/80 light:text-cyan-700 font-mono">
-                  YDS · YDT · YÖKDİL Tüm Modüller
-                </span>
-              </div>
-            </div>
-
-            {/* Yan Çekmece İçinde Canlı Tema Butonları ve Kapat */}
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setThemeModal(true)}
-                className="h-9 px-2.5 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-pink-500/15 to-cyan-500/15 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-1 text-xs font-bold transition-all shadow-sm"
-                title="🎨 1.000+ Tema Stüdyosu"
-              >
-                <span>🎨</span>
-                <span className="text-[10px] font-mono hidden sm:inline">1000+</span>
-              </button>
-              <ThemeToggle compact className="!w-9 !h-9 !px-0 rounded-xl" />
-              <button
-                onClick={handleSafeClose}
-                className="w-9 h-9 rounded-xl border border-white/15 light:border-slate-300 bg-white/5 light:bg-slate-100 hover:bg-white/15 text-white/80 light:text-slate-700 flex items-center justify-center transition-colors"
-                aria-label="Menüyü Kapat"
-              >
-                <X className="w-5 h-5 text-white/80 light:text-slate-700" />
-              </button>
-            </div>
-          </div>
-
-          <SearchBox />
-        </div>
-
-        {/* Kaydırılabilir İçerik Alanı */}
-        <div className="flex-1 px-5 py-4 space-y-6 overflow-y-auto">
-          {/* 🎨 TEMALAR — 1.000+ DESENLİ & DESENSİZ RENKLİ TEMA (EN ÜSTTE) */}
-          <div className="space-y-2">
-            <GroupTitle title="Temalar & Görünüm (1.000+ Desenli & Renkli)" emoji="🎨" />
-            <button
-              type="button"
-              onClick={() => {
-                setThemeModal(true);
-              }}
-              className="w-full p-4 rounded-2xl bg-gradient-to-r from-pink-500/25 via-purple-500/25 to-cyan-500/25 border-2 border-pink-400/60 hover:border-pink-300 flex items-center justify-between group transition-all text-left shadow-xl shadow-pink-950/40 cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-400 text-white flex items-center justify-center text-2xl font-black shadow-lg shrink-0 group-hover:scale-105 transition-transform">
-                  🎨
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-black text-white group-hover:text-pink-300 transition-colors">
-                      Temalar (Hızlı Seçici)
-                    </h4>
-                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-pink-400/30 text-pink-200 font-mono">
-                      1.000+ Tema
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/70 mt-0.5">
-                    250+ SVG Desenli & 750 Düz/Degrade Canlı Renk
-                  </p>
-                </div>
-              </div>
-              <ChevronRight className="w-5 h-5 text-pink-300 group-hover:translate-x-1 transition-transform shrink-0" />
-            </button>
-
-            <Link
-              href="/temalar"
-              onClick={handleSafeClose}
-              className="p-2.5 rounded-xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 border border-pink-400/30 hover:border-pink-300 flex items-center justify-between group transition-all"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-base">🎨</span>
-                <div>
-                  <h5 className="text-[11px] font-bold text-white group-hover:text-pink-300">
-                    1.000+ Tema Stüdyosu Bölümü (Tam Sayfa)
-                  </h5>
-                  <span className="text-[9px] text-white/50 block">250 Desenli & 750 Desensiz Tema Rehberi</span>
-                </div>
-              </div>
-              <ChevronRight className="w-4 h-4 text-pink-300 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          {/* 📅 ÇALIŞMA PLANLARI (GÜN / AY / YIL TAKVİMİ) */}
-          <div className="space-y-2">
-            <GroupTitle title="Çalışma Planları (Gün · Ay · Yıl Takvimi)" emoji="📅" />
-            <Link
-              href="/study-plans"
-              onClick={handleSafeClose}
-              className="p-4 rounded-2xl bg-gradient-to-r from-cyan-500/25 via-blue-500/25 to-purple-500/25 border-2 border-cyan-400/60 hover:border-cyan-300 flex items-center justify-between group transition-all shadow-xl shadow-cyan-950/40"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-cyan-500/30 text-cyan-300 flex items-center justify-center text-2xl font-black shrink-0 group-hover:scale-105 transition-transform">
-                  📅
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
-                      Sınav Çalışma Planları
-                    </h4>
-                    <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-cyan-400/25 text-cyan-200 font-mono">
-                      Gün / Ay / Yıl
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/70 mt-0.5">
-                    YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) kişiselleştirilmiş takvim
-                  </p>
-                </div>
-              </div>
-              <ChevronRight className="w-5 h-5 text-cyan-300 group-hover:translate-x-1 transition-transform shrink-0" />
-            </Link>
-
-            {/* Hızlı Plan Başlatıcı / Sınav Seçenekleri */}
-            <div className="grid grid-cols-3 gap-1.5">
-              <Link
-                href="/study-plans?exam=yds"
-                onClick={handleSafeClose}
-                className="p-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/30 text-center transition-all group"
-              >
-                <span className="text-[10px] font-black text-emerald-300 group-hover:text-white block">
-                  📘 YDS
-                </span>
-                <span className="text-[9px] text-white/50 block">30–120 Gün</span>
-              </Link>
-
-              <Link
-                href="/study-plans?exam=ydt"
-                onClick={handleSafeClose}
-                className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
-              >
-                <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
-                  🎯 YDT
-                </span>
-                <span className="text-[9px] text-white/50 block">Net Artırma</span>
-              </Link>
-
-              <Link
-                href="/study-plans?exam=yokdil"
-                onClick={handleSafeClose}
-                className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
-              >
-                <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
-                  🌐 YÖKDİL
-                </span>
-                <span className="text-[9px] text-white/50 block">3 Alan</span>
-              </Link>
-            </div>
-
-            {/* Özel Plan Oluşturucu Kısayolu */}
-            <Link
-              href="/study-plans?tab=generator"
-              onClick={handleSafeClose}
-              className="w-full p-2.5 rounded-xl bg-gradient-to-r from-cyan-500/15 to-purple-500/15 border border-cyan-400/30 hover:border-cyan-300 flex items-center justify-between text-xs font-bold text-cyan-200 transition-all group"
-            >
-              <span className="flex items-center gap-1.5">
-                <span>✨</span>
-                <span>Kendi Özel Çalışma Planını Oluştur</span>
-              </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-lg bg-cyan-400/20 text-cyan-300 font-mono">
-                Takvimli 🚀
-              </span>
-            </Link>
-          </div>
-
-          {/* 🚀 HAFIZA VE DEPOLAMA GENİŞLETİCİ (2.048 MB / 2 GB IndexedDB) */}
-          <div className="p-3 rounded-2xl bg-slate-950/60 border border-emerald-500/30 flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-sm font-black shrink-0">
-                💾
-              </div>
-              <div>
-                <span className="text-xs font-bold text-white block">Genişletilmiş Hafıza Devrede</span>
-                <span className="text-[10px] text-emerald-300/90 font-mono block">IndexedDB 2.048 MB (2 GB) Alan</span>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={async () => {
-                if (typeof window !== "undefined") {
-                  const { boostStorageCapacity } = await import("@/lib/storage-optimizer");
-                  await boostStorageCapacity();
-                  alert("🚀 Hafıza Kapasitesi 2.048 MB (2 GB) Seviyesine Başarıyla Genişletildi ve Önbellek Optimize Edildi!");
-                }
-              }}
-              className="text-[10px] font-black px-2.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all shrink-0"
-              title="Tarayıcı depolama sınırını kaldır ve önbelleği tazele"
-            >
-              Hafızayı Genişlet ⚡
-            </button>
-          </div>
-
-          {/* 👑 YÖNETİCİ PANELİ & 👤 HESABIM KARTLARI */}
-          <div className="space-y-1.5">
-            <h3 className="text-[11px] font-black uppercase tracking-widest text-amber-300/90 flex items-center gap-1.5 mb-2 border-b border-white/10 pb-1">
-              <span>👑</span> Yönetim & Hesap Merkezi
-            </h3>
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/admin"
-                onClick={handleSafeClose}
-                className="p-3.5 rounded-2xl bg-gradient-to-br from-purple-950/70 via-slate-900 to-purple-950/40 border-2 border-purple-400/50 hover:border-purple-300 hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col justify-between group shadow-lg shadow-purple-950/40"
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-2xl group-hover:scale-110 transition-transform">👑</span>
-                  <span className="text-[9px] font-black uppercase tracking-wider text-purple-200 bg-purple-500/25 px-2 py-0.5 rounded-full border border-purple-400/40">
-                    Admin
+                <div className="min-w-0">
+                  <span className="font-black text-base text-white light:text-slate-900 block leading-tight truncate">
+                    Menü · DİL MASTER
+                  </span>
+                  <span className="text-[11px] text-cyan-300/90 light:text-cyan-700 font-mono block truncate">
+                    YDS · YDT · YÖKDİL Tüm Ana Bölümler
                   </span>
                 </div>
-                <div>
-                  <span className="text-xs font-black text-white group-hover:text-purple-300 block">
-                    Yönetici Paneli
-                  </span>
-                  <span className="text-[10px] text-white/50 block">Öğrenci & çalışma takibi</span>
-                </div>
-              </Link>
+              </div>
 
-              <Link
-                href="/hesap"
-                onClick={handleSafeClose}
-                className="p-3.5 rounded-2xl bg-gradient-to-br from-cyan-950/70 via-slate-900 to-cyan-950/40 border-2 border-cyan-400/50 hover:border-cyan-300 hover:scale-[1.02] active:scale-[0.98] transition-all flex flex-col justify-between group shadow-lg shadow-cyan-950/40"
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-2xl group-hover:scale-110 transition-transform">👤</span>
-                  <span className="text-[9px] font-black uppercase tracking-wider text-cyan-200 bg-cyan-500/25 px-2 py-0.5 rounded-full border border-cyan-400/40">
-                    Hesap
-                  </span>
-                </div>
-                <div>
-                  <span className="text-xs font-black text-white group-hover:text-cyan-300 block">
-                    Hesabım & Profil
-                  </span>
-                  <span className="text-[10px] text-white/50 block">Hedef, avatar & ayarlar</span>
-                </div>
-              </Link>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setThemeModal(true)}
+                  className="min-h-[40px] px-2.5 rounded-xl border border-cyan-400/40 bg-cyan-500/15 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  title="Desenli Tema Galerisi"
+                >
+                  <Palette className="w-4 h-4 text-cyan-300 light:text-cyan-700" aria-hidden="true" />
+                  <span className="text-[11px] font-semibold hidden sm:inline">Temalar</span>
+                </button>
+                <ThemeToggle compact className="!w-10 !h-10 !px-0 rounded-xl" />
+                <button
+                  type="button"
+                  id="global-menu-close"
+                  onClick={handleSafeClose}
+                  className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-xl border border-white/15 light:border-slate-300 bg-white/5 light:bg-slate-100 hover:bg-white/15 text-white light:text-slate-800 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  aria-label="Menüyü Kapat"
+                >
+                  <X className="w-5 h-5" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            {/* Menü İçi Bölüm Arama Alanı */}
+            <div className="relative">
+              <label htmlFor="menu-section-search" className="sr-only">
+                Menü içinde bölüm veya modül ara
+              </label>
+              <Search
+                className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
+                aria-hidden="true"
+              />
+              <input
+                ref={searchInputRef}
+                id="menu-section-search"
+                type="search"
+                value={menuQuery}
+                onChange={(e) => setMenuQuery(e.target.value)}
+                placeholder="Bölüm ara: kelime, envanter, gramer, reading, sesli gramer..."
+                aria-label="Menü içinde bölüm veya modül ara"
+                className="w-full pl-9 pr-8 py-2.5 rounded-xl bg-slate-950/90 light:bg-slate-100 border border-white/15 light:border-slate-300 text-xs sm:text-sm text-white light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              />
+              {menuQuery && (
+                <button
+                  type="button"
+                  onClick={() => setMenuQuery("")}
+                  aria-label="Aramayı temizle"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white px-1.5 py-0.5 rounded"
+                >
+                  ✕
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Hızlı İlerleme & İndirme Kartları */}
-          <div className="grid grid-cols-2 gap-2">
-            <Link
-              href="/ilerleme"
-              onClick={handleSafeClose}
-              className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 hover:border-cyan-400 transition-all flex flex-col justify-between group"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xl">📈</span>
-                <span className="text-[10px] font-black text-cyan-300 font-mono">%{progress.overallPercent}</span>
-              </div>
-              <span className="text-xs font-black text-white group-hover:text-cyan-300">İlerlemem</span>
-            </Link>
-
-            <button
-              onClick={() => {
-                handleSafeClose();
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(new CustomEvent("yds:open-install-modal"));
-                }
-              }}
-              className="p-3 rounded-2xl bg-gradient-to-br from-purple-500/15 to-pink-500/10 border border-purple-500/30 hover:border-purple-400 transition-all text-left flex flex-col justify-between group shadow-sm"
-              title="iPhone, iPad ve Android cihazına tek tıkla yükle"
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xl">📲</span>
-                <span className="text-[10px] font-black text-purple-300 font-mono">iOS & Android</span>
-              </div>
-              <span className="text-xs font-black text-white group-hover:text-purple-300">
-                iOS ve Android&apos;e İndir
-              </span>
-            </button>
-          </div>
-
-          {/* 1. ÜÇ BÜYÜK SINAV MERKEZİ (YDS, YDT, YÖKDİL) */}
-          <div>
-            <GroupTitle title="Sınav Özel Merkezleri (YDS / YDT / YÖKDİL)" emoji="🎯" />
-            <div className="space-y-2">
-              <Link
-                href="/yds"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-gradient-to-r from-cyan-500/15 to-blue-500/15 border border-cyan-400/30 hover:border-cyan-300 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg font-black">
-                    🎯
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-white group-hover:text-cyan-300 transition-colors">
-                      YDS Hazırlık & Sınav Merkezi
-                    </h4>
-                    <p className="text-[10px] text-white/50">180 dk • 80 Soru • Kamu & Lisansüstü</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-cyan-300 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <Link
-                href="/ydt"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 to-orange-500/15 border border-amber-400/30 hover:border-amber-300 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg font-black">
-                    🎓
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-                      YDT (YKS-Dil / LYS-5) Merkezi
-                    </h4>
-                    <p className="text-[10px] text-white/50">120 dk • 80 Soru • Üniversite Giriş</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
-              </Link>
-
-              <Link
-                href="/yokdil"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-gradient-to-r from-purple-500/15 to-pink-500/15 border border-purple-400/30 hover:border-purple-300 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-lg font-black">
-                    🔬
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-black text-white group-hover:text-purple-300 transition-colors">
-                      YÖKDİL Alan Merkezi (Sağlık, Fen, Sosyal)
-                    </h4>
-                    <p className="text-[10px] text-white/50">180 dk • 80 Soru • 3 Ayrı Bilim Alanı</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-purple-300 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Sınav Bazlı Kelime Envanteri & Yayın Havuzu */}
-          <div>
-            <GroupTitle title="Kelime Envanteri (Sınav Bazlı)" emoji="📚" />
-            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-indigo-950/60 via-slate-900 to-cyan-950/40 border border-indigo-400/30 space-y-2.5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">📖</span>
-                  <div>
-                    <span className="text-xs font-black text-white block">
-                      Akademik Kelime Envanteri
-                    </span>
-                    <span className="text-[10px] text-white/50 block">
-                      Sınavlara göre ayrıştırılmış yayın havuzu
-                    </span>
-                  </div>
-                </div>
+          {/* Kaydırılabilir İçerik Alanı (min-height: 0 ile tam dikey scroll) */}
+          <div
+            data-testid="menu-drawer-content"
+            className="flex-1 min-h-0 px-4 sm:px-5 py-4 space-y-6 overflow-y-auto overscroll-contain"
+          >
+            {/* Hızlı İlerleme & Durum Özeti */}
+            {!menuQuery && (
+              <div className="grid grid-cols-3 gap-2">
+                <Link
+                  href="/ilerleme"
+                  onClick={handleSafeClose}
+                  className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25 hover:border-cyan-400 transition-all text-center"
+                >
+                  <span className="text-xs font-black text-cyan-300 light:text-cyan-700 font-mono block">
+                    %{progress.overallPercent}
+                  </span>
+                  <span className="text-[11px] font-semibold text-white/80 light:text-slate-700">
+                    Genel İlerleme
+                  </span>
+                </Link>
                 <Link
                   href="/vocabulary/inventory"
                   onClick={handleSafeClose}
-                  className="text-[11px] font-bold text-cyan-300 hover:text-white flex items-center gap-0.5"
+                  className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 hover:border-emerald-400 transition-all text-center"
                 >
-                  Tümü &rarr;
-                </Link>
-              </div>
-
-              {/* Sınav Seçim Hapları */}
-              <div className="grid grid-cols-3 gap-1.5 pt-1">
-                <Link
-                  href="/vocabulary/inventory?exam=YDS"
-                  onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/30 text-center transition-all group"
-                >
-                  <span className="text-[10px] font-black text-cyan-300 group-hover:text-white block">
-                    🎯 YDS
+                  <span className="text-xs font-black text-emerald-300 light:text-emerald-700 font-mono block">
+                    {wordsLearned}
                   </span>
-                  <span className="text-[9px] text-white/50 block">Akademik</span>
-                </Link>
-
-                <Link
-                  href="/vocabulary/inventory?exam=YDT"
-                  onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-center transition-all group"
-                >
-                  <span className="text-[10px] font-black text-amber-300 group-hover:text-white block">
-                    🎓 YDT
+                  <span className="text-[11px] font-semibold text-white/80 light:text-slate-700">
+                    Öğrenilen Kelime
                   </span>
-                  <span className="text-[9px] text-white/50 block">YKS-Dil</span>
                 </Link>
-
                 <Link
-                  href="/vocabulary/inventory?exam=YÖKDİL"
+                  href="/temalar"
                   onClick={handleSafeClose}
-                  className="p-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/30 text-center transition-all group"
+                  className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/25 hover:border-purple-400 transition-all text-center"
                 >
-                  <span className="text-[10px] font-black text-purple-300 group-hover:text-white block">
-                    🔬 YÖKDİL
+                  <span className="text-xs font-black text-purple-300 light:text-purple-700 font-mono block">
+                    36 Desen
                   </span>
-                  <span className="text-[9px] text-white/50 block">3 Alan</span>
+                  <span className="text-[11px] font-semibold text-white/80 light:text-slate-700">
+                    Tema Galerisi
+                  </span>
                 </Link>
               </div>
-            </div>
-          </div>
+            )}
 
-          {/* 2. YEDİ TEMEL DİL BECERİSİ (SKILLS) */}
-          <div>
-            <GroupTitle title="7 Temel Dil Becerisi Modülü" emoji="⚡" />
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/vocabulary/flashcards"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">🃏</span>
-                <span className="text-xs font-black text-white group-hover:text-cyan-300 block">
-                  3D Flashcards
-                </span>
-                <span className="text-[10px] text-white/50">2.500+ Kelime & Küp</span>
-              </Link>
+            {/* Merkezi Navigasyon Kategorileri (A–H) */}
+            {filteredGroups.length > 0 ? (
+              <div className="space-y-5">
+                {filteredGroups.map((group) => (
+                  <section key={group.id} aria-label={group.title} className="space-y-2">
+                    <div className="border-b border-white/10 light:border-slate-200 pb-1.5">
+                      <h3 className="text-xs font-black uppercase tracking-wider text-cyan-300 light:text-cyan-800">
+                        {group.title}
+                      </h3>
+                      <p className="text-[11px] text-white/50 light:text-slate-500">
+                        {group.subtitle}
+                      </p>
+                    </div>
 
-              <Link
-                href="/grammar"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-purple-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">📖</span>
-                <span className="text-xs font-black text-white group-hover:text-purple-300 block">
-                  Gramer (27 Konu)
-                </span>
-                <span className="text-[10px] text-white/50">Formül & Animasyon</span>
-              </Link>
+                    <div className="grid grid-cols-1 gap-1.5">
+                      {group.items.map((item) => {
+                        const isActive =
+                          item.href === "/"
+                            ? pathname === "/"
+                            : pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-              <Link
-                href="/reading"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">🔬</span>
-                <span className="text-xs font-black text-white group-hover:text-emerald-300 block">
-                  Reading Lab
-                </span>
-                <span className="text-[10px] text-white/50">Tıkla-Öğren Sözlük</span>
-              </Link>
-
-              <Link
-                href="/listening"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-blue-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">🎧</span>
-                <span className="text-xs font-black text-white group-hover:text-blue-300 block">
-                  Listening Lab
-                </span>
-                <span className="text-[10px] text-white/50">14 Aksan & Ses</span>
-              </Link>
-
-              <Link
-                href="/writing"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-pink-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">✍️</span>
-                <span className="text-xs font-black text-white group-hover:text-pink-300 block">
-                  Writing Lab
-                </span>
-                <span className="text-[10px] text-white/50">Cümle Kurma & Çeviri</span>
-              </Link>
-
-              <Link
-                href="/speaking"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-rose-400/40 transition-all block group"
-              >
-                <span className="text-xl block mb-1">🎙️</span>
-                <span className="text-xs font-black text-white group-hover:text-rose-300 block">
-                  Speaking Lab
-                </span>
-                <span className="text-[10px] text-white/50">AI Sesli Pratik</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* 3. TÜM DENEME SINAVLARI */}
-          <div>
-            <GroupTitle title="Sınav Denemeleri & Çıkmış Sorular" emoji="⏱️" />
-            <Link
-              href="/exams"
-              onClick={handleSafeClose}
-              className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-pink-500/20 to-cyan-500/20 border border-amber-400/30 hover:border-amber-300 flex items-center justify-between group transition-all"
-            >
-              <div>
-                <span className="text-xs font-black text-white group-hover:text-amber-300 block">
-                  ⏱️ Tüm Sınav Havuzunu Aç
-                </span>
-                <span className="text-[10px] text-white/60">
-                  YDS (2013-2026), YDT (2010-2026), YÖKDİL + 72'şer Özgün Deneme
-                </span>
+                        return (
+                          <Link
+                            key={item.id}
+                            href={item.href}
+                            onClick={handleSafeClose}
+                            aria-current={isActive ? "page" : undefined}
+                            className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                              isActive
+                                ? "bg-cyan-500/20 border-cyan-400 text-white light:bg-cyan-50 light:border-cyan-600 light:text-slate-950 shadow-sm"
+                                : "bg-white/[0.03] light:bg-slate-50 border-white/10 light:border-slate-200 hover:border-cyan-400/50 hover:bg-white/[0.06] text-white light:text-slate-900"
+                            }`}
+                          >
+                            <div className="flex items-start gap-3 min-w-0">
+                              <div className="mt-0.5 p-2 rounded-lg bg-white/5 light:bg-slate-200/70 shrink-0">
+                                {renderCategoryItemIcon(item.icon)}
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="text-xs sm:text-sm font-bold leading-snug">
+                                    {item.label}
+                                  </span>
+                                  {item.badge && (
+                                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-200 light:bg-cyan-100 light:text-cyan-800">
+                                      {item.badge}
+                                    </span>
+                                  )}
+                                  {isActive && (
+                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/25 text-emerald-300 light:bg-emerald-100 light:text-emerald-800">
+                                      Aktif
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-[11px] text-white/60 light:text-slate-600 mt-0.5 line-clamp-2">
+                                  {item.description}
+                                </p>
+                              </div>
+                            </div>
+                            <ChevronRight
+                              className="w-4 h-4 text-slate-400 shrink-0"
+                              aria-hidden="true"
+                            />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ))}
               </div>
-              <ChevronRight className="w-5 h-5 text-amber-300 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          {/* 4. AKILLI PDF VE KELİME ARAÇLARI */}
-          <div>
-            <GroupTitle title="Akıllı Araçlar & PDF Aktarıcı" emoji="📄" />
-            <div className="space-y-1.5">
-              <Link
-                href="/import"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-400 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">📄➕</span>
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-emerald-300">
-                      Akıllı PDF & Kelime Ekle (Claude AI)
-                    </h5>
-                    <p className="text-[10px] text-white/50">Kitap/deneme yükle, otomatik kelimeleri ayıkla</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-emerald-300" />
-              </Link>
-
-              <Link
-                href="/grammar/audio"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/30 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">🎧</span>
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-cyan-300">
-                      Sesli Gramer Kodları (12 Track)
-                    </h5>
-                    <p className="text-[10px] text-white/50">ALi CÜMLEci vs DEDE İSİMci & kilit ekranı</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-cyan-300" />
-              </Link>
-
-              <Link
-                href="/tactics"
-                onClick={handleSafeClose}
-                className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-pink-400/30 flex items-center justify-between group transition-all"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">🎯</span>
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-pink-300">
-                      Soru Taktikleri (11 Tip / 600 Soru)
-                    </h5>
-                    <p className="text-[10px] text-white/50">Çeldirici eleme & adım adım çözümler</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-pink-300" />
-              </Link>
-
-              <Link
-                href="/games#game-library"
-                onClick={handleSafeClose}
-                className="p-3.5 rounded-2xl bg-gradient-to-r from-pink-500/20 via-purple-600/20 to-amber-500/20 border-2 border-amber-400/50 hover:border-amber-300 hover:scale-[1.01] flex items-center justify-between group transition-all shadow-lg"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="text-2xl group-hover:scale-110 transition-transform">🎮</span>
-                  <div>
-                    <h5 className="text-xs font-black text-white group-hover:text-amber-300 flex items-center gap-1.5">
-                      <span>Oyun Kütüphanesi</span>
-                      <span className="px-2 py-0.2 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black">240+ Oyun</span>
-                    </h5>
-                    <p className="text-[10px] text-white/60">10 özgün mekanik • 24 gramer konusu • %100 çevrimdışı</p>
-                  </div>
-                </div>
-                <ChevronRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-
-          {/* 5. DİĞER SAYFALAR & YÖNETİM */}
-          <div>
-            <GroupTitle title="Genel Sayfalar & Ayarlar" emoji="📘" />
-            <div className="grid grid-cols-2 gap-1.5">
-              {PAGES.slice(0, 10).map((p) => (
-                <Link
-                  key={p.href}
-                  href={p.href}
-                  onClick={handleSafeClose}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white/75 hover:bg-white/10 hover:text-white transition-colors truncate"
+            ) : (
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center space-y-2">
+                <p className="text-sm font-bold text-white light:text-slate-900">
+                  &ldquo;{menuQuery}&rdquo; ile eşleşen menü bölümü bulunamadı.
+                </p>
+                <p className="text-xs text-white/60 light:text-slate-600">
+                  &ldquo;kelime&rdquo;, &ldquo;envanter&rdquo;, &ldquo;gramer&rdquo;, &ldquo;reading&rdquo; veya &ldquo;tema&rdquo; yazarak arayabilirsiniz.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setMenuQuery("")}
+                  className="px-3 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 text-xs font-bold"
                 >
-                  <span>{p.emoji}</span>
-                  <span className="truncate">{p.label}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Sistem Denetçisi / Sıfır Hata Butonu */}
-          <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => {
-                handleSafeClose();
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(new CustomEvent("yds:open-debug"));
-                }
-              }}
-              className="w-full p-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25 text-left flex items-center justify-between transition-all"
-            >
-              <div className="flex items-center gap-2">
-                <span>🛡️</span>
-                <span className="text-xs font-black">Sistem Denetçisi & Sıfır Hata (0 Hata)</span>
+                  Tüm Bölümleri Göster
+                </button>
               </div>
-              <span className="text-xs">⚡ Tara & Sıfırla</span>
-            </button>
-          </div>
-        </div>
-      </aside>
+            )}
 
-      {/* 1.000+ Tema Seçici Modal */}
-      <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
-    </div>
+            {/* Kelime & Konu Sözlük Araması */}
+            <div className="pt-3 border-t border-white/10 light:border-slate-200 space-y-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-white/60 light:text-slate-600 block">
+                Sözlük & İçerik Araması
+              </span>
+              <SearchBox />
+            </div>
+
+            {/* Ek Yardımcı Sayfalar */}
+            {!menuQuery && (
+              <div className="pt-2 border-t border-white/10 light:border-slate-200">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-white/50 light:text-slate-500 block mb-2">
+                  Hızlı Bağlantılar
+                </span>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {PAGES.slice(0, 8).map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      onClick={handleSafeClose}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-white/75 light:text-slate-700 hover:bg-white/10 hover:text-white transition-colors truncate"
+                    >
+                      <span aria-hidden="true">{p.emoji}</span>
+                      <span className="truncate">{p.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </aside>
+
+        {/* Hızlı Tema Seçici Modal */}
+        <ThemeQuickModal open={themeModal} onClose={() => setThemeModal(false)} />
+      </div>
+    </MenuPortal>
   );
 }
