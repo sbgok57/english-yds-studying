@@ -58,7 +58,7 @@ export class SmartNotificationManager {
       });
     } else if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
       try {
-        new Notification(tip.title, { body: tip.body, icon: '/favicon.ico' });
+        new Notification(tip.title, { body: tip.body, icon: '/icons/icon-192.png' });
       } catch {
         // Tarayıcı kısıtı durumunda sessiz kal
       }
