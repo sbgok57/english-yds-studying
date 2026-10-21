@@ -10,6 +10,7 @@ export interface LessonTrack {
   level: string; // YDS, YDT, YÖKDİL
   audioUrl?: string;
   textScript: string;
+  speaker?: 'emel' | 'ahmet';
 }
 
 export class BackgroundAudioEngine {
@@ -48,6 +49,16 @@ export class BackgroundAudioEngine {
     this.isInitialized = true;
   }
 
+  public buildLessonStreamUrl(track: LessonTrack): string {
+    if (track.audioUrl) return track.audioUrl;
+    const speaker = track.speaker === 'ahmet' ? 'ahmet' : 'emel';
+    const gender = speaker === 'ahmet' ? 'male' : 'female';
+    const voiceId = speaker === 'ahmet' ? 'tr-TR-male-ahmet' : 'tr-TR-female-emel';
+    return `/api/tts?text=${encodeURIComponent(
+      track.textScript
+    )}&voiceId=${voiceId}&locale=tr-TR&contentLanguage=tr&speaker=${speaker}&gender=${gender}&rate=0.95&contentType=long-form`;
+  }
+
   // Tane Tane, Doğal İnsan Sesiyle Gramer Çalma Fonksiyonu
   public async playGrammarLesson(track: LessonTrack): Promise<void> {
     this.initAudioElement();
@@ -59,7 +70,7 @@ export class BackgroundAudioEngine {
     if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: track.title,
-        artist: 'DİL MASTER (Doğal İnsan Sesi)',
+        artist: track.speaker === 'ahmet' ? 'DİL MASTER (Ahmet — Erkek Hoca)' : 'DİL MASTER (Emel — Kadın Hoca)',
         album: `${track.level} Gramer Akademisi`,
         artwork: [
           { src: '/favicon.ico', sizes: '192x192', type: 'image/png' }
@@ -68,13 +79,8 @@ export class BackgroundAudioEngine {
       navigator.mediaSession.playbackState = 'playing';
     }
 
-    // Doğal İnsan Sesi Stream Kaynağı (Tane tane, 0.95x hızında Türkçe & İngilizce Doğal Anlatım)
-    let sourceUrl = track.audioUrl;
-    if (!sourceUrl) {
-      // Doğal ses sentezleme akışı (Google Cloud / Edge Neural Stream)
-      const encodedText = encodeURIComponent(track.textScript);
-      sourceUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=tr&client=tw-ob`;
-    }
+    // Merkezi /api/tts Doğal İnsan Sesi Stream Kaynağı (Emel / Ahmet)
+    const sourceUrl = this.buildLessonStreamUrl(track);
 
     this.audioElement.src = sourceUrl;
     this.audioElement.playbackRate = 0.95; // Tane tane ve sindirerek anlatım

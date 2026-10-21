@@ -28,7 +28,16 @@ assert.ok(speechEngine instanceof SpeechEngineService, "speechEngine singleton o
 // Güvenli başlatma ve durdurma
 speechEngine.unlockAudio();
 speechEngine.stop();
-console.log("  ✅ PASS: 7 accents defined, unlockAudio & stop methods operate safely.\n");
+const scotPayload = speechEngine.buildApiRequestPayload({
+  text: "ubiquitous",
+  accent: "en-GB-scotland",
+  gender: "male",
+  speakingRate: 0.9,
+});
+assert.strictEqual(scotPayload.voiceId, "en-GB-scotland-male-thomas", "Kanonik İskoç erkek ses ID'si çözümlenmelidir.");
+assert.strictEqual(scotPayload.contentType, "word", "Tek kelimelik metin 'word' contentType üretmelidir.");
+assert.strictEqual(scotPayload.rate, 0.9, "Hız 'rate' alanına yazılmalıdır.");
+console.log("  ✅ PASS: 7 accents defined, canonical voiceId payload & unlockAudio/stop methods operate safely.\n");
 
 // 2. BackgroundAudioEngine ve Kilit Ekranı (MediaSession) Doğrulaması
 console.log("  2. Testing BackgroundAudioEngine & Lesson Playback...");
@@ -42,11 +51,18 @@ const testTrack: LessonTrack = {
   textScript: "Since bağlacı arkasından past alır, ana cümlede present perfect gelir.",
 };
 
+const emelStreamUrl = backgroundAudio.buildLessonStreamUrl({ ...testTrack, speaker: "emel" });
+const ahmetStreamUrl = backgroundAudio.buildLessonStreamUrl({ ...testTrack, speaker: "ahmet" });
+assert.ok(emelStreamUrl.startsWith("/api/tts?"), "BackgroundAudioEngine merkezi /api/tts rotasını kullanmalıdır.");
+assert.ok(emelStreamUrl.includes("voiceId=tr-TR-female-emel"), "Emel stream URL'i tr-TR-female-emel içermelidir.");
+assert.ok(ahmetStreamUrl.includes("voiceId=tr-TR-male-ahmet"), "Ahmet stream URL'i tr-TR-male-ahmet içermelidir.");
+assert.notStrictEqual(emelStreamUrl, ahmetStreamUrl, "Emel ve Ahmet stream URL'leri birbirinden farklı olmalıdır.");
+
 backgroundAudio.play();
 backgroundAudio.pause();
 backgroundAudio.stop();
 assert.strictEqual(backgroundAudio.getCurrentTrack(), null, "Başlangıçta track null olmalıdır.");
-console.log("  ✅ PASS: BackgroundAudioEngine controls work seamlessly.\n");
+console.log("  ✅ PASS: BackgroundAudioEngine controls & Emel/Ahmet /api/tts stream URLs work seamlessly.\n");
 
 // 3. SmartNotificationManager ve Hap Bilgiler Doğrulaması
 console.log("  3. Testing SmartNotificationManager & Smart Tips...");
