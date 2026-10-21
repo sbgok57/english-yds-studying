@@ -2,14 +2,21 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Download, X, Share2, PlusSquare, Smartphone, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
 
 export default function PwaInstaller() {
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isStandalone, setIsStandalone] = useState(false);
   const [isIos, setIsIos] = useState(false);
   const [showIosGuide, setShowIosGuide] = useState(false);
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const installClickRef = useRef<() => Promise<void>>(async () => {});
 
   useEffect(() => {
     setMounted(true);
@@ -17,7 +24,7 @@ export default function PwaInstaller() {
     // 1. Standalone / Yüklü Kontrolü
     const checkStandalone = () => {
       const isMediaStandalone = window.matchMedia("(display-mode: standalone)").matches;
-      const isNavStandalone = (window.navigator as any).standalone === true;
+      const isNavStandalone = (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
       return isMediaStandalone || isNavStandalone;
     };
 
@@ -40,13 +47,13 @@ export default function PwaInstaller() {
 
     // 3. iOS Tespiti
     const ua = window.navigator.userAgent;
-    const isIosDevice = /iPad|iPhone|iPod/.test(ua) && !(window as any).MSStream;
+    const isIosDevice = /iPad|iPhone|iPod/.test(ua) && !("MSStream" in window);
     setIsIos(isIosDevice);
 
     // 4. Android / Chrome beforeinstallprompt dinleyicisi
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setDeferredPrompt(e);
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -61,13 +68,7 @@ export default function PwaInstaller() {
     // 6. Dışarıdan tetiklenebilir açılış sinyali
     const handleExternalTrigger = () => {
       if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult: any) => {
-          if (choiceResult.outcome === "accepted") {
-            setIsStandalone(true);
-          }
-          setDeferredPrompt(null);
-        });
+        void installClickRef.current();
       } else {
         setShowIosGuide(true);
       }
@@ -93,18 +94,24 @@ export default function PwaInstaller() {
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
-      if (choiceResult.outcome === "accepted") {
-        setIsStandalone(true);
+      try {
+        await deferredPrompt.prompt();
+        const choiceResult = await deferredPrompt.userChoice;
+        if (choiceResult.outcome === "accepted") {
+          setIsStandalone(true);
+        }
+      } catch {
+        setShowIosGuide(true);
+      } finally {
+        setDeferredPrompt(null);
       }
-      setDeferredPrompt(null);
     } else if (isIos) {
       setShowIosGuide(true);
     } else {
       setShowIosGuide(true);
     }
   };
+  installClickRef.current = handleInstallClick;
 
   const handleDismiss = () => {
     setBannerDismissed(true);
@@ -128,16 +135,14 @@ export default function PwaInstaller() {
         >
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-[1.5px] shrink-0 shadow-md">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center text-lg">
-                🧠
-              </div>
+              <Image src="/icons/icon-192.png" alt="" width={40} height={40} className="h-full w-full rounded-[10px] object-cover" />
             </div>
             <div className="min-w-0">
               <h4 className="text-xs sm:text-sm font-bold text-white truncate">
                 DİL MASTER Uygulamasını Yükle
               </h4>
               <p className="text-[11px] text-white/60 truncate">
-                Hızlı açılış, tam ekran ve offline çalışma
+                Hızlı erişim ve tam ekran deneyimi
               </p>
             </div>
           </div>
@@ -176,8 +181,8 @@ export default function PwaInstaller() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center text-xl shadow-lg">
-                  🧠
+                <div className="h-10 w-10 overflow-hidden rounded-2xl shadow-lg">
+                  <Image src="/icons/icon-192.png" alt="" width={40} height={40} className="h-full w-full object-cover" />
                 </div>
                 <div>
                   <h3 id="pwa-install-guide-title" className="font-black text-base">iOS ve Android&apos;e İndir</h3>

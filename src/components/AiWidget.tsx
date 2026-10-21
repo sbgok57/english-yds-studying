@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import ChatPanel from "./ChatPanel";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+
+const ChatPanel = dynamic(() => import("./ChatPanel"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center text-sm text-white/60" role="status">
+      Sohbet hazırlanıyor…
+    </div>
+  ),
+});
 
 /** Tüm sayfalarda gezen yüzen YDS Kanka AI. */
 export default function AiWidget() {
@@ -11,11 +21,11 @@ export default function AiWidget() {
     <>
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-4 right-4 z-40 w-14 h-14 rounded-full bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center text-2xl shadow-xl shadow-purple-500/40 hover:scale-110 transition-transform anim-pulse-glow"
+        className="fixed bottom-4 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full border border-cyan-200/60 bg-slate-950 shadow-xl shadow-cyan-950/40 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 motion-reduce:transition-none"
         aria-label="YDS Kanka AI"
         title="YDS Kanka AI"
       >
-        🤖
+        <Image src="/icons/icon-192.png" alt="" width={48} height={48} className="h-12 w-12 rounded-full object-cover" />
       </button>
 
       {open && (
