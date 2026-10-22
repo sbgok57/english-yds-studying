@@ -31,15 +31,6 @@ function resolveExample(serializedExamples: string | undefined, fallback: string
   return fallback;
 }
 
-function hashVisualSeed(value: string): number {
-  let hash = 2166136261;
-  for (const character of value) {
-    hash ^= character.codePointAt(0) || 0;
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-}
-
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const wordId = searchParams.get("id");
@@ -68,25 +59,20 @@ export async function GET(req: NextRequest) {
     const targetType = word?.type || requestedType || "academic vocabulary";
     const targetExample = resolveExample(word?.examples, requestedExample);
 
-    // Reuse a stored 3D image only when its style, sense and current prompt version match.
-    if (style === "3d" && word?.imageUrl?.includes("memoryVersion=3") && word.imageUrl.includes("style=3d")) {
-      return NextResponse.json({
-        imageUrl: word.imageUrl,
-        source: "db",
-        word: targetEnglish,
-        meaning: targetTurkish,
-      });
-    }
-
-    const prompt = generateVocabularyVisualPrompt(targetEnglish, targetTurkish, targetType, targetExample || "", style);
-    const hash = hashVisualSeed(`${targetEnglish}|${targetTurkish}|${targetType}|${targetExample}|${style}|memory-v3`);
-    const ai3dImageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
-      prompt
-    )}?width=768&height=768&nologo=true&seed=${hash}&style=${style}&memoryVersion=3`;
+    // Keep the provider URL server-side. The app renders through our own
+    // same-origin image endpoint, which validates MIME/size and can be cached.
+    const imageQuery = new URLSearchParams({
+      word: targetEnglish,
+      meaning: targetTurkish,
+      type: targetType,
+      style,
+    });
+    if (targetExample) imageQuery.set("example", targetExample);
+    const imageUrl = `/api/word-image/image?${imageQuery.toString()}`;
 
     return NextResponse.json({
-      imageUrl: ai3dImageUrl,
-      source: "ai-3d-render",
+      imageUrl,
+      source: "same-origin-image-proxy",
       word: targetEnglish,
       meaning: targetTurkish,
       style: `${style}-vocabulary-memory-v3`,

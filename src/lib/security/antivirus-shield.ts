@@ -1,8 +1,10 @@
 /**
- * ENTERPRISE ANTIVIRUS & CYBER SECURITY SHIELD (P0 RELIABILITY & SECURITY)
+ * Application-level request heuristic filter.
  * 
- * Comprehensive Anti-Malware, Anti-Virus, WebShell, and Intrusion Prevention Engine.
- * Protects website and application against:
+ * This is not an endpoint antivirus or malware sandbox. It applies request
+ * heuristics and upload validation inside the app. Production edge protection
+ * and dependency scanning must be supplied by the hosting/repository platform.
+ * It checks for:
  * 1. Virus & Trojan Payloads (EICAR, Droppers, Malicious Polyglots)
  * 2. WebShells & Remote Code Execution (b374k, c99, r57, eval, system, passthru)
  * 3. SQL Injection (SQLi) & Database Tampering
@@ -27,7 +29,7 @@ export interface SecurityTelemetry {
   status: "ACTIVE_PROTECTED" | "DEGRADED" | "STANDBY";
   engineName: string;
   version: string;
-  signaturesCount: number;
+  rulesCount: number;
   totalScans: number;
   threatsBlocked: number;
   lastThreatAt: string | null;
@@ -492,11 +494,11 @@ export function sanitizeInputString(input: string): string {
 }
 
 // ==========================================
-// 3. MILITARY-GRADE HTTP SECURITY HEADERS
+// 3. HTTP SECURITY HEADERS
 // ==========================================
 
 /**
- * Attaches enterprise-grade HTTP security headers to response
+ * Attaches browser security headers to response
  */
 export function applySecurityHeaders(res: NextResponse): NextResponse {
   // Prevent MIME-sniffing
@@ -504,9 +506,6 @@ export function applySecurityHeaders(res: NextResponse): NextResponse {
 
   // Prevent Clickjacking (disallow embedding in foreign iframes)
   res.headers.set("X-Frame-Options", "DENY");
-
-  // Legacy XSS filter activation
-  res.headers.set("X-XSS-Protection", "1; mode=block");
 
   // Enforce HTTPS for 2 years with preloading
   res.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
@@ -537,9 +536,6 @@ export function applySecurityHeaders(res: NextResponse): NextResponse {
 
   res.headers.set("Content-Security-Policy", cspHeader);
 
-  // Custom Antivirus Shield signature verification header
-  res.headers.set("X-Protected-By", "YDS-Master-Antivirus-Shield-v4.2");
-
   return res;
 }
 
@@ -554,19 +550,24 @@ function recordThreat(type: string) {
 }
 
 /**
- * Returns live Antivirus & Security telemetry for Admin Dashboard
+ * Returns application request-filter telemetry for the Admin Dashboard.
+ * The status deliberately remains degraded: these heuristics are not a full
+ * antivirus engine and must not be presented as one.
  */
 export function getSecurityShieldTelemetry(): SecurityTelemetry {
+  const rulesCount = 1 + WEBSHELL_PATTERNS.length + RCE_COMMAND_PATTERNS.length +
+    SQLI_PATTERNS.length + XSS_PATTERNS.length + TRAVERSAL_PATTERNS.length +
+    PROTOTYPE_POLLUTION_PATTERNS.length + SSRF_PATTERNS.length + PROMPT_INJECTION_PATTERNS.length;
   return {
-    status: "ACTIVE_PROTECTED",
-    engineName: "YDS Master Heuristic & Signature Cyber-Shield",
-    version: "4.2-enterprise",
-    signaturesCount: 1480,
+    status: "DEGRADED",
+    engineName: "YDS Master HTTP Heuristic Filter",
+    version: "5.0-app-filter",
+    rulesCount,
     totalScans: Math.max(scanCounter, 1),
     threatsBlocked: blockedCounter,
     lastThreatAt: lastThreatTimestamp,
     activeModules: {
-      antiVirusSignature: true,
+      antiVirusSignature: false,
       heuristicWebshell: true,
       sqlInjectionDefense: true,
       xssSanitizer: true,

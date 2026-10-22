@@ -17,7 +17,9 @@ export async function GET() {
   const providerHealth = await defaultTtsProvider.healthCheck();
 
   const enabledCount = VOICE_REGISTRY.filter((v) => v.enabled).length;
-  const isHealthy = matrix.valid && enabledCount === 12 && providerHealth.available;
+  // Keep health reporting tied to the registry: the project now has a
+  // variable number of accent and narrator profiles.
+  const isHealthy = matrix.valid && enabledCount === VOICE_REGISTRY.length && providerHealth.available;
 
   return NextResponse.json({
     status: isHealthy ? "ok" : "degraded",

