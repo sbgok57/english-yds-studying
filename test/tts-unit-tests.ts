@@ -11,6 +11,7 @@ import {
 } from "../src/lib/tts/voice-registry";
 import { escapeXml, formatSpeakingRate } from "../src/lib/tts/tts-provider";
 import { audioCache } from "../src/lib/tts/audio-cache";
+import { chooseExactBrowserVoice } from "../src/lib/tts/browser-voice-matcher";
 
 console.log("▶ Starting TTS Voice Registry & Unit Tests...\n");
 
@@ -51,6 +52,31 @@ for (const loc of requiredLocales) {
   );
 }
 console.log("  ✅ PASS: All 7 locales have distinct, verified female & male voices.\n");
+
+// 2b. Browser fallback must preserve both exact region and speaker identity.
+const deviceVoices = [
+  { name: "Google UK English Female", lang: "en-GB" },
+  { name: "Google US English Female", lang: "en-US" },
+  { name: "Google US English Male", lang: "en-US" },
+  { name: "Microsoft Clara Online (Natural) - English (Canada)", lang: "en-CA" },
+  { name: "Microsoft Liam Online (Natural) - English (Canada)", lang: "en-CA" },
+  { name: "Microsoft Maisie Online (Natural) - English (Scotland)", lang: "en-GB" },
+  { name: "Microsoft Thomas Online (Natural) - English (Scotland)", lang: "en-GB" },
+  { name: "Microsoft Emel Online (Natural) - Turkish", lang: "tr-TR" },
+  { name: "Microsoft Ahmet Online (Natural) - Turkish", lang: "tr-TR" },
+];
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "female")?.name, "Google UK English Female");
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-US", "male")?.name, "Google US English Male");
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "female")?.name, deviceVoices[3].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "male")?.name, deviceVoices[4].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB-scotland", "female")?.name, deviceVoices[5].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB-scotland", "male")?.name, deviceVoices[6].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "female")?.name, deviceVoices[7].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "male")?.name, deviceVoices[8].name);
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "male"), undefined, "US/Canada voices must not impersonate a missing British male voice");
+assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-AU", "female"), undefined, "A different accent must not be substituted");
+assert.throws(() => findVoice("en-GB", "invalid" as never), /konuşmacı profili tanımlı değil/);
+console.log("  ✅ PASS: Browser fallback refuses wrong-gender and wrong-region substitutions.\n");
 
 // 3. Kanada ve İskoçya Aksanı Spesifik Doğrulaması
 console.log("  3. Testing Canadian (en-CA) and Scottish (en-GB-scotland) isolation...");

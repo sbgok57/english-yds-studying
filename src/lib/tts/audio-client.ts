@@ -11,6 +11,7 @@ import {
   STANDARD_TURKISH_PREVIEW_TEXT,
 } from "./voice-registry";
 import { trace } from "@/lib/debug/tracer";
+import { chooseExactBrowserVoice } from "./browser-voice-matcher";
 
 export interface PlaybackMetadata {
   provider: string;
@@ -203,7 +204,11 @@ class ClientAudioManager {
     options?: PlaybackOptions
   ): VoiceProfile | undefined {
     if (options?.voiceId) {
-      return getVoiceProfile(options.voiceId);
+      const requestedVoice = getVoiceProfile(options.voiceId);
+      if (!requestedVoice) return undefined;
+      if (options.accent && requestedVoice.locale !== options.accent) return undefined;
+      if (options.gender && requestedVoice.gender !== options.gender) return undefined;
+      return requestedVoice;
     }
     if (options?.speaker) {
       return findTurkishNarratorVoice(options.speaker === "ahmet" ? "male" : "female");
@@ -220,10 +225,14 @@ class ClientAudioManager {
     if (options?.accent) {
       return findVoice(options.accent, prefs.preferredVoiceGender);
     }
-    return (
-      getVoiceProfile(prefs.preferredVoiceId) ||
-      findVoice(prefs.preferredAccent, prefs.preferredVoiceGender)
-    );
+    const savedVoice = getVoiceProfile(prefs.preferredVoiceId);
+    if (
+      savedVoice?.locale === prefs.preferredAccent &&
+      savedVoice.gender === prefs.preferredVoiceGender
+    ) {
+      return savedVoice;
+    }
+    return findVoice(prefs.preferredAccent, prefs.preferredVoiceGender);
   }
 
   // Sunucu API üzerinden doğal neural ses çal; gecikirse Web Speech API'ye güvenli geçiş yap.
@@ -260,26 +269,16 @@ class ClientAudioManager {
           utterance.pitch = 1.0;
 
           const voices = window.speechSynthesis.getVoices();
-          const localePrefix = langLocale.toLowerCase().slice(0, 2);
-          const matchingLangVoices = voices.filter((v) =>
-            v.lang.toLowerCase().replace(/_/g, "-").startsWith(localePrefix)
+          const selectedBrowserVoice = chooseExactBrowserVoice(
+            voices,
+            voice.locale,
+            voice.gender,
           );
-          const femaleVoice = matchingLangVoices.find((candidate) =>
-            /female|emel|yelda|filiz|seda|sonia|jenny|clara|natasha|molly|neerja|samantha|victoria|karen|moira|tessa|fiona|veena/i.test(
-              candidate.name,
-            ),
-          );
-          const maleVoice = matchingLangVoices.find((candidate) =>
-            /male|ahmet|cem|tolga|kerem|mert|ryan|guy|liam|william|mitchell|prabhat|daniel|alex|fred|ralph|albert|reed/i.test(
-              candidate.name,
-            ),
-          );
-          const selectedBrowserVoice = voice.gender === "female" ? femaleVoice : maleVoice;
 
           if (!selectedBrowserVoice) {
             const requestedGender = voice.gender === "female" ? "kadın" : "erkek";
             const error = new Error(
-              `Bu cihazda ${voice.contentLanguage === "tr" ? "Türkçe" : voice.accentLabelTr} için doğrulanabilir ${requestedGender} sesi bulunamadı. Ses ayarlarından uygun bir sistem sesi yükleyin veya ayrı konuşmacı sesleri tanımlı bulut sağlayıcısını kullanın.`,
+              `Bu cihazda ${voice.contentLanguage === "tr" ? "Türkçe" : voice.accentLabelTr} aksanı için doğrulanabilir ${requestedGender} sesi bulunamadı. Yanlış aksan veya konuşmacı seçilmedi. Cihazınıza uygun ses ekleyin ya da ayrı konuşmacı kimlikleri yapılandırılmış bulut ses sağlayıcısını kullanın.`,
             );
             options?.onInfo?.(error.message);
             options?.onError?.(error);

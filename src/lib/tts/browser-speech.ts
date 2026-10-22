@@ -69,13 +69,8 @@ export function chooseVoice(
 
   if (exact) return exact;
 
-  // A locale-prefix match is useful for some regional voices,
-  // but it is not proof of an exact regional accent.
-  return voices.find((voice) =>
-    normalizeLocale(voice.lang).startsWith(
-      normalizeLocale(accent).split("-")[0] + "-",
-    ),
-  );
+  // Never substitute another English region when the requested accent is absent.
+  return undefined;
 }
 
 export function speakWithBrowser(
