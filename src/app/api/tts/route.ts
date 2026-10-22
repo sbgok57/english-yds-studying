@@ -155,23 +155,27 @@ async function handleTtsRequest(
 
   const cached = audioCache.get(cacheKey);
   if (cached) {
-    return new Response(new Uint8Array(cached.buffer), {
-      status: 200,
-      headers: {
-        "Content-Type": cached.mimeType,
-        "Content-Length": String(cached.sizeBytes),
-        "Cache-Control": "public, max-age=604800, immutable",
-        "X-TTS-Provider": cached.provider,
-        "X-TTS-Provider-Voice": cached.providerVoiceId,
-        "X-TTS-Voice": targetVoice.id,
-        "X-TTS-Locale": targetVoice.locale,
-        "X-TTS-Language": targetVoice.contentLanguage,
-        "X-TTS-Gender": targetVoice.gender,
-        "X-TTS-Distinct-Speaker": String(cached.distinctSpeakerVerified),
-        "X-TTS-Source": targetVoice.source,
-        "X-TTS-Cache": "HIT",
-      },
-    });
+    if (!cached.distinctSpeakerVerified) {
+      audioCache.delete(cacheKey);
+    } else {
+      return new Response(new Uint8Array(cached.buffer), {
+        status: 200,
+        headers: {
+          "Content-Type": cached.mimeType,
+          "Content-Length": String(cached.sizeBytes),
+          "Cache-Control": "public, max-age=604800, immutable",
+          "X-TTS-Provider": cached.provider,
+          "X-TTS-Provider-Voice": cached.providerVoiceId,
+          "X-TTS-Voice": targetVoice.id,
+          "X-TTS-Locale": targetVoice.locale,
+          "X-TTS-Language": targetVoice.contentLanguage,
+          "X-TTS-Gender": targetVoice.gender,
+          "X-TTS-Distinct-Speaker": String(cached.distinctSpeakerVerified),
+          "X-TTS-Source": targetVoice.source,
+          "X-TTS-Cache": "HIT",
+        },
+      });
+    }
   }
 
   // 2. Ses Sentezleme (Cache Miss)
@@ -185,6 +189,10 @@ async function handleTtsRequest(
       speakingRate: safeRate,
       contentType,
     });
+
+    if (!result.distinctSpeakerVerified) {
+      throw new Error("VOICE_NOT_AVAILABLE: Sağlayıcı seçilen konuşmacıyı doğrulamadı.");
+    }
 
     // Önbelleğe al
     audioCache.set(cacheKey, {

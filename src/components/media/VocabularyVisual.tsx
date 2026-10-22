@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import {
@@ -35,8 +35,15 @@ const MODE_LABELS: Record<VisualMode, { labelTr: string; icon: React.ComponentTy
   photo: { labelTr: "Fotoğraf", icon: Camera },
   animation: { labelTr: "Animasyon / Şema", icon: Sparkles },
   "3d": { labelTr: "3D Görünüm", icon: Box },
+  ai3d: { labelTr: "3D Hafıza Görseli", icon: Sparkles },
   card: { labelTr: "Anlam Kartı", icon: BookOpen },
 };
+
+type GeneratedVisualResponse = { imageUrl?: unknown };
+
+function isGeneratedVisualResponse(value: unknown): value is GeneratedVisualResponse {
+  return typeof value === "object" && value !== null && "imageUrl" in value;
+}
 
 function SemanticAnimatedSvg({
   motionType,
@@ -380,11 +387,33 @@ export default function VocabularyVisual({
   const [photoError, setPhotoError] = useState(false);
   const [localAnimationError, setLocalAnimationError] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [compactVisible, setCompactVisible] = useState(
+    !compact || Boolean(manifest.threeD.imageUrl),
+  );
+  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
+    manifest.threeD.imageUrl || null,
+  );
+  const [generatedImageStatus, setGeneratedImageStatus] = useState<
+    "idle" | "loading" | "ready" | "error"
+  >(manifest.threeD.imageUrl ? "ready" : "idle");
+  const [generatedImageError, setGeneratedImageError] = useState(false);
+  const compactVisualRef = useRef<HTMLDivElement | null>(null);
+
+  const effectiveModes = manifest.availableModes.filter((mode) =>
+    mode === "photo" ? manifest.hasVerifiedPhoto && !photoError : true,
+  );
+  const currentMode: VisualMode = effectiveModes.includes(activeMode)
+    ? activeMode
+    : effectiveModes[0] || "card";
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
     setPhotoError(false);
     setLocalAnimationError(false);
+    setGeneratedImageError(false);
+    setGeneratedImageUrl(manifest.threeD.imageUrl || null);
+    setGeneratedImageStatus(manifest.threeD.imageUrl ? "ready" : "idle");
+    setCompactVisible(!compact || Boolean(manifest.threeD.imageUrl));
     const nextDefault =
       initialMode && manifest.availableModes.includes(initialMode)
         ? initialMode
@@ -397,59 +426,118 @@ export default function VocabularyVisual({
         setIsPaused(true);
       }
     }
-  }, [english, initialMode, manifest.defaultMode, manifest.availableModes]);
+  }, [compact, english, initialMode, manifest.defaultMode, manifest.availableModes, manifest.threeD.imageUrl]);
+
+  useEffect(() => {
+    if (!compact || manifest.threeD.imageUrl) {
+      setCompactVisible(true);
+      return;
+    }
+
+    const element = compactVisualRef.current;
+    if (!element || typeof IntersectionObserver === "undefined") {
+      setCompactVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setCompactVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "180px 0px", threshold: 0.01 },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [compact, manifest.threeD.imageUrl, manifest.wordSlug]);
+
+  useEffect(() => {
+    if (
+      currentMode !== "ai3d" ||
+      !compactVisible ||
+      generatedImageUrl ||
+      generatedImageStatus !== "idle"
+    ) {
+      return;
+    }
+
+    const controller = new AbortController();
+    setGeneratedImageStatus("loading");
+
+    const loadGeneratedVisual = async () => {
+      try {
+        const query = new URLSearchParams({
+          word: english,
+          meaning: turkish,
+          type: partOfSpeech,
+        });
+        if (example) query.set("example", example);
+        const response = await fetch(`/api/word-image?${query.toString()}`, {
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          throw new Error(`3D görsel isteği başarısız: HTTP ${response.status}`);
+        }
+
+        const payload: unknown = await response.json();
+        if (!isGeneratedVisualResponse(payload) || typeof payload.imageUrl !== "string") {
+          throw new Error("3D görsel yanıtı geçerli bir görsel adresi içermiyor.");
+        }
+
+        setGeneratedImageUrl(payload.imageUrl);
+        setGeneratedImageStatus("ready");
+      } catch (error) {
+        if (!controller.signal.aborted) {
+          setGeneratedImageStatus("error");
+          console.warn("[VocabularyVisual] 3D memory image unavailable:", error);
+        }
+      }
+    };
+
+    void loadGeneratedVisual();
+    return () => controller.abort();
+  }, [compactVisible, currentMode, english, example, generatedImageStatus, generatedImageUrl, partOfSpeech, turkish]);
 
   // Kompakt Kart Görünümü (Kelime listesi ızgarası için sıfır layout-shift önizleme)
   if (compact) {
     return (
       <div
+        ref={compactVisualRef}
         data-testid={`vocab-visual-compact-${manifest.wordSlug}`}
         data-visual-key={manifest.visualKey || manifest.wordSlug}
         data-motion-type={manifest.animation.motionType}
         className={`relative w-full h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-950 ${className}`}
       >
-        {manifest.hasVerifiedPhoto && manifest.photo && !photoError ? (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={manifest.photo.url}
-              alt={manifest.photo.altTr}
-              width={manifest.photo.width}
-              height={manifest.photo.height}
-              loading="lazy"
-              decoding="async"
-              onError={() => setPhotoError(true)}
-              className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-300"
-            />
-            <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-slate-950/80 border border-white/15 text-[10px] font-bold text-emerald-300">
-              📷 Doğrulanmış Fotoğraf
-            </span>
-          </>
+        {generatedImageUrl && !generatedImageError ? (
+          <Image
+            src={generatedImageUrl}
+            alt={`${english} (${turkish}) kelimesini anlatan 3D hafıza görseli`}
+            fill
+            unoptimized
+            sizes="(max-width: 768px) 100vw, 33vw"
+            loading="lazy"
+            onError={() => setGeneratedImageError(true)}
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
         ) : (
-          <div className="w-full h-full">
-            <SemanticAnimatedSvg
-              motionType={manifest.animation.motionType}
-              visualKey={manifest.visualKey || manifest.wordSlug}
-              english={english}
-              turkish={turkish}
-              paused={true}
-            />
-            <span className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-slate-950/80 border border-cyan-500/30 text-[10px] font-bold text-cyan-300">
-              ✨ Semantik Şema
+          <div className="flex h-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950 px-4 text-center">
+            <span className="text-lg font-black text-white">{english}</span>
+            <span className="line-clamp-1 text-sm font-semibold text-cyan-100">{turkish}</span>
+            <span className="text-xs text-white/70">
+              {generatedImageStatus === "error" || generatedImageError
+                ? "3D görsel şu anda yüklenemedi"
+                : "Kelimeye özel 3D sahne hazırlanıyor"}
             </span>
           </div>
         )}
+        <span className="absolute left-2 top-2 rounded-lg border border-white/20 bg-slate-950/75 px-2.5 py-1 text-xs font-bold text-cyan-100 shadow-lg backdrop-blur">
+          ✨ 3D Hafıza Görseli
+        </span>
       </div>
     );
   }
-
-  const effectiveModes = manifest.availableModes.filter((m) =>
-    m === "photo" ? manifest.hasVerifiedPhoto && !photoError : true
-  );
-
-  const currentMode: VisualMode = effectiveModes.includes(activeMode)
-    ? activeMode
-    : effectiveModes[0] || "card";
 
   return (
     <div
@@ -584,6 +672,54 @@ export default function VocabularyVisual({
               motionType={manifest.animation.motionType}
               visualKey={manifest.visualKey || manifest.wordSlug}
             />
+          </div>
+        )}
+
+        {currentMode === "ai3d" && (
+          <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950">
+            {generatedImageUrl && !generatedImageError ? (
+              <Image
+                src={generatedImageUrl}
+                alt={`${english} (${turkish}) anlamını anlatan kelimeye özel 3D sahne`}
+                fill
+                unoptimized
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                loading="lazy"
+                onError={() => setGeneratedImageError(true)}
+                className="object-cover"
+                data-testid={`vocabulary-3d-image-${manifest.wordSlug}`}
+              />
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+                <Sparkles className="h-8 w-8 text-amber-300" aria-hidden="true" />
+                <h3 className="text-2xl font-black text-white">{english}</h3>
+                <p className="text-lg font-semibold text-cyan-100">{turkish}</p>
+                <p className="max-w-md text-sm text-white/75" role={generatedImageStatus === "error" ? "alert" : undefined}>
+                  {generatedImageStatus === "error" || generatedImageError
+                    ? "Bu kelimenin 3D sahnesi şu anda yüklenemedi. İstersen görseli yeniden deneyebilirsin."
+                    : "Kelimenin anlamını anlatan 3D hafıza sahnesi hazırlanıyor…"}
+                </p>
+                {(generatedImageStatus === "error" || generatedImageError) && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setGeneratedImageError(false);
+                      setGeneratedImageStatus("idle");
+                    }}
+                    className="rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20"
+                  >
+                    Görseli yeniden dene
+                  </button>
+                )}
+              </div>
+            )}
+            {generatedImageUrl && !generatedImageError && (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-4 pt-12">
+                <div className="inline-flex rounded-full border border-white/20 bg-slate-950/65 px-3 py-1 text-xs font-bold text-cyan-100 backdrop-blur">
+                  {english} · {turkish}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
