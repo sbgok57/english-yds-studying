@@ -8,6 +8,28 @@ function cleanPromptValue(value: string, maxLength: number): string {
   return value.replace(/[<>\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, maxLength);
 }
 
+function resolveExample(serializedExamples: string | undefined, fallback: string): string {
+  if (!serializedExamples) return fallback;
+
+  try {
+    const parsed: unknown = JSON.parse(serializedExamples);
+    if (Array.isArray(parsed)) {
+      const firstExample = parsed.find((item) =>
+        typeof item === "string" || (typeof item === "object" && item !== null),
+      );
+      if (typeof firstExample === "string") return cleanPromptValue(firstExample, 260);
+      if (typeof firstExample === "object" && firstExample !== null) {
+        const candidate = "en" in firstExample ? firstExample.en : "english" in firstExample ? firstExample.english : undefined;
+        if (typeof candidate === "string") return cleanPromptValue(candidate, 260);
+      }
+    }
+  } catch {
+    return cleanPromptValue(serializedExamples, 260);
+  }
+
+  return fallback;
+}
+
 function generate3dVisualPrompt(english: string, turkish: string, type: string, example: string): string {
   const cleanEn = cleanPromptValue(english, 90);
   const cleanTr = cleanPromptValue(turkish, 180);
@@ -49,7 +71,7 @@ export async function GET(req: NextRequest) {
     const targetEnglish = word?.english || english || "vocabulary";
     const targetTurkish = word?.turkish || requestedMeaning || "meaning not provided";
     const targetType = word?.type || requestedType || "academic vocabulary";
-    const targetExample = word?.examples?.[0] || requestedExample;
+    const targetExample = resolveExample(word?.examples, requestedExample);
 
     // Only reuse assets generated with the current, word-specific memory-scene prompt.
     if (word?.imageUrl?.includes("memoryVersion=2")) {
