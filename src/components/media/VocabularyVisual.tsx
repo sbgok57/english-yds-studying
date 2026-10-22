@@ -417,6 +417,7 @@ export default function VocabularyVisual({
     manifest.threeD.imageUrl ? { ai3d: "ready" } : {},
   );
   const [generatedImageErrors, setGeneratedImageErrors] = useState<Partial<Record<GeneratedImageMode, boolean>>>({});
+  const [generatedImageRetry, setGeneratedImageRetry] = useState(0);
   const compactVisualRef = useRef<HTMLDivElement | null>(null);
 
   const effectiveModes = manifest.availableModes.filter((mode) =>
@@ -429,12 +430,15 @@ export default function VocabularyVisual({
   const generatedImageUrl = generatedImageMode ? generatedImages[generatedImageMode] || null : null;
   const generatedImageStatus = generatedImageMode ? generatedImageStatuses[generatedImageMode] || "idle" : "idle";
   const generatedImageError = generatedImageMode ? Boolean(generatedImageErrors[generatedImageMode]) : false;
+  const generatedVisualStateRef = useRef({ generatedImages, generatedImageStatuses });
+  generatedVisualStateRef.current = { generatedImages, generatedImageStatuses };
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
     setPhotoError(false);
     setLocalAnimationError(false);
     setGeneratedImageErrors({});
+    setGeneratedImageRetry(0);
     setGeneratedImages(manifest.threeD.imageUrl ? { ai3d: manifest.threeD.imageUrl } : {});
     setGeneratedImageStatuses(manifest.threeD.imageUrl ? { ai3d: "ready" } : {});
     setCompactVisible(!compact || Boolean(manifest.threeD.imageUrl));
@@ -481,8 +485,8 @@ export default function VocabularyVisual({
     if (
       !generatedImageMode ||
       !compactVisible ||
-      generatedImageUrl ||
-      generatedImageStatus !== "idle"
+      generatedVisualStateRef.current.generatedImages[generatedImageMode] ||
+      (generatedVisualStateRef.current.generatedImageStatuses[generatedImageMode] || "idle") !== "idle"
     ) {
       return;
     }
@@ -529,7 +533,10 @@ export default function VocabularyVisual({
 
     void loadGeneratedVisual();
     return () => controller.abort();
-  }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageStatus, generatedImageUrl, partOfSpeech, turkish]);
+  // Do not depend on generatedImageStatus or generatedImageUrl here. Updating
+  // either after starting the request would clean up this effect, abort its
+  // fetch, and leave the visual stuck in an idle/loading loop.
+  }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageRetry, partOfSpeech, turkish]);
 
   // Kompakt Kart Görünümü (Kelime listesi ızgarası için sıfır layout-shift önizleme)
   if (compact) {
@@ -550,6 +557,7 @@ export default function VocabularyVisual({
             sizes="(max-width: 768px) 100vw, 33vw"
             loading="lazy"
             onError={() => setGeneratedImageErrors((previous) => ({ ...previous, ai3d: true }))}
+            onLoad={() => setGeneratedImageErrors((previous) => ({ ...previous, ai3d: false }))}
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
@@ -717,6 +725,7 @@ export default function VocabularyVisual({
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 loading="lazy"
                 onError={() => setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: true }))}
+                onLoad={() => setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: false }))}
                 className="object-cover"
                 data-testid={`vocabulary-${generatedImageMode}-image-${manifest.wordSlug}`}
               />
@@ -735,7 +744,9 @@ export default function VocabularyVisual({
                     type="button"
                     onClick={() => {
                       setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: false }));
+                      setGeneratedImages((previous) => ({ ...previous, [generatedImageMode]: undefined }));
                       setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "idle" }));
+                      setGeneratedImageRetry((previous) => previous + 1);
                     }}
                     className="rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20"
                   >
