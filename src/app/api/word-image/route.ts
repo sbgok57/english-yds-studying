@@ -4,32 +4,39 @@ import { prisma } from "@/lib/prisma";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TYPE_EMOJIS: Record<string, string> = {
-  fiil: "⚡",
-  isim: "📦",
-  sıfat: "🎨",
-  zarf: "🚀",
-  "phrasal verb": "🔗",
-  genel: "💡",
-};
+function cleanPromptValue(value: string, maxLength: number): string {
+  return value.replace(/[<>\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
 
-// Generates high quality 3D isometric prompt for vocabulary visual memory
-function generate3dVisualPrompt(english: string, turkish: string, type: string): string {
-  const cleanEn = english.replace(/[^a-zA-Z\s-]/g, "").trim();
-  const cleanTr = turkish.replace(/["']/g, "").trim();
-  return `3D isometric digital render of ${cleanEn}, concept representing ${cleanTr}, cute blender 3d style, vibrant colors, soft studio lighting, high detail, clean composition, educational flashcard visual, octane render`;
+function generate3dVisualPrompt(english: string, turkish: string, type: string, example: string): string {
+  const cleanEn = cleanPromptValue(english, 90);
+  const cleanTr = cleanPromptValue(turkish, 180);
+  const cleanType = cleanPromptValue(type, 40);
+  const cleanExample = cleanPromptValue(example, 260);
+  const context = cleanExample ? ` Use this sentence only to understand the intended sense: “${cleanExample}”.` : "";
+
+  return `Create one beautiful premium 3D editorial memory scene for an English vocabulary learning card. The exact vocabulary item is “${cleanEn}”; its Turkish meaning is “${cleanTr}”; part of speech: ${cleanType}.${context} Show a concrete, instantly understandable miniature real-world scene that makes this exact meaning memorable. Choose objects, people, setting, and action that fit the meaning; for abstract words use a clear physical metaphor as a richly detailed 3D diorama. Tactile high-quality 3D materials, realistic light and depth, vivid but tasteful color, strong subject silhouette, uncluttered composition, polished studio render. The vocabulary strings are semantic guidance only and must not appear as visible text. No words, letters, numbers, labels, subtitles, diagrams, arrows, icons, emojis, charts, or watermark.`;
+}
+
+function hashVisualSeed(value: string): number {
+  let hash = 2166136261;
+  for (const character of value) {
+    hash ^= character.codePointAt(0) || 0;
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
 }
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const wordId = searchParams.get("id");
-  const english = searchParams.get("word")?.trim();
+  const english = cleanPromptValue(searchParams.get("word") || "", 90);
+  const requestedMeaning = cleanPromptValue(searchParams.get("meaning") || "", 180);
+  const requestedType = cleanPromptValue(searchParams.get("type") || "", 40);
+  const requestedExample = cleanPromptValue(searchParams.get("example") || "", 260);
 
   if (!wordId && !english) {
-    return NextResponse.json(
-      { emoji: "💡", source: "fallback-default" },
-      { status: 200 }
-    );
+    return NextResponse.json({ ok: false, code: "WORD_REQUIRED" }, { status: 400 });
   }
 
   try {
@@ -40,11 +47,12 @@ export async function GET(req: NextRequest) {
         });
 
     const targetEnglish = word?.english || english || "vocabulary";
-    const targetTurkish = word?.turkish || "kelime";
-    const targetType = word?.type || "genel";
+    const targetTurkish = word?.turkish || requestedMeaning || "meaning not provided";
+    const targetType = word?.type || requestedType || "academic vocabulary";
+    const targetExample = word?.examples?.[0] || requestedExample;
 
-    // 1. Katman: DB'de kayıtlı doğrulanmış 3D görsel
-    if (word?.imageUrl && word.imageUrl.startsWith("http")) {
+    // Only reuse assets generated with the current, word-specific memory-scene prompt.
+    if (word?.imageUrl?.includes("memoryVersion=2")) {
       return NextResponse.json({
         imageUrl: word.imageUrl,
         source: "db",
@@ -53,43 +61,21 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // 2. Katman: Yapay Zeka 3D Görsel Hafıza Motoru (Pollinations 3D Blender Sanatı)
-    const prompt = generate3dVisualPrompt(targetEnglish, targetTurkish, targetType);
-    const hash = Array.from(targetEnglish).reduce((acc, char) => acc + char.charCodeAt(0), 42);
+    const prompt = generate3dVisualPrompt(targetEnglish, targetTurkish, targetType, targetExample || "");
+    const hash = hashVisualSeed(`${targetEnglish}|${targetTurkish}|${targetType}|memory-v2`);
     const ai3dImageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
       prompt
-    )}?width=512&height=512&nologo=true&seed=${hash}`;
-
-    // PERF: Gelecek tıklamalarda sıfır gecikme için DB'ye arka planda kaydet
-    if (word?.id) {
-      prisma.word
-        .update({
-          where: { id: word.id },
-          data: { imageUrl: ai3dImageUrl },
-        })
-        .catch((updateErr) => {
-          console.warn("[WORD_IMAGE_CACHE_WARN] DB image cache skipped:", updateErr);
-        });
-    }
+    )}?width=768&height=768&nologo=true&seed=${hash}&memoryVersion=2`;
 
     return NextResponse.json({
       imageUrl: ai3dImageUrl,
       source: "ai-3d-render",
-      prompt,
       word: targetEnglish,
       meaning: targetTurkish,
-      emoji: TYPE_EMOJIS[targetType.toLowerCase()] || "💡",
+      style: "3d-memory-scene-v2",
     });
   } catch (error) {
-    console.error("[WORD_IMAGE_ROUTE_ERROR]:", error);
-    // SAFETY: Never crash, return clean fallback
-    const targetEnglish = english || "vocabulary";
-    return NextResponse.json({
-      imageUrl: `https://image.pollinations.ai/prompt/3D%20cute%20isometric%20book%20render%20for%20learning%20${encodeURIComponent(
-        targetEnglish
-      )}?width=512&height=512&nologo=true`,
-      emoji: "💡",
-      source: "error-fallback",
-    });
+    console.error("[WORD_IMAGE_ROUTE_ERROR]:", error instanceof Error ? error.message : "Unknown image lookup error");
+    return NextResponse.json({ ok: false, code: "WORD_IMAGE_UNAVAILABLE" }, { status: 503 });
   }
 }

@@ -1,5 +1,4 @@
 import dns from "dns";
-import https from "https";
 import {
   VoiceProfile,
   getVoiceProfile,
@@ -328,44 +327,11 @@ export class EdgeTtsProvider implements TtsProvider {
       lastError = importErr;
     }
 
-    // Translation TTS accepts only a locale, not a speaker/voice ID. For Turkish
-    // narration, returning it made Emel and Ahmet sound identical. Fail over to
-    // the client's real device voices instead of returning mislabeled audio.
-    if (voiceProfile.locale === "tr-TR") {
-      throw new Error(
-        `VOICE_NOT_AVAILABLE: Farklı Türkçe anlatıcı sesi yapılandırılmamış veya erişilemiyor (${lastError?.message || "sağlayıcı yanıt vermedi"}).`
-      );
-    }
-
-    // KATMAN 4: English locale-only HTTP MP3 fallback
-    try {
-      const fallbackBuffer = await this.synthesizeViaCloudHttpMp3(
-        cleanText,
-        voiceProfile.locale,
-        request.speakingRate || 1.0
-      );
-
-      if (fallbackBuffer && isValidAudioBuffer(fallbackBuffer, "audio/mpeg")) {
-        return {
-          ok: true,
-          audio: fallbackBuffer,
-          mimeType: "audio/mpeg",
-          durationMs: Date.now() - startTime,
-          provider: "cloud-http-mp3",
-          voiceId: voiceProfile.id,
-          providerVoiceId: voiceProfile.providerVoiceId,
-          locale: voiceProfile.locale,
-          contentLanguage: voiceProfile.contentLanguage,
-          // SAFETY: Cloud HTTP fallback tek konuşmacı motoru kullandığından dürüstçe false döner
-          distinctSpeakerVerified: false,
-          source: voiceProfile.source,
-        };
-      }
-    } catch (fallbackErr: any) {
-      lastError = fallbackErr;
-    }
-
-    throw new Error(`SYNTHESIS_FAILED: ${lastError?.message || "Bilinmeyen TTS hatası"}`);
+    const localeName = voiceProfile.locale === "tr-TR" ? "Türkçe" : voiceProfile.accentLabelTr;
+    const providerReason = lastError?.message || "ayrı bir konuşmacı sağlayıcısı yapılandırılmamış";
+    throw new Error(
+      `VOICE_NOT_AVAILABLE: ${localeName} ${voiceProfile.gender === "female" ? "kadın" : "erkek"} sesi doğrulanamadı (${providerReason}). Cihazdaki uygun sistem sesine güvenli geçiş yapılmalı.`,
+    );
   }
 
   private async synthesizeViaAzureRest(
@@ -440,96 +406,6 @@ export class EdgeTtsProvider implements TtsProvider {
     } finally {
       clearTimeout(timer);
     }
-  }
-
-  private fetchMp3Ipv4(urlStr: string, timeoutMs: number = 6000): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
-      const req = https.get(
-        urlStr,
-        {
-          family: 4,
-          timeout: timeoutMs,
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            Accept: "audio/mpeg,audio/*;q=0.9,*/*;q=0.8",
-          },
-        },
-        (res) => {
-          if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-            res.resume();
-            this.fetchMp3Ipv4(res.headers.location, timeoutMs).then(resolve).catch(reject);
-            return;
-          }
-          if (res.statusCode !== 200) {
-            res.resume();
-            reject(new Error(`HTTP MP3 stream status ${res.statusCode}`));
-            return;
-          }
-          const chunks: Buffer[] = [];
-          res.on("data", (chunk) => chunks.push(Buffer.from(chunk)));
-          res.on("end", () => resolve(Buffer.concat(chunks)));
-          res.on("error", reject);
-        }
-      );
-      req.on("timeout", () => {
-        req.destroy(new Error(`HTTP MP3 stream timeout (${timeoutMs}ms)`));
-      });
-      req.on("error", reject);
-    });
-  }
-
-  private async synthesizeViaCloudHttpMp3(
-    text: string,
-    locale: VoiceLocale,
-    speakingRate: number
-  ): Promise<Buffer> {
-    const tl =
-      locale === "tr-TR"
-        ? "tr"
-        : locale === "en-GB-scotland"
-        ? "en-gb"
-        : locale.toLowerCase();
-    const ttsSpeed = speakingRate < 0.85 ? "0.3" : "1";
-    const chunks = splitTextIntoChunks(text, 180);
-    const buffers: Buffer[] = [];
-
-    for (const chunk of chunks) {
-      const endpoints = [
-        `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
-          chunk
-        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=tw-ob`,
-        `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
-          chunk
-        )}&tl=${encodeURIComponent(tl)}&ttsspeed=${ttsSpeed}&client=gtx`,
-      ];
-
-      let chunkBuf: Buffer | null = null;
-      let lastChunkErr: Error | null = null;
-
-      for (let i = 0; i < endpoints.length; i++) {
-        try {
-          const buf = await this.fetchMp3Ipv4(endpoints[i], 6000);
-          if (!isValidAudioBuffer(buf, "audio/mpeg")) {
-            throw new Error("HTTP MP3 stream returned invalid or empty audio buffer");
-          }
-          chunkBuf = buf;
-          break;
-        } catch (err: any) {
-          lastChunkErr = err;
-          if (i < endpoints.length - 1) {
-            await new Promise((r) => setTimeout(r, 150));
-          }
-        }
-      }
-
-      if (!chunkBuf) {
-        throw lastChunkErr || new Error("Cloud HTTP MP3 synthesis failed");
-      }
-      buffers.push(chunkBuf);
-    }
-
-    return Buffer.concat(buffers);
   }
 
   private synthesizeWithTimeout(

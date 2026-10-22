@@ -264,33 +264,29 @@ class ClientAudioManager {
           const matchingLangVoices = voices.filter((v) =>
             v.lang.toLowerCase().replace(/_/g, "-").startsWith(localePrefix)
           );
+          const femaleVoice = matchingLangVoices.find((candidate) =>
+            /female|emel|yelda|filiz|seda|sonia|jenny|clara|natasha|molly|neerja|samantha|victoria|karen|moira|tessa|fiona|veena/i.test(
+              candidate.name,
+            ),
+          );
+          const maleVoice = matchingLangVoices.find((candidate) =>
+            /male|ahmet|cem|tolga|kerem|mert|ryan|guy|liam|william|mitchell|prabhat|daniel|alex|fred|ralph|albert|reed/i.test(
+              candidate.name,
+            ),
+          );
+          const selectedBrowserVoice = voice.gender === "female" ? femaleVoice : maleVoice;
 
-          let selectedBrowserVoice =
-            matchingLangVoices.find(
-              (v) => v.lang.toLowerCase().replace(/_/g, "-") === langLocale.toLowerCase()
-            ) || matchingLangVoices[0];
-
-          let hasDistinctGenderVoices = false;
-          if (matchingLangVoices.length > 1) {
-            const fMatch = matchingLangVoices.find((v) =>
-              /female|emel|yelda|filiz|seda|sonia|jenny|clara|natasha|molly|neerja|samantha|victoria/i.test(
-                v.name
-              )
+          if (!selectedBrowserVoice) {
+            const requestedGender = voice.gender === "female" ? "kadın" : "erkek";
+            const error = new Error(
+              `Bu cihazda ${voice.contentLanguage === "tr" ? "Türkçe" : voice.accentLabelTr} için doğrulanabilir ${requestedGender} sesi bulunamadı. Ses ayarlarından uygun bir sistem sesi yükleyin veya ayrı konuşmacı sesleri tanımlı bulut sağlayıcısını kullanın.`,
             );
-            const mMatch = matchingLangVoices.find((v) =>
-              /male|ahmet|cem|tolga|ryan|guy|liam|william|mitchell|prabhat|daniel|alex/i.test(
-                v.name
-              )
-            );
-            if (fMatch && mMatch && fMatch.name !== mMatch.name) {
-              hasDistinctGenderVoices = true;
-              selectedBrowserVoice = voice.gender === "female" ? fMatch : mMatch;
-            }
+            options?.onInfo?.(error.message);
+            options?.onError?.(error);
+            return true;
           }
 
-          if (selectedBrowserVoice) {
-            utterance.voice = selectedBrowserVoice;
-          }
+          utterance.voice = selectedBrowserVoice;
 
           const meta: PlaybackMetadata = {
             provider: "browser-speech-fallback",
@@ -300,7 +296,7 @@ class ClientAudioManager {
             locale: voice.locale,
             contentLanguage: voice.contentLanguage,
             gender: voice.gender,
-            distinctSpeakerVerified: hasDistinctGenderVoices,
+            distinctSpeakerVerified: true,
             usingBrowserFallback: true,
             latencyMs: Date.now() - t0,
           };
@@ -311,9 +307,7 @@ class ClientAudioManager {
             options?.onStart?.();
             if (voice.contentLanguage === "tr") {
               options?.onInfo?.(
-                hasDistinctGenderVoices
-                  ? `Cihaz Yerel Türkçe Sesi: ${voice.displayName}`
-                  : "Cihaz yerel Türkçe sesi kullanılıyor (Tek yerel ses profili aktif)"
+                `Cihaz sesi: ${selectedBrowserVoice.name} (${voice.gender === "female" ? "Kadın" : "Erkek"} · Türkçe)`
               );
             } else {
               options?.onInfo?.(
@@ -379,6 +373,11 @@ class ClientAudioManager {
         );
       }
 
+      const distinctHeader = res.headers.get("x-tts-distinct-speaker") === "true";
+      if (!distinctHeader) {
+        throw new Error("Ses sağlayıcısı seçilen konuşmacıdan farklı bir sesi doğrulamadı.");
+      }
+
       const audioBlob = await res.blob();
       if (audioBlob.size === 0) {
         throw new Error("TTS API boş ses verisi döndürdü.");
@@ -386,8 +385,6 @@ class ClientAudioManager {
 
       const providerHeader = res.headers.get("x-tts-provider") || voice.provider;
       const providerVoiceHeader = res.headers.get("x-tts-provider-voice") || voice.providerVoiceId;
-      const distinctHeader = res.headers.get("x-tts-distinct-speaker") === "true";
-
       const meta: PlaybackMetadata = {
         provider: providerHeader,
         providerVoiceId: providerVoiceHeader,

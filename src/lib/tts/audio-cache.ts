@@ -107,6 +107,13 @@ class AudioCacheManager {
     return entry;
   }
 
+  delete(key: string): void {
+    const entry = this.cache.get(key);
+    if (!entry) return;
+    this.currentBytes -= entry.sizeBytes;
+    this.cache.delete(key);
+  }
+
   set(
     key: string,
     entry: Omit<

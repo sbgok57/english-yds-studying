@@ -49,7 +49,7 @@ const dynamicAcademicWord = resolveWordVisualManifest({
 });
 assert.strictEqual(dynamicAcademicWord.hasVerifiedPhoto, false);
 assert.strictEqual(dynamicAcademicWord.availableModes.includes("photo"), false);
-assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["animation", "3d", "card"]);
+assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["ai3d", "animation", "3d", "card"]);
 assert.ok(dynamicAcademicWord.animation.reducedMotionFallbackTextTr.length > 10);
 assert.strictEqual(dynamicAcademicWord.visualKey, "unprecedented");
 

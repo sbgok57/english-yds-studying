@@ -1,4 +1,4 @@
-export type VisualMode = "photo" | "animation" | "3d" | "card";
+export type VisualMode = "photo" | "animation" | "3d" | "ai3d" | "card";
 
 export type MotionDiagramType =
   | "mitigate"
@@ -53,6 +53,7 @@ export interface WordVisualManifest {
   threeD: {
     enabled: boolean;
     conceptLabelTr: string;
+    imageUrl?: string;
   };
 }
 
@@ -175,8 +176,8 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     partOfSpeech: "fiil",
     level: "B2",
     semanticCategory: "process",
-    availableModes: ["animation", "3d", "card"],
-    defaultMode: "animation",
+    availableModes: ["ai3d", "animation", "3d", "card"],
+    defaultMode: "ai3d",
     hasVerifiedPhoto: false,
     animation: {
       localSvgUrl: "/media/vocabulary/mitigate-diagram.svg",
@@ -190,6 +191,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     threeD: {
       enabled: true,
       conceptLabelTr: "3D Kavram Küpü: Mitigate — Hafifletmek",
+      imageUrl: "/media/vocabulary/mitigate-coastal-defense.jpg",
     },
   },
   "carry-out": {
@@ -449,7 +451,14 @@ export function resolveWordVisualManifest(params: {
   const slug = normalizeWordSlug(params.english);
   const existing = VISUAL_ASSET_REGISTRY[slug];
   if (existing) {
-    return { ...existing, visualKey: slug };
+    return {
+      ...existing,
+      availableModes: existing.availableModes.includes("ai3d")
+        ? existing.availableModes
+        : ["ai3d", ...existing.availableModes],
+      defaultMode: "ai3d",
+      visualKey: slug,
+    };
   }
 
   const pos = params.partOfSpeech || "academic";
@@ -470,8 +479,8 @@ export function resolveWordVisualManifest(params: {
     partOfSpeech: pos,
     level,
     semanticCategory: pos.toLowerCase().includes("phrasal") ? "phrasal-verb" : "abstract-academic",
-    availableModes: ["animation", "3d", "card"],
-    defaultMode: "animation",
+    availableModes: ["ai3d", "animation", "3d", "card"],
+    defaultMode: "ai3d",
     hasVerifiedPhoto: false,
     animation: {
       motionType,
