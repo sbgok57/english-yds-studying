@@ -26,7 +26,7 @@ export default function AdminPage() {
     email: "sinembuse724@gmail.com",
     role: "Kurucu Yönetici (Root Admin)",
     status: "Aktif • Tam Yetkili",
-    securityProtection: "Antivirüs & Siber Savunma v4.2 Aktif",
+    securityProtection: "Uygulama istek filtresi etkin",
     lastActive: new Date().toISOString(),
     permissions: [
       "Tüm Öğrenci Süreç Takibi",
@@ -90,7 +90,7 @@ export default function AdminPage() {
       setLoading(true);
       setErrorMsg("");
       try {
-        const res = await fetch("/api/admin/students?admin_key=sbgok57_root_authorized");
+        const res = await fetch("/api/admin/students", { credentials: "same-origin" });
         const data = await res.json();
         if (!isCancelled && data.ok) {
           setStudents(data.students || []);
@@ -102,7 +102,7 @@ export default function AdminPage() {
 
         // Fetch Live Antivirus & Cyber Security Shield telemetry
         try {
-          const secRes = await fetch("/api/security/telemetry?admin_key=sbgok57_root_authorized");
+          const secRes = await fetch("/api/security/telemetry", { credentials: "same-origin" });
           if (secRes.ok) {
             const secData = await secRes.json();
             if (!isCancelled && secData.ok) {
@@ -313,7 +313,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      {/* 🛡️ Enterprise Siber Güvenlik & Antivirüs Kalkanı */}
+      {/* 🛡️ Application request filtering telemetry */}
       <div className="card-vibrant p-6 mb-8 border border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 via-slate-950/60 to-cyan-950/20 shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10 mb-5">
           <div className="flex items-center gap-3">
@@ -323,15 +323,15 @@ export default function AdminPage() {
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h3 className="text-base font-black text-white">
-                  Siber Güvenlik, Antivirüs & Saldırı Engelleme Kalkanı
+                  Uygulama İstek Güvenliği
                 </h3>
                 <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] font-black">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  %100 AKTİF & KORUMA ALTINDA
+                  <span className={`w-2 h-2 rounded-full ${telemetry?.status === "ACTIVE_PROTECTED" ? "bg-emerald-400" : "bg-amber-400"}`} />
+                  {telemetry?.status === "ACTIVE_PROTECTED" ? "İSTEK FİLTRESİ ETKİN" : "KATMANLI KORUMA GEREKLİ"}
                 </span>
               </div>
               <p className="text-xs text-white/60 mt-0.5 font-mono">
-                {telemetry?.engineName || "YDS Master Heuristic & Signature Cyber-Shield"} • v4.2-enterprise • 1.480+ Canlı İmza
+                {telemetry?.engineName || "YDS Master HTTP Heuristic Filter"} • İstek filtresi, uç nokta antivirüsü değildir
               </p>
             </div>
           </div>

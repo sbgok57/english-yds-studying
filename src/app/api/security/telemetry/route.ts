@@ -27,11 +27,6 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    const adminParam = req.nextUrl.searchParams.get("admin_key");
-    if (adminParam === "sbgok57_root_authorized") {
-      isAdmin = true;
-    }
-
     if (!isAdmin) {
       return NextResponse.json(
         { ok: false, error: "Yetkisiz Erişim: Bu güvenlik verileri yalnızca Kurucu Yöneticiye açıktır." },
