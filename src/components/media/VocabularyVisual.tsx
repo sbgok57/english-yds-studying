@@ -430,8 +430,6 @@ export default function VocabularyVisual({
   const generatedImageUrl = generatedImageMode ? generatedImages[generatedImageMode] || null : null;
   const generatedImageStatus = generatedImageMode ? generatedImageStatuses[generatedImageMode] || "idle" : "idle";
   const generatedImageError = generatedImageMode ? Boolean(generatedImageErrors[generatedImageMode]) : false;
-  const generatedVisualStateRef = useRef({ generatedImages, generatedImageStatuses });
-  generatedVisualStateRef.current = { generatedImages, generatedImageStatuses };
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
@@ -482,12 +480,7 @@ export default function VocabularyVisual({
   }, [compact, manifest.threeD.imageUrl, manifest.wordSlug]);
 
   useEffect(() => {
-    if (
-      !generatedImageMode ||
-      !compactVisible ||
-      generatedVisualStateRef.current.generatedImages[generatedImageMode] ||
-      (generatedVisualStateRef.current.generatedImageStatuses[generatedImageMode] || "idle") !== "idle"
-    ) {
+    if (!generatedImageMode || !compactVisible) {
       return;
     }
 
@@ -521,12 +514,6 @@ export default function VocabularyVisual({
         if (!controller.signal.aborted) {
           setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "error" }));
           console.warn(`[VocabularyVisual] ${generatedImageMode} memory image unavailable:`, error);
-        } else {
-          setGeneratedImageStatuses((previous) => (
-            previous[generatedImageMode] === "loading"
-              ? { ...previous, [generatedImageMode]: "idle" }
-              : previous
-          ));
         }
       }
     };
@@ -535,7 +522,8 @@ export default function VocabularyVisual({
     return () => controller.abort();
   // Do not depend on generatedImageStatus or generatedImageUrl here. Updating
   // either after starting the request would clean up this effect, abort its
-  // fetch, and leave the visual stuck in an idle/loading loop.
+  // fetch, and leave the visual stuck in an idle/loading loop. Mode/content
+  // changes and the explicit retry counter are the only request triggers.
   }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageRetry, partOfSpeech, turkish]);
 
   // Kompakt Kart Görünümü (Kelime listesi ızgarası için sıfır layout-shift önizleme)
