@@ -8,7 +8,7 @@ import {
   VisualMode,
   MotionDiagramType,
 } from "@/lib/media/visual-asset-registry";
-import { Camera, Sparkles, Box, BookOpen, Play, Pause, Info } from "lucide-react";
+import { Camera, Sparkles, Box, BookOpen, Play, Pause, Info, Image as ImageIcon, Film } from "lucide-react";
 
 const LazyWord3DScene = dynamic(() => import("@/components/vocabulary/Word3DScene"), {
   ssr: false,
@@ -33,6 +33,8 @@ export interface VocabularyVisualProps {
 
 const MODE_LABELS: Record<VisualMode, { labelTr: string; icon: React.ComponentType<{ className?: string }> }> = {
   photo: { labelTr: "Fotoğraf", icon: Camera },
+  photorealistic: { labelTr: "Foto-gerçekçi AI", icon: ImageIcon },
+  cartoon: { labelTr: "Çizgi Film", icon: Film },
   animation: { labelTr: "Animasyon / Şema", icon: Sparkles },
   "3d": { labelTr: "3D Görünüm", icon: Box },
   ai3d: { labelTr: "3D Hafıza Görseli", icon: Sparkles },
@@ -40,6 +42,24 @@ const MODE_LABELS: Record<VisualMode, { labelTr: string; icon: React.ComponentTy
 };
 
 type GeneratedVisualResponse = { imageUrl?: unknown };
+type GeneratedImageMode = Extract<VisualMode, "ai3d" | "photorealistic" | "cartoon">;
+type GeneratedImageStatus = "idle" | "loading" | "ready" | "error";
+
+function isGeneratedImageMode(mode: VisualMode): mode is GeneratedImageMode {
+  return mode === "ai3d" || mode === "photorealistic" || mode === "cartoon";
+}
+
+const IMAGE_STYLE_BY_MODE: Record<GeneratedImageMode, "3d" | "photorealistic" | "cartoon"> = {
+  ai3d: "3d",
+  photorealistic: "photorealistic",
+  cartoon: "cartoon",
+};
+
+const GENERATED_MODE_LABELS: Record<GeneratedImageMode, string> = {
+  ai3d: "3D sahnesi",
+  photorealistic: "foto-gerçekçi AI görseli",
+  cartoon: "çizgi film görseli",
+};
 
 function isGeneratedVisualResponse(value: unknown): value is GeneratedVisualResponse {
   return typeof value === "object" && value !== null && "imageUrl" in value;
@@ -390,13 +410,13 @@ export default function VocabularyVisual({
   const [compactVisible, setCompactVisible] = useState(
     !compact || Boolean(manifest.threeD.imageUrl),
   );
-  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(
-    manifest.threeD.imageUrl || null,
+  const [generatedImages, setGeneratedImages] = useState<Partial<Record<GeneratedImageMode, string>>>(
+    manifest.threeD.imageUrl ? { ai3d: manifest.threeD.imageUrl } : {},
   );
-  const [generatedImageStatus, setGeneratedImageStatus] = useState<
-    "idle" | "loading" | "ready" | "error"
-  >(manifest.threeD.imageUrl ? "ready" : "idle");
-  const [generatedImageError, setGeneratedImageError] = useState(false);
+  const [generatedImageStatuses, setGeneratedImageStatuses] = useState<Partial<Record<GeneratedImageMode, GeneratedImageStatus>>>(
+    manifest.threeD.imageUrl ? { ai3d: "ready" } : {},
+  );
+  const [generatedImageErrors, setGeneratedImageErrors] = useState<Partial<Record<GeneratedImageMode, boolean>>>({});
   const compactVisualRef = useRef<HTMLDivElement | null>(null);
 
   const effectiveModes = manifest.availableModes.filter((mode) =>
@@ -405,14 +425,18 @@ export default function VocabularyVisual({
   const currentMode: VisualMode = effectiveModes.includes(activeMode)
     ? activeMode
     : effectiveModes[0] || "card";
+  const generatedImageMode = isGeneratedImageMode(currentMode) ? currentMode : null;
+  const generatedImageUrl = generatedImageMode ? generatedImages[generatedImageMode] || null : null;
+  const generatedImageStatus = generatedImageMode ? generatedImageStatuses[generatedImageMode] || "idle" : "idle";
+  const generatedImageError = generatedImageMode ? Boolean(generatedImageErrors[generatedImageMode]) : false;
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
     setPhotoError(false);
     setLocalAnimationError(false);
-    setGeneratedImageError(false);
-    setGeneratedImageUrl(manifest.threeD.imageUrl || null);
-    setGeneratedImageStatus(manifest.threeD.imageUrl ? "ready" : "idle");
+    setGeneratedImageErrors({});
+    setGeneratedImages(manifest.threeD.imageUrl ? { ai3d: manifest.threeD.imageUrl } : {});
+    setGeneratedImageStatuses(manifest.threeD.imageUrl ? { ai3d: "ready" } : {});
     setCompactVisible(!compact || Boolean(manifest.threeD.imageUrl));
     const nextDefault =
       initialMode && manifest.availableModes.includes(initialMode)
@@ -455,7 +479,7 @@ export default function VocabularyVisual({
 
   useEffect(() => {
     if (
-      currentMode !== "ai3d" ||
+      !generatedImageMode ||
       !compactVisible ||
       generatedImageUrl ||
       generatedImageStatus !== "idle"
@@ -464,7 +488,7 @@ export default function VocabularyVisual({
     }
 
     const controller = new AbortController();
-    setGeneratedImageStatus("loading");
+    setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "loading" }));
 
     const loadGeneratedVisual = async () => {
       try {
@@ -472,6 +496,7 @@ export default function VocabularyVisual({
           word: english,
           meaning: turkish,
           type: partOfSpeech,
+          style: IMAGE_STYLE_BY_MODE[generatedImageMode],
         });
         if (example) query.set("example", example);
         const response = await fetch(`/api/word-image?${query.toString()}`, {
@@ -486,19 +511,25 @@ export default function VocabularyVisual({
           throw new Error("3D görsel yanıtı geçerli bir görsel adresi içermiyor.");
         }
 
-        setGeneratedImageUrl(payload.imageUrl);
-        setGeneratedImageStatus("ready");
+        setGeneratedImages((previous) => ({ ...previous, [generatedImageMode]: payload.imageUrl as string }));
+        setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "ready" }));
       } catch (error) {
         if (!controller.signal.aborted) {
-          setGeneratedImageStatus("error");
-          console.warn("[VocabularyVisual] 3D memory image unavailable:", error);
+          setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "error" }));
+          console.warn(`[VocabularyVisual] ${generatedImageMode} memory image unavailable:`, error);
+        } else {
+          setGeneratedImageStatuses((previous) => (
+            previous[generatedImageMode] === "loading"
+              ? { ...previous, [generatedImageMode]: "idle" }
+              : previous
+          ));
         }
       }
     };
 
     void loadGeneratedVisual();
     return () => controller.abort();
-  }, [compactVisible, currentMode, english, example, generatedImageStatus, generatedImageUrl, partOfSpeech, turkish]);
+  }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageStatus, generatedImageUrl, partOfSpeech, turkish]);
 
   // Kompakt Kart Görünümü (Kelime listesi ızgarası için sıfır layout-shift önizleme)
   if (compact) {
@@ -518,7 +549,7 @@ export default function VocabularyVisual({
             unoptimized
             sizes="(max-width: 768px) 100vw, 33vw"
             loading="lazy"
-            onError={() => setGeneratedImageError(true)}
+            onError={() => setGeneratedImageErrors((previous) => ({ ...previous, ai3d: true }))}
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
@@ -675,19 +706,19 @@ export default function VocabularyVisual({
           </div>
         )}
 
-        {currentMode === "ai3d" && (
+        {generatedImageMode && (
           <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950">
             {generatedImageUrl && !generatedImageError ? (
               <Image
                 src={generatedImageUrl}
-                alt={`${english} (${turkish}) anlamını anlatan kelimeye özel 3D sahne`}
+                alt={`${english} (${turkish}) anlamını anlatan ${GENERATED_MODE_LABELS[generatedImageMode]}`}
                 fill
                 unoptimized
                 sizes="(max-width: 1024px) 100vw, 58vw"
                 loading="lazy"
-                onError={() => setGeneratedImageError(true)}
+                onError={() => setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: true }))}
                 className="object-cover"
-                data-testid={`vocabulary-3d-image-${manifest.wordSlug}`}
+                data-testid={`vocabulary-${generatedImageMode}-image-${manifest.wordSlug}`}
               />
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
@@ -696,15 +727,15 @@ export default function VocabularyVisual({
                 <p className="text-lg font-semibold text-cyan-100">{turkish}</p>
                 <p className="max-w-md text-sm text-white/75" role={generatedImageStatus === "error" ? "alert" : undefined}>
                   {generatedImageStatus === "error" || generatedImageError
-                    ? "Bu kelimenin 3D sahnesi şu anda yüklenemedi. İstersen görseli yeniden deneyebilirsin."
-                    : "Kelimenin anlamını anlatan 3D hafıza sahnesi hazırlanıyor…"}
+                    ? `Bu kelimenin ${GENERATED_MODE_LABELS[generatedImageMode]} şu anda yüklenemedi. Görseli yeniden deneyebilirsin.`
+                    : `${english} kelimesinin anlamına uygun ${GENERATED_MODE_LABELS[generatedImageMode]} hazırlanıyor…`}
                 </p>
                 {(generatedImageStatus === "error" || generatedImageError) && (
                   <button
                     type="button"
                     onClick={() => {
-                      setGeneratedImageError(false);
-                      setGeneratedImageStatus("idle");
+                      setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: false }));
+                      setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "idle" }));
                     }}
                     className="rounded-xl border border-white/25 bg-white/10 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/20"
                   >
@@ -716,7 +747,7 @@ export default function VocabularyVisual({
             {generatedImageUrl && !generatedImageError && (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-4 pt-12">
                 <div className="inline-flex rounded-full border border-white/20 bg-slate-950/65 px-3 py-1 text-xs font-bold text-cyan-100 backdrop-blur">
-                  {english} · {turkish}
+                  {MODE_LABELS[generatedImageMode].labelTr} · {english} · {turkish}
                 </div>
               </div>
             )}

@@ -591,15 +591,7 @@ export function findVoice(locale: VoiceLocale, gender: VoiceGender): VoiceProfil
     (v) => v.locale === locale && v.gender === gender && v.enabled
   );
   if (found) return found;
-
-  // Fallback: Same locale other gender
-  const sameLocale = ALL_VOICE_REGISTRY.find(
-    (v) => v.locale === locale && v.enabled
-  );
-  if (sameLocale) return sameLocale;
-
-  // Default: US Female
-  return VOICE_REGISTRY[2];
+  throw new Error(`Etkin ${locale} ${gender} konuşmacı profili tanımlı değil.`);
 }
 
 /**

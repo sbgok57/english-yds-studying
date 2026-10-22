@@ -1,4 +1,6 @@
-export type VisualMode = "photo" | "animation" | "3d" | "ai3d" | "card";
+export type VisualMode = "photo" | "photorealistic" | "cartoon" | "animation" | "3d" | "ai3d" | "card";
+
+const GENERATED_IMAGE_MODES: VisualMode[] = ["photorealistic", "cartoon", "ai3d"];
 
 export type MotionDiagramType =
   | "mitigate"
@@ -453,9 +455,10 @@ export function resolveWordVisualManifest(params: {
   if (existing) {
     return {
       ...existing,
-      availableModes: existing.availableModes.includes("ai3d")
-        ? existing.availableModes
-        : ["ai3d", ...existing.availableModes],
+      availableModes: [
+        ...GENERATED_IMAGE_MODES,
+        ...existing.availableModes.filter((mode) => !GENERATED_IMAGE_MODES.includes(mode)),
+      ],
       defaultMode: "ai3d",
       visualKey: slug,
     };
@@ -479,7 +482,7 @@ export function resolveWordVisualManifest(params: {
     partOfSpeech: pos,
     level,
     semanticCategory: pos.toLowerCase().includes("phrasal") ? "phrasal-verb" : "abstract-academic",
-    availableModes: ["ai3d", "animation", "3d", "card"],
+    availableModes: ["ai3d", "photorealistic", "cartoon", "animation", "3d", "card"],
     defaultMode: "ai3d",
     hasVerifiedPhoto: false,
     animation: {

@@ -5,6 +5,7 @@ import {
   VISUAL_ASSET_REGISTRY,
   resolveWordVisualManifest,
 } from "../src/lib/media/visual-asset-registry";
+import { generateVocabularyVisualPrompt } from "../src/lib/media/vocabulary-image-prompt";
 
 console.log("▶ Starting Vocabulary Visual Asset Registry & Integrity Tests...\n");
 
@@ -38,6 +39,8 @@ assert.strictEqual(
 );
 assert.ok(ubiquitous.availableModes.includes("animation"));
 assert.ok(ubiquitous.availableModes.includes("3d"));
+assert.ok(ubiquitous.availableModes.includes("photorealistic"));
+assert.ok(ubiquitous.availableModes.includes("cartoon"));
 assert.ok(ubiquitous.availableModes.includes("card"));
 
 // 3. Katalog Dışı Herhangi Bir Envanter Kelimesi İçin Güvenli Fallback
@@ -49,9 +52,27 @@ const dynamicAcademicWord = resolveWordVisualManifest({
 });
 assert.strictEqual(dynamicAcademicWord.hasVerifiedPhoto, false);
 assert.strictEqual(dynamicAcademicWord.availableModes.includes("photo"), false);
-assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["ai3d", "animation", "3d", "card"]);
+assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["ai3d", "photorealistic", "cartoon", "animation", "3d", "card"]);
 assert.ok(dynamicAcademicWord.animation.reducedMotionFallbackTextTr.length > 10);
 assert.strictEqual(dynamicAcademicWord.visualKey, "unprecedented");
+
+const samplePrompt3d = generateVocabularyVisualPrompt("abundant", "bol miktarda", "adjective", "Food was abundant.", "3d");
+const samplePromptPhoto = generateVocabularyVisualPrompt("abundant", "bol miktarda", "adjective", "Food was abundant.", "photorealistic");
+const samplePromptCartoon = generateVocabularyVisualPrompt("abundant", "bol miktarda", "adjective", "Food was abundant.", "cartoon");
+assert.ok(samplePrompt3d.includes("3D editorial memory scene"));
+assert.ok(samplePromptPhoto.includes("photorealistic editorial photograph"));
+assert.ok(samplePromptCartoon.includes("animated-film illustration"));
+assert.ok(samplePrompt3d.includes("Food was abundant."), "Example context should ground visual sense selection.");
+assert.ok(!samplePromptPhoto.includes("3D editorial memory scene"), "Photo-realistic mode must not request a 3D render.");
+
+// Every catalog entry and every uncatalogued inventory word gets the three generated image styles.
+for (const [slug, visual] of Object.entries(VISUAL_ASSET_REGISTRY)) {
+  const resolved = resolveWordVisualManifest({ english: slug, turkish: visual.turkish });
+  assert.ok(resolved.availableModes.includes("ai3d"), `${slug} is missing generated 3D mode`);
+  assert.ok(resolved.availableModes.includes("photorealistic"), `${slug} is missing photorealistic AI mode`);
+  assert.ok(resolved.availableModes.includes("cartoon"), `${slug} is missing cartoon mode`);
+  if (!resolved.hasVerifiedPhoto) assert.ok(!resolved.availableModes.includes("photo"), `${slug} claims an unverified photo`);
+}
 
 // 3b. Sense-aware semantic topologies must not collapse to one generic diagram
 const conceptSamples = [

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { generateVocabularyVisualPrompt, GeneratedImageStyle } from "@/lib/media/vocabulary-image-prompt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,16 +31,6 @@ function resolveExample(serializedExamples: string | undefined, fallback: string
   return fallback;
 }
 
-function generate3dVisualPrompt(english: string, turkish: string, type: string, example: string): string {
-  const cleanEn = cleanPromptValue(english, 90);
-  const cleanTr = cleanPromptValue(turkish, 180);
-  const cleanType = cleanPromptValue(type, 40);
-  const cleanExample = cleanPromptValue(example, 260);
-  const context = cleanExample ? ` Use this sentence only to understand the intended sense: “${cleanExample}”.` : "";
-
-  return `Create one beautiful premium 3D editorial memory scene for an English vocabulary learning card. The exact vocabulary item is “${cleanEn}”; its Turkish meaning is “${cleanTr}”; part of speech: ${cleanType}.${context} Show a concrete, instantly understandable miniature real-world scene that makes this exact meaning memorable. Choose objects, people, setting, and action that fit the meaning; for abstract words use a clear physical metaphor as a richly detailed 3D diorama. Tactile high-quality 3D materials, realistic light and depth, vivid but tasteful color, strong subject silhouette, uncluttered composition, polished studio render. The vocabulary strings are semantic guidance only and must not appear as visible text. No words, letters, numbers, labels, subtitles, diagrams, arrows, icons, emojis, charts, or watermark.`;
-}
-
 function hashVisualSeed(value: string): number {
   let hash = 2166136261;
   for (const character of value) {
@@ -56,6 +47,10 @@ export async function GET(req: NextRequest) {
   const requestedMeaning = cleanPromptValue(searchParams.get("meaning") || "", 180);
   const requestedType = cleanPromptValue(searchParams.get("type") || "", 40);
   const requestedExample = cleanPromptValue(searchParams.get("example") || "", 260);
+  const requestedStyle = searchParams.get("style");
+  const style: GeneratedImageStyle = requestedStyle === "photorealistic" || requestedStyle === "cartoon"
+    ? requestedStyle
+    : "3d";
 
   if (!wordId && !english) {
     return NextResponse.json({ ok: false, code: "WORD_REQUIRED" }, { status: 400 });
@@ -73,8 +68,8 @@ export async function GET(req: NextRequest) {
     const targetType = word?.type || requestedType || "academic vocabulary";
     const targetExample = resolveExample(word?.examples, requestedExample);
 
-    // Only reuse assets generated with the current, word-specific memory-scene prompt.
-    if (word?.imageUrl?.includes("memoryVersion=2")) {
+    // Reuse a stored 3D image only when its style, sense and current prompt version match.
+    if (style === "3d" && word?.imageUrl?.includes("memoryVersion=3") && word.imageUrl.includes("style=3d")) {
       return NextResponse.json({
         imageUrl: word.imageUrl,
         source: "db",
@@ -83,18 +78,18 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const prompt = generate3dVisualPrompt(targetEnglish, targetTurkish, targetType, targetExample || "");
-    const hash = hashVisualSeed(`${targetEnglish}|${targetTurkish}|${targetType}|memory-v2`);
+    const prompt = generateVocabularyVisualPrompt(targetEnglish, targetTurkish, targetType, targetExample || "", style);
+    const hash = hashVisualSeed(`${targetEnglish}|${targetTurkish}|${targetType}|${targetExample}|${style}|memory-v3`);
     const ai3dImageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(
       prompt
-    )}?width=768&height=768&nologo=true&seed=${hash}&memoryVersion=2`;
+    )}?width=768&height=768&nologo=true&seed=${hash}&style=${style}&memoryVersion=3`;
 
     return NextResponse.json({
       imageUrl: ai3dImageUrl,
       source: "ai-3d-render",
       word: targetEnglish,
       meaning: targetTurkish,
-      style: "3d-memory-scene-v2",
+      style: `${style}-vocabulary-memory-v3`,
     });
   } catch (error) {
     console.error("[WORD_IMAGE_ROUTE_ERROR]:", error instanceof Error ? error.message : "Unknown image lookup error");

@@ -85,6 +85,7 @@ export default function AccentVoicePicker({
   }
 
   const voicesForCurrentAccent = getVoicesForAccent(activeAccent);
+  const englishSpeakerCount = ACCENT_METADATA_LIST.length * 2;
   const currentAccentMeta = ACCENT_METADATA_LIST.find((a) => a.code === activeAccent) || ACCENT_METADATA_LIST[0];
 
   return (
@@ -99,11 +100,11 @@ export default function AccentVoicePicker({
             <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
               <span>Doğal Çoklu Aksan & Konuşmacı Seçici</span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-normal">
-                12 Doğrulanmış Ses
+                {englishSpeakerCount} İngilizce ses profili
               </span>
             </h4>
             <p className="text-xs text-white/60">
-              Her aksan için bağımsız kadın ve erkek konuşmacı (96 kbps stüdyo kalitesi)
+              Her aksanda ayrı kadın ve erkek konuşmacı kimliği. Cihaz yedeği uygun aksan ve cinsiyet sesini bulamazsa yanlış ses seçmez.
             </p>
           </div>
         </div>
