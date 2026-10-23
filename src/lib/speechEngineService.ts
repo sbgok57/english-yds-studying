@@ -1,9 +1,9 @@
 /**
- * DİL MASTER - 7 AKSANLI HİBRİT SES MOTORU & KESİNTİSİZ ÇALICI
+ * DİL MASTER - Sağlayıcıda doğrulanmış aksanlar için hibrit ses motoru
  * Vercel 502 hatası verse dahi tarayıcı motoruyla sesi %100 kesinlikle çıkarır.
  */
 
-import { findVoice } from './tts/voice-registry';
+import { findEnabledVoice } from './tts/voice-registry';
 
 export type EnglishAccent = 'en-GB' | 'en-US' | 'en-AU' | 'en-CA' | 'en-NZ' | 'en-IN' | 'en-GB-scotland';
 
@@ -52,7 +52,8 @@ export class SpeechEngineService {
     const accent = options.accent || 'en-GB';
     const gender = options.gender || 'female';
     const rate = options.speakingRate ?? 1.0;
-    const voice = findVoice(accent, gender);
+    const voice = findEnabledVoice(accent, gender);
+    if (!voice) throw new Error(`VOICE_NOT_AVAILABLE: ${accent} ${gender}`);
     const trimmed = (options.text || '').trim();
     const contentType =
       trimmed.length > 120 ? 'long-form' : trimmed.includes(' ') ? 'sentence' : 'word';

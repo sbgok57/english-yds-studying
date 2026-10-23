@@ -1,5 +1,5 @@
 /**
- * DİL MASTER - 7-AKSANLI HİBRİT SES MOTORU, ARKA PLAN SES VE AKILLI BİLDİRİM TESTLERİ
+ * DİL MASTER - Doğrulanmış aksanlar, arka plan ses ve bildirim testleri
  */
 
 import assert from "assert";
@@ -10,8 +10,8 @@ import { GRAMMAR_LESSONS } from "../src/components/DilMasterIosMaster";
 
 console.log("▶ Starting Speech Engine, Background Audio & Notification Tests...\n");
 
-// 1. 7 Aksan Tipi ve SpeechEngine Doğrulaması
-console.log("  1. Testing SpeechEngineService and 7 English Accents...");
+// 1. Provider-supported accents and SpeechEngine validation
+console.log("  1. Testing SpeechEngineService and supported English accents...");
 const accents: EnglishAccent[] = [
   'en-GB',
   'en-US',
@@ -19,25 +19,24 @@ const accents: EnglishAccent[] = [
   'en-CA',
   'en-NZ',
   'en-IN',
-  'en-GB-scotland',
 ];
 
-assert.strictEqual(accents.length, 7, "Tam 7 İngilizce aksan tanımlı olmalıdır.");
+assert.strictEqual(accents.length, 6, "Altı sağlayıcı-doğrulanmış İngilizce aksan etkin olmalıdır.");
 assert.ok(speechEngine instanceof SpeechEngineService, "speechEngine singleton olmalıdır.");
 
 // Güvenli başlatma ve durdurma
 speechEngine.unlockAudio();
 speechEngine.stop();
-const scotPayload = speechEngine.buildApiRequestPayload({
-  text: "ubiquitous",
-  accent: "en-GB-scotland",
-  gender: "male",
-  speakingRate: 0.9,
-});
-assert.strictEqual(scotPayload.voiceId, "en-GB-scotland-male-thomas", "Kanonik İskoç erkek ses ID'si çözümlenmelidir.");
-assert.strictEqual(scotPayload.contentType, "word", "Tek kelimelik metin 'word' contentType üretmelidir.");
-assert.strictEqual(scotPayload.rate, 0.9, "Hız 'rate' alanına yazılmalıdır.");
-console.log("  ✅ PASS: 7 accents defined, canonical voiceId payload & unlockAudio/stop methods operate safely.\n");
+const supportedPayload = speechEngine.buildApiRequestPayload({ text: "ubiquitous", accent: "en-GB", gender: "male", speakingRate: 0.9 });
+assert.strictEqual(supportedPayload.voiceId, "en-GB-male-ryan");
+assert.strictEqual(supportedPayload.contentType, "word", "Tek kelimelik metin 'word' contentType üretmelidir.");
+assert.strictEqual(supportedPayload.rate, 0.9, "Hız 'rate' alanına yazılmalıdır.");
+assert.throws(
+  () => speechEngine.buildApiRequestPayload({ text: "test", accent: "en-GB-scotland", gender: "male" }),
+  /VOICE_NOT_AVAILABLE/,
+  "Doğrulanmamış İskoç sesi sessizce standart İngilizceye düşmemelidir.",
+);
+console.log("  ✅ PASS: Supported accents resolve; unsupported Scottish selection fails explicitly.\n");
 
 // 2. BackgroundAudioEngine ve Kilit Ekranı (MediaSession) Doğrulaması
 console.log("  2. Testing BackgroundAudioEngine & Lesson Playback...");
@@ -88,7 +87,7 @@ GRAMMAR_LESSONS.forEach((lesson) => {
 });
 console.log("  ✅ PASS: All GRAMMAR_LESSONS meet curriculum standards.\n");
 
-// 5. Browser Speech 7-Accent Honest Matcher & AudioResponse Contract Doğrulaması
+// 5. Browser Speech honest matcher & AudioResponse contract
 console.log("  5. Testing Browser Speech Honest Matcher & AudioResponse Contract...");
 import("../src/lib/tts/browser-speech").then(async ({ ACCENTS, chooseVoice }) => {
   const { AudioRequestError, requestPronunciationAudio } = await import("../src/lib/tts/audio-response");

@@ -2,7 +2,8 @@
  * DİL MASTER — Merkezî Ses Kayıt Kütüğü (Central Voice Registry)
  *
  * - İngilizce Öğrenme Sesleri (contentLanguage: "en"):
- *   7 İngilizce aksanı × 2 cinsiyet = 14 Neural Konuşmacı Profili
+ *   6 provider-doğrulanmış İngilizce aksan × 2 cinsiyet = 12 etkin Neural profil
+ *   İskoç profilleri kayıtlı kimlikleri korur ancak gerçek İskoç aksanı doğrulanmadığı için devre dışıdır.
  *   (en-GB, en-US, en-CA, en-AU, en-NZ, en-GB-scotland, en-IN)
  * - Türkçe Anlatım Sesleri (contentLanguage: "tr"):
  *   Sesli Gramer ve Türkçe açıklamalar için 2 ayrı konuşmacı profili:
@@ -66,6 +67,7 @@ export interface AccentMetadata {
   descriptionTr: string;
   femaleVoiceId: string;
   maleVoiceId: string;
+  supported: boolean;
 }
 
 /**
@@ -94,6 +96,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "RP (Received Pronunciation) standart İngiliz telaffuzu",
     femaleVoiceId: "en-GB-female-sonia",
     maleVoiceId: "en-GB-male-ryan",
+    supported: true,
   },
   {
     code: "en-US",
@@ -105,6 +108,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Genel Amerikan (General American) akademik telaffuz",
     femaleVoiceId: "en-US-female-jenny",
     maleVoiceId: "en-US-male-guy",
+    supported: true,
   },
   {
     code: "en-CA",
@@ -116,6 +120,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Standart Kanada İngilizcesi ve sesletim dinamikleri",
     femaleVoiceId: "en-CA-female-clara",
     maleVoiceId: "en-CA-male-liam",
+    supported: true,
   },
   {
     code: "en-AU",
@@ -127,6 +132,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Genel Avustralya İngilizcesi (General Australian)",
     femaleVoiceId: "en-AU-female-natasha",
     maleVoiceId: "en-AU-male-william",
+    supported: true,
   },
   {
     code: "en-NZ",
@@ -138,6 +144,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Yeni Zelanda İngilizcesi ve kendine özgü ünlü sesleri",
     femaleVoiceId: "en-NZ-female-molly",
     maleVoiceId: "en-NZ-male-mitchell",
+    supported: true,
   },
   {
     code: "en-GB-scotland",
@@ -146,9 +153,10 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     labelEn: "Scottish",
     flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
     youglishSlug: "uk",
-    descriptionTr: "Karakteristik İskoç İngilizcesi (Scottish English) ritim ve sesletimi",
+    descriptionTr: "İskoç aksanı mevcut sağlayıcıda doğrulanmıyor. Maisie ve Thomas standart en-GB sesleridir; yanlış aksanla etiketlenmemeleri için seçim kapalıdır.",
     femaleVoiceId: "en-GB-scotland-female-maisie",
     maleVoiceId: "en-GB-scotland-male-thomas",
+    supported: false,
   },
   {
     code: "en-IN",
@@ -160,6 +168,7 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Uluslararası akademik sınavlarda sıklıkla çıkan Hint İngilizcesi",
     femaleVoiceId: "en-IN-female-neerja",
     maleVoiceId: "en-IN-male-prabhat",
+    supported: true,
   },
 ];
 
@@ -216,7 +225,7 @@ export const TURKISH_NARRATOR_VOICES: VoiceProfile[] = [
 ];
 
 /**
- * 14 İngilizce Neural Konuşmacı Profili + 2 Türkçe Eğitmen Profili = 16 Kayıtlı Ses
+ * 14 katalog girdisi (12 etkin İngilizce + 2 devre dışı Scottish claim) + 2 Türkçe anlatıcı
  */
 export const VOICE_REGISTRY: VoiceProfile[] = [
   // 1. İngiliz (en-GB)
@@ -523,13 +532,13 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
     maxCharacters: 2500,
     license: "Microsoft Neural Speech Engine (Service Authorization)",
-    description: "Otantik İskoç / Kuzey İngilizcesi kadın anlatıcı sesi",
+    description: "İskoç aksanı olarak doğrulanmadı; kullanılabilir değildir.",
   },
   {
     id: "en-GB-scotland-male-thomas",
@@ -546,18 +555,18 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
     maxCharacters: 2500,
     license: "Microsoft Neural Speech Engine (Service Authorization)",
-    description: "Karakteristik İskoç / Kuzey İngilizcesi erkek anlatıcı sesi",
+    description: "İskoç aksanı olarak doğrulanmadı; kullanılabilir değildir.",
   },
 ];
 
 /**
- * 16 Doğrulanmış Ses Profilinin Tamamı (14 İngilizce Öğrenme + 2 Türkçe Anlatıcı: Emel & Ahmet)
+ * İngilizce aksan kataloğu ve Türkçe anlatıcı profilleri (Emel & Ahmet)
  */
 export const ALL_VOICE_REGISTRY: VoiceProfile[] = [
   ...VOICE_REGISTRY,
@@ -594,6 +603,11 @@ export function findVoice(locale: VoiceLocale, gender: VoiceGender): VoiceProfil
   throw new Error(`Etkin ${locale} ${gender} konuşmacı profili tanımlı değil.`);
 }
 
+/** Resolve a profile without allowing unsupported legacy preferences to throw. */
+export function findEnabledVoice(locale: VoiceLocale, gender: VoiceGender): VoiceProfile | undefined {
+  return ALL_VOICE_REGISTRY.find((v) => v.locale === locale && v.gender === gender && v.enabled);
+}
+
 /**
  * Türkçe anlatım (Emel veya Ahmet) profilini getir
  */
@@ -624,7 +638,6 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
     "en-CA",
     "en-AU",
     "en-NZ",
-    "en-GB-scotland",
     "en-IN",
     "tr-TR",
   ];
@@ -641,10 +654,16 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   }
 
   for (const loc of requiredLocales) {
-    const female = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female");
-    const male = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male");
+    const female = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female" && v.enabled);
+    const male = ALL_VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male" && v.enabled);
     if (!female) errors.push(`${loc} için kadın ses eksik.`);
     if (!male) errors.push(`${loc} için erkek ses eksik.`);
+  }
+
+  for (const locale of ["en-GB-scotland"] as const) {
+    if (ALL_VOICE_REGISTRY.some((voice) => voice.locale === locale && voice.enabled)) {
+      errors.push(`${locale} desteklenmediği doğrulandığı halde etkin olarak sunuluyor.`);
+    }
   }
 
   return {

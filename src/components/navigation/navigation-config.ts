@@ -205,12 +205,12 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   {
     id: "nav-listening",
-    label: "Listening Lab (7 Aksan Dinleme)",
+    label: "Listening Lab (6 Doğrulanmış Aksan)",
     description: "Akademik dinleme materyalleri, aksan karşılaştırma ve transkript",
     href: "/listening",
     category: "reading-listening",
     icon: "headphones",
-    badge: "7 Aksan",
+    badge: "6 Aksan",
     searchTags: ["listening", "dinleme", "aksan", "kulak aşinalığı", "listening lab"],
   },
   {

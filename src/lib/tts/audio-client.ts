@@ -5,8 +5,8 @@ import {
   VoiceGender,
   VoiceProfile,
   getVoiceProfile,
-  findVoice,
   findTurkishNarratorVoice,
+  findEnabledVoice,
   STANDARD_PREVIEW_TEXT,
   STANDARD_TURKISH_PREVIEW_TEXT,
 } from "./voice-registry";
@@ -35,6 +35,9 @@ export interface PlaybackOptions {
   gender?: VoiceGender;
   rate?: number;
   contentType?: "word" | "sentence" | "long-form";
+  /** Resume a generated audio file at a saved position after its metadata loads. */
+  startAtSeconds?: number;
+  onTimeUpdate?: (currentTime: number, duration: number) => void;
   onStart?: () => void;
   onEnd?: () => void;
   onError?: (err: any) => void;
@@ -67,6 +70,9 @@ class ClientAudioManager {
   private currentBlobUrl: string | null = null;
   private activeAbortController: AbortController | null = null;
   private lastMetadata: PlaybackMetadata | null = null;
+  private currentPlaybackKey: string | null = null;
+  private currentPlaybackOptions: PlaybackOptions | null = null;
+  private currentUtterance: SpeechSynthesisUtterance | null = null;
 
   constructor() {
     if (typeof window !== "undefined") {
@@ -77,6 +83,66 @@ class ClientAudioManager {
 
   getLastPlaybackMetadata(): PlaybackMetadata | null {
     return this.lastMetadata;
+  }
+
+  getPlaybackPosition(): { currentTime: number; duration: number; paused: boolean } | null {
+    const audio = this.currentAudio;
+    if (!audio) return null;
+    return {
+      currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
+      duration: Number.isFinite(audio.duration) ? audio.duration : 0,
+      paused: audio.paused,
+    };
+  }
+
+  isNativeSpeechPlayback(): boolean {
+    return Boolean(this.currentUtterance);
+  }
+
+  hasPlayback(text: string, voiceId: string): boolean {
+    return this.currentPlaybackKey === this.playbackKey(text, voiceId) && Boolean(this.currentAudio || this.currentUtterance);
+  }
+
+  pauseCurrent(): number | null {
+    const audio = this.currentAudio;
+    if (!audio) {
+      if (!this.currentUtterance || typeof window === "undefined" || !("speechSynthesis" in window)) return null;
+      window.speechSynthesis.pause();
+      return 0; // Native speech provides pause/resume but no reliable time or seek API.
+    }
+    const position = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+    audio.pause();
+    this.currentPlaybackOptions?.onTimeUpdate?.(position, Number.isFinite(audio.duration) ? audio.duration : 0);
+    return position;
+  }
+
+  async resumeCurrent(options?: PlaybackOptions): Promise<boolean> {
+    if (!this.currentAudio && !this.currentUtterance) return false;
+    if (options) this.currentPlaybackOptions = options;
+    if (!this.currentAudio && this.currentUtterance && typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.resume();
+      return true;
+    }
+    const audio = this.currentAudio;
+    if (!audio) return false;
+    try {
+      await audio.play();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  seekCurrent(seconds: number): boolean {
+    const audio = this.currentAudio;
+    if (!audio || !Number.isFinite(seconds) || seconds < 0) return false;
+    if (!Number.isFinite(audio.duration) || audio.duration <= 0) return false;
+    audio.currentTime = Math.max(0, Math.min(seconds, Math.max(0, audio.duration - 0.1)));
+    return true;
+  }
+
+  private playbackKey(text: string, voiceId: string): string {
+    return `${voiceId}:${text.trim()}`;
   }
 
   // Tercihleri yükle
@@ -180,6 +246,9 @@ class ClientAudioManager {
       }
       this.currentAudio = null;
     }
+    this.currentUtterance = null;
+    this.currentPlaybackKey = null;
+    this.currentPlaybackOptions = null;
 
     if (this.currentBlobUrl) {
       try {
@@ -205,7 +274,7 @@ class ClientAudioManager {
   ): VoiceProfile | undefined {
     if (options?.voiceId) {
       const requestedVoice = getVoiceProfile(options.voiceId);
-      if (!requestedVoice) return undefined;
+      if (!requestedVoice?.enabled) return undefined;
       if (options.accent && requestedVoice.locale !== options.accent) return undefined;
       if (options.gender && requestedVoice.gender !== options.gender) return undefined;
       return requestedVoice;
@@ -220,10 +289,10 @@ class ClientAudioManager {
       return findTurkishNarratorVoice(g);
     }
     if (options?.accent && options?.gender) {
-      return findVoice(options.accent, options.gender);
+      return findEnabledVoice(options.accent, options.gender);
     }
     if (options?.accent) {
-      return findVoice(options.accent, prefs.preferredVoiceGender);
+      return findEnabledVoice(options.accent, prefs.preferredVoiceGender);
     }
     const savedVoice = getVoiceProfile(prefs.preferredVoiceId);
     if (
@@ -232,7 +301,7 @@ class ClientAudioManager {
     ) {
       return savedVoice;
     }
-    return findVoice(prefs.preferredAccent, prefs.preferredVoiceGender);
+    return findEnabledVoice(prefs.preferredAccent, prefs.preferredVoiceGender);
   }
 
   // Sunucu API üzerinden doğal neural ses çal; gecikirse Web Speech API'ye güvenli geçiş yap.
@@ -261,6 +330,9 @@ class ClientAudioManager {
         try {
           window.speechSynthesis.cancel();
           const utterance = new SpeechSynthesisUtterance(text);
+          this.currentUtterance = utterance;
+          this.currentPlaybackKey = this.playbackKey(text, voice.id);
+          this.currentPlaybackOptions = options || null;
           const langLocale =
             voice.locale === "en-GB-scotland" ? "en-GB" : voice.locale || "en-US";
           utterance.lang = langLocale;
@@ -303,13 +375,13 @@ class ClientAudioManager {
           options?.onMetadata?.(meta);
 
           utterance.onstart = () => {
-            options?.onStart?.();
+            this.currentPlaybackOptions?.onStart?.();
             if (voice.contentLanguage === "tr") {
-              options?.onInfo?.(
+              this.currentPlaybackOptions?.onInfo?.(
                 `Cihaz sesi: ${selectedBrowserVoice.name} (${voice.gender === "female" ? "Kadın" : "Erkek"} · Türkçe)`
               );
             } else {
-              options?.onInfo?.(
+              this.currentPlaybackOptions?.onInfo?.(
                 `Cihaz Yerel Sesi: ${voice.accentLabelTr} (${
                   voice.gender === "female" ? "Kadın" : "Erkek"
                 })`
@@ -317,10 +389,22 @@ class ClientAudioManager {
             }
           };
           utterance.onend = () => {
-            options?.onEnd?.();
+            const callbacks = this.currentPlaybackOptions;
+            if (this.currentUtterance === utterance) {
+              this.currentUtterance = null;
+              this.currentPlaybackKey = null;
+              this.currentPlaybackOptions = null;
+            }
+            callbacks?.onEnd?.();
           };
           utterance.onerror = () => {
-            options?.onError?.(new Error("Cihaz sesi oynatılamadı."));
+            const callbacks = this.currentPlaybackOptions;
+            if (this.currentUtterance === utterance) {
+              this.currentUtterance = null;
+              this.currentPlaybackKey = null;
+              this.currentPlaybackOptions = null;
+            }
+            callbacks?.onError?.(new Error("Cihaz sesi oynatılamadı."));
           };
 
           window.speechSynthesis.speak(utterance);
@@ -405,17 +489,56 @@ class ClientAudioManager {
       const audio = new Audio(audioUrl);
       audio.playbackRate = 1.0; // Hız zaten sunucu tarafında prosody/stream ile uygulandı
       this.currentAudio = audio;
+      this.currentPlaybackKey = this.playbackKey(text, voice.id);
+      this.currentPlaybackOptions = options || null;
+
+      audio.ontimeupdate = () => {
+        this.currentPlaybackOptions?.onTimeUpdate?.(
+          Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
+          Number.isFinite(audio.duration) ? audio.duration : 0,
+        );
+      };
+
+      const requestedStart = options?.startAtSeconds;
+      if (typeof requestedStart === "number" && Number.isFinite(requestedStart) && requestedStart > 0) {
+        const restorePosition = () => {
+          if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
+          audio.currentTime = Math.max(0, Math.min(requestedStart, Math.max(0, audio.duration - 0.1)));
+        };
+        if (audio.readyState >= HTMLMediaElement.HAVE_METADATA) {
+          restorePosition();
+        } else {
+          await new Promise<void>((resolve) => {
+            const onMetadata = () => {
+              audio.removeEventListener("loadedmetadata", onMetadata);
+              restorePosition();
+              resolve();
+            };
+            audio.addEventListener("loadedmetadata", onMetadata, { once: true });
+            audio.load();
+            // Some browsers don't emit loadedmetadata for a rejected/unsupported blob.
+            window.setTimeout(() => {
+              audio.removeEventListener("loadedmetadata", onMetadata);
+              resolve();
+            }, 1500);
+          });
+        }
+      }
+
+      // stopAll may be called while waiting for audio metadata to restore a
+      // saved position. Do not start this stale audio after a lesson/voice change.
+      if (this.currentAudio !== audio) return;
 
       audio.onplay = () => {
-        options?.onStart?.();
+        this.currentPlaybackOptions?.onStart?.();
         if (distinctHeader) {
-          options?.onInfo?.(
+          this.currentPlaybackOptions?.onInfo?.(
             `Doğal Neural Ses: ${voice.displayName} (${voice.accentLabelTr} · ${
               voice.gender === "female" ? "Kadın" : "Erkek"
             })`
           );
         } else {
-          options?.onInfo?.(
+          this.currentPlaybackOptions?.onInfo?.(
             `Bulut Ses Motoru (${voice.accentLabelTr}): Standart yedek ses aktif`
           );
         }
@@ -427,7 +550,7 @@ class ClientAudioManager {
           this.currentBlobUrl = null;
         }
         this.currentAudio = null;
-        options?.onEnd?.();
+        this.currentPlaybackOptions?.onEnd?.();
       };
 
       audio.onerror = () => {

@@ -48,7 +48,7 @@ export default function ListeningPage() {
           YDS Dinleme & Çoklu Aksan Laboratuvarı
         </h1>
         <p className="text-xs md:text-sm text-white/70">
-          7 farklı İngilizce aksanı (İngiliz, Amerikan, Avustralya, Kanada, Yeni Zelanda, İskoçya, Hint) ve stüdyo kalitesinde kadın/erkek neural sesleriyle kulak aşinalığı kazanın.
+          Doğrulanmış altı İngilizce aksanda (İngiliz, Amerikan, Avustralya, Kanada, Yeni Zelanda ve Hint) kadın/erkek sesleriyle kulak aşinalığı kazanın. İskoç sesi sağlayıcıda doğrulanmadığı için seçime kapalıdır.
         </p>
       </div>
 
@@ -58,7 +58,7 @@ export default function ListeningPage() {
           {/* Aksan Seçimi */}
           <div>
             <label className="text-xs font-mono text-cyan-300 uppercase tracking-widest block font-bold mb-2">
-              Aksan Seçimi (7 Aksan • 14 Ses)
+              Aksan Seçimi (6 doğrulanmış aksan • 12 ses profili)
             </label>
             <div className="flex gap-1.5 flex-wrap">
               {ACCENT_OPTIONS.map((a) => (

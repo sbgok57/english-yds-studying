@@ -273,7 +273,7 @@ function VocabularyInventoryContent() {
             <button
               onClick={() => setShowVoicePicker(!showVoicePicker)}
               className="px-4 py-2.5 rounded-xl border border-cyan-400/30 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-bold text-cyan-300 transition-all flex items-center gap-2 shadow-sm"
-              title="Doğal Çoklu Aksan Ses Motoru (7 Aksan, 14 Doğal Konuşmacı)"
+              title="Doğal Çoklu Aksan Ses Motoru (12 doğrulanmış İngilizce konuşmacı profili)"
             >
               <span className="text-base">{activeAccentObj.flag}</span>
               <span>{activeAccentObj.label} Aksanı</span>
@@ -307,10 +307,10 @@ function VocabularyInventoryContent() {
                 <span className="text-xl">🎙️</span>
                 <div>
                   <h3 className="text-sm font-black text-white">
-                    Doğal Çoklu Aksan Ses Sistemi (7 Aksan • 14 Konuşmacı)
+                    Doğal Çoklu Aksan Ses Sistemi (6 doğrulanmış aksan • 12 konuşmacı)
                   </h3>
                   <p className="text-xs text-white/50">
-                    İngiliz, Amerikan, Kanada, Avustralya, Yeni Zelanda, İskoçya ve Hint aksanlarında kadın & erkek sesleri seç
+                    İngiliz, Amerikan, Kanada, Avustralya, Yeni Zelanda ve Hint aksanlarında kadın & erkek sesleri seç. İskoç aksanı doğrulanmadığı için kapalıdır.
                   </p>
                 </div>
               </div>

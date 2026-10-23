@@ -287,12 +287,40 @@ export function getTracksByCategory(category: string): AudioTrack[] {
 }
 
 const STORAGE_KEY_PREFIX = "yds_audio_progress_";
+export type AudioProgressStorage = Pick<Storage, "getItem" | "setItem">;
 
-export function saveTrackProgress(trackId: string, currentSeconds: number, completed: boolean) {
-  if (typeof window === "undefined") return;
+function availableAudioStorage(): AudioProgressStorage | undefined {
   try {
-    localStorage.setItem(
-      `${STORAGE_KEY_PREFIX}${trackId}`,
+    return typeof window === "undefined" ? undefined : window.localStorage;
+  } catch {
+    return undefined;
+  }
+}
+
+function trackProgressKey(trackId: string, voiceProfileId: string, script: string): string {
+  // Progress belongs to one immutable lesson script and one narrator. A small
+  // deterministic hash keeps storage keys short without persisting lesson text.
+  let hash = 2166136261;
+  for (let index = 0; index < script.length; index++) {
+    hash ^= script.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `${STORAGE_KEY_PREFIX}${encodeURIComponent(trackId)}:${encodeURIComponent(voiceProfileId)}:${(hash >>> 0).toString(16)}`;
+}
+
+export function saveTrackProgress(
+  trackId: string,
+  currentSeconds: number,
+  completed: boolean,
+  voiceProfileId = "legacy",
+  script = "",
+  storage: AudioProgressStorage | undefined = availableAudioStorage(),
+) {
+  if (!storage) return;
+  if (!Number.isFinite(currentSeconds) || currentSeconds < 0) return;
+  try {
+    storage.setItem(
+      trackProgressKey(trackId, voiceProfileId, script),
       JSON.stringify({
         currentSeconds: Math.floor(currentSeconds),
         completed,
@@ -304,12 +332,21 @@ export function saveTrackProgress(trackId: string, currentSeconds: number, compl
   }
 }
 
-export function getTrackProgress(trackId: string): { currentSeconds: number; completed: boolean } | null {
-  if (typeof window === "undefined") return null;
+export function getTrackProgress(
+  trackId: string,
+  voiceProfileId = "legacy",
+  script = "",
+  storage: AudioProgressStorage | undefined = availableAudioStorage(),
+): { currentSeconds: number; completed: boolean } | null {
+  if (!storage) return null;
   try {
-    const raw = localStorage.getItem(`${STORAGE_KEY_PREFIX}${trackId}`);
+    const raw = storage.getItem(trackProgressKey(trackId, voiceProfileId, script));
     if (!raw) return null;
-    return JSON.parse(raw);
+    const value: unknown = JSON.parse(raw);
+    if (typeof value !== "object" || value === null) return null;
+    const record = value as { currentSeconds?: unknown; completed?: unknown };
+    if (typeof record.currentSeconds !== "number" || !Number.isFinite(record.currentSeconds) || record.currentSeconds < 0) return null;
+    return { currentSeconds: record.currentSeconds, completed: record.completed === true };
   } catch {
     return null;
   }

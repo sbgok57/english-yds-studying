@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   getVoiceProfile,
-  findVoice,
+  findEnabledVoice,
   findTurkishNarratorVoice,
   AccentCode,
   VoiceLocale,
@@ -16,7 +16,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Normalizasyon: Kısa aksan/dil kodlarını standart VoiceLocale formatına çevir
-function normalizeLocale(code?: string | null, contentLanguage?: string | null): VoiceLocale {
+function normalizeLocale(code?: string | null, contentLanguage?: string | null): VoiceLocale | null {
   if (contentLanguage?.toLowerCase() === "tr") return "tr-TR";
   if (!code) return "en-US";
   const c = code.toLowerCase().trim();
@@ -37,7 +37,7 @@ function normalizeLocale(code?: string | null, contentLanguage?: string | null):
   )
     return "en-GB-scotland";
   if (c === "in" || c === "en-in" || c === "en_in") return "en-IN";
-  return "en-US";
+  return null;
 }
 
 // Normalizasyon: Cinsiyet veya konuşmacı adı (emel / ahmet)
@@ -71,13 +71,14 @@ function resolveVoice(
   }
 
   const locale = normalizeLocale(accentParam, contentLanguageParam);
+  if (!locale) return null;
   const gender = normalizeGender(genderParam, speakerParam);
 
   if (locale === "tr-TR" || contentLanguageParam?.toLowerCase() === "tr" || speakerParam) {
     return findTurkishNarratorVoice(gender);
   }
 
-  return findVoice(locale as AccentCode, gender);
+  return findEnabledVoice(locale as AccentCode, gender) || null;
 }
 
 // Ortak Sentezleme Mantığı

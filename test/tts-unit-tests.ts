@@ -21,7 +21,7 @@ const matrix = validateVoiceMatrix();
 assert.strictEqual(matrix.valid, true, `Matrix errors: ${matrix.errors.join(", ")}`);
 assert.strictEqual(VOICE_REGISTRY.length, 14, "Tam olarak 14 ses profili olmalıdır.");
 assert.strictEqual(ACCENT_METADATA_LIST.length, 7, "Tam olarak 7 aksan meta verisi olmalıdır.");
-console.log("  ✅ PASS: Exactly 14 verified voices across 7 accents.\n");
+console.log("  ✅ PASS: The registry contains 14 English records; unsupported profiles are disabled.\n");
 
 // 2. Aksan ve Cinsiyet Birebir Eşleşmesi
 console.log("  2. Testing Accent & Gender Coverage...");
@@ -31,7 +31,6 @@ const requiredLocales: AccentCode[] = [
   "en-CA",
   "en-AU",
   "en-NZ",
-  "en-GB-scotland",
   "en-IN",
 ];
 for (const loc of requiredLocales) {
@@ -51,7 +50,7 @@ for (const loc of requiredLocales) {
     `${loc} kadın ve erkek providerVoiceId aynı olamaz`
   );
 }
-console.log("  ✅ PASS: All 7 locales have distinct, verified female & male voices.\n");
+console.log("  ✅ PASS: All provider-supported locales have distinct female and male profiles.\n");
 
 // 2b. Browser fallback must preserve both exact region and speaker identity.
 const deviceVoices = [
@@ -69,8 +68,6 @@ assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "female")?.nam
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-US", "male")?.name, "Google US English Male");
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "female")?.name, deviceVoices[3].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "male")?.name, deviceVoices[4].name);
-assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB-scotland", "female")?.name, deviceVoices[5].name);
-assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB-scotland", "male")?.name, deviceVoices[6].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "female")?.name, deviceVoices[7].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "male")?.name, deviceVoices[8].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "male"), undefined, "US/Canada voices must not impersonate a missing British male voice");
@@ -90,14 +87,11 @@ assert.ok(caFemale?.description.includes("Kanada"));
 assert.ok(caMale?.description.includes("Kanada"));
 
 const scotVoices = getVoicesForAccent("en-GB-scotland");
-assert.strictEqual(scotVoices.length, 2, "İskoçya için tam 2 ses bulunmalı");
-const scotFemale = scotVoices.find((v) => v.gender === "female");
-const scotMale = scotVoices.find((v) => v.gender === "male");
-assert.strictEqual(scotFemale?.providerVoiceId, "en-GB-MaisieNeural");
-assert.strictEqual(scotMale?.providerVoiceId, "en-GB-ThomasNeural");
-assert.ok(scotFemale?.description.includes("İskoç"));
-assert.ok(scotMale?.description.includes("İskoç"));
-console.log("  ✅ PASS: Canadian and Scottish English use authentic neural voices.\n");
+assert.strictEqual(scotVoices.length, 0, "İskoç aksanı için standart en-GB sesleri kullanıma açık olmamalı");
+assert.strictEqual(VOICE_REGISTRY.find((v) => v.id === "en-GB-scotland-female-maisie")?.enabled, false);
+assert.strictEqual(VOICE_REGISTRY.find((v) => v.id === "en-GB-scotland-male-thomas")?.enabled, false);
+assert.strictEqual(ACCENT_METADATA_LIST.find((a) => a.code === "en-GB-scotland")?.supported, false);
+console.log("  ✅ PASS: Unsupported Scottish accent is explicitly disabled rather than mislabeled.\n");
 
 // 4. Cache Anahtarı ve Bounded LRU Önbellek
 console.log("  4. Testing Audio Cache Key and Bounded Storage...");

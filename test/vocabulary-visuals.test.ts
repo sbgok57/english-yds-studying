@@ -6,8 +6,14 @@ import {
   resolveWordVisualManifest,
 } from "../src/lib/media/visual-asset-registry";
 import { generateVocabularyVisualPrompt } from "../src/lib/media/vocabulary-image-prompt";
+import { createVisualUnavailableResponse } from "../src/lib/media/visual-error";
 
 console.log("▶ Starting Vocabulary Visual Asset Registry & Integrity Tests...\n");
+
+const unavailable = createVisualUnavailableResponse();
+assert.strictEqual(unavailable.status, 503, "Unavailable provider must not return a successful image response.");
+assert.strictEqual(unavailable.headers.get("cache-control"), "no-store");
+assert.match(unavailable.headers.get("content-type") || "", /application\/json/);
 
 // 1. Somut ve Süreç Kelimelerinde Doğrulanmış Fotoğraf & Lisans Kontrolü
 const pioneer = resolveWordVisualManifest({

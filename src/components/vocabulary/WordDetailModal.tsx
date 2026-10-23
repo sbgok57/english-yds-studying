@@ -190,13 +190,13 @@ export default function WordDetailModal({
           </div>
         </div>
 
-        {/* 🎙️ 7 AKSAN × KADIN & ERKEK (14 DOĞAL SES SEÇİCİSİ) */}
+        {/* 🎙️ Doğrulanmış aksanlar ve cinsiyet profilleri */}
         <div className="space-y-3 pt-2 border-t border-white/10">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold uppercase tracking-wider text-yellow-300 flex items-center gap-1.5">
-              <span>🎙️</span> 7 Farklı Aksan & Kadın / Erkek Doğal Sesler
+              <span>🎙️</span> Doğrulanmış Aksanlar & Kadın / Erkek Sesler
             </h4>
-            <span className="text-[11px] text-white/50">Tıklayıp anında dinleyin</span>
+            <span className="text-[11px] text-white/50">Tıklayıp anında dinleyin · İskoç sesi doğrulanmadı</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
@@ -221,6 +221,7 @@ export default function WordDetailModal({
                   <div className="grid grid-cols-2 gap-1">
                     <button
                       type="button"
+                      disabled={!accent.supported}
                       onClick={() =>
                         handlePlayVoice(accent.code, "female", accent.femaleVoiceId)
                       }
@@ -238,6 +239,7 @@ export default function WordDetailModal({
 
                     <button
                       type="button"
+                      disabled={!accent.supported}
                       onClick={() =>
                         handlePlayVoice(accent.code, "male", accent.maleVoiceId)
                       }

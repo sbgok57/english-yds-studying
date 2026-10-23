@@ -151,6 +151,7 @@ export default function WordPronunciationBar({
               <button
                 key={a.code}
                 type="button"
+                disabled={!a.supported}
                 onClick={() => {
                   setActiveAccent(a.code);
                   setStoredAccent(a.shortId);
@@ -159,9 +160,10 @@ export default function WordPronunciationBar({
                   "px-2 py-0.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-1",
                   activeAccent === a.code
                     ? "bg-cyan-500/30 border-cyan-400 text-white shadow-sm"
-                    : "bg-white/5 border-white/10 text-white/50 hover:text-white"
+                    : "bg-white/5 border-white/10 text-white/50 hover:text-white",
+                  !a.supported && "cursor-not-allowed opacity-40"
                 )}
-                title={`${a.labelTr} Aksanı`}
+                title={a.supported ? `${a.labelTr} Aksanı` : `${a.labelTr}: bu ses sağlayıcısında doğrulanmadı`}
               >
                 <span>{a.flag}</span>
                 <span className="text-[10px] hidden sm:inline">{a.labelTr}</span>

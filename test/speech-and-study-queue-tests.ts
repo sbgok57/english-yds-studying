@@ -17,6 +17,7 @@ import {
 } from "../src/shared/grammar-progress";
 import { mergeUniqueStudyQueue, rememberStudyWords } from "../src/shared/study-queue";
 import { appendUniqueWordCards } from "../src/shared/word-pagination";
+import { getTrackProgress, saveTrackProgress, type AudioProgressStorage } from "../src/lib/audio/tracks";
 
 let passed = 0;
 
@@ -39,6 +40,12 @@ class MemoryStorage implements GrammarProgressStorage {
   setItem(key: string, value: string) {
     this.#values.set(key, value);
   }
+}
+
+class MemoryAudioProgressStorage implements AudioProgressStorage {
+  #values = new Map<string, string>();
+  getItem(key: string) { return this.#values.get(key) ?? null; }
+  setItem(key: string, value: string) { this.#values.set(key, value); }
 }
 
 export async function runSpeechAndStudyQueueTests() {
@@ -102,6 +109,16 @@ export async function runSpeechAndStudyQueueTests() {
     const loaded = loadGrammarProgress("test-progress", storage);
     assert.deepEqual(loaded.completedLessonIds, progress.completedLessonIds);
     assert.equal(currentLessonIndex(loaded), 0);
+  });
+
+  runTest("audio resume progress is isolated by narrator and lesson script", () => {
+    const storage = new MemoryAudioProgressStorage();
+    saveTrackProgress("lesson-a", 42, false, "tr-TR-female-emel", "script revision one", storage);
+    assert.equal(getTrackProgress("lesson-a", "tr-TR-female-emel", "script revision one", storage)?.currentSeconds, 42);
+    assert.equal(getTrackProgress("lesson-a", "tr-TR-male-ahmet", "script revision one", storage), null);
+    assert.equal(getTrackProgress("lesson-a", "tr-TR-female-emel", "script revision two", storage), null);
+    saveTrackProgress("lesson-a", -1, false, "tr-TR-female-emel", "script revision one", storage);
+    assert.equal(getTrackProgress("lesson-a", "tr-TR-female-emel", "script revision one", storage)?.currentSeconds, 42);
   });
 
   runTest("review session de-duplicates due/new pages and excludes previously answered words", () => {

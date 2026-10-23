@@ -85,7 +85,7 @@ export default function AccentVoicePicker({
   }
 
   const voicesForCurrentAccent = getVoicesForAccent(activeAccent);
-  const englishSpeakerCount = ACCENT_METADATA_LIST.length * 2;
+  const englishSpeakerCount = ACCENT_METADATA_LIST.filter((accent) => accent.supported).length * 2;
   const currentAccentMeta = ACCENT_METADATA_LIST.find((a) => a.code === activeAccent) || ACCENT_METADATA_LIST[0];
 
   return (
@@ -139,6 +139,7 @@ export default function AccentVoicePicker({
           return (
             <button
               key={acc.code}
+              disabled={!acc.supported}
               onClick={() => {
                 setActiveAccent(acc.code);
                 // Tercihi de bu aksanın mevcut cinsiyetine göre güncelle
@@ -151,12 +152,14 @@ export default function AccentVoicePicker({
                 "flex flex-col items-center justify-center p-2 rounded-xl border text-center transition-all",
                 isSelected
                   ? "bg-gradient-to-b from-cyan-500/20 to-blue-600/30 border-cyan-400 text-white shadow-lg scale-[1.02]"
-                  : "bg-white/[0.03] border-white/10 text-white/70 hover:bg-white/[0.08] hover:text-white"
+                  : "bg-white/[0.03] border-white/10 text-white/70 hover:bg-white/[0.08] hover:text-white",
+                !acc.supported && "cursor-not-allowed opacity-50"
               )}
+              title={acc.supported ? acc.descriptionTr : `${acc.labelTr}: bu aksan mevcut ses sağlayıcısında doğrulanmadı.`}
             >
               <span className="text-xl mb-0.5">{acc.flag}</span>
               <span className="text-xs font-bold">{acc.labelTr}</span>
-              <span className="text-[10px] text-white/40 font-mono">{acc.code}</span>
+              <span className="text-[10px] text-white/40 font-mono">{acc.supported ? acc.code : "Desteklenmiyor"}</span>
             </button>
           );
         })}

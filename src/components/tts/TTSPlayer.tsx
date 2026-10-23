@@ -11,7 +11,7 @@ export const ACCENT_OPTIONS = [
   { code: "en-CA", label: "Kanada", flag: "🇨🇦" },
   { code: "en-AU", label: "Avustralya", flag: "🇦🇺" },
   { code: "en-NZ", label: "Y. Zelanda", flag: "🇳🇿" },
-  { code: "en-GB-scotland", label: "İskoçya", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
+  { code: "en-GB-scotland", label: "İskoçya (uygun ses yok)", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
   { code: "en-IN", label: "Hint", flag: "🇮🇳" },
 ] as const;
 
@@ -127,12 +127,13 @@ export default function TTSPlayer({
               <button
                 type="button"
                 key={a.code}
+                disabled={a.code === "en-GB-scotland"}
                 onClick={() => setCurrentAccent(a.code)}
                 className={cn(
-                  "p-1 rounded-md text-sm transition-transform",
+                  "p-1 rounded-md text-sm transition-transform disabled:cursor-not-allowed disabled:opacity-30",
                   currentAccent === a.code ? "bg-white/30 scale-110 shadow" : "opacity-60 hover:opacity-100"
                 )}
-                title={a.label}
+                title={a.code === "en-GB-scotland" ? "İskoç aksanı mevcut sağlayıcıda doğrulanmadığı için kapalı" : a.label}
               >
                 {a.flag}
               </button>

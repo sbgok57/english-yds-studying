@@ -19,7 +19,9 @@ export async function GET() {
   const enabledCount = VOICE_REGISTRY.filter((v) => v.enabled).length;
   // Keep health reporting tied to the registry: the project now has a
   // variable number of accent and narrator profiles.
-  const isHealthy = matrix.valid && enabledCount === VOICE_REGISTRY.length && providerHealth.available;
+  // Disabled catalog entries are expected when a provider cannot verify an
+  // accent. They should be reported, not make the entire service unhealthy.
+  const isHealthy = matrix.valid && enabledCount > 0 && providerHealth.available;
 
   return NextResponse.json({
     status: isHealthy ? "ok" : "degraded",

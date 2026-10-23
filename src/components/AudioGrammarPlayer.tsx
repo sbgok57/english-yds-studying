@@ -30,17 +30,20 @@ export default function AudioGrammarPlayer({
   const [playbackRate, setPlaybackRate] = useState<number>(1.0);
   const [showTranscript, setShowTranscript] = useState<boolean>(false);
   const [voiceGender, setVoiceGender] = useState<"female" | "male">("female");
+  const selectedVoiceProfileId = voiceGender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet";
+  const selectedProviderVoiceId = voiceGender === "female" ? "tr-TR-EmelNeural" : "tr-TR-AhmetNeural";
   const [speakerStatusMessage, setSpeakerStatusMessage] = useState<string | null>(null);
   const [playbackMeta, setPlaybackMeta] = useState<PlaybackMetadata | null>(null);
   const [sleepTimerMinutes, setSleepTimerMinutes] = useState<number | null>(null);
 
   const sleepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
   const lastSyncedSecondRef = useRef<number>(0);
+  const lastProgressSavedSecondRef = useRef<number>(-1);
 
   // Tercih edilen Türkçe eğitmen sesini yükle
   useEffect(() => {
     const prefs = clientAudio.getPreferences();
+    setPlaybackMeta(clientAudio.getLastPlaybackMetadata());
     if (prefs.preferredTurkishNarratorId === "tr-TR-male-ahmet") {
       setVoiceGender("male");
     } else {
@@ -52,11 +55,15 @@ export default function AudioGrammarPlayer({
   useEffect(() => {
     return () => {
       // SAFETY: Unmount cleanup
-      clientAudio.stopAll();
-      if (progressTimerRef.current) clearInterval(progressTimerRef.current);
+      const position = clientAudio.pauseCurrent();
+      if (position !== null) {
+        saveTrackProgress(track.id, position, false, selectedVoiceProfileId, track.script);
+      } else {
+        clientAudio.stopAll();
+      }
       if (sleepTimeoutRef.current) clearTimeout(sleepTimeoutRef.current);
     };
-  }, []);
+  }, [track.id, track.script, selectedVoiceProfileId]);
 
   // 1. Dinleme İlerlemesini Sunucuya Senkronla
   const syncListeningProgress = useCallback(
@@ -100,88 +107,93 @@ export default function AudioGrammarPlayer({
     onTrackChange?.(track);
     lastSyncedSecondRef.current = 0;
     setDuration(track.duration || 180);
-    const saved = getTrackProgress(track.id);
+    const saved = getTrackProgress(track.id, selectedVoiceProfileId, track.script);
     if (saved?.currentSeconds && saved.currentSeconds > 5 && !saved.completed) {
       setCurrentTime(saved.currentSeconds);
     } else {
       setCurrentTime(0);
     }
-  }, [track, onTrackChange]);
-
-  // İlerleme sayacı (Oynatma sırasında saniye güncellemesi)
-  useEffect(() => {
-    if (progressTimerRef.current) {
-      clearInterval(progressTimerRef.current);
-      progressTimerRef.current = null;
-    }
-
-    if (isPlaying) {
-      progressTimerRef.current = setInterval(() => {
-        setCurrentTime((prev) => {
-          const next = Math.min(prev + playbackRate, duration);
-          if (Math.floor(next) % 5 === 0) {
-            saveTrackProgress(track.id, next, false);
-            syncListeningProgress(next, false);
-          }
-          return next;
-        });
-      }, 1000);
-    }
-
-    return () => {
-      if (progressTimerRef.current) {
-        clearInterval(progressTimerRef.current);
-        progressTimerRef.current = null;
-      }
-    };
-  }, [isPlaying, playbackRate, duration, track.id, syncListeningProgress]);
+  }, [track, onTrackChange, selectedVoiceProfileId]);
 
   const handlePause = useCallback(() => {
-    clientAudio.stopAll();
+    const position = clientAudio.pauseCurrent();
+    if (position !== null) {
+      setCurrentTime(position);
+      saveTrackProgress(track.id, position, false, selectedVoiceProfileId, track.script);
+    } else if (isLoadingAudio) {
+      clientAudio.stopAll();
+    }
     setIsPlaying(false);
     setIsLoadingAudio(false);
-  }, []);
+  }, [isLoadingAudio, track.id, track.script, selectedVoiceProfileId]);
 
   const startPlaybackWithGender = useCallback(
     async (targetGender: "female" | "male", targetRate: number = playbackRate) => {
       const targetVoiceId =
         targetGender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet";
-      const speakerCode = targetGender === "female" ? "emel" : "ahmet";
+      const speakerCode = targetGender === "female" ? "emel" as const : "ahmet" as const;
 
       setIsLoadingAudio(true);
       setSpeakerStatusMessage(
         `${targetGender === "female" ? "Emel" : "Ahmet"} (${targetVoiceId}) sesi hazırlanıyor...`
       );
 
-      await clientAudio.play(track.script, {
+      const saved = getTrackProgress(track.id, targetVoiceId, track.script);
+      const options = {
         voiceId: targetVoiceId,
         speaker: speakerCode,
-        locale: "tr-TR",
-        contentLanguage: "tr",
+        locale: "tr-TR" as const,
+        contentLanguage: "tr" as const,
         gender: targetGender,
         rate: targetRate,
-        contentType: "long-form",
-        onMetadata: (meta) => {
+        contentType: "long-form" as const,
+        startAtSeconds: saved && !saved.completed ? saved.currentSeconds : 0,
+        onTimeUpdate: (seconds: number, actualDuration: number) => {
+          setCurrentTime(seconds);
+          if (actualDuration > 0) setDuration(actualDuration);
+          if (Math.floor(seconds) % 5 === 0 && Math.floor(seconds) !== lastProgressSavedSecondRef.current) {
+            lastProgressSavedSecondRef.current = Math.floor(seconds);
+            saveTrackProgress(track.id, seconds, false, targetVoiceId, track.script);
+          }
+          if (Math.floor(seconds) > 0 && Math.floor(seconds) % 60 === 0 && Math.floor(seconds) !== lastSyncedSecondRef.current) {
+            lastSyncedSecondRef.current = Math.floor(seconds);
+            void syncListeningProgress(seconds, false);
+          }
+        },
+        onMetadata: (meta: PlaybackMetadata) => {
           setPlaybackMeta(meta);
         },
         onStart: () => {
           setIsLoadingAudio(false);
           setIsPlaying(true);
         },
-        onInfo: (msg) => {
+        onInfo: (msg: string) => {
           setSpeakerStatusMessage(msg);
         },
         onEnd: () => {
           setIsPlaying(false);
           setIsLoadingAudio(false);
-          saveTrackProgress(track.id, duration, true);
+          saveTrackProgress(track.id, duration, true, targetVoiceId, track.script);
           syncListeningProgress(duration, true);
         },
-        onError: () => {
+        onError: (error: Error) => {
           setIsPlaying(false);
           setIsLoadingAudio(false);
-          setSpeakerStatusMessage("Ses oynatılamadı. Lütfen tekrar deneyin.");
+          setSpeakerStatusMessage(error.message || "Ses oynatılamadı. Lütfen tekrar deneyin.");
         },
+      };
+
+      if (clientAudio.hasPlayback(track.script, targetVoiceId)) {
+        const resumed = await clientAudio.resumeCurrent(options);
+        if (resumed) {
+          setIsLoadingAudio(false);
+          setIsPlaying(true);
+          return;
+        }
+      }
+
+      await clientAudio.play(track.script, {
+        ...options,
       });
     },
     [track.script, track.id, playbackRate, duration, syncListeningProgress]
@@ -272,8 +284,9 @@ export default function AudioGrammarPlayer({
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseFloat(e.target.value);
+    clientAudio.seekCurrent(val);
     setCurrentTime(val);
-    saveTrackProgress(track.id, val, false);
+    saveTrackProgress(track.id, val, false, selectedVoiceProfileId, track.script);
   };
 
   const handleSpeedChange = (speed: number) => {
@@ -290,11 +303,6 @@ export default function AudioGrammarPlayer({
     const s = Math.floor(secs % 60);
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
-
-  const selectedVoiceProfileId =
-    voiceGender === "female" ? "tr-TR-female-emel" : "tr-TR-male-ahmet";
-  const selectedProviderVoiceId =
-    voiceGender === "female" ? "tr-TR-EmelNeural" : "tr-TR-AhmetNeural";
 
   return (
     <div className="rounded-3xl border border-purple-500/30 bg-gradient-to-b from-purple-950/60 via-slate-950/90 to-slate-950 p-6 sm:p-8 space-y-6 shadow-2xl backdrop-blur-2xl">
@@ -355,7 +363,11 @@ export default function AudioGrammarPlayer({
       )}
 
       {/* İlerleme Çubuğu (Scrubber) */}
-      <div className="space-y-1.5">
+      {playbackMeta?.usingBrowserFallback ? (
+        <p className="text-xs text-amber-200/80" role="status">
+          Cihazın konuşma motoru kullanılıyor. Bu motor süre/arama konumu bildirmediği için kesin ilerleme çubuğu gösterilmiyor; aynı anlatım duraklatılıp devam ettirilebilir.
+        </p>
+      ) : <div className="space-y-1.5">
         <input
           type="range"
           min={0}
@@ -369,7 +381,7 @@ export default function AudioGrammarPlayer({
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration)}</span>
         </div>
-      </div>
+      </div>}
 
       {/* Ana Oynatma Kontrolleri */}
       <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
