@@ -20,18 +20,16 @@ console.log("  1. Testing 14 Voice Matrix Completeness...");
 const matrix = validateVoiceMatrix();
 assert.strictEqual(matrix.valid, true, `Matrix errors: ${matrix.errors.join(", ")}`);
 assert.strictEqual(VOICE_REGISTRY.length, 14, "Tam olarak 14 ses profili olmalıdır.");
-assert.strictEqual(ACCENT_METADATA_LIST.length, 7, "Tam olarak 7 aksan meta verisi olmalıdır.");
-console.log("  ✅ PASS: The registry contains 14 English records; unsupported profiles are disabled.\n");
+assert.strictEqual(ACCENT_METADATA_LIST.length, 3, "Yalnızca 3 aksan kullanıcıya sunulmalıdır.");
+assert.deepStrictEqual(ACCENT_METADATA_LIST.map((accent) => accent.code), ["en-GB", "en-US", "en-AU"]);
+console.log("  ✅ PASS: Only British, American, and Australian accents are selectable.\n");
 
 // 2. Aksan ve Cinsiyet Birebir Eşleşmesi
 console.log("  2. Testing Accent & Gender Coverage...");
 const requiredLocales: AccentCode[] = [
   "en-GB",
   "en-US",
-  "en-CA",
   "en-AU",
-  "en-NZ",
-  "en-IN",
 ];
 for (const loc of requiredLocales) {
   const female = findVoice(loc, "female");
@@ -76,21 +74,17 @@ assert.throws(() => findVoice("en-GB", "invalid" as never), /konuşmacı profili
 console.log("  ✅ PASS: Browser fallback refuses wrong-gender and wrong-region substitutions.\n");
 
 // 3. Kanada ve İskoçya Aksanı Spesifik Doğrulaması
-console.log("  3. Testing Canadian (en-CA) and Scottish (en-GB-scotland) isolation...");
+console.log("  3. Testing hidden legacy accents and Scottish isolation...");
 const caVoices = getVoicesForAccent("en-CA");
-assert.strictEqual(caVoices.length, 2, "Kanada için tam 2 ses bulunmalı");
-const caFemale = caVoices.find((v) => v.gender === "female");
-const caMale = caVoices.find((v) => v.gender === "male");
-assert.strictEqual(caFemale?.providerVoiceId, "en-CA-ClaraNeural");
-assert.strictEqual(caMale?.providerVoiceId, "en-CA-LiamNeural");
-assert.ok(caFemale?.description.includes("Kanada"));
-assert.ok(caMale?.description.includes("Kanada"));
+assert.strictEqual(caVoices.length, 0, "Kanada profilleri artık seçilebilir olmamalı");
+assert.strictEqual(getVoicesForAccent("en-NZ").length, 0, "Yeni Zelanda profilleri artık seçilebilir olmamalı");
+assert.strictEqual(getVoicesForAccent("en-IN").length, 0, "Hint profilleri artık seçilebilir olmamalı");
 
 const scotVoices = getVoicesForAccent("en-GB-scotland");
 assert.strictEqual(scotVoices.length, 0, "İskoç aksanı için standart en-GB sesleri kullanıma açık olmamalı");
 assert.strictEqual(VOICE_REGISTRY.find((v) => v.id === "en-GB-scotland-female-maisie")?.enabled, false);
 assert.strictEqual(VOICE_REGISTRY.find((v) => v.id === "en-GB-scotland-male-thomas")?.enabled, false);
-assert.strictEqual(ACCENT_METADATA_LIST.find((a) => a.code === "en-GB-scotland")?.supported, false);
+assert.strictEqual(ACCENT_METADATA_LIST.some((a) => a.code === "en-GB-scotland"), false);
 console.log("  ✅ PASS: Unsupported Scottish accent is explicitly disabled rather than mislabeled.\n");
 
 // 4. Cache Anahtarı ve Bounded LRU Önbellek
@@ -113,6 +107,7 @@ audioCache.set(key1, {
 const retrieved = audioCache.get(key1);
 assert.ok(retrieved);
 assert.strictEqual(retrieved.sizeBytes, 15);
+assert.strictEqual(retrieved.distinctSpeakerVerified, false, "Eksik cache metadata'sı doğrulama iddiasına dönüşmemelidir.");
 console.log("  ✅ PASS: Cache keys are multi-parameter deterministic and LRU bounded.\n");
 
 // 5. XML / SSML Kaçış ve Hız Dönüşümü

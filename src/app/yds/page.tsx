@@ -44,7 +44,7 @@ const YDS_SKILLS = [
   {
     title: "Listening & Sesli Gramer (Dinleme)",
     emoji: "🎧",
-    desc: "12 sesli stüdyo kaydı: ALi CÜMLEci vs DEDE İSİMci, Sebahattin & Sevim ve çoklu aksan kulak aşinalığı.",
+    desc: "Sesli gramer dersleri ve İngiliz, Amerikan, Avustralya aksanlarında kulak aşinalığı.",
     href: "/grammar/audio",
     badge: "12 Parça",
     color: "from-amber-500/20 to-orange-500/20 border-amber-400/30 text-amber-300",

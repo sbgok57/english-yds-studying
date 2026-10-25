@@ -58,7 +58,7 @@ export default function ListeningPage() {
           {/* Aksan Seçimi */}
           <div>
             <label className="text-xs font-mono text-cyan-300 uppercase tracking-widest block font-bold mb-2">
-              Aksan Seçimi (6 doğrulanmış aksan • 12 ses profili)
+              Aksan Seçimi (3 İngilizce aksan • kadın ve erkek ses profilleri)
             </label>
             <div className="flex gap-1.5 flex-wrap">
               {ACCENT_OPTIONS.map((a) => (

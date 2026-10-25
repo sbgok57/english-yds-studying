@@ -211,7 +211,7 @@ export default function AccentVoicePicker({
                 </div>
 
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-medium">
-                  Doğal Neural Ses
+                  Neural konuşma sentezi
                 </span>
               </div>
 

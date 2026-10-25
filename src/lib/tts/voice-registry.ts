@@ -2,9 +2,8 @@
  * DİL MASTER — Merkezî Ses Kayıt Kütüğü (Central Voice Registry)
  *
  * - İngilizce Öğrenme Sesleri (contentLanguage: "en"):
- *   6 provider-doğrulanmış İngilizce aksan × 2 cinsiyet = 12 etkin Neural profil
- *   İskoç profilleri kayıtlı kimlikleri korur ancak gerçek İskoç aksanı doğrulanmadığı için devre dışıdır.
- *   (en-GB, en-US, en-CA, en-AU, en-NZ, en-GB-scotland, en-IN)
+ *   Kullanıcı arayüzünde yalnızca İngiliz, Amerikan ve Avustralya aksanları sunulur.
+ *   Diğer kayıtlar eski tercihlerle uyumluluk için saklıdır ancak devre dışıdır.
  * - Türkçe Anlatım Sesleri (contentLanguage: "tr"):
  *   Sesli Gramer ve Türkçe açıklamalar için 2 ayrı konuşmacı profili:
  *   Emel (tr-TR-EmelNeural) ve Ahmet (tr-TR-AhmetNeural)
@@ -83,7 +82,7 @@ export const STANDARD_TURKISH_PREVIEW_TEXT =
   "Merhaba, ben Dil Master gramer eğitmeniniz. Bağlaç sorularında boşluktan sonraki yapıya dikkat edin.";
 
 /**
- * 7 İngilizce Aksan Meta Verisi
+ * Sunulan üç İngilizce aksan
  */
 export const ACCENT_METADATA_LIST: AccentMetadata[] = [
   {
@@ -111,18 +110,6 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     supported: true,
   },
   {
-    code: "en-CA",
-    shortId: "ca",
-    labelTr: "Kanada",
-    labelEn: "Canadian",
-    flag: "🇨🇦",
-    youglishSlug: "us",
-    descriptionTr: "Standart Kanada İngilizcesi ve sesletim dinamikleri",
-    femaleVoiceId: "en-CA-female-clara",
-    maleVoiceId: "en-CA-male-liam",
-    supported: true,
-  },
-  {
     code: "en-AU",
     shortId: "au",
     labelTr: "Avustralya",
@@ -132,42 +119,6 @@ export const ACCENT_METADATA_LIST: AccentMetadata[] = [
     descriptionTr: "Genel Avustralya İngilizcesi (General Australian)",
     femaleVoiceId: "en-AU-female-natasha",
     maleVoiceId: "en-AU-male-william",
-    supported: true,
-  },
-  {
-    code: "en-NZ",
-    shortId: "nz",
-    labelTr: "Yeni Zelanda",
-    labelEn: "New Zealand",
-    flag: "🇳🇿",
-    youglishSlug: "aus",
-    descriptionTr: "Yeni Zelanda İngilizcesi ve kendine özgü ünlü sesleri",
-    femaleVoiceId: "en-NZ-female-molly",
-    maleVoiceId: "en-NZ-male-mitchell",
-    supported: true,
-  },
-  {
-    code: "en-GB-scotland",
-    shortId: "sc",
-    labelTr: "İskoçya",
-    labelEn: "Scottish",
-    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-    youglishSlug: "uk",
-    descriptionTr: "İskoç aksanı mevcut sağlayıcıda doğrulanmıyor. Maisie ve Thomas standart en-GB sesleridir; yanlış aksanla etiketlenmemeleri için seçim kapalıdır.",
-    femaleVoiceId: "en-GB-scotland-female-maisie",
-    maleVoiceId: "en-GB-scotland-male-thomas",
-    supported: false,
-  },
-  {
-    code: "en-IN",
-    shortId: "in",
-    labelTr: "Hint",
-    labelEn: "Indian",
-    flag: "🇮🇳",
-    youglishSlug: "uk",
-    descriptionTr: "Uluslararası akademik sınavlarda sıklıkla çıkan Hint İngilizcesi",
-    femaleVoiceId: "en-IN-female-neerja",
-    maleVoiceId: "en-IN-male-prabhat",
     supported: true,
   },
 ];
@@ -340,7 +291,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -363,7 +314,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -436,7 +387,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -459,7 +410,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -484,7 +435,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -507,7 +458,7 @@ export const VOICE_REGISTRY: VoiceProfile[] = [
     naturalnessTier: "premium",
     sampleRateHz: 24000,
     outputFormat: "mp3",
-    enabled: true,
+    enabled: false,
     supportsWords: true,
     supportsSentences: true,
     supportsLongForm: true,
@@ -635,10 +586,7 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   const requiredLocales: VoiceLocale[] = [
     "en-GB",
     "en-US",
-    "en-CA",
     "en-AU",
-    "en-NZ",
-    "en-IN",
     "tr-TR",
   ];
 
@@ -663,6 +611,12 @@ export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   for (const locale of ["en-GB-scotland"] as const) {
     if (ALL_VOICE_REGISTRY.some((voice) => voice.locale === locale && voice.enabled)) {
       errors.push(`${locale} desteklenmediği doğrulandığı halde etkin olarak sunuluyor.`);
+    }
+  }
+
+  for (const locale of ["en-CA", "en-NZ", "en-IN"] as const) {
+    if (ALL_VOICE_REGISTRY.some((voice) => voice.locale === locale && voice.enabled)) {
+      errors.push(`${locale} gizli eski aksan profili etkin durumda.`);
     }
   }
 

@@ -42,7 +42,7 @@ const YDT_SKILLS = [
   {
     title: "Listening & Aksan (Dinleme)",
     emoji: "🎧",
-    desc: "Üniversite hazırlık için çoklu aksan dinleme parçaları ve 12 sesli gramer stüdyo kaydı.",
+    desc: "Üniversite hazırlık için üç İngilizce aksanda dinleme ve telaffuz çalışmaları.",
     href: "/listening",
     badge: "Multi-Accent TTS",
     color: "from-blue-500/20 to-indigo-500/20 border-blue-400/30 text-blue-300",

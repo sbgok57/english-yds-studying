@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import {
   resolveWordVisualManifest,
@@ -10,14 +9,24 @@ import {
 } from "@/lib/media/visual-asset-registry";
 import { Camera, Sparkles, Box, BookOpen, Play, Pause, Info, Image as ImageIcon, Film } from "lucide-react";
 
-const LazyWord3DScene = dynamic(() => import("@/components/vocabulary/Word3DScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-64 rounded-2xl bg-slate-900/90 border border-white/10 flex items-center justify-center text-xs text-slate-400 animate-pulse">
-      3D Kavram Sahnesi Yükleniyor...
-    </div>
-  ),
-});
+function Lightweight3DMeaningCard({ english, turkish }: { english: string; turkish: string }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <button
+      type="button"
+      aria-label={`${english}: anlamı görmek için çevir`}
+      onClick={() => setFlipped((value) => !value)}
+      className="relative mx-auto flex h-64 w-full max-w-md items-center justify-center rounded-3xl border border-cyan-300/30 bg-[radial-gradient(ellipse_at_50%_20%,#4338ca,#111827_68%)] p-6 text-center shadow-2xl [perspective:900px]"
+    >
+      <span className="absolute left-4 top-3 text-[10px] font-semibold uppercase tracking-wider text-cyan-100/80">Hafif CSS 3D anlam kartı · çevirmek için dokun</span>
+      <span className="absolute -right-4 -top-2 h-20 w-20 rounded-full bg-fuchsia-400/20 blur-2xl" aria-hidden="true" />
+      <span className="relative block w-full rounded-2xl border border-white/20 bg-slate-950/35 px-5 py-8 shadow-xl transition-transform duration-500 [transform-style:preserve-3d]" style={{ transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}>
+        <span className="block text-xs uppercase tracking-[0.25em] text-cyan-200">{flipped ? "Türkçe anlam" : "English word"}</span>
+        <span className="mt-3 block text-3xl font-black text-white" style={{ transform: flipped ? "rotateY(180deg)" : undefined }}>{flipped ? turkish : english}</span>
+      </span>
+    </button>
+  );
+}
 
 export interface VocabularyVisualProps {
   english: string;
@@ -549,14 +558,21 @@ export default function VocabularyVisual({
             className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950 px-4 text-center">
-            <span className="text-lg font-black text-white">{english}</span>
-            <span className="line-clamp-1 text-sm font-semibold text-cyan-100">{turkish}</span>
-            <span className="text-xs text-white/70">
-              {generatedImageStatus === "error" || generatedImageError
-                ? "3D görsel şu anda yüklenemedi"
-                : "Kelimeye özel 3D sahne hazırlanıyor"}
-            </span>
+          <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950">
+            {(generatedImageStatus === "error" || generatedImageError) && (
+              <div className="absolute inset-0 opacity-80">
+                <SemanticAnimatedSvg motionType={manifest.animation.motionType} visualKey={manifest.visualKey || manifest.wordSlug} english={english} turkish={turkish} paused={true} />
+              </div>
+            )}
+            <div className="relative flex h-full flex-col items-center justify-center gap-1 bg-slate-950/35 px-4 text-center">
+              <span className="text-lg font-black text-white">{english}</span>
+              <span className="line-clamp-1 text-sm font-semibold text-cyan-100">{turkish}</span>
+              <span className="text-[11px] text-amber-100/90">
+                {generatedImageStatus === "error" || generatedImageError
+                  ? "Görsel hizmeti yanıt vermedi · anlam şeması gösteriliyor"
+                  : "Kelimeye özel görsel hazırlanıyor…"}
+              </span>
+            </div>
           </div>
         )}
         <span className="absolute left-2 top-2 rounded-lg border border-white/20 bg-slate-950/75 px-2.5 py-1 text-xs font-bold text-cyan-100 shadow-lg backdrop-blur">
@@ -645,7 +661,9 @@ export default function VocabularyVisual({
               decoding="async"
               onError={() => {
                 setPhotoError(true);
-                setActiveMode("card");
+                // Keep a useful, word-specific semantic visual on screen when
+                // the external photo host fails instead of dropping to text.
+                setActiveMode("animation");
               }}
               className="w-full h-full object-cover"
             />
@@ -693,11 +711,9 @@ export default function VocabularyVisual({
 
         {currentMode === "3d" && (
           <div className="w-full h-full flex items-center justify-center bg-slate-950">
-            <LazyWord3DScene
+            <Lightweight3DMeaningCard
               english={english}
               turkish={turkish}
-              motionType={manifest.animation.motionType}
-              visualKey={manifest.visualKey || manifest.wordSlug}
             />
           </div>
         )}
@@ -718,13 +734,22 @@ export default function VocabularyVisual({
                 data-testid={`vocabulary-${generatedImageMode}-image-${manifest.wordSlug}`}
               />
             ) : (
-              <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+              <div className="flex h-full flex-col items-center justify-center gap-3 px-5 py-4 text-center">
                 <Sparkles className="h-8 w-8 text-amber-300" aria-hidden="true" />
-                <h3 className="text-2xl font-black text-white">{english}</h3>
-                <p className="text-lg font-semibold text-cyan-100">{turkish}</p>
+                <div className="h-44 w-full max-w-lg overflow-hidden rounded-2xl border border-white/10">
+                  <SemanticAnimatedSvg
+                    motionType={manifest.animation.motionType}
+                    visualKey={manifest.visualKey || manifest.wordSlug}
+                    english={english}
+                    turkish={turkish}
+                    paused={isPaused}
+                  />
+                </div>
+                <h3 className="text-xl font-black text-white">{english}</h3>
+                <p className="text-base font-semibold text-cyan-100">{turkish}</p>
                 <p className="max-w-md text-sm text-white/75" role={generatedImageStatus === "error" ? "alert" : undefined}>
                   {generatedImageStatus === "error" || generatedImageError
-                    ? `Bu kelimenin ${GENERATED_MODE_LABELS[generatedImageMode]} şu anda yüklenemedi. Görseli yeniden deneyebilirsin.`
+                    ? `Üretilen ${GENERATED_MODE_LABELS[generatedImageMode]} şu anda erişilemiyor. Anlamı gösteren şema hazır; görseli yeniden deneyebilirsin.`
                     : `${english} kelimesinin anlamına uygun ${GENERATED_MODE_LABELS[generatedImageMode]} hazırlanıyor…`}
                 </p>
                 {(generatedImageStatus === "error" || generatedImageError) && (

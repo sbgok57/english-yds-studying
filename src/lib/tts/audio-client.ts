@@ -158,9 +158,17 @@ class ClientAudioManager {
     }
 
     try {
-      const accent = (window.localStorage.getItem(STORAGE_KEYS.ACCENT) as AccentCode) || "en-US";
-      const gender = (window.localStorage.getItem(STORAGE_KEYS.GENDER) as VoiceGender) || "female";
-      const voiceId = window.localStorage.getItem(STORAGE_KEYS.VOICE_ID) || "en-US-female-jenny";
+      const savedAccent = window.localStorage.getItem(STORAGE_KEYS.ACCENT) as AccentCode | null;
+      const savedGender = window.localStorage.getItem(STORAGE_KEYS.GENDER);
+      const gender: VoiceGender = savedGender === "male" ? "male" : "female";
+      const selectableAccents: AccentCode[] = ["en-GB", "en-US", "en-AU"];
+      const accent = savedAccent && selectableAccents.includes(savedAccent) ? savedAccent : "en-US";
+      const savedVoiceId = window.localStorage.getItem(STORAGE_KEYS.VOICE_ID) || "";
+      const savedVoice = getVoiceProfile(savedVoiceId);
+      const accentVoice = findEnabledVoice(accent, gender);
+      const voiceId = savedVoice?.enabled && savedVoice.locale === accent && savedVoice.gender === gender
+        ? savedVoice.id
+        : accentVoice?.id || "en-US-female-jenny";
       const trNarrator =
         (window.localStorage.getItem(STORAGE_KEYS.TR_NARRATOR_ID) as
           | "tr-TR-female-emel"
@@ -169,7 +177,7 @@ class ClientAudioManager {
       const rate = rateStr ? parseFloat(rateStr) || 1.0 : 1.0;
 
       return {
-        preferredAccent: accent,
+        preferredAccent: getVoiceProfile(voiceId)?.locale as AccentCode || accent,
         preferredVoiceGender: gender,
         preferredVoiceId: voiceId,
         preferredTurkishNarratorId: trNarrator,
@@ -306,6 +314,9 @@ class ClientAudioManager {
 
   // Sunucu API üzerinden doğal neural ses çal; gecikirse Web Speech API'ye güvenli geçiş yap.
   async play(text: string, options?: PlaybackOptions): Promise<void> {
+    // Do not expose metadata from the previous speaker while this request is
+    // unresolved or when the requested profile cannot be played.
+    this.lastMetadata = null;
     const prefs = this.getPreferences();
     const voice = this.resolveTargetVoice(prefs, options);
 
@@ -367,7 +378,9 @@ class ClientAudioManager {
             locale: voice.locale,
             contentLanguage: voice.contentLanguage,
             gender: voice.gender,
-            distinctSpeakerVerified: true,
+            // A browser voice's name/locale is not proof that its speaker
+            // identity or gender is accurate. Keep this explicitly unverified.
+            distinctSpeakerVerified: false,
             usingBrowserFallback: true,
             latencyMs: Date.now() - t0,
           };

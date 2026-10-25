@@ -134,6 +134,9 @@ export default function AudioGrammarPlayer({
       const speakerCode = targetGender === "female" ? "emel" as const : "ahmet" as const;
 
       setIsLoadingAudio(true);
+      // Never leave a previous speaker's provider badge visible while a new
+      // speaker request is loading (or if that request fails).
+      setPlaybackMeta(null);
       setSpeakerStatusMessage(
         `${targetGender === "female" ? "Emel" : "Ahmet"} (${targetVoiceId}) sesi hazırlanıyor...`
       );
@@ -179,6 +182,7 @@ export default function AudioGrammarPlayer({
         onError: (error: Error) => {
           setIsPlaying(false);
           setIsLoadingAudio(false);
+          setPlaybackMeta(null);
           setSpeakerStatusMessage(error.message || "Ses oynatılamadı. Lütfen tekrar deneyin.");
         },
       };
@@ -355,8 +359,10 @@ export default function AudioGrammarPlayer({
             <span className="text-[11px] font-mono text-slate-400">
               Sağlayıcı: {playbackMeta.provider} · Ses ID: {playbackMeta.voiceId} ·{" "}
               {playbackMeta.distinctSpeakerVerified
-                ? "Ayrık Neural Konuşmacı Doğrulandı"
-                : "Tekil Yedek Konuşmacı Modu"}
+                ? "Ayrı konuşmacı profili doğrulandı"
+                : playbackMeta.usingBrowserFallback
+                  ? "Cihazın yerel konuşma sesi · sağlayıcı doğrulaması yok"
+                  : "Konuşmacı ayrımı doğrulanmadı"}
             </span>
           )}
         </div>

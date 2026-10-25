@@ -247,7 +247,7 @@ function VocabularyContent() {
             </span>
           </div>
           <p className="text-xs md:text-sm text-white/70 light:text-slate-600 mt-1">
-            YDS, YDT ve YÖKDİL için bağımsız ayrılmış sınav külliyatı, 12 sesli aksan telaffuzu ve görsel hafıza kartları
+            YDS, YDT ve YÖKDİL için bağımsız ayrılmış sınav külliyatı, 3 İngilizce aksanında telaffuz ve görsel hafıza kartları
           </p>
         </div>
 

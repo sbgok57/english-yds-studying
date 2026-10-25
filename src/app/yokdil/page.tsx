@@ -53,7 +53,7 @@ const YOKDIL_SKILLS = [
   {
     title: "Listening & Sesli Makale (Dinleme)",
     emoji: "🎧",
-    desc: "Akademik konferans ve makale dinleme metinleri; 12 sesli gramer stüdyo kaydı ve telaffuz.",
+    desc: "Akademik konferans ve makale dinleme metinleri; üç İngilizce aksanda telaffuz çalışması.",
     href: "/grammar/audio",
     badge: "Sesli Gramer",
     color: "from-amber-500/20 to-orange-500/20 border-amber-400/30 text-amber-300",

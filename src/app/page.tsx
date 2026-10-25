@@ -124,7 +124,7 @@ const STATIONS = [
     href: "/listening",
     emoji: "🎧",
     title: "Listening & Dinleme Lab",
-    desc: "Çoklu aksan dinleme parçaları, telaffuz karşılaştırmaları ve 12 sesli stüdyo kaydı.",
+    desc: "İngiliz, Amerikan ve Avustralya aksanlarında dinleme ve telaffuz çalışmaları.",
     cta: "Dinlemeye Başla",
     color: "from-amber-500 to-orange-600",
   },

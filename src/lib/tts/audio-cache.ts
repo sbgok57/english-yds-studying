@@ -135,7 +135,9 @@ class AudioCacheManager {
       providerVoiceId:
         entry.providerVoiceId || getVoiceProfile(entry.voiceId)?.providerVoiceId || entry.voiceId,
       provider: entry.provider || "msedge-neural",
-      distinctSpeakerVerified: entry.distinctSpeakerVerified ?? true,
+      // Missing legacy metadata is unknown, not evidence of a verified
+      // speaker. Avoid turning old cache entries into a false quality claim.
+      distinctSpeakerVerified: entry.distinctSpeakerVerified ?? false,
     };
 
     // Zaten varsa eski boyutu çıkar
