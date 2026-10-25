@@ -10,6 +10,7 @@ import {
 import { audioCache, isValidAudioBuffer } from "../src/lib/tts/audio-cache";
 import { splitTextIntoChunks } from "../src/lib/tts/tts-provider";
 import { auditCacheKeyIsolation } from "../src/lib/tts/voice-audit";
+import { findExactElevenLabsVoice } from "../src/lib/tts/elevenlabs-voice-catalog";
 
 console.log("▶ Starting TTS Voice Audit, Turkish Narrator (Emel/Ahmet) & Cache Isolation Tests...\n");
 
@@ -38,6 +39,21 @@ assert.notStrictEqual(emel.providerVoiceId, ahmet.providerVoiceId);
 assert.strictEqual(findTurkishNarratorVoice("female").id, "tr-TR-female-emel");
 assert.strictEqual(findTurkishNarratorVoice("male").id, "tr-TR-male-ahmet");
 console.log("  ✅ PASS: Emel (tr-TR-EmelNeural) and Ahmet (tr-TR-AhmetNeural) are strictly distinct.\n");
+
+// 2a. Provider account discovery must use verified locale + gender labels,
+// never display names, catalog order, or a shared generic voice ID.
+const accountVoiceFixture = [
+  { voice_id: "us-female-id", name: "Any Display Name", labels: { gender: "female" }, verified_languages: [{ locale: "en-US" }] },
+  { voice_id: "us-male-id", name: "Any Other Name", labels: { gender: "male" }, verified_languages: [{ locale: "en-US" }] },
+  { voice_id: "gb-female-id", name: "Sonia", labels: { gender: "female" }, verified_languages: [{ locale: "en-GB" }] },
+  { voice_id: "unverified-id", name: "American Female", labels: { gender: "female" }, verified_languages: [{ locale: "en-GB" }] },
+];
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture)?.id, "us-female-id");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-male-guy")!, accountVoiceFixture)?.id, "us-male-id");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-GB-male-ryan")!, accountVoiceFixture), null);
+assert.strictEqual(findExactElevenLabsVoice(emel!, [{ voice_id: "shared", labels: { gender: "female" }, verified_languages: [{ locale: "tr-TR" }] }])?.id, "shared");
+assert.strictEqual(findExactElevenLabsVoice(ahmet!, [{ voice_id: "shared", labels: { gender: "female" }, verified_languages: [{ locale: "tr-TR" }] }]), null);
+console.log("  ✅ PASS: Runtime account voice discovery rejects wrong locale/gender and shared Turkish identity.\n");
 
 // 3. Cache Anahtarı İzolasyonu
 const cacheAudit = auditCacheKeyIsolation("Merhaba arkadaşlar, bugün zaman uyumunu inceliyoruz.");

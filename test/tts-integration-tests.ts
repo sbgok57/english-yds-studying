@@ -44,6 +44,13 @@ async function runIntegrationTests() {
     undefined
   );
 
+  if (process.env.RUN_BILLABLE_TTS_INTEGRATION !== "true") {
+    console.log(
+      "  ⏭️ Live synthesis checks skipped. Set RUN_BILLABLE_TTS_INTEGRATION=true only when explicitly authorizing paid provider requests.\n"
+    );
+    return;
+  }
+
   // 1. Sağlayıcı Sağlık Kontrolü
   console.log("  1. Testing Default TTS Provider Health...");
   let health = await defaultTtsProvider.healthCheck();

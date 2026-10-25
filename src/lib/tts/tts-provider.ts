@@ -8,6 +8,8 @@ import {
   VoiceSource,
 } from "./voice-registry";
 import { isValidAudioBuffer } from "./audio-cache";
+import { findExactElevenLabsVoice, getElevenLabsVoiceCatalog } from "./elevenlabs-voice-catalog";
+import { ALL_VOICE_REGISTRY } from "./voice-registry";
 
 // PERF & SAFETY: Prevent Node.js undici/WebSocket IPv6 blackhole 8s timeouts on dual-stack networks
 try {
@@ -246,12 +248,39 @@ export class EdgeTtsProvider implements TtsProvider {
       }
     }
 
-    // A single shared ElevenLabs voice ID cannot satisfy the Emel/Ahmet
-    // distinction. Only use explicitly configured IDs for each narrator.
-    const elevenLabsVoiceId = getDedicatedTurkishElevenLabsVoiceId(voiceProfile.id);
     const elevenLabsKey = process.env.ELEVENLABS_API_KEY;
-    if (voiceProfile.locale === "tr-TR" && elevenLabsKey && elevenLabsVoiceId) {
+    if (elevenLabsKey) {
       try {
+        const catalog = await getElevenLabsVoiceCatalog(elevenLabsKey);
+        const pairedProfile = ALL_VOICE_REGISTRY.find(
+          (candidate) =>
+            candidate.enabled &&
+            candidate.contentLanguage === voiceProfile.contentLanguage &&
+            candidate.locale === voiceProfile.locale &&
+            candidate.gender !== voiceProfile.gender
+        );
+        const explicitlyConfiguredTurkishVoice =
+          voiceProfile.locale === "tr-TR"
+            ? getDedicatedTurkishElevenLabsVoiceId(voiceProfile.id)
+            : undefined;
+        const resolvedVoice = findExactElevenLabsVoice(
+          voiceProfile,
+          catalog,
+          explicitlyConfiguredTurkishVoice
+        );
+        const pairedVoice = pairedProfile
+          ? findExactElevenLabsVoice(pairedProfile, catalog)
+          : null;
+        const hasDistinctPair = Boolean(
+          resolvedVoice && pairedVoice && resolvedVoice.id !== pairedVoice.id
+        );
+        const elevenLabsVoiceId = resolvedVoice?.id;
+
+        if (!elevenLabsVoiceId) {
+          throw new Error(
+            `No exact ElevenLabs voice found for ${voiceProfile.locale}/${voiceProfile.gender}`
+          );
+        }
         const elevenLabsBuffer = await this.synthesizeViaElevenLabs(
           elevenLabsKey,
           elevenLabsVoiceId,
@@ -259,12 +288,6 @@ export class EdgeTtsProvider implements TtsProvider {
           request.speakingRate || 1.0
         );
         if (elevenLabsBuffer && isValidAudioBuffer(elevenLabsBuffer, "audio/mpeg")) {
-          const bothNarratorsConfigured = Boolean(
-            process.env.ELEVENLABS_TR_EMEL_VOICE_ID?.trim() &&
-              process.env.ELEVENLABS_TR_AHMET_VOICE_ID?.trim() &&
-              process.env.ELEVENLABS_TR_EMEL_VOICE_ID.trim() !==
-                process.env.ELEVENLABS_TR_AHMET_VOICE_ID.trim()
-          );
           return {
             ok: true,
             audio: elevenLabsBuffer,
@@ -275,7 +298,7 @@ export class EdgeTtsProvider implements TtsProvider {
             providerVoiceId: elevenLabsVoiceId,
             locale: voiceProfile.locale,
             contentLanguage: voiceProfile.contentLanguage,
-            distinctSpeakerVerified: bothNarratorsConfigured,
+            distinctSpeakerVerified: hasDistinctPair,
             source: voiceProfile.source,
           };
         }
@@ -453,18 +476,28 @@ export class EdgeTtsProvider implements TtsProvider {
   async healthCheck(voice?: VoiceProfile): Promise<TtsHealth> {
     const t0 = Date.now();
     try {
-      const targetVoice = voice || getVoiceProfile("en-US-female-jenny");
-      if (!targetVoice) throw new Error("Varsayılan ses profili bulunamadı.");
+      const apiKey = process.env.ELEVENLABS_API_KEY;
+      if (apiKey) {
+        const catalog = await getElevenLabsVoiceCatalog(apiKey);
+        const candidates = voice
+          ? [voice]
+          : ALL_VOICE_REGISTRY.filter((profile) => profile.enabled);
+        const matched = candidates.some((profile) => findExactElevenLabsVoice(profile, catalog));
+        if (matched) {
+          return { provider: "elevenlabs-catalog", available: true, latencyMs: Date.now() - t0 };
+        }
+      }
 
-      await this.synthesize({
-        text: "Test.",
-        voiceId: targetVoice.id,
-        speakingRate: 1.0,
-        contentType: "word",
-      });
+      // A health check must not synthesize a sample: ElevenLabs bills generated
+      // characters. Validate configured credentials/catalog only, then report
+      // the blocked provider instead of spending credits or claiming success.
+      const azureConfigured = Boolean(process.env.AZURE_SPEECH_KEY?.trim());
+      if (!azureConfigured) {
+        throw new Error("No exact configured cloud voice is available; no audio was generated.");
+      }
 
       return {
-        provider: this.id,
+        provider: "azure-neural-configured",
         available: true,
         latencyMs: Date.now() - t0,
       };
