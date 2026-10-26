@@ -45,8 +45,6 @@ async function fetchCatalog(apiKey: string): Promise<ElevenLabsVoice[]> {
     const url = new URL("https://api.elevenlabs.io/v2/voices");
     url.searchParams.set("page_size", "100");
     url.searchParams.set("include_total_count", "false");
-    url.searchParams.append("language", "en");
-    url.searchParams.append("language", "tr");
     if (nextPageToken) url.searchParams.set("next_page_token", nextPageToken);
 
     const response = await fetch(url, {
@@ -66,6 +64,48 @@ async function fetchCatalog(apiKey: string): Promise<ElevenLabsVoice[]> {
     voices.push(...(payload.voices as ElevenLabsVoice[]));
     nextPageToken = text(payload.next_page_token) || null;
     if (payload.has_more !== true || !nextPageToken) break;
+  }
+
+  // Some accounts return an empty filtered v2 catalog despite having a
+  // configured voice. Fall back to the provider's account voice list (read-only)
+  // and then fetch only the already-configured voice metadata if necessary.
+  if (voices.length === 0) {
+    try {
+      const response = await fetch("https://api.elevenlabs.io/v1/voices?show_legacy=true", {
+        method: "GET",
+        cache: "no-store",
+        headers: { "xi-api-key": apiKey, Accept: "application/json" },
+        signal: AbortSignal.timeout(5000),
+      });
+      if (response.ok) {
+        const payload = record(await response.json());
+        if (payload && Array.isArray(payload.voices)) {
+          voices.push(...(payload.voices as ElevenLabsVoice[]));
+        }
+      }
+    } catch {
+      // The account may not expose the deprecated listing endpoint. Try the
+      // exact configured voice ID below without leaking provider details.
+    }
+  }
+
+  const configuredVoiceId = process.env.ELEVENLABS_VOICE_ID?.trim();
+  if (configuredVoiceId && !voices.some((voice) => voice.voice_id === configuredVoiceId)) {
+    try {
+      const response = await fetch(
+        `https://api.elevenlabs.io/v1/voices/${encodeURIComponent(configuredVoiceId)}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          headers: { "xi-api-key": apiKey, Accept: "application/json" },
+          signal: AbortSignal.timeout(5000),
+        }
+      );
+      if (response.ok) voices.push((await response.json()) as ElevenLabsVoice);
+    } catch {
+      // Metadata is optional for catalog discovery; synthesis still requires an
+      // exact locale and gender match before this voice can be selected.
+    }
   }
 
   return voices;

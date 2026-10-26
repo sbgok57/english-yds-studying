@@ -18,9 +18,12 @@ export async function GET() {
   // Inventory calls are read-only and cost no synthesis credits. Do not create
   // sample audio from a health endpoint: provider-generated characters are billed.
   let elevenLabsCatalogAvailable = false;
+  let elevenLabsCatalogVoiceCount = 0;
+  const elevenLabsCredentialsConfigured = Boolean(process.env.ELEVENLABS_API_KEY?.trim());
   let catalogCheckError: string | undefined;
   try {
     const catalog = await getElevenLabsVoiceCatalog();
+    elevenLabsCatalogVoiceCount = catalog.length;
     elevenLabsCatalogAvailable = catalog.length > 0;
   } catch (error) {
     catalogCheckError = error instanceof Error ? error.message : "Ses kataloğu okunamadı.";
@@ -60,6 +63,8 @@ export async function GET() {
     enabledVoices: enabledCount,
     enabledProfiles: enabledProfileCount,
     availableProfiles: availableProfileCount,
+    elevenLabsCredentialsConfigured,
+    elevenLabsCatalogVoiceCount,
     catalogError: catalogCheckError,
     matrixValid: matrix.valid,
     matrixErrors: matrix.errors,
