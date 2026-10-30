@@ -9,6 +9,11 @@
  */
 
 import { safeSetStorage, safeGetStorage } from "@/lib/storage-optimizer";
+import {
+  applyPatternToDocument,
+  getPatternById,
+  getSavedPatternPreference,
+} from "@/lib/themes/pattern-registry";
 
 export const THEME_COUNT = 1000;
 
@@ -351,6 +356,17 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
       root.style.setProperty("--theme-pattern-fg", hexToRgba(targetTheme.accent, 0.3));
     }
 
+    // Theme changes must not erase a separately selected gallery pattern.
+    // The generated theme pattern remains the default when the user has not
+    // chosen a custom gallery pattern.
+    const savedPattern = getSavedPatternPreference();
+    if (savedPattern.patternId === "none") {
+      root.style.setProperty("--theme-pattern", "none");
+      root.style.setProperty("--pattern-opacity", "0");
+    } else if (savedPattern.patternId && getPatternById(savedPattern.patternId)) {
+      applyPatternToDocument(savedPattern.patternId, savedPattern.opacity, savedPattern.scale);
+    }
+
     // Doğrudan body stillerine anında enjekte et
     if (document.body) {
       document.body.style.backgroundColor = mode === "light" ? targetTheme.lightBg : targetTheme.darkBg;
@@ -381,7 +397,8 @@ export function getSavedTheme(): { theme: ThemePalette; mode: "dark" | "light" }
 
   try {
     const savedId = parseInt(safeGetStorage("yds_theme_id", "1"), 10);
-    const savedMode = (safeGetStorage("yds_theme_mode", "dark") as "dark" | "light") || "dark";
+    const modeValue = safeGetStorage("yds_theme_mode", "dark");
+    const savedMode = modeValue === "light" ? "light" : "dark";
     const theme = ALL_THEMES.find((t) => t.id === savedId) || ALL_THEMES[0];
     return { theme, mode: savedMode };
   } catch {

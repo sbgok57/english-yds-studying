@@ -420,7 +420,10 @@ export function getSavedPatternPreference(): SavedPatternPreference {
     return { patternId: null, opacity: 0.24, scale: 1.0 };
   }
   try {
-    const patternId = window.localStorage.getItem(PATTERN_STORAGE_KEYS.ID) || null;
+    const savedPatternId = window.localStorage.getItem(PATTERN_STORAGE_KEYS.ID);
+    const patternId = savedPatternId === "none" || getPatternById(savedPatternId)
+      ? savedPatternId
+      : null;
     const opRaw = window.localStorage.getItem(PATTERN_STORAGE_KEYS.OPACITY);
     const scRaw = window.localStorage.getItem(PATTERN_STORAGE_KEYS.SCALE);
     const opacity = opRaw ? Math.max(0.05, Math.min(0.6, parseFloat(opRaw) || 0.24)) : 0.24;
@@ -445,7 +448,16 @@ export function applyPatternToDocument(
     root.style.setProperty("--theme-pattern", "none");
     root.style.setProperty("--pattern-opacity", "0");
     try {
-      window.localStorage.removeItem(PATTERN_STORAGE_KEYS.ID);
+      // Keep an explicit "none" choice so a later color-theme change does not
+      // silently restore that theme's built-in decorative pattern.
+      window.localStorage.setItem(PATTERN_STORAGE_KEYS.ID, "none");
+      window.localStorage.setItem(PATTERN_STORAGE_KEYS.OPACITY, safeOpacity.toFixed(2));
+      window.localStorage.setItem(PATTERN_STORAGE_KEYS.SCALE, safeScale.toFixed(2));
+      window.dispatchEvent(
+        new CustomEvent("yds:pattern-changed", {
+          detail: { patternId: "none", opacity: safeOpacity, scale: safeScale },
+        })
+      );
     } catch {
       /* noop */
     }

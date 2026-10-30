@@ -22,6 +22,9 @@ import {
   getAvatar2000Page,
 } from "@/lib/avatar-catalog-2000";
 import { useUsage } from "@/lib/store";
+import AvatarCreator from "@/components/avatars/AvatarCreator";
+import NavigationSectionIcon from "@/components/navigation/NavigationSectionIcon";
+import { toast } from "sonner";
 
 interface CustomAvatar {
   id: string;
@@ -32,15 +35,12 @@ interface CustomAvatar {
 const CUSTOM_KEY = "yds-master-custom-avatars";
 const CUSTOM_SELECTED = CUSTOM_AVATAR_KEY;
 const THREE_D_AVATARS = [
-  { id: "fox", name: "Pofuduk Tilki", src: "/avatars/3d/fox.jpg" },
-  { id: "bear", name: "Bilge Ayıcık", src: "/avatars/3d/bear.jpg" },
-  { id: "owl", name: "Meraklı Baykuş", src: "/avatars/3d/owl.jpg" },
-  { id: "robot", name: "Neşeli Robot", src: "/avatars/3d/robot.jpg" },
   { id: "student-woman", name: "Enerjik Öğrenci", src: "/avatars/3d/student-woman.jpg" },
   { id: "student-man", name: "Maceracı Öğrenci", src: "/avatars/3d/student-man.jpg" },
-  { id: "corgi", name: "Çalışkan Corgi", src: "/avatars/3d/corgi.jpg" },
-  { id: "astronaut", name: "Uzay Kaşifi", src: "/avatars/3d/astronaut.jpg" },
-  { id: "dragon", name: "Minik Ejderha", src: "/avatars/3d/dragon.jpg" },
+  { id: "student-curly-glasses", name: "Kıvırcık Saçlı Tasarımcı", src: "/avatars/3d/student-curly-glasses.jpg" },
+  { id: "student-teal-jacket", name: "Turkuaz Ceketli Öğrenci", src: "/avatars/3d/student-teal-jacket.jpg" },
+  { id: "student-coral-hoodie", name: "Mercan Kapüşonlu Kaşif", src: "/avatars/3d/student-coral-hoodie.jpg" },
+  { id: "student-sage-scarf", name: "Adaçayı Şallı Bilgin", src: "/avatars/3d/student-sage-scarf.jpg" },
 ];
 
 function loadCustom(): CustomAvatar[] {
@@ -64,7 +64,7 @@ export default function AvatarsPage() {
   const { usage, update } = useUsage();
 
   // Tab navigation
-  const [activeTab, setActiveTab] = useState<"2k" | "10k" | "3d" | "upload">("2k");
+  const [activeTab, setActiveTab] = useState<"2k" | "10k" | "3d" | "create" | "upload">("3d");
 
   // --- 2.000 Avatar State ---
   const [cat2k, setCat2k] = useState<Avatar2000Category>("all");
@@ -194,7 +194,8 @@ export default function AvatarsPage() {
         setCustomSelected(item.id);
         syncActiveAvatar(item.id, dataUrl);
         update((u) => ({ ...u, customAvatar: dataUrl }));
-        setUploadMsg("Harika! Profil resmin başarıyla güncellendi. ✅");
+        setUploadMsg("Harika! Profil resmin başarıyla güncellendi.");
+        toast.success("Profil fotoğrafın güncellendi. Güle güle kullan!", { duration: 2100, id: "avatar-feedback" });
       } catch {
         setUploadMsg("Depolama kotası aşıldı veya bir hata oluştu.");
       }
@@ -220,6 +221,7 @@ export default function AvatarsPage() {
     setSelected10k(null);
     syncActiveAvatar(`2k-${id}`, dataUrl);
     update((u) => ({ ...u, customAvatar: dataUrl }));
+    toast.success("Seçtiğin karakter profilinde. Güle güle kullan!", { duration: 1900, id: "avatar-feedback" });
   };
 
   const select3dAvatar = (id: string, src: string, name: string) => {
@@ -228,6 +230,7 @@ export default function AvatarsPage() {
     syncActiveAvatar(`3d-${id}`, src);
     update((u) => ({ ...u, customAvatar: src }));
     setUploadMsg(`${name} profil avatarın oldu!`);
+    toast.success(`${name} artık profilinde. Sana çok yakıştı!`, { duration: 2100, id: "avatar-feedback" });
   };
 
   const selectedCustom =
@@ -245,16 +248,16 @@ export default function AvatarsPage() {
       {/* Başlık ve Parıltılı Açıklama */}
       <header className="text-center mb-8">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-pink-500/10 via-amber-500/10 to-cyan-500/10 border border-white/10 mb-3">
-          <span className="text-sm">🌈</span>
+          <NavigationSectionIcon icon="palette" className="h-4 w-4" />
           <span className="text-xs font-bold uppercase tracking-wider text-pink-400">
             Kişiselleştirilmiş Avatar Dünyası
           </span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-black mb-3">
-          👤 <span className="rainbow-text">Avatar & Profil Galerisi</span>
+          <span className="rainbow-text">Avatar & Profil Galerisi</span>
         </h1>
         <p className="text-sm text-slate-300 dark:text-slate-400 max-w-2xl mx-auto">
-          Emojiler kendi kategorisinde; burada 3D karakterler, yaratıcı SVG avatarları ve kendi fotoğrafın ya da hareketli GIF&apos;in seni bekliyor.
+          Profilini hazır 3D portrelerden seçebilir, kendi tasarımını oluşturabilir veya fotoğrafını yükleyebilirsin.
         </p>
       </header>
 
@@ -262,10 +265,12 @@ export default function AvatarsPage() {
       {(selected10k !== null || selectedCustom) && (
         <div className="card-vibrant p-5 mb-8 flex items-center gap-4 max-w-xl mx-auto border-2 border-cyan-400/40 shadow-xl shadow-cyan-500/10 rounded-3xl">
           {selectedCustom ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={selectedCustom.dataUrl}
               alt={selectedCustom.name}
+              width={80}
+              height={80}
+              unoptimized
               className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 border-2 border-pink-400 object-cover shadow-md"
             />
           ) : (
@@ -289,36 +294,13 @@ export default function AvatarsPage() {
                 : `${avatarMeta(selected10k as number).name} · ${avatarMeta(selected10k as number).profession}`}
             </p>
           </div>
-          <span className="text-3xl shrink-0">✨</span>
+          <NavigationSectionIcon icon="award" className="h-7 w-7 shrink-0" />
         </div>
       )}
 
       {/* Üst Sekme Seçici (Tab Bar) */}
       <div className="flex justify-center mb-8">
         <div className="inline-flex p-1.5 rounded-2xl bg-slate-900/80 border border-white/10 backdrop-blur-md shadow-2xl flex-wrap justify-center gap-1">
-          <button
-            onClick={() => setActiveTab("2k")}
-            className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 ${
-              activeTab === "2k"
-                ? "bg-gradient-to-r from-pink-500 via-rose-500 to-amber-500 text-white shadow-lg shadow-pink-500/30 scale-105"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            <span>🌈</span>
-            <span>2.000 Yaratıcı Avatar</span>
-            <span className="px-1.5 py-0.2 text-[10px] rounded-full bg-white/20">Yeni</span>
-          </button>
-          <button
-            onClick={() => setActiveTab("10k")}
-            className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 ${
-              activeTab === "10k"
-                ? "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-lg shadow-cyan-500/30 scale-105"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            <span>🏛️</span>
-            <span>10.000 Meslek & Karakter</span>
-          </button>
           <button
             onClick={() => setActiveTab("3d")}
             className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 ${
@@ -327,8 +309,19 @@ export default function AvatarsPage() {
                 : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <span>🪄</span>
-            <span>3D Görsel Avatarlar</span>
+            <NavigationSectionIcon icon="user-plus" className="h-4 w-4" />
+            <span>Portre galerisi</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("create")}
+            className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 ${
+              activeTab === "create"
+                ? "bg-gradient-to-r from-fuchsia-500 via-violet-500 to-pink-500 text-white shadow-lg shadow-fuchsia-500/30 scale-105"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <NavigationSectionIcon icon="palette" className="h-4 w-4" />
+            <span>Avatarını düzenle</span>
           </button>
           <button
             onClick={() => setActiveTab("upload")}
@@ -338,7 +331,7 @@ export default function AvatarsPage() {
                 : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <span>📤</span>
+            <NavigationSectionIcon icon="file-up" className="h-4 w-4" />
             <span>Resim / GIF Yükle</span>
           </button>
         </div>
@@ -366,7 +359,6 @@ export default function AvatarsPage() {
                       : "border-white/10 bg-slate-900/60 text-slate-300 hover:text-white hover:border-white/30"
                   }`}
                 >
-                  <span>{meta.emoji}</span>
                   <span>{meta.label}</span>
                   <span className="text-[10px] opacity-75 font-normal">({meta.count})</span>
                 </button>
@@ -383,7 +375,7 @@ export default function AvatarsPage() {
                   setQuery2k(e.target.value);
                   setPage2k(0);
                 }}
-                placeholder="🔍 Canavar, emoji, renk veya motif ara..."
+                placeholder="Canavar, renk veya motif ara..."
                 className="w-full px-5 py-3 rounded-2xl bg-slate-900/80 border border-white/15 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-pink-500 shadow-inner"
               />
               {query2k && (
@@ -409,7 +401,7 @@ export default function AvatarsPage() {
           {/* Avatar Kartları Grid */}
           {result2k.items.length === 0 ? (
             <div className="card-vibrant p-8 text-center max-w-md mx-auto my-8">
-              <p className="text-4xl mb-2">🔍</p>
+              <NavigationSectionIcon icon="compass" className="mx-auto mb-2 h-8 w-8" />
               <p className="font-bold text-white mb-1">Eşleşen avatar bulunamadı</p>
               <p className="text-xs text-slate-400 mb-4">
                 Arama kriterini değiştirerek veya filtreleri temizleyerek tekrar dene.
@@ -516,10 +508,10 @@ export default function AvatarsPage() {
               }}
               className="px-4 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-cyan-400 max-w-[240px]"
             >
-              <option value="Tüm Meslekler">🧑‍💼 Tüm Meslekler</option>
+              <option value="Tüm Meslekler">Tüm Meslekler</option>
               {PROFESSIONS.map((p) => (
                 <option key={p.name} value={p.name}>
-                  {p.emoji} {p.name}
+                  {p.name}
                 </option>
               ))}
             </select>
@@ -534,7 +526,7 @@ export default function AvatarsPage() {
             >
               {AVATAR_EXPRESSIONS.map((ex) => (
                 <option key={ex} value={ex}>
-                  {ex === "Tüm İfadeler" ? "🎭 Tüm İfadeler" : `✨ ${ex}`}
+                  {ex}
                 </option>
               ))}
             </select>
@@ -545,7 +537,7 @@ export default function AvatarsPage() {
                 setQuery(e.target.value);
                 setPage(0);
               }}
-              placeholder="🔍 Avatar veya meslek ara..."
+                placeholder="Avatar veya meslek ara..."
               className="px-4 py-2 rounded-xl bg-slate-900 border border-white/15 text-xs sm:text-sm text-white focus:outline-none focus:border-cyan-400 w-48 sm:w-56"
             />
           </div>
@@ -557,7 +549,7 @@ export default function AvatarsPage() {
           {/* 10.000 Grid */}
           {filtered10k.length === 0 ? (
             <div className="card-vibrant p-8 text-center max-w-md mx-auto my-8">
-              <p className="text-4xl mb-2">🔍</p>
+              <NavigationSectionIcon icon="compass" className="mx-auto mb-2 h-8 w-8" />
               <p className="font-bold text-white mb-1">Eşleşen avatar bulunamadı</p>
               <button
                 onClick={() => {
@@ -582,15 +574,11 @@ export default function AvatarsPage() {
                     onClick={() => {
                       const numId =
                         typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0;
-                      if (a.category === "3D Animasyon & Portre") {
-                        const portrait = THREE_D_AVATARS[Math.abs(numId) % THREE_D_AVATARS.length];
-                        select3dAvatar(`catalog-${numId}`, portrait.src, a.name);
-                        return;
-                      }
                       setSelected10k(numId);
                       setCustomSelected(null);
                       syncActiveAvatar(numId, null);
                       update((u) => ({ ...u, avatar: numId, customAvatar: null }));
+                      toast.success("Profil karakterin güncellendi.", { duration: 1900, id: "avatar-feedback" });
                     }}
                     className={`group relative rounded-2xl overflow-hidden border-2 transition-all hover:scale-105 ${
                       isSelected
@@ -601,21 +589,14 @@ export default function AvatarsPage() {
                       a.profession
                     }`}
                   >
-                    {a.category === "3D Animasyon & Portre" ? (
-                      <div className="relative w-full aspect-square">
-                        <Image
-                          src={THREE_D_AVATARS[Math.abs(typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0) % THREE_D_AVATARS.length].src}
-                          alt={`${a.name} 3D görsel avatarı`}
-                          fill
-                          sizes="(max-width: 640px) 30vw, 10vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full aspect-square" dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }} />
-                    )}
+                    <div
+                      className="w-full aspect-square"
+                      role="img"
+                      aria-label={`${a.name} için özgün portre`}
+                      dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }}
+                    />
                     <div className="absolute inset-x-0 bottom-0 bg-black/85 text-[9px] text-white opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1 font-medium">
-                      {a.professionEmoji} {a.profession}
+                      {a.profession}
                     </div>
                   </button>
                 );
@@ -651,10 +632,10 @@ export default function AvatarsPage() {
       {activeTab === "3d" && (
         <section className="space-y-5">
           <div className="card-vibrant rounded-3xl p-5 sm:p-7 text-center">
-            <h2 className="text-2xl sm:text-3xl font-black rainbow-text">Karşında: gerçek 3D görsel avatar galerisi!</h2>
+          <h2 className="text-2xl sm:text-3xl font-black rainbow-text">Sana yakın hissettiren bir portre seç</h2>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-              Bunlar emoji değil; seçip profilinde kullanabileceğin, birbirinden farklı 3D render edilmiş karakter görselleri.
-              Hareketli GIF seçeneği kendi görselini yükleme bölümünde ayrı duruyor.
+              Birbirinden farklı, özgün 3D illüstrasyon portreleri. Gerçek fotoğrafını veya hareketli GIF’ini
+              kullanmak istersen kendi görselini yükleyebilirsin.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -681,6 +662,18 @@ export default function AvatarsPage() {
         </section>
       )}
 
+      {activeTab === "create" && (
+        <AvatarCreator
+          onSave={(dataUrl) => {
+            setSelected10k(null);
+            setCustomSelected("custom-designed");
+            syncActiveAvatar("custom-designed", dataUrl);
+            update((current) => ({ ...current, customAvatar: dataUrl }));
+            setUploadMsg("");
+          }}
+        />
+      )}
+
       {/* ======================================================== */}
       {/* SEKME 3: KENDİ RESMİNİ / GIF'İNİ YÜKLE                      */}
       {/* ======================================================== */}
@@ -689,20 +682,19 @@ export default function AvatarsPage() {
           <div className="card-vibrant p-6 rounded-3xl border border-white/10 shadow-2xl">
             <div className="flex items-center gap-4 flex-wrap">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-3xl shadow-lg shadow-emerald-500/20">
-                📤
+                <NavigationSectionIcon icon="file-up" className="h-7 w-7 text-white" />
               </div>
               <div className="flex-1 min-w-[200px]">
-                <h3 className="font-black text-lg text-white">Kendi Resmini veya GIF&apos;ini Yükle</h3>
+                <h3 className="font-black text-lg text-white">Kendi fotoğrafını veya GIF&apos;ini kullan</h3>
                 <p className="text-xs text-slate-300 mt-1">
-                  Kendi fotoğrafın, anime karakterin veya favori hareketli GIF animasyonun profil
-                  resmin olsun (max 1.5 MB).
+                  Profil fotoğrafın veya kullanma hakkına sahip olduğun bir görsel burada görünsün (max 1.5 MB).
                 </p>
               </div>
               <button
                 onClick={() => fileRef.current?.click()}
                 className="px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 font-black text-xs sm:text-sm text-white shadow-lg shadow-emerald-500/25 hover:scale-105 transition-transform"
               >
-                📁 Dosya Seç
+                Dosya seç
               </button>
               <input
                 ref={fileRef}

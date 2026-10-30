@@ -22,6 +22,7 @@ export default function WordPronunciationBar({
 }: WordPronunciationBarProps) {
   const [activeRate, setActiveRate] = useState<number>(1.0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audioError, setAudioError] = useState("");
   const [micState, setMicState] = useState<"idle" | "listening" | "success">("idle");
   const micTimerRef = useRef<NodeJS.Timeout | null>(null);
   const speechRecRef = useRef<any>(null);
@@ -54,6 +55,7 @@ export default function WordPronunciationBar({
 
   const handlePlayWord = async (rate: number = 1.0) => {
     setActiveRate(rate);
+    setAudioError("");
     setIsPlaying(true);
     await clientAudio.play(word, {
       accent: activeAccent,
@@ -61,12 +63,16 @@ export default function WordPronunciationBar({
       rate,
       contentType: "word",
       onEnd: () => setIsPlaying(false),
-      onError: () => setIsPlaying(false),
+      onError: (error) => {
+        setIsPlaying(false);
+        setAudioError(error.message || "Bu ses profili için ses üretilemedi.");
+      },
     });
   };
 
   const handlePlaySentence = async () => {
     if (!sentence) return;
+    setAudioError("");
     setIsPlaying(true);
     await clientAudio.play(sentence, {
       accent: activeAccent,
@@ -74,7 +80,10 @@ export default function WordPronunciationBar({
       rate: 1.0,
       contentType: "sentence",
       onEnd: () => setIsPlaying(false),
-      onError: () => setIsPlaying(false),
+      onError: (error) => {
+        setIsPlaying(false);
+        setAudioError(error.message || "Cümle sesi üretilemedi.");
+      },
     });
   };
 
@@ -197,6 +206,11 @@ export default function WordPronunciationBar({
       </div>
 
       {/* Kontrol Butonları: ▶ Normal, 🐢 Yavaş, 🔁 Tekrar, 🎙️ Ben de söyleyeceğim */}
+      {audioError && (
+        <p role="alert" className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-100">
+          {audioError}
+        </p>
+      )}
       <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/10">
         {/* ▶ Normal */}
         <button

@@ -12,6 +12,7 @@ import PwaInstaller from "@/components/pwa/PwaInstaller";
 import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import DilMasterProSystem from "@/components/DilMasterProSystem";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dil-master.vercel.app"),
@@ -91,16 +92,28 @@ export default function RootLayout({
               <CaptureBootstrap />
               <DebugPanel />
               <PwaInstaller />
+              <Toaster
+                position="bottom-center"
+                closeButton
+                richColors
+                duration={2200}
+                toastOptions={{
+                  classNames: {
+                    toast: "!rounded-2xl !border-white/15 !shadow-xl",
+                    title: "!font-semibold",
+                  },
+                }}
+              />
             </ThemeProvider>
           </BadgeQueueProvider>
         </CrashGuardianProvider>
         <footer className="border-t border-white/10 py-8 mt-12 transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
             <p className="text-sm text-white/50">
-              🧠 DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.
+              DİL MASTER (YDS · YDT · YÖKDİL) — Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.
             </p>
             <p className="text-xs text-white/30 font-mono">
-              Kanka, bugün çalıştığın her kelime, yarınki netinin teminatıdır. ✨
+              Bugün çalıştığın her kelime, yarınki netine atılmış güzel bir adım.
             </p>
           </div>
         </footer>

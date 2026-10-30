@@ -246,15 +246,10 @@ export const DilMasterProSystem: React.FC = () => {
       localStorage.setItem("dilmaster_active_pattern", preset.id);
 
       const root = document.documentElement;
-      root.style.setProperty("--theme-bg", preset.bg);
-      root.style.setProperty("--theme-card", preset.card);
       root.style.setProperty("--theme-primary", preset.primary);
-      root.style.setProperty("--theme-text", preset.text);
       root.style.setProperty("--theme-pattern", preset.svg);
       root.style.setProperty("--theme-pattern-size", preset.size);
-
-      document.body.style.backgroundColor = preset.bg;
-      document.body.style.color = preset.text;
+      root.style.setProperty("--pattern-opacity", "1");
     }
   }, []);
 

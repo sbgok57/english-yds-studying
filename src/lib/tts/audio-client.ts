@@ -411,7 +411,7 @@ class ClientAudioManager {
           if (!selectedBrowserVoice) {
             const requestedGender = voice.gender === "female" ? "kadın" : "erkek";
             const error = new Error(
-              `Bu cihazda ${voice.contentLanguage === "tr" ? "Türkçe" : voice.accentLabelTr} aksanı için doğrulanabilir ${requestedGender} sesi bulunamadı. Yanlış aksan veya konuşmacı seçilmedi. Cihazınıza uygun ses ekleyin ya da ayrı konuşmacı kimlikleri yapılandırılmış bulut ses sağlayıcısını kullanın.`,
+              `Bu cihazda doğrulanmış ${voice.contentLanguage === "tr" ? "Türkçe" : voice.accentLabelTr} ${requestedGender} konuşmacısı bulunamadı ve sunucu ses üretimi de şu anda kullanılamıyor. Yanlış aksan veya konuşmacı seçilmedi. Site yöneticisinin lisanslı bir ses sağlayıcısını etkinleştirmesi ya da bu cihaz için uygun bir sistem sesi kurması gerekiyor.`,
             );
             options?.onInfo?.(error.message);
             options?.onError?.(error);

@@ -76,23 +76,23 @@ export default function ThemePatternPicker() {
       id="theme-pattern-picker"
       data-testid="theme-pattern-picker"
       aria-labelledby="pattern-gallery-heading"
-      className="rounded-3xl border border-white/15 bg-slate-950/90 p-5 sm:p-8 space-y-6 shadow-2xl"
+      className="rounded-3xl border border-white/15 bg-slate-950/90 p-5 sm:p-8 space-y-6 shadow-2xl light:border-slate-200 light:bg-white/95 light:shadow-slate-900/10"
     >
       {/* Üst Başlık ve Gerçek Desen Sayısı */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-5 light:border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-bold mb-2 light:bg-cyan-50 light:text-cyan-800 light:border-cyan-200">
             <Sparkles className="w-3.5 h-3.5" />
             <span data-testid="pattern-registry-exact-count">
               {PATTERN_REGISTRY.length} Özgün Vektörel SVG Desen ({categories.length} Kategori)
             </span>
           </div>
-          <h2 id="pattern-gallery-heading" className="text-xl sm:text-2xl font-black text-white">
+          <h2 id="pattern-gallery-heading" className="text-xl sm:text-2xl font-black text-white light:text-slate-900">
             Vektörel SVG Arka Plan Desen Galerisi
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1 light:text-slate-600">
             Noktalı, milimetrik ızgara, topografik kontur, altıgen, blueprint, molekül ağı, takımyıldız, devre ve terrazzo dahil{" "}
-            <strong className="text-slate-200">tam {PATTERN_REGISTRY.length} gerçek SVG deseni</strong> arasından seçim yapın.
+            <strong className="text-slate-200 light:text-slate-800">tam {PATTERN_REGISTRY.length} gerçek SVG deseni</strong> arasından seçim yapın.
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export default function ThemePatternPicker() {
           <button
             type="button"
             onClick={() => setPreviewMode((m) => (m === "dark" ? "light" : "dark"))}
-            className="px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-slate-200 flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-slate-200 flex items-center gap-1.5 light:border-slate-300 light:bg-white light:text-slate-700 light:hover:bg-slate-100"
           >
             {previewMode === "dark" ? (
               <>
@@ -119,7 +119,7 @@ export default function ThemePatternPicker() {
             type="button"
             data-testid="pattern-reset-button"
             onClick={handleResetPattern}
-            className="px-3.5 py-2 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-bold text-rose-200 flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-bold text-rose-200 flex items-center gap-1.5 light:border-rose-200 light:bg-rose-50 light:text-rose-700 light:hover:bg-rose-100"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Deseni Kaldır (Sıfırla)</span>
@@ -128,10 +128,10 @@ export default function ThemePatternPicker() {
       </div>
 
       {/* Opaklık, Ölçek ve Arama Kontrolleri */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white/[0.03] p-4 rounded-2xl border border-white/10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white/[0.03] p-4 rounded-2xl border border-white/10 light:bg-slate-50 light:border-slate-200">
         {/* Arama */}
         <div className="relative">
-          <label htmlFor="pattern-search-input" className="block text-[11px] font-bold text-slate-300 mb-1">
+          <label htmlFor="pattern-search-input" className="block text-[11px] font-bold text-slate-300 mb-1 light:text-slate-700">
             Desen Ara
           </label>
           <div className="relative">
@@ -143,7 +143,7 @@ export default function ThemePatternPicker() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Blueprint, molekül, ızgara, dalga..."
-              className="w-full rounded-xl bg-slate-900 border border-white/15 pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400"
+              className="w-full rounded-xl bg-slate-900 border border-white/15 pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400 light:bg-white light:border-slate-300 light:text-slate-900 light:placeholder:text-slate-500"
             />
           </div>
         </div>
@@ -152,7 +152,7 @@ export default function ThemePatternPicker() {
         <div>
           <label
             htmlFor="pattern-opacity-slider"
-            className="flex items-center justify-between text-[11px] font-bold text-slate-300 mb-1"
+            className="flex items-center justify-between text-[11px] font-bold text-slate-300 mb-1 light:text-slate-700"
           >
             <span className="flex items-center gap-1">
               <Sliders className="w-3.5 h-3.5 text-cyan-400" />
@@ -177,7 +177,7 @@ export default function ThemePatternPicker() {
         <div>
           <label
             htmlFor="pattern-scale-slider"
-            className="flex items-center justify-between text-[11px] font-bold text-slate-300 mb-1"
+            className="flex items-center justify-between text-[11px] font-bold text-slate-300 mb-1 light:text-slate-700"
           >
             <span>Desen Ölçeği (Boyut)</span>
             <span className="font-mono text-cyan-300">{scale.toFixed(2)}x</span>
@@ -202,9 +202,9 @@ export default function ThemePatternPicker() {
           type="button"
           onClick={() => setActiveCategory("all")}
           className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all ${
-            activeCategory === "all"
+              activeCategory === "all"
               ? "bg-cyan-500 text-slate-950 shadow"
-              : "bg-white/5 text-slate-300 hover:bg-white/10"
+              : "bg-white/5 text-slate-300 hover:bg-white/10 light:bg-slate-100 light:text-slate-700 light:hover:bg-slate-200"
           }`}
         >
           Tümü ({PATTERN_REGISTRY.length})
@@ -217,7 +217,7 @@ export default function ThemePatternPicker() {
             className={`px-3 py-1.5 rounded-xl text-xs font-bold shrink-0 transition-all ${
               activeCategory === cat
                 ? "bg-cyan-500 text-slate-950 shadow"
-                : "bg-white/5 text-slate-300 hover:bg-white/10"
+                : "bg-white/5 text-slate-300 hover:bg-white/10 light:bg-slate-100 light:text-slate-700 light:hover:bg-slate-200"
             }`}
           >
             {PATTERN_CATEGORY_LABELS[cat]}

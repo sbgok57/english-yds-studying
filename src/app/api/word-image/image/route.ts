@@ -29,7 +29,17 @@ export async function GET(request: NextRequest) {
   const styleValue = params.get("style");
   const style: GeneratedImageStyle = styleValue === "photorealistic" || styleValue === "cartoon" ? styleValue : "3d";
   const prompt = generateVocabularyVisualPrompt(word, meaning, type, example, style);
-  const imageUrl = new URL(`https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`);
+  const apiKey = process.env.POLLINATIONS_API_KEY?.trim();
+  if (!apiKey) {
+    return createVisualUnavailableResponse({
+      code: "IMAGE_PROVIDER_NOT_CONFIGURED",
+      message: "AI görsel üretimi henüz yapılandırılmadı. Sunucuya POLLINATIONS_API_KEY eklendiğinde bu görsel oluşturulabilir.",
+      retryable: false,
+    });
+  }
+
+  const imageUrl = new URL(`https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}`);
+  imageUrl.searchParams.set("model", "black-forest-labs/flux.1-schnell");
   imageUrl.searchParams.set("width", "768");
   imageUrl.searchParams.set("height", "768");
   imageUrl.searchParams.set("nologo", "true");
@@ -40,17 +50,22 @@ export async function GET(request: NextRequest) {
   try {
     const upstream = await fetch(imageUrl, {
       signal: controller.signal,
-      headers: { Accept: "image/avif,image/webp,image/png,image/jpeg" },
-      next: { revalidate: 86400 },
+      cache: "no-store",
+      headers: {
+        Accept: "image/avif,image/webp,image/png,image/jpeg",
+        Authorization: `Bearer ${apiKey}`,
+      },
     });
     const contentType = upstream.headers.get("content-type")?.split(";")[0].toLowerCase() || "";
     const contentLength = Number(upstream.headers.get("content-length") || 0);
     if (!upstream.ok || !["image/jpeg", "image/png", "image/webp", "image/avif"].includes(contentType) || contentLength > MAX_IMAGE_BYTES) {
-      return createVisualUnavailableResponse();
+      return createVisualUnavailableResponse({ status: 502 });
     }
 
     const bytes = await upstream.arrayBuffer();
-    if (!bytes.byteLength || bytes.byteLength > MAX_IMAGE_BYTES) return createVisualUnavailableResponse();
+    if (!bytes.byteLength || bytes.byteLength > MAX_IMAGE_BYTES) {
+      return createVisualUnavailableResponse({ status: 502 });
+    }
     return new NextResponse(bytes, {
       status: 200,
       headers: {

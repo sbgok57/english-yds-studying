@@ -231,11 +231,31 @@ export function useUsage() {
 }
 
 // ---- kolaylaştırıcı kayıt fonksiyonları ----
+function showActivityFeedback(
+  kind: "success" | "info",
+  message: string,
+  duration = 1900
+) {
+  if (typeof window === "undefined") return;
+  void import("sonner")
+    .then(({ toast }) => {
+      toast[kind](message, { duration, id: "activity-feedback" });
+    })
+    .catch(() => {
+      // A feedback UI failure must never interrupt saving the learner's progress.
+    });
+}
+
 export function recordWord(
   update: (fn: (u: UsageData) => UsageData) => void,
   id: number | string,
   correct: boolean
 ) {
+  showActivityFeedback(
+    correct ? "success" : "info",
+    correct ? "Harika, bu kelimeyi yakaladın!" : "Sorun değil; bu kelime tekrarında daha da kolaylaşacak.",
+    1900
+  );
   update((u) => {
     const key = String(id);
     const rec = u.words[key] || { c: 0, w: 0, last: 0 };
@@ -252,6 +272,11 @@ export function recordGrammar(
   slug: string,
   correct: boolean
 ) {
+  showActivityFeedback(
+    correct ? "success" : "info",
+    correct ? "Çok iyi! Gramer bilgisini sağlamlaştırdın." : "Güzel denemeydi; kuralı birlikte pekiştiriyoruz.",
+    1900
+  );
   update((u) => {
     const rec = u.grammar[slug] || { a: 0, ok: 0 };
     rec.a += 1;
@@ -265,6 +290,7 @@ export function recordTacticView(
   update: (fn: (u: UsageData) => UsageData) => void,
   slug: string
 ) {
+  showActivityFeedback("info", "Taktiği çalışma listene ekledik; küçük adımlar işe yarar.");
   update((u) => {
     u.tactics[slug] = (u.tactics[slug] || 0) + 1;
     return u;
@@ -279,6 +305,7 @@ export function recordExam(
   net?: number
 ) {
   const finalNet = typeof net === "number" ? net : calculateYdsNet(correct, wrong);
+  showActivityFeedback("success", "Deneme tamamlandı. Emeğin için kendinle gurur duy!", 2400);
   update((u) => {
     if (!u.exams || typeof u.exams !== "object") {
       u.exams = { taken: 0, totalCorrect: 0, totalQuestions: 0, bestNet: 0 };
@@ -317,6 +344,7 @@ export function toggleBookmark(
   update: (fn: (u: UsageData) => UsageData) => void,
   questionId: string
 ) {
+  showActivityFeedback("info", "Kaydetme tercihin güncellendi.", 1600);
   update((u) => {
     const list = u.bookmarks || [];
     if (list.includes(questionId)) {
@@ -336,6 +364,11 @@ export function recordQuestionResult(
   answer: number,
   meta?: { topic?: string; type?: string }
 ) {
+  showActivityFeedback(
+    correct ? "success" : "info",
+    correct ? "Doğru cevap! İlerleyişin çok iyi." : "Cevabını kaydettik; her deneme seni güçlendiriyor.",
+    1900
+  );
   update((u) => {
     if (!u.solvedQuestions) u.solvedQuestions = {};
     if (!u.wrongQuestions) u.wrongQuestions = {};

@@ -10,6 +10,7 @@ import SearchBox from "@/components/SearchBox";
 import ThemeToggle from "@/components/ThemeToggle";
 import ThemeQuickModal from "@/components/theme/ThemeQuickModal";
 import MenuPortal from "@/components/navigation/MenuPortal";
+import NavigationSectionIcon from "@/components/navigation/NavigationSectionIcon";
 import {
   getFilteredNavigationGroups,
   type NavigationIconId,
@@ -28,39 +29,10 @@ interface MenuDrawerProps {
   onClose: () => void;
 }
 
-const NAV_3D_ICON: Record<NavigationIconId, string> = {
-  home: "/icons/3d/globe.jpg",
-  dashboard: "/icons/3d/target.jpg",
-  compass: "/icons/3d/target.jpg",
-  "book-open": "/icons/3d/book.jpg",
-  layers: "/icons/3d/flashcards.jpg",
-  box: "/icons/3d/flashcards.jpg",
-  sparkles: "/icons/3d/medal.jpg",
-  "file-up": "/icons/3d/exam.jpg",
-  "graduation-cap": "/icons/3d/book.jpg",
-  headphones: "/icons/3d/globe.jpg",
-  microscope: "/icons/3d/microscope.jpg",
-  "pen-tool": "/icons/3d/calendar.jpg",
-  mic: "/icons/3d/globe.jpg",
-  target: "/icons/3d/target.jpg",
-  clock: "/icons/3d/calendar.jpg",
-  zap: "/icons/3d/medal.jpg",
-  gamepad: "/icons/3d/games.jpg",
-  "trending-up": "/icons/3d/target.jpg",
-  calendar: "/icons/3d/calendar.jpg",
-  award: "/icons/3d/medal.jpg",
-  palette: "/icons/3d/flashcards.jpg",
-  "volume-2": "/icons/3d/globe.jpg",
-  user: "/icons/3d/globe.jpg",
-  settings: "/icons/3d/target.jpg",
-  shield: "/icons/3d/medal.jpg",
-  "help-circle": "/icons/3d/book.jpg",
-};
-
 function renderCategoryItemIcon(icon: NavigationIconId) {
   return (
-    <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-100 via-cyan-100 to-amber-100 shadow-sm ring-1 ring-white/70 dark:ring-white/20">
-      <Image src={NAV_3D_ICON[icon]} alt="" fill sizes="36px" className="object-cover" />
+    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-fuchsia-100 via-cyan-100 to-amber-100 shadow-sm ring-1 ring-white/70 dark:ring-white/20">
+      <NavigationSectionIcon icon={icon} className="h-5 w-5" />
     </span>
   );
 }
@@ -212,10 +184,10 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                     Menü · DİL MASTER
                   </span>
                   <span className="text-[11px] text-cyan-300/90 light:text-cyan-700 font-mono block truncate">
-                    YDS · YDT · YÖKDİL yol arkadaşın 🌈
+                    YDS · YDT · YÖKDİL yol arkadaşın
                   </span>
                   <span className="text-[11px] text-amber-300 font-semibold block truncate">
-                    Hadi bugün bir adım daha atalım! ✨
+                    Hadi bugün bir adım daha atalım!
                   </span>
                 </div>
               </div>
@@ -431,7 +403,6 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                       onClick={handleSafeClose}
                       className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-white/75 light:text-slate-700 hover:bg-white/10 hover:text-white transition-colors truncate"
                     >
-                      <span aria-hidden="true">{p.emoji}</span>
                       <span className="truncate">{p.label}</span>
                     </Link>
                   ))}

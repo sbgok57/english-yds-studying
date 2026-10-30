@@ -33,8 +33,8 @@ export default function PatternPreview({
       onClick={() => onSelect?.(pattern)}
       className={`group relative rounded-2xl border p-3.5 text-left transition-all flex flex-col justify-between gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
         isSelected
-          ? "border-cyan-400 bg-cyan-950/30 ring-2 ring-cyan-400/50 shadow-lg"
-          : "border-white/10 bg-slate-900/70 hover:border-white/25 hover:bg-slate-900"
+          ? "border-cyan-400 bg-cyan-950/30 ring-2 ring-cyan-400/50 shadow-lg light:border-cyan-500 light:bg-cyan-50 light:ring-cyan-200"
+          : "border-white/10 bg-slate-900/70 hover:border-white/25 hover:bg-slate-900 light:border-slate-200 light:bg-white light:hover:border-cyan-300 light:hover:bg-cyan-50"
       }`}
     >
       {/* Canlı SVG Desen Önizleme Kutusu */}
@@ -76,11 +76,11 @@ export default function PatternPreview({
       {/* Desen Başlığı ve Teknik Etiketler */}
       <div>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs sm:text-sm font-black text-white group-hover:text-cyan-300 transition-colors">
+          <span className="text-xs sm:text-sm font-black text-white group-hover:text-cyan-300 transition-colors light:text-slate-900 light:group-hover:text-cyan-800">
             {pattern.nameTr}
           </span>
         </div>
-        <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 mt-1">
+        <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 mt-1 light:text-slate-600">
           <span>ID: {pattern.id}</span>
           <span>{pattern.backgroundSize}</span>
         </div>

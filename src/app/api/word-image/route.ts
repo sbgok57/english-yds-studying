@@ -47,6 +47,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: false, code: "WORD_REQUIRED" }, { status: 400 });
   }
 
+  if (!process.env.POLLINATIONS_API_KEY?.trim()) {
+    return NextResponse.json(
+      {
+        ok: false,
+        code: "IMAGE_PROVIDER_NOT_CONFIGURED",
+        message: "AI görsel üretimi henüz yapılandırılmadı. Sunucuya POLLINATIONS_API_KEY eklendiğinde bu görsel oluşturulabilir.",
+        retryable: false,
+      },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   try {
     const word = wordId
       ? await prisma.word.findUnique({ where: { id: wordId } })

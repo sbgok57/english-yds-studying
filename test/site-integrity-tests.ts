@@ -1,9 +1,18 @@
 import assert from "assert";
+import { createHash } from "crypto";
+import { readFileSync, readdirSync } from "fs";
+import { join } from "path";
 import { PASSAGES, READING_PASSAGES, getReadingPassages } from "../src/lib/data-reading";
 import { EXAMS, getExamQuestions, getExamMeta } from "../src/lib/data-exams";
 import { WORDS, VOCABULARY, getVocabularyWords } from "../src/lib/data-vocabulary";
 import { VOICE_REGISTRY, validateVoiceMatrix, getVoiceProfile } from "../src/lib/tts/voice-registry";
-import { AVATARS } from "../src/lib/avatars";
+import { AVATARS, avatarSvg } from "../src/lib/avatars";
+import { NAVIGATION_ITEMS } from "../src/components/navigation/navigation-config";
+import {
+  CUSTOM_AVATAR_OPTIONS,
+  normalizeCustomAvatarConfig,
+  renderCustomAvatar,
+} from "../src/lib/custom-avatar";
 import { LEVEL_TEST_QUESTIONS } from "../src/lib/data-level-test";
 import { GRAMMAR_TOPICS } from "../src/lib/data-grammar";
 import { TACTICS } from "../src/lib/data-tactics";
@@ -26,6 +35,12 @@ function test(name: string, fn: () => void) {
     process.exit(1);
   }
 }
+
+test("Every primary navigation section has its own distinct icon", () => {
+  const iconIds = NAVIGATION_ITEMS.map((item) => item.icon);
+  assert.strictEqual(new Set(iconIds).size, iconIds.length, "Primary navigation icons must not repeat");
+});
+
 
 console.log("\n========================================================");
 console.log("🛡️ SITE INTEGRITY & HARDENING SPECIFICATION TESTS");
@@ -140,6 +155,82 @@ test("All 10000 avatars have distinct labels, valid categories, and emojis", () 
     assert(av.label && av.label.length > 0, `Avatar ${av.id} missing label`);
     assert(av.emoji && av.emoji.length > 0, `Avatar ${av.id} missing emoji`);
   }
+});
+
+test("3D portrait catalog does not cycle repeated artwork", () => {
+  const portraitIds = Array.from({ length: 1200 }, (_, index) => index + 4200);
+  const portraitHashes = portraitIds.map((id) => {
+    const visualSvg = avatarSvg(id)
+      .replace(/av-3d-grad-\d+/g, "av-3d-grad")
+      .replace(/av-3d-light-\d+/g, "av-3d-light");
+    return createHash("sha256").update(visualSvg).digest("hex");
+  });
+  assert.strictEqual(
+    new Set(portraitHashes).size,
+    portraitIds.length,
+    "Generated portrait visuals must differ after unique SVG IDs are normalized"
+  );
+
+  const renderedAvatarDirectory = join(process.cwd(), "public/avatars/3d");
+  const renderedAvatarFiles = readdirSync(renderedAvatarDirectory)
+    .filter((file) => /\.(avif|gif|jpe?g|png|webp)$/i.test(file))
+    .sort();
+  assert.strictEqual(renderedAvatarFiles.length, 13, "The dedicated render gallery should match its thirteen declared assets");
+
+  const renderedAvatarHashes = renderedAvatarFiles.map((file) =>
+    createHash("sha256").update(readFileSync(join(renderedAvatarDirectory, file))).digest("hex")
+  );
+  assert.strictEqual(
+    new Set(renderedAvatarHashes).size,
+    renderedAvatarFiles.length,
+    "The dedicated render gallery must not contain byte-identical files"
+  );
+});
+
+test("Avatar creator renders at least 1000 unique real option combinations", () => {
+  const signatures = new Set<string>();
+  outer: for (const skin of CUSTOM_AVATAR_OPTIONS.skin) {
+    for (const face of CUSTOM_AVATAR_OPTIONS.face) {
+      for (const hair of CUSTOM_AVATAR_OPTIONS.hair) {
+        for (const hairColor of CUSTOM_AVATAR_OPTIONS.hairColor) {
+          for (const eyes of CUSTOM_AVATAR_OPTIONS.eyes) {
+            for (const expression of CUSTOM_AVATAR_OPTIONS.expression) {
+              for (const headwear of CUSTOM_AVATAR_OPTIONS.headwear) {
+                for (const outfit of CUSTOM_AVATAR_OPTIONS.outfit) {
+                  for (const outfitColor of CUSTOM_AVATAR_OPTIONS.outfitColor) {
+                    for (const accessory of CUSTOM_AVATAR_OPTIONS.accessory) {
+                      for (const background of CUSTOM_AVATAR_OPTIONS.background) {
+                        const config = {
+                          skin: skin.id,
+                          face: face.id,
+                          hair: hair.id,
+                          hairColor: hairColor.id,
+                          eyes: eyes.id,
+                          expression: expression.id,
+                          headwear: headwear.id,
+                          outfit: outfit.id,
+                          outfitColor: outfitColor.id,
+                          accessory: accessory.id,
+                          background: background.id,
+                        };
+                        signatures.add(renderCustomAvatar(config));
+                        if (signatures.size >= 1000) break outer;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  assert.strictEqual(signatures.size, 1000, "The real renderer must produce 1000 distinct SVGs");
+
+  const invalidConfig = normalizeCustomAvatarConfig({ skin: "javascript:alert(1)", hair: "missing" });
+  assert.strictEqual(invalidConfig.skin, CUSTOM_AVATAR_OPTIONS.skin[0].id);
+  assert.strictEqual(invalidConfig.hair, CUSTOM_AVATAR_OPTIONS.hair[0].id);
 });
 
 // 6. CEFR Level Test Bank

@@ -1,7 +1,7 @@
 // 10.000 Benzersiz Deterministik Avatar Sistemi
 // - Tam 10.000 avatar (AVATAR_COUNT = 10000)
 // - Bütün Meslekler (120+ modern & klasik meslek)
-// - 3D Animasyonlu Portreler (Pixar/Disney 3D Stili, derinlik ve stüdyo ışıklandırması)
+// - Gölgelendirilmiş ve farklılaştırılmış vektörel portreler
 // - Yüz İfadeleri (Gülümseyen, Kahkaha, Zafer/Şampiyon, Odaklanmış/Dahi, Göz Kırpan, Cool/Karizmatik, Meraklı, Düşünceli)
 // - Çizgi Film & Disney Karakterleri, Karikatür & Komik, Film & Dizi Efsaneleri
 // - Hareketli & Canlı Resimler (SVG CSS keyframe nabız ve ışıltı animasyonları)
@@ -151,7 +151,7 @@ export const AVATAR_EXPRESSIONS = [
 export const AVATAR_CATEGORIES = [
   "Tümü",
   "Meslekler",
-  "3D Animasyon & Portre",
+  "Vektörel Portreler",
   "Çizgi Film & Disney",
   "Film & Dizi Efsaneleri",
   "Karikatür & Komik",
@@ -281,13 +281,13 @@ export const AVATARS: Avatar[] = (() => {
         expression,
       };
     } else if (i < 5400) {
-      // 3. 3D Animasyon & Portre (3D Render Stili, stüdyo ışığı ve derinlik)
+      // 3. Gölgelendirilmiş vektörel portreler; gerçek render'lar ayrı galeridedir.
       const varNum = i - 4199;
       const name = `3D Vizyoner #${varNum}`;
       list[i] = {
         id: i,
         name,
-        category: "3D Animasyon & Portre",
+        category: "Vektörel Portreler",
         profession: "Akademik Vizyoner",
         professionEmoji: "🧑‍💼",
         emoji: "🧑‍💼",
@@ -602,13 +602,46 @@ function generateMonsterSvg(idx: number, suffix = ""): string {
 
 // 2. 3D Animasyonlu Portre SVG Üreticisi (Pixar/Disney 3D Stili, Stüdyo Işığı & Derinlik)
 function generate3DPortraitSvg(idx: number, suffix = ""): string {
-  const p = MONSTER_PALETTES[idx % MONSTER_PALETTES.length];
+  const variant = idx - 4200;
+  const p = MONSTER_PALETTES[(variant * 3) % MONSTER_PALETTES.length];
   const skinTones = ["#ffd7ba", "#fec89a", "#f1a208", "#d4a373", "#ffddd2", "#e29578"];
-  const skin = skinTones[idx % skinTones.length];
-  const hairColors = ["#1a1a1a", "#3d2314", "#8b5a2b", "#d4a373", "#5c3d2e", "#2c1d11", "#d97706"];
-  const hair = hairColors[(idx * 7) % hairColors.length];
-  const suitColors = ["#1e293b", "#0f172a", "#1e3a8a", "#064e3b", "#4c1d95", "#831843", "#312e81"];
-  const suit = suitColors[(idx * 11) % suitColors.length];
+  const skin = skinTones[(variant * 5) % skinTones.length];
+  const hairColors = ["#1a1a1a", "#3d2314", "#8b5a2b", "#d4a373", "#5c3d2e", "#2c1d11", "#d97706", "#984c62"];
+  const hair = hairColors[(variant * 7) % hairColors.length];
+  const suitColors = ["#1e293b", "#0f172a", "#1e3a8a", "#064e3b", "#4c1d95", "#831843", "#312e81", "#a44361", "#087f8c"];
+  const suit = suitColors[(variant * 11) % suitColors.length];
+  const eyeColors = ["#0f172a", "#557a46", "#4c78a8", "#80623d", "#79529b", "#287d81"];
+  const eyeColor = eyeColors[(variant * 13) % eyeColors.length];
+  const faceRx = [16, 17.5, 19, 20, 18][(variant * 3) % 5];
+  const faceRy = [18, 19, 20, 21][(variant * 5) % 4];
+  const hairShape = variant % 5;
+  const expression = variant % 4;
+  const hairFront = [
+    '<path d="M30 42Q29 25 50 25q21 0 20 18-9-8-20-9-11 1-20 8Z"/>',
+    '<path d="M29 43q-6-19 9-19 2-8 12-4 11-4 15 5 12 1 6 20-12-12-22-12-10 0-20 10Z"/><circle cx="34" cy="29" r="5"/><circle cx="64" cy="31" r="5"/>',
+    '<path d="M29 44q-5-20 21-21 27-1 21 22-12-10-21-10-10 0-21 9Z"/><path d="M34 36q7-12 17-10m4 0q10-2 15 10" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="2"/>',
+    '<path d="M28 43Q30 23 50 25q22-2 22 19l-8-4-4 8-7-10-5 9-7-9-7 9-4-8Z"/>',
+    '<path d="M29 43Q28 23 50 25q23-1 22 20-8-10-15-10-8 0-14 9-7-9-14-1Z"/><path d="M34 35q7-9 14-9m5 0q8 0 13 8" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>',
+  ][hairShape];
+  const glasses = variant % 5 === 0
+    ? '<g fill="none" stroke="#263447" stroke-width="1.8"><rect x="34" y="43" width="14" height="10" rx="4"/><rect x="52" y="43" width="14" height="10" rx="4"/><path d="M48 47h4"/></g>'
+    : "";
+  const faceDetail = [
+    "",
+    '<g fill="#a85f51" opacity=".65"><circle cx="36" cy="57" r="1"/><circle cx="39" cy="59" r="1"/><circle cx="42" cy="57" r="1"/></g>',
+    '<g fill="#a85f51" opacity=".65"><circle cx="58" cy="57" r="1"/><circle cx="61" cy="59" r="1"/><circle cx="64" cy="57" r="1"/></g>',
+    '<g fill="#a85f51" opacity=".65"><circle cx="36" cy="57" r="1"/><circle cx="40" cy="59" r="1"/><circle cx="64" cy="57" r="1"/><circle cx="60" cy="59" r="1"/></g>',
+    '<circle cx="63" cy="55" r="1.7" fill="#8b4f43" opacity=".7"/>',
+    '<path d="M35 57q4-3 8 0m14 0q4-3 8 0" fill="none" stroke="#d58b72" stroke-width="1.4"/>',
+    '<path d="M38 57l3 2m-3-2 3-2m18 2 3 2m-3-2 3-2" stroke="#a85f51" stroke-width="1" stroke-linecap="round"/>',
+  ][variant % 7];
+  const mouth = expression === 0
+    ? '<path d="M43 58q7 6 14 0" stroke="#be123c" stroke-width="2.3" fill="none" stroke-linecap="round"/>'
+    : expression === 1
+      ? '<path d="M42 57q8 10 16 0Z" fill="#a83e50"/><path d="M45 58h10" stroke="#fff" stroke-width="1.5"/>'
+      : expression === 2
+        ? '<path d="M44 58q6 2 12 0" stroke="#8b3c44" stroke-width="2" fill="none" stroke-linecap="round"/>'
+        : '<path d="M43 58q6-5 12 0" stroke="#8b3c44" stroke-width="2" fill="none" stroke-linecap="round"/>';
 
   const gradId = `av-3d-grad-${idx}${suffix ? "-" + suffix : ""}`;
   const lightId = `av-3d-light-${idx}${suffix ? "-" + suffix : ""}`;
@@ -634,42 +667,45 @@ function generate3DPortraitSvg(idx: number, suffix = ""): string {
     <path d="M 18 94 C 18 72, 32 66, 50 66 C 68 66, 82 72, 82 94 Z" fill="${suit}" />
     <path d="M 32 94 C 36 78, 44 74, 50 74 C 56 74, 64 78, 68 94 Z" fill="#ffffff" opacity="0.9" />
     <polygon points="46,74 54,74 52,86 48,86" fill="${p.c1}" />
+    <path d="M 22 84 Q 50 ${70 + (variant % 8)} 78 84" fill="none" stroke="#ffffff" stroke-opacity="${variant % 3 === 0 ? "0.55" : "0.25"}" stroke-width="${variant % 3 + 1}" />
 
     <!-- 3D Boyun ve Çene Gölgelendirmesi -->
     <rect x="43" y="58" width="14" height="14" rx="5" fill="${skin}" />
     <ellipse cx="50" cy="67" rx="9" ry="3.5" fill="#000000" opacity="0.15" />
 
     <!-- 3D Hacimli Saç Arka Bloğu -->
-    <circle cx="50" cy="42" r="25" fill="${hair}" />
+    <circle cx="50" cy="42" r="${24 + (variant % 4)}" fill="${hair}" />
     <circle cx="42" cy="34" r="14" fill="#ffffff" opacity="0.12" />
 
     <!-- 3D Yüz & Yanaklar -->
-    <ellipse cx="50" cy="48" rx="18" ry="20" fill="${skin}" />
+    <ellipse cx="50" cy="48" rx="${faceRx}" ry="${faceRy}" fill="${skin}" />
     <ellipse cx="36" cy="54" rx="4" ry="2.5" fill="#fb7185" opacity="0.45" />
     <ellipse cx="64" cy="54" rx="4" ry="2.5" fill="#fb7185" opacity="0.45" />
+    ${faceDetail}
 
     <!-- 3D Ön Saç Dalgaları -->
-    <path d="M 30 42 C 30 26, 70 26, 70 42 C 63 35, 56 33, 50 33 C 44 33, 37 35, 30 42 Z" fill="${hair}" />
-    <path d="M 36 33 Q 48 24 64 34" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.25" />
+    <g fill="${hair}">${hairFront}</g>
+    <path d="M 36 33 Q 48 ${24 + (variant % 5)} 64 34" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.25" />
 
     <!-- Büyük Parlak 3D Anime/Pixar Gözler -->
     <ellipse cx="41" cy="47" rx="4.5" ry="6" fill="#ffffff" />
-    <circle cx="41" cy="47" r="3.2" fill="#0f172a" />
+    <circle cx="41" cy="47" r="${2.8 + (variant % 3) * 0.4}" fill="${eyeColor}" />
     <circle cx="42" cy="45" r="1.4" fill="#ffffff" />
     <circle cx="39.5" cy="48" r="0.7" fill="#ffffff" />
 
     <ellipse cx="59" cy="47" rx="4.5" ry="6" fill="#ffffff" />
-    <circle cx="59" cy="47" r="3.2" fill="#0f172a" />
+    <circle cx="59" cy="47" r="${2.8 + (variant % 3) * 0.4}" fill="${eyeColor}" />
     <circle cx="60" cy="45" r="1.4" fill="#ffffff" />
     <circle cx="57.5" cy="48" r="0.7" fill="#ffffff" />
 
     <!-- Kaşlar -->
     <path d="M 36 41 Q 42 38 46 41" stroke="${hair}" stroke-width="1.8" fill="none" stroke-linecap="round" />
     <path d="M 54 41 Q 58 38 64 41" stroke="${hair}" stroke-width="1.8" fill="none" stroke-linecap="round" />
+    ${glasses}
 
     <!-- Sevimli Burun & Gülümseme -->
     <path d="M 50 49 Q 52 52 49 53" stroke="#b45309" stroke-width="1.3" fill="none" stroke-linecap="round" />
-    <path d="M 43 58 Q 50 64 57 58" stroke="#be123c" stroke-width="2.4" fill="none" stroke-linecap="round" />
+    ${mouth}
   </svg>`;
 }
 
@@ -810,7 +846,7 @@ export function avatarSvg(indexOrId: number | string, suffix = ""): string {
     return generateMonsterSvg(idx, suffix);
   }
 
-  // 2. 3D Animasyon & Portre (4200 - 5400)
+  // 2. Vektörel Portreler (4200 - 5400)
   if (idx >= 4200 && idx < 5400) {
     return generate3DPortraitSvg(idx, suffix);
   }

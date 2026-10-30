@@ -2,24 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, BookOpen, GraduationCap, Microscope, Menu } from "lucide-react";
-import { MOBILE_BOTTOM_NAV_ITEMS, type NavigationIconId } from "./navigation-config";
-
-function renderNavIcon(icon: NavigationIconId, active: boolean) {
-  const cls = `w-5 h-5 transition-transform ${active ? "scale-110 text-cyan-300" : "text-slate-400"}`;
-  switch (icon) {
-    case "home":
-      return <Home className={cls} aria-hidden="true" />;
-    case "book-open":
-      return <BookOpen className={cls} aria-hidden="true" />;
-    case "graduation-cap":
-      return <GraduationCap className={cls} aria-hidden="true" />;
-    case "microscope":
-      return <Microscope className={cls} aria-hidden="true" />;
-    default:
-      return <Home className={cls} aria-hidden="true" />;
-  }
-}
+import { Menu } from "lucide-react";
+import NavigationSectionIcon from "./NavigationSectionIcon";
+import { MOBILE_BOTTOM_NAV_ITEMS } from "./navigation-config";
 
 export default function BottomNavigation() {
   const pathname = usePathname() || "/";
@@ -56,7 +41,10 @@ export default function BottomNavigation() {
                   : "text-slate-300 light:text-slate-600 hover:text-white font-semibold"
               }`}
             >
-              {renderNavIcon(item.icon, isActive)}
+              <NavigationSectionIcon
+                icon={item.icon}
+                className={`h-5 w-5 transition-transform ${isActive ? "scale-110" : ""}`}
+              />
               <span className="text-[11px] leading-none truncate max-w-[68px]">{item.label}</span>
             </Link>
           );

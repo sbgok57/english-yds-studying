@@ -12,6 +12,9 @@
   --theme-bg: #050814;
   --theme-card: #0b1126;
   --theme-text: #f8fafc;
+  --theme-text-strong: #f8fafc;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-muted: #94a3b8;
   --theme-border: rgba(255, 255, 255, 0.15);
   --gradient-main: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 20%, #f7c948 40%, #2dbb70 60%, #09b8c8 80%, #2878e5 100%);
   --rainbow-spectrum: linear-gradient(90deg, #ff4d6d 0%, #ff9f1c 18%, #f7c948 36%, #2dbb70 54%, #09b8c8 72%, #2878e5 88%, #e052b5 100%);
@@ -158,6 +161,14 @@ html:not(.light) .border-slate-700\/60 {
 /* ---------- AYDINLIK MOD (Işıltılı, Canlı & Kristal Netlik) ---------- */
 html.light {
   color-scheme: light;
+  /* Paint a readable light surface before the saved palette hydrates. The
+     theme engine replaces these fallback tokens with the selected palette. */
+  --theme-bg: #faf5f5;
+  --theme-card: #ffffff;
+  --theme-text: #0f172a;
+  --theme-text-strong: #0f172a;
+  --theme-text-secondary: #334155;
+  --theme-text-muted: #475569;
 }
 
 html.light body {
@@ -211,28 +222,28 @@ html.light .card-vibrant:hover {
 }
 
 /* Aydınlık mod metin hiyerarşisi */
-html.light .text-white {
-  color: #0f172a;
-}
+html.light .text-white,
+html.light .text-white\/95,
 html.light .text-white\/90 {
-  color: #1e293b;
+  color: var(--theme-text-strong) !important;
 }
-html.light .text-white\/80 {
-  color: #334155;
+html.light .text-white\/85,
+html.light .text-white\/80,
+html.light .text-white\/75 {
+  color: var(--theme-text-secondary) !important;
 }
-html.light .text-white\/70 {
-  color: #475569;
-}
+html.light .text-white\/70,
+html.light .text-white\/65,
 html.light .text-white\/60 {
-  color: #64748b;
+  color: var(--theme-text-muted) !important;
 }
 html.light .text-white\/55,
-html.light .text-white\/50 {
-  color: #64748b;
-}
+html.light .text-white\/50,
 html.light .text-white\/40,
-html.light .text-white\/30 {
-  color: #94a3b8;
+html.light .text-white\/35,
+html.light .text-white\/30,
+html.light .text-white\/20 {
+  color: var(--theme-text-muted) !important;
 }
 
 /* Aydınlık mod kenarlık ve arkaplan yumuşatmaları */
@@ -381,11 +392,9 @@ html.light [class*="to-emerald-950"] {
   color: #17233c;
 }
 
-/* Renkli veya Gradyan butonların içindeki beyaz yazıyı koru */
-html.light [class*="bg-gradient-"] .text-white,
-html.light [class*="bg-gradient-"].text-white,
+/* Keep white copy only on actual saturated controls. Gradient panels are
+   restyled as light surfaces above, so descendant text must use light tokens. */
 html.light button[class*="bg-gradient-"],
-html.light a[class*="bg-gradient-"],
 html.light .bg-pink-600,
 html.light .bg-purple-600,
 html.light .bg-blue-600,

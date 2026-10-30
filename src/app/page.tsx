@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { CountUp, Reveal } from "@/components/animations";
 import HomeGreeting from "@/components/HomeGreeting";
 import ProgressPanel from "@/components/ProgressPanel";
@@ -7,11 +6,12 @@ import DailyTasksPanel from "@/components/DailyTasksPanel";
 import MotivationBox from "@/components/MotivationBox";
 import ExamModeSwitcher from "@/components/ExamModeSwitcher";
 import ExamProgramsSection from "@/components/ExamPrograms";
+import NavigationSectionIcon from "@/components/navigation/NavigationSectionIcon";
 
 const STATIONS = [
   {
     href: "/vocabulary/inventory",
-    icon: "flashcards",
+    icon: "library",
     title: "Kelime Envanteri (A1–C2)",
     desc: "485 akademik kelime, CEFR seviye filtreleri, kişisel not defteri ve güvenli CSV dışa aktarımı.",
     cta: "Envanteri Aç",
@@ -19,7 +19,7 @@ const STATIONS = [
   },
   {
     href: "/study-plans",
-    icon: "calendar",
+    icon: "calendar-days",
     title: "Sınav Çalışma Programları",
     desc: "YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) için 7–180 günlük hedefe özel çalışma planları, günlük takvim ve CEFR A1–C2 seviye rehberleri.",
     cta: "Programları İncele",
@@ -27,7 +27,7 @@ const STATIONS = [
   },
   {
     href: "/level-test",
-    icon: "target",
+    icon: "compass",
     title: "Mini Seviye Tespit Sınavı",
     desc: "42 soruluk bilimsel teşhis sınavı ile gerçek CEFR seviyeni ve güçlü/zayıf becerilerini öğren.",
     cta: "Seviyeni Ölç",
@@ -35,7 +35,7 @@ const STATIONS = [
   },
   {
     href: "/vocabulary/flashcards",
-    icon: "book",
+    icon: "book-open",
     title: "3D Flashcards & Görsel Hafıza",
     desc: "Kart çevirme animasyonu, 3D dönen kelime küpü ve SM-2 tekrar algoritması.",
     cta: "Öğrenmeye Başla",
@@ -43,7 +43,7 @@ const STATIONS = [
   },
   {
     href: "/exams",
-    icon: "exam",
+    icon: "clipboard-list",
     title: "180 dk Online Optik Sınav",
     desc: "2013-2026 çıkmış sınavlar ve özgün denemeler. Baloncuk formu ve otomatik net hesabı.",
     cta: "Sınavları İncele",
@@ -51,7 +51,7 @@ const STATIONS = [
   },
   {
     href: "/grammar",
-    icon: "book",
+    icon: "graduation-cap",
     title: "19 Animasyonlu Gramer Konusu",
     desc: "A1 sadeliğinde Türkçe anlatım, renk kodlu formüller, adım adım animasyonlar ve tuzak uyarıları.",
     cta: "Konuları Keşfet",
@@ -59,7 +59,7 @@ const STATIONS = [
   },
   {
     href: "/tactics",
-    icon: "target",
+    icon: "list-checks",
     title: "11 YDS Soru Tipi ve Taktikleri",
     desc: "Her soru tipi için hafıza kodlamaları, adım adım çözüm algoritmaları ve çözümlü örnek sorular.",
     cta: "Taktikleri Oku",
@@ -67,7 +67,7 @@ const STATIONS = [
   },
   {
     href: "/reading",
-    icon: "microscope",
+    icon: "audio-lines",
     title: "Reader at Work Tarzı Reading Lab",
     desc: "Özgün akademik okuma parçaları, tıkla-açılır kelime sözlüğü ve 5 açık uçlu kavrama sorusu.",
     cta: "Okumaya Başla",
@@ -75,7 +75,7 @@ const STATIONS = [
   },
   {
     href: "/games",
-    icon: "games",
+    icon: "zap",
     title: "Oyun Merkezi (Wordwall tadında)",
     desc: "Eşleştirme, Köstebek Vur, Çarkıfelek, Doğru/Yanlış ve Dinle & Seç — her doğru cevapta havai fişek!",
     cta: "Oyna",
@@ -83,7 +83,7 @@ const STATIONS = [
   },
   {
     href: "/arsiv",
-    icon: "exam",
+    icon: "archive",
     title: "2013-2026 YDS Arşivi",
     desc: "Tüm YDS dönemleri + o sınavlarda çıkan kelimeler (Türkçe anlamlarıyla).",
     cta: "Arşivi Aç",
@@ -91,7 +91,7 @@ const STATIONS = [
   },
   {
     href: "/kilavuz",
-    icon: "book",
+    icon: "help-circle",
     title: "Kullanım Kılavuzu",
     desc: "Siteyi 2 dakikada çöz: her modül + gizli ipuçları kanka dilinde.",
     cta: "Kılavuzu Oku",
@@ -99,15 +99,15 @@ const STATIONS = [
   },
   {
     href: "/avatars",
-    icon: "globe",
-    title: "1000 Profil & Maskot Avatarı",
-    desc: "Profilini kişiselleştir: 7 kategori, 1000 benzersiz, tamamen çevrimdışı çalışan SVG karakter.",
+    icon: "user-plus",
+    title: "Avatar ve Portre Galerisi",
+    desc: "Özgün portrelerden birini seç, kendi illüstrasyon avatarını düzenle ya da kendi görselini yükle.",
     cta: "Avatar Seç",
     color: "from-fuchsia-500 to-pink-600",
   },
   {
     href: "/import",
-    icon: "flashcards",
+    icon: "file-up",
     title: "PDF & Quizlet İçe Aktarma",
     desc: "Quizlet dışa aktarımını yapıştır-parse et-onayla akışı ve PDF metin içe aktarma.",
     cta: "İçe Aktar",
@@ -115,7 +115,7 @@ const STATIONS = [
   },
   {
     href: "/writing",
-    icon: "calendar",
+    icon: "pen-line",
     title: "Writing & Cümle Kurma Lab",
     desc: "Akademik cümle mimarisi (S+V+O+MPT), bağlaç şifreleri, devrik yapılar ve interaktif paraphrase.",
     cta: "Yazmaya Başla",
@@ -123,7 +123,7 @@ const STATIONS = [
   },
   {
     href: "/listening",
-    icon: "globe",
+    icon: "headphones",
     title: "Listening & Dinleme Lab",
     desc: "İngiliz, Amerikan ve Avustralya aksanlarında dinleme ve telaffuz çalışmaları.",
     cta: "Dinlemeye Başla",
@@ -131,7 +131,7 @@ const STATIONS = [
   },
   {
     href: "/speaking",
-    icon: "globe",
+    icon: "mic-vocal",
     title: "AI Speaking Lab",
     desc: "Yapay zeka ile sesli/yazılı interaktif diyalog pratiği ve telaffuz geribildirimi.",
     cta: "Konuşmaya Başla",
@@ -139,32 +139,20 @@ const STATIONS = [
   },
   {
     href: "/vocabulary/flashcards?mode=fsrs",
-    icon: "target",
+    icon: "layers-3",
     title: "FSRS 2.0 Akıllı Bellek Laboratuvarı",
     desc: "Bilişsel unutma eğrisi, kişiselleştirilmiş aralıklı tekrar sıklığı ve kalıcı uzun süreli hafıza.",
     cta: "Laboratuvarı Aç",
     color: "from-purple-600 to-pink-600",
   },
-];
+ ] as const;
 
 const STATS = [
-  { to: 10000, suffix: "+", label: "Benzersiz Avatar", icon: "globe", href: "/avatars" },
-  { to: 1000, suffix: "+", label: "Sınav Sorusu Bankası", icon: "exam", href: "/exams" },
-  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", icon: "book", href: "/grammar" },
-  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", icon: "target", href: "/tactics" },
-];
-
-const FEATURE_ICON_SRC: Record<string, string> = {
-  book: "/icons/3d/book.jpg",
-  calendar: "/icons/3d/calendar.jpg",
-  target: "/icons/3d/target.jpg",
-  flashcards: "/icons/3d/flashcards.jpg",
-  exam: "/icons/3d/exam.jpg",
-  microscope: "/icons/3d/microscope.jpg",
-  games: "/icons/3d/games.jpg",
-  globe: "/icons/3d/globe.jpg",
-  medal: "/icons/3d/medal.jpg",
-};
+  { to: 6, suffix: "", label: "Özgün portre", icon: "user-plus", href: "/avatars" },
+  { to: 1000, suffix: "+", label: "Sınav Sorusu Bankası", icon: "archive", href: "/exams" },
+  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", icon: "graduation-cap", href: "/grammar" },
+  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", icon: "list-checks", href: "/tactics" },
+ ] as const;
 
 export default function Home() {
   return (
@@ -175,12 +163,12 @@ export default function Home() {
       <section className="text-center py-10 sm:py-14 space-y-6">
         <Reveal>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/10 px-4 py-1.5 text-xs font-black text-amber-300 anim-pulse-glow">
-            🚀 DİL MASTER · Hedefine birlikte, adım adım!
+            DİL MASTER · Hedefine birlikte, adım adım!
           </div>
         </Reveal>
         <Reveal delay={80}>
           <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto italic font-medium">
-            “Kanka, bugün çalıştığın her kelime ve çözdüğün her soru, yarınki sınav sonucunun teminatıdır! ✨”
+            “Kanka, bugün attığın her küçük adım yarınki hedefini biraz daha yaklaştırıyor.”
           </p>
         </Reveal>
         <Reveal delay={140}>
@@ -200,7 +188,7 @@ export default function Home() {
         </Reveal>
         <Reveal delay={250}>
           <p className="inline-flex items-center gap-2 rounded-full border border-fuchsia-300/30 bg-fuchsia-400/10 px-4 py-2 text-sm sm:text-base font-bold text-fuchsia-100 shadow-lg shadow-fuchsia-950/20">
-            <span aria-hidden="true">☕</span> Kahveni kap gel; kelimeler bugün senden hızlı kaçamayacak! 😄
+            Kahveni kap gel; kelimeler bugün senden hızlı kaçamayacak!
           </p>
         </Reveal>
 
@@ -215,7 +203,7 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
-                    <Image src={FEATURE_ICON_SRC.target} alt="" fill sizes="48px" className="object-cover" />
+                    <NavigationSectionIcon icon="compass" className="h-7 w-7" />
                   </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
                     180 dk • 80 Soru
@@ -242,7 +230,7 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
-                    <Image src={FEATURE_ICON_SRC.book} alt="" fill sizes="48px" className="object-cover" />
+                    <NavigationSectionIcon icon="school" className="h-7 w-7" />
                   </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-mono">
                     120 dk • 80 Soru
@@ -269,7 +257,7 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
-                    <Image src={FEATURE_ICON_SRC.microscope} alt="" fill sizes="48px" className="object-cover" />
+                    <NavigationSectionIcon icon="globe-2" className="h-7 w-7" />
                   </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30 font-mono">
                     Sağlık · Fen · Sosyal
@@ -279,7 +267,7 @@ export default function Home() {
                   YÖKDİL Alan Merkezi
                 </h3>
                 <p className="text-xs text-white/60 leading-relaxed">
-                  Sağlık 🩺, Fen ⚡ ve Sosyal 🏛️ bilim alanlarına özel terminoloji havuzları, makale okumaları ve alan denemeleri.
+                  Sağlık, fen ve sosyal bilim alanlarına özel terminoloji havuzları, makale okumaları ve alan denemeleri.
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-bold text-purple-400">
@@ -298,7 +286,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* 🚀 ENTERPRISE SINAV ÇALIŞMA PROGRAMLARI (YDS, YDT, YÖKDİL DİNAMİK VERİ MODELİ) */}
+      {/* ENTERPRISE SINAV ÇALIŞMA PROGRAMLARI (YDS, YDT, YÖKDİL DİNAMİK VERİ MODELİ) */}
       <Reveal delay={150}>
         <ExamProgramsSection />
       </Reveal>
@@ -307,11 +295,9 @@ export default function Home() {
       <section className="my-16">
         <Reveal>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-2xl">⚡</span>
             <h2 className="text-xl sm:text-2xl font-black text-center tracking-tight">
               Platform <span className="gradient-text">Güç Göstergeleri</span>
             </h2>
-            <span className="text-2xl">✨</span>
           </div>
         </Reveal>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -324,7 +310,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative mx-auto mb-2 h-14 w-14 overflow-hidden rounded-2xl shadow-lg shadow-fuchsia-500/20 group-hover:scale-110 transition-transform duration-300">
-                <Image src={FEATURE_ICON_SRC[s.icon]} alt="" fill sizes="56px" className="object-cover" />
+                <NavigationSectionIcon icon={s.icon} className="h-8 w-8" />
               </div>
               <div className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-cyan-300">
                 <CountUp to={s.to} suffix={s.suffix} />
@@ -353,11 +339,9 @@ export default function Home() {
       <section className="my-16">
         <Reveal>
           <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-3xl">🧭</span>
             <h2 className="text-3xl font-black text-center">
               Öğrenme ve Simülasyon <span className="gradient-text">İstasyonları</span>
             </h2>
-            <span className="text-3xl">🚀</span>
           </div>
           <p className="text-center text-white/50 mb-10">
             Her aşamada renkli, animasyonlu ve görsel hafıza destekli modüller
@@ -373,7 +357,7 @@ export default function Home() {
                 <div
                   className={`relative w-16 h-16 rounded-2xl bg-gradient-to-tr ${s.color} p-1 mb-4 group-hover:scale-110 transition-transform shadow-lg`}
                 >
-                  <Image src={FEATURE_ICON_SRC[s.icon]} alt="" fill sizes="64px" className="rounded-2xl object-cover" />
+                  <NavigationSectionIcon icon={s.icon} className="h-9 w-9 text-white" />
                 </div>
                 <h3 className="font-black text-lg mb-2">{s.title}</h3>
                 <p className="text-sm text-white/55 leading-relaxed flex-1">{s.desc}</p>
@@ -391,14 +375,14 @@ export default function Home() {
         <Reveal>
           <div className="card-vibrant p-10 text-center bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10">
             <h3 className="text-2xl sm:text-3xl font-black mb-3">
-              👑 Hazır mısın kanka? <span className="gradient-text">Optik form seni bekliyor.</span>
+              Hazır mısın kanka? <span className="gradient-text">Optik form seni bekliyor.</span>
             </h3>
-            <p className="text-white/60 mb-6">80 net hedefine giden yol, doğru taktik + düzenli tekrardan geçer. Kral olma vakti! 👑</p>
+            <p className="text-white/60 mb-6">80 net hedefine giden yol, doğru taktik + düzenli tekrardan geçer. Güzel bir ilerleme için tam zamanı.</p>
             <Link
               href="/exams"
               className="inline-block px-8 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-slate-900 font-black shadow-lg shadow-yellow-500/30 hover:scale-105 transition-transform"
             >
-              Sınav Salonuna Gir ⏱️
+              Sınav salonuna gir
             </Link>
           </div>
         </Reveal>

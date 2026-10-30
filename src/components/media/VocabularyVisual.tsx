@@ -426,6 +426,8 @@ export default function VocabularyVisual({
     manifest.threeD.imageUrl ? { ai3d: "ready" } : {},
   );
   const [generatedImageErrors, setGeneratedImageErrors] = useState<Partial<Record<GeneratedImageMode, boolean>>>({});
+  const [generatedImageErrorMessages, setGeneratedImageErrorMessages] = useState<Partial<Record<GeneratedImageMode, string>>>({});
+  const [requestedGenerationKey, setRequestedGenerationKey] = useState<string | null>(null);
   const [generatedImageRetry, setGeneratedImageRetry] = useState(0);
   const compactVisualRef = useRef<HTMLDivElement | null>(null);
 
@@ -445,6 +447,7 @@ export default function VocabularyVisual({
     setPhotoError(false);
     setLocalAnimationError(false);
     setGeneratedImageErrors({});
+    setGeneratedImageErrorMessages({});
     setGeneratedImageRetry(0);
     setGeneratedImages(manifest.threeD.imageUrl ? { ai3d: manifest.threeD.imageUrl } : {});
     setGeneratedImageStatuses(manifest.threeD.imageUrl ? { ai3d: "ready" } : {});
@@ -489,7 +492,10 @@ export default function VocabularyVisual({
   }, [compact, manifest.threeD.imageUrl, manifest.wordSlug]);
 
   useEffect(() => {
-    if (!generatedImageMode || !compactVisible) {
+    const generationKey = generatedImageMode
+      ? `${manifest.wordSlug}:${IMAGE_STYLE_BY_MODE[generatedImageMode]}:${english}:${turkish}:${example || ""}`
+      : null;
+    if (!generatedImageMode || !compactVisible || requestedGenerationKey !== generationKey) {
       return;
     }
 
@@ -509,7 +515,13 @@ export default function VocabularyVisual({
           signal: controller.signal,
         });
         if (!response.ok) {
-          throw new Error(`3D görsel isteği başarısız: HTTP ${response.status}`);
+          const payload: unknown = await response.json().catch(() => null);
+          const message =
+            typeof payload === "object" && payload !== null && "message" in payload &&
+            typeof payload.message === "string"
+              ? payload.message
+              : `Görsel isteği başarısız oldu (HTTP ${response.status}).`;
+          throw new Error(message);
         }
 
         const payload: unknown = await response.json();
@@ -522,6 +534,10 @@ export default function VocabularyVisual({
       } catch (error) {
         if (!controller.signal.aborted) {
           setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "error" }));
+          setGeneratedImageErrorMessages((previous) => ({
+            ...previous,
+            [generatedImageMode]: error instanceof Error ? error.message : "Görsel yüklenemedi. Yeniden deneyebilirsin.",
+          }));
           console.warn(`[VocabularyVisual] ${generatedImageMode} memory image unavailable:`, error);
         }
       }
@@ -532,8 +548,8 @@ export default function VocabularyVisual({
   // Do not depend on generatedImageStatus or generatedImageUrl here. Updating
   // either after starting the request would clean up this effect, abort its
   // fetch, and leave the visual stuck in an idle/loading loop. Mode/content
-  // changes and the explicit retry counter are the only request triggers.
-  }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageRetry, partOfSpeech, turkish]);
+  // changes, an explicit user request, and the explicit retry counter are the only triggers.
+  }, [compactVisible, currentMode, english, example, generatedImageMode, generatedImageRetry, manifest.wordSlug, partOfSpeech, requestedGenerationKey, turkish]);
 
   // Kompakt Kart Görünümü (Kelime listesi ızgarası için sıfır layout-shift önizleme)
   if (compact) {
@@ -609,7 +625,14 @@ export default function VocabularyVisual({
                 role="tab"
                 aria-selected={isSelected}
                 data-testid={`visual-mode-tab-${mode}`}
-                onClick={() => setActiveMode(mode)}
+                onClick={() => {
+                  setActiveMode(mode);
+                  setRequestedGenerationKey(
+                    isGeneratedImageMode(mode)
+                      ? `${manifest.wordSlug}:${IMAGE_STYLE_BY_MODE[mode]}:${english}:${turkish}:${example || ""}`
+                      : null,
+                  );
+                }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
                   isSelected
                     ? "bg-cyan-500 text-slate-950 shadow"
@@ -749,14 +772,26 @@ export default function VocabularyVisual({
                 <p className="text-base font-semibold text-cyan-100">{turkish}</p>
                 <p className="max-w-md text-sm text-white/75" role={generatedImageStatus === "error" ? "alert" : undefined}>
                   {generatedImageStatus === "error" || generatedImageError
-                    ? `Üretilen ${GENERATED_MODE_LABELS[generatedImageMode]} şu anda erişilemiyor. Anlamı gösteren şema hazır; görseli yeniden deneyebilirsin.`
-                    : `${english} kelimesinin anlamına uygun ${GENERATED_MODE_LABELS[generatedImageMode]} hazırlanıyor…`}
+                    ? generatedImageErrorMessages[generatedImageMode] || `Üretilen ${GENERATED_MODE_LABELS[generatedImageMode]} şu anda erişilemiyor.`
+                    : generatedImageStatus === "loading"
+                      ? `${english} kelimesinin anlamına uygun ${GENERATED_MODE_LABELS[generatedImageMode]} hazırlanıyor…`
+                      : `${english} için ${GENERATED_MODE_LABELS[generatedImageMode]} henüz oluşturulmadı.`}
                 </p>
+                {generatedImageStatus === "idle" && (
+                  <button
+                    type="button"
+                    onClick={() => setRequestedGenerationKey(`${manifest.wordSlug}:${IMAGE_STYLE_BY_MODE[generatedImageMode]}:${english}:${turkish}:${example || ""}`)}
+                    className="rounded-xl bg-cyan-400 px-4 py-2 text-sm font-black text-slate-950 transition hover:bg-cyan-300"
+                  >
+                    Bu görseli oluştur
+                  </button>
+                )}
                 {(generatedImageStatus === "error" || generatedImageError) && (
                   <button
                     type="button"
                     onClick={() => {
                       setGeneratedImageErrors((previous) => ({ ...previous, [generatedImageMode]: false }));
+                      setGeneratedImageErrorMessages((previous) => ({ ...previous, [generatedImageMode]: undefined }));
                       setGeneratedImages((previous) => ({ ...previous, [generatedImageMode]: undefined }));
                       setGeneratedImageStatuses((previous) => ({ ...previous, [generatedImageMode]: "idle" }));
                       setGeneratedImageRetry((previous) => previous + 1);

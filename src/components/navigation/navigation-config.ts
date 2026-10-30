@@ -16,32 +16,12 @@ export type NavigationCategoryId =
   | "account";
 
 export type NavigationIconId =
-  | "home"
-  | "dashboard"
-  | "compass"
-  | "book-open"
-  | "layers"
-  | "box"
-  | "sparkles"
-  | "file-up"
-  | "graduation-cap"
-  | "headphones"
-  | "microscope"
-  | "pen-tool"
-  | "mic"
-  | "target"
-  | "clock"
-  | "zap"
-  | "gamepad"
-  | "trending-up"
-  | "calendar"
-  | "award"
-  | "palette"
-  | "volume-2"
-  | "user"
-  | "settings"
-  | "shield"
-  | "help-circle";
+  | "home" | "dashboard" | "compass" | "help-circle" | "book-open"
+  | "library" | "layers-3" | "file-up" | "graduation-cap" | "headphones"
+  | "pen-tool" | "zap" | "sparkles" | "microscope" | "audio-lines"
+  | "mic-vocal" | "pen-line" | "clipboard-list" | "map-pinned" | "school"
+  | "globe-2" | "list-checks" | "gamepad-2" | "trending-up" | "calendar-days"
+  | "award" | "archive" | "palette" | "volume" | "user-plus" | "user" | "shield";
 
 export interface NavigationItem {
   id: string;
@@ -119,7 +99,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Kaydedilmiş kelimeler, tekrar edilecekler, sınav filtresi ve notlar",
     href: "/vocabulary/inventory",
     category: "vocabulary",
-    icon: "layers",
+    icon: "library",
     badge: "Envanter",
     searchTags: ["envanter", "kelime envanteri", "kelime arama", "favori kelimeler", "tekrar", "kaydedilmiş", "inventory"],
   },
@@ -129,7 +109,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Üç boyutlu dokunsal hafıza kartları ve hızlı ezber modu",
     href: "/vocabulary/flashcards",
     category: "vocabulary",
-    icon: "box",
+    icon: "layers-3",
     badge: "3D",
     searchTags: ["flashcards", "3d kelime", "kelime kartları", "küp", "ezber"],
   },
@@ -209,7 +189,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Akademik dinleme materyalleri, aksan karşılaştırma ve transkript",
     href: "/listening",
     category: "reading-listening",
-    icon: "headphones",
+    icon: "audio-lines",
     badge: "6 Aksan",
     searchTags: ["listening", "dinleme", "aksan", "kulak aşinalığı", "listening lab"],
   },
@@ -219,7 +199,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Mikrofonla telaffuz pratiği ve konuşma egzersizleri",
     href: "/speaking",
     category: "reading-listening",
-    icon: "mic",
+    icon: "mic-vocal",
     searchTags: ["speaking", "konuşma", "telaffuz", "mikrofon"],
   },
   {
@@ -228,7 +208,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Akademik cümle kurma, paraphrase ve çeviri çalışmaları",
     href: "/writing",
     category: "reading-listening",
-    icon: "pen-tool",
+    icon: "pen-line",
     searchTags: ["writing", "yazma", "çeviri", "cümle kurma"],
   },
 
@@ -239,7 +219,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "YDS, YDT ve YÖKDİL çıkmış sorular ile özgün denemeler",
     href: "/exams",
     category: "exams",
-    icon: "clock",
+    icon: "clipboard-list",
     badge: "80 Soru",
     searchTags: ["deneme", "denemeler", "soru bankası", "sınav", "çıkmış sorular", "testler", "exams"],
   },
@@ -249,7 +229,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Kamu ve akademik personel sınavına özel çalışma merkezi",
     href: "/yds",
     category: "exams",
-    icon: "target",
+    icon: "map-pinned",
     searchTags: ["yds", "yabancı dil sınavı", "akademik sınav"],
   },
   {
@@ -258,7 +238,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Üniversite dil sınavı odaklı kelime, okuma ve soru merkezi",
     href: "/ydt",
     category: "exams",
-    icon: "graduation-cap",
+    icon: "school",
     searchTags: ["ydt", "yks dil", "üniversite hazırlık"],
   },
   {
@@ -267,7 +247,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "3 bilim alanına ayrılmış terminoloji ve deneme merkezi",
     href: "/yokdil",
     category: "exams",
-    icon: "microscope",
+    icon: "globe-2",
     searchTags: ["yökdil", "yokdil", "sağlık", "fen", "sosyal"],
   },
   {
@@ -276,7 +256,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Cloze test, cümle tamamlama, çeviri ve diyalog eleme teknikleri",
     href: "/tactics",
     category: "exams",
-    icon: "zap",
+    icon: "list-checks",
     searchTags: ["taktik", "taktikler", "soru tipleri", "ipuçları", "cloze test"],
   },
   {
@@ -285,7 +265,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Kelime ve gramer reflekslerini hızlandıran interaktif oyunlar",
     href: "/games",
     category: "exams",
-    icon: "gamepad",
+    icon: "gamepad-2",
     badge: "Oyunlar",
     searchTags: ["oyun", "oyunlar", "games", "yarışma"],
   },
@@ -306,7 +286,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "30, 60, 90 ve 120 günlük kişiselleştirilmiş çalışma programı",
     href: "/study-plans",
     category: "progress",
-    icon: "calendar",
+    icon: "calendar-days",
     searchTags: ["plan", "planlar", "çalışma planı", "takvim", "program"],
   },
   {
@@ -333,10 +313,10 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   {
     id: "nav-voice-settings",
     label: "Ses Aksanı, Hız & Konuşmacı QA Merkezi",
-    description: "7 İngilizce aksan + Türkçe (Emel & Ahmet) ses testi ve erişilebilirlik",
+    description: "İngiliz, Amerikan ve Avustralya aksanları ile Türkçe Emel ve Ahmet konuşmacı profilleri",
     href: "/ayarlar",
     category: "personalization",
-    icon: "volume-2",
+    icon: "volume",
     badge: "Ses QA",
     searchTags: ["ses ayarları", "aksan", "konuşma hızı", "emel", "ahmet", "erişilebilirlik", "voice qa"],
   },
@@ -346,7 +326,7 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     description: "Öğrenci profil görünümü ve karakter seçimi",
     href: "/avatars",
     category: "personalization",
-    icon: "sparkles",
+    icon: "user-plus",
     searchTags: ["avatar", "profil resmi", "karakter"],
   },
 
