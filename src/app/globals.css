@@ -20,6 +20,17 @@
   --neon-blue: #00f0ff;
   --neon-yellow: #ffff00;
   --neon-green: #00ff88;
+  --theme-primary-glow: rgba(255, 77, 109, 0.12);
+  --theme-secondary-glow: rgba(9, 184, 200, 0.1);
+  --theme-accent-glow: rgba(255, 159, 28, 0.08);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
 }
 
 /* ---------- pürüzsüz tema geçişi ---------- */
@@ -55,9 +66,9 @@ body {
   background-color: var(--theme-bg, #030712) !important;
   color: var(--theme-text, #f8fafc) !important;
   background-image:
-    radial-gradient(1200px 600px at 10% -10%, var(--theme-primary, rgba(217, 70, 239, 0.2)), transparent 60%),
-    radial-gradient(1000px 500px at 100% 0%, var(--theme-secondary, rgba(34, 211, 238, 0.18)), transparent 55%),
-    radial-gradient(900px 600px at 50% 120%, var(--theme-accent, rgba(250, 204, 21, 0.12)), transparent 55%);
+    radial-gradient(1200px 600px at 10% -10%, var(--theme-primary-glow, rgba(217, 70, 239, 0.2)), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, var(--theme-secondary-glow, rgba(34, 211, 238, 0.18)), transparent 55%),
+    radial-gradient(900px 600px at 50% 120%, var(--theme-accent-glow, rgba(250, 204, 21, 0.12)), transparent 55%);
   background-attachment: fixed;
 }
 
@@ -90,6 +101,18 @@ body > * {
 .card-vibrant:hover {
   border-color: var(--theme-secondary, rgba(168, 85, 247, 0.5)) !important;
   box-shadow: 0 18px 50px -15px var(--theme-glow, rgba(168, 85, 247, 0.3)), 0 0 25px var(--theme-primary, rgba(56, 189, 248, 0.15)) !important;
+}
+
+html.light .card-vibrant {
+  box-shadow: 0 12px 36px -22px var(--theme-primary), 0 6px 20px -14px rgba(71, 31, 133, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html.light .card-vibrant:hover {
+  box-shadow: 0 18px 40px -18px var(--theme-primary), 0 0 0 1px var(--theme-border) !important;
+}
+
+.card-vibrant img {
+  backface-visibility: hidden;
 }
 
 .gradient-text {

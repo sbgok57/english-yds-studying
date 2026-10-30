@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CountUp, Reveal } from "@/components/animations";
 import HomeGreeting from "@/components/HomeGreeting";
 import ProgressPanel from "@/components/ProgressPanel";
@@ -10,7 +11,7 @@ import ExamProgramsSection from "@/components/ExamPrograms";
 const STATIONS = [
   {
     href: "/vocabulary/inventory",
-    emoji: "📦",
+    icon: "flashcards",
     title: "Kelime Envanteri (A1–C2)",
     desc: "485 akademik kelime, CEFR seviye filtreleri, kişisel not defteri ve güvenli CSV dışa aktarımı.",
     cta: "Envanteri Aç",
@@ -18,7 +19,7 @@ const STATIONS = [
   },
   {
     href: "/study-plans",
-    emoji: "📅",
+    icon: "calendar",
     title: "Sınav Çalışma Programları",
     desc: "YDS, YDT ve YÖKDİL (Sağlık, Fen, Sosyal) için 7–180 günlük hedefe özel çalışma planları, günlük takvim ve CEFR A1–C2 seviye rehberleri.",
     cta: "Programları İncele",
@@ -26,7 +27,7 @@ const STATIONS = [
   },
   {
     href: "/level-test",
-    emoji: "📊",
+    icon: "target",
     title: "Mini Seviye Tespit Sınavı",
     desc: "42 soruluk bilimsel teşhis sınavı ile gerçek CEFR seviyeni ve güçlü/zayıf becerilerini öğren.",
     cta: "Seviyeni Ölç",
@@ -34,7 +35,7 @@ const STATIONS = [
   },
   {
     href: "/vocabulary/flashcards",
-    emoji: "🃏",
+    icon: "book",
     title: "3D Flashcards & Görsel Hafıza",
     desc: "Kart çevirme animasyonu, 3D dönen kelime küpü ve SM-2 tekrar algoritması.",
     cta: "Öğrenmeye Başla",
@@ -42,7 +43,7 @@ const STATIONS = [
   },
   {
     href: "/exams",
-    emoji: "⏱️",
+    icon: "exam",
     title: "180 dk Online Optik Sınav",
     desc: "2013-2026 çıkmış sınavlar ve özgün denemeler. Baloncuk formu ve otomatik net hesabı.",
     cta: "Sınavları İncele",
@@ -50,7 +51,7 @@ const STATIONS = [
   },
   {
     href: "/grammar",
-    emoji: "📖",
+    icon: "book",
     title: "19 Animasyonlu Gramer Konusu",
     desc: "A1 sadeliğinde Türkçe anlatım, renk kodlu formüller, adım adım animasyonlar ve tuzak uyarıları.",
     cta: "Konuları Keşfet",
@@ -58,7 +59,7 @@ const STATIONS = [
   },
   {
     href: "/tactics",
-    emoji: "🎯",
+    icon: "target",
     title: "11 YDS Soru Tipi ve Taktikleri",
     desc: "Her soru tipi için hafıza kodlamaları, adım adım çözüm algoritmaları ve çözümlü örnek sorular.",
     cta: "Taktikleri Oku",
@@ -66,7 +67,7 @@ const STATIONS = [
   },
   {
     href: "/reading",
-    emoji: "🔬",
+    icon: "microscope",
     title: "Reader at Work Tarzı Reading Lab",
     desc: "Özgün akademik okuma parçaları, tıkla-açılır kelime sözlüğü ve 5 açık uçlu kavrama sorusu.",
     cta: "Okumaya Başla",
@@ -74,7 +75,7 @@ const STATIONS = [
   },
   {
     href: "/games",
-    emoji: "🎮",
+    icon: "games",
     title: "Oyun Merkezi (Wordwall tadında)",
     desc: "Eşleştirme, Köstebek Vur, Çarkıfelek, Doğru/Yanlış ve Dinle & Seç — her doğru cevapta havai fişek!",
     cta: "Oyna",
@@ -82,7 +83,7 @@ const STATIONS = [
   },
   {
     href: "/arsiv",
-    emoji: "🗄️",
+    icon: "exam",
     title: "2013-2026 YDS Arşivi",
     desc: "Tüm YDS dönemleri + o sınavlarda çıkan kelimeler (Türkçe anlamlarıyla).",
     cta: "Arşivi Aç",
@@ -90,7 +91,7 @@ const STATIONS = [
   },
   {
     href: "/kilavuz",
-    emoji: "📘",
+    icon: "book",
     title: "Kullanım Kılavuzu",
     desc: "Siteyi 2 dakikada çöz: her modül + gizli ipuçları kanka dilinde.",
     cta: "Kılavuzu Oku",
@@ -98,7 +99,7 @@ const STATIONS = [
   },
   {
     href: "/avatars",
-    emoji: "👤",
+    icon: "globe",
     title: "1000 Profil & Maskot Avatarı",
     desc: "Profilini kişiselleştir: 7 kategori, 1000 benzersiz, tamamen çevrimdışı çalışan SVG karakter.",
     cta: "Avatar Seç",
@@ -106,7 +107,7 @@ const STATIONS = [
   },
   {
     href: "/import",
-    emoji: "📤",
+    icon: "flashcards",
     title: "PDF & Quizlet İçe Aktarma",
     desc: "Quizlet dışa aktarımını yapıştır-parse et-onayla akışı ve PDF metin içe aktarma.",
     cta: "İçe Aktar",
@@ -114,7 +115,7 @@ const STATIONS = [
   },
   {
     href: "/writing",
-    emoji: "✍️",
+    icon: "calendar",
     title: "Writing & Cümle Kurma Lab",
     desc: "Akademik cümle mimarisi (S+V+O+MPT), bağlaç şifreleri, devrik yapılar ve interaktif paraphrase.",
     cta: "Yazmaya Başla",
@@ -122,7 +123,7 @@ const STATIONS = [
   },
   {
     href: "/listening",
-    emoji: "🎧",
+    icon: "globe",
     title: "Listening & Dinleme Lab",
     desc: "İngiliz, Amerikan ve Avustralya aksanlarında dinleme ve telaffuz çalışmaları.",
     cta: "Dinlemeye Başla",
@@ -130,7 +131,7 @@ const STATIONS = [
   },
   {
     href: "/speaking",
-    emoji: "🎙️",
+    icon: "globe",
     title: "AI Speaking Lab",
     desc: "Yapay zeka ile sesli/yazılı interaktif diyalog pratiği ve telaffuz geribildirimi.",
     cta: "Konuşmaya Başla",
@@ -138,7 +139,7 @@ const STATIONS = [
   },
   {
     href: "/vocabulary/flashcards?mode=fsrs",
-    emoji: "🧠",
+    icon: "target",
     title: "FSRS 2.0 Akıllı Bellek Laboratuvarı",
     desc: "Bilişsel unutma eğrisi, kişiselleştirilmiş aralıklı tekrar sıklığı ve kalıcı uzun süreli hafıza.",
     cta: "Laboratuvarı Aç",
@@ -147,11 +148,23 @@ const STATIONS = [
 ];
 
 const STATS = [
-  { to: 10000, suffix: "+", label: "Benzersiz Avatar", emoji: "👤", href: "/avatars" },
-  { to: 1000, suffix: "+", label: "Sınav Sorusu Bankası", emoji: "📝", href: "/exams" },
-  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", emoji: "📖", href: "/grammar" },
-  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", emoji: "🎯", href: "/tactics" },
+  { to: 10000, suffix: "+", label: "Benzersiz Avatar", icon: "globe", href: "/avatars" },
+  { to: 1000, suffix: "+", label: "Sınav Sorusu Bankası", icon: "exam", href: "/exams" },
+  { to: 19, suffix: "", label: "Animasyonlu Gramer Konusu", icon: "book", href: "/grammar" },
+  { to: 11, suffix: "", label: "Soru Tipi Taktikleri", icon: "target", href: "/tactics" },
 ];
+
+const FEATURE_ICON_SRC: Record<string, string> = {
+  book: "/icons/3d/book.jpg",
+  calendar: "/icons/3d/calendar.jpg",
+  target: "/icons/3d/target.jpg",
+  flashcards: "/icons/3d/flashcards.jpg",
+  exam: "/icons/3d/exam.jpg",
+  microscope: "/icons/3d/microscope.jpg",
+  games: "/icons/3d/games.jpg",
+  globe: "/icons/3d/globe.jpg",
+  medal: "/icons/3d/medal.jpg",
+};
 
 export default function Home() {
   return (
@@ -201,7 +214,9 @@ export default function Home() {
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl">🎯</span>
+                  <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
+                    <Image src={FEATURE_ICON_SRC.target} alt="" fill sizes="48px" className="object-cover" />
+                  </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
                     180 dk • 80 Soru
                   </span>
@@ -226,7 +241,9 @@ export default function Home() {
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl">🎓</span>
+                  <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
+                    <Image src={FEATURE_ICON_SRC.book} alt="" fill sizes="48px" className="object-cover" />
+                  </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-mono">
                     120 dk • 80 Soru
                   </span>
@@ -251,7 +268,9 @@ export default function Home() {
             >
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl">🔬</span>
+                  <span className="relative h-12 w-12 overflow-hidden rounded-xl shadow-md">
+                    <Image src={FEATURE_ICON_SRC.microscope} alt="" fill sizes="48px" className="object-cover" />
+                  </span>
                   <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30 font-mono">
                     Sağlık · Fen · Sosyal
                   </span>
@@ -304,7 +323,9 @@ export default function Home() {
               title={`${s.label} bölümünü aç`}
             >
               <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="text-3xl mb-1 group-hover:scale-110 transition-transform duration-300">{s.emoji}</div>
+              <div className="relative mx-auto mb-2 h-14 w-14 overflow-hidden rounded-2xl shadow-lg shadow-fuchsia-500/20 group-hover:scale-110 transition-transform duration-300">
+                <Image src={FEATURE_ICON_SRC[s.icon]} alt="" fill sizes="56px" className="object-cover" />
+              </div>
               <div className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-cyan-300">
                 <CountUp to={s.to} suffix={s.suffix} />
               </div>
@@ -350,9 +371,9 @@ export default function Home() {
                 className="card-vibrant group p-6 flex flex-col h-full hover:border-white/25 transition-all hover:-translate-y-1"
               >
                 <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${s.color} flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform shadow-lg`}
+                  className={`relative w-16 h-16 rounded-2xl bg-gradient-to-tr ${s.color} p-1 mb-4 group-hover:scale-110 transition-transform shadow-lg`}
                 >
-                  {s.emoji}
+                  <Image src={FEATURE_ICON_SRC[s.icon]} alt="" fill sizes="64px" className="rounded-2xl object-cover" />
                 </div>
                 <h3 className="font-black text-lg mb-2">{s.title}</h3>
                 <p className="text-sm text-white/55 leading-relaxed flex-1">{s.desc}</p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import {
   AVATARS,
   AVATAR_COUNT,
@@ -30,6 +31,17 @@ interface CustomAvatar {
 
 const CUSTOM_KEY = "yds-master-custom-avatars";
 const CUSTOM_SELECTED = CUSTOM_AVATAR_KEY;
+const THREE_D_AVATARS = [
+  { id: "fox", name: "Pofuduk Tilki", src: "/avatars/3d/fox.jpg" },
+  { id: "bear", name: "Bilge Ayıcık", src: "/avatars/3d/bear.jpg" },
+  { id: "owl", name: "Meraklı Baykuş", src: "/avatars/3d/owl.jpg" },
+  { id: "robot", name: "Neşeli Robot", src: "/avatars/3d/robot.jpg" },
+  { id: "student-woman", name: "Enerjik Öğrenci", src: "/avatars/3d/student-woman.jpg" },
+  { id: "student-man", name: "Maceracı Öğrenci", src: "/avatars/3d/student-man.jpg" },
+  { id: "corgi", name: "Çalışkan Corgi", src: "/avatars/3d/corgi.jpg" },
+  { id: "astronaut", name: "Uzay Kaşifi", src: "/avatars/3d/astronaut.jpg" },
+  { id: "dragon", name: "Minik Ejderha", src: "/avatars/3d/dragon.jpg" },
+];
 
 function loadCustom(): CustomAvatar[] {
   try {
@@ -52,7 +64,7 @@ export default function AvatarsPage() {
   const { usage, update } = useUsage();
 
   // Tab navigation
-  const [activeTab, setActiveTab] = useState<"2k" | "10k" | "upload">("2k");
+  const [activeTab, setActiveTab] = useState<"2k" | "10k" | "3d" | "upload">("2k");
 
   // --- 2.000 Avatar State ---
   const [cat2k, setCat2k] = useState<Avatar2000Category>("all");
@@ -210,10 +222,22 @@ export default function AvatarsPage() {
     update((u) => ({ ...u, customAvatar: dataUrl }));
   };
 
+  const select3dAvatar = (id: string, src: string, name: string) => {
+    setCustomSelected(`3d-${id}`);
+    setSelected10k(null);
+    syncActiveAvatar(`3d-${id}`, src);
+    update((u) => ({ ...u, customAvatar: src }));
+    setUploadMsg(`${name} profil avatarın oldu!`);
+  };
+
   const selectedCustom =
     custom.find((c) => c.id === customSelected) ||
     (usage.customAvatar
-      ? { id: "custom-active", name: "Özel / Yaratıcı Profil Resmi", dataUrl: usage.customAvatar }
+      ? {
+          id: "custom-active",
+          name: THREE_D_AVATARS.find((avatar) => avatar.src === usage.customAvatar)?.name || "Özel / Yaratıcı Profil Resmi",
+          dataUrl: usage.customAvatar,
+        }
       : null);
 
   return (
@@ -230,8 +254,7 @@ export default function AvatarsPage() {
           👤 <span className="rainbow-text">Avatar & Profil Galerisi</span>
         </h1>
         <p className="text-sm text-slate-300 dark:text-slate-400 max-w-2xl mx-auto">
-          Tam <span className="font-black text-amber-400">2.000 yaratıcı canavar, sevimli hayvan ve emoji</span>,{" "}
-          <span className="font-black text-cyan-400">10.000 meslek & karakter</span> veya kendi fotoğraf ve hareketli GIF&apos;in!
+          Emojiler kendi kategorisinde; burada 3D karakterler, yaratıcı SVG avatarları ve kendi fotoğrafın ya da hareketli GIF&apos;in seni bekliyor.
         </p>
       </header>
 
@@ -295,6 +318,17 @@ export default function AvatarsPage() {
           >
             <span>🏛️</span>
             <span>10.000 Meslek & Karakter</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("3d")}
+            className={`px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 ${
+              activeTab === "3d"
+                ? "bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-500 text-white shadow-lg shadow-fuchsia-500/30 scale-105"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
+            }`}
+          >
+            <span>🪄</span>
+            <span>3D Görsel Avatarlar</span>
           </button>
           <button
             onClick={() => setActiveTab("upload")}
@@ -548,6 +582,11 @@ export default function AvatarsPage() {
                     onClick={() => {
                       const numId =
                         typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0;
+                      if (a.category === "3D Animasyon & Portre") {
+                        const portrait = THREE_D_AVATARS[Math.abs(numId) % THREE_D_AVATARS.length];
+                        select3dAvatar(`catalog-${numId}`, portrait.src, a.name);
+                        return;
+                      }
                       setSelected10k(numId);
                       setCustomSelected(null);
                       syncActiveAvatar(numId, null);
@@ -562,10 +601,19 @@ export default function AvatarsPage() {
                       a.profession
                     }`}
                   >
-                    <div
-                      className="w-full aspect-square"
-                      dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }}
-                    />
+                    {a.category === "3D Animasyon & Portre" ? (
+                      <div className="relative w-full aspect-square">
+                        <Image
+                          src={THREE_D_AVATARS[Math.abs(typeof a.id === "number" ? a.id : parseInt(String(a.id), 10) || 0) % THREE_D_AVATARS.length].src}
+                          alt={`${a.name} 3D görsel avatarı`}
+                          fill
+                          sizes="(max-width: 640px) 30vw, 10vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full aspect-square" dangerouslySetInnerHTML={{ __html: avatarSvg(a.id, "grid") }} />
+                    )}
                     <div className="absolute inset-x-0 bottom-0 bg-black/85 text-[9px] text-white opacity-0 group-hover:opacity-100 transition-opacity py-0.5 truncate px-1 font-medium">
                       {a.professionEmoji} {a.profession}
                     </div>
@@ -597,6 +645,39 @@ export default function AvatarsPage() {
               </button>
             </div>
           )}
+        </section>
+      )}
+
+      {activeTab === "3d" && (
+        <section className="space-y-5">
+          <div className="card-vibrant rounded-3xl p-5 sm:p-7 text-center">
+            <h2 className="text-2xl sm:text-3xl font-black rainbow-text">Karşında: gerçek 3D görsel avatar galerisi!</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              Bunlar emoji değil; seçip profilinde kullanabileceğin, birbirinden farklı 3D render edilmiş karakter görselleri.
+              Hareketli GIF seçeneği kendi görselini yükleme bölümünde ayrı duruyor.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {THREE_D_AVATARS.map((avatar) => {
+              const isActive = customSelected === `3d-${avatar.id}` || usage.customAvatar === avatar.src;
+              return (
+                <button
+                  key={avatar.id}
+                  onClick={() => select3dAvatar(avatar.id, avatar.src, avatar.name)}
+                  className={`group overflow-hidden rounded-3xl border-2 text-left transition-all hover:-translate-y-1 hover:shadow-xl ${
+                    isActive ? "border-fuchsia-400 shadow-xl shadow-fuchsia-500/25" : "border-white/20"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-fuchsia-200 via-cyan-100 to-amber-100">
+                    <Image src={avatar.src} alt={avatar.name} fill sizes="(max-width: 640px) 50vw, 20vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    {isActive && <span className="absolute right-3 top-3 rounded-full bg-white/95 px-3 py-1 text-xs font-black text-fuchsia-700 shadow">Seçili ✓</span>}
+                  </div>
+                  <span className="block bg-white/90 px-4 py-3 text-sm font-black text-slate-800 dark:bg-slate-950/90 dark:text-white">{avatar.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </section>
       )}
 

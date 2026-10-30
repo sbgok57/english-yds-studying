@@ -6,7 +6,7 @@
    - /api, auth, token, cookie ve kişisel veriler ASLA Cache Storage'a girmez.
    ============================================================ */
 
-const SW_VERSION = 'dil-master-offline-v2026.10.30-joyful-brand-v1';
+const SW_VERSION = 'dil-master-offline-v2026.10.30-joyful-brand-v2';
 const APP_SHELL_CACHE = `${SW_VERSION}-shell`;
 
 const PUBLIC_APP_SHELL = [

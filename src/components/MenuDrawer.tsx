@@ -18,34 +18,9 @@ import { useUsage } from "@/lib/store";
 import { calculateStudentProgress } from "@/lib/progress/calculator";
 import {
   X,
-  Home,
-  LayoutDashboard,
-  Compass,
-  GraduationCap,
-  Microscope,
-  BookOpen,
-  Headphones,
-  PenTool,
-  Mic,
-  Clock,
-  Sparkles,
-  FileUp,
-  Shield,
-  Layers,
   ChevronRight,
   Search,
-  Box,
-  Target,
-  Zap,
-  Gamepad2,
-  TrendingUp,
-  Calendar,
-  Award,
   Palette,
-  Volume2,
-  User,
-  Settings,
-  HelpCircle,
 } from "lucide-react";
 
 interface MenuDrawerProps {
@@ -53,64 +28,41 @@ interface MenuDrawerProps {
   onClose: () => void;
 }
 
+const NAV_3D_ICON: Record<NavigationIconId, string> = {
+  home: "/icons/3d/globe.jpg",
+  dashboard: "/icons/3d/target.jpg",
+  compass: "/icons/3d/target.jpg",
+  "book-open": "/icons/3d/book.jpg",
+  layers: "/icons/3d/flashcards.jpg",
+  box: "/icons/3d/flashcards.jpg",
+  sparkles: "/icons/3d/medal.jpg",
+  "file-up": "/icons/3d/exam.jpg",
+  "graduation-cap": "/icons/3d/book.jpg",
+  headphones: "/icons/3d/globe.jpg",
+  microscope: "/icons/3d/microscope.jpg",
+  "pen-tool": "/icons/3d/calendar.jpg",
+  mic: "/icons/3d/globe.jpg",
+  target: "/icons/3d/target.jpg",
+  clock: "/icons/3d/calendar.jpg",
+  zap: "/icons/3d/medal.jpg",
+  gamepad: "/icons/3d/games.jpg",
+  "trending-up": "/icons/3d/target.jpg",
+  calendar: "/icons/3d/calendar.jpg",
+  award: "/icons/3d/medal.jpg",
+  palette: "/icons/3d/flashcards.jpg",
+  "volume-2": "/icons/3d/globe.jpg",
+  user: "/icons/3d/globe.jpg",
+  settings: "/icons/3d/target.jpg",
+  shield: "/icons/3d/medal.jpg",
+  "help-circle": "/icons/3d/book.jpg",
+};
+
 function renderCategoryItemIcon(icon: NavigationIconId) {
-  const cls = "w-5 h-5 text-cyan-200 light:text-cyan-700 shrink-0";
-  switch (icon) {
-    case "home":
-      return <Home className={cls} aria-hidden="true" />;
-    case "dashboard":
-      return <LayoutDashboard className={cls} aria-hidden="true" />;
-    case "compass":
-      return <Compass className={cls} aria-hidden="true" />;
-    case "book-open":
-      return <BookOpen className={cls} aria-hidden="true" />;
-    case "layers":
-      return <Layers className={cls} aria-hidden="true" />;
-    case "box":
-      return <Box className={cls} aria-hidden="true" />;
-    case "sparkles":
-      return <Sparkles className={cls} aria-hidden="true" />;
-    case "file-up":
-      return <FileUp className={cls} aria-hidden="true" />;
-    case "graduation-cap":
-      return <GraduationCap className={cls} aria-hidden="true" />;
-    case "headphones":
-      return <Headphones className={cls} aria-hidden="true" />;
-    case "microscope":
-      return <Microscope className={cls} aria-hidden="true" />;
-    case "pen-tool":
-      return <PenTool className={cls} aria-hidden="true" />;
-    case "mic":
-      return <Mic className={cls} aria-hidden="true" />;
-    case "target":
-      return <Target className={cls} aria-hidden="true" />;
-    case "clock":
-      return <Clock className={cls} aria-hidden="true" />;
-    case "zap":
-      return <Zap className={cls} aria-hidden="true" />;
-    case "gamepad":
-      return <Gamepad2 className={cls} aria-hidden="true" />;
-    case "trending-up":
-      return <TrendingUp className={cls} aria-hidden="true" />;
-    case "calendar":
-      return <Calendar className={cls} aria-hidden="true" />;
-    case "award":
-      return <Award className={cls} aria-hidden="true" />;
-    case "palette":
-      return <Palette className={cls} aria-hidden="true" />;
-    case "volume-2":
-      return <Volume2 className={cls} aria-hidden="true" />;
-    case "user":
-      return <User className={cls} aria-hidden="true" />;
-    case "settings":
-      return <Settings className={cls} aria-hidden="true" />;
-    case "shield":
-      return <Shield className={cls} aria-hidden="true" />;
-    case "help-circle":
-      return <HelpCircle className={cls} aria-hidden="true" />;
-    default:
-      return <Compass className={cls} aria-hidden="true" />;
-  }
+  return (
+    <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-fuchsia-100 via-cyan-100 to-amber-100 shadow-sm ring-1 ring-white/70 dark:ring-white/20">
+      <Image src={NAV_3D_ICON[icon]} alt="" fill sizes="36px" className="object-cover" />
+    </span>
+  );
 }
 
 export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {

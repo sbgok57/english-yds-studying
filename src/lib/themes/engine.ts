@@ -63,6 +63,15 @@ function hslToHex(h: number, s: number, l: number): string {
   return `#${f(0)}${f(8)}${f(4)}`;
 }
 
+function hexToRgba(hex: string, alpha: number): string {
+  const normalized = hex.replace("#", "");
+  const value = Number.parseInt(normalized, 16);
+  const r = (value >> 16) & 255;
+  const g = (value >> 8) & 255;
+  const b = value & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 // ── SVG ARKA PLAN DESENLERİ ──────────────────────────────────
 export const SVG_PATTERNS: Record<PatternKey, string> = {
   none: "none",
@@ -196,7 +205,9 @@ export const ALL_THEMES: ThemePalette[] = (() => {
 
     const darkBg = hslToHex(hue, bgSat, bgLight);
     const darkCard = hslToHex(hue, cardSat, cardLight);
-    const lightBg = hslToHex(hue, Math.min(30, bgSat), 97);
+    // Preserve each theme's identity in light mode while keeping a near-white,
+    // readable canvas. Previously saturation was capped at 30% for every theme.
+    const lightBg = hslToHex(hue, Math.max(16, Math.min(58, bgSat + 12)), 97);
     const lightCard = "#ffffff";
 
     const catInfo = CATEGORY_NAMES[catKey];
@@ -317,9 +328,9 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
     root.style.setProperty("--theme-accent", targetTheme.accent);
     root.style.setProperty("--theme-glow", targetTheme.glowColor);
     root.style.setProperty("--theme-gradient", targetTheme.gradient);
-    root.style.setProperty("--theme-primary-glow", `${targetTheme.primary}33`);
-    root.style.setProperty("--theme-secondary-glow", `${targetTheme.secondary}26`);
-    root.style.setProperty("--theme-accent-glow", `${targetTheme.accent}20`);
+    root.style.setProperty("--theme-primary-glow", `${targetTheme.primary}${mode === "light" ? "38" : "33"}`);
+    root.style.setProperty("--theme-secondary-glow", `${targetTheme.secondary}${mode === "light" ? "30" : "26"}`);
+    root.style.setProperty("--theme-accent-glow", `${targetTheme.accent}${mode === "light" ? "24" : "20"}`);
     root.style.setProperty("--theme-pattern", targetTheme.patternCss);
     root.style.setProperty("--theme-pattern-size", SVG_PATTERN_SIZES[targetTheme.patternType] || "auto");
     root.style.setProperty("--pattern-opacity", "1");
@@ -330,14 +341,14 @@ export function applyTheme(themeId: number, mode: "dark" | "light" = "dark"): vo
       root.style.setProperty("--theme-bg", targetTheme.lightBg);
       root.style.setProperty("--theme-card", targetTheme.lightCard);
       root.style.setProperty("--theme-text", targetTheme.lightText);
-      root.style.setProperty("--theme-border", "#cbd5e1");
-      root.style.setProperty("--theme-pattern-fg", "rgba(15, 23, 42, 0.16)");
+      root.style.setProperty("--theme-border", hexToRgba(targetTheme.primary, 0.28));
+      root.style.setProperty("--theme-pattern-fg", hexToRgba(targetTheme.primary, 0.2));
     } else {
       root.style.setProperty("--theme-bg", targetTheme.darkBg);
       root.style.setProperty("--theme-card", targetTheme.darkCard);
       root.style.setProperty("--theme-text", targetTheme.darkText);
       root.style.setProperty("--theme-border", "rgba(255, 255, 255, 0.12)");
-      root.style.setProperty("--theme-pattern-fg", "rgba(255, 255, 255, 0.22)");
+      root.style.setProperty("--theme-pattern-fg", hexToRgba(targetTheme.accent, 0.3));
     }
 
     // Doğrudan body stillerine anında enjekte et
