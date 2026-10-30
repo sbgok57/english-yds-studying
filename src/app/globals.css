@@ -994,3 +994,80 @@ body > div:first-of-type {
   font-size: 0.72rem !important;
   line-height: 1.35rem;
 }
+
+/* DİL MASTER — daha okunaklı, enerjik ve dokunmatik dostu son görünüm katmanı */
+html {
+  font-size: 19px;
+}
+
+body {
+  line-height: 1.68;
+}
+
+/* Küçük yardımcı etiketler de göz yormasın; 9–11 px sınıfları yukarıda zaten dengeleniyor. */
+.text-xs {
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.global-menu-trigger {
+  min-height: 3rem;
+}
+
+.menu-nav-item {
+  min-height: 3.35rem;
+  box-shadow: 0 5px 18px -14px rgba(34, 211, 238, 0.55);
+}
+
+.menu-nav-item:hover {
+  transform: translateX(-3px);
+  box-shadow: 0 9px 24px -14px rgba(232, 121, 249, 0.7);
+}
+
+.menu-nav-icon {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-vibrant {
+  box-shadow: 0 14px 40px -24px rgba(14, 165, 233, 0.5),
+    0 10px 30px -25px rgba(232, 121, 249, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+button,
+a[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

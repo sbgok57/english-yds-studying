@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -40,14 +40,13 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.svg",
     apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07152d",
+  themeColor: "#5b42e8",
 };
 
 export default function RootLayout({

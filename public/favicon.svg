@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="15" fill="#07152d"/>
-  <path d="M10 31c7-6 15-6 22 1v22c-7-6-15-7-22-2V31Zm44 0c-7-6-15-6-22 1v22c7-6 15-7 22-2V31Z" fill="#53e4f2" stroke="#9af5fa" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M32 30v24" stroke="#f8fdff" stroke-width="2"/>
-  <path d="M22 27v-5m5 7V17m5 9V11m5 14V17m5 12v-7" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>
-  <path d="M48 7l2.2 4.8L55 14l-4.8 2.2L48 21l-2.2-4.8L41 14l4.8-2.2L48 7Z" fill="#ffc447"/>
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#111b55"/><stop offset="1" stop-color="#25105c"/></linearGradient><linearGradient id="book" x2="0" y2="1"><stop stop-color="#a5fbff"/><stop offset="1" stop-color="#00aeea"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <path d="M9 32c7-5 15-5 23 1v20c-8-6-16-6-23-2V32Zm46 0c-7-5-15-5-23 1v20c8-6 16-6 23-2V32Z" fill="url(#book)" stroke="#e3ffff" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M21 25v-5m7 7V13m8 14V18m7 9v-5" stroke="#fb7185" stroke-width="4" stroke-linecap="round"/>
+  <path d="m48 7 2.1 4.6L55 14l-4.9 2.3L48 21l-2.1-4.7L41 14l4.9-2.4L48 7Z" fill="#ffcb45" stroke="#fff2bd" stroke-width="1.2"/>
 </svg>

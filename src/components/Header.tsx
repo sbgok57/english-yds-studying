@@ -34,10 +34,10 @@ export default function Header() {
             aria-expanded={menu}
             aria-controls="global-menu-drawer"
             title="Tüm site bölümleri ve ayarlar"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border-2 border-cyan-400 bg-slate-900 px-3 text-white shadow-md shadow-cyan-950/30 transition hover:border-amber-300 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 active:scale-95 light:bg-slate-900"
+            className="global-menu-trigger inline-flex min-h-12 min-w-12 items-center justify-center gap-2.5 rounded-2xl border-2 border-cyan-300 bg-gradient-to-r from-fuchsia-600 via-violet-600 to-cyan-500 px-4 text-white shadow-lg shadow-violet-950/40 transition hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 active:scale-95"
           >
-            <Menu className="h-5 w-5 text-cyan-300" aria-hidden="true" />
-            <span className="text-base font-extrabold tracking-wide">Menü</span>
+            <Menu className="h-6 w-6 text-white" aria-hidden="true" />
+            <span className="text-lg font-extrabold tracking-wide">Menü</span>
           </button>
         </div>
       </header>

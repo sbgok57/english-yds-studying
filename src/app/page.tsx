@@ -185,6 +185,11 @@ export default function Home() {
             akademik okuma-dinleme-yazma-konuşma laboratuvarları ve 2010-2026 tüm yayınlar soru havuzu.
           </p>
         </Reveal>
+        <Reveal delay={250}>
+          <p className="inline-flex items-center gap-2 rounded-full border border-fuchsia-300/30 bg-fuchsia-400/10 px-4 py-2 text-sm sm:text-base font-bold text-fuchsia-100 shadow-lg shadow-fuchsia-950/20">
+            <span aria-hidden="true">☕</span> Kahveni kap gel; kelimeler bugün senden hızlı kaçamayacak! 😄
+          </p>
+        </Reveal>
 
         {/* 3 BÜYÜK SINAV SEÇİM MERKEZİ (YDS, YDT, YÖKDİL) */}
         <Reveal delay={280}>

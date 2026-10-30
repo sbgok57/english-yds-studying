@@ -54,7 +54,7 @@ interface MenuDrawerProps {
 }
 
 function renderCategoryItemIcon(icon: NavigationIconId) {
-  const cls = "w-4 h-4 text-cyan-300 light:text-cyan-700 shrink-0";
+  const cls = "w-5 h-5 text-cyan-200 light:text-cyan-700 shrink-0";
   switch (icon) {
     case "home":
       return <Home className={cls} aria-hidden="true" />;
@@ -250,9 +250,9 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 <Image
                   src="/icons/icon-192.png"
                   alt="DİL MASTER logosu"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 shrink-0 rounded-xl object-contain"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 shrink-0 rounded-2xl object-cover shadow-lg shadow-cyan-950/35 ring-2 ring-white/15"
                   priority
                 />
                 <div className="min-w-0">
@@ -262,6 +262,9 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                   <span className="text-[11px] text-cyan-300/90 light:text-cyan-700 font-mono block truncate">
                     YDS · YDT · YÖKDİL Tüm Ana Bölümler
                   </span>
+                  <span className="text-[11px] text-amber-300 font-semibold block truncate">
+                    Bugün hangi konuda parlayalım? ✨
+                  </span>
                 </div>
               </div>
 
@@ -269,11 +272,11 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 <button
                   type="button"
                   onClick={() => setThemeModal(true)}
-                  className="min-h-[40px] px-2.5 rounded-xl border border-cyan-400/40 bg-cyan-500/15 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-1.5 text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  className="min-h-11 px-3 rounded-2xl border border-cyan-300/50 bg-gradient-to-r from-cyan-500/20 to-fuchsia-500/20 hover:border-cyan-300 text-white light:text-slate-900 flex items-center gap-2 text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   title="Desenli Tema Galerisi"
                 >
-                  <Palette className="w-4 h-4 text-cyan-300 light:text-cyan-700" aria-hidden="true" />
-                  <span className="text-[11px] font-semibold hidden sm:inline">Temalar</span>
+                  <Palette className="w-5 h-5 text-cyan-200 light:text-cyan-700" aria-hidden="true" />
+                  <span className="font-semibold hidden sm:inline">Temalar</span>
                 </button>
                 <ThemeToggle compact className="!w-10 !h-10 !px-0 rounded-xl" />
                 <button
@@ -294,7 +297,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 Menü içinde bölüm veya modül ara
               </label>
               <Search
-                className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
+                className="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"
                 aria-hidden="true"
               />
               <input
@@ -305,7 +308,7 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                 onChange={(e) => setMenuQuery(e.target.value)}
                 placeholder="Bölüm ara: kelime, envanter, gramer, reading, sesli gramer..."
                 aria-label="Menü içinde bölüm veya modül ara"
-                className="w-full pl-9 pr-8 py-2.5 rounded-xl bg-slate-950/90 light:bg-slate-100 border border-white/15 light:border-slate-300 text-xs sm:text-sm text-white light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full pl-11 pr-8 py-3 rounded-2xl bg-slate-950/90 light:bg-slate-100 border border-white/15 light:border-slate-300 text-sm sm:text-base text-white light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
               />
               {menuQuery && (
                 <button
@@ -394,19 +397,19 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                             href={item.href}
                             onClick={handleSafeClose}
                             aria-current={isActive ? "page" : undefined}
-                            className={`p-3 rounded-xl border flex items-center justify-between gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
+                            className={`menu-nav-item p-3.5 rounded-2xl border flex items-center justify-between gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ${
                               isActive
                                 ? "bg-cyan-500/20 border-cyan-400 text-white light:bg-cyan-50 light:border-cyan-600 light:text-slate-950 shadow-sm"
                                 : "bg-white/[0.03] light:bg-slate-50 border-white/10 light:border-slate-200 hover:border-cyan-400/50 hover:bg-white/[0.06] text-white light:text-slate-900"
                             }`}
                           >
                             <div className="flex items-start gap-3 min-w-0">
-                              <div className="mt-0.5 p-2 rounded-lg bg-white/5 light:bg-slate-200/70 shrink-0">
+                              <div className="menu-nav-icon mt-0.5 p-2.5 rounded-2xl bg-gradient-to-br from-cyan-400/20 via-violet-400/15 to-pink-400/20 light:bg-cyan-100 shrink-0 shadow-inner">
                                 {renderCategoryItemIcon(item.icon)}
                               </div>
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="text-xs sm:text-sm font-bold leading-snug">
+                                  <span className="text-sm sm:text-base font-bold leading-snug">
                                     {item.label}
                                   </span>
                                   {item.badge && (
