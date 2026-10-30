@@ -43,7 +43,7 @@ export interface PlaybackOptions {
   onError?: (err: any) => void;
   onInfo?: (msg: string) => void;
   onMetadata?: (meta: PlaybackMetadata) => void;
-  /** Use a device voice only after the caller explicitly opts into unverified local speech. */
+  /** Set false to disable a clearly labeled, exact-match device voice fallback. */
   allowBrowserFallback?: boolean;
 }
 
@@ -66,6 +66,46 @@ const STORAGE_KEYS = {
 // Neural TTS cold starts and provider retries can exceed 1.5 seconds.
 // Keep a bounded wait, but do not abort normal requests before audio can arrive.
 const TTS_REQUEST_TIMEOUT_MS = 8_000;
+const BROWSER_VOICE_WAIT_MS = 1_500;
+
+function waitForExactBrowserVoice(
+  locale: VoiceLocale,
+  gender: VoiceGender,
+): Promise<SpeechSynthesisVoice | undefined> {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+    return Promise.resolve(undefined);
+  }
+
+  const synthesis = window.speechSynthesis;
+  const findVoice = () =>
+    chooseExactBrowserVoice(synthesis.getVoices(), locale, gender);
+  const immediatelyAvailable = findVoice();
+  if (immediatelyAvailable) return Promise.resolve(immediatelyAvailable);
+
+  // Chrome/Safari can return an empty voice list on the first call and fill it
+  // asynchronously. Wait briefly for voiceschanged instead of reporting a
+  // false "voice not found" immediately after the cloud provider fails.
+  return new Promise((resolve) => {
+    let settled = false;
+    const finish = (voice?: SpeechSynthesisVoice) => {
+      if (settled) return;
+      settled = true;
+      window.clearInterval(pollId);
+      window.clearTimeout(timeoutId);
+      synthesis.removeEventListener?.("voiceschanged", onVoicesChanged);
+      resolve(voice);
+    };
+    const check = () => {
+      const voice = findVoice();
+      if (voice) finish(voice);
+    };
+    const onVoicesChanged = () => check();
+    synthesis.addEventListener?.("voiceschanged", onVoicesChanged);
+    const pollId = window.setInterval(check, 100);
+    const timeoutId = window.setTimeout(() => finish(findVoice()), BROWSER_VOICE_WAIT_MS);
+    check();
+  });
+}
 
 class ClientAudioManager {
   private currentAudio: HTMLAudioElement | null = null;
@@ -75,6 +115,7 @@ class ClientAudioManager {
   private currentPlaybackKey: string | null = null;
   private currentPlaybackOptions: PlaybackOptions | null = null;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
+  private playbackGeneration = 0;
 
   constructor() {
     if (typeof window !== "undefined") {
@@ -238,6 +279,7 @@ class ClientAudioManager {
 
   // Çalmakta olan tüm sesleri ve bekleyen ağ isteklerini anında durdur
   stopAll(): void {
+    this.playbackGeneration += 1;
     if (this.activeAbortController) {
       try {
         this.activeAbortController.abort();
@@ -330,6 +372,7 @@ class ClientAudioManager {
     }
 
     this.stopAll();
+    const playbackGeneration = this.playbackGeneration;
 
     const rate = options?.rate ?? prefs.speakingRate;
     const contentType =
@@ -338,10 +381,10 @@ class ClientAudioManager {
     const t0 = Date.now();
 
     // SAFETY: Helper for browser speech synthesis fallback (never uses fake pitch shifting)
-    const playWithBrowserSpeech = () => {
+    const playWithBrowserSpeech = async (): Promise<boolean> => {
       // Cloud failures must not silently change the requested accent/speaker or
       // label an unverified device voice as the selected cloud voice.
-      if (!options?.allowBrowserFallback) return false;
+      if (options?.allowBrowserFallback === false) return false;
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         try {
           window.speechSynthesis.cancel();
@@ -356,12 +399,14 @@ class ClientAudioManager {
           // YASAK KURALI: Yapay pitch (1.08 / 0.88) ile sahte konuşmacı türetilmez; doğal pitch=1.0 korunur
           utterance.pitch = 1.0;
 
-          const voices = window.speechSynthesis.getVoices();
-          const selectedBrowserVoice = chooseExactBrowserVoice(
-            voices,
+          const selectedBrowserVoice = await waitForExactBrowserVoice(
             voice.locale,
             voice.gender,
           );
+
+          // Ignore a late voice-list result if the user stopped playback or
+          // started a different word/lesson while the browser was loading it.
+          if (playbackGeneration !== this.playbackGeneration) return true;
 
           if (!selectedBrowserVoice) {
             const requestedGender = voice.gender === "female" ? "kadın" : "erkek";
@@ -577,22 +622,22 @@ class ClientAudioManager {
         this.currentPlaybackOptions?.onEnd?.();
       };
 
-      audio.onerror = () => {
+      audio.onerror = async () => {
         if (this.currentBlobUrl) {
           URL.revokeObjectURL(this.currentBlobUrl);
           this.currentBlobUrl = null;
         }
         this.currentAudio = null;
 
-        if (!playWithBrowserSpeech()) {
+        if (!(await playWithBrowserSpeech())) {
           const err = new Error("Ses oynatılamadı.");
           options?.onError?.(err);
           options?.onInfo?.("Ses dosyası oynatılamadı.");
         }
       };
 
-      await audio.play().catch((playErr) => {
-        if (!playWithBrowserSpeech()) {
+      await audio.play().catch(async (playErr) => {
+        if (!(await playWithBrowserSpeech())) {
           throw playErr;
         }
       });
@@ -603,7 +648,7 @@ class ClientAudioManager {
       }
       // A system voice is opt-in: an unavailable cloud voice must remain an
       // honest playback error instead of silently changing speaker identity.
-      const fallbackSuccess = playWithBrowserSpeech();
+      const fallbackSuccess = await playWithBrowserSpeech();
       if (!fallbackSuccess) {
         options?.onError?.(err instanceof Error ? err : new Error(String(err)));
         options?.onInfo?.("Ses bağlantısı kurulamadı. Lütfen tekrar deneyin.");

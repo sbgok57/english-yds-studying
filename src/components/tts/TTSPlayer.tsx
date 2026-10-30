@@ -85,6 +85,11 @@ export default function TTSPlayer({
       gender: currentGender,
       rate: speed,
       contentType,
+      // If the configured cloud service is unavailable, use a matching
+      // device voice when the browser can verify both locale and speaker.
+      // The audio manager labels this as a local fallback and never invents
+      // an accent or gender match.
+      allowBrowserFallback: true,
       onStart: () => {
         setLoading(false);
         updatePlaying(true);
