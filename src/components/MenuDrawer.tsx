@@ -260,10 +260,10 @@ export default function MenuDrawer({ open, onClose }: MenuDrawerProps) {
                     Menü · DİL MASTER
                   </span>
                   <span className="text-[11px] text-cyan-300/90 light:text-cyan-700 font-mono block truncate">
-                    YDS · YDT · YÖKDİL Tüm Ana Bölümler
+                    YDS · YDT · YÖKDİL yol arkadaşın 🌈
                   </span>
                   <span className="text-[11px] text-amber-300 font-semibold block truncate">
-                    Bugün hangi konuda parlayalım? ✨
+                    Hadi bugün bir adım daha atalım! ✨
                   </span>
                 </div>
               </div>

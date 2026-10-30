@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -41,7 +42,12 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [plugin(
+    // A large part of the app already uses `light:*` utility classes. Tailwind
+    // does not ship a `light` variant, so those utilities were silently omitted
+    // from the CSS bundle and light mode could only partially update the UI.
+    ({ addVariant }) => addVariant("light", "html.light &")
+  )],
 };
 
 export default config;

@@ -162,7 +162,7 @@ export default function Home() {
       <section className="text-center py-10 sm:py-14 space-y-6">
         <Reveal>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-amber-400/10 px-4 py-1.5 text-xs font-black text-amber-300 anim-pulse-glow">
-            🚀 DİL MASTER · YDS · YDT · YÖKDİL TAM KAPSAMLI AKADEMİ
+            🚀 DİL MASTER · Hedefine birlikte, adım adım!
           </div>
         </Reveal>
         <Reveal delay={80}>
@@ -176,13 +176,13 @@ export default function Home() {
               DİL MASTER:
             </span>
             <br />
-            <span className="text-white">YDS, YDT ve YÖKDİL 7 Beceriyle Yanında!</span>
+            <span className="text-white">YDS, YDT ve YÖKDİL yolunda yanındayız!</span>
           </h1>
         </Reveal>
         <Reveal delay={220}>
           <p className="text-white/70 max-w-3xl mx-auto leading-relaxed text-sm sm:text-base">
-            Sınava özel 80 soruluk gerçek denemeler, 3D görsel flashcards, 27 animasyonlu gramer konusu, 
-            akademik okuma-dinleme-yazma-konuşma laboratuvarları ve 2010-2026 tüm yayınlar soru havuzu.
+            Biraz kelime, biraz pratik, bolca moral! Denemeler, görsel kelime kartları, gramer,
+            okuma-dinleme-yazma-konuşma çalışmaları ve sınav arşiviyle hedefe beraber ilerleyelim.
           </p>
         </Reveal>
         <Reveal delay={250}>

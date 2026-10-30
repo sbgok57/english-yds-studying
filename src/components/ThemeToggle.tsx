@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
+import { applyTheme, getSavedTheme } from "@/lib/themes/engine";
 
 interface ThemeToggleProps {
   compact?: boolean;
@@ -31,33 +32,10 @@ export default function ThemeToggle({ compact = false, className = "" }: ThemeTo
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
-
-    // Pürüzsüz geçiş sınıfı ekle
     document.documentElement.classList.add("theme-transition");
-
-    if (nextTheme === "light") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-      try {
-        localStorage.setItem("yds_theme", "light");
-        localStorage.setItem("yds_theme_mode", "light");
-        const savedId = parseInt(localStorage.getItem("yds_theme_id") || "1", 10);
-        import("@/lib/themes/engine").then(({ applyTheme }) => applyTheme(savedId, "light"));
-      } catch {
-        // // SAFETY: localStorage failover
-      }
-    } else {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-      try {
-        localStorage.setItem("yds_theme", "dark");
-        localStorage.setItem("yds_theme_mode", "dark");
-        const savedId = parseInt(localStorage.getItem("yds_theme_id") || "1", 10);
-        import("@/lib/themes/engine").then(({ applyTheme }) => applyTheme(savedId, "dark"));
-      } catch {
-        // // SAFETY: localStorage failover
-      }
-    }
+    // Use the theme engine as the single source of truth so the mode class,
+    // palette variables, storage preference and cross-tab event stay in sync.
+    applyTheme(getSavedTheme().theme.id, nextTheme);
 
     // Geçiş animasyonunu temizle
     setTimeout(() => {

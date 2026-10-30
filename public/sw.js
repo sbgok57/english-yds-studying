@@ -6,14 +6,13 @@
    - /api, auth, token, cookie ve kişisel veriler ASLA Cache Storage'a girmez.
    ============================================================ */
 
-const SW_VERSION = 'dil-master-offline-v2026.10.21-brand-audio-v1';
+const SW_VERSION = 'dil-master-offline-v2026.10.30-joyful-brand-v1';
 const APP_SHELL_CACHE = `${SW_VERSION}-shell`;
 
 const PUBLIC_APP_SHELL = [
   '/',
   '/manifest.json',
   '/favicon.ico',
-  '/favicon.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/apple-touch-icon.png',
