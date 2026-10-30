@@ -19,9 +19,10 @@ export default function ThemeToggle({ compact = false, className = "" }: ThemeTo
     const isLight = document.documentElement.classList.contains("light");
     setTheme(isLight ? "light" : "dark");
 
-    const handleThemeChange = (e: any) => {
-      if (e.detail?.mode) {
-        setTheme(e.detail.mode);
+    const handleThemeChange = (event: Event) => {
+      const mode = (event as CustomEvent<{ mode?: unknown }>).detail?.mode;
+      if (mode === "light" || mode === "dark") {
+        setTheme(mode);
       }
     };
 
