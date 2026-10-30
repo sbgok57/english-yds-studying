@@ -231,10 +231,9 @@ async function handleTtsRequest(
     return NextResponse.json(
       {
         ok: false,
-        code: "PROVIDER_ERROR",
-        fallbackToClient: true,
-        message: "Bulut ses motoru geçici olarak meşgul, istemci yerel ses motoru devreye girdi.",
-        error: err?.message || "Synthesis provider unavailable",
+        code: "VOICE_PROVIDER_UNAVAILABLE",
+        retryable: true,
+        message: "Seçilen konuşmacı için bulut ses sağlayıcısı şu anda yanıt veremedi. Cihaz sesiyle otomatik değişiklik yapılmadı.",
       },
       { status: 503 }
     );

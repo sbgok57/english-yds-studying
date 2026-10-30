@@ -43,6 +43,8 @@ export interface PlaybackOptions {
   onError?: (err: any) => void;
   onInfo?: (msg: string) => void;
   onMetadata?: (meta: PlaybackMetadata) => void;
+  /** Use a device voice only after the caller explicitly opts into unverified local speech. */
+  allowBrowserFallback?: boolean;
 }
 
 export interface UserVoicePreferences {
@@ -337,6 +339,9 @@ class ClientAudioManager {
 
     // SAFETY: Helper for browser speech synthesis fallback (never uses fake pitch shifting)
     const playWithBrowserSpeech = () => {
+      // Cloud failures must not silently change the requested accent/speaker or
+      // label an unverified device voice as the selected cloud voice.
+      if (!options?.allowBrowserFallback) return false;
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
         try {
           window.speechSynthesis.cancel();
@@ -460,7 +465,13 @@ class ClientAudioManager {
       const contentTypeHeader = res.headers.get("content-type") || "";
 
       if (!res.ok) {
-        throw new Error(`TTS API Hatası: HTTP ${res.status}`);
+        const errorPayload: unknown = await res.json().catch(() => null);
+        const message =
+          typeof errorPayload === "object" && errorPayload !== null && "message" in errorPayload &&
+          typeof errorPayload.message === "string"
+            ? errorPayload.message
+            : `TTS API isteği başarısız oldu (HTTP ${res.status}).`;
+        throw new Error(message);
       }
 
       if (!contentTypeHeader.toLowerCase().startsWith("audio/")) {
@@ -590,7 +601,8 @@ class ClientAudioManager {
         // Kullanıcı stopAll() çağırdıysa sessizce çık
         return;
       }
-      // PERF & SAFETY: Automatic Web Speech API Fallback ensures sounds NEVER fail
+      // A system voice is opt-in: an unavailable cloud voice must remain an
+      // honest playback error instead of silently changing speaker identity.
       const fallbackSuccess = playWithBrowserSpeech();
       if (!fallbackSuccess) {
         options?.onError?.(err instanceof Error ? err : new Error(String(err)));

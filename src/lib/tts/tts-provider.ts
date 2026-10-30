@@ -180,11 +180,9 @@ export function splitTextIntoChunks(text: string, maxLen: number = 180): string[
 }
 
 /**
- * Çok Katmanlı Neural TTS Sağlayıcısı:
- * 1. Azure Cognitive Services Speech REST API (if configured)
- * 2. Dedicated ElevenLabs Turkish narrator (if its speaker-specific voice ID is configured)
- * 3. Microsoft Edge Neural TTS WebSocket (msedge-tts)
- * 4. Locale-only HTTP fallback for English. Turkish never uses this shared-voice fallback.
+ * Provider-backed TTS. Only configured commercial providers are used: Azure
+ * Speech or an exact verified ElevenLabs voice pair. Browser/device speech and
+ * the unofficial Edge WebSocket are not treated as equivalent cloud voices.
  */
 export class EdgeTtsProvider implements TtsProvider {
   public readonly id = "msedge-neural";
@@ -307,53 +305,10 @@ export class EdgeTtsProvider implements TtsProvider {
       }
     }
 
-    // KATMAN 2: Microsoft Edge Neural WebSocket
-    try {
-      const { MsEdgeTTS, OUTPUT_FORMAT } = await import("msedge-tts");
-      for (let attempt = 1; attempt <= 2; attempt++) {
-        try {
-          const audioBuffer = await this.synthesizeWithTimeout(
-            MsEdgeTTS,
-            OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3,
-            voiceProfile.providerVoiceId,
-            escapedText,
-            rateOption,
-            3500
-          );
-
-          if (audioBuffer && isValidAudioBuffer(audioBuffer, "audio/mpeg")) {
-            return {
-              ok: true,
-              audio: audioBuffer,
-              mimeType: "audio/mpeg",
-              durationMs: Date.now() - startTime,
-              provider: this.id,
-              voiceId: voiceProfile.id,
-              providerVoiceId: voiceProfile.providerVoiceId,
-              locale: voiceProfile.locale,
-              contentLanguage: voiceProfile.contentLanguage,
-              distinctSpeakerVerified: true,
-              source: voiceProfile.source,
-            };
-          }
-        } catch (err: any) {
-          lastError = err;
-          if (String(err?.message || "").includes("403")) {
-            break;
-          }
-          if (attempt < 2) {
-            await new Promise((res) => setTimeout(res, 200));
-          }
-        }
-      }
-    } catch (importErr: any) {
-      lastError = importErr;
-    }
-
     const localeName = voiceProfile.locale === "tr-TR" ? "Türkçe" : voiceProfile.accentLabelTr;
-    const providerReason = lastError?.message || "ayrı bir konuşmacı sağlayıcısı yapılandırılmamış";
+    const providerReason = lastError?.message || "doğrulanmış bulut ses sağlayıcısı yapılandırılmamış";
     throw new Error(
-      `VOICE_NOT_AVAILABLE: ${localeName} ${voiceProfile.gender === "female" ? "kadın" : "erkek"} sesi doğrulanamadı (${providerReason}). Cihazdaki uygun sistem sesine güvenli geçiş yapılmalı.`,
+      `VOICE_NOT_AVAILABLE: ${localeName} ${voiceProfile.gender === "female" ? "kadın" : "erkek"} profili için doğrulanmış bulut sesi kullanılamıyor (${providerReason}).`,
     );
   }
 
@@ -429,48 +384,6 @@ export class EdgeTtsProvider implements TtsProvider {
     } finally {
       clearTimeout(timer);
     }
-  }
-
-  private synthesizeWithTimeout(
-    MsEdgeTTS: any,
-    format: string,
-    providerVoiceId: string,
-    text: string,
-    rateOption: string,
-    timeoutMs: number
-  ): Promise<Buffer> {
-    return new Promise((resolve, reject) => {
-      let isDone = false;
-      const timer = setTimeout(() => {
-        if (!isDone) {
-          isDone = true;
-          reject(new Error(`TIMEOUT: TTS işlemi ${timeoutMs}ms içinde yanıt vermedi.`));
-        }
-      }, timeoutMs);
-
-      (async () => {
-        try {
-          const tts = new MsEdgeTTS();
-          await tts.setMetadata(providerVoiceId, format);
-          const { audioStream } = tts.toStream(text, { rate: rateOption });
-          const chunks: Buffer[] = [];
-          for await (const chunk of audioStream) {
-            chunks.push(Buffer.from(chunk));
-          }
-          if (!isDone) {
-            isDone = true;
-            clearTimeout(timer);
-            resolve(Buffer.concat(chunks));
-          }
-        } catch (err) {
-          if (!isDone) {
-            isDone = true;
-            clearTimeout(timer);
-            reject(err);
-          }
-        }
-      })();
-    });
   }
 
   async healthCheck(voice?: VoiceProfile): Promise<TtsHealth> {
