@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac } from "crypto";
-import { AUTH_SECRET } from "@/lib/server-config";
+import { timingSafeEqual } from "crypto";
+import { getAuthSecret } from "@/lib/server-config";
 import {
   AUTH_ERROR_CODES,
   authError,
@@ -19,6 +20,15 @@ function b64urlDecode(str: string): Buffer {
 
 export async function POST(req: NextRequest) {
   const requestId = generateRequestId();
+  let authSecret: string;
+  try {
+    authSecret = getAuthSecret();
+  } catch {
+    return NextResponse.json(
+      authError(AUTH_ERROR_CODES.INTERNAL_SERVER_ERROR, "Güvenli doğrulama hizmeti şu anda kullanılamıyor.", undefined, requestId),
+      { status: 503 }
+    );
+  }
   let body: { email?: string; code?: string; challenge?: string } = {};
   try {
     body = await req.json();
@@ -96,11 +106,13 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const expectedSig = createHmac("sha256", AUTH_SECRET)
+  const expectedSig = createHmac("sha256", authSecret)
     .update(`${email}.${code}.${exp}`)
     .digest("hex");
 
-  if (expectedSig !== sig) {
+  const expectedBytes = Buffer.from(expectedSig, "hex");
+  const actualBytes = Buffer.from(sig, "hex");
+  if (expectedBytes.length !== actualBytes.length || !timingSafeEqual(expectedBytes, actualBytes)) {
     return NextResponse.json(
       authError(
         AUTH_ERROR_CODES.INVALID_OR_EXPIRED_CODE,

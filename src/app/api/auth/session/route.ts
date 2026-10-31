@@ -47,18 +47,14 @@ export async function GET(req: NextRequest) {
           createdAt: user.createdAt.toISOString(),
         };
       }
-    } catch (dbErr) {
-      console.warn(`[AUTH_SESSION_DB_FALLBACK] ${requestId} - Falling back to JWT payload:`, dbErr);
-      // Fallback to JWT payload data if database connection is temporarily unavailable
-      safeUser = {
-        id: payload.userId,
-        email: payload.email,
-        username: payload.username,
-        avatarId: "astronaut",
-        level: "A1",
-        streak: 1,
-        totalPoints: 50,
-      };
+    } catch {
+      // A signed token alone is not enough to keep an account active when the
+      // current database record cannot be checked. Fail closed; do not invent
+      // profile fields or grant stale roles from the token.
+      return NextResponse.json(
+        authSuccess({ authenticated: false, user: null }, "Hesap doğrulaması geçici olarak kullanılamıyor", requestId),
+        { status: 503 }
+      );
     }
 
     if (!safeUser) {
@@ -67,17 +63,11 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const isDesignatedAdmin =
-      Boolean(payload.isAdmin) ||
-      payload.role === "admin" ||
-      payload.username?.toLowerCase() === "sbgok57" ||
-      payload.email?.toLowerCase() === "sinembuse724@gmail.com" ||
-      safeUser.username?.toLowerCase() === "sbgok57" ||
-      safeUser.email?.toLowerCase() === "sinembuse724@gmail.com";
+    const isDesignatedAdmin = safeUser.email?.toLowerCase() === "sinembuse724@gmail.com";
 
     const userWithRole = {
       ...safeUser,
-      role: isDesignatedAdmin ? ("admin" as const) : (payload.role || "user"),
+      role: isDesignatedAdmin ? ("admin" as const) : "user",
       isAdmin: isDesignatedAdmin,
     };
 

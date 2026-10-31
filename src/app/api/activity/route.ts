@@ -1,242 +1,170 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifySessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
-import { adminClient } from "@/lib/supabase/admin";
+import { validateDatabaseConfig } from "@/lib/server-config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export interface ActivityRequestBody {
-  type: "game" | "vocabulary" | "grammar" | "reading" | "listening" | "writing" | "speaking" | "exam";
-  category?: "YDS" | "YDT" | "YÖKDİL" | "Genel";
-  title: string;
-  details?: string;
-  scoreOrCount?: string;
-  points?: number;
-  timeSpentMinutes?: number;
-  metadata?: Record<string, any>;
-  userEmail?: string;
-  username?: string;
+const ACTIVITY_TYPES = [
+  "game",
+  "vocabulary",
+  "grammar",
+  "reading",
+  "listening",
+  "writing",
+  "speaking",
+  "exam",
+] as const;
+type ActivityType = (typeof ACTIVITY_TYPES)[number];
+
+const CATEGORIES = ["YDS", "YDT", "YÖKDİL", "Genel"] as const;
+type ActivityCategory = (typeof CATEGORIES)[number];
+
+interface ActivityRequestBody {
+  type?: unknown;
+  category?: unknown;
+  title?: unknown;
+  details?: unknown;
+  scoreOrCount?: unknown;
+  timeSpentMinutes?: unknown;
+  metadata?: unknown;
+  // userEmail, username, and points from older clients are intentionally ignored.
 }
 
-// SAFETY: P0 Anti-Crash sanitization and boundary check
-function sanitizeString(val: unknown, maxLen = 300): string {
-  if (typeof val !== "string") return "";
-  return val.trim().slice(0, maxLen);
+function isActivityType(value: unknown): value is ActivityType {
+  return typeof value === "string" && ACTIVITY_TYPES.some((type) => type === value);
+}
+
+function isActivityCategory(value: unknown): value is ActivityCategory {
+  return typeof value === "string" && CATEGORIES.some((category) => category === value);
+}
+
+function sanitizeString(value: unknown, maxLength: number): string {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function jsonError(message: string, status: number) {
+  return NextResponse.json({ ok: false, error: message }, { status });
+}
+
+async function getSessionUser(req: NextRequest) {
+  const token = req.cookies.get(SESSION_COOKIE_NAME)?.value;
+  if (!token) return null;
+
+  const payload = await verifySessionToken(token);
+  if (!payload?.userId) return null;
+
+  return prisma.user.findUnique({
+    where: { id: payload.userId },
+    select: { id: true, email: true, username: true },
+  });
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const body: ActivityRequestBody = await req.json().catch(() => ({}) as any);
+    const database = validateDatabaseConfig();
+    if (!database.valid) return jsonError("Kalıcı veritabanı yapılandırılmadı.", 503);
 
-    const type = (body.type || "game") as ActivityRequestBody["type"];
-    const category = (body.category || "Genel") as ActivityRequestBody["category"];
-    const title = sanitizeString(body.title || "Çalışma Aktivitesi", 150);
-    const details = sanitizeString(body.details || "", 500);
-    const scoreOrCount = sanitizeString(body.scoreOrCount || "", 50);
-    const points = Math.min(Math.max(0, Number(body.points) || 10), 500);
-    const timeSpentMinutes = Math.min(Math.max(1, Number(body.timeSpentMinutes) || 1), 300);
-    const metadata = typeof body.metadata === "object" && body.metadata !== null ? body.metadata : {};
+    // Never identify the owner from client-supplied email/name or choose a default student.
+    const user = await getSessionUser(req);
+    if (!user) return jsonError("Aktivite kaydetmek için geçerli bir oturum açın.", 401);
 
-    // 1. Resolve student user ID with multiple fallbacks
-    let targetUserId: string | null = null;
-    let targetUserEmail: string | null = null;
-    let targetUsername: string | null = null;
-
-    // A. Check verified session cookie first and confirm user exists in DB
-    const sessionCookie = req.cookies.get(SESSION_COOKIE_NAME)?.value;
-    if (sessionCookie) {
-      try {
-        const payload = await verifySessionToken(sessionCookie);
-        if (payload?.userId) {
-          const existingUser = await prisma.user.findUnique({
-            where: { id: payload.userId },
-          });
-          if (existingUser) {
-            targetUserId = existingUser.id;
-            targetUserEmail = existingUser.email;
-            targetUsername = existingUser.username;
-          }
-        }
-      } catch {
-        // Fallback to body identifiers
-      }
+    let body: ActivityRequestBody;
+    try {
+      body = await req.json();
+    } catch {
+      return jsonError("İstek gövdesi geçerli JSON değil.", 400);
     }
 
-    // B. Check request body email or username
-    const reqEmail = sanitizeString(body.userEmail, 100).toLowerCase();
-    const reqUsername = sanitizeString(body.username, 60).toLowerCase();
-
-    if (!targetUserId && (reqEmail || reqUsername)) {
-      try {
-        const found = await prisma.user.findFirst({
-          where: {
-            OR: [
-              ...(reqEmail ? [{ email: { equals: reqEmail } }] : []),
-              ...(reqUsername ? [{ username: { equals: reqUsername } }] : []),
-            ],
-          },
-        });
-        if (found) {
-          targetUserId = found.id;
-          targetUserEmail = found.email;
-          targetUsername = found.username;
-        }
-      } catch (err) {
-        console.warn("[ACTIVITY_USER_LOOKUP_WARN]", err);
-      }
+    if (!isActivityType(body.type)) return jsonError("Aktivite türü geçersiz.", 400);
+    if (body.category !== undefined && !isActivityCategory(body.category)) {
+      return jsonError("Aktivite kategorisi geçersiz.", 400);
     }
 
-    // C. Special check for Yağız (yagoo_x / yagiz.ilhan32@gmail.com)
-    if (!targetUserId && (reqEmail.includes("yagiz") || reqUsername.includes("yagoo"))) {
-      try {
-        const yagiz = await prisma.user.findFirst({
-          where: {
-            OR: [
-              { email: "yagiz.ilhan32@gmail.com" },
-              { username: "yagoo_x" },
-            ],
-          },
-        });
-        if (yagiz) {
-          targetUserId = yagiz.id;
-          targetUserEmail = yagiz.email;
-          targetUsername = yagiz.username;
-        }
-      } catch {
-        // Safe degrade
-      }
-    }
+    const title = sanitizeString(body.title, 150);
+    if (!title) return jsonError("Aktivite başlığı zorunludur.", 400);
 
-    // D. Fallback to the first registered student (excluding root admin sbgok57)
-    if (!targetUserId) {
-      try {
-        const firstStudent = await prisma.user.findFirst({
-          where: {
-            username: { not: "sbgok57" },
-            email: { not: "sinembuse724@gmail.com" },
-          },
-          orderBy: { createdAt: "asc" },
-        });
-        if (firstStudent) {
-          targetUserId = firstStudent.id;
-          targetUserEmail = firstStudent.email;
-          targetUsername = firstStudent.username;
-        }
-      } catch {
-        // Safe degrade
-      }
-    }
+    const details = sanitizeString(body.details, 500);
+    const scoreOrCount = sanitizeString(body.scoreOrCount, 50);
+    const requestedMinutes = Number(body.timeSpentMinutes);
+    const timeSpentMinutes = Number.isFinite(requestedMinutes)
+      ? Math.min(Math.max(Math.round(requestedMinutes), 1), 300)
+      : 1;
+    const metadata =
+      typeof body.metadata === "object" && body.metadata !== null && !Array.isArray(body.metadata)
+        ? body.metadata
+        : {};
 
-    // If still no user exists, fail safely without throwing
-    if (!targetUserId) {
-      return NextResponse.json(
-        { ok: false, error: "Kullanıcı bulunamadı. Lütfen oturum açın." },
-        { status: 400 }
-      );
-    }
-
-    // 2. Persist activity to Prisma Progress table
-    const progressData = {
-      category,
-      title,
-      details,
-      scoreOrCount,
-      points,
-      timeSpentMinutes,
-      metadata,
-      timestamp: new Date().toISOString(),
-    };
-
+    // Generic activity records do not award points. Score-bearing rewards must be
+    // calculated by a server-side completion endpoint, never trusted from a client.
+    const points = 0;
     const newProgress = await prisma.progress.create({
       data: {
-        userId: targetUserId,
-        type,
-        data: JSON.stringify(progressData),
+        userId: user.id,
+        type: body.type,
+        data: JSON.stringify({
+          category: body.category ?? "Genel",
+          title,
+          details,
+          scoreOrCount,
+          points,
+          timeSpentMinutes,
+          metadata,
+          timestamp: new Date().toISOString(),
+          source: "authenticated-user-action",
+        }),
       },
     });
-
-    // 3. Update student user totalPoints & streak
-    try {
-      await prisma.user.update({
-        where: { id: targetUserId },
-        data: {
-          totalPoints: { increment: points },
-        },
-      });
-    } catch (updateErr) {
-      console.warn("[ACTIVITY_USER_UPDATE_WARN]", updateErr);
-    }
-
-    // 4. Dual-sync to Supabase user metadata / user_stats if Supabase auth user exists
-    if (targetUserEmail) {
-      try {
-        // Best-effort non-blocking sync to Supabase admin
-        const { data: usersData } = await adminClient.auth.admin.listUsers();
-        const sbUser = usersData?.users?.find(
-          (u) => (u.email || "").toLowerCase() === targetUserEmail?.toLowerCase()
-        );
-        if (sbUser) {
-          const currentMeta = sbUser.user_metadata || {};
-          const currentPoints = (Number(currentMeta.totalPoints) || 0) + points;
-          await adminClient.auth.admin.updateUserById(sbUser.id, {
-            user_metadata: {
-              ...currentMeta,
-              totalPoints: currentPoints,
-              lastActive: new Date().toISOString(),
-            },
-          });
-        }
-      } catch {
-        // Supabase sync is optional enhancement, never crash
-      }
-    }
 
     return NextResponse.json({
       ok: true,
       activityId: newProgress.id,
-      userId: targetUserId,
-      username: targetUsername,
+      userId: user.id,
+      username: user.username,
       pointsAwarded: points,
     });
-  } catch (error: any) {
-    // SAFETY: Never crash serverless process on activity logging
-    console.error("[ACTIVITY_LOG_ERROR]", error);
-    return NextResponse.json(
-      { ok: false, error: "Aktivite kaydedilirken sunucu hatası oluştu." },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error("[ACTIVITY_LOG_ERROR]", error instanceof Error ? error.name : "unknown");
+    return jsonError("Aktivite kaydedilirken sunucu hatası oluştu.", 500);
   }
 }
 
 export async function GET(req: NextRequest) {
   try {
-    const studentParam = req.nextUrl.searchParams.get("student");
-    const limit = Math.min(Number(req.nextUrl.searchParams.get("limit")) || 30, 100);
+    const database = validateDatabaseConfig();
+    if (!database.valid) return jsonError("Kalıcı veritabanı yapılandırılmadı.", 503);
 
-    let targetUserId: string | null = null;
+    const requester = await getSessionUser(req);
+    if (!requester) return jsonError("Aktiviteleri görmek için geçerli bir oturum açın.", 401);
 
-    if (studentParam) {
-      const u = await prisma.user.findFirst({
-        where: {
-          OR: [
-            { id: studentParam },
-            { email: studentParam.toLowerCase() },
-            { username: studentParam.toLowerCase() },
-          ],
-        },
-      });
-      targetUserId = u?.id || null;
-    } else {
-      const sessionCookie = req.cookies.get(SESSION_COOKIE_NAME)?.value;
-      if (sessionCookie) {
-        const payload = await verifySessionToken(sessionCookie);
-        targetUserId = payload?.userId || null;
+    const requestedStudent = req.nextUrl.searchParams.get("student")?.trim();
+    const limitValue = Number(req.nextUrl.searchParams.get("limit"));
+    const limit = Number.isFinite(limitValue) && limitValue > 0
+      ? Math.min(Math.floor(limitValue), 100)
+      : 30;
+    const requesterIsAdmin = requester.email.toLowerCase() === "sinembuse724@gmail.com";
+
+    let targetUserId = requester.id;
+    if (requestedStudent) {
+      if (!requesterIsAdmin) {
+        const matchesRequester = [requester.id, requester.email.toLowerCase(), requester.username.toLowerCase()]
+          .includes(requestedStudent.toLowerCase());
+        if (!matchesRequester) return jsonError("Başka bir kullanıcının etkinliklerine erişemezsiniz.", 403);
+      } else {
+        const target = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { id: requestedStudent },
+              { email: requestedStudent.toLowerCase() },
+              { username: requestedStudent.toLowerCase() },
+            ],
+          },
+          select: { id: true },
+        });
+        if (!target) return jsonError("Kullanıcı bulunamadı.", 404);
+        targetUserId = target.id;
       }
-    }
-
-    if (!targetUserId) {
-      return NextResponse.json({ ok: true, activities: [] });
     }
 
     const records = await prisma.progress.findMany({
@@ -245,31 +173,36 @@ export async function GET(req: NextRequest) {
       take: limit,
     });
 
-    const activities = records.map((r) => {
-      let parsed: any = {};
+    const activities = records.map((record) => {
+      let data: Record<string, unknown> = {};
       try {
-        parsed = JSON.parse(r.data);
+        const parsed: unknown = JSON.parse(record.data);
+        if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+          data = parsed as Record<string, unknown>;
+        }
       } catch {
-        parsed = {};
+        // Preserve the record while returning safe defaults for malformed historical JSON.
       }
+
       return {
-        id: r.id,
-        type: r.type,
-        category: parsed.category || "Genel",
-        title: parsed.title || "Çalışma Aktivitesi",
-        details: parsed.details || "",
-        scoreOrCount: parsed.scoreOrCount || "",
-        timeSpentMinutes: parsed.timeSpentMinutes || 1,
-        points: parsed.points || 0,
-        createdAt: r.createdAt.toISOString(),
+        id: record.id,
+        type: record.type,
+        category: typeof data.category === "string" ? data.category : "Genel",
+        title: typeof data.title === "string" ? data.title : "Çalışma Aktivitesi",
+        details: typeof data.details === "string" ? data.details : "",
+        scoreOrCount: typeof data.scoreOrCount === "string" ? data.scoreOrCount : "",
+        timeSpentMinutes:
+          typeof data.timeSpentMinutes === "number" && Number.isFinite(data.timeSpentMinutes)
+            ? data.timeSpentMinutes
+            : 1,
+        points: typeof data.points === "number" && Number.isFinite(data.points) ? data.points : 0,
+        createdAt: record.createdAt.toISOString(),
       };
     });
 
     return NextResponse.json({ ok: true, activities });
-  } catch (err: any) {
-    return NextResponse.json(
-      { ok: false, error: "Aktiviteler getirilemedi." },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error("[ACTIVITY_READ_ERROR]", error instanceof Error ? error.name : "unknown");
+    return jsonError("Aktiviteler getirilemedi.", 500);
   }
 }

@@ -4,7 +4,6 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
 
 function sanitizeUrl(url) {
   if (!url) return "";
@@ -34,6 +33,12 @@ function resolveDbEnvironment() {
   // Check common Vercel / Cloud environment variables (standard or prefixed)
   const rawDbUrl = findEnvVar(["DATABASE_URL", "POSTGRES_PRISMA_URL", "POSTGRES_URL"]);
   const rawDirectUrl = findEnvVar(["DIRECT_URL", "POSTGRES_URL_NON_POOLING"]);
+
+  // Never allow a serverless production build to silently use a disposable
+  // SQLite file. It would appear to save data while losing it across instances.
+  if (process.env.VERCEL && !rawDbUrl) {
+    throw new Error("A persistent DATABASE_URL is required for Vercel builds.");
+  }
 
   // Auto-export Supabase URL and keys to standard names if prefixed versions exist
   const supabaseUrl = findEnvVar(["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_URL"]);
@@ -110,19 +115,10 @@ function updateSchemaPrisma(provider) {
 }
 
 function syncDatabaseSchema(provider, activeUrl) {
-  // In remote database environments (PostgreSQL / MySQL), ensure all tables exist
+  // Builds must not mutate production schemas. Apply reviewed migrations as a
+  // separate, explicit release step instead of running `prisma db push` here.
   if (provider === "postgresql" || provider === "mysql") {
-    console.log(`[PREPARE_DB] Verifying table schemas on remote ${provider} database...`);
-    try {
-      execSync("npx prisma db push --skip-generate", {
-        stdio: "inherit",
-        timeout: 20000,
-        env: process.env,
-      });
-      console.log(`[PREPARE_DB] ✅ Remote database schema verified successfully.`);
-    } catch (err) {
-      console.warn(`[PREPARE_DB] ⚠️ Note: Remote schema push encountered an issue (will proceed with build):`, err.message || err);
-    }
+    console.log(`[PREPARE_DB] Skipping remote ${provider} schema mutation during build.`);
   }
 }
 

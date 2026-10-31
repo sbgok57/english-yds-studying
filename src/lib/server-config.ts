@@ -1,8 +1,8 @@
 import path from "path";
 import fs from "fs";
-import { AUTH_SECRET } from "./auth-secret";
+import { getAuthSecret } from "./auth-secret";
 
-export { AUTH_SECRET };
+export { getAuthSecret };
 
 export const IS_SERVERLESS = !!(
   process.env.VERCEL ||
@@ -61,8 +61,9 @@ export function validateDatabaseConfig(): { valid: boolean; provider: string; er
   if (!rawUrl) {
     if (IS_SERVERLESS) {
       return {
-        valid: true,
-        provider: "sqlite",
+        valid: false,
+        provider: "unknown",
+        error: "A persistent remote DATABASE_URL is required in serverless environments",
       };
     }
     return {
@@ -113,62 +114,24 @@ export function getSafeDatabaseUrl(): string {
     return rawUrl;
   }
 
-  // 2. In Serverless environments (Vercel Lambda), write operations require /tmp
+  // A writable /tmp SQLite copy is ephemeral per serverless instance and must
+  // never be presented as persistent application storage.
   if (IS_SERVERLESS) {
-    const tmpDbPath = "/tmp/dev.db";
+    throw new Error("A persistent remote DATABASE_URL is required in serverless environments.");
+  }
 
-    try {
-      if (!fs.existsSync(tmpDbPath)) {
-        const candidateSourcePaths = [
-          path.join(process.cwd(), "prisma", "dev.db"),
-          path.resolve(__dirname, "../../prisma/dev.db"),
-          path.resolve(__dirname, "../prisma/dev.db"),
-          path.join(process.cwd(), "dev.db"),
-          path.resolve("/var/task/prisma/dev.db"),
-          path.resolve("/var/task/dev.db"),
-        ];
-
-        let foundSource: string | null = null;
-        for (const candidate of candidateSourcePaths) {
-          try {
-            if (fs.existsSync(candidate) && fs.statSync(candidate).size > 0) {
-              foundSource = candidate;
-              break;
-            }
-          } catch {
-            // Ignore access errors on candidate probe
-          }
-        }
-
-        if (foundSource) {
-          fs.copyFileSync(foundSource, tmpDbPath);
-          try {
-            fs.chmodSync(tmpDbPath, 0o666);
-          } catch {
-            /* ignore */
-          }
-        }
-      }
-    } catch (err) {
-      console.warn("[SERVER_CONFIG] Notice copying SQLite to /tmp:", err);
-    }
-
-    return `file:${tmpDbPath}`;
+  // Respect an explicitly configured local SQLite URL first. This is required
+  // for isolated test databases and prevents accidental writes to prisma/dev.db.
+  if (rawUrl && rawUrl.startsWith("file:")) {
+    const cleanPath = rawUrl.replace(/^file:/, "");
+    const resolvedPath = path.isAbsolute(cleanPath) ? cleanPath : path.resolve(process.cwd(), cleanPath);
+    return `file:${resolvedPath}`;
   }
 
   // 3. In persistent / local development environments:
   const canonicalPrismaDb = path.resolve(process.cwd(), "prisma", "dev.db");
   if (fs.existsSync(canonicalPrismaDb) && fs.statSync(canonicalPrismaDb).size > 0) {
     return `file:${canonicalPrismaDb}`;
-  }
-
-  // If rawUrl points to an existing file, use it
-  if (rawUrl && rawUrl.startsWith("file:")) {
-    const cleanPath = rawUrl.replace(/^file:/, "");
-    const resolvedPath = path.isAbsolute(cleanPath) ? cleanPath : path.resolve(process.cwd(), cleanPath);
-    if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).size > 0) {
-      return `file:${resolvedPath}`;
-    }
   }
 
   return `file:${canonicalPrismaDb}`;

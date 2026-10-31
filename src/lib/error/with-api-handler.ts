@@ -14,9 +14,10 @@ export interface ApiCtx {
 }
 
 type Handler = (req: Request, ctx: ApiCtx) => Promise<Response>
+type RouteContext = { params: Promise<Record<string, string>> }
 
 export function withApiHandler(name: string, handler: Handler) {
-  return async (req: Request, routeCtx?: Record<string, unknown>): Promise<Response> => {
+  return async (req: Request, routeCtx: RouteContext): Promise<Response> => {
     const cid = newCid()
     const started = Date.now()
 

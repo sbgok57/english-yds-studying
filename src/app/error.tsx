@@ -5,6 +5,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function ErrorPage({
   error,
@@ -39,12 +40,12 @@ export default function ErrorPage({
         >
           🔄 Tekrar dene
         </button>
-        <a
+        <Link
           href="/"
           className="rounded-xl bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-200 hover:bg-slate-700 transition"
         >
           Ana sayfa
-        </a>
+        </Link>
       </div>
     </main>
   );

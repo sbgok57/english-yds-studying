@@ -12,19 +12,21 @@ export function generateStaticParams() {
   return GRAMMAR_TOPICS.map((t) => ({ slug: t.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const topic = GRAMMAR_TOPICS.find((t) => t.slug === slug);
   return {
     title: topic ? `${topic.title} — DİL MASTER Gramer` : "Gramer — DİL MASTER",
   };
 }
 
-export default function GrammarTopicPage({ params }: { params: { slug: string } }) {
-  let topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+export default async function GrammarTopicPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  let topic = GRAMMAR_TOPICS.find((t) => t.slug === slug);
 
   // İngilizce/takma adla gelindiyse (örn. "simple-present") doğru konuya yönlendir.
   if (!topic) {
-    const canonical = findGrammarByAlias(params.slug);
+    const canonical = findGrammarByAlias(slug);
     if (canonical) redirect(`/grammar/${canonical}`);
   }
 
@@ -32,7 +34,7 @@ export default function GrammarTopicPage({ params }: { params: { slug: string } 
     return (
       <TopicFallback
         title="Gramer konusu"
-        slug={params.slug}
+        slug={slug}
         items={GRAMMAR_TOPICS.map((t) => ({ slug: t.slug, title: t.title, emoji: t.emoji }))}
         listHref="/grammar"
       />

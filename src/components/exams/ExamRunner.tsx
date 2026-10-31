@@ -42,6 +42,7 @@ export default function ExamRunner({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
   const hasRecordedRef = useRef(false);
+  const hasCloudSubmissionRef = useRef(false);
   const isSubmittingRef = useRef(false);
   const { update } = useUsage();
 
@@ -135,6 +136,28 @@ export default function ExamRunner({
     }
   }, [submitted, stats.correct, stats.wrong, stats.net, questions, update]);
 
+  // Persist the actual answer map; the server independently grades it against
+  // the same deterministic question bank and attributes it from the signed cookie.
+  useEffect(() => {
+    if (!submitted || hasCloudSubmissionRef.current || !questions.length) return;
+    hasCloudSubmissionRef.current = true;
+    const submittedAnswers = Object.fromEntries(
+      Object.entries(answers).map(([questionNumber, answerIndex]) => [questionNumber, answerIndex])
+    );
+    void fetch(`/api/exams/${encodeURIComponent(meta.id)}/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        answers: submittedAnswers,
+        timeSpent: Math.max(0, Math.min(totalSec, totalSec - timeLeft)),
+      }),
+      keepalive: true,
+    }).catch(() => {
+      // The local exam result remains available; the server never receives a
+      // client-selected user identity or client-computed score.
+    });
+  }, [submitted, questions, answers, meta.id, totalSec, timeLeft]);
+
   const answeredCount = Object.keys(answers).length;
 
   const select = (qIndex: number, opt: number) => {
@@ -214,6 +237,7 @@ export default function ExamRunner({
               onClick={() => {
                 clearSessionCheckpoint("exam");
                 hasRecordedRef.current = false;
+                hasCloudSubmissionRef.current = false;
                 setSubmitted(false);
                 setAnswers({});
                 setFlags({});

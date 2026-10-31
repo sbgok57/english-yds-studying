@@ -99,7 +99,7 @@ async function runErrorShieldTests() {
     },
   });
 
-  const response = await pushSendGet(unauthReq);
+  const response = await pushSendGet(unauthReq, { params: Promise.resolve({}) });
   assert.strictEqual(response.status, 401, 'Yanlış secret HTTP 401 dönmelidir');
   const body = await response.json();
   assert.strictEqual(body.ok, false, 'Zarf ok: false olmalıdır');

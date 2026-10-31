@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createHmac } from "crypto";
+import { timingSafeEqual } from "crypto";
 import { signSessionToken, SESSION_COOKIE_NAME } from "@/lib/server-auth";
-import { AUTH_SECRET } from "@/lib/server-config";
+import { getAuthSecret } from "@/lib/server-config";
 import { withDbRetry } from "@/lib/db-retry";
 import {
   AUTH_ERROR_CODES,
@@ -33,10 +34,13 @@ function verifyChallengeCode(email: string, code: string, challenge: string): bo
     if (parsed.email !== email) return false;
     if (Date.now() > Number(parsed.exp)) return false;
 
-    const expectedSig = createHmac("sha256", AUTH_SECRET)
+    const expectedSig = createHmac("sha256", getAuthSecret())
       .update(`${email}.${code}.${parsed.exp}`)
       .digest("hex");
-    return expectedSig === sig;
+    if (!/^[a-f0-9]{64}$/i.test(sig)) return false;
+    const expected = Buffer.from(expectedSig, "hex");
+    const actual = Buffer.from(sig, "hex");
+    return expected.length === actual.length && timingSafeEqual(expected, actual);
   } catch {
     return false;
   }
@@ -94,20 +98,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 2. Verification Challenge Check (if challenge provided)
-    if (challenge && code) {
-      const isCodeValid = verifyChallengeCode(email, code, challenge);
-      if (!isCodeValid) {
-        return NextResponse.json(
-          authError(
-            AUTH_ERROR_CODES.INVALID_OR_EXPIRED_CODE,
-            "E-posta doğrulama kodu geçersiz veya süresi dolmuş kanka.",
-            "code",
-            requestId
-          ),
-          { status: 400 }
-        );
-      }
+    // Registration is never allowed to bypass email verification.
+    if (!challenge || !code || !verifyChallengeCode(email, code, challenge)) {
+      return NextResponse.json(
+        authError(
+          AUTH_ERROR_CODES.INVALID_OR_EXPIRED_CODE,
+          "E-posta doğrulama kodu geçersiz veya süresi dolmuş kanka.",
+          "code",
+          requestId
+        ),
+        { status: 400 }
+      );
     }
 
     // 3. Create Permanent Cloud-Backed User (Supabase Auth & PostgreSQL + Prisma sync)

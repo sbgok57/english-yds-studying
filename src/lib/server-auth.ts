@@ -1,5 +1,5 @@
 // Secure Server-Side Session Token Management (Edge & Node compatible via Web Crypto)
-import { AUTH_SECRET } from "./auth-secret";
+import { getAuthSecret } from "./auth-secret";
 
 export interface SessionPayload {
   userId: string;
@@ -51,15 +51,13 @@ export async function signSessionToken(payload: Omit<SessionPayload, "iat" | "ex
   const exp = payload.exp || iat + TOKEN_MAX_AGE;
 
   // SAFETY: user sbgok57 or sinembuse724@gmail.com is designated site admin
-  const isTargetAdmin =
-    payload.username?.toLowerCase() === "sbgok57" ||
-    payload.email?.toLowerCase() === "sinembuse724@gmail.com" ||
-    payload.role === "admin" ||
-    payload.isAdmin === true;
+  // Only the designated, verified account email grants the legacy admin role.
+  // Never trust caller-provided role/isAdmin fields or a freely chosen username.
+  const isTargetAdmin = payload.email?.trim().toLowerCase() === "sinembuse724@gmail.com";
 
   const fullPayload: SessionPayload = {
     ...payload,
-    role: isTargetAdmin ? "admin" : (payload.role || "user"),
+    role: isTargetAdmin ? "admin" : "user",
     isAdmin: isTargetAdmin,
     iat,
     exp,
@@ -70,7 +68,7 @@ export async function signSessionToken(payload: Omit<SessionPayload, "iat" | "ex
   const payloadB64 = b64urlEncode(enc.encode(JSON.stringify(fullPayload)));
   const dataToSign = `${headerB64}.${payloadB64}`;
 
-  const key = await getHmacKey(AUTH_SECRET);
+  const key = await getHmacKey(getAuthSecret());
   const signature = await crypto.subtle.sign("HMAC", key, enc.encode(dataToSign));
   const signatureB64 = b64urlEncode(signature);
 
@@ -88,7 +86,7 @@ export async function verifySessionToken(token: string): Promise<SessionPayload 
 
   try {
     const enc = new TextEncoder();
-    const key = await getHmacKey(AUTH_SECRET);
+    const key = await getHmacKey(getAuthSecret());
     const signatureBytes = b64urlDecode(signatureB64);
 
     const valid = await crypto.subtle.verify(

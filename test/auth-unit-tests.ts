@@ -1,6 +1,7 @@
 import assert from "assert";
 import { getSafeDatabaseUrl } from "../src/lib/server-config";
 import { signSessionToken, verifySessionToken } from "../src/lib/server-auth";
+import { getAuthSecret } from "../src/lib/auth-secret";
 import {
   authSuccess,
   authError,
@@ -10,12 +11,20 @@ import {
 
 async function runUnitTests() {
   console.log("▶ Starting Auth Unit Tests...");
+  const originalAuthSecret = process.env.AUTH_SECRET;
+  const originalNextAuthSecret = process.env.NEXTAUTH_SECRET;
+  process.env.AUTH_SECRET = "unit-test-only-auth-secret-0123456789abcdef";
 
   // 1. Database URL Resolution
   console.log("  Testing database URL resolution...");
   const localUrl = getSafeDatabaseUrl();
   assert(localUrl.startsWith("file:"), "Database URL must start with file:");
-  assert(localUrl.includes("dev.db"), "Database URL must point to dev.db");
+  const configuredUrl = process.env.DATABASE_URL;
+  if (configuredUrl?.startsWith("file:")) {
+    assert(localUrl.includes(configuredUrl.replace(/^file:/, "")), "Explicit test database URL must be honored");
+  } else {
+    assert(localUrl.includes("dev.db"), "Database URL must point to dev.db when no explicit URL is configured");
+  }
 
   // 2. Auth Contract
   console.log("  Testing auth contract helpers...");
@@ -58,6 +67,31 @@ async function runUnitTests() {
   assert.strictEqual(verified?.email, testPayload.email);
   assert.strictEqual(verified?.username, testPayload.username);
   assert(typeof verified?.exp === "number", "Token must have numeric expiration");
+
+  const forgedRoleToken = await signSessionToken({
+    ...testPayload,
+    username: "ordinary_student",
+    role: "admin",
+    isAdmin: true,
+  });
+  const forgedRolePayload = await verifySessionToken(forgedRoleToken);
+  assert.strictEqual(forgedRolePayload?.role, "user", "Caller-provided role must not grant admin access");
+  assert.strictEqual(forgedRolePayload?.isAdmin, false, "Caller-provided isAdmin must not grant admin access");
+
+  console.log("  Testing fail-closed signing secret configuration...");
+  const previousAuthSecret = process.env.AUTH_SECRET;
+  const previousNextAuthSecret = process.env.NEXTAUTH_SECRET;
+  delete process.env.AUTH_SECRET;
+  delete process.env.NEXTAUTH_SECRET;
+  assert.throws(() => getAuthSecret(), /at least 32 characters/);
+  process.env.AUTH_SECRET = "too-short";
+  assert.throws(() => getAuthSecret(), /at least 32 characters/);
+  process.env.AUTH_SECRET = "a".repeat(40);
+  assert.strictEqual(getAuthSecret().length, 40);
+  if (previousAuthSecret === undefined) delete process.env.AUTH_SECRET;
+  else process.env.AUTH_SECRET = previousAuthSecret;
+  if (previousNextAuthSecret === undefined) delete process.env.NEXTAUTH_SECRET;
+  else process.env.NEXTAUTH_SECRET = previousNextAuthSecret;
 
   // 4. Tampered Token Rejection
   console.log("  Testing tampered token rejection...");
@@ -127,6 +161,10 @@ async function runUnitTests() {
   }
 
   console.log("✅ All Auth Unit Tests Passed Successfully!");
+  if (originalAuthSecret === undefined) delete process.env.AUTH_SECRET;
+  else process.env.AUTH_SECRET = originalAuthSecret;
+  if (originalNextAuthSecret === undefined) delete process.env.NEXTAUTH_SECRET;
+  else process.env.NEXTAUTH_SECRET = originalNextAuthSecret;
 }
 
 runUnitTests().catch((err) => {

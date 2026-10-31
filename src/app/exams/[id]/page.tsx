@@ -2,8 +2,9 @@ import { getExamMeta, getExamQuestions } from "@/lib/data-exams";
 import ExamRunner from "@/components/ExamRunner";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
-export function generateMetadata({ params }: { params: { id: string } }) {
-  const id = params?.id || "yds-2024-ilkbahar";
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id: routeId } = await params;
+  const id = routeId || "yds-2024-ilkbahar";
   const meta = getExamMeta(id);
   return {
     title: `${meta.title} — DİL MASTER Optik Sınav`,
@@ -11,9 +12,10 @@ export function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
-export default function ExamPage({ params }: { params: { id: string } }) {
+export default async function ExamPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id: routeId } = await params;
   // id ne olursa olsun güvenli veri döndürülür → client-side exception oluşmaz.
-  const id = params?.id || "yds-2024-ilkbahar";
+  const id = routeId || "yds-2024-ilkbahar";
   const meta = getExamMeta(id);
   const questions = getExamQuestions(id);
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { Component, type ReactNode } from "react";
+import Link from "next/link";
 
 /** İkinci güvenlik katmanı: herhangi bir render hatasında sayfayı çökertmez,
  *  "Tekrar Dene" ile kurtarır. Route seviyesindeki app/error.tsx ile birlikte çalışır. */
@@ -63,12 +64,12 @@ export default class ErrorBoundary extends Component<
               >
                 🔄 Tekrar Dene
               </button>
-              <a
+              <Link
                 href="/"
                 className="px-6 py-3 rounded-full border border-white/20 font-bold hover:bg-white/10 transition-all"
               >
                 Ana Sayfa
-              </a>
+              </Link>
             </div>
           </div>
         </div>

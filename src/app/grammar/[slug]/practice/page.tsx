@@ -10,18 +10,20 @@ export function generateStaticParams() {
   return GRAMMAR_TOPICS.map((t) => ({ slug: t.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const topic = GRAMMAR_TOPICS.find((t) => t.slug === slug);
   return {
     title: topic ? `${topic.title} 100 Soru Testi — DİL MASTER` : "Gramer Konu Testi — DİL MASTER",
   };
 }
 
-export default function GrammarPracticePage({ params }: { params: { slug: string } }) {
-  let topic = GRAMMAR_TOPICS.find((t) => t.slug === params.slug);
+export default async function GrammarPracticePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  let topic = GRAMMAR_TOPICS.find((t) => t.slug === slug);
 
   if (!topic) {
-    const canonical = findGrammarByAlias(params.slug);
+    const canonical = findGrammarByAlias(slug);
     if (canonical) redirect(`/grammar/${canonical}/practice`);
   }
 
@@ -33,7 +35,7 @@ export default function GrammarPracticePage({ params }: { params: { slug: string
         </div>
       }
     >
-      <TopicPracticeRunner slug={params.slug} topic={topic} />
+      <TopicPracticeRunner slug={slug} topic={topic} />
     </Suspense>
   );
 }

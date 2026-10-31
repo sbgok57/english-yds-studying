@@ -10,20 +10,22 @@ export function generateStaticParams() {
   return TACTICS.map((t) => ({ slug: t.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const tactic = TACTICS.find((t) => t.slug === params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const tactic = TACTICS.find((t) => t.slug === slug);
   return {
     title: tactic ? `${tactic.title} — DİL MASTER Taktikleri` : "Taktikler — DİL MASTER",
   };
 }
 
-export default function TacticPage({ params }: { params: { slug: string } }) {
-  const tactic = TACTICS.find((t) => t.slug === params.slug);
+export default async function TacticPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const tactic = TACTICS.find((t) => t.slug === slug);
   if (!tactic) {
     return (
       <TopicFallback
         title="Soru taktiği"
-        slug={params.slug}
+        slug={slug}
         items={TACTICS.map((t) => ({ slug: t.slug, title: t.title, emoji: t.emoji }))}
         listHref="/tactics"
       />

@@ -24,12 +24,7 @@ const nextConfig = {
       process.env.englishydsstudying_NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
       "",
   },
-  experimental: {
-    serverComponentsExternalPackages: ["msedge-tts", "nodemailer"],
-    outputFileTracingIncludes: {
-      "/api/**/*": ["./prisma/dev.db", "./prisma/schema.prisma"],
-    },
-  },
+  serverExternalPackages: ["msedge-tts", "nodemailer"],
   transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   webpack: (config) => {
     config.resolve.alias.canvas = false;

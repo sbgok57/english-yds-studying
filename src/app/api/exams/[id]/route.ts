@@ -194,9 +194,9 @@ function generate80Questions(examTitle: string) {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const exam = await prisma.exam.findUnique({
@@ -205,6 +205,13 @@ export async function GET(
 
     const title = exam?.title || `YDS Sınav Simülatörü (${id})`;
     const questions = generate80Questions(title);
+    // Keep the answer key server-only; /submit grades against its own trusted bank.
+    const publicQuestions = questions.map(({ id: questionId, text, options, type }) => ({
+      id: questionId,
+      text,
+      options,
+      type,
+    }));
 
     return NextResponse.json({
       id,
@@ -212,7 +219,7 @@ export async function GET(
       durationMinutes: exam?.durationMinutes || 180,
       totalQuestions: 80,
       isReal: exam?.isReal || false,
-      questions,
+      questions: publicQuestions,
     });
   } catch (error) {
     console.error("Exam load error:", error);

@@ -54,9 +54,9 @@ const BALLOON_QUESTIONS: BalloonQuestion[] = [
 export default async function GameLauncherPage({
   params,
 }: {
-  params: Promise<{ gameId: string }> | { gameId: string };
+  params: Promise<{ gameId: string }>;
 }) {
-  const resolvedParams = await Promise.resolve(params);
+  const resolvedParams = await params;
   const gameId = resolvedParams?.gameId;
 
   // Veritabanından kelimeleri çek

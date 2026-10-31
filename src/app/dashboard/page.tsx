@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { AVATARS, AVATAR_CATEGORIES, getAvatar, avatarSvg, syncActiveAvatar, type Avatar } from "@/lib/avatars";
 import { 
   Award, 
@@ -263,7 +264,7 @@ export default function DashboardPage() {
               <div className="h-full flex flex-col items-center justify-center text-white/50 text-xs space-y-2">
                 <p className="text-3xl">📊</p>
                 <p>Henüz çözülmüş deneme kaydı yok.</p>
-                <a href="/exams" className="text-cyan-300 underline font-bold">180 dk Sınav Başlat &rarr;</a>
+                <Link href="/exams" className="text-cyan-300 underline font-bold">180 dk Sınav Başlat &rarr;</Link>
               </div>
             )}
           </div>

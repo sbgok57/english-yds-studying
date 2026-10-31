@@ -73,7 +73,7 @@ export const ExamQuestionsArraySchema = z
 export function validateBankQuestion(q: unknown): { valid: boolean; error?: string } {
   const result = BankQuestionSchema.safeParse(q);
   if (!result.success) {
-    return { valid: false, error: result.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
+    return { valid: false, error: result.error.issues.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
   }
   return { valid: true };
 }
@@ -81,7 +81,7 @@ export function validateBankQuestion(q: unknown): { valid: boolean; error?: stri
 export function validateExamQuestion(q: unknown): { valid: boolean; error?: string } {
   const result = ExamQuestionSchema.safeParse(q);
   if (!result.success) {
-    return { valid: false, error: result.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
+    return { valid: false, error: result.error.issues.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
   }
   return { valid: true };
 }
@@ -89,7 +89,7 @@ export function validateExamQuestion(q: unknown): { valid: boolean; error?: stri
 export function validateExam(questions: ExamQuestion[]): { valid: boolean; error?: string } {
   const result = ExamQuestionsArraySchema.safeParse(questions);
   if (!result.success) {
-    return { valid: false, error: result.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
+    return { valid: false, error: result.error.issues.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ") };
   }
   return { valid: true };
 }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHmac, randomInt } from "crypto";
-import { AUTH_SECRET } from "@/lib/server-config";
+import { getAuthSecret } from "@/lib/server-config";
 import {
   AUTH_ERROR_CODES,
   authError,
@@ -76,7 +76,7 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
         }),
       });
       if (res.ok) {
-        console.info(`[EMAIL_SENT_RESEND] From: ${SENDER_EMAIL} To: ${to}`);
+        console.info(`[EMAIL_SENT_RESEND] From: ${SENDER_EMAIL}`);
         return { ok: true };
       }
       console.warn(`[EMAIL_RESEND_FAIL] Status: ${res.status}`);
@@ -103,7 +103,7 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
         }),
       });
       if (res.ok) {
-        console.info(`[EMAIL_SENT_BREVO] From: ${SENDER_EMAIL} To: ${to}`);
+        console.info(`[EMAIL_SENT_BREVO] From: ${SENDER_EMAIL}`);
         return { ok: true };
       }
     } catch (e) {
@@ -140,20 +140,35 @@ async function sendEmail(to: string, code: string): Promise<SendResult> {
         text,
         html,
       });
-      console.info(`[EMAIL_SENT_${isGmail ? "GMAIL" : "SMTP"}] From: ${SENDER_EMAIL} To: ${to}`);
+      console.info(`[EMAIL_SENT_${isGmail ? "GMAIL" : "SMTP"}] From: ${SENDER_EMAIL}`);
       return { ok: true };
     } catch (smtpErr) {
       console.warn(`[EMAIL_SMTP_ERR]`, smtpErr);
     }
   }
 
-  // 4) Default / Instant Delivery Mode (Ensures zero user block if external mailer is unconfigured)
-  console.info(`[EMAIL_DISPATCH_INSTANT] From: ${SENDER_EMAIL} To: ${to} Code: ${code}`);
-  return { ok: true, demo: true };
+  // Do not claim delivery or expose verification codes in production logs.
+  return process.env.NODE_ENV === "production"
+    ? { ok: false, demo: true, message: "E-posta gönderim servisi yapılandırılmamış." }
+    : { ok: true, demo: true, message: "Geliştirme ortamı doğrulama kodu." };
 }
 
 export async function POST(req: NextRequest) {
   const requestId = generateRequestId();
+  let authSecret: string;
+  try {
+    authSecret = getAuthSecret();
+  } catch {
+    return NextResponse.json(
+      authError(
+        AUTH_ERROR_CODES.INTERNAL_SERVER_ERROR,
+        "Güvenli doğrulama hizmeti şu anda kullanılamıyor.",
+        undefined,
+        requestId
+      ),
+      { status: 503 }
+    );
+  }
   let body: { email?: string } = {};
   try {
     body = await req.json();
@@ -194,7 +209,7 @@ export async function POST(req: NextRequest) {
   const exp = now + CODE_TTL_MS;
 
   const payload = b64url(Buffer.from(JSON.stringify({ email, exp })));
-  const sig = createHmac("sha256", AUTH_SECRET).update(`${email}.${code}.${exp}`).digest("hex");
+  const sig = createHmac("sha256", authSecret).update(`${email}.${code}.${exp}`).digest("hex");
   const challenge = `${payload}.${sig}`;
 
   const sent = await sendEmail(email, code);
