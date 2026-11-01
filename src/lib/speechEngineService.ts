@@ -1,3 +1,4 @@
+import { getSavedElevenLabsVoiceId } from "./tts/saved-voice-choice";
 /**
  * DİL MASTER - Sağlayıcıda doğrulanmış aksanlar için hibrit ses motoru
  * Vercel 502 hatası verse dahi tarayıcı motoruyla sesi %100 kesinlikle çıkarır.
@@ -97,7 +98,7 @@ export class SpeechEngineService {
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, elevenLabsVoiceId: getSavedElevenLabsVoiceId() }),
         signal: controller.signal,
       });
 
@@ -194,7 +195,8 @@ export class SpeechEngineService {
     )}&accent=${encodeURIComponent(payload.accent)}&gender=${encodeURIComponent(
       payload.gender
     )}&rate=${payload.rate}&contentType=${payload.contentType}`;
-    this.playAudioElement(url, fallbackText, accent, speakingRate, onEnd, onError);
+    const savedVoice = getSavedElevenLabsVoiceId();
+    this.playAudioElement(savedVoice ? `${url}&elevenLabsVoiceId=${encodeURIComponent(savedVoice)}` : url, fallbackText, accent, speakingRate, onEnd, onError);
   }
 
   private playAudioElement(

@@ -43,6 +43,10 @@ export default function AyarlarPage() {
       </div>
 
       {/* Merkezi Ses Motoru & 16 Konuşmacı QA Denetim Masası */}
+      <Link href="/voice-library.html" className="block rounded-2xl border border-violet-400/30 bg-violet-500/10 p-5 text-white hover:bg-violet-500/20">
+        <strong className="text-lg">ElevenLabs · My Voices</strong>
+        <p className="mt-2 text-sm text-white/70">Kaydettiğiniz sesleri eşitleyin, bir ses seçin ve içerikleriniz için MP3 oluşturun.</p>
+      </Link>
       <VoiceQaPanel />
 
       {/* Tema & Renk Kişiselleştirme Stüdyosu */}

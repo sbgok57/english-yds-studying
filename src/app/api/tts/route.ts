@@ -1,3 +1,4 @@
+import { createElevenLabsService } from "@/lib/tts/elevenlabs-service.cjs";
 import { NextRequest, NextResponse } from "next/server";
 import {
   getVoiceProfile,
@@ -14,6 +15,8 @@ import { audioCache } from "@/lib/tts/audio-cache";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
+const savedVoiceSpeech = createElevenLabsService();
 
 // Normalizasyon: Kısa aksan/dil kodlarını standart VoiceLocale formatına çevir
 function normalizeLocale(code?: string | null, contentLanguage?: string | null): VoiceLocale | null {
@@ -247,6 +250,15 @@ async function handleTtsRequest(
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const text = searchParams.get("text") || "";
+  const savedVoice = searchParams.get("elevenLabsVoiceId");
+  if (savedVoice) {
+    const headers = new Headers(req.headers);
+    headers.delete("content-length");
+    return savedVoiceSpeech(new Request(req.url, { method: "POST", headers,
+      body: JSON.stringify({ text, voiceId: savedVoice })
+    }), req.headers.get("x-forwarded-for")?.split(",")[0] || "unknown");
+  }
+
   const voice = searchParams.get("voice") || searchParams.get("voiceId");
   const accent = searchParams.get("accent") || searchParams.get("locale");
   const gender = searchParams.get("gender");
@@ -274,6 +286,13 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    if (typeof body?.elevenLabsVoiceId === "string" && body.elevenLabsVoiceId) {
+      const headers = new Headers(req.headers);
+      headers.delete("content-length");
+      return savedVoiceSpeech(new Request(req.url, { method: "POST", headers,
+        body: JSON.stringify({ text: body.text, voiceId: body.elevenLabsVoiceId })
+      }), req.headers.get("x-forwarded-for")?.split(",")[0] || "unknown");
+    }
     const text = body?.text || "";
     const voice = body?.voice || body?.voiceId;
     const accent = body?.accent || body?.locale;

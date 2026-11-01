@@ -1,3 +1,4 @@
+import { getSavedElevenLabsVoiceId } from "./saved-voice-choice";
 import {
   AccentCode,
   VoiceLocale,
@@ -185,7 +186,7 @@ class ClientAudioManager {
   }
 
   private playbackKey(text: string, voiceId: string): string {
-    return `${voiceId}:${text.trim()}`;
+    return `${getSavedElevenLabsVoiceId() || voiceId}:${text.trim()}`;
   }
 
   // Tercihleri yükle
@@ -381,7 +382,9 @@ class ClientAudioManager {
     const t0 = Date.now();
 
     // SAFETY: Helper for browser speech synthesis fallback (never uses fake pitch shifting)
+    const selectedElevenLabsVoice = getSavedElevenLabsVoiceId();
     const playWithBrowserSpeech = async (): Promise<boolean> => {
+      if (selectedElevenLabsVoice) return false;
       // Cloud failures must not silently change the requested accent/speaker or
       // label an unverified device voice as the selected cloud voice.
       if (options?.allowBrowserFallback === false) return false;
@@ -491,6 +494,7 @@ class ClientAudioManager {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           text,
+          elevenLabsVoiceId: selectedElevenLabsVoice,
           voiceId: voice.id,
           locale: voice.locale,
           contentLanguage: voice.contentLanguage,
@@ -515,7 +519,9 @@ class ClientAudioManager {
           typeof errorPayload === "object" && errorPayload !== null && "message" in errorPayload &&
           typeof errorPayload.message === "string"
             ? errorPayload.message
-            : `TTS API isteği başarısız oldu (HTTP ${res.status}).`;
+            : typeof errorPayload === "object" && errorPayload !== null && "error" in errorPayload && typeof errorPayload.error === "string"
+              ? errorPayload.error
+              : `TTS API isteği başarısız oldu (HTTP ${res.status}).`;
         throw new Error(message);
       }
 
@@ -526,7 +532,8 @@ class ClientAudioManager {
       }
 
       const distinctHeader = res.headers.get("x-tts-distinct-speaker") === "true";
-      if (!distinctHeader) {
+      const savedVoiceVerified = Boolean(selectedElevenLabsVoice && res.headers.get("x-tts-provider-voice") === selectedElevenLabsVoice);
+      if (!distinctHeader && !savedVoiceVerified) {
         throw new Error("Ses sağlayıcısı seçilen konuşmacıdan farklı bir sesi doğrulamadı.");
       }
 
@@ -541,7 +548,7 @@ class ClientAudioManager {
         provider: providerHeader,
         providerVoiceId: providerVoiceHeader,
         voiceId: voice.id,
-        displayName: voice.displayName,
+        displayName: savedVoiceVerified ? "ElevenLabs · My Voices" : voice.displayName,
         locale: voice.locale,
         contentLanguage: voice.contentLanguage,
         gender: voice.gender,
@@ -556,7 +563,7 @@ class ClientAudioManager {
       this.currentBlobUrl = audioUrl;
 
       const audio = new Audio(audioUrl);
-      audio.playbackRate = 1.0; // Hız zaten sunucu tarafında prosody/stream ile uygulandı
+      audio.playbackRate = savedVoiceVerified ? rate : 1.0; // Saved-voice audio is generated at its natural speed.
       this.currentAudio = audio;
       this.currentPlaybackKey = this.playbackKey(text, voice.id);
       this.currentPlaybackOptions = options || null;
@@ -600,7 +607,9 @@ class ClientAudioManager {
 
       audio.onplay = () => {
         this.currentPlaybackOptions?.onStart?.();
-        if (distinctHeader) {
+        if (savedVoiceVerified) {
+          this.currentPlaybackOptions?.onInfo?.("ElevenLabs · My Voices: seçtiğiniz ses çalınıyor.");
+        } else if (distinctHeader) {
           this.currentPlaybackOptions?.onInfo?.(
             `Doğal Neural Ses: ${voice.displayName} (${voice.accentLabelTr} · ${
               voice.gender === "female" ? "Kadın" : "Erkek"

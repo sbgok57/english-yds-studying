@@ -15,7 +15,7 @@
     "deploy-and-rename": "node scripts/deploy-and-rename.mjs",
     "vercel:link": "npx vercel link --yes --project dil-master",
     "test": "node prisma/prepare-db.js && prisma generate && npm run test:unit && npm run test:integration",
-    "test:unit": "tsx test/master-test-runner.ts",
+    "test:unit": "tsx test/master-test-runner.ts && node --test test/elevenlabs-service.test.cjs",
     "test:integration": "tsx test/tts-integration-tests.ts && tsx test/auth-integration-tests.ts && tsx test/module-tests.ts",
     "test:e2e": "tsx test/e2e-tests.ts",
     "validate:data": "tsx test/validate-data.ts",

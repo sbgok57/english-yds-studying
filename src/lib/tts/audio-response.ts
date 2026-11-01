@@ -1,3 +1,4 @@
+import { getSavedElevenLabsVoiceId } from "./saved-voice-choice";
 export type AudioRequestErrorCode =
   | "INVALID_RESPONSE"
   | "VOICE_UNAVAILABLE"
@@ -30,7 +31,7 @@ export async function requestPronunciationAudio(
         "Content-Type": "application/json",
         Accept: "audio/mpeg, application/json",
       },
-      body: JSON.stringify({ text, accent }),
+      body: JSON.stringify({ text, accent, elevenLabsVoiceId: getSavedElevenLabsVoiceId() }),
       signal,
     });
   } catch (error) {
