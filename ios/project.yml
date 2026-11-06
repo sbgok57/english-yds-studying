@@ -1,0 +1,25 @@
+name: DilMaster
+options:
+  bundleIdPrefix: com.dilmaster
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+targets:
+  DilMaster:
+    type: application
+    platform: iOS
+    sources:
+      - path: DilMaster
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dilmaster.app
+        PRODUCT_NAME: Dil Master
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        SWIFT_EMIT_LOC_STRINGS: YES

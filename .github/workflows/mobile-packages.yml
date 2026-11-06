@@ -1,0 +1,76 @@
+name: Mobile package builds
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, fix/audio-image-security-hardening]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android-debug:
+    name: Android installable debug package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Build Android debug APK
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dil-master-android-debug
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+  ios-simulator:
+    name: iOS simulator app package
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate --spec ios/project.yml --project ios
+
+      - name: Build unsigned iOS simulator app
+        run: >-
+          xcodebuild
+          -project ios/DilMaster.xcodeproj
+          -scheme DilMaster
+          -sdk iphonesimulator
+          -configuration Release
+          -derivedDataPath build/ios
+          CODE_SIGNING_ALLOWED=NO
+          build
+
+      - name: Package simulator app
+        run: ditto -c -k --sequesterRsrc --keepParent build/ios/Build/Products/Release-iphonesimulator/DilMaster.app dil-master-ios-simulator.zip
+
+      - name: Upload iOS simulator package
+        uses: actions/upload-artifact@v4
+        with:
+          name: dil-master-ios-simulator
+          path: dil-master-ios-simulator.zip
+          if-no-files-found: error
+          retention-days: 14

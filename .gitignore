@@ -8,6 +8,12 @@ node_modules
 out/
 *.tsbuildinfo
 
+# Native app build output and generated Xcode project
+.gradle/
+**/build/
+ios/*.xcodeproj/
+ios/DerivedData/
+
 # Production & Vercel
 .vercel
 
