@@ -35,6 +35,20 @@ function voiceGender(voice: ElevenLabsVoice): string {
   return text(labels?.gender).toLocaleLowerCase("en-US");
 }
 
+function expectedAccentLabel(profile: VoiceProfile): string | null {
+  switch (profile.locale) {
+    case "en-GB": return "british";
+    case "en-US": return "american";
+    case "en-AU": return "australian";
+    case "tr-TR": return "turkish";
+    default: return null;
+  }
+}
+
+function voiceAccent(voice: ElevenLabsVoice): string {
+  return text(record(voice.labels)?.accent).toLocaleLowerCase("en-US").replace(/[^a-z]/g, "");
+}
+
 async function fetchCatalog(apiKey: string): Promise<ElevenLabsVoice[]> {
   const voices: ElevenLabsVoice[] = [];
   let nextPageToken: string | null = null;
@@ -140,24 +154,47 @@ export function findExactElevenLabsVoice(
   catalog: readonly ElevenLabsVoice[],
   preferredVoiceId?: string
 ): { id: string; name: string } | null {
+  // A language/locale verification and a gender label do not prove a regional
+  // accent. Require an administrator-selected, profile-specific voice ID so
+  // an arbitrary account voice can never be presented as British/US/Australian.
+  const exactId = text(preferredVoiceId);
+  if (!exactId) return null;
+  const expectedAccent = expectedAccentLabel(profile);
+  if (!expectedAccent) return null;
+
   const candidates = catalog
     .filter((voice) => {
       const id = text(voice.voice_id);
       return (
-        Boolean(id) &&
+        id === exactId &&
         voiceLocales(voice).includes(profile.locale === "en-GB-scotland" ? "en-GB" : profile.locale) &&
-        voiceGender(voice) === profile.gender
+        voiceGender(voice) === profile.gender &&
+        voiceAccent(voice) === expectedAccent
       );
     })
-    .map((voice) => ({ id: text(voice.voice_id), name: text(voice.name) }))
-    .sort((a, b) => {
-      if (a.id === preferredVoiceId) return -1;
-      if (b.id === preferredVoiceId) return 1;
-      return a.id.localeCompare(b.id);
-    });
+    .map((voice) => ({ id: text(voice.voice_id), name: text(voice.name) }));
 
-  const selected = candidates[0];
-  return selected ? { id: selected.id, name: selected.name } : null;
+  return candidates.length === 1 ? candidates[0] : null;
+}
+
+const ELEVENLABS_PROFILE_ENV: Record<string, string> = {
+  "en-GB-female-sonia": "ELEVENLABS_EN_GB_FEMALE_VOICE_ID",
+  "en-GB-male-ryan": "ELEVENLABS_EN_GB_MALE_VOICE_ID",
+  "en-US-female-jenny": "ELEVENLABS_EN_US_FEMALE_VOICE_ID",
+  "en-US-male-guy": "ELEVENLABS_EN_US_MALE_VOICE_ID",
+  "en-AU-female-natasha": "ELEVENLABS_EN_AU_FEMALE_VOICE_ID",
+  "en-AU-male-william": "ELEVENLABS_EN_AU_MALE_VOICE_ID",
+  "tr-TR-female-emel": "ELEVENLABS_TR_EMEL_VOICE_ID",
+  "tr-TR-male-ahmet": "ELEVENLABS_TR_AHMET_VOICE_ID",
+};
+
+export function getConfiguredElevenLabsVoiceId(
+  profileId: string,
+  env: Record<string, string | undefined> = process.env
+): string | undefined {
+  const envName = ELEVENLABS_PROFILE_ENV[profileId];
+  const voiceId = envName ? env[envName]?.trim() : "";
+  return voiceId || undefined;
 }
 
 export function resetElevenLabsVoiceCatalogForTests(): void {

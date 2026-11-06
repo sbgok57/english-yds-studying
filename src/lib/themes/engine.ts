@@ -18,7 +18,19 @@ import {
 export const THEME_COUNT = 1000;
 
 export type ThemeCategoryKey = "minimal" | "vibrant" | "dark" | "pastel" | "gradient" | "patterned";
-export type PatternKey = "none" | "dots" | "grid" | "stripes" | "geometric" | "mesh";
+export type PatternKey =
+  | "none"
+  | "dots"
+  | "grid"
+  | "stripes"
+  | "geometric"
+  | "mesh"
+  | "topographic"
+  | "rings"
+  | "aurora"
+  | "woven"
+  | "confetti"
+  | "crosshatch";
 
 export interface ThemePalette {
   id: number;
@@ -85,6 +97,12 @@ export const SVG_PATTERNS: Record<PatternKey, string> = {
   stripes: "repeating-linear-gradient(45deg, transparent, transparent 12px, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 12px, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 24px)",
   geometric: "linear-gradient(135deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(225deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(45deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%), linear-gradient(315deg, var(--theme-pattern-fg, rgba(255, 255, 255, 0.12)) 25%, transparent 25%)",
   mesh: "radial-gradient(at 10% 10%, var(--theme-primary-glow, rgba(217, 70, 239, 0.35)) 0px, transparent 55%), radial-gradient(at 90% 90%, var(--theme-secondary-glow, rgba(34, 211, 238, 0.30)) 0px, transparent 55%), radial-gradient(at 50% 50%, var(--theme-accent-glow, rgba(250, 204, 21, 0.25)) 0px, transparent 50%)",
+  topographic: "repeating-radial-gradient(ellipse at 22% 35%, transparent 0 13px, var(--theme-pattern-fg, rgba(255,255,255,.12)) 14px 15px, transparent 16px 28px)",
+  rings: "radial-gradient(circle at 25% 25%, transparent 0 12px, var(--theme-pattern-fg, rgba(255,255,255,.14)) 13px 14px, transparent 15px 28px), radial-gradient(circle at 75% 75%, transparent 0 12px, var(--theme-pattern-fg, rgba(255,255,255,.12)) 13px 14px, transparent 15px 28px)",
+  aurora: "linear-gradient(155deg, transparent 22%, var(--theme-primary-glow, rgba(217,70,239,.18)) 42%, transparent 58%), linear-gradient(25deg, transparent 30%, var(--theme-secondary-glow, rgba(34,211,238,.16)) 52%, transparent 72%)",
+  woven: "repeating-linear-gradient(45deg, transparent 0 9px, var(--theme-pattern-fg, rgba(255,255,255,.11)) 10px 11px, transparent 12px 20px), repeating-linear-gradient(-45deg, transparent 0 9px, var(--theme-pattern-fg, rgba(255,255,255,.08)) 10px 11px, transparent 12px 20px)",
+  confetti: "radial-gradient(circle at 15% 25%, var(--theme-primary-glow, rgba(217,70,239,.35)) 0 2px, transparent 3px), radial-gradient(circle at 70% 18%, var(--theme-secondary-glow, rgba(34,211,238,.32)) 0 2px, transparent 3px), radial-gradient(circle at 42% 75%, var(--theme-accent-glow, rgba(250,204,21,.28)) 0 2px, transparent 3px), radial-gradient(circle at 88% 68%, var(--theme-primary-glow, rgba(217,70,239,.25)) 0 2px, transparent 3px)",
+  crosshatch: "repeating-linear-gradient(45deg, transparent 0 13px, var(--theme-pattern-fg, rgba(255,255,255,.10)) 14px, transparent 15px 25px), repeating-linear-gradient(-45deg, transparent 0 13px, var(--theme-pattern-fg, rgba(255,255,255,.08)) 14px, transparent 15px 25px)",
 };
 
 export const SVG_PATTERN_SIZES: Record<PatternKey, string> = {
@@ -94,6 +112,12 @@ export const SVG_PATTERN_SIZES: Record<PatternKey, string> = {
   stripes: "28px 28px",
   geometric: "40px 40px",
   mesh: "100% 100%",
+  topographic: "88px 88px",
+  rings: "72px 72px",
+  aurora: "100% 100%",
+  woven: "32px 32px",
+  confetti: "88px 88px",
+  crosshatch: "36px 36px",
 };
 
 const CATEGORY_NAMES: Record<ThemeCategoryKey, { label: string; emoji: string }> = {
@@ -194,7 +218,10 @@ export const ALL_THEMES: ThemePalette[] = (() => {
     } else {
       // 6. PATTERNED (SVG Desenli: Noktalı, Izgara, Çizgili, Geometrik, Mesh - 250 Farklı Desenli Tema)
       catKey = "patterned";
-      const patternKeys: PatternKey[] = ["dots", "grid", "stripes", "geometric", "mesh"];
+      const patternKeys: PatternKey[] = [
+        "dots", "grid", "stripes", "geometric", "mesh", "topographic",
+        "rings", "aurora", "woven", "confetti", "crosshatch",
+      ];
       patternType = patternKeys[i % patternKeys.length];
       pSat = 88;
       pLight = 56;

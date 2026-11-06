@@ -4,8 +4,9 @@
  */
 
 import { findEnabledVoice } from './tts/voice-registry';
+import { chooseExactBrowserVoice } from './tts/browser-voice-matcher';
 
-export type EnglishAccent = 'en-GB' | 'en-US' | 'en-AU' | 'en-CA' | 'en-NZ' | 'en-IN' | 'en-GB-scotland';
+export type EnglishAccent = 'en-GB' | 'en-US' | 'en-AU';
 
 export interface PlaySpeechOptions {
   text: string;
@@ -111,6 +112,7 @@ export class SpeechEngineService {
               blobUrl,
               text,
               accent,
+              gender,
               speakingRate,
               () => {
                 URL.revokeObjectURL(blobUrl);
@@ -130,7 +132,7 @@ export class SpeechEngineService {
 
     // 2. AŞAMA: Yerel Tarayıcı Web Speech API (Kesin Çalışan Yedek)
     try {
-      this.playLocalWebSpeech(text, accent, speakingRate, onEnd, onError);
+      this.playLocalWebSpeech(text, accent, gender, speakingRate, onEnd, onError);
     } catch {
       // 3. AŞAMA: GET /api/tts Akış Yedeği
       this.playServerGetFallback(payload, text, accent, speakingRate, onEnd, onError);
@@ -141,6 +143,7 @@ export class SpeechEngineService {
   private playLocalWebSpeech(
     text: string,
     accent: EnglishAccent,
+    gender: 'female' | 'male',
     speakingRate: number,
     onEnd?: () => void,
     onError?: (err: any) => void
@@ -153,21 +156,17 @@ export class SpeechEngineService {
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = Math.max(0.7, Math.min(speakingRate, 1.3));
-    utterance.lang = accent === 'en-GB-scotland' ? 'en-GB' : accent;
+    utterance.lang = accent;
 
-    // Sistemdeki en uygun aksanlı sesi seç
+    // Cihazın konuşma API'si gender alanı sunmadığından yalnızca doğrulanabilir
+    // locale + ses adı eşleşmesi varsa seç; farklı profili sessizce kullanma.
     if (this.cachedVoices.length === 0) {
       this.cachedVoices = window.speechSynthesis.getVoices();
     }
 
-    const targetLangPrefix = accent.slice(0, 5); // 'en-GB', 'en-US' vb.
-    const matchedVoice =
-      this.cachedVoices.find((v) => v.lang.replace('_', '-').startsWith(targetLangPrefix)) ||
-      this.cachedVoices.find((v) => v.lang.startsWith('en'));
-
-    if (matchedVoice) {
-      utterance.voice = matchedVoice;
-    }
+    const matchedVoice = chooseExactBrowserVoice(this.cachedVoices, accent, gender);
+    if (!matchedVoice) throw new Error(`VOICE_NOT_AVAILABLE: ${accent} ${gender}`);
+    utterance.voice = matchedVoice as SpeechSynthesisVoice;
 
     utterance.onend = () => onEnd?.();
     utterance.onerror = (e) => {
@@ -194,13 +193,14 @@ export class SpeechEngineService {
     )}&accent=${encodeURIComponent(payload.accent)}&gender=${encodeURIComponent(
       payload.gender
     )}&rate=${payload.rate}&contentType=${payload.contentType}`;
-    this.playAudioElement(url, fallbackText, accent, speakingRate, onEnd, onError);
+    this.playAudioElement(url, fallbackText, accent, payload.gender, speakingRate, onEnd, onError);
   }
 
   private playAudioElement(
     src: string,
     fallbackText: string,
     accent: EnglishAccent,
+    gender: 'female' | 'male',
     speakingRate: number,
     onEnd?: () => void,
     onError?: (err: any) => void
@@ -212,7 +212,7 @@ export class SpeechEngineService {
     this.currentAudio.play().catch(() => {
       // SAFETY: Pass actual fallbackText (never the blob:/data: src URL!) to local speech synthesis
       try {
-        this.playLocalWebSpeech(fallbackText, accent, speakingRate, onEnd, onError);
+        this.playLocalWebSpeech(fallbackText, accent, gender, speakingRate, onEnd, onError);
       } catch {
         // Sessizce başarısız ol
       }

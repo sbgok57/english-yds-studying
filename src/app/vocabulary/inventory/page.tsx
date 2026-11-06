@@ -24,6 +24,7 @@ import AccentVoicePicker from "@/components/tts/AccentVoicePicker";
 import WordPronunciationBar from "@/components/vocabulary/WordPronunciationBar";
 import VocabularyVisual from "@/components/media/VocabularyVisual";
 import AccentBar from "@/components/AccentBar";
+import { getHighestUnlockedCefrLevel, isCefrLevelUnlocked } from "@/lib/adaptive/content-access";
 import {
   ACCENTS,
   getStoredAccent,
@@ -47,7 +48,8 @@ const CEFR_TABS: { label: string; value: CefrLevel | "ALL" }[] = [
 ];
 
 function VocabularyInventoryContent() {
-  const { addXp } = useUsage();
+  const { addXp, usage } = useUsage();
+  const unlockedLevel = getHighestUnlockedCefrLevel(usage.levelAssessment?.currentLevel);
   const searchParams = useSearchParams();
 
   // Read initial exam from URL ?exam=YDS, YDT, YOKDIL
@@ -181,6 +183,7 @@ function VocabularyInventoryContent() {
     const q = searchQuery.toLowerCase().trim();
 
     return (INVENTORY_ITEMS || []).filter((item) => {
+      if (item.level !== "UNCLASSIFIED" && !isCefrLevelUnlocked(usage.levelAssessment?.currentLevel, item.level)) return false;
       // 0. Sınav filtresi (YDS - YDT - YÖKDİL)
       if (examFilter !== "ALL") {
         const itemExams = getWordExams(item);
@@ -213,7 +216,7 @@ function VocabularyInventoryContent() {
 
       return true;
     });
-  }, [activeTab, examFilter, posFilter, statusFilter, searchQuery, userData]);
+  }, [activeTab, examFilter, posFilter, statusFilter, searchQuery, userData, usage.levelAssessment?.currentLevel]);
 
   // Pagination calculations
   const totalPages = Math.max(1, Math.ceil(filteredItems.length / pageSize));
@@ -394,23 +397,25 @@ function VocabularyInventoryContent() {
         </div>
 
         {/* CEFR Level Tabs */}
+        <p className="text-sm text-white/75">Şu an <strong className="text-cyan-200">{unlockedLevel}</strong> seviyesine kadar açık. Daha ileri kelimeler seviye tespitinde ilerledikçe açılır. <Link href="/level-test" className="font-bold text-amber-200 underline underline-offset-2">Seviyeni ölç</Link></p>
         <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin">
           {CEFR_TABS.map((tab) => (
             <button
               key={tab.value}
+              disabled={tab.value !== "ALL" && tab.value !== "UNCLASSIFIED" && !isCefrLevelUnlocked(usage.levelAssessment?.currentLevel, tab.value)}
               onClick={() => setActiveTab(tab.value)}
               className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                 activeTab === tab.value
                   ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black shadow-md shadow-cyan-500/20"
                   : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-              }`}
+              } ${tab.value !== "ALL" && tab.value !== "UNCLASSIFIED" && !isCefrLevelUnlocked(usage.levelAssessment?.currentLevel, tab.value) ? "cursor-not-allowed opacity-35" : ""}`}
             >
-              {tab.label}
+              {tab.value !== "ALL" && tab.value !== "UNCLASSIFIED" && !isCefrLevelUnlocked(usage.levelAssessment?.currentLevel, tab.value) ? `🔒 ${tab.label}` : tab.label}
             </button>
           ))}
         </div>
 
-        {/* 6 Aksan × Kadın/Erkek Doğal Ses Seçim Barı */}
+        {/* 3 İngilizce aksan × Kadın/Erkek konuşmacı seçimi */}
         <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-cyan-400/20 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
             <span className="text-xl">🎙️</span>
@@ -428,7 +433,7 @@ function VocabularyInventoryContent() {
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
-            {/* 6 Aksan Butonları */}
+            {/* Desteklenen İngilizce aksan butonları */}
             <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
               {ACCENTS.map((a) => {
                 const isActive = globalAccent === a.id;
@@ -780,7 +785,7 @@ function VocabularyInventoryContent() {
                     <span>🎙️</span> Çoklu Aksan Telaffuz & Konuşma Pratiği
                   </span>
                   <span className="text-[10px] text-white/50">
-                    6 Aksan &bull; 12 Doğal Konuşmacı &bull; Mikrofon
+                    3 Aksan &bull; 6 Konuşmacı Profili &bull; Mikrofon
                   </span>
                 </div>
                 <WordPronunciationBar

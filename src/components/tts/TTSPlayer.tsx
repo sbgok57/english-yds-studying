@@ -4,18 +4,16 @@ import { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { clientAudio } from "@/lib/tts/audio-client";
+import type { PlaybackMetadata } from "@/lib/tts/audio-client";
+import type { AccentCode as RegistryAccentCode } from "@/lib/tts/voice-registry";
 
 export const ACCENT_OPTIONS = [
   { code: "en-GB", label: "İngiliz", flag: "🇬🇧" },
   { code: "en-US", label: "Amerikan", flag: "🇺🇸" },
-  { code: "en-CA", label: "Kanada", flag: "🇨🇦" },
   { code: "en-AU", label: "Avustralya", flag: "🇦🇺" },
-  { code: "en-NZ", label: "Y. Zelanda", flag: "🇳🇿" },
-  { code: "en-GB-scotland", label: "İskoçya (uygun ses yok)", flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿" },
-  { code: "en-IN", label: "Hint", flag: "🇮🇳" },
-] as const;
+ ] as const satisfies ReadonlyArray<{ code: RegistryAccentCode; label: string; flag: string }>;
 
-export type AccentCode = typeof ACCENT_OPTIONS[number]["code"];
+export type AccentCode = RegistryAccentCode;
 export type GenderCode = "female" | "male";
 
 interface TTSPlayerProps {
@@ -55,6 +53,8 @@ export default function TTSPlayer({
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [playbackMeta, setPlaybackMeta] = useState<PlaybackMetadata | null>(null);
+  const [playbackError, setPlaybackError] = useState("");
 
   // Dışarıdan prop değişirse senkronize et
   useEffect(() => {
@@ -79,6 +79,8 @@ export default function TTSPlayer({
     }
 
     setLoading(true);
+    setPlaybackMeta(null);
+    setPlaybackError("");
 
     await clientAudio.play(text, {
       accent: currentAccent,
@@ -105,9 +107,39 @@ export default function TTSPlayer({
         setLoading(false);
         updatePlaying(false);
       },
+      onMetadata: setPlaybackMeta,
       onError: () => {
         setLoading(false);
         updatePlaying(false);
+      },
+    });
+  };
+
+  const playHumanRecording = async () => {
+    if (loading || isPlaying) return;
+    setLoading(true);
+    setPlaybackMeta(null);
+    setPlaybackError("");
+    await clientAudio.play(text, {
+      accent: currentAccent,
+      gender: currentGender,
+      rate: speed,
+      contentType: "word",
+      humanRecordingOnly: true,
+      allowBrowserFallback: false,
+      onMetadata: setPlaybackMeta,
+      onStart: () => {
+        setLoading(false);
+        updatePlaying(true);
+      },
+      onEnd: () => {
+        setLoading(false);
+        updatePlaying(false);
+      },
+      onError: (error) => {
+        setLoading(false);
+        updatePlaying(false);
+        setPlaybackError(error.message);
       },
     });
   };
@@ -126,19 +158,18 @@ export default function TTSPlayer({
             {currentGender === "female" ? "👩" : "👨"}
           </button>
 
-          {/* 6 Aksan Butonları */}
+          {/* Desteklenen üç aksan */}
           <div className="flex gap-0.5">
             {ACCENT_OPTIONS.map((a) => (
               <button
                 type="button"
                 key={a.code}
-                disabled={a.code === "en-GB-scotland"}
                 onClick={() => setCurrentAccent(a.code)}
                 className={cn(
-                  "p-1 rounded-md text-sm transition-transform disabled:cursor-not-allowed disabled:opacity-30",
+                  "p-1 rounded-md text-sm transition-transform",
                   currentAccent === a.code ? "bg-white/30 scale-110 shadow" : "opacity-60 hover:opacity-100"
                 )}
-                title={a.code === "en-GB-scotland" ? "İskoç aksanı mevcut sağlayıcıda doğrulanmadığı için kapalı" : a.label}
+                title={a.label}
               >
                 {a.flag}
               </button>
@@ -161,7 +192,7 @@ export default function TTSPlayer({
             ? "bg-gradient-to-r from-pink-500 to-rose-600 border-pink-400 text-white animate-pulse"
             : "bg-white/20 hover:bg-white/30 backdrop-blur-md border-white/30 text-white"
         )}
-        title={`${currentAccent} (${currentGender === "female" ? "Kadın" : "Erkek"}) • Doğal Neural Ses ile dinle`}
+        title={`${currentAccent} (${currentGender === "female" ? "Kadın" : "Erkek"}) telaffuzunu dinle`}
         aria-label="Telaffuzu Dinle"
         aria-pressed={isPlaying}
       >
@@ -173,6 +204,30 @@ export default function TTSPlayer({
           <Volume2 className="w-4 h-4" />
         )}
       </button>
+      {contentType === "word" && (
+        <button
+          type="button"
+          onClick={playHumanRecording}
+          disabled={loading || isPlaying}
+          className="rounded-full border border-emerald-300/50 bg-emerald-500/20 px-2 py-1 text-[10px] font-semibold text-emerald-100 hover:bg-emerald-500/30 disabled:opacity-50"
+          title="Yalnızca kaynak ve lisansı doğrulanmış insan kaydı aranır; bulunmazsa yapay sesle değiştirilmez. Kayıtta konuşmacı cinsiyeti belirtilmemiş olabilir."
+          aria-label="Gerçek insan kaydını dinle"
+        >
+          İnsan kaydı
+        </button>
+      )}
+      {playbackError && <span role="status" className="basis-full text-[10px] leading-tight text-amber-100">{playbackError}</span>}
+      {playbackMeta?.humanRecordingAttribution && (
+        <a
+          className="basis-full text-[10px] leading-tight text-white/70 underline decoration-dotted underline-offset-2"
+          href={playbackMeta.humanRecordingAttribution.filePageUrl}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`İnsan kaydı: ${playbackMeta.humanRecordingAttribution.creator}; lisans ${playbackMeta.humanRecordingAttribution.licenseName}`}
+        >
+          İnsan kaydı: {playbackMeta.humanRecordingAttribution.creator} · {playbackMeta.humanRecordingAttribution.licenseName}
+        </a>
+      )}
     </div>
   );
 }

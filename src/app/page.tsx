@@ -36,8 +36,8 @@ const STATIONS = [
   {
     href: "/vocabulary/flashcards",
     icon: "book-open",
-    title: "3D Flashcards & Görsel Hafıza",
-    desc: "Kart çevirme animasyonu, 3D dönen kelime küpü ve SM-2 tekrar algoritması.",
+    title: "Kelime Kartları & Görsel Hafıza",
+    desc: "Çevrilebilir kelime kartları ve kişiselleştirilmiş aralıklı tekrar sistemi.",
     cta: "Öğrenmeye Başla",
     color: "from-pink-500 to-rose-500",
   },

@@ -45,7 +45,7 @@ export default function WordDetailModal({
     void logStudentActivity({
       type: "vocabulary",
       category: (word.targetExams?.[0] as any) || "Genel",
-      title: `🔍 Görsel & 3D Kelime İncelemesi: ${word.english}`,
+      title: `Kelime görseli ve telaffuz incelemesi: ${word.english}`,
       details: `"${word.english}" (${word.turkish}) kelimesinin görsel hafıza kartı ve telaffuzları incelendi.`,
       scoreOrCount: `${word.level} • ${word.type}`,
       points: 5,

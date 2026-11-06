@@ -103,7 +103,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Pioneer — Öncü",
+      conceptLabelTr: "Görsel anlam sahnesi: Pioneer — Öncü",
     },
   },
   deteriorate: {
@@ -136,7 +136,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Deteriorate — Kötüleşmek",
+      conceptLabelTr: "Görsel anlam sahnesi: Deteriorate — Kötüleşmek",
     },
   },
   scrutinize: {
@@ -168,7 +168,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Scrutinize — Dikkatle İncelemek",
+      conceptLabelTr: "Görsel anlam sahnesi: Scrutinize — Dikkatle İncelemek",
     },
   },
   mitigate: {
@@ -192,7 +192,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Mitigate — Hafifletmek",
+      conceptLabelTr: "Görsel anlam sahnesi: Mitigate — Hafifletmek",
       imageUrl: "/media/vocabulary/mitigate-coastal-defense.jpg",
     },
   },
@@ -217,7 +217,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Carry Out — Yürütmek",
+      conceptLabelTr: "Görsel anlam sahnesi: Carry Out — Yürütmek",
     },
   },
   "cope-with": {
@@ -240,7 +240,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Cope With — Başa Çıkmak",
+      conceptLabelTr: "Görsel anlam sahnesi: Cope With — Başa Çıkmak",
     },
   },
   ubiquitous: {
@@ -264,7 +264,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Ubiquitous — Her Yerde Bulunan",
+      conceptLabelTr: "Görsel anlam sahnesi: Ubiquitous — Her Yerde Bulunan",
     },
   },
   inevitable: {
@@ -287,7 +287,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Inevitable — Kaçınılmaz",
+      conceptLabelTr: "Görsel anlam sahnesi: Inevitable — Kaçınılmaz",
     },
   },
   drastically: {
@@ -310,7 +310,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Drastically — Köklü Biçimde",
+      conceptLabelTr: "Görsel anlam sahnesi: Drastically — Köklü Biçimde",
     },
   },
   prevalent: {
@@ -333,7 +333,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Prevalent — Yaygın / Hâkim",
+      conceptLabelTr: "Görsel anlam sahnesi: Prevalent — Yaygın / Hâkim",
     },
   },
   reconcile: {
@@ -356,7 +356,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Reconcile — Uzlaştırmak",
+      conceptLabelTr: "Görsel anlam sahnesi: Reconcile — Uzlaştırmak",
     },
   },
   reluctance: {
@@ -379,7 +379,7 @@ export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: "3D Kavram Küpü: Reluctance — İsteksizlik",
+      conceptLabelTr: "Görsel anlam sahnesi: Reluctance — İsteksizlik",
     },
   },
 };
@@ -495,7 +495,7 @@ export function resolveWordVisualManifest(params: {
     },
     threeD: {
       enabled: true,
-      conceptLabelTr: `3D Kavram Küpü: ${params.english} — ${params.turkish}`,
+      conceptLabelTr: `Görsel anlam sahnesi: ${params.english} — ${params.turkish}`,
     },
   };
 }

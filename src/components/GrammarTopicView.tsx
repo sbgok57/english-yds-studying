@@ -18,6 +18,9 @@ import {
   type GrammarLevel7Block,
 } from "@/lib/data-grammar-levels-7";
 import { recordGrammar, useUsage } from "@/lib/store";
+import { getHighestUnlockedCefrLevel, isGrammarLevelUnlocked } from "@/lib/adaptive/content-access";
+import { GRAMMAR_CURRICULUM } from "@/lib/grammar-curriculum";
+import { suggestGrammarStudyMethod } from "@/lib/ai";
 
 const LEVEL_COLORS_7: Record<GrammarLevel7, string> = {
   A1: "from-emerald-500 to-teal-600",
@@ -39,7 +42,7 @@ function mediaOptions(title: string): VideoOption[] {
 }
 
 export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
-  const { update } = useUsage();
+  const { update, usage } = useUsage();
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [choice, setChoice] = useState<string | null>(null);
@@ -64,6 +67,18 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
   const activeBlock7 = useMemo(() => {
     return levelBlocks7.find((b) => b.level === activeLevel7) || levelBlocks7[0] || null;
   }, [levelBlocks7, activeLevel7]);
+  const unlockedLevel = getHighestUnlockedCefrLevel(usage.levelAssessment?.currentLevel);
+  const activeLevelUnlocked = isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, activeLevel7);
+  const curriculumEntry = GRAMMAR_CURRICULUM.find((entry) => entry.slug === topic.slug);
+  const requiredLevelMatch = curriculumEntry?.level.match(/\b(A1|A2|B1|B2|C1|C2)\b/);
+  const requiredTopicLevel = requiredLevelMatch?.[1] as "A1" | "A2" | "B1" | "B2" | "C1" | "C2" | undefined;
+  const topicUnlocked = !requiredTopicLevel || isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, requiredTopicLevel);
+  const studyMethod = suggestGrammarStudyMethod({
+    topicTitle: activeBlock7?.title || topic.title,
+    rule: activeBlock7?.formula || activeBlock7?.definition || topic.summary,
+    example: activeBlock7?.exampleEn || topic.example.sentence,
+    memoryHint: activeBlock7?.memoryCode || topic.coding[0] || "",
+  });
 
   const highlighted = useMemo(() => {
     if (step < 0 || step >= topic.anim.length) return topic.example.sentence;
@@ -96,6 +111,17 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
       }
     };
   }, [topic.slug]);
+
+  if (!topicUnlocked) {
+    return (
+      <section className="mx-auto max-w-3xl rounded-3xl border border-amber-300/25 bg-slate-900 p-8 text-white shadow-xl" role="status">
+        <p className="text-xs font-bold uppercase tracking-wider text-amber-200">{requiredTopicLevel} seviyesi gerekli</p>
+        <h1 className="mt-2 text-2xl font-black">Bu konu sıradaki basamağında açılacak.</h1>
+        <p className="mt-3 text-white/75">Kanka, önce mevcut seviyeyi sağlamlaştıralım. Seviye tespitini tamamlayınca sana uygun gramer konuları ve kelimeler otomatik açılır.</p>
+        <Link href="/level-test" className="mt-5 inline-flex rounded-xl bg-amber-300 px-5 py-3 font-black text-slate-950">Seviye tespitine git</Link>
+      </section>
+    );
+  }
 
   const togglePlay = () => {
     if (animIntervalRef.current) {
@@ -285,8 +311,8 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
               <span className="text-2xl">📶</span>
               <h2 className="text-2xl font-black">7 Seviyeli Gramer & Zaman Belirteci Rehberi</h2>
             </div>
-            <p className="text-xs text-white/50 mt-1">
-              A1 den C2 ye ve YDS ustalik duzeyine kadar kurallar, zaman tablolari ve mini testler!
+            <p className="text-xs text-white/70 mt-1">
+              Şu an {unlockedLevel} düzeyine kadar açık. Seviye tespitinde ilerledikçe sonraki anlatımlar ve mini testler açılır.
             </p>
           </div>
 
@@ -297,7 +323,10 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
               return (
                 <button
                   key={lvl}
+                  type="button"
+                  disabled={!isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, lvl)}
                   onClick={() => {
+                    if (!isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, lvl)) return;
                     setActiveLevel7(lvl);
                     setMiniExChoice(null);
                   }}
@@ -305,16 +334,23 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
                     active
                       ? `bg-gradient-to-r ${LEVEL_COLORS_7[lvl]} text-white shadow-md`
                       : "text-white/60 hover:text-white hover:bg-white/5"
-                  }`}
+                  } ${!isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, lvl) ? "cursor-not-allowed opacity-35" : ""}`}
+                  aria-label={isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, lvl) ? `${lvl} gramer seviyesi` : `${lvl} seviyesi kilitli; seviye tespitini tamamlayın`}
                 >
-                  {lvl}
+                  {!isGrammarLevelUnlocked(usage.levelAssessment?.currentLevel, lvl) ? `🔒 ${lvl}` : lvl}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {activeBlock7 && (
+        {!activeLevelUnlocked ? (
+          <div className="rounded-2xl border border-amber-300/30 bg-amber-500/10 p-5 text-sm text-white/85" role="status">
+            <p className="font-bold text-amber-100">Bu anlatım bir üst seviyede açılıyor.</p>
+            <p className="mt-1">Kanka, önce mevcut basamağı sağlamlaştıralım; seviye tespitini tamamlayınca uygun dersler otomatik açılır.</p>
+            <Link href="/level-test" className="mt-3 inline-flex rounded-xl bg-amber-300 px-4 py-2 font-bold text-slate-950">Seviye tespitine git</Link>
+          </div>
+        ) : activeBlock7 && (
           <div className="space-y-6">
             {/* Seviye Basligi ve Tanimi */}
             <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
@@ -328,6 +364,13 @@ export default function GrammarTopicView({ topic }: { topic: GrammarTopic }) {
               <p className="text-xs text-cyan-300 mt-2">
                 <strong>Kullanim Amaci:</strong> {activeBlock7.usage}
               </p>
+              <aside className="mt-4 rounded-2xl border border-amber-300/25 bg-amber-400/10 p-4" aria-label="Kişisel hafıza ve tekrar önerisi">
+                <p className="font-black text-amber-100">Kanka, akılda tutmanın kısa yolu</p>
+                <ol className="mt-2 space-y-2 text-sm text-white/85">
+                  {studyMethod.steps.map((step, index) => <li key={`${topic.slug}-${activeLevel7}-${index}`} className="flex gap-2"><span className="font-black text-cyan-200">{index + 1}.</span><span>{step}</span></li>)}
+                </ol>
+                <p className="mt-3 rounded-xl bg-black/20 p-3 text-xs text-cyan-100/90"><strong>Tekrar planı:</strong> {studyMethod.reviewPlan}</p>
+              </aside>
             </div>
 
             {/* Cumle Yapisi (+, -, ?) ve Formul */}

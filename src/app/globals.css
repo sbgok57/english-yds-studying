@@ -596,29 +596,6 @@ html.light ::-webkit-scrollbar-thumb:hover {
 }
 .animate-wiggle { animation: wiggle 0.2s ease-in-out infinite; }
 
-/* 3D cube scene */
-.cube-scene { perspective: 1000px; }
-.cube {
-  transform-style: preserve-3d;
-  animation: cubeSpin 18s linear infinite;
-}
-.cube:hover { animation-play-state: paused; }
-@keyframes cubeSpin {
-  from { transform: rotateX(-18deg) rotateY(0deg); }
-  to { transform: rotateX(-18deg) rotateY(360deg); }
-}
-.cube-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backface-visibility: visible;
-  border-radius: 1.5rem;
-}
-
 /* flashcard flip */
 .flip-scene { perspective: 1600px; }
 .flip-card {
@@ -699,7 +676,6 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cube,
   .ambient-blob,
   .anim-pop,
   .anim-fade-up,

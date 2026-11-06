@@ -6,17 +6,18 @@ import { WORDS } from "@/lib/data-vocabulary";
 import { BASE_INVENTORY_ITEMS, getWordExams } from "@/lib/data-inventory";
 import { MASTER_VOCABULARY } from "@/lib/vocabulary/master-vocab-database";
 import { YDS_PUBLICATIONS_MASTER_CORPUS } from "@/lib/vocabulary/publications-master-corpus";
-import Cube from "@/components/Cube";
 import Celebration from "@/components/Celebration";
 import Tip from "@/components/Tip";
 import VideoModal, { type VideoOption } from "@/components/VideoModal";
-import SceneAnim from "@/components/SceneAnim";
 import AccentBar from "@/components/AccentBar";
 import VocabularyVisual from "@/components/media/VocabularyVisual";
 import { MEDIA_SOURCE_TIP } from "@/lib/media-source";
 import { recordWord, useUsage, wordScore } from "@/lib/store";
+import { isWordReviewDue, isWordStillLearning } from "@/lib/vocabulary/learning-schedule";
 import { logVocabularySession } from "@/lib/activity-logger";
 import { clientAudio } from "@/lib/tts/audio-client";
+import { getHighestUnlockedCefrLevel, isVocabularyLevelUnlocked } from "@/lib/adaptive/content-access";
+import { getVoiceProfile } from "@/lib/tts/voice-registry";
 import {
   Sparkles,
   FileUp,
@@ -28,7 +29,6 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  ExternalLink,
   Volume2,
   LayoutGrid,
   Table as TableIcon,
@@ -52,14 +52,6 @@ export interface UnifiedFlashcardWord {
   poolSource: "temel" | "master" | "yayinlar";
 }
 
-const GRADIENTS = [
-  "linear-gradient(135deg,#7c3aed,#06b6d4)",
-  "linear-gradient(135deg,#db2777,#f59e0b)",
-  "linear-gradient(135deg,#059669,#0ea5e9)",
-  "linear-gradient(135deg,#e11d48,#8b5cf6)",
-  "linear-gradient(135deg,#2563eb,#22d3ee)",
-];
-
 const CEFR_LEVELS = ["Tümü", "A1", "A2", "B1", "B2", "C1", "C2"] as const;
 const WORD_TYPES = ["Tümü", "fiil", "isim", "sıfat", "zarf", "phrasal verb"] as const;
 
@@ -70,6 +62,7 @@ function correctLastStreak(streak: number): string {
 
 export default function FlashcardsPage() {
   const { usage, update } = useUsage();
+  const unlockedLevel = getHighestUnlockedCefrLevel(usage.levelAssessment?.currentLevel);
 
   // Filtre durumları
   const [selectedExam, setSelectedExam] = useState<"TÜMÜ" | "YDS" | "YDT" | "YÖKDİL">("TÜMÜ");
@@ -77,26 +70,12 @@ export default function FlashcardsPage() {
   const [selectedType, setSelectedType] = useState<string>("Tümü");
   const [selectedPool, setSelectedPool] = useState<"TÜMÜ" | "yayinlar" | "master" | "temel">("TÜMÜ");
   const [searchQuery, setSearchQuery] = useState("");
+  const [queueMode, setQueueMode] = useState<"all" | "learning">("all");
 
-  // Görünüm Modu: 3D Kart vs Tüm Liste Tablosu
+  // Görünüm modu: kelime kartları veya tüm liste tablosu
   const [viewMode, setViewMode] = useState<"card" | "table">("card");
   const [tablePage, setTablePage] = useState(1);
   const TABLE_PAGE_SIZE = 30;
-
-  // Kişiselleştirilmiş Seviye Tespiti (Senin seviyen bu, buradan başlayalım!)
-  const [userDetectedLevel, setUserDetectedLevel] = useState<string>("A1");
-
-  useEffect(() => {
-    try {
-      const rawTest = localStorage.getItem("yds_level_test_result_v1");
-      if (rawTest) {
-        const parsed = JSON.parse(rawTest);
-        if (parsed.level) setUserDetectedLevel(parsed.level.toUpperCase());
-      }
-    } catch {
-      // safe fallback
-    }
-  }, []);
 
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -232,8 +211,14 @@ export default function FlashcardsPage() {
   // 2. Filtrelenmiş ve Kullanıcı Performansına göre Sıralanmış Liste
   const filteredWords = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
+    const now = Date.now();
 
     return consolidatedPool.filter((item) => {
+      if (!isVocabularyLevelUnlocked(usage.levelAssessment?.currentLevel, item.level)) return false;
+      if (queueMode === "learning") {
+        const review = usage.wordReviews?.[String(item.id)];
+        if (!isWordStillLearning(review) && !isWordReviewDue(review, now)) return false;
+      }
       // Sınav Filtresi
       if (selectedExam !== "TÜMÜ" && !item.exams.includes(selectedExam)) {
         return false;
@@ -262,14 +247,27 @@ export default function FlashcardsPage() {
       }
       return true;
     });
-  }, [consolidatedPool, selectedExam, selectedLevel, selectedType, selectedPool, searchQuery]);
+  }, [consolidatedPool, selectedExam, selectedLevel, selectedType, selectedPool, searchQuery, queueMode, usage.wordReviews, usage.levelAssessment?.currentLevel]);
 
   // 3. Öğrenci skoruna göre sırala: En zayıf (düşük puanlı) kelimeler önce gelir
   const sortedWords = useMemo(() => {
-    return [...filteredWords].sort(
-      (a, b) => wordScore(usage.words[String(a.id)]) - wordScore(usage.words[String(b.id)])
-    );
-  }, [filteredWords, usage.words]);
+    return [...filteredWords].sort((a, b) => {
+      if (queueMode === "learning") {
+        const aDue = usage.wordReviews?.[String(a.id)]?.dueAt ?? 0;
+        const bDue = usage.wordReviews?.[String(b.id)]?.dueAt ?? 0;
+        if (aDue !== bDue) return aDue - bDue;
+      }
+      return wordScore(usage.words[String(a.id)]) - wordScore(usage.words[String(b.id)]);
+    });
+  }, [filteredWords, usage.words, usage.wordReviews, queueMode]);
+
+  const reviewQueueCount = consolidatedPool.filter((word) => {
+    const review = usage.wordReviews?.[String(word.id)];
+    return isWordStillLearning(review) || isWordReviewDue(review, Date.now());
+  }).length;
+  const dueReviewCount = consolidatedPool.filter((word) =>
+    isWordReviewDue(usage.wordReviews?.[String(word.id)], Date.now())
+  ).length;
 
   // Güvenli kelime seçimi (SAFETY: Liste boşsa çökme önlenir)
   const currentWord: UnifiedFlashcardWord | null =
@@ -325,15 +323,18 @@ export default function FlashcardsPage() {
   // Sesli Telaffuz (Merkezi clientAudio motoru ile)
   const speakWord = (text: string, e?: React.MouseEvent) => {
     e?.stopPropagation();
+    const preferences = clientAudio.getPreferences();
+    const selectedVoice = getVoiceProfile(preferences.preferredVoiceId);
     void clientAudio.play(text, {
-      accent: "en-US",
-      gender: "female",
-      rate: 0.9,
+      voiceId: selectedVoice?.enabled ? selectedVoice.id : undefined,
+      accent: preferences.preferredAccent,
+      gender: preferences.preferredVoiceGender,
+      rate: preferences.speakingRate,
       contentType: text.includes(" ") ? "sentence" : "word",
     });
   };
 
-  const openIn3DCard = (targetWord: UnifiedFlashcardWord) => {
+  const openWordCard = (targetWord: UnifiedFlashcardWord) => {
     const targetIdx = sortedWords.findIndex((w) => w.id === targetWord.id);
     if (targetIdx !== -1) {
       setIdx(targetIdx);
@@ -490,10 +491,10 @@ export default function FlashcardsPage() {
               <span>DİL MASTER • YDS · YDT · YÖKDİL Çoklu Sınav Kartları</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-white">
-              🃏 <span className="gradient-text">3D Flashcards & Zengin Hafıza</span>
+              <span className="gradient-text">Kelime kartları</span>
             </h1>
             <p className="text-xs sm:text-sm text-white/70 max-w-2xl leading-relaxed">
-              2.500+ master akademik kelime, 2013-2026 yayınlar havuzu (Modadil, Akın Dil, Remzi Hoca, vb.) ve kendi PDF aktarımlarınız tek küpte! Çevir, dinle, öğren, en zayıf kelimelerini otomatik önceliklendir.
+              Kanka, kelimeyi hatırlamaya çalış; takıldıklarını sana uygun aralıklarla yeniden getireceğiz. Şu an {consolidatedPool.length.toLocaleString("tr-TR")} kelime var.
             </p>
           </div>
 
@@ -504,7 +505,7 @@ export default function FlashcardsPage() {
               className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 text-slate-950 font-black text-sm shadow-xl shadow-teal-500/30 hover:scale-105 active:scale-95 transition-all text-center group"
             >
               <FileUp className="w-5 h-5 text-slate-950 group-hover:-translate-y-0.5 transition-transform" />
-              <span>📄➕ Kelime Ekle & Akıllı PDF Aktarıcı</span>
+              <span>Kelime veya PDF ekle</span>
             </Link>
 
             <Link
@@ -516,45 +517,39 @@ export default function FlashcardsPage() {
             </Link>
           </div>
         </div>
+
+        <div className="mt-5 rounded-2xl border border-cyan-300/20 bg-cyan-950/30 px-4 py-3 text-sm text-white/80" aria-live="polite">
+          Şu an <strong className="text-cyan-200">{unlockedLevel}</strong> seviyesine kadar içerik açık. Bir üst basamağı açmak için <Link href="/level-test" className="font-bold text-amber-200 underline underline-offset-2">seviye tespitini tamamla</Link>; kelime havuzun sonucuna göre genişler.
+        </div>
       </div>
 
-      {/* 🎯 Kişiselleştirilmiş Seviye Başlangıç Banner'ı */}
-      <div className="rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-cyan-950/40 via-purple-950/40 to-slate-900 border-2 border-cyan-400/40 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-3.5">
-          <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-2xl shrink-0 shadow-md">
-            🎯
-          </div>
+      <section className="card-vibrant p-4 sm:p-5 space-y-4" aria-labelledby="word-learning-title">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h4 className="text-sm sm:text-base font-black text-white flex items-center gap-2 flex-wrap">
-              <span>Senin Seviyen:</span>
-              <span className="px-2.5 py-0.5 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-200 text-xs font-mono font-bold">
-                {userDetectedLevel} ({userDetectedLevel === "A1" ? "Başlangıç" : userDetectedLevel === "A2" ? "Temel" : userDetectedLevel === "B1" ? "Orta" : "İleri"})
-              </span>
-              <span className="text-xs text-white/50">• Hadi buradan başlayalım!</span>
-            </h4>
-            <p className="text-xs text-white/60 mt-0.5">
-              Kendi seviyene uygun kelimelerle başlayarak adım adım ilerle; netlerini ve kalıcılığını katla.
-            </p>
+            <h2 id="word-learning-title" className="text-lg font-black text-white">Bugün ne çalışalım?</h2>
+            <p className="text-sm text-white/65 mt-1">Zorlandıkların burada kalır; öğrendiklerin de zamanı gelince tekrar önüne çıkar.</p>
+          </div>
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Kelime çalışma listesi">
+            <button type="button" onClick={() => { setQueueMode("all"); resetIdx(); }} aria-pressed={queueMode === "all"}
+              className={`rounded-xl px-4 py-2 text-sm font-bold border transition-colors ${queueMode === "all" ? "bg-cyan-400 text-slate-950 border-cyan-300" : "bg-white/5 text-white/80 border-white/15 hover:bg-white/10"}`}>
+              Tüm kelimeler
+            </button>
+            <button type="button" onClick={() => { setQueueMode("learning"); setViewMode("card"); resetIdx(); }} aria-pressed={queueMode === "learning"}
+              className={`rounded-xl px-4 py-2 text-sm font-bold border transition-colors ${queueMode === "learning" ? "bg-rose-400 text-slate-950 border-rose-300" : "bg-white/5 text-white/80 border-white/15 hover:bg-white/10"}`}>
+              Zorlandıklarım ve tekrar listem ({reviewQueueCount})
+            </button>
           </div>
         </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={() => {
-              setSelectedLevel(userDetectedLevel);
-              resetIdx();
-            }}
-            className="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-black text-xs hover:scale-105 active:scale-95 transition-all shadow-md shadow-cyan-500/20 flex items-center gap-2"
-          >
-            <span>🚀</span>
-            <span>{userDetectedLevel} Seviyesinden Başla ({consolidatedPool.filter(w => w.level.toUpperCase() === userDetectedLevel.toUpperCase()).length} Kelime)</span>
-          </button>
+        <div className="grid gap-2 sm:grid-cols-3 text-xs sm:text-sm text-white/75">
+          <p className="rounded-xl bg-white/5 p-3"><strong className="text-cyan-200">1. Hatırla:</strong> Cevabı açmadan önce anlamını aklından söyle.</p>
+          <p className="rounded-xl bg-white/5 p-3"><strong className="text-cyan-200">2. Kendini yokla:</strong> Takıldıysan “Tekrar et”, bildiysen “Bildim” seç.</p>
+          <p className="rounded-xl bg-white/5 p-3"><strong className="text-cyan-200">3. Aralıklı tekrar:</strong> Yanlışlar yakında, doğrular giderek daha uzun arayla gelir.</p>
         </div>
-      </div>
+        {queueMode === "learning" && <p className="text-xs text-white/60">{dueReviewCount} kelimenin tekrar zamanı geldi. Takıldıkların da öğrendiklerini sağlamlaştırana kadar listede kalır.</p>}
+      </section>
 
       {/* Filtre & Arama Kontrolleri Paneli */}
-      <div className="card-vibrant p-5 sm:p-6 space-y-4">
+      <div className="card-vibrant p-4 sm:p-5 space-y-4">
         {/* Satır 1: Sınav Modu & Görünüm Modu & Canlı Arama */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
@@ -582,7 +577,7 @@ export default function FlashcardsPage() {
               ))}
             </div>
 
-            {/* Görünüm Modu: 3D Kart vs Tüm Liste Tablosu */}
+            {/* Görünüm Modu: Kart vs Tüm Liste Tablosu */}
             <div className="flex items-center gap-1 bg-black/40 p-1 rounded-2xl border border-white/10 shrink-0">
               <button
                 type="button"
@@ -594,7 +589,7 @@ export default function FlashcardsPage() {
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
-                <span>3D Kart</span>
+                <span>Kart</span>
               </button>
               <button
                 type="button"
@@ -638,24 +633,26 @@ export default function FlashcardsPage() {
           </div>
         </div>
 
-        {/* Satır 2: CEFR Seviyesi, Kelime Türü & Kaynak Havuzu */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-white/10 text-xs">
+        <details className="border-t border-white/10 pt-3">
+          <summary className="cursor-pointer select-none text-sm font-bold text-white/80 hover:text-white">Ek filtreler ve liste araçları</summary>
+          <div className="flex flex-wrap items-center gap-2 pt-3 text-xs">
           {/* CEFR Seviye Hapları */}
           <span className="text-[11px] font-bold text-white/50 mr-1">Seviye:</span>
           {CEFR_LEVELS.map((lvl) => (
-            <button
+              <button
               key={lvl}
+                disabled={lvl !== "Tümü" && !isVocabularyLevelUnlocked(usage.levelAssessment?.currentLevel, lvl)}
               onClick={() => {
                 setSelectedLevel(lvl);
                 resetIdx();
               }}
               className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
-                selectedLevel === lvl
+                  selectedLevel === lvl
                   ? "bg-cyan-500/30 border border-cyan-400 text-cyan-200"
-                  : "bg-white/5 border border-white/10 text-white/60 hover:text-white"
-              }`}
+                    : "bg-white/5 border border-white/10 text-white/60 hover:text-white"
+                } ${lvl !== "Tümü" && !isVocabularyLevelUnlocked(usage.levelAssessment?.currentLevel, lvl) ? "cursor-not-allowed opacity-35" : ""}`}
             >
-              {lvl}
+              {lvl !== "Tümü" && !isVocabularyLevelUnlocked(usage.levelAssessment?.currentLevel, lvl) ? `🔒 ${lvl}` : lvl}
             </button>
           ))}
 
@@ -735,7 +732,10 @@ export default function FlashcardsPage() {
               <span>Karıştır</span>
             </button>
             <button
-              onClick={resetAllFilters}
+              onClick={() => {
+                setQueueMode("all");
+                resetAllFilters();
+              }}
               className="flex items-center gap-1 px-3 py-1 rounded-xl bg-white/5 border border-white/15 text-white/60 hover:text-white hover:bg-white/10 font-bold transition-all"
               title="Filtreleri Sıfırla"
             >
@@ -743,7 +743,8 @@ export default function FlashcardsPage() {
               <span>Sıfırla</span>
             </button>
           </div>
-        </div>
+          </div>
+        </details>
       </div>
 
       {/* Seri göstergesi */}
@@ -761,11 +762,18 @@ export default function FlashcardsPage() {
           <div className="text-5xl">🔍</div>
           <h3 className="text-xl font-black text-white">Bu Filtreye Uygun Kelime Bulunamadı</h3>
           <p className="text-xs text-white/60">
-            Arama kriterlerinize veya seçtiğiniz seviyeye uygun kart bulunamadı. Filtreleri sıfırlayabilir veya kendi PDF kelimelerinizi ekleyebilirsiniz.
+            {queueMode === "learning" && reviewQueueCount === 0
+              ? "Şimdilik tekrar sırası boş kanka. Bir kartta “Tekrar et” seçtiğinde zorlandığın kelimeyi buraya alacağız."
+              : queueMode === "learning"
+                ? "Bu filtrelere uyan tekrar kelimesi yok. Filtreleri kaldırıp tüm tekrar listene bakabilirsin."
+                : "Aramana veya filtrelerine uygun kelime bulamadık. Filtreleri sıfırlayıp yeniden deneyebilirsin."}
           </p>
           <div className="flex justify-center gap-3 pt-2">
             <button
-              onClick={resetAllFilters}
+              onClick={() => {
+                setQueueMode("all");
+                resetAllFilters();
+              }}
               className="px-5 py-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-200 font-bold text-xs hover:bg-cyan-500/30 transition-all"
             >
               Tüm Filtreleri Sıfırla
@@ -786,7 +794,7 @@ export default function FlashcardsPage() {
                 <span>📋</span> Tüm Kelime Envanteri Tablosu
               </h3>
               <p className="text-xs text-white/60">
-                Toplam <strong className="text-cyan-300 font-mono">{sortedWords.length}</strong> kelime. İstediğiniz satıra veya &ldquo;3D Aç&rdquo; butonuna basarak kart görünümüne geçebilirsiniz.
+                Toplam <strong className="text-cyan-300 font-mono">{sortedWords.length}</strong> kelime. Bir satıra veya &ldquo;Kartı Aç&rdquo; düğmesine basarak kelime kartına geçebilirsiniz.
               </p>
             </div>
             <div className="text-xs text-white/50 font-mono">
@@ -805,14 +813,14 @@ export default function FlashcardsPage() {
                   <th className="py-3 px-3">Seviye</th>
                   <th className="py-3 px-3">Sınav</th>
                   <th className="py-3 px-4">Kaynak / Havuz</th>
-                  <th className="py-3 px-3 text-right">3D Kart</th>
+                  <th className="py-3 px-3 text-right">Kart</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
                 {paginatedWords.map((word) => (
                   <tr
                     key={word.id}
-                    onClick={() => openIn3DCard(word)}
+                    onClick={() => openWordCard(word)}
                     className="hover:bg-white/[0.06] transition-colors cursor-pointer group"
                   >
                     <td className="py-3 px-4">
@@ -865,12 +873,12 @@ export default function FlashcardsPage() {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          openIn3DCard(word);
+                          openWordCard(word);
                         }}
                         className="px-2.5 py-1 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/30 text-cyan-200 text-[11px] font-bold transition-all shrink-0 inline-flex items-center gap-1"
                       >
                         <span>🃏</span>
-                        <span>3D Aç</span>
+                        <span>Kartı Aç</span>
                       </button>
                     </td>
                   </tr>
@@ -951,38 +959,10 @@ export default function FlashcardsPage() {
             </div>
           </div>
 
-          {/* Ana 3D Küp ve Kart Görünümü */}
+          {/* Kelime kartı görünümü */}
           {currentWord && (
-            <div className="grid md:grid-cols-2 gap-8 items-center pt-2">
-              {/* Sol Sütun: 3D Dönen Küp */}
-              <div className="order-2 md:order-1 flex flex-col items-center gap-4">
-                <Cube
-                  front={currentWord.word}
-                  back={currentWord.tr.split(",")[0] || currentWord.tr}
-                  color={GRADIENTS[idx % GRADIENTS.length]}
-                />
-                <p className="text-xs text-white/40 font-mono flex items-center gap-1.5">
-                  <span>🖱️</span> Küpü sürükleyerek 3D döndürebilirsiniz
-                </p>
-
-                <div className="flex items-center gap-2">
-                  <SceneAnim slug={currentWord.category} size="text-2xl" />
-                  <a
-                    href={`https://giphy.com/search/${encodeURIComponent(currentWord.word)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    data-testid="giphy-external-search-link"
-                    title="Giphy üzerinde harici arama sayfası açar (gömülü GIF değildir)"
-                    className="text-[11px] font-bold px-3 py-1.5 rounded-full border border-white/15 bg-white/5 text-white/70 hover:text-white hover:border-pink-400/50 transition-all flex items-center gap-1"
-                  >
-                    <span>Giphy&apos;de Dış Arama (Harici Bağlantı)</span>
-                    <ExternalLink className="w-3 h-3 text-pink-400" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Sağ Sütun: 3D Çevrilebilir Kart */}
-              <div className="order-1 md:order-2 space-y-4">
+            <div className="max-w-3xl mx-auto pt-2">
+              <div className="space-y-4">
                 <div
                   className="flip-scene min-h-[340px] cursor-pointer"
                   onClick={() => setFlipped(!flipped)}

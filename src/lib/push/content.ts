@@ -28,7 +28,7 @@ export const REMINDERS_COUNTDOWN: Array<(d: number) => string> = [
   (d) => `${d} gün kaldı. Bağlaç (however / therefore / although) soruları puan deposu: bugün 10 tane çöz ✏️`,
   (d) => `YDS'ye ${d} gün! Hafta sonu için 180 dakikalık tam deneme slotunu şimdiden ayır ⏱️`,
   (d) => `${d} gün sonra sınavdasın. Bugün 1 çeviri + 1 cloze test: küçük adımlar, büyük puan 🎯`,
-  (d) => `Sınav günü yaklaşıyor: ${d} gün. 3D Kelime kartların seni bekliyor, 10 dakikanı ayır yeter 🧠`,
+  (d) => `Sınav günü yaklaşıyor: ${d} gün. Kelime kartların seni bekliyor; 10 dakikanı ayırman yeter.`,
   (d) => `${d} gün kaldı! Paragraf tamamlama sorularında önce "bağlantı cümlesini" bulmayı dene 🧩`,
   (d) => `Son ${d} gün! Cümle tamamlama taktiği: zaman ve zıtlık bağlaçlarını işaretle 🚩`,
   (d) => `Sınava ${d} gün: Akış bozan cümle sorularında konunun yön değiştirdiği cümleyi yakala 🔍`,
@@ -161,7 +161,7 @@ export function daytimePayload(): PushPayload {
   const options = [
     'Öğle molasında 5 dakikalık hızlı kelime turu! 🥪 10 kelime tekrarı yapalım mı?',
     'Günün ortasındayız kral! 1 paragraf veya 3 soru çözerek zihnini zinde tut. 🎯',
-    'Kahvenin yanında 3D kelime kartları iyi gider! ☕ 5 dakikanı ayır, netlerin artsın.',
+    'Kahvenin yanında kısa bir kelime tekrarı iyi gider. 5 dakikanı ayır, istikrarlı ilerle.',
     'Gündem İngilizce haberlerden 1 kısa haber oku & dinle! 📰 Hem genel kültür hem YDS kelimesi.',
   ];
   return {

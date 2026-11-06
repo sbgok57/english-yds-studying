@@ -6,7 +6,13 @@ import {
 } from "@/lib/tts/voice-registry";
 import { defaultTtsProvider } from "@/lib/tts/tts-provider";
 import { audioCache } from "@/lib/tts/audio-cache";
-import { findExactElevenLabsVoice, getElevenLabsVoiceCatalog } from "@/lib/tts/elevenlabs-voice-catalog";
+import {
+  findExactElevenLabsVoice,
+  getConfiguredElevenLabsVoiceId,
+  getElevenLabsVoiceCatalog,
+} from "@/lib/tts/elevenlabs-voice-catalog";
+import { getAzureVoiceCatalog, isExactAzureVoice } from "@/lib/tts/azure-voice-catalog";
+import { getNarakeetVoiceCatalog, resolveNarakeetVoice } from "@/lib/tts/narakeet-voice-catalog";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,26 +26,41 @@ export async function GET() {
   let elevenLabsCatalogAvailable = false;
   let elevenLabsCatalogVoiceCount = 0;
   const elevenLabsCredentialsConfigured = Boolean(process.env.ELEVENLABS_API_KEY?.trim());
+  let narakeetCatalogVoiceCount = 0;
+  const narakeetCredentialsConfigured = Boolean(process.env.NARAKEET_API_KEY?.trim());
   let catalogCheckError: string | undefined;
+  let elevenLabsCatalog: Awaited<ReturnType<typeof getElevenLabsVoiceCatalog>> = [];
+  let narakeetCatalog: Awaited<ReturnType<typeof getNarakeetVoiceCatalog>> = [];
+  let azureCatalog: Awaited<ReturnType<typeof getAzureVoiceCatalog>> = [];
+  let azureCatalogVoiceCount = 0;
+  const azureCredentialsConfigured = Boolean(process.env.AZURE_SPEECH_KEY?.trim());
   try {
-    const catalog = await getElevenLabsVoiceCatalog();
-    elevenLabsCatalogVoiceCount = catalog.length;
-    elevenLabsCatalogAvailable = catalog.length > 0;
+    [elevenLabsCatalog, narakeetCatalog, azureCatalog] = await Promise.all([
+      getElevenLabsVoiceCatalog(),
+      getNarakeetVoiceCatalog(),
+      getAzureVoiceCatalog(),
+    ]);
+    elevenLabsCatalogVoiceCount = elevenLabsCatalog.length;
+    narakeetCatalogVoiceCount = narakeetCatalog.length;
+    azureCatalogVoiceCount = azureCatalog.length;
+    elevenLabsCatalogAvailable = elevenLabsCatalog.length > 0;
   } catch (error) {
     catalogCheckError = error instanceof Error ? error.message : "Ses kataloğu okunamadı.";
   }
 
   const profileAvailability = await Promise.all(
     ALL_VOICE_REGISTRY.map(async (voice) => {
-      const catalog = elevenLabsCatalogAvailable ? await getElevenLabsVoiceCatalog() : [];
-      const exactElevenLabsMatch = Boolean(findExactElevenLabsVoice(voice, catalog));
-      const azureConfigured = Boolean(process.env.AZURE_SPEECH_KEY?.trim());
-      const canRequest = voice.enabled && (exactElevenLabsMatch || azureConfigured);
+      const exactNarakeetMatch = Boolean(resolveNarakeetVoice(voice, narakeetCatalog));
+      const exactElevenLabsMatch = elevenLabsCatalogAvailable && Boolean(
+        findExactElevenLabsVoice(voice, elevenLabsCatalog, getConfiguredElevenLabsVoiceId(voice.id))
+      );
+      const exactAzureMatch = azureCredentialsConfigured && isExactAzureVoice(voice, azureCatalog);
+      const canRequest = voice.enabled && (exactNarakeetMatch || exactElevenLabsMatch || exactAzureMatch);
       return {
         id: voice.id,
         enabled: voice.enabled,
         available: canRequest,
-        provider: exactElevenLabsMatch ? "elevenlabs" : azureConfigured ? "azure" : null,
+        provider: exactNarakeetMatch ? "narakeet" : exactAzureMatch ? "azure" : exactElevenLabsMatch ? "elevenlabs" : null,
         accent: voice.accentLabelTr,
         gender: voice.gender,
       };
@@ -65,6 +86,10 @@ export async function GET() {
     availableProfiles: availableProfileCount,
     elevenLabsCredentialsConfigured,
     elevenLabsCatalogVoiceCount,
+    azureCredentialsConfigured,
+    azureCatalogVoiceCount,
+    narakeetCredentialsConfigured,
+    narakeetCatalogVoiceCount,
     catalogError: catalogCheckError,
     matrixValid: matrix.valid,
     matrixErrors: matrix.errors,

@@ -4,10 +4,84 @@ import {
   defaultTtsProvider,
   getDedicatedTurkishElevenLabsVoiceId,
 } from "../src/lib/tts/tts-provider";
+import { getExpectedNarakeetVoice, resolveNarakeetVoice } from "../src/lib/tts/narakeet-voice-catalog";
+import { ALL_VOICE_REGISTRY, getVoiceProfile } from "../src/lib/tts/voice-registry";
+import { findHumanWordRecording, findWiktionaryAudioTitle, isSingleEnglishWord } from "../src/lib/tts/wiktionary-human-audio";
 
 console.log("▶ Starting TTS Server-Side Synthesis & Integration Tests...\n");
 
 async function runIntegrationTests() {
+  // Narakeet profile mappings must be fixed, locale-checked and speaker-specific.
+  const narakeetMappings = [
+    ["en-GB-female-sonia", "Beatrice", "en-GB", "female"],
+    ["en-GB-male-ryan", "Nelson", "en-GB", "male"],
+    ["en-US-female-jenny", "Jessica", "en-US", "female"],
+    ["en-US-male-guy", "Matt", "en-US", "male"],
+    ["en-AU-female-natasha", "Gail", "en-AU", "female"],
+    ["en-AU-male-william", "Graham", "en-AU", "male"],
+    ["tr-TR-female-emel", "Sibel", "tr-TR", "female"],
+    ["tr-TR-male-ahmet", "Murat", "tr-TR", "male"],
+  ] as const;
+  const mockCatalog = narakeetMappings.map(([, name, languageCode]) => ({ name, languageCode }));
+  for (const [profileId, name, languageCode, gender] of narakeetMappings) {
+    const expected = getExpectedNarakeetVoice(profileId);
+    const profile = getVoiceProfile(profileId);
+    assert.ok(expected, `Missing Narakeet mapping for ${profileId}`);
+    assert.ok(profile, `Missing app profile ${profileId}`);
+    assert.strictEqual(expected.name, name);
+    assert.strictEqual(expected.languageCode, languageCode);
+    assert.strictEqual(profile.gender, gender);
+    assert.strictEqual(resolveNarakeetVoice(profile, mockCatalog)?.name, name);
+  }
+  assert.strictEqual(
+    resolveNarakeetVoice(getVoiceProfile("tr-TR-male-ahmet")!, [{ name: "Sibel", languageCode: "tr-TR" }]),
+    null,
+    "A Turkish female Narakeet speaker must never resolve for the male profile"
+  );
+  assert.strictEqual(
+    resolveNarakeetVoice(getVoiceProfile("en-GB-female-sonia")!, [{ name: "Beatrice", languageCode: "en-US" }]),
+    null,
+    "A wrong locale must not resolve as British English"
+  );
+  assert.ok(ALL_VOICE_REGISTRY.some((voice) => voice.id === "tr-TR-male-ahmet"));
+
+  // Open human recordings are matched by exact word and exact accent only.
+  const humanAudioTitles = [
+    "File:en-au-mitigate.ogg",
+    "File:en-us-mitigate.ogg",
+    "File:en-us-mitigated.ogg",
+    "File:en-us-mitigate-image.jpg",
+  ];
+  assert.strictEqual(isSingleEnglishWord("mitigate"), true);
+  assert.strictEqual(isSingleEnglishWord("mitigate meaning"), false);
+  assert.strictEqual(findWiktionaryAudioTitle("mitigate", "en-US", humanAudioTitles), "File:en-us-mitigate.ogg");
+  assert.strictEqual(findWiktionaryAudioTitle("mitigate", "en-AU", humanAudioTitles), "File:en-au-mitigate.ogg");
+  assert.strictEqual(findWiktionaryAudioTitle("mitigate", "en-GB", humanAudioTitles), null);
+  assert.strictEqual(findWiktionaryAudioTitle("mitigated", "en-US", humanAudioTitles), "File:en-us-mitigated.ogg");
+  const mockWiktionaryFetch: typeof fetch = async (input) => {
+    const requestUrl = new URL(String(input));
+    if (requestUrl.hostname === "en.wiktionary.org") {
+      return new Response(JSON.stringify({ query: { pages: [{ images: [{ title: "File:en-us-mitigate.ogg" }] }] } }), { status: 200 });
+    }
+    return new Response(JSON.stringify({ query: { pages: [{
+      title: "File:En-us-mitigate.ogg",
+      imageinfo: [{
+        url: "https://upload.wikimedia.org/wikipedia/commons/1/11/En-us-mitigate.ogg",
+        descriptionurl: "https://commons.wikimedia.org/wiki/File:En-us-mitigate.ogg",
+        extmetadata: {
+          LicenseShortName: { value: "CC BY-SA 3.0" },
+          LicenseUrl: { value: "https://creativecommons.org/licenses/by-sa/3.0/" },
+          Artist: { value: "<a>Contributor</a>" },
+        },
+      }],
+    }] } }), { status: 200 });
+  };
+  const humanRecording = await findHumanWordRecording("mitigate", "en-US", mockWiktionaryFetch);
+  assert.strictEqual(humanRecording?.speakerGender, "unknown");
+  assert.strictEqual(humanRecording?.accent, "en-US");
+  assert.strictEqual(humanRecording?.creator, "Contributor");
+  assert.strictEqual(humanRecording?.licenseName, "CC BY-SA 3.0");
+
   // 0. Emel/Ahmet must never inherit one shared generic voice ID.
   assert.strictEqual(
     getDedicatedTurkishElevenLabsVoiceId("tr-TR-female-emel", {
@@ -67,9 +141,10 @@ async function runIntegrationTests() {
   assert.ok(health.latencyMs > 0, "Latency ms olmalıdır.");
   console.log(`  ✅ PASS: Provider is healthy, latency: ${health.latencyMs}ms\n`);
 
-  // 2. 14 Sesin Her Biri İçin Doğrudan Sentezleme
-  console.log("  2. Testing Real Server-Side Audio Generation for All 14 Voices...");
-  for (const voice of VOICE_REGISTRY) {
+  // Synthesize only user-selectable profiles; disabled legacy profiles are not live-tested.
+  const enabledProfiles = VOICE_REGISTRY.filter((voice) => voice.enabled);
+  console.log(`  2. Testing Real Server-Side Audio Generation for ${enabledProfiles.length} Enabled Voices...`);
+  for (const voice of enabledProfiles) {
     const t0 = Date.now();
     const result = await defaultTtsProvider.synthesize({
       text: "YDS Master accent test.",
@@ -87,25 +162,25 @@ async function runIntegrationTests() {
     // PERF: Brief pause between requests to respect edge socket rates
     await new Promise((res) => setTimeout(res, 150));
   }
-  console.log("  ✅ PASS: All 14 voice profiles generated valid, crisp 96kbps MP3 audio.\n");
+  console.log("  ✅ PASS: All enabled voice profiles generated valid MP3 audio.\n");
 
   // 3. Kelime Telaffuz Testi (Yavaş ve Normal Hız)
   console.log("  3. Testing Vocabulary Pronunciation (Normal vs Slow)...");
   const normalResult = await defaultTtsProvider.synthesize({
     text: "sustainable",
-    voiceId: "en-CA-female-clara",
+    voiceId: "en-US-female-jenny",
     speakingRate: 1.0,
     contentType: "word",
   });
   const slowResult = await defaultTtsProvider.synthesize({
     text: "sustainable",
-    voiceId: "en-CA-female-clara",
+    voiceId: "en-US-female-jenny",
     speakingRate: 0.75,
     contentType: "word",
   });
   assert.ok(normalResult.audio.length > 2000);
   assert.ok(slowResult.audio.length > 2000);
-  console.log("  ✅ PASS: Word pronunciation synthesized for Canadian English at both speeds.\n");
+  console.log("  ✅ PASS: Word pronunciation synthesized for American English at both speeds.\n");
 
   // 4. Akademik / Bilimsel Uzun Metin Testi
   console.log("  4. Testing Academic Long-Form Text Synthesis...");

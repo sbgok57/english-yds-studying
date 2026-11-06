@@ -18,6 +18,10 @@ import {
 import { mergeUniqueStudyQueue, rememberStudyWords } from "../src/shared/study-queue";
 import { appendUniqueWordCards } from "../src/shared/word-pagination";
 import { getTrackProgress, saveTrackProgress, type AudioProgressStorage } from "../src/lib/audio/tracks";
+import { isWordReviewDue, isWordStillLearning, scheduleWordReview } from "../src/lib/vocabulary/learning-schedule";
+import { getHighestUnlockedCefrLevel, isCefrLevelUnlocked, isGrammarLevelUnlocked, isVocabularyLevelUnlocked } from "../src/lib/adaptive/content-access";
+import { defaultUsage } from "../src/lib/store";
+import { migrateUsageData } from "../src/lib/exam-validator";
 
 let passed = 0;
 
@@ -53,6 +57,18 @@ export async function runSpeechAndStudyQueueTests() {
   console.log("🚀 SPEECH, GRAMMAR PROGRESS & STUDY QUEUE TESTS");
   console.log("==========================================\n");
 
+  runTest("CEFR learning content opens progressively from assessed level", () => {
+    assert.equal(getHighestUnlockedCefrLevel(null), "A1");
+    assert.equal(isCefrLevelUnlocked("A2", "A1"), true);
+    assert.equal(isCefrLevelUnlocked("A2", "A2"), true);
+    assert.equal(isCefrLevelUnlocked("A2", "B1"), false);
+    assert.equal(isVocabularyLevelUnlocked("B1", "YDS"), false);
+    assert.equal(isVocabularyLevelUnlocked("C1", "YDS"), true);
+    assert.equal(isGrammarLevelUnlocked("C1", "YDS"), false);
+    assert.equal(isGrammarLevelUnlocked("C2", "YDS"), true);
+    assert.equal(isVocabularyLevelUnlocked("A1", "legacy-custom"), true);
+  });
+
   const voices: BrowserVoiceLike[] = [
     { name: "Sophie", lang: "en-GB", voiceURI: "voice-en-f" },
     { name: "Daniel", lang: "en-GB", voiceURI: "voice-en-default", default: true },
@@ -66,6 +82,47 @@ export async function runSpeechAndStudyQueueTests() {
     );
     assert.equal(chooseBrowserVoice(voices, "en-GB", "voice-en-f", "voice-en-f")?.voiceURI, "voice-en-default");
     assert.equal(chooseBrowserVoice(voices, "tr-TR")?.voiceURI, "voice-tr-f");
+  });
+
+  runTest("missed words enter a spaced-review queue and leave it after two successful recalls", () => {
+    const now = 1_800_000_000_000;
+    const missed = scheduleWordReview(undefined, false, now);
+    assert.equal(missed.box, 0);
+    assert.equal(isWordStillLearning(missed), true);
+    assert.equal(isWordReviewDue(missed, now + 10 * 60 * 1000), true);
+
+    const firstRecall = scheduleWordReview(missed, true, now + 10 * 60 * 1000);
+    assert.equal(firstRecall.box, 1);
+    assert.equal(isWordStillLearning(firstRecall), true);
+    assert.equal(firstRecall.dueAt, now + 10 * 60 * 1000 + 24 * 60 * 60 * 1000);
+
+    const secondRecall = scheduleWordReview(firstRecall, true, firstRecall.dueAt);
+    assert.equal(secondRecall.box, 2);
+    assert.equal(isWordStillLearning(secondRecall), false);
+    assert.equal(secondRecall.dueAt, firstRecall.dueAt + 3 * 24 * 60 * 60 * 1000);
+
+    const forgottenAgain = scheduleWordReview(secondRecall, false, secondRecall.dueAt);
+    assert.equal(forgottenAgain.box, 0);
+    assert.equal(forgottenAgain.correctStreak, 0);
+    assert.equal(isWordStillLearning(forgottenAgain), true);
+  });
+
+  runTest("usage migration keeps valid review data and queues historically missed words", () => {
+    const migrated = migrateUsageData({
+      words: {
+        historical: { c: 1, w: 3, last: 1_700_000_000_000 },
+        mastered: { c: 4, w: 0, last: 1_700_000_000_000 },
+      },
+      wordReviews: {
+        saved: { box: 2, dueAt: 1_800_000_000_000, correctStreak: 2, lastReviewedAt: 1_700_000_000_000 },
+        invalid: { box: 99, dueAt: -1, correctStreak: -2, lastReviewedAt: 0 },
+      },
+    }, defaultUsage());
+
+    assert.equal(migrated.wordReviews.historical.box, 0);
+    assert.equal(migrated.wordReviews.mastered, undefined);
+    assert.equal(migrated.wordReviews.saved.box, 2);
+    assert.equal(migrated.wordReviews.invalid, undefined);
   });
 
   runTest("native voice option preserves encoded voice URIs and provider labels expose configured gender/accent", () => {

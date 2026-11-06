@@ -20,10 +20,16 @@ export interface PlaybackMetadata {
   displayName: string;
   locale: VoiceLocale;
   contentLanguage: ContentLanguage;
-  gender: VoiceGender;
+  gender: VoiceGender | "unknown";
   distinctSpeakerVerified: boolean;
   usingBrowserFallback: boolean;
   latencyMs: number;
+  humanRecordingAttribution?: {
+    creator: string;
+    licenseName: string;
+    licenseUrl: string;
+    filePageUrl: string;
+  };
 }
 
 export interface PlaybackOptions {
@@ -35,6 +41,8 @@ export interface PlaybackOptions {
   gender?: VoiceGender;
   rate?: number;
   contentType?: "word" | "sentence" | "long-form";
+  /** Request an actual open human recording only; do not silently substitute TTS. */
+  humanRecordingOnly?: boolean;
   /** Resume a generated audio file at a saved position after its metadata loads. */
   startAtSeconds?: number;
   onTimeUpdate?: (currentTime: number, duration: number) => void;
@@ -379,6 +387,143 @@ class ClientAudioManager {
       options?.contentType ||
       (text.length > 500 ? "long-form" : text.length > 140 ? "sentence" : "word");
     const t0 = Date.now();
+
+    // For single English vocabulary items, request an actual contributor-recorded
+    // pronunciation where Wikimedia provides an exact accent match and reusable
+    // license. Such recordings are not labeled with a guessed speaker gender.
+    // This explicit mode must never fall through to synthesized speech.
+    if (options?.humanRecordingOnly) {
+      if (contentType !== "word" || voice.contentLanguage !== "en") {
+        const unsupportedRequest = new Error("Doğrulanmış insan kaydı şu anda yalnızca tek İngilizce kelime için aranabilir.");
+        options.onInfo?.(unsupportedRequest.message);
+        options.onError?.(unsupportedRequest);
+        return;
+      }
+      const lookupController = new AbortController();
+      try {
+        this.activeAbortController = lookupController;
+        const lookupTimeout = window.setTimeout(() => lookupController.abort(), 8_000);
+        const lookup = await fetch(
+          `/api/pronunciation/human?word=${encodeURIComponent(text.trim())}&accent=${encodeURIComponent(voice.locale)}`,
+          { signal: lookupController.signal },
+        ).finally(() => window.clearTimeout(lookupTimeout));
+        if (this.activeAbortController === lookupController) this.activeAbortController = null;
+        if (playbackGeneration !== this.playbackGeneration) return;
+
+        const humanAccent = lookup.headers.get("x-audio-accent");
+        if (
+          lookup.ok &&
+          lookup.headers.get("x-audio-source") === "wikimedia-human-recording" &&
+          humanAccent === voice.locale &&
+          lookup.headers.get("x-audio-speaker-gender") === "unknown" &&
+          (lookup.headers.get("content-type") || "").startsWith("audio/")
+        ) {
+          const audioBlob = await lookup.blob();
+          if (audioBlob.size > 0 && playbackGeneration === this.playbackGeneration) {
+            const filePageUrl = lookup.headers.get("x-audio-file-url") || "";
+            const licenseUrl = lookup.headers.get("x-audio-license-url") || "";
+            if (!filePageUrl.startsWith("https://commons.wikimedia.org/wiki/File:") || !licenseUrl.startsWith("https://")) {
+              throw new Error("Human audio attribution metadata was invalid.");
+            }
+            const attribution = {
+              creator: decodeURIComponent(lookup.headers.get("x-audio-creator") || "Wikimedia Commons contributor"),
+              licenseName: decodeURIComponent(lookup.headers.get("x-audio-license") || "Creative Commons"),
+              licenseUrl,
+              filePageUrl,
+            };
+            const audioUrl = URL.createObjectURL(audioBlob);
+            this.currentBlobUrl = audioUrl;
+            const humanAudio = new Audio(audioUrl);
+            humanAudio.preload = "auto";
+            humanAudio.playbackRate = rate;
+            this.currentAudio = humanAudio;
+            this.currentPlaybackKey = this.playbackKey(text, voice.id);
+            this.currentPlaybackOptions = options || null;
+            const meta: PlaybackMetadata = {
+              provider: "wikimedia-human-recording",
+              providerVoiceId: filePageUrl,
+              voiceId: voice.id,
+              displayName: "İnsan kaydı · konuşmacı cinsiyeti bilinmiyor",
+              locale: voice.locale,
+              contentLanguage: "en",
+              gender: "unknown",
+              distinctSpeakerVerified: false,
+              usingBrowserFallback: false,
+              latencyMs: Date.now() - t0,
+              humanRecordingAttribution: attribution,
+            };
+            this.lastMetadata = meta;
+            options?.onMetadata?.(meta);
+            if (typeof window !== "undefined") {
+              window.dispatchEvent(new CustomEvent("dil-master:human-audio-attribution", {
+                detail: attribution,
+              }));
+            }
+            humanAudio.ontimeupdate = () => {
+              this.currentPlaybackOptions?.onTimeUpdate?.(
+                Number.isFinite(humanAudio.currentTime) ? humanAudio.currentTime : 0,
+                Number.isFinite(humanAudio.duration) ? humanAudio.duration : 0,
+              );
+            };
+            humanAudio.onplay = () => {
+              this.currentPlaybackOptions?.onStart?.();
+              this.currentPlaybackOptions?.onInfo?.(
+                `Gerçek insan kaydı · ${voice.accentLabelTr} · konuşmacı cinsiyeti kaynakta belirtilmemiş`,
+              );
+            };
+            humanAudio.onended = () => {
+              if (this.currentBlobUrl === audioUrl) {
+                URL.revokeObjectURL(audioUrl);
+                this.currentBlobUrl = null;
+              }
+              const stillActive = this.currentAudio === humanAudio;
+              if (stillActive) {
+                this.currentAudio = null;
+                this.currentPlaybackKey = null;
+                this.currentPlaybackOptions = null;
+              }
+              if (stillActive) options?.onEnd?.();
+            };
+            humanAudio.onerror = () => {
+              if (this.currentBlobUrl === audioUrl) {
+                URL.revokeObjectURL(audioUrl);
+                this.currentBlobUrl = null;
+              }
+              const stillActive = this.currentAudio === humanAudio;
+              if (stillActive) {
+                this.currentAudio = null;
+                this.currentPlaybackKey = null;
+                this.currentPlaybackOptions = null;
+              }
+              if (stillActive) options?.onError?.(new Error("İnsan kaynaklı telaffuz dosyası yüklenemedi."));
+            };
+            try {
+              await humanAudio.play();
+              return;
+            } catch (error) {
+              URL.revokeObjectURL(audioUrl);
+              this.currentBlobUrl = null;
+              this.currentAudio = null;
+              this.currentPlaybackKey = null;
+              this.currentPlaybackOptions = null;
+              throw error;
+            }
+          }
+        }
+      } catch (humanLookupError) {
+        if (this.activeAbortController === lookupController) this.activeAbortController = null;
+        if (playbackGeneration !== this.playbackGeneration) return;
+        // Do not log user word text or remote URLs. Human-recording-only mode
+        // intentionally reports failure instead of replacing the recording with TTS.
+        console.warn("[HUMAN_PRONUNCIATION_FALLBACK]", humanLookupError instanceof Error ? humanLookupError.name : "unknown");
+      }
+      if (playbackGeneration === this.playbackGeneration) {
+        const missingRecording = new Error("Bu kelime ve aksan için lisansı doğrulanmış insan kaydı bulunamadı.");
+        options?.onInfo?.(missingRecording.message);
+        options?.onError?.(missingRecording);
+      }
+      return;
+    }
 
     // SAFETY: Helper for browser speech synthesis fallback (never uses fake pitch shifting)
     const playWithBrowserSpeech = async (): Promise<boolean> => {

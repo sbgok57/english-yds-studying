@@ -29,7 +29,7 @@ const YOKDIL_SKILLS = [
   {
     title: "Alan Kelime Çalışmaları (Vocabulary)",
     emoji: "📚",
-    desc: "Sağlık, Fen ve Sosyal alanlarına göre ayrıştırılmış yüksek frekanslı akademik terimler ve 3D flashcards.",
+    desc: "Sağlık, Fen ve Sosyal alanlarına göre ayrıştırılmış akademik terimler için seviyeli kelime kartları.",
     href: "/vocabulary/flashcards?exam=YÖKDİL",
     badge: "3 Alan Havuzu",
     color: "from-purple-500/20 to-pink-500/20 border-purple-400/30 text-purple-300",
@@ -77,7 +77,7 @@ const YOKDIL_SKILLS = [
   {
     title: "YÖKDİL Alan Denemeleri (Sağlık, Fen, Sosyal)",
     emoji: "⏱️",
-    desc: "2018-2026 İlkbahar / Sonbahar çıkmış sınavlar ve 72 Özgün Alan Denemesi (180 dk, 80 soru).",
+    desc: "Uygulamadaki YÖKDİL denemeleri ve ÖSYM'nin yayımladığı resmi sınav kitapçıklarına erişim (180 dk, 80 soru formatı).",
     href: "/exams?category=YÖKDİL",
     badge: "180 dk • 80 Soru",
     color: "from-indigo-500/20 to-purple-500/20 border-indigo-400/30 text-indigo-300",

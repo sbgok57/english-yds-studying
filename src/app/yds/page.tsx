@@ -20,7 +20,7 @@ const YDS_SKILLS = [
   {
     title: "Kelime Çalışmaları (Vocabulary)",
     emoji: "📚",
-    desc: "2.500+ master akademik kelime, 2013-2026 Modadil, Akın Dil, Remzi Hoca yayınlar havuzu ve 3D flashcards.",
+    desc: "Akademik kelime çalışmaları, kişisel tekrar listeleri ve seviyene göre kelime kartları.",
     href: "/vocabulary/flashcards?exam=YDS",
     badge: "2.500+ Kelime",
     color: "from-cyan-500/20 to-blue-500/20 border-cyan-400/30 text-cyan-300",
@@ -68,7 +68,7 @@ const YDS_SKILLS = [
   {
     title: "Sınav Denemeleri & Çıkmış Sorular",
     emoji: "⏱️",
-    desc: "2013-2026 İlkbahar / Sonbahar tüm gerçek çıkmış YDS sınavları ve 72 Özgün Deneme (180 dk, 80 soru).",
+    desc: "Uygulamadaki YDS denemeleri ve ÖSYM'nin yayımladığı resmi sınav kitapçıklarına erişim (180 dk, 80 soru formatı).",
     href: "/exams?category=YDS",
     badge: "180 dk • 80 Soru",
     color: "from-cyan-500/20 to-teal-500/20 border-cyan-400/30 text-cyan-300",
@@ -117,7 +117,7 @@ export default function YdsHubPage() {
             href="/vocabulary/flashcards?exam=YDS"
             className="flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-200 font-bold text-xs sm:text-sm transition-all"
           >
-            <span>🃏 3D YDS Kelime Kartları</span>
+            <span>Kelime Kartları</span>
           </Link>
         </div>
       </div>

@@ -13,7 +13,7 @@ import {
   type Gender,
 } from "@/lib/accents";
 
-/** 6 aksan × (Kadın/Erkek) = 12 doğal telaffuz seçeneği + Youglish linki. */
+/** Üç İngilizce aksan için kadın/erkek profil seçimi + Youglish bağlantısı. */
 export default function AccentBar({ text }: { text: string }) {
   const [accent, setAccent] = useState<AccentId>("us");
   const [gender, setGender] = useState<Gender>("female");
@@ -82,9 +82,6 @@ export default function AccentBar({ text }: { text: string }) {
         >
           🎧 Gerçek aksan ↗
         </a>
-        <span className="text-[10px] text-white/30">
-          Doğal stüdyo kalitesinde 96kbps çoklu aksan motoru.
-        </span>
       </div>
 
       {note && <p className="text-[10px] text-cyan-200/60 leading-snug">{note}</p>}

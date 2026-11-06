@@ -13,12 +13,13 @@ import ThemeInitializer from "@/components/theme/ThemeInitializer";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import DilMasterProSystem from "@/components/DilMasterProSystem";
 import { Toaster } from "sonner";
+import HumanAudioAttributionNotice from "@/components/tts/HumanAudioAttributionNotice";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dil-master.vercel.app"),
   title: "DİL MASTER | YDS · YDT · YÖKDİL Akademik Hazırlık Platformu",
   description:
-    "ÖSYM standartlarında YDS, YDT ve YÖKDİL kelime, gramer, okuma, dinleme ve deneme merkezi. Görsel hafıza, kodlama taktikleri ve animasyonlu gramer ile hazırlanın.",
+    "YDS, YDT ve YÖKDİL için seviyene göre kelime, gramer, okuma, dinleme ve deneme çalışmaları.",
   alternates: {
     canonical: "https://dil-master.vercel.app",
   },
@@ -85,6 +86,7 @@ export default function RootLayout({
             <ThemeProvider>
               <ThemeInitializer />
               <Header />
+              <HumanAudioAttributionNotice />
               <main className="min-h-[calc(100vh-3.5rem)] pb-6 transition-all duration-300">{children}</main>
               <AiWidget />
               <RecoveryBanner />

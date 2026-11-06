@@ -14,15 +14,16 @@ export interface ApiCtx {
 }
 
 type Handler = (req: Request, ctx: ApiCtx) => Promise<Response>
-type RouteContext = { params: Promise<Record<string, string>> }
 
 export function withApiHandler(name: string, handler: Handler) {
-  return async (req: Request, routeCtx: RouteContext): Promise<Response> => {
+  // All currently wrapped routes are static and accept only Request. Avoid an
+  // optional second argument: Next.js validates route-handler signatures at build time.
+  return async (req: Request): Promise<Response> => {
     const cid = newCid()
     const started = Date.now()
 
     try {
-      const res = await handler(req, { cid, ...(routeCtx ?? {}) })
+      const res = await handler(req, { cid })
       logInfo({
         cid,
         code: 'API_OK',

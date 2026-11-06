@@ -150,6 +150,15 @@ for (const relPath of requiredLocalAssets) {
 const registryEntries = Object.entries(VISUAL_ASSET_REGISTRY);
 assert.strictEqual(registryEntries.length, 12, "VISUAL_ASSET_REGISTRY 12 küratörlü kayıt içermelidir.");
 
+for (const [slug, item] of registryEntries) {
+  assert.doesNotMatch(item.threeD.conceptLabelTr, /küp/i, `${slug} görsel etiketi artık küp adını kullanmamalı`);
+}
+assert.doesNotMatch(
+  resolveWordVisualManifest({ english: "mitigate", turkish: "hafifletmek" }).threeD.conceptLabelTr,
+  /küp/i,
+  "Katalog dışından oluşturulan anlam sahnesi etiketi de küp adını kullanmamalı",
+);
+
 const verifiedPhotoSlugs = registryEntries
   .filter(([, item]) => item.hasVerifiedPhoto)
   .map(([slug]) => slug)

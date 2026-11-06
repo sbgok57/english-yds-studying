@@ -58,7 +58,7 @@ export interface VoiceProfile {
 
 export interface AccentMetadata {
   code: AccentCode;
-  shortId: "uk" | "us" | "ca" | "au" | "nz" | "sc" | "in";
+  shortId: "uk" | "us" | "au";
   labelTr: string;
   labelEn: string;
   flag: string;
@@ -579,7 +579,7 @@ export function getVoicesForAccent(locale: VoiceLocale): VoiceProfile[] {
 }
 
 /**
- * Doğrulama: Tüm 7 İngilizce aksanda + Türkçe (tr-TR) anlatımda kadın ve erkek seslerin varlığını test eder.
+ * Doğrulama: Desteklenen üç İngilizce aksan profili ve ayrı Türkçe anlatım profillerini denetler.
  */
 export function validateVoiceMatrix(): { valid: boolean; errors: string[] } {
   const errors: string[] = [];

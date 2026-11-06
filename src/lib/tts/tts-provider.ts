@@ -8,8 +8,14 @@ import {
   VoiceSource,
 } from "./voice-registry";
 import { isValidAudioBuffer } from "./audio-cache";
-import { findExactElevenLabsVoice, getElevenLabsVoiceCatalog } from "./elevenlabs-voice-catalog";
+import {
+  findExactElevenLabsVoice,
+  getConfiguredElevenLabsVoiceId,
+  getElevenLabsVoiceCatalog,
+} from "./elevenlabs-voice-catalog";
+import { getAzureVoiceCatalog, isExactAzureVoice } from "./azure-voice-catalog";
 import { ALL_VOICE_REGISTRY } from "./voice-registry";
+import { getNarakeetVoiceCatalog, resolveNarakeetVoice } from "./narakeet-voice-catalog";
 
 // PERF & SAFETY: Prevent Node.js undici/WebSocket IPv6 blackhole 8s timeouts on dual-stack networks
 try {
@@ -213,11 +219,53 @@ export class EdgeTtsProvider implements TtsProvider {
     const startTime = Date.now();
     let lastError: Error | null = null;
 
-    // KATMAN 1: Resmi Azure Speech REST API (Sunucu ortamında anahtar tanımlıysa gerçek EmelNeural/AhmetNeural/14 Aksan)
+    // Narakeet is used only when an administrator explicitly configures its
+    // server-side API key. Its API generates billable synthetic speech; never
+    // call it from health checks or when the key is absent.
+    const narakeetKey = process.env.NARAKEET_API_KEY?.trim();
+    if (narakeetKey) {
+      try {
+        const catalog = await getNarakeetVoiceCatalog(narakeetKey);
+        const resolved = resolveNarakeetVoice(voiceProfile, catalog);
+        if (!resolved) {
+          throw new Error(`VOICE_NOT_AVAILABLE: Narakeet does not verify the configured ${voiceProfile.locale} voice profile.`);
+        }
+        const audio = await this.synthesizeViaNarakeet(
+          narakeetKey,
+          resolved.name,
+          cleanText,
+          request.speakingRate || 1.0
+        );
+        if (!isValidAudioBuffer(audio, "audio/mpeg")) {
+          throw new Error("AUDIO_EMPTY: Narakeet returned invalid MP3 audio.");
+        }
+        return {
+          ok: true,
+          audio,
+          mimeType: "audio/mpeg",
+          durationMs: Date.now() - startTime,
+          provider: "narakeet",
+          voiceId: voiceProfile.id,
+          providerVoiceId: resolved.name,
+          locale: voiceProfile.locale,
+          contentLanguage: voiceProfile.contentLanguage,
+          distinctSpeakerVerified: true,
+          source: voiceProfile.source,
+        };
+      } catch (narakeetErr) {
+        lastError = narakeetErr instanceof Error ? narakeetErr : new Error("Narakeet synthesis failed.");
+      }
+    }
+
+    // KATMAN 1: Azure Speech REST API (yalnızca sunucu anahtarı ve katalog doğrulaması varsa)
     const azureKey = process.env.AZURE_SPEECH_KEY;
     const azureRegion = process.env.AZURE_SPEECH_REGION || "westeurope";
     if (azureKey) {
       try {
+        const azureCatalog = await getAzureVoiceCatalog(azureKey, azureRegion);
+        if (!isExactAzureVoice(voiceProfile, azureCatalog)) {
+          throw new Error(`VOICE_NOT_AVAILABLE: Azure did not verify ${voiceProfile.providerVoiceId} as ${voiceProfile.locale}/${voiceProfile.gender}.`);
+        }
         const azureBuffer = await this.synthesizeViaAzureRest(
           azureKey,
           azureRegion,
@@ -257,17 +305,18 @@ export class EdgeTtsProvider implements TtsProvider {
             candidate.locale === voiceProfile.locale &&
             candidate.gender !== voiceProfile.gender
         );
-        const explicitlyConfiguredTurkishVoice =
-          voiceProfile.locale === "tr-TR"
-            ? getDedicatedTurkishElevenLabsVoiceId(voiceProfile.id)
-            : undefined;
+        const explicitlyConfiguredVoice = getConfiguredElevenLabsVoiceId(voiceProfile.id);
         const resolvedVoice = findExactElevenLabsVoice(
           voiceProfile,
           catalog,
-          explicitlyConfiguredTurkishVoice
+          explicitlyConfiguredVoice
         );
         const pairedVoice = pairedProfile
-          ? findExactElevenLabsVoice(pairedProfile, catalog)
+          ? findExactElevenLabsVoice(
+              pairedProfile,
+              catalog,
+              getConfiguredElevenLabsVoiceId(pairedProfile.id)
+            )
           : null;
         const hasDistinctPair = Boolean(
           resolvedVoice && pairedVoice && resolvedVoice.id !== pairedVoice.id
@@ -386,16 +435,109 @@ export class EdgeTtsProvider implements TtsProvider {
     }
   }
 
+  private async synthesizeViaNarakeet(
+    apiKey: string,
+    voiceName: string,
+    text: string,
+    speakingRate: number
+  ): Promise<Buffer> {
+    const endpoint = new URL("https://api.narakeet.com/text-to-speech/mp3");
+    endpoint.searchParams.set("voice", voiceName);
+    endpoint.searchParams.set("voice-speed", String(Math.max(0.7, Math.min(1.2, speakingRate))));
+
+    const headers = {
+      "x-api-key": apiKey,
+      "Content-Type": "text/plain; charset=utf-8",
+    };
+    const isShortText = Buffer.byteLength(text, "utf8") <= 1024;
+    const controller = new AbortController();
+    // Keep the request within Vercel Hobby's default function window. Long
+    // Narakeet jobs can take longer and must fail clearly so the caller can use
+    // another configured provider instead of being terminated as a 504.
+    const timeout = setTimeout(() => controller.abort(), 7_500);
+    try {
+      const buildResponse = await fetch(endpoint, {
+        method: "POST",
+        cache: "no-store",
+        headers: isShortText ? { ...headers, Accept: "application/octet-stream" } : headers,
+        body: text,
+        signal: controller.signal,
+      });
+      if (!buildResponse.ok) throw new Error(`Narakeet TTS HTTP ${buildResponse.status}`);
+
+      if (isShortText) {
+        return Buffer.from(await buildResponse.arrayBuffer());
+      }
+
+      const build = (await buildResponse.json()) as { statusUrl?: unknown };
+      const statusUrl = typeof build.statusUrl === "string" ? new URL(build.statusUrl) : null;
+      if (!statusUrl || statusUrl.protocol !== "https:" || statusUrl.hostname !== "api.narakeet.com") {
+        throw new Error("Narakeet returned an invalid build status URL.");
+      }
+
+      const deadline = Date.now() + 6_000;
+      while (Date.now() < deadline) {
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        const statusResponse = await fetch(statusUrl, {
+          method: "GET",
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!statusResponse.ok) throw new Error(`Narakeet build status HTTP ${statusResponse.status}`);
+        const status = (await statusResponse.json()) as {
+          finished?: unknown;
+          succeeded?: unknown;
+          result?: unknown;
+        };
+        if (status.finished !== true) continue;
+        if (status.succeeded !== true || typeof status.result !== "string") {
+          throw new Error("Narakeet could not finish this audio build.");
+        }
+
+        const resultUrl = new URL(status.result);
+        if (resultUrl.protocol !== "https:" || resultUrl.username || resultUrl.password) {
+          throw new Error("Narakeet returned an unsafe audio result URL.");
+        }
+        // Narakeet result URLs are temporary signed URLs. Do not forward the
+        // API key to the storage host; only the URL's own signature is used.
+        const audioResponse = await fetch(resultUrl, {
+          method: "GET",
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        if (!audioResponse.ok) throw new Error(`Narakeet audio download HTTP ${audioResponse.status}`);
+        return Buffer.from(await audioResponse.arrayBuffer());
+      }
+      throw new Error("TIMEOUT: Narakeet audio build exceeded the request deadline.");
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
   async healthCheck(voice?: VoiceProfile): Promise<TtsHealth> {
     const t0 = Date.now();
     try {
+      const narakeetKey = process.env.NARAKEET_API_KEY?.trim();
+      if (narakeetKey) {
+        const catalog = await getNarakeetVoiceCatalog(narakeetKey);
+        const candidates = voice
+          ? [voice]
+          : ALL_VOICE_REGISTRY.filter((profile) => profile.enabled);
+        const matched = candidates.some((profile) => resolveNarakeetVoice(profile, catalog));
+        if (matched) {
+          return { provider: "narakeet-catalog", available: true, latencyMs: Date.now() - t0 };
+        }
+      }
+
       const apiKey = process.env.ELEVENLABS_API_KEY;
       if (apiKey) {
         const catalog = await getElevenLabsVoiceCatalog(apiKey);
         const candidates = voice
           ? [voice]
           : ALL_VOICE_REGISTRY.filter((profile) => profile.enabled);
-        const matched = candidates.some((profile) => findExactElevenLabsVoice(profile, catalog));
+        const matched = candidates.some((profile) =>
+          findExactElevenLabsVoice(profile, catalog, getConfiguredElevenLabsVoiceId(profile.id))
+        );
         if (matched) {
           return { provider: "elevenlabs-catalog", available: true, latencyMs: Date.now() - t0 };
         }
@@ -404,13 +546,20 @@ export class EdgeTtsProvider implements TtsProvider {
       // A health check must not synthesize a sample: ElevenLabs bills generated
       // characters. Validate configured credentials/catalog only, then report
       // the blocked provider instead of spending credits or claiming success.
-      const azureConfigured = Boolean(process.env.AZURE_SPEECH_KEY?.trim());
-      if (!azureConfigured) {
+      const azureKey = process.env.AZURE_SPEECH_KEY?.trim();
+      const azureRegion = process.env.AZURE_SPEECH_REGION || "westeurope";
+      if (!azureKey) {
         throw new Error("No exact configured cloud voice is available; no audio was generated.");
       }
 
+      const candidates = voice ? [voice] : ALL_VOICE_REGISTRY.filter((profile) => profile.enabled);
+      const azureCatalog = await getAzureVoiceCatalog(azureKey, azureRegion);
+      if (!candidates.some((profile) => isExactAzureVoice(profile, azureCatalog))) {
+        throw new Error("No configured Azure voice exactly matches the requested locale and speaker gender.");
+      }
+
       return {
-        provider: "azure-neural-configured",
+        provider: "azure-voice-catalog",
         available: true,
         latencyMs: Date.now() - t0,
       };

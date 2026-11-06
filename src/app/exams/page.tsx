@@ -65,7 +65,7 @@ export default function ExamsPage() {
           Sınav Merkezi: <span className="rainbow-text">YDS · YDT · YÖKDİL</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
-          2010&apos;dan 2026&apos;ya çıkmış tüm ÖSYM sınavları (LYS-5, YDT, YDS, YÖKDİL Sağlık/Fen/Sosyal) ve her sınav türü için 72&apos;şer adet özgün deneme sınavı. Tıklanabilir optik form, süre uyarıları ve anlık net hesabı ile sınav salonundaymış gibi deneyimleyin.
+          YDS, YDT ve YÖKDİL çalışmalarını burada takip edebilir; ÖSYM&apos;nin yayımladığı resmi soru kitapçıklarına aşağıdaki arşiv bağlantılarından ulaşabilirsin. Uygulama içindeki denemeler ve optik form ile sınav temposu pratiği yap.
         </p>
 
         {/* Sınav Modu Seçici */}
@@ -73,6 +73,18 @@ export default function ExamsPage() {
           <ExamModeSwitcher />
         </div>
       </div>
+
+      <section aria-labelledby="official-archives-title" className="rounded-2xl border border-cyan-400/25 bg-slate-900/70 p-5 sm:p-6 space-y-3">
+        <div>
+          <h2 id="official-archives-title" className="text-lg font-black text-white">ÖSYM resmî sınav arşivleri</h2>
+          <p className="mt-1 text-sm text-slate-300">Geçmiş sınav kitapçıklarını yayımlayan resmî kaynağa git. Arşiv kapsamı ve erişim koşulları ÖSYM tarafından belirlenir.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <a className="rounded-xl border border-cyan-300/30 bg-cyan-400/10 px-4 py-2 text-sm font-bold text-cyan-100 hover:bg-cyan-400/20" href="https://www.osym.gov.tr/SinavGrubu/Index/7" target="_blank" rel="noopener noreferrer">YDS arşivi</a>
+          <a className="rounded-xl border border-amber-300/30 bg-amber-400/10 px-4 py-2 text-sm font-bold text-amber-100 hover:bg-amber-400/20" href="https://www.osym.gov.tr/SinavGrubu/Index/2" target="_blank" rel="noopener noreferrer">YKS-Dil / YDT arşivi</a>
+          <a className="rounded-xl border border-violet-300/30 bg-violet-400/10 px-4 py-2 text-sm font-bold text-violet-100 hover:bg-violet-400/20" href="https://www.osym.gov.tr/SinavGrubu/Index/12" target="_blank" rel="noopener noreferrer">YÖKDİL arşivi</a>
+        </div>
+      </section>
 
       {/* 3 Büyük Sınav Özel Akademisi Butonları */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -139,7 +151,7 @@ export default function ExamsPage() {
           <span className="text-2xl shrink-0 group-hover:scale-110 transition-transform">🎧</span>
           <div>
             <h4 className="font-bold text-xs text-white">Listening Lab</h4>
-            <p className="text-[10px] text-slate-400">14 Aksan & Ses</p>
+            <p className="text-[10px] text-slate-400">3 Aksan & Kadın/Erkek Ses</p>
           </div>
         </Link>
 

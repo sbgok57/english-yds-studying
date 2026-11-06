@@ -16,7 +16,7 @@ import { chooseExactBrowserVoice } from "../src/lib/tts/browser-voice-matcher";
 console.log("▶ Starting TTS Voice Registry & Unit Tests...\n");
 
 // 1. Matris Doğrulaması
-console.log("  1. Testing 14 Voice Matrix Completeness...");
+console.log("  1. Testing Voice Registry and Three-Accent Matrix...");
 const matrix = validateVoiceMatrix();
 assert.strictEqual(matrix.valid, true, `Matrix errors: ${matrix.errors.join(", ")}`);
 assert.strictEqual(VOICE_REGISTRY.length, 14, "Tam olarak 14 ses profili olmalıdır.");
@@ -64,8 +64,15 @@ const deviceVoices = [
 ];
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "female")?.name, "Google UK English Female");
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-US", "male")?.name, "Google US English Male");
-assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "female")?.name, deviceVoices[3].name);
-assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-CA", "male")?.name, deviceVoices[4].name);
+const australianVoices = [
+  { name: "Microsoft Natasha Online (Natural) - English (Australia)", lang: "en-AU" },
+  { name: "Microsoft William Online (Natural) - English (Australia)", lang: "en-AU" },
+  { name: "Google UK English Female", lang: "en-GB" },
+];
+assert.strictEqual(chooseExactBrowserVoice(australianVoices, "en-AU", "female")?.name, australianVoices[0].name);
+assert.strictEqual(chooseExactBrowserVoice(australianVoices, "en-AU", "male")?.name, australianVoices[1].name);
+assert.strictEqual(chooseExactBrowserVoice(australianVoices, "en-US", "female"), undefined, "Avustralya cihaz sesi Amerikan aksanı diye sunulmamalı");
+assert(!ACCENT_METADATA_LIST.some((accent) => accent.code === "en-CA"), "Kanada artık kullanıcıya sunulan aksan seçeneklerinde olmamalı");
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "female")?.name, deviceVoices[7].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "tr-TR", "male")?.name, deviceVoices[8].name);
 assert.strictEqual(chooseExactBrowserVoice(deviceVoices, "en-GB", "male"), undefined, "US/Canada voices must not impersonate a missing British male voice");

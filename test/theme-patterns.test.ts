@@ -9,12 +9,12 @@ import { ALL_THEMES, applyTheme } from "../src/lib/themes/engine";
 
 console.log("▶ Starting Theme Pattern Registry & Uniqueness Verification Tests...\n");
 
-// 1. En az 30+ (Tam 36) Benzersiz SVG Deseni Kontrolü
+// 1. Genişletilmiş ve benzersiz SVG desen galerisi
 assert.ok(
-  PATTERN_REGISTRY.length >= 30,
-  `Desen galerisinde en az 30 benzersiz desen olmalıdır; mevcut: ${PATTERN_REGISTRY.length}`
+  PATTERN_REGISTRY.length >= 48,
+  `Desen galerisinde en az 48 benzersiz desen olmalıdır; mevcut: ${PATTERN_REGISTRY.length}`
 );
-console.log(`  ✅ PASS: Pattern registry contains ${PATTERN_REGISTRY.length} patterns (>= 30 required).\n`);
+console.log(`  ✅ PASS: Pattern registry contains ${PATTERN_REGISTRY.length} patterns (>= 48 required).\n`);
 
 // 2. ID, İsim ve SVG İçeriği Benzersizliği (Kopya Desen Yasağı)
 const ids = new Set<string>();
@@ -38,7 +38,19 @@ for (const item of PATTERN_REGISTRY) {
   assert.ok(item.reducedMotionFallback.length > 10);
   assert.ok(item.attribution.length > 5);
 }
-console.log("  ✅ PASS: All 36 patterns have unique IDs, Turkish names, and distinct SVG vector geometry.\n");
+console.log(`  ✅ PASS: All ${PATTERN_REGISTRY.length} patterns have unique IDs, Turkish names, and distinct SVG vector geometry.\n`);
+
+// Algorithmic color themes should expose every built-in motif, not cycle over
+// the original five designs only.
+const patternedThemes = ALL_THEMES.filter((theme) => theme.category === "patterned");
+const usedThemePatterns = new Set(patternedThemes.map((theme) => theme.patternType));
+assert.ok(usedThemePatterns.size >= 11, `Desenli renk temalarında en az 11 motif olmalı; mevcut: ${usedThemePatterns.size}`);
+for (const theme of patternedThemes) {
+  assert.ok(theme.patternCss && theme.patternCss !== "none", `Desenli tema ${theme.id} boş motif kullanamaz`);
+  assert.ok(theme.lightBg !== theme.darkBg, `Tema ${theme.id} açık/koyu modda farklı zemin kullanmalı`);
+  assert.strictEqual(theme.lightText, "#0f172a", `Tema ${theme.id} açık modda okunaklı metin rengi kullanmalı`);
+}
+console.log(`  ✅ PASS: ${usedThemePatterns.size} distinct built-in motifs are spread across patterned color themes.\n`);
 
 // 3. Zorunlu Kategorilerin Kapsanması
 const requiredCategories = [

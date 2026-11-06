@@ -152,6 +152,34 @@ export function migrateUsageData(raw: unknown, defaultUsage: UsageData): UsageDa
     }
   }
 
+  const wordReviews: UsageData["wordReviews"] = {};
+  if (src.wordReviews && typeof src.wordReviews === "object" && !Array.isArray(src.wordReviews)) {
+    for (const [key, value] of Object.entries(src.wordReviews as Record<string, unknown>)) {
+      if (!value || typeof value !== "object" || Array.isArray(value)) continue;
+      const item = value as Record<string, unknown>;
+      const box = item.box;
+      const dueAt = item.dueAt;
+      const correctStreak = item.correctStreak;
+      const lastReviewedAt = item.lastReviewedAt;
+      if (
+        typeof box === "number" && Number.isInteger(box) && box >= 0 && box <= 4 &&
+        typeof dueAt === "number" && Number.isFinite(dueAt) && dueAt >= 0 &&
+        typeof correctStreak === "number" && Number.isInteger(correctStreak) && correctStreak >= 0 &&
+        typeof lastReviewedAt === "number" && Number.isFinite(lastReviewedAt) && lastReviewedAt >= 0
+      ) {
+        wordReviews[key] = { box: box as 0 | 1 | 2 | 3 | 4, dueAt, correctStreak, lastReviewedAt };
+      }
+    }
+  }
+  // Preserve the learner's existing mistakes when introducing the review queue.
+  // Historical words with more misses than recalls enter the new-learning box.
+  const migrationNow = Date.now();
+  for (const [key, stat] of Object.entries(words)) {
+    if (stat.w > stat.c && !wordReviews[key]) {
+      wordReviews[key] = { box: 0, dueAt: migrationNow, correctStreak: 0, lastReviewedAt: stat.last };
+    }
+  }
+
   // Validate grammar
   const grammar: Record<string, { a: number; ok: number }> = {};
   if (src.grammar && typeof src.grammar === "object" && !Array.isArray(src.grammar)) {
@@ -254,6 +282,7 @@ export function migrateUsageData(raw: unknown, defaultUsage: UsageData): UsageDa
 
   return {
     words,
+    wordReviews,
     grammar,
     tactics,
     exams,

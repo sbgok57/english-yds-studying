@@ -235,3 +235,29 @@ export function answerAi(raw: string): string {
     `İpucu kanka: ${GRAMMAR_TOPICS.length} gramer konusu ve ${TACTICS.length} soru tipi taktiği sitede seni bekliyor. Bir konu adı yaz, hemen detaylandırayım. 🎯`,
   ].join("\n\n");
 }
+
+/**
+ * Contextual, offline grammar study coach used by lesson screens. The current
+ * in-app assistant is a rule-based system, so this helper never implies that
+ * a remote model was called or that a model key is configured.
+ */
+export function suggestGrammarStudyMethod(input: {
+  topicTitle: string;
+  rule: string;
+  example: string;
+  memoryHint: string;
+}): { title: string; steps: string[]; reviewPlan: string } {
+  const safeRule = input.rule.trim() || "Dersin ana kuralını kendi cümlenle özetle.";
+  const safeExample = input.example.trim() || "Ders içindeki bir örneği kullan.";
+  const safeHint = input.memoryHint.trim() || "Kısa bir çağrışım kur.";
+
+  return {
+    title: `${input.topicTitle}: kısa ve akılda kalıcı çalışma planı`,
+    steps: [
+      `Kanka, önce şu kuralı 10 saniyede kendi sözlerinle anlat: ${safeRule}`,
+      `Sonra örneği kapatıp yeniden kur; hedef yapıyı kendin bul: “${safeExample}”`,
+      `Takılırsan hafıza ipucunu çağır ve kuralı bir yeni cümlede uygula: ${safeHint}`,
+    ],
+    reviewPlan: "Aynı mini yoklamayı 10 dakika sonra, yarın ve 3 gün sonra tekrar çöz. Cevabı okumadan hatırlamaya çalış.",
+  };
+}

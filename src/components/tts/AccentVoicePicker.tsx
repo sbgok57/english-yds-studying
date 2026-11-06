@@ -132,8 +132,8 @@ export default function AccentVoicePicker({
         )}
       </div>
 
-      {/* 6 Aksan Sekmesi */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+      {/* İngilizce, Amerikan ve Avustralya aksanları */}
+      <div className="grid grid-cols-3 gap-1.5">
         {ACCENT_METADATA_LIST.map((acc) => {
           const isSelected = activeAccent === acc.code;
           return (

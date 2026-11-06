@@ -1,15 +1,7 @@
 export const ACCENTS = [
   { id: "en-GB", label: "British English", locale: "en-GB" },
   { id: "en-US", label: "American English", locale: "en-US" },
-  { id: "en-CA", label: "Canadian English", locale: "en-CA" },
   { id: "en-AU", label: "Australian English", locale: "en-AU" },
-  { id: "en-NZ", label: "New Zealand English", locale: "en-NZ" },
-  {
-    id: "en-GB-scotland",
-    label: "Scottish English",
-    locale: "en-GB",
-  },
-  { id: "en-IN", label: "Indian English", locale: "en-IN" },
 ] as const;
 
 export type AccentId = (typeof ACCENTS)[number]["id"];
@@ -49,17 +41,6 @@ export function chooseVoice(
     : Array.isArray(voicesOrAccent)
       ? voicesOrAccent
       : getAvailableEnglishVoices();
-
-  if (accent === "en-GB-scotland") {
-    const exactScottish = voices.find((voice) =>
-      /scotland|scottish|fiona|alba/i.test(
-        `${voice.name} ${voice.lang}`,
-      ),
-    );
-
-    // Never claim a generic British voice is a verified Scottish accent.
-    return exactScottish;
-  }
 
   const exact = voices.find(
     (voice) =>

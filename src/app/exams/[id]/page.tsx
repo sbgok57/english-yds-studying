@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 }
 
 export default async function ExamPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id: routeId } = await params;
   // id ne olursa olsun güvenli veri döndürülür → client-side exception oluşmaz.
+  const { id: routeId } = await params;
   const id = routeId || "yds-2024-ilkbahar";
   const meta = getExamMeta(id);
   const questions = getExamQuestions(id);

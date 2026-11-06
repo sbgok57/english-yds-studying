@@ -22,7 +22,19 @@ export type PatternCategory =
   | "abstract-geometry"
   | "micro-geo"
   | "minimal-circles"
-  | "layered-lines";
+  | "layered-lines"
+  | "soundwave"
+  | "petal-lattice"
+  | "contour-river"
+  | "sunburst"
+  | "woven-diamond"
+  | "confetti"
+  | "orbit-dots"
+  | "ripple-grid"
+  | "leaf-veins"
+  | "stained-glass"
+  | "rainbow-arc"
+  | "star-map";
 
 export interface ThemePatternItem {
   id: string;
@@ -58,7 +70,7 @@ export const PATTERN_CATEGORY_LABELS: Record<PatternCategory, string> = {
   bubbles: "Hafif Kabarcıklar",
   arcs: "Kesişen Yaylar (Arcs)",
   aurora: "Kuzey Işıkları (Aurora)",
-  isometric: "İzometrik Küp",
+  isometric: "İzometrik Çizgiler",
   crosshatch: "Çapraz Tarama (Crosshatch)",
   woven: "Dokuma Örgü (Woven)",
   terrazzo: "Terrazzo Mozaik",
@@ -66,6 +78,18 @@ export const PATTERN_CATEGORY_LABELS: Record<PatternCategory, string> = {
   "micro-geo": "Mikro Üçgen & Nokta",
   "minimal-circles": "Minimal Halkalar",
   "layered-lines": "Katmanlı Paralel Çizgiler",
+  soundwave: "Ses Dalgası",
+  "petal-lattice": "Taç Yaprak Izgarası",
+  "contour-river": "Akarsu Konturları",
+  sunburst: "Güneş Işını",
+  "woven-diamond": "Baklava Dokuma",
+  confetti: "Renkli Konfeti",
+  "orbit-dots": "Yörünge Noktaları",
+  "ripple-grid": "Dalga Halkaları",
+  "leaf-veins": "Yaprak Damarları",
+  "stained-glass": "Vitray Paneller",
+  "rainbow-arc": "Spektrum Yayları",
+  "star-map": "Yıldız Haritası",
 };
 
 function svgToDataUri(svg: string): string {
@@ -304,12 +328,14 @@ const RAW_PATTERN_SEEDS: RawPatternSeed[] = [
     svgBody: `<path d="M 0 20 C 20 4, 44 36, 64 20" fill="none" stroke="#22d3ee" stroke-width="2"/><path d="M 0 36 C 20 20, 44 52, 64 36" fill="none" stroke="#a855f7" stroke-width="2"/><path d="M 0 50 C 20 34, 44 66, 64 50" fill="none" stroke="#10b981" stroke-width="1.6"/>`,
   },
   {
+    // Keep the historical ID so saved theme selections remain valid; the
+    // rendered motif is now a non-cubic line lattice.
     id: "isometric-3d-cubes",
-    nameTr: "İzometrik 3B Kristal Küpler",
+    nameTr: "İzometrik Kristal Izgara",
     category: "isometric",
     size: 48,
     defaultOpacity: 0.24,
-    svgBody: `<path d="M 24 4 L 44 15 L 44 37 L 24 48 L 4 37 L 4 15 Z M 4 15 L 24 26 L 44 15 M 24 26 V 48" fill="none" stroke="#38bdf8" stroke-width="1.1"/>`,
+    svgBody: `<path d="M -12 12 L 60 12 M -12 24 L 60 24 M -12 36 L 60 36 M 12 -12 L 12 60 M 24 -12 L 24 60 M 36 -12 L 36 60" fill="none" stroke="#38bdf8" stroke-width="1.1"/>`,
   },
   {
     id: "isometric-steps-matrix",
@@ -374,6 +400,102 @@ const RAW_PATTERN_SEEDS: RawPatternSeed[] = [
     size: 40,
     defaultOpacity: 0.21,
     svgBody: `<path d="M -10 10 L 10 -10 M 0 40 L 40 0 M 30 50 L 50 30" stroke="#38bdf8" stroke-width="1.1"/><path d="M -10 30 L 30 -10 M 10 50 L 50 10" stroke="#a855f7" stroke-width="0.7" stroke-dasharray="4 3"/>`,
+  },
+  {
+    id: "soundwave-stereo-pulse",
+    nameTr: "Stereo Ses Dalgası",
+    category: "soundwave",
+    size: 72,
+    defaultOpacity: 0.23,
+    svgBody: `<path d="M0 36h8l5-16 7 32 7-42 8 52 7-34 7 16 6-8h17" fill="none" stroke="#06b6d4" stroke-width="1.6" stroke-linejoin="round"/><path d="M0 52h14m44 0h14" stroke="#f472b6" stroke-width="1"/>`,
+  },
+  {
+    id: "petal-lattice-bloom",
+    nameTr: "Çiçek Açan Taç Yaprak Izgarası",
+    category: "petal-lattice",
+    size: 64,
+    defaultOpacity: 0.22,
+    svgBody: `<g fill="none" stroke="#f472b6" stroke-width="1"><ellipse cx="32" cy="18" rx="8" ry="16"/><ellipse cx="32" cy="46" rx="8" ry="16"/><ellipse cx="18" cy="32" rx="16" ry="8"/><ellipse cx="46" cy="32" rx="16" ry="8"/></g><circle cx="32" cy="32" r="4" fill="#fbbf24"/>`,
+  },
+  {
+    id: "contour-river-delta",
+    nameTr: "Kıvrımlı Nehir Deltası Konturları",
+    category: "contour-river",
+    size: 80,
+    defaultOpacity: 0.21,
+    svgBody: `<path d="M-8 12C12 4 20 28 40 18S68 8 88 18M-8 28C12 20 20 44 40 34S68 24 88 34M-8 44C12 36 20 60 40 50S68 40 88 50M-8 60C12 52 20 76 40 66S68 56 88 66" fill="none" stroke="#14b8a6" stroke-width="1.2"/>`,
+  },
+  {
+    id: "sunburst-golden-hour",
+    nameTr: "Altın Saat Güneş Işınları",
+    category: "stars",
+    size: 64,
+    defaultOpacity: 0.23,
+    svgBody: `<g stroke="#f59e0b" stroke-width="1.2"><path d="M32 2v13M32 49v13M2 32h13M49 32h13M11 11l9 9M44 44l9 9M53 11l-9 9M20 44l-9 9"/></g><circle cx="32" cy="32" r="11" fill="none" stroke="#fb7185" stroke-width="1.5"/><circle cx="32" cy="32" r="4" fill="#fbbf24"/>`,
+  },
+  {
+    id: "woven-diamond-satin",
+    nameTr: "Saten Baklava Dokuma",
+    category: "woven-diamond",
+    size: 48,
+    defaultOpacity: 0.22,
+    svgBody: `<path d="M24 0 48 24 24 48 0 24Z M-24 0 0 24-24 48 M48 0 72 24 48 48 M0-24 24 0 48-24 M0 48 24 72 48 48" fill="none" stroke="#a78bfa" stroke-width="1.1"/><path d="M24 8 40 24 24 40 8 24Z" fill="none" stroke="#22d3ee" stroke-width=".8"/>`,
+  },
+  {
+    id: "confetti-celebration",
+    nameTr: "Canlı Renkli Konfeti",
+    category: "confetti",
+    size: 72,
+    defaultOpacity: 0.24,
+    svgBody: `<circle cx="10" cy="12" r="2" fill="#fb7185"/><rect x="30" y="8" width="3" height="8" rx="1" transform="rotate(24 31.5 12)" fill="#22d3ee"/><path d="m54 12 3 5-6 1Z" fill="#a78bfa"/><circle cx="22" cy="38" r="1.5" fill="#facc15"/><rect x="48" y="34" width="3" height="9" rx="1" transform="rotate(-28 49.5 38.5)" fill="#34d399"/><path d="m12 56 4 5-6 1Z" fill="#f472b6"/><circle cx="36" cy="60" r="2" fill="#38bdf8"/><path d="m64 54 3 5-6 1Z" fill="#f59e0b"/>`,
+  },
+  {
+    id: "orbit-dots-celestial",
+    nameTr: "Gezegenimsi Noktalı Yörüngeler",
+    category: "orbit-dots",
+    size: 72,
+    defaultOpacity: 0.22,
+    svgBody: `<ellipse cx="36" cy="36" rx="29" ry="12" transform="rotate(-28 36 36)" fill="none" stroke="#6366f1" stroke-width="1"/><ellipse cx="36" cy="36" rx="29" ry="12" transform="rotate(42 36 36)" fill="none" stroke="#06b6d4" stroke-width="1"/><circle cx="36" cy="36" r="4" fill="#fbbf24"/><circle cx="58" cy="22" r="2.5" fill="#f472b6"/><circle cx="18" cy="50" r="2" fill="#34d399"/>`,
+  },
+  {
+    id: "ripple-grid-water",
+    nameTr: "Suya Düşen Halka Dalgaları",
+    category: "ripple-grid",
+    size: 72,
+    defaultOpacity: 0.21,
+    svgBody: `<g fill="none" stroke="#38bdf8"><circle cx="36" cy="36" r="7" stroke-width="1.3"/><circle cx="36" cy="36" r="15" stroke-width="1.1"/><circle cx="36" cy="36" r="23" stroke-width=".9"/><circle cx="36" cy="36" r="31" stroke-width=".7"/></g><path d="M36 0v5M72 36h-5M36 72v-5M0 36h5" stroke="#a78bfa" stroke-width="1.5"/>`,
+  },
+  {
+    id: "leaf-veins-botanical",
+    nameTr: "Botanik Yaprak Damarları",
+    category: "leaf-veins",
+    size: 64,
+    defaultOpacity: 0.22,
+    svgBody: `<path d="M8 52C18 14 44 8 56 10 54 34 42 54 8 52Z" fill="none" stroke="#22c55e" stroke-width="1.3"/><path d="M10 51 52 13M20 42l-2-15M29 34l13-2M37 27l-1-11M18 44l13 2M28 35l-1-12M38 26l10 1" fill="none" stroke="#14b8a6" stroke-width=".9"/>`,
+  },
+  {
+    id: "stained-glass-mosaic",
+    nameTr: "Renkli Vitray Mozaik",
+    category: "stained-glass",
+    size: 72,
+    defaultOpacity: 0.2,
+    svgBody: `<path d="M0 0h36v36H0zM36 0h36v36H36zM0 36h36v36H0zM36 36h36v36H36z" fill="none" stroke="#38bdf8" stroke-width="1.2"/><path d="M0 0 36 36 0 36ZM36 0l36 36H36ZM0 36l36 36V36ZM36 36l36 36V36Z" fill="#a855f7" fill-opacity=".35" stroke="#f472b6" stroke-width=".8"/>`,
+  },
+  {
+    id: "rainbow-arc-spectrum",
+    nameTr: "Renk Spektrumu Yayları",
+    category: "rainbow-arc",
+    size: 80,
+    defaultOpacity: 0.22,
+    svgBody: `<path d="M4 68A36 36 0 0 1 76 68M12 68A28 28 0 0 1 68 68M20 68A20 20 0 0 1 60 68M28 68A12 12 0 0 1 52 68" fill="none" stroke-width="2.2" stroke="#ef4444"/><path d="M12 68A28 28 0 0 1 68 68" fill="none" stroke="#f59e0b" stroke-width="2"/><path d="M20 68A20 20 0 0 1 60 68" fill="none" stroke="#22c55e" stroke-width="2"/><path d="M28 68A12 12 0 0 1 52 68" fill="none" stroke="#6366f1" stroke-width="2"/>`,
+  },
+  {
+    id: "star-map-polaris",
+    nameTr: "Kutup Yıldızı Gökyüzü Haritası",
+    category: "star-map",
+    size: 72,
+    defaultOpacity: 0.22,
+    svgBody: `<path d="M8 54 20 34 36 40 48 14 63 25" fill="none" stroke="#818cf8" stroke-width=".9" stroke-dasharray="2 3"/><circle cx="8" cy="54" r="2.2" fill="#22d3ee"/><circle cx="20" cy="34" r="2.8" fill="#fbbf24"/><circle cx="36" cy="40" r="2" fill="#f472b6"/><path d="m48 8 2 5 5 1-5 2-2 5-2-5-5-2 5-1Z" fill="#fde68a"/><circle cx="63" cy="25" r="2.4" fill="#34d399"/>`,
   },
 ];
 

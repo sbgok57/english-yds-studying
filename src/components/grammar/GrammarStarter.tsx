@@ -10,6 +10,7 @@ import {
 } from "../../shared/grammar-progress";
 import { clientAudio } from "@/lib/tts/audio-client";
 import type { AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
+import { VOICE_REGISTRY } from "@/lib/tts/voice-registry";
 import { Sparkles, Volume2, VolumeX, CheckCircle2, XCircle, ArrowLeft, ArrowRight, RotateCcw, Award } from "lucide-react";
 
 export type GrammarVoiceProfile = {
@@ -26,14 +27,15 @@ export type GrammarVoiceProfile = {
 
 export type LanguageKey = "en" | "tr";
 
-const DEFAULT_ENGLISH_PROFILES: readonly GrammarVoiceProfile[] = [
-  { id: "en-GB-female-sonia", label: "İngiliz Aksanı (British 🇬🇧 - Sonia)", language: "en-GB", flag: "🇬🇧", gender: "female" },
-  { id: "en-GB-male-ryan", label: "İngiliz Aksanı (British 🇬🇧 - Ryan)", language: "en-GB", flag: "🇬🇧", gender: "male" },
-  { id: "en-US-female-jenny", label: "Amerikan Aksanı (American 🇺🇸 - Jenny)", language: "en-US", flag: "🇺🇸", gender: "female" },
-  { id: "en-US-male-guy", label: "Amerikan Aksanı (American 🇺🇸 - Guy)", language: "en-US", flag: "🇺🇸", gender: "male" },
-  { id: "en-AU-female-natasha", label: "Avustralya Aksanı (Australian 🇦🇺 - Natasha)", language: "en-AU", flag: "🇦🇺", gender: "female" },
-  { id: "en-CA-female-clara", label: "Kanada Aksanı (Canadian 🇨🇦 - Clara)", language: "en-CA", flag: "🇨🇦", gender: "female" },
-];
+const DEFAULT_ENGLISH_PROFILES: readonly GrammarVoiceProfile[] = VOICE_REGISTRY
+  .filter((voice) => voice.enabled && voice.contentLanguage === "en")
+  .map((voice) => ({
+    id: voice.id,
+    label: `${voice.accentLabelTr} aksanı · ${voice.displayName}`,
+    language: voice.locale,
+    flag: voice.flag,
+    gender: voice.gender,
+  }));
 
 const DEFAULT_TURKISH_PROFILES: readonly GrammarVoiceProfile[] = [
   { id: "tr-TR-female-emel", label: "Emel — Kadın Hoca (Türkçe 🇹🇷)", language: "tr-TR", flag: "🇹🇷", gender: "female" },
@@ -279,14 +281,24 @@ export function GrammarStarter({
 
         <div>
           <h3 className="text-xl sm:text-2xl font-black text-white">{lesson.title}</h3>
-          <p className="text-sm font-semibold text-cyan-300/90 mt-1">{lesson.objective}</p>
-          <p className="text-xs sm:text-sm text-white/80 mt-3 leading-relaxed">{lesson.explanation}</p>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-cyan-200 mt-3">Kısa anlatım</p>
+          <p className="text-sm sm:text-base text-white/90 mt-1 leading-relaxed">{lesson.explanation}</p>
+          <details className="mt-3 rounded-xl border border-white/10 bg-white/[0.03] p-3">
+            <summary className="cursor-pointer text-xs font-semibold text-white/65">Bu derste ne öğreneceğim?</summary>
+            <p className="mt-2 text-sm text-white/75 leading-relaxed">{lesson.objective}</p>
+          </details>
         </div>
 
         {/* Kalıp Formülü */}
         <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/40 to-slate-950 border border-purple-500/30 space-y-1">
           <span className="text-[10px] font-bold uppercase tracking-widest text-purple-400">Gramer Kalıbı / Formül</span>
           <p className="font-mono text-xs sm:text-sm text-cyan-200 font-bold">{lesson.pattern}</p>
+        </div>
+
+        <div className="grid gap-2 sm:grid-cols-3 text-xs text-white/75">
+          <p className="rounded-xl bg-white/[0.04] p-3"><strong className="text-cyan-200">Hatırla:</strong> Kalıbı sesli ya da içinden bir kez söyle.</p>
+          <p className="rounded-xl bg-white/[0.04] p-3"><strong className="text-cyan-200">Bağla:</strong> Örnekte hedeflenen yapıyı bul.</p>
+          <p className="rounded-xl bg-white/[0.04] p-3"><strong className="text-cyan-200">Yokla:</strong> Mini soruyu cevaba bakmadan çöz.</p>
         </div>
 
         {/* Sesli Dinleme Butonları */}

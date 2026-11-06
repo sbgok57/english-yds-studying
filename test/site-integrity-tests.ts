@@ -127,21 +127,22 @@ test("All vocabulary items have valid word, meaning, and examples", () => {
   assert(delayWord.example.includes("delayed"), "Word 'delay' must have valid example sentence");
 });
 
-// 4. TTS 14 Voices Matrix
+// 4. TTS enabled accent and speaker matrix
 console.log("\n4. TTS Multi-Accent Matrix Specification...");
 test("All provider-supported accents have female and male voices; unsupported accents are not enabled", () => {
   const result = validateVoiceMatrix();
   assert(result.valid, `Voice matrix validation failed: ${result.errors.join(", ")}`);
-  assert.strictEqual(VOICE_REGISTRY.length, 14, "Voice registry must contain exactly 14 voices");
+  const enabledVoices = VOICE_REGISTRY.filter((voice) => voice.enabled);
+  assert.strictEqual(enabledVoices.filter((voice) => voice.contentLanguage === "en").length, 6, "Only three English accents with female/male profiles should be enabled");
 
-  const expectedLocales = ["en-GB", "en-US", "en-CA", "en-AU", "en-NZ", "en-IN"];
+  const expectedLocales = ["en-GB", "en-US", "en-AU"];
   for (const loc of expectedLocales) {
     const female = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "female");
     const male = VOICE_REGISTRY.find((v) => v.locale === loc && v.gender === "male");
     assert(female, `Missing female voice for locale ${loc}`);
     assert(male, `Missing male voice for locale ${loc}`);
   }
-  assert(!VOICE_REGISTRY.some((voice) => voice.locale === "en-GB-scotland" && voice.enabled));
+  assert(!VOICE_REGISTRY.some((voice) => ["en-CA", "en-NZ", "en-IN", "en-GB-scotland"].includes(voice.locale) && voice.enabled));
 });
 
 // 5. 10000 Avatars

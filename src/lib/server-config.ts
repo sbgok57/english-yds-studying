@@ -120,18 +120,19 @@ export function getSafeDatabaseUrl(): string {
     throw new Error("A persistent remote DATABASE_URL is required in serverless environments.");
   }
 
-  // Respect an explicitly configured local SQLite URL first. This is required
-  // for isolated test databases and prevents accidental writes to prisma/dev.db.
-  if (rawUrl && rawUrl.startsWith("file:")) {
-    const cleanPath = rawUrl.replace(/^file:/, "");
-    const resolvedPath = path.isAbsolute(cleanPath) ? cleanPath : path.resolve(process.cwd(), cleanPath);
-    return `file:${resolvedPath}`;
-  }
-
   // 3. In persistent / local development environments:
   const canonicalPrismaDb = path.resolve(process.cwd(), "prisma", "dev.db");
   if (fs.existsSync(canonicalPrismaDb) && fs.statSync(canonicalPrismaDb).size > 0) {
     return `file:${canonicalPrismaDb}`;
+  }
+
+  // If rawUrl points to an existing file, use it
+  if (rawUrl && rawUrl.startsWith("file:")) {
+    const cleanPath = rawUrl.replace(/^file:/, "");
+    const resolvedPath = path.isAbsolute(cleanPath) ? cleanPath : path.resolve(process.cwd(), cleanPath);
+    if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).size > 0) {
+      return `file:${resolvedPath}`;
+    }
   }
 
   return `file:${canonicalPrismaDb}`;

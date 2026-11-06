@@ -1,7 +1,7 @@
 // Çoklu aksan + cinsiyet desteği (Doğal Edge Neural TTS).
 import { clientAudio } from "./tts/audio-client";
 
-export type AccentId = "uk" | "us" | "ca" | "au" | "nz" | "sc" | "in";
+export type AccentId = "uk" | "us" | "au";
 export type Gender = "female" | "male";
 
 export interface Accent {
@@ -48,20 +48,6 @@ export const ACCENTS: Accent[] = [
     edgeVoice: { female: "en-US-JennyNeural", male: "en-US-GuyNeural" },
   },
   {
-    id: "ca",
-    label: "Kanada",
-    flag: "🇨🇦",
-    lang: "en-CA",
-    langPrefixes: ["en-ca", "en_ca"],
-    youglish: "us",
-    keywords: ["canadian", "google ca", "clara", "liam"],
-    names: {
-      female: ["canadian female", "clara", "linda", "heather"],
-      male: ["canadian male", "liam"],
-    },
-    edgeVoice: { female: "en-CA-ClaraNeural", male: "en-CA-LiamNeural" },
-  },
-  {
     id: "au",
     label: "Avustralya",
     flag: "🇦🇺",
@@ -74,48 +60,6 @@ export const ACCENTS: Accent[] = [
       male: ["australian male", "james", "william"],
     },
     edgeVoice: { female: "en-AU-NatashaNeural", male: "en-AU-WilliamMultilingualNeural" },
-  },
-  {
-    id: "nz",
-    label: "Yeni Zelanda",
-    flag: "🇳🇿",
-    lang: "en-NZ",
-    langPrefixes: ["en-nz", "en_nz"],
-    youglish: "nz",
-    keywords: ["new zealand", "molly", "mitchell"],
-    names: {
-      female: ["new zealand female", "molly"],
-      male: ["new zealand male", "mitchell"],
-    },
-    edgeVoice: { female: "en-NZ-MollyNeural", male: "en-NZ-MitchellNeural" },
-  },
-  {
-    id: "sc",
-    label: "İskoçya",
-    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
-    lang: "en-GB-scotland",
-    langPrefixes: ["en-gb-scotland", "en-scot", "en_gb_scotland"],
-    youglish: "uk",
-    keywords: ["scottish", "scotland", "maisie", "thomas", "fiona"],
-    names: {
-      female: ["scottish female", "fiona", "maisie"],
-      male: ["scottish male", "thomas", "ryan"],
-    },
-    edgeVoice: { female: "en-GB-MaisieNeural", male: "en-GB-ThomasNeural" },
-  },
-  {
-    id: "in",
-    label: "Hint",
-    flag: "🇮🇳",
-    lang: "en-IN",
-    langPrefixes: ["en-in", "en_in"],
-    youglish: "in",
-    keywords: ["indian", "hindi", "google in", "rishi", "veena", "heera", "neerja", "ravi", "prabhat"],
-    names: {
-      female: ["indian female", "veena", "heera", "neerja", "hindi female"],
-      male: ["indian male", "rishi", "ravi", "prabhat", "hindi male"],
-    },
-    edgeVoice: { female: "en-IN-NeerjaNeural", male: "en-IN-PrabhatNeural" },
   },
 ];
 
@@ -133,7 +77,7 @@ export interface SpeakResult {
 
 /**
  * (aksan, cinsiyet) için doğal neural stüdyo kalitesinde konuşmayı başlatır.
- * 12 farklı Edge Neural sesi doğrudan sunucu üzerinden çalar.
+ * Üç İngilizce aksanda (İngiliz, Amerikan, Avustralya) kadın ve erkek seslerini seçer.
  */
 export function speakWithAccent(
   text: string,
@@ -184,11 +128,7 @@ export function youglishUrl(word: string, id: AccentId): string {
 const ACCENT_LOCALE_MAP: Record<AccentId, string> = {
   uk: "en-GB",
   us: "en-US",
-  ca: "en-CA",
   au: "en-AU",
-  nz: "en-NZ",
-  sc: "en-GB-scotland",
-  in: "en-IN",
 };
 
 export function getStoredAccent(): AccentId {
@@ -198,13 +138,12 @@ export function getStoredAccent(): AccentId {
 
     const p = window.localStorage.getItem("yds-preferred-accent");
     if (p) {
-      if (p.includes("scotland") || p.includes("scot") || p === "sc") return "sc";
+      // Legacy accents removed from the product fall back to the supported
+      // default instead of being mislabeled as a neighboring accent.
+      if (/scotland|scottish|en-CA|en_NZ|en-IN|(?:^|\b)(?:ca|nz|in|sc)(?:\b|$)/i.test(p)) return "us";
       if (p.includes("GB") || p === "uk") return "uk";
       if (p.includes("US") || p === "us") return "us";
-      if (p.includes("CA") || p === "ca") return "ca";
       if (p.includes("AU") || p === "au") return "au";
-      if (p.includes("NZ") || p === "nz") return "nz";
-      if (p.includes("IN") || p === "in") return "in";
     }
   } catch {
     /* boş */

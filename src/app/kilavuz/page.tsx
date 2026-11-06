@@ -32,9 +32,9 @@ const SECTIONS = [
   },
   {
     emoji: "🃏",
-    title: "3D Flashcards & Tüm Kelime Tablosu",
+    title: "Kelime Kartları & Tüm Kelime Tablosu",
     href: "/vocabulary/flashcards",
-    desc: "2.500+ master akademik kelime, yayınlar havuzu ve kendi ekledikleriniz. 3D küpü döndür, kartı çevir, 5 aksanda dinle veya 'Tablo' modunda tüm kelimeleri filtrele.",
+    desc: "Mevcut akademik kelime havuzunu ve kendi eklediklerinizi çalışın. Kartı çevirin, telaffuzu dinleyin veya 'Tablo' modunda kelimeleri filtreleyin.",
     tip: "Akıllı Bellek (SM-2): Zayıf olduğunuz kelimeler otomatik olarak en başta gelir. 5 seri doğruda havai fişek patlar!",
   },
   {

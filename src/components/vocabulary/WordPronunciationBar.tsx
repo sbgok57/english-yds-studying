@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Play, RotateCcw, Mic, Sparkles, Volume2, CheckCircle, Snail } from "lucide-react";
 import { clientAudio } from "@/lib/tts/audio-client";
+import type { PlaybackMetadata } from "@/lib/tts/audio-client";
 import { ACCENT_METADATA_LIST, AccentCode, VoiceGender } from "@/lib/tts/voice-registry";
 import { setStoredAccent, setStoredGender, getStoredGender } from "@/lib/accents";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ export default function WordPronunciationBar({
   const [activeRate, setActiveRate] = useState<number>(1.0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioError, setAudioError] = useState("");
+  const [playbackMeta, setPlaybackMeta] = useState<PlaybackMetadata | null>(null);
   const [micState, setMicState] = useState<"idle" | "listening" | "success">("idle");
   const micTimerRef = useRef<NodeJS.Timeout | null>(null);
   const speechRecRef = useRef<any>(null);
@@ -56,12 +58,14 @@ export default function WordPronunciationBar({
   const handlePlayWord = async (rate: number = 1.0) => {
     setActiveRate(rate);
     setAudioError("");
+    setPlaybackMeta(null);
     setIsPlaying(true);
     await clientAudio.play(word, {
       accent: activeAccent,
       gender: activeGender,
       rate,
       contentType: "word",
+      onMetadata: setPlaybackMeta,
       onEnd: () => setIsPlaying(false),
       onError: (error) => {
         setIsPlaying(false);
@@ -154,7 +158,7 @@ export default function WordPronunciationBar({
 
         {/* Aksan ve Cinsiyet Seçici */}
         <div className="flex items-center gap-2 flex-wrap">
-          {/* 6 Aksan */}
+          {/* 3 Desteklenen İngilizce aksan */}
           <div className="flex items-center gap-1">
             {ACCENT_METADATA_LIST.map((a) => (
               <button
@@ -209,6 +213,19 @@ export default function WordPronunciationBar({
       {audioError && (
         <p role="alert" className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-3 py-2 text-xs text-rose-100">
           {audioError}
+        </p>
+      )}
+      {playbackMeta?.humanRecordingAttribution && (
+        <p className="text-[11px] leading-relaxed text-white/70">
+          Bu, topluluk tarafından kaydedilmiş gerçek bir insan telaffuzudur. Konuşmacı cinsiyeti kaynakta doğrulanmadı. Kaynak: {" "}
+          <a
+            href={playbackMeta.humanRecordingAttribution.filePageUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="underline decoration-dotted underline-offset-2"
+          >
+            {playbackMeta.humanRecordingAttribution.creator} · {playbackMeta.humanRecordingAttribution.licenseName}
+          </a>
         </p>
       )}
       <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-white/10">

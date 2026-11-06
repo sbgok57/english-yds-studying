@@ -19,6 +19,7 @@ import {
   evaluateAllBadges,
   UserStatsContext,
 } from "./gamification/badges-engine";
+import { scheduleWordReview, type WordLearningState } from "./vocabulary/learning-schedule";
 
 export interface WordStat {
   c: number; // doğru
@@ -71,6 +72,7 @@ export interface CareerGoal {
 
 export interface UsageData {
   words: Record<string, WordStat>;
+  wordReviews: Record<string, WordLearningState>;
   grammar: Record<string, { a: number; ok: number }>;
   tactics: Record<string, number>;
   exams: { taken: number; totalCorrect: number; totalQuestions: number; bestNet: number };
@@ -116,6 +118,7 @@ export function defaultGamification(): GamificationState {
 export function defaultUsage(): UsageData {
   return {
     words: {},
+    wordReviews: {},
     grammar: {},
     tactics: {},
     exams: { taken: 0, totalCorrect: 0, totalQuestions: 0, bestNet: 0 },
@@ -258,11 +261,14 @@ export function recordWord(
   );
   update((u) => {
     const key = String(id);
+    const reviewedAt = Date.now();
     const rec = u.words[key] || { c: 0, w: 0, last: 0 };
     if (correct) rec.c += 1;
     else rec.w += 1;
-    rec.last = Date.now();
+    rec.last = reviewedAt;
     u.words[key] = rec;
+    u.wordReviews = u.wordReviews || {};
+    u.wordReviews[key] = scheduleWordReview(u.wordReviews[key], correct, reviewedAt);
     return u;
   });
 }

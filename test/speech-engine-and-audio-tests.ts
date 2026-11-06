@@ -16,12 +16,9 @@ const accents: EnglishAccent[] = [
   'en-GB',
   'en-US',
   'en-AU',
-  'en-CA',
-  'en-NZ',
-  'en-IN',
 ];
 
-assert.strictEqual(accents.length, 6, "Altı sağlayıcı-doğrulanmış İngilizce aksan etkin olmalıdır.");
+assert.strictEqual(accents.length, 3, "Yalnızca İngiliz, Amerikan ve Avustralya aksanları etkin olmalıdır.");
 assert.ok(speechEngine instanceof SpeechEngineService, "speechEngine singleton olmalıdır.");
 
 // Güvenli başlatma ve durdurma
@@ -32,7 +29,7 @@ assert.strictEqual(supportedPayload.voiceId, "en-GB-male-ryan");
 assert.strictEqual(supportedPayload.contentType, "word", "Tek kelimelik metin 'word' contentType üretmelidir.");
 assert.strictEqual(supportedPayload.rate, 0.9, "Hız 'rate' alanına yazılmalıdır.");
 assert.throws(
-  () => speechEngine.buildApiRequestPayload({ text: "test", accent: "en-GB-scotland", gender: "male" }),
+  () => speechEngine.buildApiRequestPayload({ text: "test", accent: "en-GB-scotland" as EnglishAccent, gender: "male" }),
   /VOICE_NOT_AVAILABLE/,
   "Doğrulanmamış İskoç sesi sessizce standart İngilizceye düşmemelidir.",
 );
@@ -91,9 +88,9 @@ console.log("  ✅ PASS: All GRAMMAR_LESSONS meet curriculum standards.\n");
 console.log("  5. Testing Browser Speech Honest Matcher & AudioResponse Contract...");
 import("../src/lib/tts/browser-speech").then(async ({ ACCENTS, chooseVoice }) => {
   const { AudioRequestError, requestPronunciationAudio } = await import("../src/lib/tts/audio-response");
-  assert.strictEqual(ACCENTS.length, 7, "ACCENTS dizisi 7 aksan içermelidir.");
+  assert.strictEqual(ACCENTS.length, 3, "Yalnızca üç istenen İngilizce aksan açık olmalıdır.");
   const genericUk = { lang: "en-GB", name: "Google UK English Female" } as SpeechSynthesisVoice;
-  assert.strictEqual(chooseVoice([genericUk], "en-GB-scotland") ?? null, null, "Standart İngiliz sesi İskoç olarak etiketlenmemelidir.");
+  assert.ok(chooseVoice([genericUk], "en-GB"), "Tam locale eşleşen İngiliz sesi seçilebilmelidir.");
 
   const validBlob = await requestPronunciationAudio(
     "resilient",

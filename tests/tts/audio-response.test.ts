@@ -74,7 +74,7 @@ async function runAudioResponseTests() {
 
   // 4. Browser voice selection never mislabels generic en-GB as Scottish unless name matches
   {
-    assert.strictEqual(ACCENTS.length, 7, "All 7 accents must be configured");
+    assert.strictEqual(ACCENTS.length, 3, "Only British, American, and Australian accents are selectable");
     const genericGbVoice = {
       lang: "en-GB",
       name: "Google UK English Female",
@@ -83,23 +83,10 @@ async function runAudioResponseTests() {
       voiceURI: "Google UK English Female",
     } as SpeechSynthesisVoice;
 
-    const scottishVoice = {
-      lang: "en-GB",
-      name: "Fiona (Scottish English)",
-      default: false,
-      localService: true,
-      voiceURI: "Fiona",
-    } as SpeechSynthesisVoice;
-
     assert.strictEqual(
-      chooseVoice([genericGbVoice], "en-GB-scotland") ?? null,
-      null,
-      "Generic en-GB voice without Scottish hint must not be falsely matched as Scottish"
-    );
-    assert.strictEqual(
-      chooseVoice([genericGbVoice, scottishVoice], "en-GB-scotland")?.name,
-      "Fiona (Scottish English)",
-      "Genuine Scottish voice must be matched for en-GB-scotland"
+      chooseVoice([genericGbVoice], "en-GB"),
+      genericGbVoice,
+      "A British profile must resolve only to the exact British locale"
     );
   }
 

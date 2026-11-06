@@ -7,8 +7,8 @@ import type { Group } from "three";
 import { shouldThrottleGraphics, checkWebGLSupport } from "@/lib/hardware-optimizer";
 import type { MotionDiagramType } from "@/lib/media/visual-asset-registry";
 
-// High-performance CSS 3D Card Fallback for low-end devices, mobile battery saver, or WebGL context losses
-function Css3DCubeFallback({ english, turkish }: { english: string; turkish: string }) {
+// Lightweight meaning-card fallback for low-end devices or WebGL context loss.
+function Css3DMeaningCard({ english, turkish }: { english: string; turkish: string }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -99,7 +99,7 @@ function ConceptGeometry({ type, color }: { type: MotionDiagramType; color: stri
   return <mesh><icosahedronGeometry args={[1.15, 1]} /><meshStandardMaterial color={color} metalness={0.4} roughness={0.22} emissive="#312e81" emissiveIntensity={0.2} /></mesh>;
 }
 
-function WordCube({ english, turkish, motionType, visualKey }: { english: string; turkish: string; motionType: MotionDiagramType; visualKey: string }) {
+function WordConceptScene({ english, turkish, motionType, visualKey }: { english: string; turkish: string; motionType: MotionDiagramType; visualKey: string }) {
   const groupRef = useRef<Group>(null);
   const palette = ["#8b5cf6", "#0891b2", "#e11d48", "#059669", "#d97706", "#4f46e5"];
   const color = palette[visualKey.split("").reduce((sum, character) => sum + character.charCodeAt(0), 0) % palette.length];
@@ -138,7 +138,7 @@ class CanvasErrorBoundary extends Component<{ children: ReactNode; fallback: Rea
   }
 
   componentDidCatch(err: any) {
-    console.warn("[Word3DScene] WebGL Canvas error caught. Falling back to CSS 3D:", err?.message || err);
+    console.warn("[Word3DScene] WebGL Canvas error caught. Falling back to the meaning card:", err?.message || err);
   }
 
   render() {
@@ -176,14 +176,14 @@ export default function Word3DScene({ english, turkish, motionType = "flow", vis
   }
 
   if (useCssFallback) {
-    return <Css3DCubeFallback english={english} turkish={turkish} />;
+    return <Css3DMeaningCard english={english} turkish={turkish} />;
   }
 
   // Keep the canvas framebuffer bounded: pixel cost grows quadratically with DPR.
   const dpr = Math.min(1.25, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1);
 
   return (
-    <CanvasErrorBoundary fallback={<Css3DCubeFallback english={english} turkish={turkish} />}>
+    <CanvasErrorBoundary fallback={<Css3DMeaningCard english={english} turkish={turkish} />}>
       <div className="relative w-full h-80 rounded-3xl overflow-hidden bg-gradient-to-b from-indigo-950 via-purple-950 to-slate-950 border border-white/20 shadow-2xl" data-testid="word-3d-scene" data-visual-key={visualKey} data-motion-type={motionType}>
         <div className="absolute top-3 left-4 z-10 glass-pill text-[11px] text-cyan-300">
           3D kavramsal geometri · Fotoğraf/GLB varlığı değildir
@@ -196,7 +196,7 @@ export default function Word3DScene({ english, turkish, motionType = "flow", vis
           <ambientLight intensity={0.7} />
           <pointLight position={[6, 6, 6]} intensity={1.5} color="#f59e0b" />
           <pointLight position={[-6, -6, -6]} intensity={0.9} color="#06b6d4" />
-          <WordCube english={english} turkish={turkish} motionType={motionType} visualKey={visualKey} />
+          <WordConceptScene english={english} turkish={turkish} motionType={motionType} visualKey={visualKey} />
           <OrbitControls enableZoom={false} enablePan={false} autoRotate={false} />
         </Canvas>
       </div>

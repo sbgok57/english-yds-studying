@@ -324,8 +324,8 @@ async function testBrowser(browserType: any, browserName: string) {
     passedFlows++;
     console.log(`✅ [${browserName}] Home page adaptive daily tasks panel verified`);
 
-    // 21. Hamburger Menu Drawer, Vocabulary Visuals & 36-Pattern Theme Gallery Flow
-    console.log(`[${browserName}] 21. Testing Hamburger Menu Drawer, Vocabulary Visuals & 36-Pattern Theme Gallery`);
+    // 21. Hamburger Menu Drawer, Vocabulary Visuals & 48-Pattern Theme Gallery Flow
+    console.log(`[${browserName}] 21. Testing Hamburger Menu Drawer, Vocabulary Visuals & 48-Pattern Theme Gallery`);
     const menuTrigger = page.locator("#global-menu-trigger");
     if ((await menuTrigger.count()) === 0) throw new Error("#global-menu-trigger not found in Header");
     await menuTrigger.click();
@@ -341,11 +341,11 @@ async function testBrowser(browserType: any, browserName: string) {
 
     await page.goto(`${BASE_URL}/temalar`, { waitUntil: "networkidle" });
     const patternCountText = await page.locator("[data-testid='pattern-registry-exact-count']").textContent();
-    if (!patternCountText || !patternCountText.includes("36")) {
-      throw new Error(`Expected 36 patterns in ThemePatternPicker, got: ${patternCountText}`);
+    if (!patternCountText || !patternCountText.includes("48")) {
+      throw new Error(`Expected at least 48 patterns in ThemePatternPicker, got: ${patternCountText}`);
     }
     passedFlows++;
-    console.log(`✅ [${browserName}] Hamburger Menu, Vocabulary Visuals & 36-Pattern Theme Gallery verified`);
+    console.log(`✅ [${browserName}] Hamburger Menu, Vocabulary Visuals & 48-Pattern Theme Gallery verified`);
 
   } finally {
     await browser.close();

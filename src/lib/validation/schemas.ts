@@ -138,11 +138,11 @@ export type ValidatedUsageData = z.infer<typeof UsageDataSchema>;
 /**
  * Validates untrusted input with a Zod schema, returning safe data or default.
  */
-export function safeValidate<Schema extends z.ZodType>(
-  schema: Schema,
+export function safeValidate<Output>(
+  schema: z.ZodType<Output>,
   data: unknown,
-  fallback: z.output<Schema>
-): { data: z.output<Schema>; valid: boolean; errors?: z.ZodError } {
+  fallback: Output
+): { data: Output; valid: boolean; errors?: z.ZodError } {
   const parsed = schema.safeParse(data);
   if (parsed.success) {
     return { data: parsed.data, valid: true };

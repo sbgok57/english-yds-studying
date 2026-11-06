@@ -20,7 +20,7 @@ export const PAGES: NavLink[] = [
   { label: "YDT (YKS-Dil) Kelime Envanteri", href: "/vocabulary/inventory?exam=YDT", emoji: "🎓" },
   { label: "YÖKDİL Alan Kelime Envanteri", href: "/vocabulary/inventory?exam=YÖKDİL", emoji: "🔬" },
   { label: "PDF / Akıllı Kelime Ekle", href: "/import", emoji: "⚡" },
-  { label: "3D Flashcards (Çoklu Sınav)", href: "/vocabulary/flashcards", emoji: "🃏" },
+  { label: "Kelime Kartları (Çoklu Sınav)", href: "/vocabulary/flashcards", emoji: "🃏" },
   { label: "Reading Lab (Okuma & Sözlük)", href: "/reading", emoji: "🔬" },
   { label: "Listening Lab (Dinleme & Aksan)", href: "/listening", emoji: "🎧" },
   { label: "Writing Lab (Cümle Kurma & Çeviri)", href: "/writing", emoji: "✍️" },

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   Search,
-  Sparkles,
   Layers,
   RefreshCw,
   AlertCircle,
@@ -277,7 +276,7 @@ function VocabularyContent() {
             href={`/vocabulary/flashcards${selectedExam !== "Hepsi" ? `?exam=${selectedExam}` : ""}`}
             className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 font-extrabold text-xs md:text-sm text-white shadow-lg hover:scale-105 transition-transform"
           >
-            <Sparkles className="w-4 h-4" /> 3D Flashcard Modu
+            Kelime Kartları
           </Link>
         </div>
       </div>
@@ -510,7 +509,7 @@ function VocabularyContent() {
                     <h3 className="text-2xl font-black text-white light:text-slate-900 group-hover:text-yellow-300 transition-colors flex items-center justify-between">
                       <span>{word.english}</span>
                       <span className="text-xs font-normal text-yellow-400/80 group-hover:translate-x-1 transition-transform">
-                        Görsel & 3D ➜
+                        Anlam görselini incele →
                       </span>
                     </h3>
                     <p className="text-lg font-bold text-cyan-200 light:text-cyan-700 mt-1">
@@ -560,7 +559,7 @@ function VocabularyContent() {
         </div>
       )}
 
-      {/* 🖼️ 3D Görsel Hafıza & 14 Aksan Ses Modalı */}
+      {/* Kelime anlam görseli ve telaffuz ayrıntıları */}
       <WordDetailModal
         word={modalWord}
         isOpen={Boolean(modalWord)}

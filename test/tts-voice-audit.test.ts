@@ -11,6 +11,7 @@ import { audioCache, isValidAudioBuffer } from "../src/lib/tts/audio-cache";
 import { splitTextIntoChunks } from "../src/lib/tts/tts-provider";
 import { auditCacheKeyIsolation } from "../src/lib/tts/voice-audit";
 import { findExactElevenLabsVoice } from "../src/lib/tts/elevenlabs-voice-catalog";
+import { isExactAzureVoice } from "../src/lib/tts/azure-voice-catalog";
 
 console.log("▶ Starting TTS Voice Audit, Turkish Narrator (Emel/Ahmet) & Cache Isolation Tests...\n");
 
@@ -43,17 +44,58 @@ console.log("  ✅ PASS: Emel (tr-TR-EmelNeural) and Ahmet (tr-TR-AhmetNeural) a
 // 2a. Provider account discovery must use verified locale + gender labels,
 // never display names, catalog order, or a shared generic voice ID.
 const accountVoiceFixture = [
-  { voice_id: "us-female-id", name: "Any Display Name", labels: { gender: "female" }, verified_languages: [{ locale: "en-US" }] },
-  { voice_id: "us-male-id", name: "Any Other Name", labels: { gender: "male" }, verified_languages: [{ locale: "en-US" }] },
-  { voice_id: "gb-female-id", name: "Sonia", labels: { gender: "female" }, verified_languages: [{ locale: "en-GB" }] },
-  { voice_id: "unverified-id", name: "American Female", labels: { gender: "female" }, verified_languages: [{ locale: "en-GB" }] },
+  { voice_id: "us-female-id", name: "Any Display Name", labels: { gender: "female", accent: "American" }, verified_languages: [{ locale: "en-US" }] },
+  { voice_id: "us-male-id", name: "Any Other Name", labels: { gender: "male", accent: "American" }, verified_languages: [{ locale: "en-US" }] },
+  { voice_id: "wrong-accent-id", name: "Wrong accent", labels: { gender: "female", accent: "British" }, verified_languages: [{ locale: "en-US" }] },
+  { voice_id: "gb-female-id", name: "Sonia", labels: { gender: "female", accent: "British" }, verified_languages: [{ locale: "en-GB" }] },
+  { voice_id: "unverified-id", name: "American Female", labels: { gender: "female", accent: "American" }, verified_languages: [{ locale: "en-GB" }] },
 ];
-assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture)?.id, "us-female-id");
-assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-male-guy")!, accountVoiceFixture)?.id, "us-male-id");
-assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-GB-male-ryan")!, accountVoiceFixture), null);
-assert.strictEqual(findExactElevenLabsVoice(emel!, [{ voice_id: "shared", labels: { gender: "female" }, verified_languages: [{ locale: "tr-TR" }] }])?.id, "shared");
-assert.strictEqual(findExactElevenLabsVoice(ahmet!, [{ voice_id: "shared", labels: { gender: "female" }, verified_languages: [{ locale: "tr-TR" }] }]), null);
-console.log("  ✅ PASS: Runtime account voice discovery rejects wrong locale/gender and shared Turkish identity.\n");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture), null,
+  "Locale/gender labels alone must not auto-select an ElevenLabs regional accent.");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture, "us-female-id")?.id, "us-female-id");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture, "gb-female-id"), null,
+  "A voice label for another region must never satisfy the American profile.");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-female-jenny")!, accountVoiceFixture, "wrong-accent-id"), null,
+  "A voice with a mismatched accent label must never satisfy the configured profile.");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-US-male-guy")!, accountVoiceFixture, "us-female-id"), null,
+  "A configured profile must reject an ID with the wrong speaker gender.");
+assert.strictEqual(findExactElevenLabsVoice(getVoiceProfile("en-GB-male-ryan")!, accountVoiceFixture, "unverified-id"), null,
+  "A configured profile must reject an ID with the wrong locale.");
+assert.strictEqual(findExactElevenLabsVoice(emel!, [{ voice_id: "shared", labels: { gender: "female", accent: "Turkish" }, verified_languages: [{ locale: "tr-TR" }] }], "shared")?.id, "shared");
+assert.strictEqual(findExactElevenLabsVoice(ahmet!, [{ voice_id: "shared", labels: { gender: "female", accent: "Turkish" }, verified_languages: [{ locale: "tr-TR" }] }], "shared"), null);
+console.log("  ✅ PASS: ElevenLabs profiles require an explicit exact ID and verified locale/gender.\n");
+
+// Azure metadata must exactly match provider voice ID, locale and gender.
+const azureFixture = [
+  { ShortName: "en-GB-SoniaNeural", Locale: "en-GB", Gender: "Female" },
+  { ShortName: "en-GB-RyanNeural", Locale: "en-GB", Gender: "Male" },
+  { ShortName: "en-US-JennyNeural", Locale: "en-US", Gender: "Female" },
+  { ShortName: "en-US-GuyNeural", Locale: "en-US", Gender: "Male" },
+  { ShortName: "en-AU-NatashaNeural", Locale: "en-AU", Gender: "Female" },
+  { ShortName: "en-AU-WilliamMultilingualNeural", Locale: "en-AU", Gender: "Male" },
+  { ShortName: "tr-TR-EmelNeural", Locale: "tr-TR", Gender: "Female" },
+];
+for (const accent of ["en-GB", "en-US", "en-AU"] as const) {
+  const female = VOICE_REGISTRY.find((voice) => voice.locale === accent && voice.gender === "female");
+  const male = VOICE_REGISTRY.find((voice) => voice.locale === accent && voice.gender === "male");
+  assert.ok(female?.enabled, `${accent} kadın profili etkin ve katalogda tanımlı olmalı`);
+  assert.ok(male?.enabled, `${accent} erkek profili etkin ve katalogda tanımlı olmalı`);
+  assert.strictEqual(isExactAzureVoice(female, azureFixture), true, `${accent} kadın provider voice tam locale/cinsiyet eşleşmeli`);
+  assert.strictEqual(isExactAzureVoice(male, azureFixture), true, `${accent} erkek provider voice tam locale/cinsiyet eşleşmeli`);
+  assert.strictEqual(
+    isExactAzureVoice(female, azureFixture.filter((voice) => voice.Gender !== "Female")),
+    false,
+    `${accent} kadın profili erkek provider voice ile doğrulanmamalı`,
+  );
+  assert.strictEqual(
+    isExactAzureVoice(male, azureFixture.filter((voice) => voice.Locale !== accent)),
+    false,
+    `${accent} erkek profili başka aksanla doğrulanmamalı`,
+  );
+}
+assert.strictEqual(isExactAzureVoice(emel!, azureFixture), true);
+assert.strictEqual(isExactAzureVoice(ahmet!, azureFixture), false);
+console.log("  ✅ PASS: Azure readiness requires exact provider voice, locale and gender metadata.\n");
 
 // 3. Cache Anahtarı İzolasyonu
 const cacheAudit = auditCacheKeyIsolation("Merhaba arkadaşlar, bugün zaman uyumunu inceliyoruz.");

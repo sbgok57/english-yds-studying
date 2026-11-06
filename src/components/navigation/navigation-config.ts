@@ -105,13 +105,13 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   {
     id: "nav-vocabulary-flashcards",
-    label: "3D Flashcards (Kelime Küpü)",
-    description: "Üç boyutlu dokunsal hafıza kartları ve hızlı ezber modu",
+    label: "Kelime Kartları",
+    description: "Çevrilebilir hafıza kartları ve kişiselleştirilmiş tekrar",
     href: "/vocabulary/flashcards",
     category: "vocabulary",
     icon: "layers-3",
-    badge: "3D",
-    searchTags: ["flashcards", "3d kelime", "kelime kartları", "küp", "ezber"],
+    badge: "Kartlar",
+    searchTags: ["flashcards", "kelime kartları", "ezber"],
   },
   {
     id: "nav-vocabulary-import",
@@ -185,12 +185,12 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
   },
   {
     id: "nav-listening",
-    label: "Listening Lab (6 Doğrulanmış Aksan)",
+    label: "Listening Lab (3 İngilizce Aksan)",
     description: "Akademik dinleme materyalleri, aksan karşılaştırma ve transkript",
     href: "/listening",
     category: "reading-listening",
     icon: "audio-lines",
-    badge: "6 Aksan",
+    badge: "3 Aksan",
     searchTags: ["listening", "dinleme", "aksan", "kulak aşinalığı", "listening lab"],
   },
   {
@@ -361,7 +361,7 @@ export const NAVIGATION_CATEGORY_META: Record<
   },
   vocabulary: {
     title: "Kelimeler & Görsel Hafıza",
-    subtitle: "Kelime çalışması, envanter, 3D kartlar ve telaffuz",
+    subtitle: "Kelime kartları, envanter, görsel hafıza ve telaffuz",
   },
   grammar: {
     title: "Gramer & Sesli Anlatım",

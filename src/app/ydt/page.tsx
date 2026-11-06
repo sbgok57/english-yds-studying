@@ -18,7 +18,7 @@ const YDT_SKILLS = [
   {
     title: "Kelime Çalışmaları (Vocabulary)",
     emoji: "📚",
-    desc: "YDT & YKS-Dil yüksek frekanslı kelimeler, phrasal verbs, yaygın eşdizimler ve 3D flashcards.",
+    desc: "YDT & YKS-Dil kelimeleri, phrasal verbs ve yaygın eşdizimler için seviyeli kelime kartları.",
     href: "/vocabulary/flashcards?exam=YDT",
     badge: "YDT Odaklı",
     color: "from-amber-500/20 to-orange-500/20 border-amber-400/30 text-amber-300",
@@ -66,7 +66,7 @@ const YDT_SKILLS = [
   {
     title: "YDT Denemeleri & LYS-5 Çıkmış Sınavlar",
     emoji: "⏱️",
-    desc: "2010-2017 LYS-5 + 2018-2026 YDT çıkmış sınavları ve 72 Özgün YDT Denemesi (120 dk, 80 soru).",
+    desc: "Uygulamadaki YDT denemeleri ve ÖSYM'nin yayımladığı resmi sınav kitapçıklarına erişim (120 dk, 80 soru formatı).",
     href: "/exams?category=YDT",
     badge: "120 dk • 80 Soru",
     color: "from-amber-500/20 to-yellow-500/20 border-amber-400/30 text-amber-300",

@@ -8,7 +8,7 @@
     "build": "node prisma/prepare-db.js && prisma generate && next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
+    "lint": "next lint",
     "zero-error": "node scripts/zero-error-check.mjs",
     "zero-error-check": "node scripts/zero-error-check.mjs",
     "auto-fix": "node scripts/auto-heal-and-audit.mjs",
@@ -22,6 +22,7 @@
     "verify": "npm run typecheck && npm run zero-error && npm run lint && npm run validate:data && npm run test:unit && npm run test:integration && npm run build",
     "prisma:generate": "node prisma/prepare-db.js && prisma generate",
     "prisma:push": "node prisma/prepare-db.js && prisma db push",
+    "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
@@ -67,14 +68,11 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "15.5.28",
     "playwright": "^1.63.0",
-    "postcss": "^8.5.28",
+    "postcss": "^8.4.47",
     "prisma": "^5.22.0",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.14",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
-  },
-  "overrides": {
-    "postcss": "$postcss",
-    "minimatch": "11.0.1"
   }
 }
