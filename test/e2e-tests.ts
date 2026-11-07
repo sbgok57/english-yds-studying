@@ -341,7 +341,8 @@ async function testBrowser(browserType: any, browserName: string) {
 
     await page.goto(`${BASE_URL}/temalar`, { waitUntil: "networkidle" });
     const patternCountText = await page.locator("[data-testid='pattern-registry-exact-count']").textContent();
-    if (!patternCountText || !patternCountText.includes("48")) {
+    const patternCount = Number(patternCountText?.match(/\d+/)?.[0] || 0);
+    if (patternCount < 48) {
       throw new Error(`Expected at least 48 patterns in ThemePatternPicker, got: ${patternCountText}`);
     }
     passedFlows++;

@@ -69,9 +69,8 @@ export function normalizeWordSlug(word: string): string {
 
 /**
  * Doğrulanmış Görsel Varlık Kataloğu (Photo / SVG Animation / 3D)
- * KURAL: Yalnızca anlamı birebir karşılayan ve lisansı/kaynağı doğrulanmış somut/bağlamsal
- * kelimeler "photo" moduna sahiptir. Soyut kelimelerde sahte stok fotoğraf veya tekil emoji
- * gösterilmez; semantik animasyon şeması, 3D sahne ve tipografik anlam kartı sunulur.
+ * Yerel fotoğrafı bulunmayan kelimeler için arayüz ücretsiz Wikimedia Commons
+ * aramasını kullanır; kaynak/lisans bilgisi API yanıtından gelir.
  */
 export const VISUAL_ASSET_REGISTRY: Record<string, WordVisualManifest> = {
   pioneer: {
@@ -455,11 +454,13 @@ export function resolveWordVisualManifest(params: {
   if (existing) {
     return {
       ...existing,
-      availableModes: [
+      availableModes: Array.from(new Set<VisualMode>([
+        "photo",
+        "animation",
         ...GENERATED_IMAGE_MODES,
         ...existing.availableModes.filter((mode) => !GENERATED_IMAGE_MODES.includes(mode)),
-      ],
-      defaultMode: "ai3d",
+      ])),
+      defaultMode: "photo",
       visualKey: slug,
     };
   }
@@ -482,8 +483,8 @@ export function resolveWordVisualManifest(params: {
     partOfSpeech: pos,
     level,
     semanticCategory: pos.toLowerCase().includes("phrasal") ? "phrasal-verb" : "abstract-academic",
-    availableModes: ["ai3d", "photorealistic", "cartoon", "animation", "3d", "card"],
-    defaultMode: "ai3d",
+    availableModes: ["photo", "animation", "ai3d", "photorealistic", "cartoon", "3d", "card"],
+    defaultMode: "photo",
     hasVerifiedPhoto: false,
     animation: {
       motionType,

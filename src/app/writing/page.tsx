@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   PenTool,
@@ -104,6 +104,13 @@ export default function WritingPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Tümü");
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [exerciseState, setExerciseState] = useState<Record<number, { selected: string; isCorrect?: boolean }>>({});
+
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("exam")?.toUpperCase();
+    if (value === "YDS" || value === "YDT" || value === "YÖKDİL" || value === "YOKDIL") {
+      setSelectedCategory(value === "YOKDIL" ? "YÖKDİL" : value);
+    }
+  }, []);
 
   const filteredTips = WRITING_TIPS.filter((t) =>
     selectedCategory === "Tümü" ? true : t.category === selectedCategory || t.category === "Genel"

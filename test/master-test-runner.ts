@@ -176,6 +176,7 @@ const testSuites: string[] = [
   'speech-engine-and-audio-tests.ts',
   'tts-voice-audit.test.ts',
   'vocabulary-visuals.test.ts',
+  'word-photo-route.test.ts',
   'theme-patterns.test.ts',
 ];
 

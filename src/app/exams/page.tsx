@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { Clock, ArrowRight, Compass, Sparkles, BookOpen, Mic, FileText, Headphones } from "lucide-react";
 import { getPracticeExamIds, PracticeExamEntry } from "@/lib/data-exams";
@@ -12,6 +12,13 @@ export default function ExamsPage() {
   const [activeCategory, setActiveCategory] = useState<"ALL" | ExamType>("ALL");
   const [typeFilter, setTypeFilter] = useState<"ALL" | "OFFICIAL" | "MOCK">("ALL");
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("exam")?.toUpperCase();
+    if (value === "YDS" || value === "YDT" || value === "YÖKDİL" || value === "YOKDIL") {
+      setActiveCategory(value === "YOKDIL" ? "YÖKDİL" : value);
+    }
+  }, []);
 
   const allExams: PracticeExamEntry[] = useMemo(() => getPracticeExamIds(), []);
 

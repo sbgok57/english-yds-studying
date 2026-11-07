@@ -5,9 +5,8 @@ import Image from "next/image";
 import {
   resolveWordVisualManifest,
   VisualMode,
-  MotionDiagramType,
 } from "@/lib/media/visual-asset-registry";
-import { Camera, Sparkles, Box, BookOpen, Play, Pause, Info, Image as ImageIcon, Film } from "lucide-react";
+import { Camera, Sparkles, Box, BookOpen, Info, Image as ImageIcon, Film } from "lucide-react";
 
 function Lightweight3DMeaningCard({ english, turkish }: { english: string; turkish: string }) {
   const [flipped, setFlipped] = useState(false);
@@ -51,6 +50,17 @@ const MODE_LABELS: Record<VisualMode, { labelTr: string; icon: React.ComponentTy
 };
 
 type GeneratedVisualResponse = { imageUrl?: unknown };
+type CommonsVisual = {
+  imageUrl: string;
+  alt: string;
+  license: string;
+  attribution: string;
+  licenseUrl: string | null;
+  sourcePage: string | null;
+  mimeType: string;
+  mediaType: "image" | "animated-image";
+  requestKey?: string;
+};
 type GeneratedImageMode = Extract<VisualMode, "ai3d" | "photorealistic" | "cartoon">;
 type GeneratedImageStatus = "idle" | "loading" | "ready" | "error";
 
@@ -72,322 +82,6 @@ const GENERATED_MODE_LABELS: Record<GeneratedImageMode, string> = {
 
 function isGeneratedVisualResponse(value: unknown): value is GeneratedVisualResponse {
   return typeof value === "object" && value !== null && "imageUrl" in value;
-}
-
-function SemanticAnimatedSvg({
-  motionType,
-  visualKey,
-  english,
-  turkish,
-  paused,
-}: {
-  motionType: MotionDiagramType;
-  visualKey: string;
-  english: string;
-  turkish: string;
-  paused: boolean;
-}) {
-  const gradientId = `semantic-bg-${visualKey}`;
-  return (
-    <svg
-      viewBox="0 0 400 220"
-      className="w-full h-full select-none"
-      role="img"
-      aria-label={`${english} (${turkish}) semantik hareket şeması`}
-      data-visual-key={visualKey}
-    >
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#0f172a" />
-          <stop offset="100%" stopColor="#1e1b4b" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="220" rx="16" fill={`url(#${gradientId})`} />
-
-      {/* Background Subtle Grid */}
-      <g stroke="#334155" strokeOpacity="0.45" strokeWidth="1">
-        <line x1="32" y1="48" x2="368" y2="48" />
-        <line x1="32" y1="108" x2="368" y2="108" />
-        <line x1="32" y1="168" x2="368" y2="168" />
-      </g>
-
-      {motionType === "mitigate" && (
-        <g>
-          <path
-            d="M 45 160 Q 160 40 355 50"
-            fill="none"
-            stroke="#f43f5e"
-            strokeWidth="2.5"
-            strokeDasharray="6 4"
-          />
-          <path
-            d="M 45 160 Q 165 105 355 145"
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-          <circle
-            cx="210"
-            cy="125"
-            r="12"
-            fill="#06b6d4"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <text x="240" y="65" fill="#fda4af" fontSize="10" fontFamily="sans-serif">
-            Yüksek Etki / Risk
-          </text>
-          <text x="235" y="138" fill="#6ee7b7" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-            Hafifletilmiş Etki ↓
-          </text>
-        </g>
-      )}
-
-      {motionType === "decay" && (
-        <g>
-          <rect x="65" y="60" width="38" height="108" rx="6" fill="#10b981" />
-          <rect x="135" y="86" width="38" height="82" rx="6" fill="#eab308" />
-          <rect x="205" y="116" width="38" height="52" rx="6" fill="#f97316" />
-          <rect
-            x="275"
-            y="142"
-            width="38"
-            height="26"
-            rx="6"
-            fill="#f43f5e"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <path
-            d="M 84 54 L 294 134"
-            stroke="#fb7185"
-            strokeWidth="2.5"
-            strokeDasharray="4 4"
-          />
-        </g>
-      )}
-
-      {motionType === "network" && (
-        <g>
-          <g stroke="#38bdf8" strokeOpacity="0.45" strokeWidth="1.5">
-            <line x1="200" y1="108" x2="95" y2="66" />
-            <line x1="200" y1="108" x2="305" y2="66" />
-            <line x1="200" y1="108" x2="95" y2="152" />
-            <line x1="200" y1="108" x2="305" y2="152" />
-            <line x1="95" y1="66" x2="305" y2="66" />
-            <line x1="95" y1="152" x2="305" y2="152" />
-          </g>
-          <circle
-            cx="200"
-            cy="108"
-            r="16"
-            fill="#8b5cf6"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <circle cx="95" cy="66" r="9" fill="#38bdf8" />
-          <circle cx="305" cy="66" r="9" fill="#38bdf8" />
-          <circle cx="95" cy="152" r="9" fill="#38bdf8" />
-          <circle cx="305" cy="152" r="9" fill="#38bdf8" />
-        </g>
-      )}
-
-      {motionType === "examine" && (
-        <g>
-          <rect
-            x="70"
-            y="68"
-            width="180"
-            height="82"
-            rx="10"
-            fill="#1e293b"
-            stroke="#475569"
-            strokeWidth="2"
-          />
-          <line x1="90" y1="92" x2="220" y2="92" stroke="#94a3b8" strokeWidth="3" />
-          <line x1="90" y1="112" x2="195" y2="112" stroke="#38bdf8" strokeWidth="3" />
-          <line x1="90" y1="130" x2="230" y2="130" stroke="#64748b" strokeWidth="3" />
-          <circle
-            cx="245"
-            cy="108"
-            r="28"
-            fill="#06b6d4"
-            fillOpacity="0.2"
-            stroke="#22d3ee"
-            strokeWidth="3"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <line x1="266" y1="128" x2="292" y2="152" stroke="#22d3ee" strokeWidth="5" strokeLinecap="round" />
-        </g>
-      )}
-
-      {motionType === "balance" && (
-        <g>
-          <polygon points="200,115 178,162 222,162" fill="#6366f1" />
-          <line x1="95" y1="115" x2="305" y2="115" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" />
-          <circle
-            cx="115"
-            cy="96"
-            r="14"
-            fill="#f472b6"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <circle
-            cx="285"
-            cy="96"
-            r="14"
-            fill="#34d399"
-            className={paused ? "" : "animate-pulse"}
-          />
-        </g>
-      )}
-
-      {motionType === "scale" && (
-        <g>
-          <path
-            d="M 55 158 L 155 150 L 235 65 L 345 55"
-            fill="none"
-            stroke="#f59e0b"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-          <circle
-            cx="235"
-            cy="65"
-            r="10"
-            fill="#fbbf24"
-            className={paused ? "" : "animate-ping"}
-          />
-          <circle cx="235" cy="65" r="8" fill="#fef08a" />
-        </g>
-      )}
-
-      {motionType === "barrier" && (
-        <g>
-          <line x1="65" y1="110" x2="220" y2="110" stroke="#fbbf24" strokeWidth="4" strokeLinecap="round" />
-          <polygon points="225,110 208,100 208,120" fill="#fbbf24" />
-          <rect
-            x="248"
-            y="64"
-            width="16"
-            height="92"
-            rx="4"
-            fill="#f43f5e"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <text x="280" y="114" fill="#fda4af" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-            Direnç / Eşik
-          </text>
-        </g>
-      )}
-
-      {motionType === "causal" && (
-        <g>
-          <rect x="42" y="82" width="88" height="56" rx="12" fill="#7c2d12" stroke="#fb923c" strokeWidth="2" />
-          <rect x="156" y="82" width="88" height="56" rx="12" fill="#1e3a8a" stroke="#60a5fa" strokeWidth="2" />
-          <rect x="270" y="82" width="88" height="56" rx="12" fill="#064e3b" stroke="#34d399" strokeWidth="2" />
-          <text x="86" y="115" textAnchor="middle" fill="#ffedd5" fontSize="11">NEDEN</text>
-          <text x="200" y="115" textAnchor="middle" fill="#dbeafe" fontSize="11">ETKİ</text>
-          <text x="314" y="115" textAnchor="middle" fill="#d1fae5" fontSize="11">SONUÇ</text>
-          <path d="M130 110h24m0 0-8-7m8 7-8 7M244 110h24m0 0-8-7m8 7-8 7" fill="none" stroke="#cbd5e1" strokeWidth="3" />
-          <circle cx="200" cy="58" r="7" fill="#60a5fa" className={paused ? "" : "animate-pulse"} />
-        </g>
-      )}
-
-      {motionType === "cycle" && (
-        <g>
-          <path d="M145 70a70 48 0 0 1 112 19M260 91l-3-17 17 6M255 150a70 48 0 0 1-112-19M140 129l3 17-17-6" fill="none" stroke="#a78bfa" strokeWidth="4" strokeLinecap="round" />
-          <circle cx="145" cy="70" r="17" fill="#0891b2" />
-          <circle cx="255" cy="150" r="17" fill="#7c3aed" className={paused ? "" : "animate-pulse"} />
-          <circle cx="200" cy="110" r="26" fill="#312e81" stroke="#818cf8" strokeWidth="2" />
-          <text x="200" y="114" textAnchor="middle" fill="#e0e7ff" fontSize="10">TEKRAR</text>
-        </g>
-      )}
-
-      {motionType === "compare" && (
-        <g>
-          <line x1="200" y1="55" x2="200" y2="169" stroke="#94a3b8" strokeWidth="2" />
-          <rect x="72" y="83" width="82" height="62" rx="12" fill="#0e7490" stroke="#67e8f9" strokeWidth="2" />
-          <rect x="246" y="83" width="82" height="62" rx="12" fill="#7c2d12" stroke="#fdba74" strokeWidth="2" />
-          <text x="113" y="111" textAnchor="middle" fill="#ecfeff" fontSize="11">A</text>
-          <text x="113" y="129" textAnchor="middle" fill="#a5f3fc" fontSize="9">ÖZELLİK</text>
-          <text x="287" y="111" textAnchor="middle" fill="#fff7ed" fontSize="11">B</text>
-          <text x="287" y="129" textAnchor="middle" fill="#fed7aa" fontSize="9">ÖZELLİK</text>
-          <path d="M164 111h28m0 0-7-6m7 6-7 6M236 129h-28m0 0 7-6m-7 6 7 6" fill="none" stroke="#e2e8f0" strokeWidth="2" />
-        </g>
-      )}
-
-      {motionType === "distribution" && (
-        <g>
-          <circle cx="200" cy="110" r="23" fill="#7c3aed" stroke="#c4b5fd" strokeWidth="2" />
-          <g stroke="#38bdf8" strokeOpacity="0.55" strokeWidth="2">
-            <line x1="200" y1="110" x2="76" y2="66"/><line x1="200" y1="110" x2="322" y2="61"/>
-            <line x1="200" y1="110" x2="65" y2="158"/><line x1="200" y1="110" x2="330" y2="161"/>
-            <line x1="200" y1="110" x2="200" y2="43"/><line x1="200" y1="110" x2="200" y2="177"/>
-          </g>
-          <g fill="#22d3ee">
-            <circle cx="76" cy="66" r="8"/><circle cx="322" cy="61" r="8"/><circle cx="65" cy="158" r="8"/>
-            <circle cx="330" cy="161" r="8"/><circle cx="200" cy="43" r="8"/><circle cx="200" cy="177" r="8" className={paused ? "" : "animate-pulse"}/>
-          </g>
-        </g>
-      )}
-
-      {motionType === "containment" && (
-        <g>
-          <rect x="72" y="53" width="256" height="116" rx="26" fill="#172554" stroke="#60a5fa" strokeWidth="3" />
-          <rect x="122" y="76" width="156" height="70" rx="20" fill="#312e81" stroke="#a78bfa" strokeWidth="3" />
-          <circle cx="200" cy="111" r="23" fill="#0e7490" stroke="#67e8f9" strokeWidth="3" className={paused ? "" : "animate-pulse"} />
-          <text x="200" y="201" textAnchor="middle" fill="#cbd5e1" fontSize="10">İÇİNDE · KAPSAMINDA · KUŞATILMIŞ</text>
-        </g>
-      )}
-
-      {motionType === "growth" && (
-        <g>
-          <line x1="58" y1="169" x2="348" y2="169" stroke="#64748b" strokeWidth="2" />
-          <rect x="78" y="130" width="42" height="39" rx="5" fill="#0e7490" />
-          <rect x="147" y="108" width="42" height="61" rx="5" fill="#0891b2" />
-          <rect x="216" y="80" width="42" height="89" rx="5" fill="#14b8a6" />
-          <rect x="285" y="50" width="42" height="119" rx="5" fill="#34d399" className={paused ? "" : "animate-pulse"} />
-          <path d="M77 118 153 93l68-28 94-34m0 0-3 17m3-17-18 2" fill="none" stroke="#fbbf24" strokeWidth="3" />
-        </g>
-      )}
-
-      {motionType === "flow" && (
-        <g>
-          <rect x="44" y="80" width="84" height="58" rx="10" fill="#1e293b" stroke="#475569" strokeWidth="2" />
-          <text x="86" y="113" textAnchor="middle" fill="#cbd5e1" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-            BAŞLANGIÇ
-          </text>
-          <rect
-            x="158"
-            y="80"
-            width="84"
-            height="58"
-            rx="10"
-            fill="#0e7490"
-            stroke="#22d3ee"
-            strokeWidth="2.5"
-            className={paused ? "" : "animate-pulse"}
-          />
-          <text x="200" y="113" textAnchor="middle" fill="#ecfeff" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-            SÜREÇ
-          </text>
-          <rect x="272" y="80" width="84" height="58" rx="10" fill="#065f46" stroke="#10b981" strokeWidth="2" />
-          <text x="314" y="113" textAnchor="middle" fill="#d1fae5" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-            SONUÇ ✓
-          </text>
-          <line x1="128" y1="109" x2="158" y2="109" stroke="#38bdf8" strokeWidth="2.5" />
-          <line x1="242" y1="109" x2="272" y2="109" stroke="#10b981" strokeWidth="2.5" />
-        </g>
-      )}
-
-      {/* Header & Footer Overlay */}
-      <text x="32" y="28" fill="#38bdf8" fontSize="11" fontWeight="bold" fontFamily="sans-serif">
-        {english.toUpperCase()} — {turkish}
-      </text>
-      <text x="32" y="200" fill="#94a3b8" fontSize="10" fontFamily="sans-serif">
-        {paused ? "⏸ Animasyon Duraklatıldı (Statik Görünüm)" : "▶ Canlı Semantik Kavram Diyagramı"}
-      </text>
-    </svg>
-  );
 }
 
 export default function VocabularyVisual({
@@ -414,10 +108,13 @@ export default function VocabularyVisual({
   });
 
   const [photoError, setPhotoError] = useState(false);
-  const [localAnimationError, setLocalAnimationError] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [commonsVisual, setCommonsVisual] = useState<CommonsVisual | null>(null);
+  const [failedCommonsImageUrl, setFailedCommonsImageUrl] = useState<string | null>(null);
+  const [commonsStatus, setCommonsStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
+  const [commonsError, setCommonsError] = useState("");
+  const [commonsRetry, setCommonsRetry] = useState(0);
   const [compactVisible, setCompactVisible] = useState(
-    !compact || Boolean(manifest.threeD.imageUrl),
+    !compact,
   );
   const [generatedImages, setGeneratedImages] = useState<Partial<Record<GeneratedImageMode, string>>>(
     manifest.threeD.imageUrl ? { ai3d: manifest.threeD.imageUrl } : {},
@@ -431,9 +128,7 @@ export default function VocabularyVisual({
   const [generatedImageRetry, setGeneratedImageRetry] = useState(0);
   const compactVisualRef = useRef<HTMLDivElement | null>(null);
 
-  const effectiveModes = manifest.availableModes.filter((mode) =>
-    mode === "photo" ? manifest.hasVerifiedPhoto && !photoError : true,
-  );
+  const effectiveModes = manifest.availableModes;
   const currentMode: VisualMode = effectiveModes.includes(activeMode)
     ? activeMode
     : effectiveModes[0] || "card";
@@ -441,11 +136,18 @@ export default function VocabularyVisual({
   const generatedImageUrl = generatedImageMode ? generatedImages[generatedImageMode] || null : null;
   const generatedImageStatus = generatedImageMode ? generatedImageStatuses[generatedImageMode] || "idle" : "idle";
   const generatedImageError = generatedImageMode ? Boolean(generatedImageErrors[generatedImageMode]) : false;
+  const commonsRequestKey = `${manifest.wordSlug}:${currentMode}`;
+  const currentCommonsVisual = commonsVisual?.requestKey === commonsRequestKey && commonsVisual.imageUrl !== failedCommonsImageUrl
+    ? commonsVisual
+    : null;
 
   // Kelime değiştiğinde varsayılan moda sıfırla ve reduced-motion tercihini kontrol et
   useEffect(() => {
     setPhotoError(false);
-    setLocalAnimationError(false);
+    setCommonsVisual(null);
+    setCommonsStatus("idle");
+    setCommonsError("");
+    setCommonsRetry(0);
     setGeneratedImageErrors({});
     setGeneratedImageErrorMessages({});
     setGeneratedImageRetry(0);
@@ -458,13 +160,45 @@ export default function VocabularyVisual({
         : manifest.defaultMode;
     setActiveMode(nextDefault);
 
-    if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
-      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (mq.matches) {
-        setIsPaused(true);
-      }
-    }
   }, [compact, english, initialMode, manifest.defaultMode, manifest.availableModes, manifest.threeD.imageUrl]);
+
+  useEffect(() => {
+    if (!compactVisible || (currentMode !== "photo" && currentMode !== "animation")) return;
+    if (currentMode === "photo" && manifest.photo && !photoError) return;
+    const controller = new AbortController();
+    setCommonsStatus("loading");
+    setCommonsError("");
+    setFailedCommonsImageUrl(null);
+    const query = new URLSearchParams({ word: english, meaning: turkish });
+    if (currentMode === "animation") query.set("animated", "1");
+
+    void fetch(`/api/word-photo?${query}`, { signal: controller.signal })
+      .then(async (response) => {
+        const payload: unknown = await response.json();
+        if (!response.ok) {
+          const message = typeof payload === "object" && payload !== null && "message" in payload && typeof payload.message === "string"
+            ? payload.message
+            : "Bu aramada uygun görsel bulunamadı.";
+          throw new Error(message);
+        }
+        if (typeof payload !== "object" || payload === null || !("imageUrl" in payload) || typeof payload.imageUrl !== "string" || !("mimeType" in payload) || typeof payload.mimeType !== "string") {
+          throw new Error("Görsel kataloğundan geçerli medya bilgisi alınamadı.");
+        }
+        if (currentMode === "animation" && payload.mimeType !== "image/gif") {
+          throw new Error("Bu kelime için gerçek GIF biçiminde animasyon bulunamadı.");
+        }
+        const data = { ...(payload as CommonsVisual), requestKey: `${manifest.wordSlug}:${currentMode}` };
+        setCommonsVisual(data);
+        setCommonsStatus("ready");
+      })
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          setCommonsStatus("error");
+          setCommonsError(error instanceof Error ? error.message : "Görsel yüklenemedi.");
+        }
+      });
+    return () => controller.abort();
+  }, [compactVisible, currentMode, english, turkish, commonsRetry, manifest.photo, manifest.wordSlug, photoError]);
 
   useEffect(() => {
     if (!compact || manifest.threeD.imageUrl) {
@@ -561,7 +295,19 @@ export default function VocabularyVisual({
         data-motion-type={manifest.animation.motionType}
         className={`relative w-full h-28 rounded-2xl overflow-hidden border border-white/10 bg-slate-950 ${className}`}
       >
-        {generatedImageUrl && !generatedImageError ? (
+        {(currentMode === "photo" && (photoError ? currentCommonsVisual?.imageUrl : manifest.photo?.url || currentCommonsVisual?.imageUrl)) || (currentMode === "animation" && currentCommonsVisual?.mediaType === "animated-image" && currentCommonsVisual.mimeType === "image/gif") ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={currentMode === "animation" ? currentCommonsVisual?.imageUrl || "" : photoError ? currentCommonsVisual?.imageUrl || "" : manifest.photo?.url || currentCommonsVisual?.imageUrl || ""} alt={currentMode === "animation" ? currentCommonsVisual?.alt || `${english}: ${turkish}` : manifest.photo?.altTr || currentCommonsVisual?.alt || `${english}: ${turkish}`} loading="lazy" className="h-full w-full object-cover" onError={(event) => {
+            const failedUrl = event.currentTarget.currentSrc || event.currentTarget.src;
+            if (failedUrl === currentCommonsVisual?.imageUrl) {
+              setFailedCommonsImageUrl(failedUrl);
+              setCommonsStatus("error");
+              setCommonsError("Görsel kaynağı bulundu ancak tarayıcı yükleyemedi.");
+            } else {
+              setPhotoError(true);
+            }
+          }} />
+        ) : generatedImageUrl && !generatedImageError ? (
           <Image
             src={generatedImageUrl}
             alt={`${english} (${turkish}) kelimesini anlatan 3D hafıza görseli`}
@@ -575,25 +321,29 @@ export default function VocabularyVisual({
           />
         ) : (
           <div className="relative h-full w-full overflow-hidden bg-gradient-to-br from-cyan-950 via-indigo-950 to-fuchsia-950">
-            {(generatedImageStatus === "error" || generatedImageError) && (
-              <div className="absolute inset-0 opacity-80">
-                <SemanticAnimatedSvg motionType={manifest.animation.motionType} visualKey={manifest.visualKey || manifest.wordSlug} english={english} turkish={turkish} paused={true} />
-              </div>
-            )}
             <div className="relative flex h-full flex-col items-center justify-center gap-1 bg-slate-950/35 px-4 text-center">
               <span className="text-lg font-black text-white">{english}</span>
               <span className="line-clamp-1 text-sm font-semibold text-cyan-100">{turkish}</span>
               <span className="text-[11px] text-amber-100/90">
-                {generatedImageStatus === "error" || generatedImageError
-                  ? "Görsel hizmeti yanıt vermedi · anlam şeması gösteriliyor"
-                  : "Kelimeye özel görsel hazırlanıyor…"}
+                {currentMode === "photo" ? commonsStatus === "loading" ? "Ücretsiz Commons kataloğunda aranıyor…" : "Fotoğraf yüklenemedi; ayrıntıyı açıp yeniden deneyebilirsin." : currentMode === "animation" ? commonsStatus === "loading" ? "Gerçek GIF aranıyor…" : "Bu kelime için GIF bulunamadı." : generatedImageStatus === "error" || generatedImageError ? "Görsel servisi yapılandırılmamış veya görsel üretilemedi." : "Kelimeye özel görsel hazırlanıyor…"}
               </span>
             </div>
           </div>
         )}
         <span className="absolute left-2 top-2 rounded-lg border border-white/20 bg-slate-950/75 px-2.5 py-1 text-xs font-bold text-cyan-100 shadow-lg backdrop-blur">
-          ✨ 3D Hafıza Görseli
+          {currentMode === "animation" ? "Wikimedia GIF" : currentMode === "photo" ? "Kelime fotoğrafı" : MODE_LABELS[currentMode].labelTr}
         </span>
+        {(currentMode === "photo" || currentMode === "animation") && currentCommonsVisual && (currentMode === "animation" || photoError || !manifest.photo) && (
+          <span className="absolute bottom-0 inset-x-0 truncate bg-slate-950/80 px-2 py-1 text-[10px] text-white/90" title={`${currentCommonsVisual.attribution} · ${currentCommonsVisual.license}`}>
+            {currentCommonsVisual.attribution} · {currentCommonsVisual.license}
+          </span>
+        )}
+        {(currentMode === "photo" || currentMode === "animation") && (commonsStatus === "error" || (commonsStatus === "ready" && !currentCommonsVisual && (!manifest.photo || photoError))) && (
+          <div className="absolute inset-x-2 bottom-2 flex items-center justify-center gap-2 rounded-lg bg-slate-950/90 p-2 text-center text-[11px] text-white" role="status">
+            <span className="min-w-0 truncate">{commonsError || "Görsel yüklenemedi."}</span>
+            <button type="button" onClick={() => setCommonsRetry((value) => value + 1)} className="shrink-0 rounded-md bg-white/15 px-2 py-1 font-bold hover:bg-white/25">Tekrar dene</button>
+          </div>
+        )}
       </div>
     );
   }
@@ -646,89 +396,77 @@ export default function VocabularyVisual({
           })}
         </div>
 
-        {/* Animasyon Modunda Play / Pause Kontrolü */}
-        {currentMode === "animation" && (
-          <button
-            type="button"
-            data-testid="visual-animation-play-pause"
-            aria-pressed={!isPaused}
-            onClick={() => setIsPaused((prev) => !prev)}
-            className="px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-xs font-bold text-cyan-200 flex items-center gap-1.5 transition-all"
-          >
-            {isPaused ? (
-              <>
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Animasyonu Oynat</span>
-              </>
-            ) : (
-              <>
-                <Pause className="w-3.5 h-3.5 fill-current" />
-                <span>Duraklat</span>
-              </>
-            )}
-          </button>
-        )}
       </div>
 
       {/* Görsel Sahne Alanı (Sabit en-boy oranı ile sıfır layout shift) */}
       <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-slate-950 shadow-inner">
-        {currentMode === "photo" && manifest.photo && !photoError && (
+        {currentMode === "photo" && (photoError ? currentCommonsVisual : manifest.photo || currentCommonsVisual) && (
           <div className="w-full h-full relative">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={manifest.photo.url}
-              alt={manifest.photo.altTr}
-              width={manifest.photo.width}
-              height={manifest.photo.height}
+              src={(photoError ? currentCommonsVisual?.imageUrl : manifest.photo?.url || currentCommonsVisual?.imageUrl) || ""}
+              alt={(photoError ? currentCommonsVisual?.alt : manifest.photo?.altTr || currentCommonsVisual?.alt) || `${english}: ${turkish}`}
+              width={manifest.photo?.width || 900}
+              height={manifest.photo?.height || 600}
               loading="lazy"
               decoding="async"
               onError={() => {
-                setPhotoError(true);
-                // Keep a useful, word-specific semantic visual on screen when
-                // the external photo host fails instead of dropping to text.
-                setActiveMode("animation");
+                const imageUrl = photoError ? currentCommonsVisual?.imageUrl : manifest.photo?.url || currentCommonsVisual?.imageUrl;
+                if (imageUrl && imageUrl === currentCommonsVisual?.imageUrl) {
+                  setFailedCommonsImageUrl(imageUrl);
+                  setCommonsStatus("error");
+                  setCommonsError("Fotoğraf bulundu ancak tarayıcı yükleyemedi.");
+                } else {
+                  setPhotoError(true);
+                }
               }}
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/95 via-slate-950/70 to-transparent p-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-200">
-              <span>📷 {manifest.photo.altTr}</span>
+              <span>{photoError ? currentCommonsVisual?.alt : manifest.photo?.altTr || currentCommonsVisual?.alt}</span>
               <span className="font-mono text-slate-400">
-                Kaynak: {manifest.photo.attribution} ({manifest.photo.license})
+                Kaynak: {manifest.photo?.attribution || currentCommonsVisual?.attribution} ({manifest.photo?.license || currentCommonsVisual?.license})
+                {currentCommonsVisual?.sourcePage && <> · <a href={currentCommonsVisual.sourcePage} target="_blank" rel="noopener noreferrer" className="underline">Kaynak sayfası</a></>}
+                {currentCommonsVisual?.licenseUrl && <> · <a href={currentCommonsVisual.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Lisans</a></>}
               </span>
             </div>
           </div>
         )}
 
+        {currentMode === "photo" && !manifest.photo && !currentCommonsVisual && commonsStatus === "loading" && (
+          <div role="status" className="flex h-full items-center justify-center gap-3 p-6 text-center text-sm text-white/75">
+            <ImageIcon className="h-5 w-5 animate-pulse text-cyan-200" aria-hidden="true" />
+            “{english}” için lisans ve üretici bilgili fotoğraflar aranıyor…
+          </div>
+        )}
+
+        {currentMode === "photo" && (commonsStatus === "error" || (commonsStatus === "ready" && Boolean(commonsVisual && commonsVisual.imageUrl === failedCommonsImageUrl))) && !(manifest.photo && !photoError) && (
+          <div role="status" className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center text-white">
+            <ImageIcon className="h-8 w-8 text-cyan-200" />
+            <p className="max-w-lg text-sm">{commonsError || "Bulunan görsel yüklenemedi; farklı bir sonuç için tekrar arayabilirsin."}</p>
+            <button type="button" onClick={() => setCommonsRetry((value) => value + 1)} className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold hover:bg-white/20">Yeniden dene</button>
+          </div>
+        )}
+
         {currentMode === "animation" && (
           <div className="w-full h-full flex flex-col justify-between bg-slate-950">
-            <div className="flex-1 min-h-0">
-              {manifest.animation.localSvgUrl && !localAnimationError && !isPaused ? (
-                <Image
-                  src={manifest.animation.localSvgUrl}
-                  alt={`${english} (${turkish}) kelimesine özgü animasyonlu semantik şema`}
-                  width={400}
-                  height={260}
-                  unoptimized
-                  onError={() => setLocalAnimationError(true)}
-                  data-testid={`vocabulary-local-animation-${manifest.wordSlug}`}
-                  className="w-full h-full object-contain"
-                />
-              ) : (
-                <SemanticAnimatedSvg
-                  motionType={manifest.animation.motionType}
-                  visualKey={manifest.visualKey || manifest.wordSlug}
-                  english={english}
-                  turkish={turkish}
-                  paused={isPaused}
-                />
-              )}
-            </div>
-            <div className="px-3.5 py-2 bg-slate-900/90 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300">
-              <span>{manifest.animation.captionTr}</span>
-              <span className="font-mono text-slate-400">
-                {manifest.animation.attribution} · {manifest.animation.license}
-              </span>
-            </div>
+            {currentCommonsVisual?.mediaType === "animated-image" && currentCommonsVisual.mimeType === "image/gif" ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={currentCommonsVisual.imageUrl} alt={currentCommonsVisual.alt} className="min-h-0 w-full flex-1 object-contain" onError={() => {
+                setFailedCommonsImageUrl(currentCommonsVisual.imageUrl);
+                setCommonsStatus("error");
+                setCommonsError("GIF bulundu ancak tarayıcı yükleyemedi.");
+              }} />
+            ) : <div className="flex-1 min-h-0 flex flex-col items-center justify-center gap-3 p-6 text-center text-white/75" role={commonsStatus === "error" ? "status" : undefined}>
+              {commonsStatus === "loading" ? "Gerçek GIF aranıyor…" : commonsError || "Bu kelime için lisans bilgisi olan gerçek GIF bulunamadı."}
+              {commonsStatus === "error" && <div className="flex flex-wrap justify-center gap-2"><button type="button" onClick={() => setActiveMode("photo")} className="rounded-xl border border-white/20 px-4 py-2 text-sm font-bold">Fotoğrafa geç</button><button type="button" onClick={() => setCommonsRetry((value) => value + 1)} className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold">Yeniden dene</button></div>}
+            </div>}
+            {currentCommonsVisual?.mediaType === "animated-image" && (
+              <div className="px-3 py-2 border-t border-white/10 text-xs text-slate-300">{currentCommonsVisual.attribution} · {currentCommonsVisual.license}{currentCommonsVisual.sourcePage && <> · <a href={currentCommonsVisual.sourcePage} target="_blank" rel="noopener noreferrer" className="underline">Kaynak</a></>}</div>
+            )}
+            {currentCommonsVisual?.mediaType === "animated-image" && currentCommonsVisual.licenseUrl && (
+              <div className="px-3 py-1 text-[11px] text-slate-400"><a href={currentCommonsVisual.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Lisans koşulları</a></div>
+            )}
           </div>
         )}
 
@@ -759,15 +497,6 @@ export default function VocabularyVisual({
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-3 px-5 py-4 text-center">
                 <Sparkles className="h-8 w-8 text-amber-300" aria-hidden="true" />
-                <div className="h-44 w-full max-w-lg overflow-hidden rounded-2xl border border-white/10">
-                  <SemanticAnimatedSvg
-                    motionType={manifest.animation.motionType}
-                    visualKey={manifest.visualKey || manifest.wordSlug}
-                    english={english}
-                    turkish={turkish}
-                    paused={isPaused}
-                  />
-                </div>
                 <h3 className="text-xl font-black text-white">{english}</h3>
                 <p className="text-base font-semibold text-cyan-100">{turkish}</p>
                 <p className="max-w-md text-sm text-white/75" role={generatedImageStatus === "error" ? "alert" : undefined}>

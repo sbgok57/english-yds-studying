@@ -35,6 +35,13 @@ export default function GamesPage() {
 
   // Çevrimdışı bağlantı durumu dinleyicisi
   useEffect(() => {
+    const exam = new URLSearchParams(window.location.search).get("exam")?.toUpperCase();
+    if (exam === "YDS" || exam === "YDT" || exam === "YÖKDİL" || exam === "YOKDIL") {
+      setSelectedExam(exam === "YOKDIL" ? "YÖKDİL" : exam);
+    }
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       setIsOnline(navigator.onLine);
       const handleOnline = () => setIsOnline(true);

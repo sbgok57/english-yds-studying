@@ -38,11 +38,7 @@ const ubiquitous = resolveWordVisualManifest({
   level: "C1",
 });
 assert.strictEqual(ubiquitous.hasVerifiedPhoto, false);
-assert.strictEqual(
-  ubiquitous.availableModes.includes("photo"),
-  false,
-  "Doğrulanmış fotoğrafı olmayan soyut kelimelerde 'photo' modu gösterilmemelidir!"
-);
+assert.ok(ubiquitous.availableModes.includes("photo"), "Commons arama yolu her kelime için fotoğraf modunu sunmalıdır.");
 assert.ok(ubiquitous.availableModes.includes("animation"));
 assert.ok(ubiquitous.availableModes.includes("3d"));
 assert.ok(ubiquitous.availableModes.includes("photorealistic"));
@@ -57,8 +53,8 @@ const dynamicAcademicWord = resolveWordVisualManifest({
   level: "C1",
 });
 assert.strictEqual(dynamicAcademicWord.hasVerifiedPhoto, false);
-assert.strictEqual(dynamicAcademicWord.availableModes.includes("photo"), false);
-assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["ai3d", "photorealistic", "cartoon", "animation", "3d", "card"]);
+assert.strictEqual(dynamicAcademicWord.availableModes.includes("photo"), true);
+assert.deepStrictEqual(dynamicAcademicWord.availableModes, ["photo", "animation", "ai3d", "photorealistic", "cartoon", "3d", "card"]);
 assert.ok(dynamicAcademicWord.animation.reducedMotionFallbackTextTr.length > 10);
 assert.strictEqual(dynamicAcademicWord.visualKey, "unprecedented");
 
@@ -77,7 +73,7 @@ for (const [slug, visual] of Object.entries(VISUAL_ASSET_REGISTRY)) {
   assert.ok(resolved.availableModes.includes("ai3d"), `${slug} is missing generated 3D mode`);
   assert.ok(resolved.availableModes.includes("photorealistic"), `${slug} is missing photorealistic AI mode`);
   assert.ok(resolved.availableModes.includes("cartoon"), `${slug} is missing cartoon mode`);
-  if (!resolved.hasVerifiedPhoto) assert.ok(!resolved.availableModes.includes("photo"), `${slug} claims an unverified photo`);
+  assert.ok(resolved.availableModes.includes("photo"), `${slug} must offer the Commons photo-search path`);
 }
 
 // 3b. Sense-aware semantic topologies must not collapse to one generic diagram

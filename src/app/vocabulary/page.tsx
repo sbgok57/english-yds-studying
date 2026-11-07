@@ -239,7 +239,7 @@ function VocabularyContent() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-400 to-yellow-300">
-              📚 Dil Master Kelime Kütüphanesi
+              <span className="inline-flex items-center gap-3"><BookOpen className="h-8 w-8 shrink-0 text-orange-300" aria-hidden="true" />Dil Master Kelime Kütüphanesi</span>
             </h1>
             <span className="glass-pill text-xs font-mono text-yellow-300 font-bold">
               {filteredWords.length} / {words.length} Kelime
