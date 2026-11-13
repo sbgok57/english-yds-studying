@@ -17,6 +17,7 @@ async function run() {
         pages: [
           { title: "File:mitigate diagram.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/diagram.png", thumburl: "https://upload.wikimedia.org/diagram-thumb.png", extmetadata: { LicenseShortName: { value: "CC BY-SA 4.0" }, Artist: { value: "Diagram author" } } }] },
           { title: "File:Economics_of_climate_change_chapter3_figure2.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/report-figure.png", thumburl: "https://upload.wikimedia.org/report-figure-thumb.png", extmetadata: { LicenseShortName: { value: "Public domain" }, Artist: { value: "Report author" } } }] },
+          { title: "File:Change_in_estimated_greenhouse_gas_emissions_per_capita_mitigation_scenario.webp", imageinfo: [{ mime: "image/webp", url: "https://upload.wikimedia.org/data-chart.webp", thumburl: "https://upload.wikimedia.org/data-chart-thumb.webp", extmetadata: { LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "Study author" } } }] },
           { title: "File:mitigate-example.gif", imageinfo: [{ mime: "image/gif", url: "https://upload.wikimedia.org/mitigate.gif", thumburl: "https://upload.wikimedia.org/mitigate-thumb.gif", descriptionurl: "https://commons.wikimedia.org/wiki/File:mitigate-example.gif", extmetadata: { LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "<a>Example author</a>" }, LicenseUrl: { value: "https://creativecommons.org/licenses/by/4.0/" } } }] },
         ],
       },

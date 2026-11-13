@@ -14,8 +14,8 @@ type CommonsPage = {
   }>;
 };
 
-const UNSUITABLE_TITLE = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms|figure|chapter|report|publication)\b/i;
-const UNSUITABLE_DESCRIPTION = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms|flow diagram|screenshot|bar chart|figure|chapter|report|publication|statistical analysis)\b/i;
+const UNSUITABLE_TITLE = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms|figure|chapter|report|publication|estimated|per capita|scenario|emissions|dataset|statistical|recommendations)\b/i;
+const UNSUITABLE_DESCRIPTION = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms|flow diagram|screenshot|bar chart|figure|chapter|report|publication|estimated|per capita|scenario|emissions|dataset|statistical analysis|recommendations)\b/i;
 const SAFE_MEDIA_HOSTS = new Set(["upload.wikimedia.org", "thumb.wikimedia.org", "commons.wikimedia.org"]);
 
 function plainText(value: string | undefined, maxLength = 240): string {
@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
       candidate = (payload.query?.pages ?? []).find((page) => {
         // Commons filenames commonly join labels to digits with underscores
         // (for example, "chapter3_figure2"); normalize those separators so
-        // the word-boundary filter still rejects report figures.
+        // the word-boundary filter still rejects figures and data visualizations.
         const searchableTitle = page.title?.replace(/[_\d]+/g, " ");
         if (!searchableTitle || UNSUITABLE_TITLE.test(searchableTitle)) return false;
         const info = page.imageinfo?.[0];
