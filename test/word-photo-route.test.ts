@@ -19,6 +19,7 @@ async function run() {
           { title: "File:Economics_of_climate_change_chapter3_figure2.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/report-figure.png", thumburl: "https://upload.wikimedia.org/report-figure-thumb.png", extmetadata: { LicenseShortName: { value: "Public domain" }, Artist: { value: "Report author" } } }] },
           { title: "File:Change_in_estimated_greenhouse_gas_emissions_per_capita_mitigation_scenario.webp", imageinfo: [{ mime: "image/webp", url: "https://upload.wikimedia.org/data-chart.webp", thumburl: "https://upload.wikimedia.org/data-chart-thumb.webp", extmetadata: { LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "Study author" } } }] },
           { title: "File:Climate_change_mitigation_and_adaptation.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/mitigation-adaptation.png", thumburl: "https://upload.wikimedia.org/mitigation-adaptation-thumb.png", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author" } } }] },
+          { title: "File:Mitigate_typeface_sample.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/typeface-sample.png", thumburl: "https://upload.wikimedia.org/typeface-sample-thumb.png", extmetadata: { LicenseShortName: { value: "Public domain" }, Artist: { value: "Font author" } } }] },
           { title: "File:mitigate-example.gif", imageinfo: [{ mime: "image/gif", url: "https://upload.wikimedia.org/mitigate.gif", thumburl: "https://upload.wikimedia.org/mitigate-thumb.gif", descriptionurl: "https://commons.wikimedia.org/wiki/File:mitigate-example.gif", extmetadata: { LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "<a>Example author</a>" }, LicenseUrl: { value: "https://creativecommons.org/licenses/by/4.0/" } } }] },
         ],
       },
@@ -48,7 +49,7 @@ async function run() {
     const unsafeHost = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=mitigate"));
     assert.equal(unsafeHost.status, 404, "Untrusted image hosts must never be returned to the browser.");
 
-    global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:sample.jpg", imageinfo: [{ mime: "image/jpeg", url: "https://upload.wikimedia.org/sample.jpg", thumburl: "https://upload.wikimedia.org/sample-thumb.jpg", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author &#99999999; Name" } } }] }] } })) as typeof fetch;
+    global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:Garden.jpg", imageinfo: [{ mime: "image/jpeg", url: "https://upload.wikimedia.org/garden.jpg", thumburl: "https://upload.wikimedia.org/garden-thumb.jpg", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author &#99999999; Name" } } }] }] } })) as typeof fetch;
     const malformedEntity = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=mitigate"));
     assert.equal(malformedEntity.status, 200, "Malformed metadata entities must not crash the photo route.");
     const malformedEntityBody = await malformedEntity.json();
