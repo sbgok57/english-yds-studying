@@ -94,7 +94,11 @@ export async function GET(request: NextRequest) {
       }
       const payload = await response.json() as { query?: { pages?: CommonsPage[] } };
       candidate = (payload.query?.pages ?? []).find((page) => {
-        if (!page.title || UNSUITABLE_TITLE.test(page.title)) return false;
+        // Commons filenames commonly join labels to digits with underscores
+        // (for example, "chapter3_figure2"); normalize those separators so
+        // the word-boundary filter still rejects report figures.
+        const searchableTitle = page.title?.replace(/[_\d]+/g, " ");
+        if (!searchableTitle || UNSUITABLE_TITLE.test(searchableTitle)) return false;
         const info = page.imageinfo?.[0];
         if (!info) return false;
         if (animated && info.mime !== "image/gif") return false;
