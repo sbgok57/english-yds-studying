@@ -15,7 +15,8 @@ type CommonsPage = {
 };
 
 const UNSUITABLE_TITLE = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms)\b/i;
-const SAFE_MEDIA_HOSTS = new Set(["upload.wikimedia.org", "commons.wikimedia.org"]);
+const UNSUITABLE_DESCRIPTION = /\b(chart|graph|diagram|infographic|icon|logo|map|plot|symbol|formula|flag|coat of arms|flow diagram|screenshot|bar chart)\b/i;
+const SAFE_MEDIA_HOSTS = new Set(["upload.wikimedia.org", "thumb.wikimedia.org", "commons.wikimedia.org"]);
 
 function plainText(value: string | undefined, maxLength = 240): string {
   if (!value) return "";
@@ -57,45 +58,56 @@ export async function GET(request: NextRequest) {
 
   if (!word) return NextResponse.json({ ok: false, code: "WORD_REQUIRED" }, { status: 400 });
 
-  const query = new URL("https://commons.wikimedia.org/w/api.php");
-  query.search = new URLSearchParams({
-    action: "query",
-    format: "json",
-    formatversion: "2",
-    generator: "search",
-    gsrsearch: `filetype:bitmap ${word} ${meaning}`.trim(),
-    gsrnamespace: "6",
-    gsrlimit: "12",
-    prop: "imageinfo",
-    iiprop: "url|extmetadata",
-    iiurlwidth: "900",
-  }).toString();
-
   try {
-    const response = await fetch(query, {
-      headers: {
-        Accept: "application/json",
-        "User-Agent": "DilMasterVocabulary/1.0 (https://dil-master.vercel.app; educational image search)",
-      },
-      signal: AbortSignal.timeout(8000),
-      cache: "no-store",
-    });
-    if (!response.ok) {
-      return NextResponse.json({ ok: false, code: "COMMONS_UNAVAILABLE" }, { status: 502, headers: { "Cache-Control": "no-store" } });
+    let candidate: CommonsPage | undefined;
+    // Search the English headword with the Turkish meaning first. Wikimedia's
+    // search treats terms as required matches, so retry by headword alone when
+    // that exact bilingual query has no usable media.
+    const searchQueries = [...new Set([`${word} ${meaning}`.trim(), word])];
+    for (const searchText of searchQueries) {
+      const query = new URL("https://commons.wikimedia.org/w/api.php");
+      query.search = new URLSearchParams({
+        action: "query",
+        format: "json",
+        formatversion: "2",
+        generator: "search",
+        gsrsearch: searchText,
+        gsrnamespace: "6",
+        gsrlimit: "24",
+        prop: "imageinfo",
+        // `mime` must be explicitly requested; otherwise the API omits it and
+        // all otherwise-valid media would be rejected by the safety filter.
+        iiprop: "url|mime|extmetadata",
+        iiurlwidth: "900",
+      }).toString();
+
+      const response = await fetch(query, {
+        headers: {
+          Accept: "application/json",
+          "User-Agent": "DilMasterVocabulary/1.0 (https://dil-master.vercel.app; educational image search)",
+        },
+        signal: AbortSignal.timeout(8000),
+        cache: "no-store",
+      });
+      if (!response.ok) {
+        return NextResponse.json({ ok: false, code: "COMMONS_UNAVAILABLE" }, { status: 502, headers: { "Cache-Control": "no-store" } });
+      }
+      const payload = await response.json() as { query?: { pages?: CommonsPage[] } };
+      candidate = (payload.query?.pages ?? []).find((page) => {
+        if (!page.title || UNSUITABLE_TITLE.test(page.title)) return false;
+        const info = page.imageinfo?.[0];
+        if (!info) return false;
+        if (animated && info.mime !== "image/gif") return false;
+        if (!animated && !["image/jpeg", "image/png", "image/webp", "image/gif"].includes(info.mime || "")) return false;
+        const metadata = info.extmetadata || {};
+        const description = plainText(metadata.ImageDescription?.value || metadata.ObjectName?.value, 600);
+        if (UNSUITABLE_DESCRIPTION.test(description)) return false;
+        const hasLicense = Boolean(plainText(metadata.LicenseShortName?.value || metadata.UsageTerms?.value, 100));
+        const hasAttribution = Boolean(plainText(metadata.Attribution?.value || metadata.Artist?.value, 240));
+        return hasLicense && hasAttribution && Boolean(safeCommonsUrl(animated ? info.url : info.thumburl || info.url));
+      });
+      if (candidate) break;
     }
-    const payload = await response.json() as { query?: { pages?: CommonsPage[] } };
-    const pages = payload.query?.pages ?? [];
-    const candidate = pages.find((page) => {
-      if (!page.title || UNSUITABLE_TITLE.test(page.title)) return false;
-      const info = page.imageinfo?.[0];
-      if (!info) return false;
-      if (animated && info.mime !== "image/gif") return false;
-      if (!animated && !["image/jpeg", "image/png", "image/webp", "image/gif"].includes(info.mime || "")) return false;
-      const metadata = info.extmetadata || {};
-      const hasLicense = Boolean(plainText(metadata.LicenseShortName?.value || metadata.UsageTerms?.value, 100));
-      const hasAttribution = Boolean(plainText(metadata.Attribution?.value || metadata.Artist?.value, 240));
-      return hasLicense && hasAttribution && Boolean(safeCommonsUrl(animated ? info.url : info.thumburl || info.url));
-    });
 
     if (!candidate?.imageinfo?.[0]) {
       return NextResponse.json(

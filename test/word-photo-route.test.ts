@@ -6,8 +6,12 @@ const originalFetch = global.fetch;
 
 async function run() {
   let requestedUrl = "";
+  const searchQueries: string[] = [];
   global.fetch = (async (input: RequestInfo | URL) => {
     requestedUrl = String(input);
+    const searchText = new URL(requestedUrl).searchParams.get("gsrsearch") || "";
+    searchQueries.push(searchText);
+    if (searchText.includes("hafifletmek")) return Response.json({ batchcomplete: true });
     return Response.json({
       query: {
         pages: [
@@ -27,8 +31,9 @@ async function run() {
     assert.equal(body.imageUrl, "https://upload.wikimedia.org/mitigate.gif", "GIF result must use original animation, not a resized still thumbnail.");
     assert.equal(body.attribution, "Example author");
     assert.equal(body.license, "CC BY 4.0");
-    assert.match(requestedUrl, /mitigate/);
-    assert.match(requestedUrl, /hafifletmek/, "Wikimedia search must include the Turkish meaning as context.");
+    assert.ok(searchQueries.some((query) => /mitigate/.test(query) && /hafifletmek/.test(query)), "Wikimedia search must first include the Turkish meaning as context.");
+    assert.ok(searchQueries.includes("mitigate"), "When the bilingual search has no result, the route must retry with the exact English headword.");
+    assert.match(requestedUrl, /iiprop=url%7Cmime%7Cextmetadata/, "The live Commons API must be asked to return MIME metadata used by the safety filter.");
 
     global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:static.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/static.png", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author" } } }] }] } })) as typeof fetch;
     const noGif = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=mitigate&animated=1"));
