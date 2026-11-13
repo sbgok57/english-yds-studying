@@ -16,6 +16,7 @@ async function run() {
       query: {
         pages: [
           { title: "File:mitigate diagram.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/diagram.png", thumburl: "https://upload.wikimedia.org/diagram-thumb.png", extmetadata: { LicenseShortName: { value: "CC BY-SA 4.0" }, Artist: { value: "Diagram author" } } }] },
+          { title: "File:Economics of climate change chapter3 figure2.png", imageinfo: [{ mime: "image/png", url: "https://upload.wikimedia.org/report-figure.png", thumburl: "https://upload.wikimedia.org/report-figure-thumb.png", extmetadata: { LicenseShortName: { value: "Public domain" }, Artist: { value: "Report author" } } }] },
           { title: "File:mitigate-example.gif", imageinfo: [{ mime: "image/gif", url: "https://upload.wikimedia.org/mitigate.gif", thumburl: "https://upload.wikimedia.org/mitigate-thumb.gif", descriptionurl: "https://commons.wikimedia.org/wiki/File:mitigate-example.gif", extmetadata: { LicenseShortName: { value: "CC BY 4.0" }, Artist: { value: "<a>Example author</a>" }, LicenseUrl: { value: "https://creativecommons.org/licenses/by/4.0/" } } }] },
         ],
       },
