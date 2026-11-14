@@ -51,6 +51,22 @@ function safeCommonsUrl(value: string | undefined): string | null {
   }
 }
 
+function matchesHeadword(text: string, word: string): boolean {
+  const normalize = (value: string) => value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("en")
+    .replace(/[_-]+/g, " ");
+  const tokens = normalize(text).split(/[^a-z0-9]+/).filter(Boolean);
+  const normalizedWord = normalize(word).trim();
+  if (!normalizedWord) return false;
+  if (tokens.includes(normalizedWord)) return true;
+  // Accept common English inflections (mitigate/mitigation, reduce/reduction)
+  // while requiring a real headword signal in the file title or description.
+  const stem = normalizedWord.length >= 5 ? normalizedWord.slice(0, -1) : "";
+  return Boolean(stem && tokens.some((token) => token.startsWith(stem)));
+}
+
 export async function GET(request: NextRequest) {
   const word = (request.nextUrl.searchParams.get("word") || "").replace(/[<>\u0000-\u001f]/g, " ").trim().slice(0, 90);
   const meaning = (request.nextUrl.searchParams.get("meaning") || "").replace(/[<>\u0000-\u001f]/g, " ").trim().slice(0, 140);
@@ -106,6 +122,10 @@ export async function GET(request: NextRequest) {
         const metadata = info.extmetadata || {};
         const description = plainText(metadata.ImageDescription?.value || metadata.ObjectName?.value, 600);
         if (UNSUITABLE_DESCRIPTION.test(description)) return false;
+        // Commons search is broad and may return a homonym or unrelated file.
+        // Require a headword (or a simple inflection) in the title/description;
+        // never pass an unrelated image off as a vocabulary illustration.
+        if (!matchesHeadword(`${page.title} ${description}`, word)) return false;
         const hasLicense = Boolean(plainText(metadata.LicenseShortName?.value || metadata.UsageTerms?.value, 100));
         const hasAttribution = Boolean(plainText(metadata.Attribution?.value || metadata.Artist?.value, 240));
         return hasLicense && hasAttribution && Boolean(safeCommonsUrl(animated ? info.url : info.thumburl || info.url));

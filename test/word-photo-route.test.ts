@@ -49,11 +49,15 @@ async function run() {
     const unsafeHost = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=mitigate"));
     assert.equal(unsafeHost.status, 404, "Untrusted image hosts must never be returned to the browser.");
 
-    global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:Garden.jpg", imageinfo: [{ mime: "image/jpeg", url: "https://upload.wikimedia.org/garden.jpg", thumburl: "https://upload.wikimedia.org/garden-thumb.jpg", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author &#99999999; Name" } } }] }] } })) as typeof fetch;
+    global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:Mitigate garden.jpg", imageinfo: [{ mime: "image/jpeg", url: "https://upload.wikimedia.org/garden.jpg", thumburl: "https://upload.wikimedia.org/garden-thumb.jpg", extmetadata: { LicenseShortName: { value: "CC0" }, Artist: { value: "Author &#99999999; Name" } } }] }] } })) as typeof fetch;
     const malformedEntity = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=mitigate"));
     assert.equal(malformedEntity.status, 200, "Malformed metadata entities must not crash the photo route.");
     const malformedEntityBody = await malformedEntity.json();
     assert.equal(malformedEntityBody.attribution, "Author Name");
+
+    global.fetch = (async () => Response.json({ query: { pages: [{ title: "File:Santa Maria de Huerta Almacen.jpg", imageinfo: [{ mime: "image/jpeg", url: "https://upload.wikimedia.org/warehouse.jpg", thumburl: "https://upload.wikimedia.org/warehouse-thumb.jpg", extmetadata: { LicenseShortName: { value: "CC BY-SA 3.0" }, Artist: { value: "Author" } } }] }] } })) as typeof fetch;
+    const unrelated = await GET(new NextRequest("https://dil-master.test/api/word-photo?word=apple&meaning=elma"));
+    assert.equal(unrelated.status, 404, "An unrelated Commons result must not be labeled as a vocabulary illustration.");
     console.log("  ✅ PASS: Commons photo route requires attribution and returns only original GIF media for animation mode.");
   } finally {
     global.fetch = originalFetch;
